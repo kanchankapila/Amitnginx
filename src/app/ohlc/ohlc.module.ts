@@ -182,4 +182,3 @@ bootstrap: [AppComponent]
 
 
 export class OhlcModule { }
-
