@@ -46,7 +46,7 @@
     "mongodb": "^4.4.0",
     "ng2-charts": "^2.4.2",
     "node-fetch": "^2.6.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.1",
     "node-telegram-bot-api": "^0.56.0",
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
@@ -54,11 +54,11 @@
     "rxjs": "~6.6.3",
     "tough-cookie": "^4.0.0",
     "tslib": "^2.0.3",
-    "zone.js": "~0.11.1"
+    "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1001.7",
-    "@angular/cli": "~10.1.7",
+    "@angular-devkit/build-angular": "^13.2.5",
+    "@angular/cli": "^13.2.5",
     "@angular/compiler-cli": "~10.1.6",
     "@angular/language-service": "~10.1.6",
     "@angular/localize": "^10.1.6",
@@ -71,7 +71,7 @@
     "codelyzer": "^6.0.1",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~6.0.0",
-    "karma": "~5.2.3",
+    "karma": "^6.3.16",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.3",
     "karma-jasmine": "~4.0.1",
