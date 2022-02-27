@@ -16,8 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgxEchartsModule } from 'ngx-echarts';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { OwlRadioModule } from 'owl-ng';
-import { OwlClockModule } from 'owl-ng';
+
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -32,7 +31,7 @@ import { OHLCComponent } from './ohlc.component';
 import { ChartsModule } from 'ng2-charts';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-import {TuiRootModule} from '@taiga-ui/core';
+
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ButtonModule } from 'primeng/button';
 import { CardModule, } from 'primeng/card';
@@ -42,17 +41,17 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
-import { OwlFanMenuModule } from 'owl-ng';
-import {GestureConfig} from 'owl-ng'
+
+
 import {MatGridListModule} from '@angular/material/grid-list';
-import { OwlTabsModule } from 'owl-ng';
+
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { SidebarModule } from 'primeng/sidebar';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-import { NgxSpinnerModule } from "ngx-spinner";
+
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
@@ -86,10 +85,10 @@ import { environment } from '../environments/environment';
     NavbarModule,
     AtomSpinnerModule,
     CardModule,
-    OwlClockModule,
+  
     ButtonModule,
-    OwlRadioModule,
-    TuiRootModule,
+
+   
     //NgTickerTapeModule,
     WavesModule,
     SidebarModule,
@@ -104,7 +103,7 @@ import { environment } from '../environments/environment';
     ChartModule,
     NgbModule,
   //  HighchartsChartModule,
-    OwlFanMenuModule,
+    
     
     CommonModule,
     //MegaMenuModule,
@@ -118,9 +117,9 @@ import { environment } from '../environments/environment';
     //NbCardModule,
     MatTableModule,
     //AmexioDataModule,
-    NgxSpinnerModule,
+    
     FormsModule,
-    OwlTabsModule,
+   
     //FlexLayoutModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
