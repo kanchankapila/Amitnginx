@@ -16,13 +16,13 @@ import {TabViewModule} from 'primeng/tabview';
 // If you are using ES6, then
 import * as CanvasJS from '../lists/canvasjs.min.js';
 
-import { Button } from 'mdb-ui-kit';
+
 //import * as Highcharts from "highcharts/highstock";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import * as mdb from 'mdb-ui-kit'; // lib
+
 import { ViewportScroller } from '@angular/common';
 import ApexCharts from 'apexcharts'
-import { Input } from 'mdb-ui-kit'; // module
+
 //import { NgxSpinnerService } from "ngx-spinner";
 //import { ChangeDetectionStrategy } from '@angular/core';
 import { BuiltinType, SelectorListContext } from '@angular/compiler';
