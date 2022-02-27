@@ -1,10 +1,7 @@
 /* Style The Dropdown Button */
 @import "~mdb-ui-kit/css/mdb.min.css";
 @import "~bootstrap/dist/css/bootstrap.min.css";
-//@import "../../../themes.scss";
-//@import "../../../styles.scss";
-// @import "../../../../node_modules/@nebular/theme/styles/prebuilt/dark.css";
-// @import "../../../../node_modules/@nebular/theme/styles/prebuilt/default.css";
+@import "~owl-ng/assets/style/theme.min.css";
 .dropbtn {
   background-color: #4caf50;
   color: white;
@@ -112,7 +109,8 @@ body {
 .yellow {
   color: orange;
 }
-@import '../../../../node_modules/mdb-ui-kit/css/mdb.min.css';
+@import '../../../node_modules/mdb-ui-kit/css/mdb.min.css';
+
 .button{
   background-color:purple;
 }

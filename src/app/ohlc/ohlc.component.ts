@@ -3,12 +3,12 @@ import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import {AtomSpinnerModule} from 'angular-epic-spinners'
 import {ChartModule} from 'primeng/chart';
-// import * as  stocks from '../dashboard/stocklist'
-// import * as bqstock from '../dashboard/bqlist'
-// import * as etsector from '../dashboard/etsectorlist'
-// import * as etindex from '../dashboard/etindexlist'
-// import * as mcindex from '../dashboard/mcsectorlist'
-import { StockChart } from 'angular-highcharts';
+ import * as  stocks from '../lists/stocklist'
+ import * as bqstock from '../lists/bqlist'
+ import * as etsector from '../lists/etsectorlist'
+ import * as etindex from '../lists/etindexlist'
+ import * as mcindex from '../lists/mcsectorlist'
+//import { StockChart } from 'angular-highcharts';
 import {CardModule} from 'primeng/card';
 import {TabViewModule} from 'primeng/tabview';
 
@@ -1205,7 +1205,7 @@ lineStylesData: any;
 //   ]
 // };
 
-constructor(private primengConfig: PrimeNGConfig,private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router, private SpinnerService: NgxSpinnerService, private vps: ViewportScroller) {
+constructor(private primengConfig: PrimeNGConfig,private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router, private vps: ViewportScroller) {
   setInterval(() => {
     const currentDate = new Date();
     this.date = currentDate.toLocaleTimeString();

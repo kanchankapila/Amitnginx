@@ -3,20 +3,20 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import {GestureConfig} from 'owl-ng'
 
 const routes: Routes = [
   { path: 'ohlc', component: OHLCComponent },
   
 ];
 import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-
+import { OwlClockModule } from 'owl-ng';
 import { ChartModule } from 'primeng/chart';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgxEchartsModule } from 'ngx-echarts';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
+import {OwlRadioModule} from 'owl-ng'
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -41,6 +41,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
+
 
 
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -85,6 +86,7 @@ import { environment } from '../environments/environment';
     NavbarModule,
     AtomSpinnerModule,
     CardModule,
+    OwlClockModule,
   
     ButtonModule,
 
@@ -102,6 +104,7 @@ import { environment } from '../environments/environment';
     ChartsModule,
     ChartModule,
     NgbModule,
+    OwlRadioModule,
   //  HighchartsChartModule,
     
     
