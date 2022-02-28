@@ -3,30 +3,30 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import {GestureConfig} from 'owl-ng'
+//import {GestureConfig} from 'owl-ng'
 
 const routes: Routes = [
   { path: 'ohlc', component: OHLCComponent },
   
 ];
-import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { OwlClockModule } from 'owl-ng';
+import { BrowserModule } from '@angular/platform-browser';
+//import { OwlClockModule } from 'owl-ng';
 import { ChartModule } from 'primeng/chart';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NgxEchartsModule } from 'ngx-echarts';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import {OwlRadioModule} from 'owl-ng'
+//import {OwlRadioModule} from 'owl-ng'
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import {AtomSpinnerModule} from 'angular-epic-spinners'
 import { AppRoutingModule } from '../app-routing.module';
-import { AppComponent } from '../app.component';
+//import { AppComponent } from '../app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
-import { NgApexchartsModule } from "ng-apexcharts";
+//import { NgApexchartsModule } from "ng-apexcharts";
 import { OHLCComponent } from './ohlc.component';
 import { ChartsModule } from 'ng2-charts';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -66,7 +66,7 @@ import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
-    AppComponent,
+   // AppComponent,
     OHLCComponent
     
   
@@ -78,7 +78,7 @@ import { environment } from '../environments/environment';
   imports: [
     RouterModule.forChild(routes),
     MDBBootstrapModule.forRoot(),
-    NgApexchartsModule,
+ //   NgApexchartsModule,
     CommonModule,
     NgbModule,
     BrowserModule,
@@ -86,7 +86,7 @@ import { environment } from '../environments/environment';
     NavbarModule,
     AtomSpinnerModule,
     CardModule,
-    OwlClockModule,
+    //OwlClockModule,
   
     ButtonModule,
 
@@ -104,7 +104,7 @@ import { environment } from '../environments/environment';
     ChartsModule,
     ChartModule,
     NgbModule,
-    OwlRadioModule,
+    //OwlRadioModule,
   //  HighchartsChartModule,
     
     
@@ -175,11 +175,11 @@ import { environment } from '../environments/environment';
     
   ],
   providers: [
-    {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig},{ provide: Window, useValue: window }
+    { provide: Window, useValue: window }
 ],
 
 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-bootstrap: [AppComponent]
+bootstrap: [OHLCComponent]
 })
 
 

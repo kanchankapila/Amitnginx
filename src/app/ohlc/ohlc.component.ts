@@ -21,7 +21,7 @@ import * as CanvasJS from '../lists/canvasjs.min.js';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { ViewportScroller } from '@angular/common';
-import ApexCharts from 'apexcharts'
+//import ApexCharts from 'apexcharts'
 
 //import { NgxSpinnerService } from "ngx-spinner";
 //import { ChangeDetectionStrategy } from '@angular/core';
@@ -2634,8 +2634,8 @@ async getmcindexchart(mcindexid) {
       }
     };
 
-    var chartsetindicescharts = new ApexCharts(document.querySelector("#chart42"), optionsetindicescharts);
-    chartsetindicescharts.render();
+    //var chartsetindicescharts = new ApexCharts(document.querySelector("#chart42"), optionsetindicescharts);
+    //chartsetindicescharts.render();
 
 
 
