@@ -181,7 +181,7 @@ async function main() {
 }
 main().catch(console.error);
 
-app.use('/', express.static('preview'));
+app.use('/', express.static('dist'));
 const options = {
   webHook: {
       port: 8443
@@ -5479,15 +5479,15 @@ var certificate = fs.readFileSync('E:/Stock Website/stockapp/amitstockweb/server
 var credentials = {key: privateKey, cert: certificate};
 var httpServer = http.createServer(app);
 //var httpsServer = https.createServer(credentials, app);
-app.use(express.static(__dirname+"preview/PurpleAdmin-Free-Angular-Admin-Template-master"));
+app.use(express.static(__dirname+"dist"));
   
-  //app.use("/app", express.static("preview/PurpleAdmin-Free-Angular-Admin-Template-master/stockjavagithub"));
+  //app.use("/app", express.static("dist/PurpleAdmin-Free-Angular-Admin-Template-master/stockjavagithub"));
 app.get("/*", function (req, res) {
 
-  res.sendFile(path.join(__dirname +'preview/index.html'));
+  res.sendFile(path.join(__dirname +'dist/index.html'));
 });
 app.get('/ngsw-worker.js', function(request, response) {
-  response.sendFile(path.resolve(__dirname, 'preview', 'ngsw-worker.js'));
+  response.sendFile(path.resolve(__dirname, 'dist/', 'ngsw-worker.js'));
 })
 http.createServer({
   key: fs.readFileSync('E:/Stock Website/stockapp/amitstockweb/key.pem'),
