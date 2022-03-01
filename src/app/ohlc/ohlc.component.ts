@@ -1,4 +1,5 @@
-import { Component, OnInit, LOCALE_ID } from '@angular/core';
+import { LOCALE_ID } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import {AtomSpinnerModule} from 'angular-epic-spinners'
@@ -723,11 +724,12 @@ export interface stockpcrtile {
 text1: number;
 }
 
+
+  
 @Component({
-selector: 'app-ohlc',
-templateUrl: './ohlc.component.html',
-//changeDetection: ChangeDetectionStrategy.OnPush,
-styleUrls: ['./ohlc.component.scss']
+  selector: 'app-ohlc',
+  templateUrl: './ohlc.component.html',
+  styleUrls: ['./ohlc.component.scss'],
 })
 export class OHLCComponent implements OnInit {
 visibleSidebar1;

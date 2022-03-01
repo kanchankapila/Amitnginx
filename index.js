@@ -52,12 +52,12 @@ var mongo = require('mongodb');
 const { response } = require('express');
 const { json } = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
- var url = "mongodb://127.0.0.1 :27017/mydb?connectTimeoutMS=2147483647&socketTimeoutMS=2147483647";
+ var url = "mongodb://0.0.0.0 :27017/mydb?&connectTimeoutMS=2147483647&socketTimeoutMS=2147483647";
  const option = {
 
   socketTimeoutMS: 3000000,
   keepAlive: true,
-  
+ 
 };
 var client = new MongoClient(url, option);
 var moment = require('moment');
@@ -4572,7 +4572,7 @@ app.get('/nse2', function (req, res) {
 //const axiosCookieJarSupport = require('axios-cookiejar-support').default;
   //const tough = require('tough-cookie');
 const instancetrendlyne = axios.create({ withCredentials: true });
-axiosCookieJarSupport(instancetrendlyne);
+  axiosCookieJarSupport(instancetrendlyne);
 instancetrendlyne.defaults.jar = new tough.CookieJar()
 
 
@@ -5479,15 +5479,15 @@ var certificate = fs.readFileSync('E:/Stock Website/stockapp/amitstockweb/server
 var credentials = {key: privateKey, cert: certificate};
 var httpServer = http.createServer(app);
 //var httpsServer = https.createServer(credentials, app);
-app.use(express.static(__dirname+"preview"));
+app.use(express.static(__dirname+"preview/PurpleAdmin-Free-Angular-Admin-Template-master"));
   
-  //app.use("/app", express.static("/dist/stockjavagithub"));
+  //app.use("/app", express.static("preview/PurpleAdmin-Free-Angular-Admin-Template-master/stockjavagithub"));
 app.get("/*", function (req, res) {
 
   res.sendFile(path.join(__dirname +'preview/index.html'));
 });
 app.get('/ngsw-worker.js', function(request, response) {
-  response.sendFile(path.resolve(__dirname, '/dist/amitstockweb/', 'ngsw-worker.js'));
+  response.sendFile(path.resolve(__dirname, 'preview', 'ngsw-worker.js'));
 })
 http.createServer({
   key: fs.readFileSync('E:/Stock Website/stockapp/amitstockweb/key.pem'),
