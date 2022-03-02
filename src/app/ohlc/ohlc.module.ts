@@ -26,7 +26,7 @@ import { AppRoutingModule } from '../app-routing.module';
 //import { AppComponent } from '../app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
-//import { NgApexchartsModule } from "ng-apexcharts";
+import { NgApexchartsModule } from "ng-apexcharts";
 import { OHLCComponent } from './ohlc.component';
 import { ChartsModule } from 'ng2-charts';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -71,7 +71,7 @@ import { environment } from '../environments/environment';
   imports: [
     RouterModule.forChild(routes),
     MDBBootstrapModule.forRoot(),
- //   NgApexchartsModule,
+    NgApexchartsModule,
     CommonModule,
     NgbModule,
     BrowserModule,

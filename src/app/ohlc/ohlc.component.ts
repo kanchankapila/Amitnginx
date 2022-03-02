@@ -5,11 +5,12 @@ import { PrimeNGConfig } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import {AtomSpinnerModule} from 'angular-epic-spinners'
 import {ChartModule} from 'primeng/chart';
- import * as  stocks from '../lists/stocklist'
- import * as bqstock from '../lists/bqlist'
- import * as etsector from '../lists/etsectorlist'
- import * as etindex from '../lists/etindexlist'
- import * as mcindex from '../lists/mcsectorlist'
+import * as  stocks from '../lists/stocklist';
+console.log(stocks)
+import * as bqstock from '../lists/bqlist';
+import * as etsector from '../lists/etsectorlist';
+import * as etindex from '../lists/etindexlist';
+import * as mcindex from '../lists/mcsectorlist';
 //import { StockChart } from 'angular-highcharts';
 import {CardModule} from 'primeng/card';
 import {TabViewModule} from 'primeng/tabview';
@@ -1467,6 +1468,7 @@ ngOnInit() {
 
   this.primengConfig.ripple = true;
   this.stockList = stocks.default.Data
+  
   this.stock = stocks.default.Data
   this.bqstocks = bqstock.default.Data
   this.etsectors = etsector.default.Data
@@ -1484,8 +1486,10 @@ ngOnInit() {
   console.log()
   this.route.queryParams.subscribe(params => {
 
-    this.eqsymbol = this.stockList.filter(i => i.isin == params.stock)[0].symbol
+    //this.eqsymbol = this.stockList.filter(i => i.isin == params.stock)[0].mcsymbol
+    //console.log(this.eqsymbol)
     this.tlid = this.stockList.filter(i => i.isin == params.stock)[0].tlid
+    console.log(this.tlid)
     this.tlname = this.stockList.filter(i => i.isin == params.stock)[0].tlname
     this.stockname = this.stockList.filter(i => i.isin == params.stock)[0].name
     this.stockisin = this.stockList.filter(i => i.isin == params.stock)[0].isin

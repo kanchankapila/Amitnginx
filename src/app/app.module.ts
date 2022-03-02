@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule, ThemeService } from 'ng2-charts';
+import { NgxEchartsModule } from 'ngx-echarts';
 //import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -39,10 +40,14 @@ import { OHLCComponent } from './ohlc/ohlc.component';
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
+    
     //CommonModule,
     HttpClientModule
   ],
-  providers: [{ provide: Window, useValue: window }],
+  providers: [{ provide: ThemeService },{ provide: Window, useValue: window }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
