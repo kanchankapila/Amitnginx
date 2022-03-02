@@ -8,7 +8,7 @@ import { OHLCComponent } from './ohlc/ohlc.component';
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'ohlc', component: OHLCComponent },
+  { path: 'Ohlc', component: OHLCComponent },
   //{ path: 'ohlc',loadChildren: () => import('./ohlc/ohlc.module').then(m => m.OhlcModule) },
   { path: 'basic-ui', loadChildren: () => import('./basic-ui/basic-ui.module').then(m => m.BasicUiModule) },
   { path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsDemoModule) },

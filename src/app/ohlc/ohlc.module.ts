@@ -6,7 +6,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 //import {GestureConfig} from 'owl-ng'
 
 const routes: Routes = [
-  { path: 'ohlc', component: OHLCComponent },
+  { path: 'Ohlc', component: OHLCComponent },
   
 ];
 import { BrowserModule } from '@angular/platform-browser';
@@ -66,15 +66,8 @@ import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
-   // AppComponent,
     OHLCComponent
-    
-  
-   
-   
- 
-    
-  ],
+   ],
   imports: [
     RouterModule.forChild(routes),
     MDBBootstrapModule.forRoot(),

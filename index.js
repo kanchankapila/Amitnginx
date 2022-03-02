@@ -52,7 +52,7 @@ var mongo = require('mongodb');
 const { response } = require('express');
 const { json } = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
- var url = "mongodb://0.0.0.0 :27017/mydb?&connectTimeoutMS=2147483647&socketTimeoutMS=2147483647";
+ var url = "mongodb://127.0.0.1 :27017/mydb?&connectTimeoutMS=2147483647&socketTimeoutMS=2147483647";
  const option = {
 
   socketTimeoutMS: 3000000,

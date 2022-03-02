@@ -2,6 +2,7 @@ import { LOCALE_ID } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
+import { CommonModule } from '@angular/common';
 import {AtomSpinnerModule} from 'angular-epic-spinners'
 import {ChartModule} from 'primeng/chart';
  import * as  stocks from '../lists/stocklist'
@@ -732,6 +733,7 @@ text1: number;
   styleUrls: ['./ohlc.component.scss'],
 })
 export class OHLCComponent implements OnInit {
+
 visibleSidebar1;
 visibleSidebar2;
   
