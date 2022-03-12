@@ -7,14 +7,14 @@
           <span class="login-status online"></span> <!--change to offline or busy as needed-->              
         </div>
         <div class="nav-profile-text">
-          <span class="font-weight-bold mb-2">David Grey. H</span>
-          <span class="text-secondary text-small">Project Manager</span>
+          <span class="font-weight-bold mb-2">Amit Kapila</span>
+          <span class="text-secondary text-small">Website Creator</span>
         </div>
         <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
       </a>
     </li>
-    <li class="nav-item" [ngClass]="{ 'active': dashboard.isActive }">
-      <a class="nav-link" routerLink="/dashboard" routerLinkActive #dashboard="routerLinkActive">
+    <li class="nav-item" [ngClass]="{ 'active': main.isActive }">
+      <a class="nav-link" routerLink="/main" routerLinkActive #main="routerLinkActive">
         <span class="menu-title">Dashboard</span>
         <i class="mdi mdi-home menu-icon"></i>
       </a>
@@ -61,8 +61,8 @@
       </a>
     </li>
     <li class="nav-item" [ngClass]="{ 'active': icons.isActive }">
-      <a class="nav-link" routerLink="icons/mdi" routerLinkActive #icons="routerLinkActive">
-        <span class="menu-title">Icons</span>
+      <a class="nav-link" routerLink="/Ohlc" routerLinkActive #icons="routerLinkActive">
+        <span class="menu-title">OHLC</span>
         <i class="mdi mdi-contacts menu-icon"></i>
       </a>
     </li>

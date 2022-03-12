@@ -8,6 +8,6 @@ if (environment.production) {
   enableProdMode();
 }
 import 'zone.js'; //Added for lazy module error in firefox,safari in server.
-
+import 'hammerjs';
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
