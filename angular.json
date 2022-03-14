@@ -43,7 +43,7 @@
             "node_modules/animate.css/animate.css",
             "node_modules/chart.js/dist/Chart.js",
             "node_modules/mdb-ui-kit/css/mdb.min.css",
-           
+            
             "node_modules/@taiga-ui/core/styles/taiga-ui-global.less",
             "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less"
           

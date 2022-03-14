@@ -1,0 +1,37 @@
+<mat-card class='n50optionssupport animate__flipOutX'  *ngFor="let tile of n50optionssupport">
+  <h6>Nifty Maximum Support:{{tile.text1}}</h6>
+  
+</mat-card>
+<mat-card class='n50optionsresistance animate__flipOutX'  *ngFor="let tile of n50optionsresistance">
+  <h6>Nifty Maximum Resistance:{{tile.text1}}</h6>
+  
+</mat-card>
+<mat-card class='bnoptionssupport animate__flipOutX'  *ngFor="let tile of bnoptionssupport">
+  <h6>Bank Nifty Maximum Support:{{tile.text1}}</h6>
+  
+</mat-card>
+<mat-card class='bnoptionsresistance animate__flipOutX'  *ngFor="let tile of bnoptionsresistance">
+  <h6>Bank Nifty Maximum Resistance:{{tile.text1}}</h6>
+  
+</mat-card>
+<mat-card class='bnoptionssupport animate__flipOutX'  *ngFor="let tile of pos">
+  <h6>Positive:{{pos}}</h6>
+  
+</mat-card>
+<mat-card class='bnoptionsresistance animate__flipOutX'  *ngFor="let tile of neg">
+  <h6>Negative:{{neg}}</h6>
+  
+</mat-card>
+
+
+<div id="chart">
+  <apx-chart
+      [series]="chartOptions5.series"
+      [chart]="chartOptions5.chart"
+      [dataLabels]="chartOptions5.dataLabels"
+      [plotOptions]="chartOptions5.plotOptions"
+      [fill]="chartOptions5.fill"
+      [title]="chartOptions5.title"
+      [legend]="chartOptions5.legend"
+    ></apx-chart>
+  </div>

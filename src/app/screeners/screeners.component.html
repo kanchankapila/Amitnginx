@@ -1,0 +1,523 @@
+<script src="/assets/backend/js/html2canvas.min.js"></script>
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+</head>
+<marquee class="col">
+
+  <div class="col" style="display:inline">
+    <span class="fontred" *ngFor="let ind of bqtl1">
+      {{ind.text}}&nbsp;{{ind.text1}}&nbsp;{{ind.text2}}&nbsp;({{ind.text3}})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+  </div>
+
+</marquee>
+<marquee class="col">
+  <div class="col" style="display:inline">
+    <span class="fontgreen" *ngFor="let ind of bqtg1">
+      {{ind.text}}&nbsp;{{ind.text1}}&nbsp;{{ind.text2}}&nbsp;({{ind.text3}})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+  </div>
+
+</marquee>
+<marquee class="col">
+  <div class="col" style="display:inline">
+    <span *ngFor="let new of news"> {{new}} </span>
+
+  </div>
+
+</marquee>
+
+<marquee class="col">
+  <div class="col" style="display:inline">
+    <span [ngClass]="{'fontgreen' : ind.text3 > 0 , 'fontred': 0 > ind.text3 }" *ngFor="let ind of indices"> {{ind.text1}}&nbsp;{{ind.text2}}&nbsp;{{ind.text7}}&nbsp;({{ind.text3}})&nbsp;Adv: {{ind.text5}}&nbsp;Dec: {{ind.text4}}***</span>
+
+  </div>
+
+</marquee>
+<p-tabView>
+  
+  
+  <p-tabPanel header="Bullish">
+    <div class="InsideContent">
+    <div class="card1">
+      <h5>Top Gainers</h5>
+      <p-chart id="tg" type="horizontalBar" width="600px" height="900px" [data]="basicData11" [options]="basicOptions11"></p-chart>
+    </div>
+    <div class="card2">
+      <h5>Price Increase Volume Increase</h5>
+      <p-chart id="pivi" type="horizontalBar" width="600px" height="900px" [data]="basicData1" [options]="basicOptions1"></p-chart>
+    </div>
+  </div>
+    
+    <div class="InsideContent">
+    <div class="card" >
+      <h5>MACD Signalling Buy</h5>
+      <p-chart id="macdb" type="horizontalBar" width="600px" height="900px"  [data]="basicData3" [options]="basicOptions3"></p-chart>
+    </div>
+  
+    <div class="card" >
+      <h5>Price Increase Volume Decrease</h5>
+      <p-chart id="pivd" type="horizontalBar"  width="600px" height="900px" [data]="basicData2" [options]="basicOptions2"></p-chart>
+    </div>
+  </div>
+  <div class="InsideContent">
+    <div class="card" >
+      <h5>Only Buyers</h5>
+      <p-chart id="ob" type="horizontalBar" width="600px" height="900px" [data]="basicData4" [options]="basicOptions4"></p-chart>
+    </div>
+    <div class="card1">
+      <h5>Top Gainers</h5>
+      <p-chart id="tg" type="horizontalBar" width="600px" height="900px" [data]="basicData" [options]="basicOptions"></p-chart>
+    </div>
+  </div>
+  </p-tabPanel>
+  <p-tabPanel header="Bearish">
+    <div class="InsideContent">
+      <div class="card"  >
+        <h5>Top Losers</h5>
+        <p-chart  type="horizontalBar" width="600px" height="900px" [data]="basicData5" [options]="basicOptions5"></p-chart>
+      </div>
+      <div class="card">
+        <h5>Price Decrease Volume Decrease</h5>
+        <p-chart id="pdvd" type="horizontalBar" width="600px" height="900px" [data]="basicData7" [options]="basicOptions7"></p-chart>
+      </div>
+    </div>
+    
+    <div class="InsideContent">
+    <div class="card" >
+      <h5>MACD Signalling Sell</h5>
+      <p-chart id="macds" type="horizontalBar" width="600px" height="900px" [data]="basicData8" [options]="basicOptions8"></p-chart>
+    </div>
+    <div class="card2">
+      <h5>Price Decrease Volume Increase</h5>
+      <p-chart id="pdvi" type="horizontalBar" width="600px" height="900px" [data]="basicData6" [options]="basicOptions6"></p-chart>
+    </div>
+  </div>
+    <div class="card" width="200px" height="200px">
+      <h5>Only Sellers</h5>
+      <p-chart id="os" type="horizontalBar"  [data]="basicData9" [options]="basicOptions9"></p-chart>
+    </div>
+    
+
+
+ 
+
+  <div class="btn btn-primary" (click)="downloadImage()">DL part</div>
+  <div class="btn btn-primary" (click)="downloadimage1()">DL1 whole</div>
+  
+  <div class="btn btn-primary" (click)="register()">email</div>
+  <button (click)="onPng()">Perfect</button>
+
+<div id="download">
+  <img #canvas>
+  <a #downloadLink></a>
+</div>
+
+<div class="ng-autocomplete">
+  <ng-autocomplete [data]="data" [searchKeyword]="keyword" (selected)='selectEvent($event.isin)'
+    (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+  </ng-autocomplete>
+
+  <ng-template #itemTemplate let-item>
+    <a [innerHTML]="item.name"></a>
+  </ng-template>
+
+  <ng-template #notFoundTemplate let-notFound>
+    <div [innerHTML]="notFound"></div>
+  </ng-template>
+</div>
+
+<p-sidebar [(visible)]="visibleSidebar1" [fullScreen]="true" [baseZIndex]="10000">
+  <div class="InsideContent">
+    <div class="card1">
+      <h5>Top Gainers</h5>
+      <p-chart id="tg" type="horizontalBar" width="600px" height="900px" [data]="basicData11" [options]="basicOptions11"></p-chart>
+    </div>
+    <div class="card2">
+      <h5>Price Increase Volume Increase</h5>
+      <p-chart id="pivi" type="horizontalBar" width="600px" height="900px" [data]="basicData1" [options]="basicOptions1"></p-chart>
+    </div>
+  </div>
+    
+    <div class="InsideContent">
+    <div class="card" >
+      <h5>MACD Signalling Buy</h5>
+      <p-chart id="macdb" type="horizontalBar" width="600px" height="900px"  [data]="basicData3" [options]="basicOptions3"></p-chart>
+    </div>
+  
+    <div class="card" >
+      <h5>Price Increase Volume Decrease</h5>
+      <p-chart id="pivd" type="horizontalBar"  width="600px" height="900px" [data]="basicData2" [options]="basicOptions2"></p-chart>
+    </div>
+  </div>
+  <div class="InsideContent">
+    <div class="card" >
+      <h5>Only Buyers</h5>
+      <p-chart id="ob" type="horizontalBar" width="600px" height="900px" [data]="basicData4" [options]="basicOptions4"></p-chart>
+    </div>
+    <div class="card1">
+      <h5>Top Gainers</h5>
+      <p-chart id="tg" type="horizontalBar" width="600px" height="900px" [data]="basicData" [options]="basicOptions"></p-chart>
+    </div>
+  </div>
+</p-sidebar>
+  
+  
+  
+  
+
+  
+  
+  
+  <div id="a52" style=float:left class="btna52 shiny">At 52wk High</div>
+  <div style=float:left width="600px">
+    <mat-card style=float:left class="mat-cardmacd fontgreen" *ngFor="let tile of bq52h">
+     <h6> {{tile.text}}</h6><h6>{{tile.text1}}&nbsp;({{tile.text2}}%)<br>{{tile.text3}}</h6><br>{{tile.text4}}
+      
+    </mat-card>
+  </div>
+  <div id="c52" style=float:left class="btnc52 shiny">Close to 52wk High</div>
+  <div style=float:left width="600px">
+    <mat-card style=float:left class="mat-cardmacd fontgreen" *ngFor="let tile of bqc52h">
+     <h6> {{tile.text}}</h6><h6>{{tile.text1}}&nbsp;({{tile.text2}}%)<br>52 wk High:{{tile.text3}}</h6><br>{{tile.text4}}
+      
+    </mat-card>
+  </div>
+  
+  
+<p-sidebar [(visible)]="visibleSidebar2" [fullScreen]="true" [baseZIndex]="10000">
+  <div class="InsideContent">
+    <div class="card"  >
+      <h5>Top Losers</h5>
+      <p-chart  type="horizontalBar" width="600px" height="900px" [data]="basicData5" [options]="basicOptions5"></p-chart>
+    </div>
+    <div class="card">
+      <h5>Price Decrease Volume Decrease</h5>
+      <p-chart id="pdvd" type="horizontalBar" width="600px" height="900px" [data]="basicData7" [options]="basicOptions7"></p-chart>
+    </div>
+  </div>
+  
+  <div class="InsideContent">
+  <div class="card" >
+    <h5>MACD Signalling Sell</h5>
+    <p-chart id="macds" type="horizontalBar" width="600px" height="900px" [data]="basicData8" [options]="basicOptions8"></p-chart>
+  </div>
+  <div class="card2">
+    <h5>Price Decrease Volume Increase</h5>
+    <p-chart id="pdvi" type="horizontalBar" width="600px" height="900px" [data]="basicData6" [options]="basicOptions6"></p-chart>
+  </div>
+</div>
+  <div class="card" width="200px" height="200px">
+    <h5>Only Sellers</h5>
+    <p-chart id="os" type="horizontalBar"  [data]="basicData9" [options]="basicOptions9"></p-chart>
+  </div>
+  
+  
+  
+  <div id="a52" style=float:left class="btna52 shiny">At 52wk Low</div>
+  <div style=float:left width="600px">
+    <mat-card style=float:left class="mat-card52l fontred" *ngFor="let tile of bq52l">
+     <h6> {{tile.text}}</h6><h6>{{tile.text1}}&nbsp;({{tile.text2}}%)<br>{{tile.text3}}</h6><br>{{tile.text4}}
+      
+    </mat-card>
+  </div>
+  <div id="c52" style=float:left class="btnc52 shiny">Close to 52wk Low</div>
+  <div style=float:left width="600px">
+    <mat-card style=float:left class="mat-cardmacd fontred" *ngFor="let tile of bqc52l">
+     <h6> {{tile.text}}</h6><h6>{{tile.text1}}&nbsp;({{tile.text2}}%)<br>52 wk High:{{tile.text3}}</h6><br>{{tile.text4}}
+      
+    </mat-card>
+  </div>
+  
+  
+  </p-sidebar>
+
+<p-sidebar [(visible)]="visibleSidebar3" position="top" [baseZIndex]="10000">
+  <h1 style="font-weight:normal">Top Sidebar</h1>
+  </p-sidebar>
+
+<p-sidebar [(visible)]="visibleSidebar4" [fullScreen]="true" position="bottom" [baseZIndex]="10000">
+  
+</p-sidebar>
+
+<p-sidebar [(visible)]="visibleSidebar5" [fullScreen]="true" [baseZIndex]="10000">
+</p-sidebar>
+<div class="InsideContent">
+  <button pButton type="button" (click)="visibleSidebar1 = true" icon="pi pi-arrow-right" label="Bullish" class="p-button-raised p-button-success p-button-outlined "></button>
+  <button pButton type="button" (click)="visibleSidebar2 = true" icon="pi pi-arrow-left" label="Bearish" class="p-button-raised p-button-danger p-button-outlined "></button>
+  <p-button type="button" (click)="visibleSidebar3 = true" icon="pi pi-arrow-down"></p-button>
+  <button pButton type="button" (click)="visibleSidebar4 = true" icon="pi pi-arrow-right" label="Intraday" class="p-button-raised p-button-success p-button-outlined "></button>
+  <button pButton type="button" (click)="visibleSidebar5 = true" icon="pi pi-arrow-right" label="Insights" class="p-button-raised p-button-success p-button-outlined "></button>
+  </div>
+
+
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('ma')">Most Active</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('hg')">Hourly Gainers</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('res')">Results</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('ts')">Trending Stocks</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('tgt')">Top Gainers Trendlyne</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('vst')">Volume Shockers Trendlyne</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('rsvdt')">Rising volume/day</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('but')">Broker's Update Trendlyne</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('n52ht')">Near 52wk High Trendlyne</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('52ht')">52wk High Trendlyne</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('tg')">Top Gainer's</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('vs')">Volume Shocker's</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('gus')">Gap Up Stocks</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('52ht')">52wk High Trendlyne</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('ec59')">EMA crossover 5 9</button>
+<button type="button" class="btn btn-outline-success animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('ec920')">EMA crossover 9 20</button>
+<button type="button" class="btn btn-outline-danger animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('hl')">Hourly Losers</button>
+<button type="button" class="btn btn-outline-danger animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('tlt')">Top Loser's Trendlyne</button>
+<button type="button" class="btn btn-outline-danger animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('ormt')">Overbought RSI/MSI Trendlyne</button>
+<button type="button" class="btn btn-outline-danger animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('52lt')">52wk Low Trendlyne</button>
+<button type="button" class="btn btn-outline-danger animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('n52lt')">Near 52wk Low Trendlyne</button>
+<button type="button" class="btn btn-outline-danger animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('tl')">Top Losers</button>
+<button type="button" class="btn btn-outline-danger animate__animated animate__flip" data-mdb-ripple-color="dark" (click)="scroll('gds')">Gap Down Stocks</button>
+
+
+
+
+<div style="display: block;float:left" class="chart animate__animated.animate__zoomIn">
+  <canvas baseChart width="1300" height="300" [datasets]="labelMFL4" [labels]="lineChartLabels4"
+    [options]="lineChartOptions4" [chartType]="ChartType4" (chartHover)="chartHovered4($event)"
+    (chartClick)="chartClicked4($event)"></canvas>
+</div>
+
+  
+
+
+<div id="capture" width="200px" height="300px">
+<div  id="ma" style=float:left class="btnma shiny">Most Active</div>
+<div #screen1 style=float:left width="600px">
+  <mat-card  style=float:left class="mat-cardbqma" *ngFor="let tile of bqma">
+    <h6>{{tile.text}}<br>{{tile.text1}}&nbsp;&nbsp;({{tile.text2}}%)</h6>Volume:{{tile.text3}}<br>{{tile.text4}}
+    
+  </mat-card>
+</div>
+</div>
+
+
+
+<div  id="hg" style=float:left class="btnhg shiny">Hourly Gainers</div>
+<div #screen style=float:left width="600px">
+  <mat-card style=float:left class="mat-card1" *ngFor="let tile of ethgainers">
+    {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}<br>{{tile.text3}}<br>{{tile.text4}}<br>{{tile.text5}}
+    <div class="detailsbutton">
+      <button class="detailsbtn1" (click)="changeStock123(tile.text6)">{{tile.text6}}</button>
+    </div>
+  </mat-card>
+</div>
+
+<div id="hl" style=float:left class="btnhl shiny">Hourly Losers</div>
+<div style=float:left width="600px">
+  <mat-card style=float:left class="mat-card1" *ngFor="let tile of ethlosers">
+    {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}<br>{{tile.text3}}<br>{{tile.text4}}<br>{{tile.text5}}
+    <div class="detailsbutton">
+      <button class="detailsbtn1" (click)="changeStock123(tile.text6)">{{tile.text6}}</button>
+    </div>
+  </mat-card>
+</div>
+
+<div #mg>
+<div id="ts" style=float:left class="btnts shiny">Trending Stocks</div>
+<div style=float:left width="600px">
+  <mat-card style=float:left class="mat-card1" *ngFor="let tile of trndngstocks">
+    {{tile.text}}<br>{{tile.text1}}
+    <div class="detailsbutton">
+      <button class="detailsbtn1" (click)="changeStock123(tile.text)">{{tile.text}}</button>
+    </div>
+  </mat-card>
+</div>
+</div>
+
+
+<div>
+  <div id="tgt" style=float:left class="btntgt shiny">Top Gainers Trendlyne</div>
+  <div style=float:left width="600px">
+    <mat-card style=float:left class="mat-card1" *ngFor="let tile of tltg">
+      {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}
+      <div class="detailsbutton">
+        <button class="detailsbtn1" (click)="changeStock123(tile.text2)">{{tile.text2}}</button>
+      </div>
+    </mat-card>
+  </div>
+
+  <div id="vst" style=float:left class="btnvst shiny">Volume Shockers Trendlyne</div>
+  <div style=float:left width="600px" class="mat-grid-tile">
+    <mat-card style=float:left class="mat-card1" *ngFor="let tile of tlvs">
+      {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}
+      <div class="detailsbutton">
+        <button class="detailsbtn1" (click)="changeStock123(tile.text2)">{{tile.text2}}</button>
+      </div>
+    </mat-card>
+
+ 
+
+
+
+
+
+
+  <div id="rvdt" style=float:left width="600px" class="btnrvdt shiny">Rising Volume/Day Trendlyne</div>
+  <div style=float:left width="600px" class="mat-grid-tile">
+    <mat-card class="mat-card1" *ngFor="let tile of tlrvpd">{{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}
+      <div class="detailsbutton">
+        <button class="detailsbtn1" (click)="changeStock123(tile.text2)">{{tile.text2}}</button>
+      </div>
+    </mat-card>
+  </div>
+
+
+
+  <div id="but" style=float:left class="btnbut shiny">Brokers Update Trendlyne</div>
+  <div style=float:left width="600px" class="mat-grid-tile">
+    <mat-card style=float:left class="mat-card1" *ngFor="let tile of tlbu">
+      {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}
+      <div class="detailsbutton">
+        <button class="detailsbtn1" (click)="changeStock123(tile.text2)">{{tile.text2}}</button>
+      </div>
+    </mat-card>
+  </div>
+
+
+
+
+
+  <div id="n52ht" style=float:left class="btnn52ht shiny">Near 52wk High Trendlyne</div>
+  <div style=float:left width="600px" class="mat-grid-tile">
+    <mat-card style=float:left class="mat-card1" *ngFor="let tile of tlnear52h">
+      {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}
+      <div class="detailsbutton">
+        <button class="detailsbtn1" (click)="changeStock123(tile.text2)">{{tile.text2}}</button>
+      </div>
+    </mat-card>
+  </div>
+
+  <div id="52ht" style=float:left class="btn52ht shiny">52wk High Trendlyne</div>
+  <div style=float:left width="600px" class="mat-grid-tile">
+    <mat-card style=float:left class="mat-card1" *ngFor="let tile of tl52h">
+      {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}
+      <div class="detailsbutton">
+        <button class="detailsbtn1" (click)="changeStock123(tile.text2)">{{tile.text2}}</button>
+      </div>
+    </mat-card>
+  </div>
+
+</div>
+
+
+
+<div>
+  <div id="tlt" style=float:left width="600px" class="btntlt shiny">Top Losers Trendlyne</div>
+  <div style=float:left width="600px" class="mat-grid-tile">
+    <mat-card style=float:left *ngFor="let tile of tltl">{{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}
+      <div class="detailsbutton">
+        <button class="detailsbtn" (click)="changeStock123(tile.text2)">{{tile.text2}}</button>
+      </div>
+    </mat-card>
+  </div>
+
+
+  <div id="ormt" style=float:left width="600px" class="btnormt shiny">OverBought RSI/MSI Trendlyne</div>
+  <div>
+    <mat-card style=float:left *ngFor="let tile of tlrvpd">{{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}
+      <div class="detailsbutton">
+        <button class="detailsbtn" (click)="changeStock123(tile.text2)">{{tile.text2}}</button>
+      </div>
+    </mat-card>
+  </div>
+
+
+  <div id="52lt" style=float:left width="600px" class="btn52lt shiny">52 wk Low Trendlyne</div>
+  <div style=float:left width="600px" class="mat-grid-tile">
+    <mat-card style=float:left *ngFor="let tile of tl52l">{{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}
+      <div class="detailsbutton">
+        <button class="detailsbtn" (click)="changeStock123(tile.text2)">{{tile.text2}}</button>
+      </div>
+    </mat-card>
+  </div>
+
+
+
+  <div id="n52lt" style=float:left width="600px" class="btnn52lt shiny">Near 52wk Low Trendlyne</div>
+  <div style=float:left width="600px" class="mat-grid-tile">
+    <mat-card style=float:right *ngFor="let tile of tlnear52l">{{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}
+      <div class="detailsbutton">
+        <button class="detailsbtn" (click)="changeStock123(tile.text2)">{{tile.text2}}</button>
+      </div>
+    </mat-card>
+  </div>
+
+</div>
+
+
+
+
+<div>
+  <div id="tg" style=float:left class="btntg shiny">Top Gainers</div>
+  <div style=float:left width="600px" class="mat-grid-tile">
+    <mat-card style=float:left class="mat-card1" *ngFor="let tile of tg">
+      {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}<br>{{tile.text3}}<br>{{tile.text4}}<br>{{tile.text5}}<br>{{tile.text6}}
+      <div class="detailsbutton">
+        <button class="detailsbtn1" (click)="changeStock123(tile.text6)">{{tile.text6}}</button>
+
+      </div>
+    </mat-card>
+  </div>
+
+  <div id="tl" style=float:left width="600px" class="btntl shiny">Top Losers</div>
+  <div>
+    <mat-card style=float:left *ngFor="let tile of tl">
+      {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}<br>{{tile.text3}}<br>{{tile.text4}}<br>{{tile.text5}}<br>{{tile.text6}}
+      <div class="detailsbutton">
+        <button class="detailsbtn" (click)="changeStock123(tile.text6)">{{tile.text6}}</button>
+      </div>
+    </mat-card>
+  </div>
+
+
+  <div id="res" style=float:left class="btnr shiny">Results</div>
+
+
+  <div style=float:left class="mat-grid-tile" color="yellow">
+    <mat-card style=float:left *ngFor="let tile of tiles1">{{tile.text}}<br>{{tile.text1}}<br>{{tile.text3}}
+      <div class="detailsbutton">
+        <button class="detailsbtn" (click)="changeStock123(tile.text2)">{{tile.text2}}</button>
+
+      </div>
+    </mat-card>
+  </div>
+
+
+
+  <div style=float:left class="btntg shiny">Top Gainers</div>
+  <div style=float:left class="mat-grid-tile" width="525px">
+    <mat-card style=float:left class="mat-card1" *ngFor="let tile of tiles">
+      {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}<br>{{tile.text3}}
+      <div class="detailsbutton1">
+        <button class="detailsbtn1" (click)="changeStock123(tile.text3)">{{tile.text3}}</button>
+
+      </div>
+
+    </mat-card>
+  </div>
+
+  <div id="vs" style=float:left class="btnvs shiny">Volume Shockers</div>
+  <div style=float:left class="mat-grid-tile">
+    <mat-card class="mat-card" *ngFor="let tile of chrtinkvs">
+      {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}<br>{{tile.text3}}<br>{{tile.text4}}<br>{{tile.text5}}
+      <div class="detailsbutton">
+        <button class="detailsbtn" (click)="changeStock123(tile.text5)">{{tile.text5}}</button>
+
+      </div>
+    </mat-card>
+  </div>
+
+  
+</div>
+
+

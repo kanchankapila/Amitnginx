@@ -1,0 +1,103 @@
+<mat-card [ngClass]="{'n50cardg animate__flipOutX fontgreen' : tile.text4 > 0 ,'n50cardr animate__flipOutX fontred': 0 > tile.text4 }" *ngFor="let tile of nifty50">
+  <h6>{{tile.text1}}&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;{{tile.text3}}&nbsp;&nbsp;{{tile.text4}}%</h6>
+  
+</mat-card>
+<mat-card class='n50optionssupport animate__flipOutX'  *ngFor="let tile of n50optionssupport">
+  <h6>Nifty Maximum Support:{{tile.text1}}</h6>
+  
+</mat-card>
+<mat-card class='n50optionsresistance animate__flipOutX'  *ngFor="let tile of n50optionsresistance">
+  <h6>Nifty Maximum Resistance:{{tile.text1}}</h6>
+  
+</mat-card>
+
+<mat-card [ngClass]="{'pcrg animate__flipOutX ' : tile.text1 > 1.2 ,'pcrr animate__flipOutX ': 0.80 > tile.text1 }"  *ngFor="let tile of pcrnsenifty">
+  <h6>PCR NSE Nifty :{{tile.text1| number : '1.2-2'}}</h6>
+     
+</mat-card>
+<mat-card [ngClass]="{'bankniftycardg animate__flipOutX fontgreen' : tile.text4 > 0 ,'bankniftycardr animate__flipOutX fontred': 0 > tile.text4 }" class="bankniftycard animate__flipOutX"
+    
+  *ngFor="let tile of banknifty1">
+  <h6>{{tile.text1}}&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;{{tile.text3}}&nbsp;&nbsp;{{tile.text4}}%</h6>
+  
+</mat-card>
+
+<mat-card class='bnoptionssupport animate__flipOutX'  *ngFor="let tile of bnoptionssupport">
+  <h6>Bank Nifty Maximum Support:{{tile.text1}}</h6>
+  
+</mat-card>
+<mat-card class='bnoptionsresistance animate__flipOutX'  *ngFor="let tile of bnoptionsresistance">
+  <h6>Bank Nifty Maximum Resistance:{{tile.text1}}</h6>
+  
+</mat-card>
+<mat-card [ngClass]="{'pcrdg animate__flipOutX ' : tile.text1 > 1.2,'pcrr animate__flipOutX ': 0.80 > tile.text1 }"  *ngFor="let tile of pcrnsebnifty">
+  <h6>PCR Bank Nifty :{{tile.text1| number : '1.2-2'}}</h6>
+</mat-card>
+<mat-card [ngClass]="{'vixg animate__flipOutX ' : tile.text4 > 0 ,'vixr animate__flipOutX ': 0 > tile.text4 }"  *ngFor="let tile of indiavix">
+  <h6>India Vix :{{tile.text3| number : '1.2-2'}}</h6> {{tile.text3}}&nbsp;&nbsp;({{tile.text4}}%)
+</mat-card>
+<div class="InsideContent">
+  <div class="InsideContent1">
+  <div id="barview" style=float:left width="600px" color="indigo" class="barview shiny">Crossed Above SMA20</div>
+<table mdbTable>
+  <thead>
+    <tr>
+      <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr mdbTableCol *ngFor="let el of dataSource">
+      <th scope="row">{{el.Company}}</th>
+      <td>{{el.SMA20}}</td>
+      <td>{{el.SMA50}}</td>
+      <td>{{el.CurrentPrice}}</td>
+      <td>{{el.Change}}</td>
+      
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="InsideContent1">
+  <div id="barview" style=float:left width="600px" color="indigo" class="barview shiny">Bullish Crossover</div>
+
+<table mdbTable>
+  <thead>
+    <tr>
+      <th *ngFor="let head of headElements1" scope="col">{{head}} </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr mdbTableCol *ngFor="let el of dataSource1">
+      <th scope="row">{{el.Company}}</th>
+      <td>{{el.Changepercent}}</td>
+      
+      <td>{{el.CurrentPrice}}</td>
+      <td>{{el.Change}}</td>
+      
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div>
+<div class="InsideContent1">
+  <div id="barview" style=float:left width="600px" color="indigo" class="barview shiny">Volume Shockers</div>
+
+<table mdbTable>
+  <thead>
+    <tr>
+      <th *ngFor="let head of headElements2" scope="col">{{head}} </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr mdbTableCol *ngFor="let el of dataSource2">
+      <th scope="row">{{el.Company}}</th>
+      <td>{{el.Changepercent}}</td>
+      <td>{{el.CurrentPrice}}</td>
+      <td>{{el.AvgVol}}</td>
+      <td>{{el.Volume}}</td>
+      <td>{{el.Volchange}}</td>
+      </tr>
+  </tbody>
+</table>
+</div>

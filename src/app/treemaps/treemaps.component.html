@@ -1,0 +1,115 @@
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<mat-card [ngClass]="{'n50cardg animate__flipOutX fontgreen' : tile.text4 > 0 ,'n50cardr animate__flipOutX fontred': 0 > tile.text4 }" *ngFor="let tile of nifty50;trackBy: trackByFuntion">
+  <h6>{{tile.text1}}&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;{{tile.text3}}&nbsp;&nbsp;{{tile.text4}}%</h6>
+  
+</mat-card>
+<mat-card class='n50optionssupport animate__flipOutX'  *ngFor="let tile of n50optionssupport;trackBy: trackByFuntion1">
+  <h6>Nifty Maximum Support:{{tile.text1}}</h6>
+  
+</mat-card>
+<mat-card class='n50optionsresistance animate__flipOutX'  *ngFor="let tile of n50optionsresistance;trackBy: trackByFuntion2">
+  <h6>Nifty Maximum Resistance:{{tile.text1}}</h6>
+  
+</mat-card>
+
+<mat-card [ngClass]="{'pcrg animate__flipOutX ' : tile.text1 > 1.2 ,'pcrr animate__flipOutX ': 0.80 > tile.text1 }"  *ngFor="let tile of pcrnsenifty;trackBy: trackByFuntion3">
+  <h6>PCR NSE Nifty :{{tile.text1| number : '1.2-2'}}</h6>
+     
+</mat-card>
+<mat-card [ngClass]="{'bankniftycardg animate__flipOutX fontgreen' : tile.text4 > 0 ,'bankniftycardr animate__flipOutX fontred': 0 > tile.text4 }" class="bankniftycard animate__flipOutX"
+    
+  *ngFor="let tile of banknifty1;trackBy: trackByFuntion4">
+  <h6>{{tile.text1}}&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;{{tile.text3}}&nbsp;&nbsp;{{tile.text4}}%</h6>
+  
+</mat-card>
+
+<mat-card class='bnoptionssupport animate__flipOutX'  *ngFor="let tile of bnoptionssupport; trackBy: trackByFuntion5">
+  <h6>Bank Nifty Maximum Support:{{tile.text1}}</h6>
+  
+</mat-card>
+<mat-card class='bnoptionsresistance animate__flipOutX'  *ngFor="let tile of bnoptionsresistance; trackBy: trackByFuntion6">
+  <h6>Bank Nifty Maximum Resistance:{{tile.text1}}</h6>
+  
+</mat-card>
+<mat-card [ngClass]="{'pcrdg animate__flipOutX ' : tile.text1 > 1.2,'pcrr animate__flipOutX ': 0.80 > tile.text1 }"  *ngFor="let tile of pcrnsebnifty; trackBy: trackByFuntion7">
+  <h6>PCR Bank Nifty :{{tile.text1| number : '1.2-2'}}</h6>
+</mat-card>
+<mat-card [ngClass]="{'vixg animate__flipOutX ' : tile.text4 > 0 ,'vixr animate__flipOutX ': 0 > tile.text4 }"  *ngFor="let tile of indiavix; trackBy: trackByFuntion8">
+  <h6>India Vix :{{tile.text3| number : '1.2-2'}}</h6> {{tile.text3}}&nbsp;&nbsp;({{tile.text4}}%)
+</mat-card>
+
+
+
+  
+
+  <div class="InsideContent1">
+  <div id="barview" style=float:left width="600px" color="indigo" class="barview shiny">Index View</div>
+  <div id="chart" >
+    <apx-chart
+      [series]="chartOptions3.series"
+      [chart]="chartOptions3.chart"
+      [dataLabels]="chartOptions3.dataLabels"
+      [stroke]="chartOptions3.stroke"
+      [colors]="chartOptions3.colors"
+      [title]="chartOptions3.title"
+      [grid]="chartOptions3.grid"
+      [tooltip]="chartOptions3.tooltip"
+      [plotOptions]="chartOptions3.plotOptions"
+      [yaxis]="chartOptions3.yaxis"
+      [xaxis]="chartOptions3.xaxis"
+    ></apx-chart>
+  </div>
+</div>
+
+<div class="InsideContent1">
+  <div id="barview" style=float:left width="600px" color="indigo" class="barview shiny">SectorMap View</div>    
+  <div id="chart">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [plotOptions]="chartOptions.plotOptions"
+        [fill]="chartOptions.fill"
+        [title]="chartOptions.title"
+        [legend]="chartOptions.legend"
+      ></apx-chart>
+    </div>
+  
+</div>
+<div class="InsideContent1">
+  <div id="barview" style=float:left width="600px" color="indigo" class="barview shiny">Index SectorMap View</div>    
+  <div id="chart">
+  <apx-chart
+      [series]="chartOptions4.series"
+      [chart]="chartOptions4.chart"
+      [dataLabels]="chartOptions4.dataLabels"
+      [plotOptions]="chartOptions4.plotOptions"
+      [fill]="chartOptions4.fill"
+      [title]="chartOptions4.title"
+      [legend]="chartOptions4.legend"
+    ></apx-chart>
+  </div>
+</div>
+
+<div id="chart" >
+  <apx-chart
+      [series]="chartOptions6.series"
+      [chart]="chartOptions6.chart"
+      [dataLabels]="chartOptions6.dataLabels"
+      [stroke]="chartOptions6.stroke"
+      [colors]="chartOptions6.colors"
+      [title]="chartOptions6.title"
+      [grid]="chartOptions6.grid"
+      [tooltip]="chartOptions6.tooltip"
+      [plotOptions]="chartOptions6.plotOptions"
+      [yaxis]="chartOptions6.yaxis"
+      [xaxis]="chartOptions6.xaxis"
+    ></apx-chart>
+  
+  
+  </div>
+  <script type="text/javascript" >  
+  document.getElementById('mylocation').innerHTML = data
+</script>  
+  <div id="mylocation"></div> 
+  <div id="chartContainer" style="height: 12000px; width: 100%;"></div>

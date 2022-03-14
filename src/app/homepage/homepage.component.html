@@ -1,0 +1,846 @@
+
+
+<div class="ng-autocomplete" style=float:right>
+  <ng-autocomplete [data]="data" [searchKeyword]="keyword" (selected)='selectEvent($event.value)'
+    (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+  </ng-autocomplete>
+
+
+  <ng-template #itemTemplate let-item>
+    <a [innerHTML]="item.name"></a>
+  </ng-template>
+
+  <ng-template #notFoundTemplate let-notFound>
+    <div [innerHTML]="notFound"></div>
+  </ng-template>
+</div>
+
+
+
+<mat-card [ngClass]="{'n50cardg animate__flipOutX fontgreen' : tile.text4 > 0 ,'n50cardr animate__flipOutX fontred': 0 > tile.text4 }" *ngFor="let tile of nifty50">
+  <h6>{{tile.text1}}&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;{{tile.text3}}&nbsp;&nbsp;{{tile.text4}}%</h6>
+  
+</mat-card>
+<mat-card [ngClass]="{'bankniftycardg animate__flipOutX fontgreen' : tile.text4 > 0 ,'bankniftycardr animate__flipOutX fontred': 0 > tile.text4 }" class="bankniftycard animate__flipOutX"
+    
+  *ngFor="let tile of banknifty1">
+  <h6>{{tile.text1}}&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;{{tile.text3}}&nbsp;&nbsp;{{tile.text4}}%</h6>
+  
+</mat-card>
+
+<mat-card class='n50optionssupport animate__flipOutX'  *ngFor="let tile of n50optionssupport">
+  <h6>Nifty Maximum Support:{{tile.text1}}</h6>
+  
+</mat-card>
+<mat-card class='n50optionsresistance animate__flipOutX'  *ngFor="let tile of n50optionsresistance">
+  <h6>Nifty Maximum Resistance:{{tile.text1}}</h6>
+  
+</mat-card>
+<mat-card class='bnoptionssupport animate__flipOutX'  *ngFor="let tile of bnoptionssupport">
+  <h6>Bank Nifty Maximum Support:{{tile.text1}}</h6>
+  
+</mat-card>
+<mat-card class='bnoptionsresistance animate__flipOutX'  *ngFor="let tile of bnoptionsresistance">
+  <h6>Bank Nifty Maximum Resistance:{{tile.text1}}</h6>
+  
+</mat-card>
+
+<p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="10000">
+  <h1 style="font-weight:normal">Left Sidebar</h1>
+  <p-button type="button" (click)="visibleSidebar1 = false" label="Save" styleClass="p-button-success"></p-button>
+  <p-button type="button" (click)="visibleSidebar1 = false" label="Cancel" styleClass="p-button-secondary"></p-button>
+</p-sidebar>
+<p-sidebar [(visible)]="visibleSidebar2" position="right" [baseZIndex]="10000">
+  <h1 style="font-weight:normal">Right Sidebar</h1>
+  <p-button type="button" (click)="visibleSidebar2 = false" label="Save" styleClass="p-button-success"></p-button>
+  <p-button type="button" (click)="visibleSidebar2 = false" label="Cancel" styleClass="p-button-secondary"></p-button>
+</p-sidebar>
+
+<p-sidebar [(visible)]="visibleSidebar3" position="top" [baseZIndex]="10000">
+  <h1 style="font-weight:normal">Top Sidebar</h1>
+  <p-button type="button" (click)="visibleSidebar3 = false" label="Save" styleClass="p-button-success"></p-button>
+  <p-button type="button" (click)="visibleSidebar3 = false" label="Cancel" styleClass="p-button-secondary"></p-button>
+</p-sidebar>
+
+<p-sidebar [(visible)]="visibleSidebar4" position="bottom" [baseZIndex]="10000">
+  <h1 style="font-weight:normal">Bottom Sidebar</h1>
+  <p-button type="button" (click)="visibleSidebar4 = false" label="Save" styleClass="p-button-success"></p-button>
+  <p-button type="button" (click)="visibleSidebar4 = false" label="Cancel" styleClass="p-button-secondary"></p-button>
+</p-sidebar>
+
+<p-sidebar [(visible)]="visibleSidebar5" [fullScreen]="true" [baseZIndex]="10000">
+  <h1 style="font-weight:normal">Full Screen Sidebar</h1>
+  <div id="chartContainer" style="height: 6000px; width: 100%;"></div>
+  
+</p-sidebar>
+
+<div class="InsideContent">
+<p-button type="button" (click)="visibleSidebar1 = true" icon="pi pi-arrow-right"></p-button>
+<p-button type="button" (click)="visibleSidebar2 = true" icon="pi pi-arrow-left"></p-button>
+<p-button type="button" (click)="visibleSidebar3 = true" icon="pi pi-arrow-down"></p-button>
+<p-button type="button" (click)="visibleSidebar4 = true" icon="pi pi-arrow-up"></p-button>
+<p-button type="button" (click)="visibleSidebar5 = true" icon="pi pi-th-large"></p-button>
+</div>
+
+
+<div class="InsideContent">
+<div class="card" width="200px" height="200px">
+  <h5>Top Gainers</h5>
+  <p-chart type="horizontalBar" [data]="basicData" [options]="basicOptions"></p-chart>
+</div>
+<div class="card" width="200px" height="200px">
+  <h5>Top Losers</h5>
+  <p-chart type="horizontalBar" [data]="basicData1" [options]="basicOptions1"></p-chart>
+</div>
+<div class="card" width="200px" height="200px">
+  <h5>Volume Shockers</h5>
+  <p-chart type="horizontalBar" [data]="basicData2" [options]="basicOptions2"></p-chart>
+</div>
+</div>
+<div class="InsideContent">
+  <div class="card" width="200px" height="200px">
+    <h5>High Volume,High Gain </h5>
+    <p-chart type="horizontalBar" [data]="basicData3" [options]="basicOptions3"></p-chart>
+  </div>
+  <div class="card" width="200px" height="200px">
+    <h5>High Volume,Low Gain </h5>
+    <p-chart type="horizontalBar" [data]="basicData4" [options]="basicOptions4"></p-chart>
+  </div>
+  <div class="card" width="200px" height="200px">
+    <h5>Rising Volume per day </h5>
+    <p-chart type="horizontalBar" [data]="basicData5" [options]="basicOptions5"></p-chart>
+  </div>
+</div>
+<p-tabView>
+  <p-tabPanel header="Technicals">
+  
+
+      
+  </p-tabPanel>
+  <p-tabPanel header="All Stocks">
+   
+
+
+  </p-tabPanel>
+</p-tabView>
+
+
+
+
+<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>
+<div class="row mt-4">
+  <div class="col-lg-6 col-xl-4">
+    <div class="card mb-3 widget-content">
+      <div class="widget-content-wrapper">
+        <div class="widget-content-left">
+          <div class="widget-heading">Total Orders</div>
+          <div class="widget-subheading">Last year expenses</div>
+        </div>
+        <div class="widget-content-right">
+          <div class="widget-numbers text-success"><span>1896</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-xl-4">
+    <div class="card mb-3 widget-content">
+      <div class="widget-content-wrapper">
+        <div class="widget-content-left">
+          <div class="widget-heading">Clients</div>
+          <div class="widget-subheading">Total Clients Profit</div>
+        </div>
+        <div class="widget-content-right">
+          <div class="widget-numbers text-primary"><span>$ 568</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-xl-4">
+    <div class="card mb-3 widget-content">
+      <div class="widget-content-wrapper">
+        <div class="widget-content-left">
+          <div class="widget-heading">Products Sold</div>
+          <div class="widget-subheading">Total revenue streams</div>
+        </div>
+        <div class="widget-content-right">
+          <div class="widget-numbers text-warning"><span>$14M</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-xl-4">
+    <div class="card mb-3 widget-content">
+      <div class="widget-content-wrapper">
+        <div class="widget-content-left">
+          <div class="widget-heading">Followers</div>
+          <div class="widget-subheading">People Interested</div>
+        </div>
+        <div class="widget-content-right">
+          <div class="widget-numbers text-danger"><span>46%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="divider mt-0" style="margin-bottom: 30px;"></div>
+<div class="row">
+  <div class="col-lg-6 col-xl-4">
+    <div class="card mb-3 widget-content bg-night-fade">
+      <div class="widget-content-wrapper text-white">
+        <div class="widget-content-left">
+          <div class="widget-heading">Total Orders</div>
+          <div class="widget-subheading">Last year expenses</div>
+        </div>
+        <div class="widget-content-right">
+          <div class="widget-numbers text-white"><span>1896</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-xl-4">
+    <div class="card mb-3 widget-content bg-arielle-smile">
+      <div class="widget-content-wrapper text-white">
+        <div class="widget-content-left">
+          <div class="widget-heading">Clients</div>
+          <div class="widget-subheading">Total Clients Profit</div>
+        </div>
+        <div class="widget-content-right">
+          <div class="widget-numbers text-white"><span>$ 568</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-xl-4">
+    <div class="card mb-3 widget-content bg-premium-dark">
+      <div class="widget-content-wrapper text-white">
+        <div class="widget-content-left">
+          <div class="widget-heading">Products Sold</div>
+          <div class="widget-subheading">Total revenue streams</div>
+        </div>
+        <div class="widget-content-right">
+          <div class="widget-numbers text-warning"><span>$14M</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-xl-4">
+    <div class="card mb-3 widget-content bg-happy-green">
+      <div class="widget-content-wrapper text-white">
+        <div class="widget-content-left">
+          <div class="widget-heading">Followers</div>
+          <div class="widget-subheading">People Interested</div>
+        </div>
+        <div class="widget-content-right">
+          <div class="widget-numbers text-dark"><span>46%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="divider mt-0" style="margin-bottom: 30px;"></div>
+<div class="row">
+  <div class="col-lg-6 col-xl-4">
+    <div class="card mb-3 widget-content">
+      <div class="widget-content-outer">
+        <div class="widget-content-wrapper">
+          <div class="widget-content-left">
+            <div class="widget-heading">Total Orders</div>
+            <div class="widget-subheading">Last year expenses</div>
+          </div>
+          <div class="widget-content-right">
+            <div class="widget-numbers text-success">1896</div>
+          </div>
+        </div>
+        <div class="widget-progress-wrapper">
+          <div class="progress-bar-xs progress">
+            <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;"></div>
+          </div>
+          <div class="progress-sub-label">
+            <div class="sub-label-left">YoY Growth</div>
+            <div class="sub-label-right">100%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-xl-4">
+    <div class="card mb-3 widget-content">
+      <div class="widget-content-outer">
+        <div class="widget-content-wrapper">
+          <div class="widget-content-left">
+            <div class="widget-heading">Clients</div>
+            <div class="widget-subheading">Total Clients Profit</div>
+          </div>
+          <div class="widget-content-right">
+            <div class="widget-numbers text-primary">$12.6k</div>
+          </div>
+        </div>
+        <div class="widget-progress-wrapper">
+          <div class="progress-bar-lg progress-bar-animated progress">
+            <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="47" aria-valuemin="0" aria-valuemax="100" style="width: 47%;"></div>
+          </div>
+          <div class="progress-sub-label">
+            <div class="sub-label-left">Retention</div>
+            <div class="sub-label-right">100%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-xl-4">
+    <div class="card mb-3 widget-content">
+      <div class="widget-content-outer">
+        <div class="widget-content-wrapper">
+          <div class="widget-content-left">
+            <div class="widget-heading">Products Sold</div>
+            <div class="widget-subheading">Total revenue streams</div>
+          </div>
+          <div class="widget-content-right">
+            <div class="widget-numbers text-warning">$3M</div>
+          </div>
+        </div>
+        <div class="widget-progress-wrapper">
+          <div class="progress-bar-xs progress-bar-animated-alt progress">
+            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%;"></div>
+          </div>
+          <div class="progress-sub-label">
+            <div class="sub-label-left">Sales</div>
+            <div class="sub-label-right">100%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-xl-4">
+    <div class="card mb-3 widget-content">
+      <div class="widget-content-outer">
+        <div class="widget-content-wrapper">
+          <div class="widget-content-left">
+            <div class="widget-heading">Followers</div>
+            <div class="widget-subheading">People Interested</div>
+          </div>
+          <div class="widget-content-right">
+            <div class="widget-numbers text-danger">45,9%</div>
+          </div>
+        </div>
+        <div class="widget-progress-wrapper">
+          <div class="progress-bar-sm progress-bar-animated-alt progress">
+            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;"></div>
+          </div>
+          <div class="progress-sub-label">
+            <div class="sub-label-left">Twitter Progress</div>
+            <div class="sub-label-right">100%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="divider mt-0" style="margin-bottom: 30px;"></div>
+<div class="main-card mb-3 card">
+  <div class="no-gutters row">
+    <div class="col-md-4">
+      <div class="widget-content">
+        <div class="widget-content-wrapper">
+          <div class="widget-content-right ml-0 mr-3">
+            <div class="widget-numbers text-success">1896</div>
+          </div>
+          <div class="widget-content-left">
+            <div class="widget-heading">Total Orders</div>
+            <div class="widget-subheading">Last year expenses</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="widget-content">
+        <div class="widget-content-wrapper">
+          <div class="widget-content-right ml-0 mr-3">
+            <div class="widget-numbers text-warning">$ 14M</div>
+          </div>
+          <div class="widget-content-left">
+            <div class="widget-heading">Products Sold</div>
+            <div class="widget-subheading">Total revenue streams</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="widget-content">
+        <div class="widget-content-wrapper">
+          <div class="widget-content-right ml-0 mr-3">
+            <div class="widget-numbers text-danger">45.9%</div>
+          </div>
+          <div class="widget-content-left">
+            <div class="widget-heading">Followers</div>
+            <div class="widget-subheading">People Interested</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="divider mt-0" style="margin-bottom: 30px;"></div>
+<div class="main-card mb-3 card">
+  <div class="no-gutters row">
+    <div class="col-md-4">
+      <div class="pt-0 pb-0 card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="widget-content p-0">
+              <div class="widget-content-outer">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Total Orders</div>
+                    <div class="widget-subheading">Last year expenses</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="widget-numbers text-success">1896</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="widget-content p-0">
+              <div class="widget-content-outer">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Clients</div>
+                    <div class="widget-subheading">Total Clients Profit</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="widget-numbers text-primary">$12.6k</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="pt-0 pb-0 card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="widget-content p-0">
+              <div class="widget-content-outer">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Followers</div>
+                    <div class="widget-subheading">People Interested</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="widget-numbers text-danger">45,9%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="widget-content p-0">
+              <div class="widget-content-outer">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Products Sold</div>
+                    <div class="widget-subheading">Total revenue streams</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="widget-numbers text-warning">$3M</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="pt-0 pb-0 card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="widget-content p-0">
+              <div class="widget-content-outer">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Total Orders</div>
+                    <div class="widget-subheading">Last year expenses</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="widget-numbers text-success">1896</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="widget-content p-0">
+              <div class="widget-content-outer">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Clients</div>
+                    <div class="widget-subheading">Total Clients Profit</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="widget-numbers text-primary">$12.6k</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="divider mt-0" style="margin-bottom: 30px;"></div>
+<div class="main-card mb-3 card">
+  <div class="row">
+    <div class="col-lg-6 col-xl-4">
+      <div class="widget-content">
+        <div class="widget-content-outer">
+          <div class="widget-content-wrapper">
+            <div class="widget-content-left">
+              <div class="widget-heading">Total Orders</div>
+              <div class="widget-subheading">Last year expenses</div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-success">1896</div>
+            </div>
+          </div>
+          <div class="widget-progress-wrapper">
+            <div class="progress-bar-sm progress-bar-animated-alt progress">
+              <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100" style="width: 43%;"></div>
+            </div>
+            <div class="progress-sub-label">
+              <div class="sub-label-left">YoY Growth</div>
+              <div class="sub-label-right">100%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-4">
+      <div class="widget-content">
+        <div class="widget-content-outer">
+          <div class="widget-content-wrapper">
+            <div class="widget-content-left">
+              <div class="widget-heading">Clients</div>
+              <div class="widget-subheading">Total Clients Profit</div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-primary">$12.6k</div>
+            </div>
+          </div>
+          <div class="widget-progress-wrapper">
+            <div class="progress-bar-sm progress-bar-animated-alt progress">
+              <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="47" aria-valuemin="0" aria-valuemax="100" style="width: 47%;"></div>
+            </div>
+            <div class="progress-sub-label">
+              <div class="sub-label-left">Retention</div>
+              <div class="sub-label-right">100%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-4">
+      <div class="widget-content">
+        <div class="widget-content-outer">
+          <div class="widget-content-wrapper">
+            <div class="widget-content-left">
+              <div class="widget-heading">Products Sold</div>
+              <div class="widget-subheading">Total revenue streams</div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-warning">$3M</div>
+            </div>
+          </div>
+          <div class="widget-progress-wrapper">
+            <div class="progress-bar-sm progress-bar-animated-alt progress">
+              <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%;"></div>
+            </div>
+            <div class="progress-sub-label">
+              <div class="sub-label-left">Sales</div>
+              <div class="sub-label-right">100%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-xl-4">
+      <div class="widget-content">
+        <div class="widget-content-outer">
+          <div class="widget-content-wrapper">
+            <div class="widget-content-left">
+              <div class="widget-heading">Followers</div>
+              <div class="widget-subheading">People Interested</div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-danger">45,9%</div>
+            </div>
+          </div>
+          <div class="widget-progress-wrapper">
+            <div class="progress-bar-sm progress-bar-animated-alt progress">
+              <div class="progress-bar bg-success" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;"></div>
+            </div>
+            <div class="progress-sub-label">
+              <div class="sub-label-left">Twitter Progress</div>
+              <div class="sub-label-right">100%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="divider mt-0" style="margin-bottom: 30px;"></div>
+<div class="main-card mb-3 card">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="widget-content">
+        <div class="widget-content-outer">
+          <div class="widget-content-wrapper">
+            <div class="widget-content-left">
+              <div class="widget-heading">Total Orders</div>
+              <div class="widget-subheading">Last year expenses</div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-success">1896</div>
+            </div>
+          </div>
+          <div class="widget-progress-wrapper">
+            <div class="progress-bar-sm progress-bar-animated-alt progress">
+              <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100" style="width: 43%;"></div>
+            </div>
+            <div class="progress-sub-label">
+              <div class="sub-label-left">YoY Growth</div>
+              <div class="sub-label-right">100%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="widget-content">
+        <div class="widget-content-outer">
+          <div class="widget-content-wrapper">
+            <div class="widget-content-left">
+              <div class="widget-heading">Products Sold</div>
+              <div class="widget-subheading">Total revenue streams</div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-warning">$3M</div>
+            </div>
+          </div>
+          <div class="widget-progress-wrapper">
+            <div class="progress-bar-sm progress-bar-animated-alt progress">
+              <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%;"></div>
+            </div>
+            <div class="progress-sub-label">
+              <div class="sub-label-left">Sales</div>
+              <div class="sub-label-right">100%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="widget-content">
+        <div class="widget-content-outer">
+          <div class="widget-content-wrapper">
+            <div class="widget-content-left">
+              <div class="widget-heading">Followers</div>
+              <div class="widget-subheading">People Interested</div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-danger">45,9%</div>
+            </div>
+          </div>
+          <div class="widget-progress-wrapper">
+            <div class="progress-bar-sm progress-bar-animated-alt progress">
+              <div class="progress-bar bg-success" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;"></div>
+            </div>
+            <div class="progress-sub-label">
+              <div class="sub-label-left">Twitter Progress</div>
+              <div class="sub-label-right">100%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="divider mt-0" style="margin-bottom: 30px;"></div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="main-card mb-3 card">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="widget-content p-0">
+            <div class="widget-content-outer">
+              <div class="widget-content-wrapper">
+                <div class="widget-content-left">
+                  <div class="widget-heading">Total Orders</div>
+                  <div class="widget-subheading">Last year expenses</div>
+                </div>
+                <div class="widget-content-right">
+                  <div class="widget-numbers text-success">1896</div>
+                </div>
+              </div>
+              <div class="widget-progress-wrapper">
+                <div class="progress-bar-xs progress">
+                  <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;"></div>
+                </div>
+                <div class="progress-sub-label">
+                  <div class="sub-label-left">YoY Growth</div>
+                  <div class="sub-label-right">100%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="widget-content p-0">
+            <div class="widget-content-outer">
+              <div class="widget-content-wrapper">
+                <div class="widget-content-left">
+                  <div class="widget-heading">Clients</div>
+                  <div class="widget-subheading">Total Clients Profit</div>
+                </div>
+                <div class="widget-content-right">
+                  <div class="widget-numbers text-primary">$12.6k</div>
+                </div>
+              </div>
+              <div class="widget-progress-wrapper">
+                <div class="progress-bar-lg progress-bar-animated progress">
+                  <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="47" aria-valuemin="0" aria-valuemax="100" style="width: 47%;"></div>
+                </div>
+                <div class="progress-sub-label">
+                  <div class="sub-label-left">Retention</div>
+                  <div class="sub-label-right">100%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="widget-content p-0">
+            <div class="widget-content-outer">
+              <div class="widget-content-wrapper">
+                <div class="widget-content-left">
+                  <div class="widget-heading">Followers</div>
+                  <div class="widget-subheading">People Interested</div>
+                </div>
+                <div class="widget-content-right">
+                  <div class="widget-numbers text-danger">45,9%</div>
+                </div>
+              </div>
+              <div class="widget-progress-wrapper">
+                <div class="progress-bar-sm progress-bar-animated-alt progress">
+                  <div class="progress-bar bg-success" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" style="width: 65%;"></div>
+                </div>
+                <div class="progress-sub-label">
+                  <div class="sub-label-left">Twitter Progress</div>
+                  <div class="sub-label-right">100%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="widget-content p-0">
+            <div class="widget-content-outer">
+              <div class="widget-content-wrapper">
+                <div class="widget-content-left">
+                  <div class="widget-heading">Products Sold</div>
+                  <div class="widget-subheading">Total revenue streams</div>
+                </div>
+                <div class="widget-content-right">
+                  <div class="widget-numbers text-warning">$3M</div>
+                </div>
+              </div>
+              <div class="widget-progress-wrapper">
+                <div class="progress-bar-xs progress-bar-animated-alt progress">
+                  <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%;"></div>
+                </div>
+                <div class="progress-sub-label">
+                  <div class="sub-label-left">Sales</div>
+                  <div class="sub-label-right">100%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <div class="widget-content p-0">
+              <div class="widget-content-outer">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Total Orders</div>
+                    <div class="widget-subheading">Last year expenses</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="widget-numbers text-success">1896</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="widget-content p-0">
+              <div class="widget-content-outer">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Clients</div>
+                    <div class="widget-subheading">Total Clients Profit</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="widget-numbers text-primary">$12.6k</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="widget-content p-0">
+              <div class="widget-content-outer">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Followers</div>
+                    <div class="widget-subheading">People Interested</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="widget-numbers text-danger">45,9%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item">
+            <div class="widget-content p-0">
+              <div class="widget-content-outer">
+                <div class="widget-content-wrapper">
+                  <div class="widget-content-left">
+                    <div class="widget-heading">Products Sold</div>
+                    <div class="widget-subheading">Total revenue streams</div>
+                  </div>
+                  <div class="widget-content-right">
+                    <div class="widget-numbers text-warning">$3M</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

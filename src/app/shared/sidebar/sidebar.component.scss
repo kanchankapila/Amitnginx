@@ -19,7 +19,7 @@
     flex-wrap: nowrap;
     flex-direction: column;
     &:not(.sub-menu) {
-      padding-bottom: 60px;
+      padding-bottom: 10px;
     }
 
     .nav-item {
@@ -127,13 +127,13 @@
           height: auto;
           line-height: 1;
           border-top: 0;
-          padding: 1.25rem 0;
+          padding: 8rem 0;
           .nav-profile-image {
-            width: 44px;
-            height: 44px;
+            width: 60px;
+            height: 60px;
             img {
-              width: 44px;
-              height: 44px;
+              width: 60px;
+              height: 60px;
               border-radius: 100%;
             }
           }

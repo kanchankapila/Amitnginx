@@ -1,0 +1,217 @@
+table {
+    width: 50%;
+  }
+  .n50cardg{
+    background: rgb(244, 247, 245);
+    display: inline-block;
+    margin: 4px;
+    max-width: 300px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  .n50optionssupport{
+    background: rgb(114, 240, 162);
+    display: inline-block;
+    margin: 4px;
+    max-width: 300px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  .bnoptionssupport{
+    background: rgb(114, 240, 162);
+    display: inline-block;
+    margin: 4px;
+    max-width: 300px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  .n50optionsresistance{
+    background: rgb(247, 155, 170);
+    display: inline-block;
+    margin: 4px;
+    max-width: 300px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  .bnoptionsresistance{
+    background: rgb(247, 155, 170);
+    display: inline-block;
+    margin: 4px;
+    max-width: 350px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  .pcrg{
+    background: rgb(161, 248, 165);
+    display: inline-block;
+    margin: 4px;
+    max-width: 350px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  .pcrdg{
+    background: rgb(57, 245, 66);
+    display: inline-block;
+    margin: 4px;
+    max-width: 350px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  
+  .pcrr{
+    background: rgb(247, 155, 170);
+    display: inline-block;
+    margin: 4px;
+    max-width: 350px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  .pcrdr{
+    background: rgb(248, 78, 106);
+    display: inline-block;
+    margin: 4px;
+    max-width: 350px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  
+  .vixg{
+    background: rgb(161, 248, 165);
+    display: inline-block;
+    margin: 4px;
+    max-width: 150px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  .vixr{
+    background: rgb(247, 155, 170);
+    display: inline-block;
+    margin: 4px;
+    max-width: 150px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  
+  .bankniftycardg{
+    background: rgb(247, 247, 247);
+    display: inline-block;
+    margin: 4px;
+    max-width: 400px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  .n50cardr{
+    background: rgb(248, 247, 247);
+    display: inline-block;
+    margin: 4px;
+    max-width: 300px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  .bankniftycardr{
+    background: rgb(247, 245, 245);
+    display: inline-block;
+    margin: 4px;
+    max-width: 400px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  .fontgreen {
+    font-family: Orbitron;
+    //font-family: 'Raleway';
+    font-weight: 150;
+    color: green;
+  }
+  
+  .fontred {
+    font-family: Orbitron;
+    font-weight: 150;
+    color: rgb(250, 51, 51);
+  }
+  .fontyellow {
+    font-family: Orbitron;
+    font-weight: 150;
+    color: rgb(227, 241, 30);
+  }
+  
+  
+  .barview {
+    position: relative;
+    width: 600px;
+    text-align: center;
+    padding: 0.61538462em 1em;
+    cursor: pointer;
+    vertical-align: middle;
+    color: #fff;
+    border: 1px solid rgb(173, 240, 173);
+    border-radius: 3px;
+    background-color:indigo;
+    box-shadow: inset 0 1px 0 lightgreen;
+  }
+  .shiny::after {
+    content: "";
+    display: block;
+    width: 10% !important;
+    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.7) 100%); /* Safari 5.1-6.0 */
+    background: -o-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.7) 100%
+    ); /* Opera 11.1-12.0 */
+    background: -moz-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.7) 100%
+    ); /* Firefox 3.6-15 */
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.7) 100%); /* Standard syntax */
+  
+    left: -100%;
+    top: 0;
+    height: 100%;
+    position: absolute;
+    transition: none;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    -ms-transition: none;
+    -ms-transform: skewX(-20deg); /* IE 9 */
+    -webkit-transform: skewX(-20deg); /* Safari */
+    transform: skewX(-20deg);
+  }
+  
+
+  .InsideContent{
+    display:flex;
+  }
+  .InsideContent1{
+    display:block;
+  }

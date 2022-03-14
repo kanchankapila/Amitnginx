@@ -1,0 +1,61 @@
+<button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark" (click)="scroll('ps')">Pscore</button>
+<button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark" (click)="scroll('mcc')">Money Control Combine</button>
+<button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark" (click)="scroll('mcd')">Money Control Daily</button>
+<button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark" (click)="scroll('mcw')">Money Control Weekly</button>
+<button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark" (click)="scroll('mcp')">Money Control Price %age</button>
+
+<div id="mcc" style=float:left class="mcheader shiny">MoneyControl Daily & Weekly Very Bullish </div>
+<div style=float:left width="600px">
+  <mat-card style=float:left class="mat-card1" *ngFor="let tile of mccombine">
+    <h6>{{tile.text4}}</h6><h6>D:{{tile.text1}}<br>W:{{tile.text2}}</h6>
+    <div class="detailsbutton">
+      
+      <button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark"(click)="changeStock123(tile.text3)">Details</button>
+     
+    </div>
+  </mat-card></div>
+
+
+
+<div id="ps" style=float:left class="pscoreheader shiny">P Score</div>
+<div style=float:left width="600px">
+  <mat-card style=float:left class="mat-card1" *ngFor="let tile of mcpscore">
+    <h6>{{tile.text}}</h6><h6>{{tile.text1}}</h6>
+    <div class="detailsbutton">
+      
+      <button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark"(click)="changeStock123(tile.text2)">Details</button>
+     
+    </div>
+  </mat-card>
+</div>
+
+<div id="mcp" style=float:left class="mccurrentheader shiny">MC Current Price Percentage</div>
+<div style=float:left width="600px">
+  <mat-card style=float:left class="mat-card1" *ngFor="let tile of mccurrent">
+    {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}
+    <div class="detailsbutton">
+      <button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark"(click)="changeStock123(tile.text2)">Details</button>
+    </div>
+  </mat-card>
+</div>
+
+
+<div id="mcw" style=float:left class="mcweeklyheader shiny">MC Weekly</div>
+<div style=float:left width="600px">
+  <mat-card style=float:left class="mat-card1" *ngFor="let tile of mcoverallvweekly">
+    {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}
+    <div class="detailsbutton">
+      <button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark"(click)="changeStock123(tile.text2)">Details</button>
+    </div>
+  </mat-card>
+</div>
+
+<div id="mcd" style=float:left class="mcdailyheader shiny">MC Daily</div>
+<div style=float:left width="600px">
+  <mat-card style=float:left class="mat-card1" *ngFor="let tile of mcoverallvdaily">
+    {{tile.text}}<br>{{tile.text1}}<br>{{tile.text2}}
+    <div class="detailsbutton">
+      <button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark"(click)="changeStock123(tile.text2)">Details</button>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,24 @@
+
+<div style=float:left width="600px" class="btn shiny">Recos</div>
+<div style=float:left width="600px">
+  <mat-card style=float:left [ngClass]="{'mat-cardgreen1' : tile.text2 == 'Buy','mat-cardred1' : tile.text2 == 'Sell' }" *ngFor="let tile of etreco">
+    {{tile.text1}}<br>Reco: {{tile.text2}}<br>Target: {{tile.text3}}<br>Current: {{tile.text4}}<br>By: {{tile.text5}}<br>{{tile.text6}}
+    
+  </mat-card>
+  <mat-card style=float:left [ngClass]="{'mat-cardgreen1' : tile.text3 == 'Buy','mat-cardred1' : tile.text3 == 'Sell' }" *ngFor="let tile of mmreco">
+    Name:{{tile.text1}}<br>Target: {{tile.text2}}<br>Reco: {{tile.text3}}<br>Date: {{tile.text4}}<br>By: {{tile.text5}}<br>At:{{tile.text6}}
+    
+  </mat-card>
+</div>
+<div style=float:left width="600px" class="btn shiny">Max Buy Reco Stocks</div>
+<mat-card style=float:left [ngClass]="{'mat-cardgreen1' : tile.text3 == 'Buy','mat-cardred1' : tile.text3 == 'Sell' }" *ngFor="let tile of mmmaxbuyreco">
+  Name:{{tile.text1}}<br>Target: {{tile.text2}}<br>Reco: {{tile.text3}}<br>Date: {{tile.text4}}<br>By: {{tile.text5}}<br>At:{{tile.text6}}
+  
+</mat-card>
+<div style=float:left width="600px" class="btn shiny">Sectors</div>
+<div style=float:left width="600px">
+  <mat-card style=float:left [ngClass]="{'mat-cardgreen1' : tile.text6 > 0 }" *ngFor="let tile of etsector">
+    {{tile.text1}}<br>{{tile.text4}}<br>{{tile.text3}}<br>{{tile.text2}}<br>{{tile.text5}}<br>Change: {{tile.text6}}
+    
+  </mat-card>
+</div>

@@ -588,14 +588,9 @@ export interface mcsectoroveralltiled {
 })
 
 export class DashboardComponent implements OnInit {
-  visibleSidebar1;
-  visibleSidebar2;
-    
-    visibleSidebar3;
-    
-    visibleSidebar4;
-    
-    visibleSidebar5;
+  
+  
+ 
 
   public chartOptions3: Partial<ChartOptions3>;
   showFiller = false;

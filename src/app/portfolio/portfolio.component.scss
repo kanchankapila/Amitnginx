@@ -1,0 +1,27 @@
+/* Style The Dropdown Button */
+@import "~mdb-ui-kit/css/mdb.min.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+.InsideContent {
+  display: flex;
+}
+.mat-cardred1 {
+  background: rgb(241, 165, 231);
+  position: relative;
+  display: flex;
+  margin: 4px;
+  width: 200px;
+  height:70px
+  
+    //margin: 10px auto
+}
+.mat-cardgreen1 {
+  background: rgb(168, 241, 165);
+  position: relative;
+  display: flex;
+  margin: 4px;
+  width: 150px;
+  height:70px
+  
+    //margin: 10px auto
+}

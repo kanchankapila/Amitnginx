@@ -1,5 +1,6 @@
 import { BrowserModule,HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ChartModule } from 'primeng/chart';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
@@ -34,7 +35,6 @@ import { MatTableModule } from '@angular/material/table';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import {AtomSpinnerModule} from 'angular-epic-spinners'
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
@@ -47,12 +47,21 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { OverlayModule } from '@angular/cdk/overlay';
-
 import {AutoCompleteModule} from 'primeng/autocomplete';
-
-
-
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ScreenersComponent } from './screeners/screeners.component';
+import { PortfolioComponent } from './portfolio/portfolio.component';
+import { RecosComponent } from './recos/recos.component';
+import { SectorsComponent } from './sectors/sectors.component';
+import { FuturesComponent } from './futures/futures.component';
+import { OptionsComponent } from './options/options.component';
+import { WatchlistComponent } from './watchlist/watchlist.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { TreemapsComponent } from './treemaps/treemaps.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { HomeComponent } from './home/home.component';
+import { SnRComponent } from './sn-r/sn-r.component';
+import { IndicatorComponent } from './indicator/indicator.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +75,20 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     SpinnerComponent,
     ContentAnimateDirective,
     OHLCComponent,
-    DashboardComponent
+    DashboardComponent,
+    RecosComponent,
+    SectorsComponent,
+    FuturesComponent,
+    OptionsComponent,
+    WatchlistComponent,
+    HomepageComponent,
+    TreemapsComponent,
+    AnalyticsComponent,
+    HomeComponent,
+    SnRComponent,
+    IndicatorComponent,
+    ScreenersComponent,
+    PortfolioComponent
   ],
   imports: [
     BrowserModule,
@@ -74,19 +96,13 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NgbModule,
     CardModule,
     SidebarModule,
-    BrowserAnimationsModule,
-    FormsModule,
     TabViewModule,
     ButtonModule,
     ChartModule,
-   // OwlRadioModule,
     OwlClockModule,
     ReactiveFormsModule,
     ChartsModule,
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts')
-
-    }),
+    NgxEchartsModule.forRoot({echarts: () => import('echarts')}),
     MDBBootstrapModule.forRoot(),
     NgApexchartsModule,
     BrowserModule,
@@ -94,10 +110,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     NavbarModule,
     AtomSpinnerModule,
     CardModule,
-    
     ButtonModule,
-    
-    //NgTickerTapeModule,
     WavesModule,
     SidebarModule,
     AppRoutingModule,
@@ -110,72 +123,38 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ChartsModule,
     ChartModule,
     NgbModule,
-
     BrowserAnimationsModule,
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts')
-    }),
-    //NbThemeModule.forRoot(),
-    //AccordionModule,
-    //ClarityModule,
-    //NbCardModule,
+    NgxEchartsModule.forRoot({  echarts: () => import('echarts')}),
     MatTableModule,
-    //AmexioDataModule,
-    
     FormsModule,
-    
-    //FlexLayoutModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
     MatButtonModule,
-    
     MatFormFieldModule,
-  
     MatGridListModule,
     MatCardModule,
-    
-   
-  
-    //NgTickerModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     AutocompleteLibModule,
-    //A11yModule,
-   
-    //CdkTableModule,
-   
     MatAutocompleteModule,
     MatBadgeModule,
-   
-    MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
-    
-    //MatGridListModule,
-    //MatIconModule,
-  
     MatProgressSpinnerModule,
-   
     MatSidenavModule,
-    
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    
     OverlayModule,
-    
-          ServiceWorkerModule.register('ngsw-worker.js', {
-            enabled: environment.production,
+    HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+          enabled: environment.production,
             
             // Register the ServiceWorker as soon as the app is stable
             // or after 30 seconds (whichever comes first).
             registrationStrategy: 'registerWhenStable:30000'
           }),
    
-
-    
-    //CommonModule,
-    HttpClientModule
   ],
   providers: [{ provide: ThemeService }, {provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig},{ provide: Window, useValue: window }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

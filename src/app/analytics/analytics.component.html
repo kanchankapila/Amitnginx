@@ -1,0 +1,27 @@
+
+ <button style=float:left type="button"  class="btn btn-outline-success " data-mdb-ripple-color="dark">Chartink</button>  
+
+  <div class="card" >
+    <h5>Bullish Momentum Stocks </h5>
+    <p-chart type="horizontalBar" [width]="200" [height]="300" [data]="basicData3" [options]="basicOptions3"></p-chart>
+  </div>
+  
+ 
+
+  <div class="card" >
+    <h5>Price Volume Breakout </h5>
+    <p-chart type="horizontalBar" [width]="200" [height]="200" [data]="basicData2" [options]="basicOptions2"></p-chart>
+  </div>
+
+<div class="InsideContent2">
+<button style=float:left type="button"  class="btn btn-outline-success " data-mdb-ripple-color="dark">MoneyControl Volumes Above 5 Day Average&nbsp;&nbsp;{{mcvolumedate}}&nbsp;&nbsp;{{mcvolumetime}}</button>
+</div>
+<div class="card" >
+    <h5>Current Volume Greater than 5Day Average(Bullish) </h5>
+    <p-chart type="bar" width="5000px" height="900px" [data]="basicData" [options]="basicOptions"></p-chart>
+  </div>
+
+  <div class="card">
+    <h5>Current Volume Greater than 5Day Average(Bearish) </h5>
+    <p-chart type="bar" [width]="6000" [height]="500" [data]="basicData1" [options]="basicOptions1"></p-chart>
+  </div>

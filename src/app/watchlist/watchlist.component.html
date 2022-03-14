@@ -1,0 +1,50 @@
+<div class="d-inline-flex p-3 bg-secondary text-white">
+    <div class="p-2 bg-info"> 
+    <button  type="button" class="btn btn-success">Add  to  Watchlist</button>   
+    
+<div class="ng-autocomplete" style=float:right>
+    <ng-autocomplete [data]="data" [searchKeyword]="keyword" (selected)='selectEvent($event.isin)'
+      (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+    </ng-autocomplete>
+    <sup>*</sup>Please enter your stock name
+    <ng-template #itemTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+    </ng-template>
+  
+    <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+    </ng-template>
+  </div>
+
+</div>
+</div>
+ 
+
+  <div class="d-inline-flex p-3 bg-secondary text-white">
+    <div class="p-2 bg-info"> 
+
+<button  type="button" class="btn btn-danger">Remove from Watchlist</button>
+<div class="ng-autocomplete" style=float:right>
+    <ng-autocomplete [data]="data" [searchKeyword]="keyword1" (selected)='selectEvent1($event.isin)'
+      (inputFocused)='onFocused1($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+    </ng-autocomplete>
+    <sup>*</sup>Please enter your stock name
+    <ng-template #itemTemplate let-item>
+      <a [innerHTML]="item.name"></a>
+    </ng-template>
+  
+    <ng-template #notFoundTemplate let-notFound>
+      <div [innerHTML]="notFound"></div>
+    </ng-template>
+  </div>
+ 
+</div>
+</div>
+<div id="wl" style=float:left class="btnwl shiny">Amit's Watchlist</div>
+<div  >
+  <mat-card [ngClass]="{'mat-cardgreen ' : tile.text9 > 0 , 'mat-cardred': 0 > tile.text9,'mat-cardyellow': 0 == tile.text9 }" *ngFor="let tile of card"  >
+    <h6>{{tile.text12}}</h6><br>UC:{{tile.text1}}&nbsp;&nbsp;&nbsp;LC:{{tile.text2}}<br>Day H:{{tile.text3}}&nbsp;&nbsp;&nbsp;Day L:{{tile.text4}}<br>52 wk High:{{tile.text5}}&nbsp;&nbsp;52 wk Low:{{tile.text6}}<br>Open:{{tile.text10}}&nbsp;&nbsp;Prev Close:{{tile.text11}}<h6>{{tile.text7}}&nbsp;{{tile.text8}}&nbsp;({{tile.text9}})</h6>
+    
+  </mat-card>
+</div>
+
