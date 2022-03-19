@@ -26,7 +26,7 @@ const fetch = require("node-fetch");
 const csrf = require('csurf');
 process.env.chartinkcsrf = 'IeyxllMLHFKfCD4Yby7Sw1g9XWJhX5XJjsGfwtnW'
 process.env.chartinkcookie = '_ga=GA1.2.2067931904.1621586668; bfp_sn_rf_8b2087b102c9e3e5ffed1c1478ed8b78=Direct; bafp=0590ba80-e319-11ea-a890-4395e7b43464; __gads=ID=eb4d407b97097fa6-22285d39c9c800fa:T=1621586677:RT=1621586677:S=ALNI_MZ3vScH0DJGPYFS_YkChWPH5KiAFg; remember_web_59ba36addc2b2f9401580f014c7f58ea4e30989d=eyJpdiI6IjFNR1pXdzlYUjlMa25jRGJ3K21FOWc9PSIsInZhbHVlIjoiV1pXSTlIWVZRYUErMllpQk1BMEVQa2tUN3R1bDFsbkZFWU5NeWdWbE4wbFByTEd1SHZRVTkrcDlUdTNoWTJySkVObTJ0cVNKanVpTTRmNlhjSExQak5lM3paNWt4MDVsdW9kQ2dGMG05ZkhXZDROeUlkVlg5U1B6MEdCdHlWQVwvSHZYZ0FGalRQQ2JFRlN6U0pZTXhMQVpESkRoNUlpbDJUWVZcL3FsVWdSMXJjeE1JTmhkMkJyK1dITmpiUUF6cGkiLCJtYWMiOiJlM2E1MzY2NzMwZTcwYWYyMjcxOTY0OGYxMDJhMTJiODkyNzQyMTUwOWZjODZlOTdmZDZlYThiMDFkNTM3Yzk4In0%3D; __utmz=102564947.1627487103.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utma=102564947.2067931904.1621586668.1629460093.1630149430.5; mnjs_session_depth=1%7C1630270688592; _gid=GA1.2.1238159065.1630270689; _yeti_currency_={"dataAsOf":"2021-08-27T00:00:00.000Z","generatedAt":"2021-08-28T15:00:47.619Z","conversions":{"USD":{"USD":1,"JPY":110.18620865572656,"BGN":1.6629538304565938,"CZK":21.735396649944732,"DKK":6.322846696709464,"GBP":0.7287050420882578,"HUF":298.3334750446391,"PLN":3.896522404557436,"RON":4.195221494770853,"SEK":8.702066150837515,"CHF":0.9179491539835047,"ISK":126.85996088767962,"NOK":8.806649094464756,"HRK":6.367315704446901,"RUB":74.01998129410765,"TRY":8.401411444605051,"AUD":1.3791344273446138,"BRL":5.245472323781992,"CAD":1.2680894481761755,"CNY":6.47861576396565,"HKD":7.790068871694584,"IDR":14428.152367995921,"ILS":3.231612958081796,"INR":73.71907150752487,"KRW":1169.7814811665676,"MXN":20.379729614828673,"MYR":4.19003486098121,"NZD":1.439248363234419,"PHP":49.95663634044724,"SGD":1.350905535243602,"THB":32.65538644673072,"ZAR":14.909956636340446,"EUR":0.8502678343678259},"GBP":{"USD":1.3722973524847437,"JPY":151.20824241858512,"BGN":2.282067138839947,"CZK":29.827427277924926,"DKK":8.676825782061306,"GBP":1,"HUF":409.4022379613316,"PLN":5.347187379671657,"RON":5.757091350361131,"SEK":11.941822339941426,"CHF":1.259699193727174,"ISK":174.0895884624809,"NOK":12.085341236596152,"HRK":8.737850483647014,"RUB":101.57742436087419,"TRY":11.529234682566539,"AUD":1.8925825233655766,"BRL":7.198347782458024,"CAD":1.7401957924460056,"CNY":8.890587260655987,"HKD":10.690290888300293,"IDR":19799.715295847287,"ILS":4.43473390663104,"INR":101.1644866574099,"KRW":1605.2880295905627,"MXN":27.967048994784314,"MYR":5.749973746543295,"NZD":1.975076718434594,"PHP":68.55535978903889,"SGD":1.8538440894717805,"THB":44.81290036521475,"ZAR":20.46089401771233,"EUR":1.1668202980059041}}}; bfp_sn_rt_8b2087b102c9e3e5ffed1c1478ed8b78=1630270689826; XSRF-TOKEN=eyJpdiI6ImxYbmtYZWJBQWdOMG1XdkZWYkIxOVE9PSIsInZhbHVlIjoiTk0rODBINVFERkRwNEQ3RXMybStWMkI3ZUpGWkhoVWx6elU1SldtcDVIUUFuRWtGY3J2R2RhR3Z5Snp0a2pJMiIsIm1hYyI6ImI2M2RiMTk5MDljNTgyNjhiZDIyYjI0NDhjM2YwMjE2ZWMxYzcwN2Q4NmE4Mjg2ZWI4ODVhZDg1MmRmNTJmOGEifQ%3D%3D; ci_session=eyJpdiI6Im5FZHF1WmU0T2lmVDJ3cjlnSDJmZGc9PSIsInZhbHVlIjoiTFg1U0k2YTVcL3dxRWFXclZhQlQ4Qkp4Q1BURll2RE1KT2JwU1FoMmFxakg5VVpYa3RCcFFoNTZPanJHZVFOVGUiLCJtYWMiOiI1Y2EyZmJmNGZkNDZmOWFhNGNiMzgyOGE1NTEwNGJiMTFkYWNlZWQ2NGUwZjVhODFmMDYyNGY5NzZiN2MzNDMzIn0%3D; _gat=1'
-process.env.trendlynecookie='_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _gid=GA1.2.726050934.1646303470; csrftoken=g1ix3m675oZH0jMLS8Cq1ElNOZv6uiCuqtYqWtkEZlKWa24RHGFJjGae4DIrXfeD; .trendlyne=gtmzuecgks3q4zxl0luvj30kb90gm00r; _gat=1'
+process.env.trendlynecookie='_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _gid=GA1.2.634541037.1647631517; _gat=1; csrftoken=BntmUUS7yVYNNVnhgwL5TyRSCVYpIFzcvvlDHSRkcxDjObyOqz626Ipqm2Kgi3wj; .trendlyne=dz3qx4c2k1l0yjq3y01vpgmz58o6z90l'
 var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
 const fs =require('fs')
@@ -548,7 +548,7 @@ app.get('/bqma', function (req, res) {
   
   request(url6, function (error, response, html) {
     
-    if (!error) {
+  if (!error) {
      // console.log(((response.body).data))
       res.json(JSON.parse(response.body).data)
     }
@@ -3163,6 +3163,70 @@ app.get('/nifty50', function (req, res) {
 
 
 })
+
+////////////////////////////////////////////MC NIFTY 50 5 days/////////////////////////////////////////////////////////
+app.get('/nifty505d', function (req, res) {
+
+  var url11 = 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=5d&type=area';
+  request(url11, function (error, response, html) {//console.log(response)
+    if (!error) {
+
+      res.json(JSON.parse(response.body))
+
+
+    }
+  })
+
+
+})
+
+////////////////////////////////////////////MC NIFTY 50 3 months/////////////////////////////////////////////////////////
+app.get('/nifty503m', function (req, res) {
+
+  var url11 = 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=3m&type=area';
+  request(url11, function (error, response, html) {//console.log(response)
+    if (!error) {
+
+      res.json(JSON.parse(response.body))
+
+
+    }
+  })
+
+
+})
+
+////////////////////////////////////////////MC NIFTY 50 6 months/////////////////////////////////////////////////////////
+app.get('/nifty506m', function (req, res) {
+
+  var url11 = 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=6m&type=area';
+  request(url11, function (error, response, html) {//console.log(response)
+    if (!error) {
+
+      res.json(JSON.parse(response.body))
+
+
+    }
+  })
+
+
+})
+
+////////////////////////////////////////////MC NIFTY 50 1 yr/////////////////////////////////////////////////////////
+app.get('/nifty501yr', function (req, res) {
+
+  var url11 = 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1yr&type=area';
+  request(url11, function (error, response, html) {//console.log(response)
+    if (!error) {
+
+      res.json(JSON.parse(response.body))
+
+
+    }
+  })
+
+
+})
 ////////////////////////////////////////////MC NIFTY 50 Snr /////////////////////////////////////////////////////////
 app.get('/nifty50snr', function (req, res) {
 
@@ -3171,7 +3235,7 @@ app.get('/nifty50snr', function (req, res) {
     if (!error) {
 
       res.json(JSON.parse(response.body).data)
-
+      
 
     }
   })
@@ -3210,6 +3274,8 @@ app.get('/mcstockdetails', function (req, res) {
 
 
 })
+
+
 ////////////////////////////////////////////MC STOCK DETAILS of an Index/////////////////////////////////////////////////////////
 app.get('/mcstockdetails1', function (req, res) {
   let mcindexid1 = req.query.mcindexid1
@@ -3765,7 +3831,7 @@ request(options2, (err, response, body) => {
       //console.log(err);
   } else {
     ( res.json(JSON.parse(body)));
-    console.log('this is response:', (response.body))
+    console.log('this is response1:', (response.body))
     //console.log( 'this is response:',(response.header))
   }
 });
@@ -3818,7 +3884,7 @@ request(options2, (err, response, body) => {
       //console.log(err);
   } else {
     ( res.json(JSON.parse(body)));
-    console.log('this is response:', (response.body))
+    console.log('this is response2:', (response.body))
     //console.log( 'this is response:',(response.header))
   }
 });

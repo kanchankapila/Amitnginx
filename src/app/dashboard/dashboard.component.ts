@@ -250,14 +250,6 @@ export interface bankniftystockstiles {
   text4: string;
   text5: string;
 }
-export interface nifty50stockstiles {
-
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-}
 export interface niftybbdtile {
   text2: string;
   text1: string;
@@ -734,8 +726,7 @@ export class DashboardComponent implements OnInit {
   basicOptions: any;
   basicData1: any;
   basicOptions1: any;
-  basicData3: any;
-  basicOptions3: any;
+ 
   bniftytid: bniftytidtile[] = [];
   bniftybbd: bniftybbdtile[] = [];
   bniftytiw: bniftytiwtile[] = [];
@@ -752,7 +743,7 @@ export class DashboardComponent implements OnInit {
  
   tg: tgtiles[] = [];
   bankniftystocks: bankniftystockstiles[] = [];
-  nifty50stocks: nifty50stockstiles[] = [];
+ 
   niftyphstocks: niftyphstockstiles[] = [];
   tltg: tltgtiles[] = [];
   indicestreemap = [];
@@ -833,14 +824,14 @@ export class DashboardComponent implements OnInit {
   firstCopyphsnrs3 = false;
 
   public lineChartLabels4: Array<any> = [];
-  public lineChartLabels7: Array<any> = [];
+  
   public lineChartData4: Array<number> = [];
   public lineChartLabels5: Array<any> = [];
   public lineChartLabels6: Array<any> = [];
   public lineChartDataph: Array<number> = [];
   public lineChartData5: Array<number> = [];
   public lineChartData6: Array<number> = [];
-  public lineChartData7: Array<number> = [];
+  
   public lineChartDatabnsnrr1: Array<number> = [];
   public lineChartDatabnsnrr2: Array<number> = [];
   public lineChartDatabnsnrr3: Array<number> = [];
@@ -853,18 +844,6 @@ export class DashboardComponent implements OnInit {
   public lineChartLabelsbnsnrs1: Array<any> = [];
   public lineChartLabelsbnsnrs2: Array<any> = [];
   public lineChartLabelsbnsnrs3: Array<any> = [];
-  public lineChartDatan50snrr1: Array<number> = [];
-  public lineChartDatan50snrr2: Array<number> = [];
-  public lineChartDatan50snrr3: Array<number> = [];
-  public lineChartDatan50snrs1: Array<number> = [];
-  public lineChartDatan50snrs2: Array<number> = [];
-  public lineChartDatan50snrs3: Array<number> = [];
-  public lineChartLabelsn50snrr1: Array<any> = [];
-  public lineChartLabelsn50nrr3: Array<any> = [];
-  public lineChartLabelsn50snrr2: Array<any> = [];
-  public lineChartLabelsn50snrs1: Array<any> = [];
-  public lineChartLabelsn50snrs2: Array<any> = [];
-  public lineChartLabelsn50snrs3: Array<any> = [];
   public lineChartDataphsnrr1: Array<number> = [];
   public lineChartDataphsnrr2: Array<number> = [];
   public lineChartDataphsnrr3: Array<number> = [];
@@ -895,17 +874,7 @@ export class DashboardComponent implements OnInit {
     { data: this.lineChartDatabnsnrs2, label: this.SystemNamebnsnrs2 },
     { data: this.lineChartDatabnsnrs3, label: this.SystemNamebnsnrs3 }
   ];
-  public labelMFL7: Array<any> = [
-
-    { data: this.lineChartData7, label: this.SystemName7 },
-    { data: this.lineChartDatan50snrr1, label: this.SystemNamen50snrr1 },
-    { data: this.lineChartDatan50snrr2, label: this.SystemNamen50snrr2 },
-    { data: this.lineChartDatan50snrr3, label: this.SystemNamen50snrr3 },
-    { data: this.lineChartDatan50snrs1, label: this.SystemNamen50snrs1 },
-    { data: this.lineChartDatan50snrs2, label: this.SystemNamen50snrs2 },
-    { data: this.lineChartDatan50snrs3, label: this.SystemNamen50snrs3 }
-
-  ];
+  
   public labelMFL8: Array<any> = [
 
     { data: this.lineChartDataph, label: this.SystemNameph },
@@ -1117,9 +1086,8 @@ export class DashboardComponent implements OnInit {
     this.gettlnear52l()
     this.getetimpdata()
     this.getbanknifty()
-    this.getnifty50()
-    this.getnifty50snr()
-    this.getnifty50stocks()
+   
+    
     this.gettlbu()
     this.gettlob()
     
@@ -1704,6 +1672,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      console.log(nestedItems)
       this.niftydi=(nestedItems[15]["indication"])
      
       
@@ -2132,21 +2101,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     })
   }
 
-  getnifty50stocks() {
-    this.dataApi.getnifty50stocks().subscribe(data6 => {
-      let nestedItems1 = Object.keys(data6).map(key => {
-        return data6[key];
-      });
-      for (let val in nestedItems1[0]) {
-
-
-        this.nifty50stocks.push({ text1: nestedItems1[0][val].shortname, text2: nestedItems1[0][val].change, text3: nestedItems1[0][val].percentchange, text4: nestedItems1[0][val].lastvalue, text5: nestedItems1[0][val].direction })
-      }
-
-    }, err => {
-      console.log(err)
-    })
-  }
+  
   getbankniftysnr() {
     this.dataApi.getbankniftysnr().subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
@@ -2185,112 +2140,8 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     })
   }
 
-  getnifty50snr() {
-    this.dataApi.getnifty50snr().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      let val = 0;
-      while (val != 400) {
-        val = val + 1
-        this.lineChartDatan50snrr1.push(nestedItems[0][0].pivotLevel.r1),
-          this.lineChartDatan50snrr2.push(nestedItems[0][0].pivotLevel.r2),
-          this.lineChartDatan50snrr3.push(nestedItems[0][0].pivotLevel.r3), this.lineChartDatan50snrs3.push(nestedItems[0][0].pivotLevel.s3), this.lineChartDatan50snrs2.push(nestedItems[0][0].pivotLevel.s2), this.lineChartDatan50snrs1.push(nestedItems[0][0].pivotLevel.s1)
-      }
-    }, err => {
-      console.log(err)
-    })
-  }
-
-  getnifty50() {
-    this.dataApi.getnifty50().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-
-
-      for (let val in nestedItems[1].values) {
-        this.lineChartData7.push(nestedItems[1].values[val]["_value"])
-        this.lineChartLabels7.push(nestedItems[1].values[val]["_time"])
-        this.niftydatav.push(nestedItems[1].values[val]["_value"])
-        this.niftydatat.push(nestedItems[1].values[val]["_time"])
-      }
-
-      this.buildnifty50graph()
-      
-
-
-
-    }, err => {
-      console.log(err)
-    })
-  }
-  buildnifty50graph() {
-    
-    var randomColorGenerator = function () {
-      return '#' + (Math.random().toString(16) + '0000000').slice(2, 8);
-    };
-    this.basicData3 = {
-      
-      labels: this.niftydatat,
-      
-      
-      datasets: [
-        {
-          label: "value",
-          //backgroundColor: this.getRandomColor(),
-          backgroundColor: randomColorGenerator,
-          data: this.niftydatav,
-          fill: false
-        },
-       
-      ]
-    };
-    var footerLine18 = this.niftydatav
-    //console.log(footerLine1 )
-   
-    this.basicOptions3 = {
-      
-      responsive: true,
-      tooltips: {
-        callbacks: {
-          beforeFooter: function (tooltipItems, data) {
-            return 'Current Price:' + footerLine18[tooltipItems[0].index];
-          }
-        },
-          plugins: {
-            legend: {
-              labels: {
-                color: '#495057'
-              }
-            }
-          },
-          scales: {
-            x: {
-              ticks: {
-                color: '#495057'
-              },
-              grid: {
-                color: '#ebedef'
-              }
-            },
-            y: {
-              ticks: {
-                color: '#495057'
-              },
-              grid: {
-                color: '#ebedef'
-              }
-            }
-        
-    
-
-          }
-        },
-      }
-    }
+ 
   
-
   getmcoverall() {
     this.dataApi.getmcoverall().subscribe(data => {
       let nestedItems = Object.keys(data).map(key => {

@@ -59,14 +59,15 @@ $theme-gradient-colors: (
   warning:         linear-gradient(to right, #f6e384, #ffd500),
   danger:          linear-gradient(to right, #ffbf96, #fe7096),
   light:           linear-gradient(to bottom, #f4f4f4, #e4e4e9),
-  dark:            linear-gradient(89deg, #5e7188, #3e4b5b)
+  dark:            linear-gradient(89deg, #5e7188, #3e4b5b),
+  amit:         linear-gradient(to right, #c8ffbb, #fff)
 );
 
 
 ////////// COLOR SYSTEM //////////
 
 ////////// COLOR VARIABLES //////////
-$content-bg: #f2edf3;
+$content-bg: white;
 $footer-bg: $content-bg;
 $footer-color: color(dark);
 $border-color: #ebedf2;
@@ -124,7 +125,7 @@ $sidebar-menu-arrow-color: #9e9da0;
 $sidebar-menu-border-color: #f2edf3;
 
 $sidebar-menu-font-size: $default-font-size;
-$sidebar-menu-padding-y: 1.125rem;
+$sidebar-menu-padding-y: .5rem;
 $sidebar-menu-padding-x: 2.25rem;
 
 $sidebar-submenu-font-size: .8125rem;
@@ -146,8 +147,8 @@ $icon-only-menu-bg-light: $sidebar-bg;
 
 ///////// NAVBAR ////////
 
-$navbar-height: 70px;
-$navbar-bg: #fff;
+$navbar-height: 100px;
+$navbar-bg: primary;
 $navbar-menu-color: #9c9fa6;
 $navbar-font-size: .875rem;
 $navbar-icon-font-size: 1.25rem;

@@ -14,9 +14,17 @@
   .donut {
     width: 4rem;
     height: 4rem;
-    border-radius: 50%;
-    border: 0.3rem solid rgba(#979fd0, 0.3);
-    border-top-color: #979fd0;
+    border-radius: 90%;
+    border: 0.3rem solid rgba(#0c2bf3, 0.3);
+    border-top-color: #11fc57;
+    animation: 1.5s spin infinite linear;
+  }
+  .donut1 {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 90%;
+    border: 0.3rem solid rgba(#0c2bf3, 0.3);
+    border-top-color: #11fc57;
     animation: 1.5s spin infinite linear;
   }
 }

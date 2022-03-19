@@ -166,10 +166,7 @@
   <h5> PCR Nifty</h5>
   <p-chart  type="line"  [width]="1000" [height]="300" [data]="basicData1" [options]="basicOptions1"></p-chart>
 </div>
-<div class="card23" width="200px" height="200px">
-  <h5> Nifty50</h5>
-  <p-chart  type="line"  [width]="1000" [height]="300" [data]="basicData3" [options]="basicOptions3"></p-chart>
-</div>
+
 
 <div class="InsideContent">
 <div class="fontgreen"><h5>Advances:{{this.bqadv}}</h5></div>&nbsp;&nbsp;&nbsp;&nbsp;<div class="fontred">
@@ -235,11 +232,7 @@
       </mat-card>
     </div>
     
-    <div style="display: block;float:left" class="chart">
-      <canvas baseChart width="1500" height="600" [datasets]="labelMFL7" [labels]="lineChartLabels7"
-        [options]="lineChartOptions4" [chartType]="ChartType4" (chartHover)="chartHovered4($event)"
-        (chartClick)="chartClicked4($event)"></canvas>
-    </div>
+    
     
     
       <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Daily:{{niftydi}}</button>

@@ -1,0 +1,73 @@
+<div class="row">
+  <div class="col-lg-6 grid-margin  stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">NIFTY50 - 5 Days</h4>
+        <canvas baseChart [chartType]="'line'" [datasets]="lineChart5dData" [labels]="lineChart5dLabels" [options]="lineChart5dOptions" [colors]="lineChart5dColors"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 grid-margin  stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">NIFTY - 3 months</h4>
+        <canvas baseChart [chartType]="'line'" [datasets]="lineChart3mData" [labels]="lineChart3mLabels" [options]="lineChart3mOptions" [colors]="lineChart3mColors"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+<div class="col-lg-13 grid-margin stretch-card ">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">NIFTY - Today</h4>
+      <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"></canvas>
+    </div>
+  </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-lg-6 grid-margin  stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">NIFTY50 - 6 Months</h4>
+        <canvas baseChart [chartType]="'line'" [datasets]="lineChart6mData" [labels]="lineChart6mLabels" [options]="lineChart6mOptions" [colors]="lineChart6mColors"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 grid-margin  stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">NIFTY - 1 Year </h4>
+        <canvas baseChart [chartType]="'line'" [datasets]="lineChart1yrData" [labels]="lineChart1yrLabels" [options]="lineChart1yrOptions" [colors]="lineChart1yrColors"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-15 grid-margin stretch-card">
+  <div class="content card">
+    <h4 class="card-title">NIFTY50 Stocks</h4>
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="15%" fxFlex.xs="100%" fxFlex.sm="33%" class="text-white"  *ngFor="let tile of nifty50stocks">
+        <mat-card [ngClass]="{'bg-gradient-amit text-white mat-elevation-z14' : tile.text5 > 0 , 'bg-gradient-danger text-white mat-elevation-z4': 0 > tile.text5}"  >
+        
+            <h3>{{tile.text1}}</h3>
+         
+          
+          <h2>
+            <p>
+
+              {{tile.text4}}<br>{{tile.text2}}&nbsp;({{tile.text3}}%)
+            </p>
+          </h2>
+          <mat-card-actions>
+            <button mat-button>Graph</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  

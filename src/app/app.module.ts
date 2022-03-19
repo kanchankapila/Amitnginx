@@ -8,7 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CardModule, } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
 import { AppRoutingModule } from './app-routing.module';
-import { GestureConfig } from 'owl-ng'
+import { GestureConfig } from 'owl-ng';
+import { OwlGalleriaModule } from 'owl-ng';
 //import { OwlRadioModule } from 'owl-ng';
 import { OwlClockModule } from 'owl-ng';
 import { HttpClientModule } from '@angular/common/http';
@@ -62,6 +63,9 @@ import { AnalyticsComponent } from './analytics/analytics.component';
 import { HomeComponent } from './home/home.component';
 import { SnRComponent } from './sn-r/sn-r.component';
 import { IndicatorComponent } from './indicator/indicator.component';
+import { Nifty50Component } from './nifty50/nifty50.component';
+import { NiftybankComponent } from './niftybank/niftybank.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -88,18 +92,22 @@ import { IndicatorComponent } from './indicator/indicator.component';
     SnRComponent,
     IndicatorComponent,
     ScreenersComponent,
-    PortfolioComponent
+    PortfolioComponent,
+    Nifty50Component,
+    NiftybankComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     CardModule,
+    FlexLayoutModule,
     SidebarModule,
     TabViewModule,
     ButtonModule,
     ChartModule,
     OwlClockModule,
+    OwlGalleriaModule,
     ReactiveFormsModule,
     ChartsModule,
     NgxEchartsModule.forRoot({echarts: () => import('echarts')}),

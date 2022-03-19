@@ -796,6 +796,22 @@ export class DataapiService {
   getnifty50(){
     return this.http.get('http://localhost:3000/nifty50')
   }
+
+  getnifty505d(){
+    return this.http.get('http://localhost:3000/nifty505d')
+  }
+
+  getnifty503m(){
+    return this.http.get('http://localhost:3000/nifty503m')
+  }
+
+  getnifty506m(){
+    return this.http.get('http://localhost:3000/nifty506m')
+  }
+
+  getnifty501yr(){
+    return this.http.get('http://localhost:3000/nifty501yr')
+  }
   
   gettlbu(){
     return this.http.get('http://localhost:3000/tlbu')
