@@ -1,31 +1,28 @@
-import { LOCALE_ID } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, LOCALE_ID } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
-import { CommonModule } from '@angular/common';
 import {AtomSpinnerModule} from 'angular-epic-spinners'
 import {ChartModule} from 'primeng/chart';
-import * as  stocks from '../lists/stocklist';
-
-import * as bqstock from '../lists/bqlist';
-import * as etsector from '../lists/etsectorlist';
-import * as etindex from '../lists/etindexlist';
-import * as mcindex from '../lists/mcsectorlist';
+import * as  stocks from '../dashboard/stocklist'
+import * as bqstock from '../dashboard/bqlist'
+import * as etsector from '../dashboard/etsectorlist'
+import * as etindex from '../dashboard/etindexlist'
+import * as mcindex from '../dashboard/mcsectorlist'
 //import { StockChart } from 'angular-highcharts';
 import {CardModule} from 'primeng/card';
 import {TabViewModule} from 'primeng/tabview';
 
 
 // If you are using ES6, then
-import * as CanvasJS from '../lists/canvasjs.min.js';
+import * as CanvasJS from '../dashboard/canvasjs.min.js';
 
-
+import { Button } from 'mdb-ui-kit';
 //import * as Highcharts from "highcharts/highstock";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-
+import * as mdb from 'mdb-ui-kit'; // lib
 import { ViewportScroller } from '@angular/common';
-//import ApexCharts from 'apexcharts'
-
+import ApexCharts from 'apexcharts'
+import { Input } from 'mdb-ui-kit'; // module
 //import { NgxSpinnerService } from "ngx-spinner";
 //import { ChangeDetectionStrategy } from '@angular/core';
 import { BuiltinType, SelectorListContext } from '@angular/compiler';
@@ -726,15 +723,13 @@ export interface stockpcrtile {
 text1: number;
 }
 
-
-  
 @Component({
-  selector: 'app-ohlc',
-  templateUrl: './ohlc.component.html',
-  styleUrls: ['./ohlc.component.scss'],
+selector: 'app-ohlc',
+templateUrl: './ohlc.component.html',
+//changeDetection: ChangeDetectionStrategy.OnPush,
+styleUrls: ['./ohlc.component.scss']
 })
 export class OHLCComponent implements OnInit {
-
 visibleSidebar1;
 visibleSidebar2;
   
@@ -745,18 +740,7 @@ visibleSidebar2;
   visibleSidebar5;
 
 basicData: any;
-  basicOptions: any;
-  visitSaleChartData: any
-  visitSaleChartOptions: any
-  visitSaleChartColors: any
-  visitSaleChartLabels:any
-  trafficChartData: any
-  trafficChartLabels: any
-  trafficChartOptions: any
-  trafficChartColors: any
-  mcadvvalue: any
-  mcdecvalue:any
-  
+basicOptions: any;
 // stock22: StockChart;
 // stock23: StockChart;
 chart;
@@ -1221,7 +1205,7 @@ lineStylesData: any;
 //   ]
 // };
 
-constructor(private primengConfig: PrimeNGConfig,private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router, private vps: ViewportScroller) {
+constructor(private primengConfig: PrimeNGConfig,private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router,  private vps: ViewportScroller) {
   setInterval(() => {
     const currentDate = new Date();
     this.date = currentDate.toLocaleTimeString();
@@ -1479,7 +1463,6 @@ ngOnInit() {
 
   this.primengConfig.ripple = true;
   this.stockList = stocks.default.Data
- 
   this.stock = stocks.default.Data
   this.bqstocks = bqstock.default.Data
   this.etsectors = etsector.default.Data
@@ -1498,9 +1481,7 @@ ngOnInit() {
   this.route.queryParams.subscribe(params => {
 
     this.eqsymbol = this.stockList.filter(i => i.isin == params.stock)[0].symbol
-    
-    this.tlid = this.stockList.filter((i: { isin: any; }) => i.isin == params.stock)[0].tlid
-    
+    this.tlid = this.stockList.filter(i => i.isin == params.stock)[0].tlid
     this.tlname = this.stockList.filter(i => i.isin == params.stock)[0].tlname
     this.stockname = this.stockList.filter(i => i.isin == params.stock)[0].name
     this.stockisin = this.stockList.filter(i => i.isin == params.stock)[0].isin
@@ -1522,7 +1503,6 @@ ngOnInit() {
     this.getmcswot(this.mcsymbol)
     this.getkite1(this.timeframe,this.eqsymbol)
     this.getnse1()
-    this.getmcoverall()
     this.getmcti(this.mcsymbol)
     this.getmctiw(this.mcsymbol)
     this.getmctim(this.mcsymbol)
@@ -1615,7 +1595,6 @@ gettrendlynestocks2(tlid) {
     let nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
-    console.log(nestedItems)
     
     this.dscore.push({ text1:nestedItems[1]['stockData'][6],text2:nestedItems[1]['stockData'][9] })
     this.volscore.push({ text1:nestedItems[1]['stockData'][7],text2:nestedItems[1]['stockData'][10]  })
@@ -1742,11 +1721,10 @@ gettrendlynestocks1(tlid,tlname,eqsymbol) {
     let nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
-     console.log(nestedItems)
-    
+    console.log(nestedItems)
     this.brokertarget.push({ text1: nestedItems[1]['broker_avg_target']['lt1'], text2: nestedItems[1]['broker_avg_target']['st1'], text3: nestedItems[1]['broker_avg_target']['color1'] })
     console.log(this.brokertarget)
-    this.ema_26.push({text1:nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['color1'],text4: nestedItems[1]['ema_26']['value'] })
+    this.ema_26.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['color1'], text4: nestedItems[1]['ema_26']['value'] })
     this.ema_50.push({text1:nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['color1'],text4: nestedItems[1]['ema_50']['value']  })
     this.ema_100.push({text1:nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_100']['value']  })
     this.ema_200.push({text1:nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_200']['value']  })
@@ -1771,6 +1749,7 @@ gettrendlynestocks1(tlid,tlname,eqsymbol) {
      this.brokertargetdowngrade.push({ text1: nestedItems[1]['broker_targetdown_6M']['lt1'], text2: nestedItems[1]['broker_targetdown_6M']['st1'], text3: nestedItems[1]['broker_targetdown_6M']['color1'] })
    }
    
+    
     
     
   }, err => {
@@ -1799,7 +1778,6 @@ getmcchartsdata(mcsymbol) {
 
 
     }
-    
     
     this.basicData = {
       type: 'line',
@@ -1847,109 +1825,7 @@ getmcchartsdata(mcsymbol) {
     //   }]
     // });
 
-    this.visitSaleChartData = [{
-      label: this.stockname,
-      data: this.lineChartData5,
-      borderWidth: 1,
-      fill: false,
-    }
-    ];
-    
-    this.visitSaleChartLabels = this.lineChartLabels5;
-    
-    this.visitSaleChartOptions = {
-      responsive: true,
-      legend: false,
-      scales: {
-          yAxes: [{
-              ticks: {
-                  display: true,
-                  
-                  
-              },
-              gridLines: {
-                drawBorder: false,
-                color: 'rgba(235,237,242,1)',
-                zeroLineColor: 'rgba(235,237,242,1)'
-              }
-          }],
-          xAxes: [{
-              gridLines: {
-                display:false,
-                drawBorder: false,
-                color: 'rgba(0,0,0,1)',
-                zeroLineColor: 'rgba(235,237,242,1)'
-              },
-              ticks: {
-                  
-                  fontColor: "#9c9fa6",
-                  autoSkip: true,
-              },
-              categoryPercentage: 0.4,
-              linePercentage: 0.4
-          }]
-        }
-    };
-    
-    this.visitSaleChartColors = [
-      {
-        backgroundColor: [
-          'rgba(154, 85, 255, 1)',
-          'rgba(154, 85, 255, 1)',
-          'rgba(154, 85, 255, 1)',
-          'rgba(154, 85, 255, 1)',
-          'rgba(154, 85, 255, 1)',
-          'rgba(154, 85, 255, 1)',
-        ],
-        borderColor: [
-          'rgba(154, 85, 255, 1)',
-          'rgba(154, 85, 255, 1)',
-          'rgba(154, 85, 255, 1)',
-          'rgba(154, 85, 255, 1)',
-          'rgba(154, 85, 255, 1)',
-          'rgba(154, 85, 255, 1)',
-        ]
-      },
-      {
-        backgroundColor: [
-          'rgba(254, 112, 150, 1)',
-          'rgba(254, 112, 150, 1)',
-          'rgba(254, 112, 150, 1)',
-          'rgba(254, 112, 150, 1)',
-          'rgba(254, 112, 150, 1)',
-          'rgba(254, 112, 150, 1)',
-        ],
-        borderColor: [
-          'rgba(254, 112, 150, 1)',
-          'rgba(254, 112, 150, 1)',
-          'rgba(254, 112, 150, 1)',
-          'rgba(254, 112, 150, 1)',
-          'rgba(254, 112, 150, 1)',
-          'rgba(254, 112, 150, 1)',
-        ]
-      },
-      {
-        backgroundColor: [
-          'rgba(177, 148, 250, 1)',
-          'rgba(177, 148, 250, 1)',
-          'rgba(177, 148, 250, 1)',
-          'rgba(177, 148, 250, 1)',
-          'rgba(177, 148, 250, 1)',
-          'rgba(177, 148, 250, 1)',
-        ],
-        borderColor: [
-          'rgba(177, 148, 250, 1)',
-          'rgba(177, 148, 250, 1)',
-          'rgba(177, 148, 250, 1)',
-          'rgba(177, 148, 250, 1)',
-          'rgba(177, 148, 250, 1)',
-          'rgba(177, 148, 250, 1)',
-        ]
-      },
-    ];
-    
-    
-    
+
 
 
   }, err => {
@@ -1959,60 +1835,7 @@ getmcchartsdata(mcsymbol) {
 
 
   })
-  }
-  getmcoverall() {
-    this.dataApi.getmcoverall().subscribe(data => {
-      let nestedItems = Object.keys(data).map(key => {
-        return data[key];
-      });
-     
-      for (let val in nestedItems[1]) {
-        this.mcadvvalue = nestedItems[1][val].advValue
-        this.mcdecvalue = nestedItems[1][val].decValue
-        
-      }
-      this.trafficChartData = [
-        {
-          data: [this.mcadvvalue, this.mcdecvalue],
-        }
-      ];
-      
-      this.trafficChartLabels =  ['Advance', 'Decline'];
-      
-      this.trafficChartOptions = {
-        responsive: true,
-        animation: {
-          animateScale: true,
-          animateRotate: true
-        },
-        legend: false,
-      };
-      
-      this.trafficChartColors = [
-        {
-          backgroundColor: [
-            'rgba(177, 148, 250, 1)',
-            'rgba(254, 112, 150, 1)',
-            'rgba(132, 217, 210, 1)'
-          ],
-          borderColor: [
-            'rgba(177, 148, 250, .2)',
-            'rgba(254, 112, 150, .2)',
-            'rgba(132, 217, 210, .2)'
-          ]
-        }
-      ];
-      
-     
-    }, err => {
-      console.log(err)
-
-
-
-
-    })
-  }
-
+}
 getmcchartsdataohlc(mcsymbol) {
   this.dataApi.getmcchartsdataohlc(mcsymbol).subscribe(data3 => {
 
@@ -2142,8 +1965,7 @@ nsedatastockoi(eqsymbol) {
     let nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
-    console.log(eqsymbol)
-    console.log(nestedItems)
+
     this.stockpcr.push({ text1: (nestedItems[1]['PE'].totOI / nestedItems[1]['CE'].totOI) })
     
     //console.log(nestedItems[1]['data'])
@@ -2492,7 +2314,7 @@ getmcpv(mcsymbol) {
     let nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
-    console.log(nestedItems)
+
     this.volume2.push({ text1: "Today: " + nestedItems[0].volume.Today.delivery_display_text, text3: "1 Week: " + nestedItems[0].volume["1 Week"].delivery_display_text, text2: "Yesterday: " + nestedItems[0].volume.Yesterday.delivery_display_text, text4: "1 Month: " + nestedItems[0].volume["1 Month"].delivery_display_text })
     this.volume2.push({ text1: "Today: " + nestedItems[0].volume.Today.cvol_display_text, text3: "1 Week: " + nestedItems[0].volume["1 Week"].cvol_display_text, text2: "Yesterday: " + nestedItems[0].volume.Yesterday.cvol_display_text, text4: "1 Month: " + nestedItems[0].volume["1 Month"].cvol_display_text })
     this.volume2.push({ text1: "1 Week: " + nestedItems[0].price["1 Week"] + "%", text3: "1 Month: " + nestedItems[0].price["1 Month"] + "%", text2: "3 Months: " + nestedItems[0].price["3 Months"] + "%", text4: "1 Year: " + nestedItems[0].price["1 Year"] + "%" })
@@ -2696,7 +2518,7 @@ getetcompanydataohlc(companyid) {
     let nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
-    console.log(nestedItems)
+
 
     this.etsectorname = (nestedItems[0][0]["sector"])
     this.sectorid = this.etsectors.filter(i => i.sectorName == this.etsectorname)[0].sectorId
@@ -2821,8 +2643,8 @@ async getmcindexchart(mcindexid) {
       }
     };
 
-    //var chartsetindicescharts = new ApexCharts(document.querySelector("#chart42"), optionsetindicescharts);
-    //chartsetindicescharts.render();
+    var chartsetindicescharts = new ApexCharts(document.querySelector("#chart42"), optionsetindicescharts);
+    chartsetindicescharts.render();
 
 
 

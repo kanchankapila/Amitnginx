@@ -519,6 +519,16 @@ export class DataapiService {
   getmcniftytid(){
     return this.http.get('http://localhost:3000/mcniftytid')
   }
+  getniftyt50indicators(){
+    return this.http.get('http://localhost:3000/mcniftytid')
+  }
+  getmcnifty50() {
+    return this.http.get('http://localhost:3000/mcnifty50')
+  }
+  getnifty50frequent(){
+    return this.http.get('http://localhost:3000/nifty50frequent')
+  }
+  
   getmcniftytiw(){
     return this.http.get('http://localhost:3000/mcniftytiw')
   }
@@ -770,12 +780,8 @@ export class DataapiService {
   getbankniftystocks(){
     return this.http.get('http://localhost:3000/bankniftystocks')
   }
-  getnifty50stocks(){
-    return this.http.get('http://localhost:3000/nifty50stocks')
-  }
-  getnifty50snr(){
-    return this.http.get('http://localhost:3000/nifty50snr')
-  }
+  
+ 
   getniftypharmasnr(){
     return this.http.get('http://localhost:3000/pharmasnr')
   }
@@ -797,21 +803,6 @@ export class DataapiService {
     return this.http.get('http://localhost:3000/nifty50')
   }
 
-  getnifty505d(){
-    return this.http.get('http://localhost:3000/nifty505d')
-  }
-
-  getnifty503m(){
-    return this.http.get('http://localhost:3000/nifty503m')
-  }
-
-  getnifty506m(){
-    return this.http.get('http://localhost:3000/nifty506m')
-  }
-
-  getnifty501yr(){
-    return this.http.get('http://localhost:3000/nifty501yr')
-  }
   
   gettlbu(){
     return this.http.get('http://localhost:3000/tlbu')

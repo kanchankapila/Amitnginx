@@ -194,39 +194,6 @@ body {
   box-shadow: inset 0 1px 0 lightgreen;
 }
 
-
-
-.shiny::after {
-  content: "";
-  display: block;
-  width: 10% !important;
-  background: rgba(255, 255, 255, 0.2);
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.7) 100%); /* Safari 5.1-6.0 */
-  background: -o-linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.7) 100%
-  ); /* Opera 11.1-12.0 */
-  background: -moz-linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.7) 100%
-  ); /* Firefox 3.6-15 */
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.7) 100%); /* Standard syntax */
-
-  left: -100%;
-  top: 0;
-  height: 100%;
-  position: absolute;
-  transition: none;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  -ms-transition: none;
-  -ms-transform: skewX(-20deg); /* IE 9 */
-  -webkit-transform: skewX(-20deg); /* Safari */
-  transform: skewX(-20deg);
-}
 .mat-card {
   background: rgb(114, 240, 162);
   display: inline-block;
@@ -1476,15 +1443,6 @@ body {
   font-size: 8pt;
   float: right;
 }
-.shiny:hover::after {
-  left: 150%;
-  transition: all 1s;
-  -webkit-transition: all 1s;
-  -moz-transition: all 1s;
-  -o-transition: all 1s;
-  -ms-transition: all 1s;
-}
-
 .overlay {
   position: fixed; /* Sit on top of the page content */
   display: block; /* Hidden by default */

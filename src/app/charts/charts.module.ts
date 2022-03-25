@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { ChartsModule } from 'ng2-charts';
+import { ChartsModule  } from 'ng2-charts';
 import { ChartjsComponent } from './chartjs/chartjs.component';
 
 const routes: Routes = [
@@ -13,7 +13,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    ChartsModule
+    ChartsModule 
   ]
 })
 export class ChartsDemoModule { }

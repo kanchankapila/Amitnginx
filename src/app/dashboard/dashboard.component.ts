@@ -12,7 +12,7 @@ import { Input } from 'mdb-ui-kit'; // module
 import ApexCharts from 'apexcharts';
 import { ChartType } from 'chart.js';
 import { Chart } from 'chart.js';
-import { MultiDataSet, Label } from 'ng2-charts';
+
 import * as xml2js from "xml2js";
 import { NewsRss } from './news-rss';
 import { DataapiService } from '../../dataapi.service'
@@ -539,15 +539,7 @@ export interface mcniftyrttiles {
  
   
 }
-export interface mcniftyvixrttiles {
 
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
- 
-  
-}
 export interface mcbniftyrttiles {
 
   text1: string;
@@ -597,7 +589,7 @@ export class DashboardComponent implements OnInit {
   mcniftyrt: mcniftyrttiles[] = [];
   newscard: newscardtile[] = [];
   mcbniftyrt: mcbniftyrttiles[] = [];
-  mcniftyvixrt: mcniftyvixrttiles[] = [];
+ 
   tlid = [];
   vixgraphtime = [];
   vixgraphvalue = [];
@@ -722,10 +714,7 @@ export class DashboardComponent implements OnInit {
   optionwp = [];
   optionbwc = [];
   optionbwp = [];
-  basicData: any;
-  basicOptions: any;
-  basicData1: any;
-  basicOptions1: any;
+  
  
   bniftytid: bniftytidtile[] = [];
   bniftybbd: bniftybbdtile[] = [];
@@ -1021,7 +1010,7 @@ export class DashboardComponent implements OnInit {
     {
       setInterval(() => { this.getmcniftyrealtime() }, 5000);
       setInterval(() => { this.getmcbankniftyrealtime() }, 5000);
-      setInterval(() => { this.getmcvixrealtime() }, 5000);
+      
       
       setInterval(() => { this.getntniftypcr() }, 30000);
       
@@ -1029,9 +1018,7 @@ export class DashboardComponent implements OnInit {
     {
       setInterval(() => { this.nsedataadvdec() }, 1200000);
     }
-    {
-      setInterval(() => { this.getmcvixgraph() }, 60000);
-    }
+   
     {
       setInterval(() => { this.getmmmarkets() }, 60000);
     }
@@ -1039,7 +1026,7 @@ export class DashboardComponent implements OnInit {
     this.getmmmarkets()
     this.opstraexpirydates()
     this.getntniftypcr()
-    this.getmcvixgraph()
+    
   this.gnewsapiall()
   
     
@@ -1369,190 +1356,27 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       console.log(err)
     })
   }
-  getmcvixrealtime() {
-    this.dataApi.getmcvixrealtime().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.mcniftyvixrt.length = 0;
-     
-        this.mcniftyvixrt.push({ text1: nestedItems[1].stkexchg, text2: nestedItems[1].lastprice, text3: nestedItems[1].change, text4: nestedItems[1].percentchange })
-      
-    }, err => {
-      console.log(err)
-    })
-  }
-  getmcvixgraph() {
-    this.dataApi.getmcvixgraph().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      // this.mcniftyvixrt.length = 0;
-     
-      //   this.mcniftyvixrt.push({ text1: nestedItems[1].stkexchg, text2: nestedItems[1].lastprice, text3: nestedItems[1].change, text4: nestedItems[1].percentchange })
-      this.vixgraphtime.length = 0;
-        this.vixgraphvalue.length = 0;
-      for (let val in nestedItems[1]['values']) {
-        this.vixgraphtime.push(nestedItems[1].values[val]["_time"])
-        this.vixgraphvalue.push(nestedItems[1].values[val]["_value"])
-      }
-     this.buildvixgraph() 
-    }, err => {
-      console.log(err)
-    })
-  }
-  buildvixgraph() {
-    
-    var randomColorGenerator = function () {
-      return '#' + (Math.random().toString(16) + '0000000').slice(2, 8);
-    };
-    this.basicData = {
-      
-      labels: this.vixgraphtime,
-      
-      
-      datasets: [
-        {
-          label: "value",
-          //backgroundColor: this.getRandomColor(),
-          backgroundColor: randomColorGenerator,
-          data: this.vixgraphvalue,
-          fill: false
-        },
-        //   {
-        //     label: "value",
-        //     backgroundColor:'transparent',
-        //     data: this.tltgstockprice,
-        // },
-    
-      ]
-    };
-    var footerLine14 = this.vixgraphvalue
-    //console.log(footerLine1 )
-   
-    this.basicOptions = {
-      
-      responsive: true,
-      tooltips: {
-        callbacks: {
-          beforeFooter: function (tooltipItems, data) {
-            return 'Current Price:' + footerLine14[tooltipItems[0].index];
-          }
-        },
-          plugins: {
-            legend: {
-              labels: {
-                color: '#495057'
-              }
-            }
-          },
-          scales: {
-            x: {
-              ticks: {
-                color: '#495057'
-              },
-              grid: {
-                color: '#ebedef'
-              }
-            },
-            y: {
-              ticks: {
-                color: '#495057'
-              },
-              grid: {
-                color: '#ebedef'
-              }
-            }
-        
-    
-
-          }
-        },
-      }
-    }
     getntniftypcr() {
       this.dataApi.getntniftypcr().subscribe(data5 => {
         let nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
+        console.log(nestedItems)
         this.pcrgraphtime.length = 0;
         this.pcrgraphvalue.length = 0;
          for (let val in nestedItems[3]['data']) {
           this.pcrgraphtime.push(nestedItems[3]['data'][val].time)
           this.pcrgraphvalue.push(nestedItems[3]['data'][val].pcr)
           }
-         this.buildpcrgraph() 
+         
       }, err => {
         console.log(err)
       })
     }
-    buildpcrgraph() {
+   
       
      
-      this.basicData1 = {
-        
-        labels: this.pcrgraphtime,
-        
-        
-        datasets: [
-          {
-            label: "value",
-            //backgroundColor: this.getRandomColor(),
-            backgroundColor: '#9966cc',
-            data: this.pcrgraphvalue,
-            fill: false
-          },
-          //   {
-          //     label: "value",
-          //     backgroundColor:'transparent',
-          //     data: this.tltgstockprice,
-          // },
       
-        ]
-      };
-      var footerLine15 = this.vixgraphvalue
-      //console.log(footerLine1 )
-     
-      this.basicOptions1 = {
-        
-        responsive: true,
-        tooltips: {
-          callbacks: {
-            beforeFooter: function (tooltipItems, data) {
-              return 'Current Price:' + footerLine15[tooltipItems[0].index];
-            }
-          },
-            plugins: {
-              legend: {
-                labels: {
-                  color: '#9966cc'
-                }
-              }
-            },
-            scales: {
-              x: {
-                ticks: {
-                  color: '#9966cc'
-                },
-                grid: {
-                  color: '#ebedef'
-                }
-              },
-              y: {
-                ticks: {
-                  color: '#495057'
-                },
-                grid: {
-                  color: '#ebedef'
-                }
-              }
-          
-      
-  
-            }
-          },
-        }
-      }
       getmmmarkets() {
         this.dataApi.getmmmarkets().subscribe(data5 => {
           let nestedItems = Object.keys(data5).map(key => {
@@ -2163,18 +1987,13 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
           datasets: [
             {
               data: [this.mcadvvalue, this.mcdecvalue],
-              backgroundColor: ['rgb(30, 83, 30)','rgb(250, 51, 51)'],
-              fill: false
+              backgroundColor: ['rgb(30, 83, 30)','rgb(250, 51, 51)']
+          
             },
           ]
         },
         options: {
-          legend: {
-            display: false
-          },
-          tooltips: {
-            enabled: true
-          }
+        
         }
       });
       

@@ -57,10 +57,17 @@ $theme-gradient-colors: (
   success:         linear-gradient(to right, #84d9d2, #07cdae),
   info:            linear-gradient(to right, #90caf9, #047edf 99%),
   warning:         linear-gradient(to right, #f6e384, #ffd500),
-  danger:          linear-gradient(to right, #ffbf96, #fe7096),
+  danger:          linear-gradient(to right, #ffbf96, #fe7096),0
   light:           linear-gradient(to bottom, #f4f4f4, #e4e4e9),
   dark:            linear-gradient(89deg, #5e7188, #3e4b5b),
-  amit:         linear-gradient(to right, #c8ffbb, #fff)
+  bull:         linear-gradient(to right, #98fb98, rgb(213, 243, 248)),
+  bull1:         linear-gradient(to right,rgb(213, 243, 248),#98fb98 ),
+  bull2:         linear-gradient(to right, #98fb98, rgb(213, 243, 248)),
+  bull3:         linear-gradient(to right, rgb(213, 243, 248),#98fb98) ,
+  bear:         linear-gradient(to right, #fa8072,rgb(255, 215, 215)),
+  bear1:         linear-gradient(to right, rgb(255, 215, 215),#fa8072 ),
+  bear2:         linear-gradient(to right, #fa8072, rgb(255, 215, 215)),
+  bear3:         linear-gradient(to right, rgb(255, 215, 215),#fa8072 ),
 );
 
 

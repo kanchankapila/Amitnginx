@@ -1,39 +1,9 @@
-//<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<div class="row">
-  <div class="col-lg-13 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <div class="d-flex flex-wrap justify-content-between">
-          <h4 class="card-title">{{this.stockname}}</h4>
-          <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal">
-            <ul>
-              <li>
-                <span class="legend-dots"></span>Price
-              </li>
-              <li>
-                <span class="legend-dots"></span>USA
-              </li>
-              <li class="mr-0">
-                <span class="legend-dots"></span>UK
-              </li>
-            </ul>
-          </div>
-        </div>
-        <canvas baseChart #visitSaleChart [chartType]="'line'" [datasets]="visitSaleChartData" [labels]="visitSaleChartLabels" [options]="visitSaleChartOptions" [colors]="visitSaleChartColors"></canvas>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-2 grid-margin stretch-card">
-   <canvas baseChart [chartType]="'doughnut'" [datasets]="trafficChartData" [labels]="trafficChartLabels" [options]="trafficChartOptions" [colors]="trafficChartColors"></canvas>
-     
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <div class="InsideContent">
   <mat-card class='stockoptionssupport animate__flipOutX'  *ngFor="let tile of stockoptionssupport">
     <h6>Max Support:{{tile.text1}}</h6>
     
   </mat-card>
-  
   <mat-card class='stockoptionsresistance animate__flipOutX'  *ngFor="let tile of stockoptionsresistance">
     <h6>Max Res:{{tile.text1}}</h6>
     
@@ -142,31 +112,32 @@
 
 <p-sidebar [(visible)]="visibleSidebar5" [fullScreen]="true" [baseZIndex]="10000">
   <h6 style="font-weight:normal">Broker's Insight</h6>
+  
   <p *ngFor="let tile of brokertarget" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}&nbsp;[{{tile.text2}}]</p>
- 
+  
   <p *ngFor="let tile of brokertargetupgrade" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
   <p *ngFor="let tile of brokertargetdowngrade" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
   <p *ngFor="let tile of brokerrecoupgrade" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
   <p *ngFor="let tile of brokerrecodowngrade" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
   <h6 style="font-weight:normal">Technicals</h6>
   <h6 style="font-weight:normal">EMA</h6>
-  <p *ngFor="let tile of ema_26" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
-  <p *ngFor="let tile of ema_50" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
-  <p *ngFor="let tile of ema_100" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
-  <p *ngFor="let tile of ema_200" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
+  <p *ngFor="let tile of ema_26" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of ema_50" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of ema_100" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of ema_200" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
   <h6 style="font-weight:normal">SMA</h6>
-  <p *ngFor="let tile of sma_30" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
-  <p *ngFor="let tile of sma_50" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
-  <p *ngFor="let tile of sma_100" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
-  <p *ngFor="let tile of sma_200" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
+  <p *ngFor="let tile of sma_30" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of sma_50" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of sma_100" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of sma_200" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
   <h6 style="font-weight:normal">MACD</h6>
-  <p *ngFor="let tile of macd" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
-  <p *ngFor="let tile of macdsignal" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
+  <p *ngFor="let tile of macd" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of macdsignal" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
  
   <h6 style="font-weight:normal">RSI</h6>
-  <p *ngFor="let tile of rsi" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
+  <p *ngFor="let tile of rsi" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
   <h6 style="font-weight:normal">MFI</h6>
-  <p *ngFor="let tile of mfi" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
+  <p *ngFor="let tile of mfi" [ngClass]="{'fontgreen' : tile.text3 == 'positive' ,'fontred' : tile.text3 == 'negative' , 'fontyellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
 </p-sidebar>
 <app-intersecting-circles-spinner
   [animationDuration]="1200"

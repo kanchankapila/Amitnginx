@@ -1,5 +1,5 @@
 
-
+const async = require("async")
 const express = require('express');
 var https = require('https');
 const merge = require('deepmerge')
@@ -33,10 +33,10 @@ const fs =require('fs')
 const axios = require('axios');
 const cheerio = require('cheerio');
 var html2json = require('html2json').html2json;
-const nodemailer = require("nodemailer");
+
 const details = require("./details.json");
 const rthw = '/bot1677607172:AAHVGkyE8H4oWqyqfAw7RHfZl8HAvnfgu_g'
-const TelegramBot = require('node-telegram-bot-api');
+
 // const server = https.createSamitstockweberver({
 //   key: fs.readFileSync('E:/Stock Website/stockapp/amitstockweb/key.pem'),
 //   cert: fs.readFileSync('E:/Stock Website/stockapp/amitstockweb/server.crt')
@@ -62,61 +62,86 @@ var MongoClient = require('mongodb').MongoClient;
 var client = new MongoClient(url, option);
 var moment = require('moment');
 
+
+//This is Nifty 50 Details used in nifty50 component using parallel api run
+app.get('/mcnifty50', (req, res) => {
+  
+
+  var requestArray = [
+    {url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area'},
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=5d&type=area' },
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1m&type=area' },
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=3m&type=area' },
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=6m&type=area' },
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1yr&type=area' },
+    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?field=RSI' },
+    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3BNSX?field=RSI' },
+    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3BNSX?field=RSI'},
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=json&type=0&ind_id=9'},
+    { url: 'https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%2050'},
+  
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/indices&format=json&t_device=iphone&t_app=MC&t_version=48&ind_id=36'},
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area'}
+  ];
+  
+  let getApi = function (opt, callback) {
+    request(opt, (err, response, body) => {
+        callback(err, JSON.parse(body));
+    });
+  };
+  
+  const functionArray = requestArray.map((opt) => { 
+    return (callback) => getApi(opt, callback); 
+  });
+  
+  async.parallel(
+    functionArray, (err, results) => {
+        if (err) {
+            console.error('Error: ', err);
+        } else {
+            res.json(results);
+        }
+  }); 
+})
+
+//This is Nifty 50 Details used in nifty50 component using parallel api run
+app.get('/nifty50frequent', (req, res) => {
+  
+
+  var requestArray = [
+    {url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area'},
+    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?field=RSI' },
+    { url: 'https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%2050'},
+    { url: 'https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr'},
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area'}
+  ];
+  
+  let getApi = function (opt, callback) {
+    request(opt, (err, response, body) => {
+        callback(err, JSON.parse(body));
+    });
+  };
+  
+  const functionArray = requestArray.map((opt) => { 
+    return (callback) => getApi(opt, callback); 
+  });
+  
+  async.parallel(
+    functionArray, (err, results) => {
+        if (err) {
+            console.error('Error: ', err);
+        } else {
+            res.json(results);
+        }
+  }); 
+})
+
 /////////////////////Firebase Real Time Database Settings////////////////////////////////////////////
-
-var admin = require("firebase-admin");
-// import * as functions from 'firebase-functions';
-// import * as admin from 'firebase-admin';
-var serviceAccount = require("E:/Stock Website/Firebase/sinuous-myth-279614-firebase-adminsdk-f7fam-8c74a2b46f.json");
-admin.initializeApp({
-credential: admin.credential.cert(serviceAccount),
-databaseURL: "https://sinuous-myth-279614.firebaseio.com"
-
-});
 
 
 
   
 
-
-function getAccessToken() {
-  return admin.credential.applicationDefault().getAccessToken()
-      .then(accessToken => {
-        return accessToken.access_token;
-      })
-      .catch(err => {
-        console.error('Unable to get access token');
-        console.error(err);
-      });
-}
-async function listProjects() {
-  const accessToken = getAccessToken();
-  const uri = 'https://firebase.googleapis.com/v1beta1/availableProjects';
-  const options = {
-    method: 'GET',
-    headers: {
-      'Authorization': 'Bearer ' + accessToken,
-    },
-  };
-
-  try {
-    const rawResponse = await fetch(uri, options);
-    const resp = await rawResponse.json();
-    const projects = resp['projectInfo'];
-    console.log('Project total: ' + projects.length);
-    console.log('');
-    for (let i in projects) {
-      const project = projects[i];
-      console.log('Project ' + i);
-      console.log('ID: ' + project['project']);
-      console.log('Display Name: ' + project['displayName']);
-      console.log('');
-    }
-  } catch(err) {
-    console.error(err);
-  }
-}
-getAccessToken()
 ///////////////////////////////For Getting Dates////////////////////////////////////////////////
 var yesterday1 = moment().subtract(1, 'days');
 var yesterday2 = moment().subtract(2, 'days');
@@ -201,10 +226,10 @@ const options = {
 ////////////////////////////////Telegram Configs///////////////////////////////////////////////
 
 
-app.post(rthw ,(req, res) =>{
-telegrambot.processUpdate(req.body);
-res.sendStatus(200);
-});
+// app.post(rthw ,(req, res) =>{
+// telegrambot.processUpdate(req.body);
+// res.sendStatus(200);
+// });
 
 // const botwebhook = new TelegramBot(token, options);
 // botwebhook.setWebHook(`${urlngrok}/bot${token}`);
@@ -1449,38 +1474,38 @@ app.post("/sendmail", (req, res) => {
   });
 });
 
-async function sendMail(user, callback) {
+// async function sendMail(user, callback) {
   
-  let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: details.email,
-      pass: details.password
-    }
-  });
+//   let transporter = nodemailer.createTransport({
+//     host: "smtp.gmail.com",
+//     port: 587,
+//     secure: false, // true for 465, false for other ports
+//     auth: {
+//       user: details.email,
+//       pass: details.password
+//     }
+//   });
 
 
-  let mailOptions = {
-    from: '"Amit Kapila"<amit.kapila.2009@gmail.com>', // sender address
-    to: user.email, // list of receivers
-    subject: `${user.subject}`, // Subject line
-    html: `<h1>Hi ${user.name}</h1><br>
-    <h4>Thanks for joining us</h4>`,
-    attachments: [
-      {
-          filename: `${user.filename}`,
-          path: "C:/Users/Amit/Downloads" + `/${user.filename}`,
-          cid: `uniq-${user.filename}`
-      }
-  ]
-  };
+//   let mailOptions = {
+//     from: '"Amit Kapila"<amit.kapila.2009@gmail.com>', // sender address
+//     to: user.email, // list of receivers
+//     subject: `${user.subject}`, // Subject line
+//     html: `<h1>Hi ${user.name}</h1><br>
+//     <h4>Thanks for joining us</h4>`,
+//     attachments: [
+//       {
+//           filename: `${user.filename}`,
+//           path: "C:/Users/Amit/Downloads" + `/${user.filename}`,
+//           cid: `uniq-${user.filename}`
+//       }
+//   ]
+//   };
 
-  // send mail with defined transport object
-  let info = await transporter.sendMail(mailOptions);
-  callback(info);
-}
+//   // send mail with defined transport object
+//   let info = await transporter.sendMail(mailOptions);
+//   callback(info);
+// }
 
 /////////////////////////////////////////////////////WATCHLIST//////////////////////////////////////////////////////////
 
@@ -2867,6 +2892,7 @@ app.get('/mcniftytiw', function (req, res) {
   })
 
 })
+
 app.get('/mcniftytim', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
@@ -3227,38 +3253,6 @@ app.get('/nifty501yr', function (req, res) {
 
 
 })
-////////////////////////////////////////////MC NIFTY 50 Snr /////////////////////////////////////////////////////////
-app.get('/nifty50snr', function (req, res) {
-
-  var url11 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?fields=sentiments,pivotLevels,sma,ema';
-  request(url11, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-      res.json(JSON.parse(response.body).data)
-      
-
-    }
-  })
-
-
-})
-////////////////////////////////////////////MC NIFTY 50 Stocks /////////////////////////////////////////////////////////
-
-app.get('/nifty50stocks', function (req, res) {
-
-  var url11 = 'https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=json&type=0&ind_id=9';
-  request(url11, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-      res.json(JSON.parse(response.body))
-
-
-    }
-  })
-
-
-})
-
 ////////////////////////////////////////////MC STOCK DETAILS of an Index/////////////////////////////////////////////////////////
 app.get('/mcstockdetails', function (req, res) {
   let mcindexid = req.query.mcindexid
@@ -5368,18 +5362,18 @@ app.get('/opstrastockdata', function (req, res) {
 })
 
 ///////////////////////////////////////////////////TELEGRAM///////////////////////////////////////////////////////////////////
-app.get('/getUpdate', function (req, res) {
+// app.get('/getUpdate', function (req, res) {
   
-  var url11 = 'https://api.telegram.org/bot1677607172:AAHVGkyE8H4oWqyqfAw7RHfZl8HAvnfgu_g/getUpdates?chat_id=@amitstockbottv';
-  request(url11, function (error, response, html) {
-    if (!error) {
+//   var url11 = 'https://api.telegram.org/bot1677607172:AAHVGkyE8H4oWqyqfAw7RHfZl8HAvnfgu_g/getUpdates?chat_id=@amitstockbottv';
+//   request(url11, function (error, response, html) {
+//     if (!error) {
       
-      res.json(JSON.parse(response.body))
+//       res.json(JSON.parse(response.body))
 
 
-    }
-  })
-})
+//     }
+//   })
+// })
 
 /////////////////////////////////////////////Kite/Zerodha/Stock Reports///////////////////////////////////////////////////
 //Getting Technicals from Zerodha
