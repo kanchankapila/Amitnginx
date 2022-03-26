@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
-import * as stocks from '../../dashboard/stocklist';
+import * as stocks from '../../lists/stocklist';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { DataapiService } from '../../../dataapi.service';

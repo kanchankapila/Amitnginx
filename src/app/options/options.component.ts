@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import ApexCharts from 'apexcharts';
-import * as mcindex from '../dashboard/mcsectorlist1'
-import * as mcindex1 from '../dashboard/mcsectorlist'
-import * as  stocks from '../dashboard/stocklist'
+import * as mcindex from '../lists/mcsectorlist1'
+import * as mcindex1 from '../lists/mcsectorlist'
+import * as  stocks from '../lists/stocklist'
 import { DataapiService } from '../../dataapi.service';
 import { HttpClient } from "@angular/common/http";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';

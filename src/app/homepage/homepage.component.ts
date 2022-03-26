@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import ApexCharts from 'apexcharts';
-import * as CanvasJS from './canvasjs.min';
+//import * as CanvasJS from './canvasjs.min';
 import { PrimeNGConfig } from 'primeng/api';
 import * as index from './tlindiceslist'
 import {MatSelectModule} from '@angular/material/select';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-import * as mcindex from '../dashboard/mcsectorlist1'
+import * as mcindex from '../lists/mcsectorlist1'
 
 
 import { interval, Observable, Subscription,timer } from 'rxjs';
 import { mapTo, startWith, map, switchMap,flatMap } from 'rxjs/operators';
 //import * as mcindex1 from '../dashboard/mcsectorlist'
-import * as  stocks from '../dashboard/stocklist'
+import * as  stocks from '../lists/stocklist'
 import { DataapiService } from '../../dataapi.service';
 import { HttpClient } from "@angular/common/http";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';

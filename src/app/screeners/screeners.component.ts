@@ -1,17 +1,17 @@
 import { MegaMenuItem, MenuItem } from 'primeng/api';
 import {SidebarModule} from 'primeng/sidebar';
 import { Component, OnInit,ElementRef, ViewChild ,Input } from '@angular/core';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import html2canvas from 'html2canvas';
+//import { MatSidenavModule } from '@angular/material/sidenav';
+
 var domtoimage = require('dom-to-image');
 
 import { HttpClient } from "@angular/common/http";
-//declare let html2canvas: any;
+
 import { ViewportScroller } from '@angular/common';
-import { DataapiService } from '../../dataapi.service'
-import * as stocks from '../dashboard/stocklist'
-import * as stocks1 from '../dashboard/stocklist12'
-import * as bqstock from '../dashboard/bqlist'
+import { DataapiService } from '../../dataapi.service';
+import * as stocks from '../lists/stocklist'
+import * as stocks1 from '../lists/stocklist12'
+import * as bqstock from '../lists/bqlist'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -214,26 +214,26 @@ export class ScreenersComponent implements OnInit {
   }
 
 
-  downloadImage() {
-    html2canvas(this.screen1.nativeElement).then(canvas => {
-      this.canvas.nativeElement.src = canvas.toDataURL();
-      this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
-      this.downloadLink.nativeElement.download = 'marble-diagram.png';
-      this.downloadLink.nativeElement.click();
-    });
-  }
+  // downloadImage() {
+  //   html2canvas(this.screen1.nativeElement).then(canvas => {
+  //     this.canvas.nativeElement.src = canvas.toDataURL();
+  //     this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+  //     this.downloadLink.nativeElement.download = 'marble-diagram.png';
+  //     this.downloadLink.nativeElement.click();
+  //   });
+  // }
   
   
-  downloadimage1() {
-    html2canvas(container).then(function (canvas) {
-      var link = document.createElement("a");
-      document.body.appendChild(link);
-      link.download = "html_image.png";
-      link.href = canvas.toDataURL("image/png");
-      link.target = '_blank';
-      link.click();
-    });
-  }
+  // downloadimage1() {
+  //   html2canvas(container).then(function (canvas) {
+  //     var link = document.createElement("a");
+  //     document.body.appendChild(link);
+  //     link.download = "html_image.png";
+  //     link.href = canvas.toDataURL("image/png");
+  //     link.target = '_blank';
+  //     link.click();
+  //   });
+  // }
   
   
   

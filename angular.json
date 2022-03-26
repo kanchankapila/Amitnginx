@@ -51,8 +51,8 @@
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/jquery/dist/jquery.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/html2canvas/dist/html2canvas.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+             
             
             ],
             "vendorChunk": true,
@@ -138,8 +138,8 @@
             ],
             "scripts": [ "./node_modules/jquery/dist/jquery.js",
               "node_modules/popper.js/dist/umd/popper.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/html2canvas/dist/html2canvas.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+              
           ]
           }
         },

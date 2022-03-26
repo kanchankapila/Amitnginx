@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from "@angular/forms";
 import { ngbCarouselTransitionOut } from '@ng-bootstrap/ng-bootstrap/carousel/carousel-transition';
-import * as stocks from '../dashboard/stocklist'
+import * as stocks from '../lists/stocklist'
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DataapiService } from '../../dataapi.service'

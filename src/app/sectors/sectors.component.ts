@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
-import * as mcindex from '../dashboard/mcsectorlist1'
+import * as mcindex from '../lists/mcsectorlist1'
 import ApexCharts from 'apexcharts'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';

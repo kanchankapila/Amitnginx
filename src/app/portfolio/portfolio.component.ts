@@ -3,7 +3,7 @@ import { DataapiService } from '../../dataapi.service'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import * as stocks from '../dashboard/stocklist'
+import * as stocks from '../lists/stocklist'
 
 export interface Tile {
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as CanvasJS from './canvasjs.min';
-import * as mcindex from '../dashboard/mcsectorlist1'
-import * as  stocks from '../dashboard/stocklist'
+import * as CanvasJS from '../lists/canvasjs.min';
+import * as mcindex from '../lists/mcsectorlist1'
+import * as  stocks from '../lists/stocklist'
 import { DataapiService } from '../../dataapi.service';
 import { HttpClient } from "@angular/common/http";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';

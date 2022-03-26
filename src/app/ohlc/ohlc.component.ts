@@ -3,31 +3,31 @@ import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import {AtomSpinnerModule} from 'angular-epic-spinners'
 import {ChartModule} from 'primeng/chart';
-import * as  stocks from '../dashboard/stocklist'
-import * as bqstock from '../dashboard/bqlist'
-import * as etsector from '../dashboard/etsectorlist'
-import * as etindex from '../dashboard/etindexlist'
-import * as mcindex from '../dashboard/mcsectorlist'
+import * as  stocks from '../lists/stocklist'
+import * as bqstock from '../lists/bqlist'
+import * as etsector from '../lists/etsectorlist'
+import * as etindex from '../lists/etindexlist'
+import * as mcindex from '../lists/mcsectorlist'
 //import { StockChart } from 'angular-highcharts';
 import {CardModule} from 'primeng/card';
 import {TabViewModule} from 'primeng/tabview';
 
 
 // If you are using ES6, then
-import * as CanvasJS from '../dashboard/canvasjs.min.js';
+//import * as CanvasJS from '../lists/canvasjs.min.js';
 
-import { Button } from 'mdb-ui-kit';
+//import { Button } from 'mdb-ui-kit';
 //import * as Highcharts from "highcharts/highstock";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import * as mdb from 'mdb-ui-kit'; // lib
+//import * as mdb from 'mdb-ui-kit'; // lib
 import { ViewportScroller } from '@angular/common';
 import ApexCharts from 'apexcharts'
-import { Input } from 'mdb-ui-kit'; // module
+//import { Input } from 'mdb-ui-kit'; // module
 //import { NgxSpinnerService } from "ngx-spinner";
 //import { ChangeDetectionStrategy } from '@angular/core';
-import { BuiltinType, SelectorListContext } from '@angular/compiler';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-import { LinearGaugeComponent } from '@swimlane/ngx-charts';
+//import { BuiltinType, SelectorListContext } from '@angular/compiler';
+//import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+//import { LinearGaugeComponent } from '@swimlane/ngx-charts';
 
 
 

@@ -7,21 +7,21 @@ import { formatDate } from '@angular/common';
 
 //import { OwlClockModule } from 'owl-ng';
 //import { OwlFanMenuModule } from 'owl-ng';
-import * as mdb from 'mdb-ui-kit'; // lib
-import { Input } from 'mdb-ui-kit'; // module
-import ApexCharts from 'apexcharts';
+//import * as mdb from 'mdb-ui-kit'; // lib
+//import { Input } from 'mdb-ui-kit'; // module
+//import ApexCharts from 'apexcharts';
 import { ChartType } from 'chart.js';
 import { Chart } from 'chart.js';
 
 import * as xml2js from "xml2js";
 import { NewsRss } from './news-rss';
 import { DataapiService } from '../../dataapi.service'
-import * as stocks from './stocklist'
-import * as fnostocks from './fnostocks'
-import * as sectors from './mcsectorlist'
-import * as bqstock from './bqlist'
-import * as stocks1 from './stocklist12'
-import * as etstock from './etlist'
+import * as stocks from '../lists/stocklist'
+import * as fnostocks from '../lists/fnostocks'
+import * as sectors from '../lists/mcsectorlist'
+import * as bqstock from '../lists/bqlist'
+import * as stocks1 from '../lists/stocklist12'
+import * as etstock from '../lists/etlist'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { FormControl } from '@angular/forms';
@@ -758,7 +758,7 @@ export class DashboardComponent implements OnInit {
   banknifty: bankniftytiles[] = [];
   banknifty1: banknifty1tiles[] = [];
 
-  dblist = { 'mydb': [], 'chartinkvshocker': [], 'chartinkemacrs59': [], 'chartinkemacrs920': [], 'chartinkgapup': [], 'chartinkgapdown': [] }
+  dblist = { 'mydb': [] }
   chart: any;
   chart1: any;
 
