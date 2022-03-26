@@ -68,20 +68,16 @@ app.get('/mcnifty50', (req, res) => {
   
 
   var requestArray = [
-    {url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area'},
+    
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=5d&type=area' },
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1m&type=area' },
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=3m&type=area' },
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=6m&type=area' },
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1yr&type=area' },
-    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?field=RSI' },
     { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3BNSX?field=RSI' },
-    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3BNSX?field=RSI'},
-    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=json&type=0&ind_id=9'},
-    { url: 'https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%2050'},
-  
-    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/indices&format=json&t_device=iphone&t_app=MC&t_version=48&ind_id=36'},
-    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area'}
+    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3BNSX?field=RSI'}
+    
+   
   ];
   
   let getApi = function (opt, callback) {
@@ -113,7 +109,8 @@ app.get('/nifty50frequent', (req, res) => {
     { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?field=RSI' },
     { url: 'https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%2050'},
     { url: 'https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr'},
-    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area'}
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area'},
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=json&type=0&ind_id=9'}
   ];
   
   let getApi = function (opt, callback) {

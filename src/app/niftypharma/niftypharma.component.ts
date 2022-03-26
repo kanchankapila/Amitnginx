@@ -69,11 +69,11 @@ export interface niftysmatile{
 
 
 @Component({
-  selector: 'app-nifty50',
-  templateUrl: './nifty50.component.html',
-  styleUrls: ['./nifty50.component.scss']
+  selector: 'app-niftypharma',
+  templateUrl: './niftypharma.component.html',
+  styleUrls: ['./niftypharma.component.scss']
 })
-export class Nifty50Component implements OnInit {
+export class NiftypharmaComponent implements OnInit {
  
   constructor(private dataApi: DataapiService,private window: Window, private primengConfig: PrimeNGConfig,private vps: ViewportScroller) {
     

@@ -997,7 +997,7 @@ export class DashboardComponent implements OnInit {
       setInterval(() => { this.getmcbankniftyrealtime() }, 5000);
       
       
-      setInterval(() => { this.getntniftypcr() }, 30000);
+      
       
   }
     {
@@ -1010,7 +1010,7 @@ export class DashboardComponent implements OnInit {
     this.getmcoverall()
     this.getmmmarkets()
     this.opstraexpirydates()
-    this.getntniftypcr()
+    
     
   this.gnewsapiall()
   
@@ -1341,91 +1341,6 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       console.log(err)
     })
   }
-  buildpcrgraph() {
-      
-     
-    this.basicData1 = {
-      
-      labels: this.pcrgraphtime,
-      
-      
-      datasets: [
-        {
-          label: "value",
-          //backgroundColor: this.getRandomColor(),
-          backgroundColor: '#9966cc',
-          data: this.pcrgraphvalue,
-          fill: false
-        },
-        //   {
-        //     label: "value",
-        //     backgroundColor:'transparent',
-        //     data: this.tltgstockprice,
-        // },
-    
-      ]
-    };
-    var footerLine15 = this.vixgraphvalue
-    //console.log(footerLine1 )
-   
-    this.basicOptions1 = {
-      
-      responsive: true,
-      tooltips: {
-        callbacks: {
-          beforeFooter: function (tooltipItems, data) {
-            return 'Current Price:' + footerLine15[tooltipItems[0].index];
-          }
-        },
-          plugins: {
-            legend: {
-              labels: {
-                color: '#9966cc'
-              }
-            }
-          },
-          scales: {
-            x: {
-              ticks: {
-                color: '#9966cc'
-              },
-              grid: {
-                color: '#ebedef'
-              }
-            },
-            y: {
-              ticks: {
-                color: '#495057'
-              },
-              grid: {
-                color: '#ebedef'
-              }
-            }
-        
-    
-
-          }
-        },
-      }
-    }
-    getntniftypcr() {
-      this.dataApi.getntniftypcr().subscribe(data5 => {
-        let nestedItems = Object.keys(data5).map(key => {
-          return data5[key];
-        });
-        console.log(nestedItems)
-        this.pcrgraphtime.length = 0;
-        this.pcrgraphvalue.length = 0;
-         for (let val in nestedItems[3]['data']) {
-          this.pcrgraphtime.push(nestedItems[3]['data'][val].time)
-          this.pcrgraphvalue.push(nestedItems[3]['data'][val].pcr)
-          }
-         this.buildpcrgraph()
-      }, err => {
-        console.log(err)
-      })
-    }
-   
       
      
       

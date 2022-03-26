@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NiftybankComponent } from './niftybank.component';
+import { NiftypharmaComponent } from './niftypharma.component';
 import { MatCardModule } from '@angular/material/card';
 import { ChartsModule } from 'ng2-charts';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -12,11 +12,11 @@ import { ChartModule } from 'primeng/chart';
 
 const routes: Routes = [
   
-  { path: '', component: NiftybankComponent },
+  { path: '', component: NiftypharmaComponent },
 ];
 
 @NgModule({
-  declarations: [NiftybankComponent],
+  declarations: [NiftypharmaComponent],
   imports: [
     CommonModule,
     ChartModule,
@@ -33,4 +33,4 @@ const routes: Routes = [
   providers:[]
 
 })
-export class NiftybankModule { }
+export class NiftypharmaModule { }

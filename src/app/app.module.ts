@@ -19,14 +19,12 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { FooterComponent } from './shared/footer/footer.component';
-//import { MainComponent } from './main/main.component';
-//import { DashboardComponent } from './dashboard/dashboard.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodoComponent } from './apps/todo-list/todo/todo.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
 import { TodoListComponent } from './apps/todo-list/todo-list.component';
-//import { OHLCComponent } from './ohlc/ohlc.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavbarModule, ButtonsModule } from 'angular-bootstrap-md'
 import { NgApexchartsModule } from "ng-apexcharts";
@@ -37,25 +35,6 @@ import {MatCardModule} from '@angular/material/card';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {MatTabsModule} from '@angular/material/tabs';
-
-
-
-
-//import { ScreenersComponent } from './screeners/screeners.component';
-//import { PortfolioComponent } from './portfolio/portfolio.component';
-//import { RecosComponent } from './recos/recos.component';
-//import { SectorsComponent } from './sectors/sectors.component';
-//import { FuturesComponent } from './futures/futures.component';
-//import { OptionsComponent } from './options/options.component';
-//import { WatchlistComponent } from './watchlist/watchlist.component';
-//import { HomepageComponent } from './homepage/homepage.component';
-//import { TreemapsComponent } from './treemaps/treemaps.component';
-//import { AnalyticsComponent } from './analytics/analytics.component';
-//import { HomeComponent } from './home/home.component';
-//import { SnRComponent } from './sn-r/sn-r.component';
-//import { IndicatorComponent } from './indicator/indicator.component';
-//import { Nifty50Component } from './nifty50/nifty50.component';
-//import { NiftybankComponent } from './niftybank/niftybank.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
@@ -68,7 +47,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     TodoComponent,
     SpinnerComponent,
     ContentAnimateDirective,
-    
     ChartsModule
     
   ],
@@ -96,7 +74,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ButtonsModule,
     ChartModule,
     NgbModule,
-   
     NgxEchartsModule.forRoot({  echarts: () => import('echarts')}),
     FormsModule,
     BrowserAnimationsModule,
