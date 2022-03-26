@@ -2,6 +2,7 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import { BaseChartDirective } from 'ng2-charts';
+import { ViewportScroller } from '@angular/common';
 
 export interface nifty50stockstiles {
 
@@ -73,8 +74,8 @@ export interface niftysmatile{
   styleUrls: ['./nifty50.component.scss']
 })
 export class Nifty50Component implements OnInit {
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
-  constructor(private dataApi: DataapiService, private primengConfig: PrimeNGConfig) {
+ 
+  constructor(private dataApi: DataapiService,private window: Window, private primengConfig: PrimeNGConfig,private vps: ViewportScroller) {
     
   }
   
@@ -128,6 +129,9 @@ export class Nifty50Component implements OnInit {
   public lineChartvixColors: any;
   basicData: any;
   basicOptions: any;
+  basicData1: any;
+  basicOptions1: any;
+  chart: any;
   nifty50stocks: nifty50stockstiles[] = [];
   nifty50crossover: nifty50crossover[] = [];
   nifty50indicators: nifty50indicatorstile[] = [];
@@ -179,34 +183,16 @@ export class Nifty50Component implements OnInit {
     this.primengConfig.ripple = true;
     this.getmcnifty50();
     this.getnifty50frequent(); 
-    //this.reloadChart();
-   // this.reloadChart1();
-   // this.refreshchart();
+   
     setInterval(() => { this.getnifty50frequent() }, 30000);
-    setInterval(() => { this.reloadChart() }, 30010);
-   // setInterval(() => { this.reloadChart1() }, 30010);
-    //setInterval(() => { this.refreshchart() }, 3010);
+ 
   }
-  // refreshchart() {
-    
-  //   this.lineChartvixData = this.niftyvixdata;
-  //   this.lineChartvixLabels = this.niftyvixtime;
-    
-  // }
-  reloadChart(){
-    this.lineChartpcrData.push('reload');
-    this.lineChartpcrLabels.push(1);
-    setTimeout(() => {
-      this.lineChartpcrData.pop();
-      this.lineChartpcrLabels.pop();
-    },1);
-  }
-  buildvixgraph() {
+  buildpcrgraph() {
     
     
-    this.basicData = {
+    this.basicData1 = {
       
-      labels: this.niftyvixtime,
+      labels: this.niftypcrtime,
       
       
       datasets: [
@@ -214,21 +200,21 @@ export class Nifty50Component implements OnInit {
           label: "value",
           //backgroundColor: this.getRandomColor(),
           backgroundColor: '#ebedef',
-          data: this.niftyvixdata,
+          data: this.niftypcrdata,
           fill: false
         },
       ]
     };
-    var footerLine14 = this.niftyvixdata
+    var footerLine14 = this.niftypcrdata
     //console.log(footerLine1 )
    
-    this.basicOptions = {
+    this.basicOptions1 = {
       
       responsive: true,
       tooltips: {
         callbacks: {
           beforeFooter: function (tooltipItems, data) {
-            return 'Current Vix:' + footerLine14[tooltipItems[0].index];
+            return 'Current Pcr:' + footerLine14[tooltipItems[0].index];
           }
         },
           plugins: {
@@ -255,15 +241,61 @@ export class Nifty50Component implements OnInit {
                 color: '#D98880'
               }
             }}},}}
- 
-  // reloadChart1(){
-  //   this.lineChartvixData.push('reload');
-  //   this.lineChartvixLabels.push(1);
-  //   setTimeout(() => {
-  //     this.lineChartvixData.pop();
-  //     this.lineChartvixLabels.pop();
-  //   },1);
- // }
+buildvixgraph() {
+    
+    
+              this.basicData = {
+                
+                labels: this.niftyvixtime,
+                
+                
+                datasets: [
+                  {
+                    label: "value",
+                    //backgroundColor: this.getRandomColor(),
+                    backgroundColor: '#ebedef',
+                    data: this.niftyvixdata,
+                    fill: false
+                  },
+                ]
+              };
+              var footerLine14 = this.niftyvixdata
+              //console.log(footerLine1 )
+             
+              this.basicOptions = {
+                
+                responsive: true,
+                tooltips: {
+                  callbacks: {
+                    beforeFooter: function (tooltipItems, data) {
+                      return 'Current Vix:' + footerLine14[tooltipItems[0].index];
+                    }
+                  },
+                    plugins: {
+                      legend: {
+                        labels: {
+                          color: '#495057'
+                        }
+                      }
+                    },
+                    scales: {
+                      x: {
+                        ticks: {
+                          color: '#D98880'
+                        },
+                        grid: {
+                          color: '#D98880'
+                        }
+                      },
+                      y: {
+                        ticks: {
+                          color: '#D98880'
+                        },
+                        grid: {
+                          color: '#D98880'
+                        }
+                      }}},}}
+           
   getnifty50frequent() {
     this.dataApi.getnifty50frequent().subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
@@ -288,41 +320,8 @@ export class Nifty50Component implements OnInit {
 for (let val in nestedItems[3]['resultData']['data']) {
   this.niftypcrdata.push( nestedItems[3]['resultData']['data'][val]['pcr'] )
   this.niftypcrtime.push( nestedItems[3]['resultData']['data'][val]['time'])
-}
-this.lineChartpcrData = [{
-  label: 'PCR',
-  data: this.niftypcrdata,
-  borderWidth: 1,
-  fill: false
-
-}],
-this.lineChartpcrLabels = this.niftypcrtime,
-  this.lineChartpcrOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-  scales: {
-    yAxes: [{
-      ticks: {
-        beginAtZero: false
       }
-    }]
-  },
-  legend: {
-    display: true
-  },
-  elements: {
-    point: {
-      radius: 0
-    }
-  }
-},
-
-this.lineChartpcrColors = [
-  {
-    borderColor: '#D98880'
-  }
-  ];
-
+      this.buildpcrgraph()
 
       ////////////To get Nifty Today Resistances and Indicators/////////////
       this.lineChartDatan50snrr1.length = 0;

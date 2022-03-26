@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './dashboard.component'
 import { ChartsModule } from 'ng2-charts';
 import { MatCardModule } from '@angular/material/card';
+import { TabViewModule } from "primeng/tabview";
 import { ChartModule } from 'primeng/chart';
 
 
@@ -19,9 +20,9 @@ import { ChartModule } from 'primeng/chart';
     declarations: [DashboardComponent],
     imports: [
       CommonModule,
+      TabViewModule,
       ChartModule,
       MatCardModule,
-      
       ChartsModule,
       NgbModule,
       RouterModule.forChild(routes),

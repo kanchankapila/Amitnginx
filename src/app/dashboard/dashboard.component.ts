@@ -7,7 +7,7 @@ import { formatDate } from '@angular/common';
 
 //import { OwlClockModule } from 'owl-ng';
 //import { OwlFanMenuModule } from 'owl-ng';
-//import * as mdb from 'mdb-ui-kit'; // lib
+import * as mdb from 'mdb-ui-kit'; // lib
 //import { Input } from 'mdb-ui-kit'; // module
 //import ApexCharts from 'apexcharts';
 import { ChartType } from 'chart.js';
@@ -579,9 +579,7 @@ export class DashboardComponent implements OnInit {
   public chartOptions3: Partial<ChartOptions3>;
   showFiller = false;
   options: any;
-  tiles11: Tile11[] = [
-
-  ];
+  tiles11: Tile11[] = [];
   n50optionssupport: n50optionssupporttile[] = [];
   n50optionsresistance: n50optionsresistancetile[] = [];
   bnoptionssupport: bnoptionssupporttile[] = [];
@@ -595,7 +593,6 @@ export class DashboardComponent implements OnInit {
   vixgraphvalue = [];
   pcrgraphtime = [];
   pcrgraphvalue = [];
-  
   mcsymbol1:any
   tableData: any
   stockList: any
@@ -607,7 +604,6 @@ export class DashboardComponent implements OnInit {
   bnifty: any
   cnxit: any
   name1: any
-  
   nmetal: any
   ph: any
   nfin: any
@@ -673,14 +669,12 @@ export class DashboardComponent implements OnInit {
   mcsymbol = [];
   companyid = [];
   stockid = [];
+  basicData1: any;
+  basicOptions1: any;
   control = new FormControl();
-  streets: string[] = ['Champs-Élysées', 'Lombard Street', 'Abbey Road', 'Fifth Avenue'];
-  filteredStreets: Observable<string[]>;
+ 
 
-  tiles: Tile[] = [
-
-
-  ];
+  tiles: Tile[] = [];
   tiles1: Tile1[] = [];
   result: resulttiles[] = [];
   niftytid: niftytidtile[] = [];
@@ -694,7 +688,6 @@ export class DashboardComponent implements OnInit {
   pcrnifty: pcrniftytile[] = [];
   pcrnsenifty: pcrnseniftytile[] = [];
   pcrnsebnifty: pcrnsebniftytile[] = [];
-
   gsectors: gsectorstiles[] = [];
   gsecstocksdetails: gsecstocksdetailstiles[] = [];
   gsectorsdetails: gsectorsdetailstiles[] = []
@@ -714,8 +707,6 @@ export class DashboardComponent implements OnInit {
   optionwp = [];
   optionbwc = [];
   optionbwp = [];
-  
- 
   bniftytid: bniftytidtile[] = [];
   bniftybbd: bniftybbdtile[] = [];
   bniftytiw: bniftytiwtile[] = [];
@@ -729,10 +720,8 @@ export class DashboardComponent implements OnInit {
   pniftytim: pniftytimtile[] = [];
   pniftybbm: pniftybbmtile[] = [];
   chrtinkvs: chrtinktilesvs[] = [];
- 
   tg: tgtiles[] = [];
   bankniftystocks: bankniftystockstiles[] = [];
- 
   niftyphstocks: niftyphstockstiles[] = [];
   tltg: tltgtiles[] = [];
   indicestreemap = [];
@@ -757,7 +746,6 @@ export class DashboardComponent implements OnInit {
   nifty50: nifty50tiles[] = [];
   banknifty: bankniftytiles[] = [];
   banknifty1: banknifty1tiles[] = [];
-
   dblist = { 'mydb': [] }
   chart: any;
   chart1: any;
@@ -766,7 +754,6 @@ export class DashboardComponent implements OnInit {
   
   public SystemName4: string = "Decline";
   firstCopy4 = false;
-  
   public SystemName5: string = "Advance";
   firstCopy5 = false;
   public SystemName6: string = "Bank Nifty";
@@ -813,14 +800,12 @@ export class DashboardComponent implements OnInit {
   firstCopyphsnrs3 = false;
 
   public lineChartLabels4: Array<any> = [];
-  
   public lineChartData4: Array<number> = [];
   public lineChartLabels5: Array<any> = [];
   public lineChartLabels6: Array<any> = [];
   public lineChartDataph: Array<number> = [];
   public lineChartData5: Array<number> = [];
   public lineChartData6: Array<number> = [];
-  
   public lineChartDatabnsnrr1: Array<number> = [];
   public lineChartDatabnsnrr2: Array<number> = [];
   public lineChartDatabnsnrr3: Array<number> = [];
@@ -1356,6 +1341,73 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       console.log(err)
     })
   }
+  buildpcrgraph() {
+      
+     
+    this.basicData1 = {
+      
+      labels: this.pcrgraphtime,
+      
+      
+      datasets: [
+        {
+          label: "value",
+          //backgroundColor: this.getRandomColor(),
+          backgroundColor: '#9966cc',
+          data: this.pcrgraphvalue,
+          fill: false
+        },
+        //   {
+        //     label: "value",
+        //     backgroundColor:'transparent',
+        //     data: this.tltgstockprice,
+        // },
+    
+      ]
+    };
+    var footerLine15 = this.vixgraphvalue
+    //console.log(footerLine1 )
+   
+    this.basicOptions1 = {
+      
+      responsive: true,
+      tooltips: {
+        callbacks: {
+          beforeFooter: function (tooltipItems, data) {
+            return 'Current Price:' + footerLine15[tooltipItems[0].index];
+          }
+        },
+          plugins: {
+            legend: {
+              labels: {
+                color: '#9966cc'
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: '#9966cc'
+              },
+              grid: {
+                color: '#ebedef'
+              }
+            },
+            y: {
+              ticks: {
+                color: '#495057'
+              },
+              grid: {
+                color: '#ebedef'
+              }
+            }
+        
+    
+
+          }
+        },
+      }
+    }
     getntniftypcr() {
       this.dataApi.getntniftypcr().subscribe(data5 => {
         let nestedItems = Object.keys(data5).map(key => {
@@ -1368,7 +1420,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
           this.pcrgraphtime.push(nestedItems[3]['data'][val].time)
           this.pcrgraphvalue.push(nestedItems[3]['data'][val].pcr)
           }
-         
+         this.buildpcrgraph()
       }, err => {
         console.log(err)
       })
