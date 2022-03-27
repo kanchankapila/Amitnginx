@@ -133,6 +133,148 @@ app.get('/nifty50frequent', (req, res) => {
   }); 
 })
 
+
+//This is Nifty Bank Details used in niftyBank component using parallel api run
+app.get('/mcniftybank', (req, res) => {
+  
+
+  var requestArray = [
+    
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=23&range=5d&type=area' },
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=23&range=1m&type=area' },
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=23&range=3m&type=area' },
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=23&range=6m&type=area' },
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=23&range=1yr&type=area' },
+    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3Bnbx?field=RSI' },
+    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3Bnbx?field=RSI'}
+    
+   
+  ];
+  
+  let getApi = function (opt, callback) {
+    request(opt, (err, response, body) => {
+        callback(err, JSON.parse(body));
+    });
+  };
+  
+  const functionArray = requestArray.map((opt) => { 
+    return (callback) => getApi(opt, callback); 
+  });
+  
+  async.parallel(
+    functionArray, (err, results) => {
+        if (err) {
+            console.error('Error: ', err);
+        } else {
+            res.json(results);
+        }
+  }); 
+})
+
+//This is Nifty 50 Details used in niftybank component using parallel api run
+app.get('/niftybankfrequent', (req, res) => {
+  
+
+  var requestArray = [
+    {url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=23&range=1d&type=area'},
+    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bnbx?field=RSI' },
+    { url: 'https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%20BANK'},
+    { url: 'https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=bankniftypcr'},
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area'},
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=json&type=0&ind_id=23'}
+  ];
+  
+  let getApi = function (opt, callback) {
+    request(opt, (err, response, body) => {
+        callback(err, JSON.parse(body));
+    });
+  };
+  
+  const functionArray = requestArray.map((opt) => { 
+    return (callback) => getApi(opt, callback); 
+  });
+  
+  async.parallel(
+    functionArray, (err, results) => {
+        if (err) {
+            console.error('Error: ', err);
+        } else {
+            res.json(results);
+        }
+  }); 
+})
+
+
+//This is Nifty Pharma Details used in niftypharma component using parallel api run
+app.get('/mcniftypharma', (req, res) => {
+  
+
+  var requestArray = [
+    
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=5d&type=area' },
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=1m&type=area' },
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=3m&type=area' },
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=6m&type=area' },
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=1yr&type=area' },
+    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3Bcpr?field=RSI' },
+    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3Bcpr?field=RSI'}
+    
+   
+  ];
+  
+  let getApi = function (opt, callback) {
+    request(opt, (err, response, body) => {
+        callback(err, JSON.parse(body));
+    });
+  };
+  
+  const functionArray = requestArray.map((opt) => { 
+    return (callback) => getApi(opt, callback); 
+  });
+  
+  async.parallel(
+    functionArray, (err, results) => {
+        if (err) {
+            console.error('Error: ', err);
+        } else {
+            res.json(results);
+        }
+  }); 
+})
+
+//This is Nifty Pharma Details used in niftypharma component using parallel api run
+app.get('/niftypharmafrequent', (req, res) => {
+  
+
+  var requestArray = [
+    {url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=1d&type=area'},
+    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bcpr?field=RSI' },
+    { url: 'https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%20PHARMA'},
+    { url: 'https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr'},
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area'},
+    { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=json&type=0&ind_id=9'}
+  ];
+  
+  let getApi = function (opt, callback) {
+    request(opt, (err, response, body) => {
+        callback(err, JSON.parse(body));
+    });
+  };
+  
+  const functionArray = requestArray.map((opt) => { 
+    return (callback) => getApi(opt, callback); 
+  });
+  
+  async.parallel(
+    functionArray, (err, results) => {
+        if (err) {
+            console.error('Error: ', err);
+        } else {
+            res.json(results);
+        }
+  }); 
+})
+
 /////////////////////Firebase Real Time Database Settings////////////////////////////////////////////
 
 

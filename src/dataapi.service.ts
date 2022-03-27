@@ -528,7 +528,20 @@ export class DataapiService {
   getnifty50frequent(){
     return this.http.get('http://localhost:3000/nifty50frequent')
   }
-  
+
+  getmcniftybank() {
+    return this.http.get('http://localhost:3000/mcniftybank')
+  }
+  getniftybankfrequent(){
+    return this.http.get('http://localhost:3000/niftybankfrequent')
+  }
+
+  getmcniftypharma() {
+    return this.http.get('http://localhost:3000/mcniftypharma')
+  }
+  getniftypharmafrequent(){
+    return this.http.get('http://localhost:3000/niftypharmafrequent')
+  }
   getmcniftytiw(){
     return this.http.get('http://localhost:3000/mcniftytiw')
   }
