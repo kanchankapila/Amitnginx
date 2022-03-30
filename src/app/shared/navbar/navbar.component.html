@@ -10,12 +10,33 @@
     </button>
     
       
-    <div class="InsideContent">
-      <div class="yk-g-12 yk-md-4">
-        <h6 class="demo-header"></h6>
-        <owl-clock [type]="'flipbox'"></owl-clock>
+ 
+      
+        
+        <div class="InsideContent1">
+        <div class="InsideContent">
+        <button pButton type="button" (click)="visibleSidebar1 = true" icon="pi pi-arrow-right" label="Actions" class="p-button-raised p-button-success p-button-outlined "></button>
+        <button pButton type="button" (click)="visibleSidebar2 = true" icon="pi pi-arrow-left" label=" News" class="p-button-raised p-button-warning p-button-outlined "></button>
+      </div>
+      <div class="InsideContent">
+        <button pButton type="button" (click)="visibleSidebar3 = true" icon="pi pi-arrow-down" label="Links" class="p-button-raised p-button-danger p-button-outlined "></button>
+        <button pButton type="button" (click)="visibleSidebar4 = true" icon="pi pi-arrow-up" label="Websites" class="p-button-raised p-button-help p-button-outlined "></button>
+      </div>
+      <div class="ng-autocomplete ng autocomplete" width="10px" >
+        <ng-autocomplete [data]="data" [searchKeyword]="keyword" placeholder="Search Stock" (selected)='selectEvent($event.isin)'
+          (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+      
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item.name"></a>
+        </ng-template>
+      
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
       </div>
     </div>
+      
     <p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="-1">
       <h1 style="font-weight:normal">Actions</h1>
       <p-button type="button" (click)="getmcmovingaverages()" label="MC Moving Averages" styleClass="p-button-success"></p-button>
@@ -86,168 +107,92 @@
       <h1 style="font-weight:normal">Full Screen Sidebar</h1>
       
     </p-sidebar>
-    
-    
-      <button pButton type="button" (click)="visibleSidebar1 = true" icon="pi pi-arrow-right" label="Actions" class="p-button-raised p-button-success p-button-outlined "></button>
-      <button pButton type="button" (click)="visibleSidebar2 = true" icon="pi pi-arrow-left" label="News" class="p-button-raised p-button-warning p-button-outlined "></button>
-    
-      <button pButton type="button" (click)="visibleSidebar3 = true" icon="pi pi-arrow-down" label="Links" class="p-button-raised p-button-danger p-button-outlined "></button>
-      <button pButton type="button" (click)="visibleSidebar4 = true" icon="pi pi-arrow-up" label="Websites" class="p-button-raised p-button-help p-button-outlined "></button>
-     <div class="InsideContent1">
-        
-    <ul class="navbar-nav navbar-nav-right">
-      <li class="nav-item nav-profile dropdown" ngbDropdown>
-        <a class="nav-link dropdown-toggle" id="profileDropdown" ngbDropdownToggle>
-          <div class="nav-profile-img">
-            <img src="assets/images/dashboard/amit.jpg" alt="image">
-            <span class="availability-status online"></span>
+     <div class="InsideContent">
+      <div class="col-md-5 ">
+        <div class="card bg-gradient-success card-img-holder text-white">
+          <div class="card-body">
+            
+            <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+            <h4 class="font-weight-normal mb-1">NIFTY 50
+             
+             </h4>
+            <h4 [ngClass]="{'fontgreen2 mb-5' : tile.text4 > 0 ,'fontred2 mb-5': 0 > tile.text4 }" *ngFor="let tile of mcniftyrt">{{tile.text2}}<br>({{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%)<br>Dec:{{tile.text5}}&nbsp;&nbsp;Adv{{tile.text6}}</h4>
+            
+              
+                
+           
+            <h6 class="card-text"></h6>
           </div>
-          <div class="nav-profile-text">
-            <p class="mb-1 text-black">Amit Kapila</p>
+        </div>
+      </div>
+      <div class="col-md-5 ">
+        <div class="card bg-gradient-primary card-img-holder text-white">
+          <div class="card-body">
+            <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                  
+            <h4 class="font-weight-normal mb-1">BANK NIFTY</h4>
+            <h4 [ngClass]="{'fontgreen2 mb-' : tile.text4 > 0 ,'fontred2 mb-5': 0 > tile.text4 }" *ngFor="let tile of mcbniftyrt">{{tile.text2}}<br>({{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%)</h4>
+            <h6 class="card-text"></h6>
           </div>
-        </a>
-        <div class="dropdown-menu navbar-dropdown" ngbDropdownMenu aria-labelledby="profileDropdown">
-          <a class="dropdown-item" href="javascript:;">
-            <i class="mdi mdi-cached mr-2 text-success"></i>
-            Activity Log
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="javascript:;">
-            <i class="mdi mdi-logout mr-2 text-primary"></i>
-            Signout
-          </a>
         </div>
-      </li>
-      <li class="nav-item dropdown" ngbDropdown>
-        <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" ngbDropdownToggle>
-          <i class="mdi mdi-email-outline"></i>
-          <span class="count-symbol bg-warning"></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" ngbDropdownMenu aria-labelledby="messageDropdown">
-          <h6 class="p-3 mb-0">Messages</h6>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <img src="assets/images/faces/face4.jpg" alt="image" class="profile-pic">
-            </div>
-            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-              <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark send you a message</h6>
-              <p class="text-gray mb-0">
-                1 Minutes ago
-              </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <img src="assets/images/faces/face2.jpg" alt="image" class="profile-pic">
-            </div>
-            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-              <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cregh send you a message</h6>
-              <p class="text-gray mb-0">
-                15 Minutes ago
-              </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <img src="assets/images/faces/face3.jpg" alt="image" class="profile-pic">
-            </div>
-            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-              <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile picture updated</h6>
-              <p class="text-gray mb-0">
-                18 Minutes ago
-              </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <h6 class="p-3 mb-0 text-center">4 new messages</h6>
-        </div>
-      </li>
-      <li class="nav-item dropdown" ngbDropdown>
-        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" ngbDropdownToggle>
-          <i class="mdi mdi-bell-outline"></i>
-          <span class="count-symbol bg-danger"></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" ngbDropdownMenu aria-labelledby="notificationDropdown">
-          <h6 class="p-3 mb-0">Notifications</h6>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-success">
-                <i class="mdi mdi-calendar"></i>
-              </div>
-            </div>
-            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-              <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
-              <p class="text-gray ellipsis mb-0">
-                Just a reminder that you have an event today
-              </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-warning">
-                <i class="mdi mdi-settings"></i>
-              </div>
-            </div>
-            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-              <h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-              <p class="text-gray ellipsis mb-0">
-                Update dashboard
-              </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
-            <div class="preview-thumbnail">
-              <div class="preview-icon bg-info">
-                <i class="mdi mdi-link-variant"></i>
-              </div>
-            </div>
-            <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-              <h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
-              <p class="text-gray ellipsis mb-0">
-                New admin wow!
-              </p>
-            </div>
-          </a>
-          <div class="dropdown-divider"></div>
-          <h6 class="p-3 mb-0 text-center">See all notifications</h6>
-        </div>
-      </li>
-      <li class="nav-item nav-logout d-none d-lg-block">
-        <a class="nav-link" href="javascript:;">
-          <i class="mdi mdi-power"></i>
-        </a>
-      </li>
-      <li class="nav-item nav-settings d-none d-lg-block">
-        <a class="nav-link">
-          <i class="mdi mdi-format-line-spacing"></i>
-        </a>
-      </li>
-    </ul>
-    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" (click)="toggleOffcanvas()">
-      <span class="mdi mdi-menu"></span>
-    </button>
-    <div class="InsideContent">
-    <div class="ng-autocomplete ng autocomplete" width="10px" style=float:right>
-      <ng-autocomplete [data]="data" [searchKeyword]="keyword" placeholder="Search Stock" (selected)='selectEvent($event.isin)'
-        (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
-      </ng-autocomplete>
-    
-      <ng-template #itemTemplate let-item>
-        <a [innerHTML]="item.name"></a>
-      </ng-template>
-    
-      <ng-template #notFoundTemplate let-notFound>
-        <div [innerHTML]="notFound"></div>
-      </ng-template>
+      </div>
     </div>
-  </div>
     
+         
+    
+  
+    <div class="InsideContent">   
+      
+    <div class="InsideContent1">
+      <mat-card [ngClass]="{'pcrg animate__flipOutX' : tile.text1 > 1.2 ,'pcrr animate__flipOutX': 0.80 > tile.text1 ,'pcry animate__flipOutX': tile.text1 == 0.80 }"  *ngFor="let tile of pcrnsebnifty">
+        <h6>PCR BNifty :{{tile.text1| number : '1.2-2'}}</h6>
+        
+      </mat-card>
+      <mat-card [ngClass]="{'pcrg animate__flipOutX' : tile.text1 > 1.2 ,'pcrr animate__flipOutX': 0.80 > tile.text1,'pcry animate__flipOutX': tile.text1 == 0.80 }"  *ngFor="let tile of pcrnsenifty">
+        <h6>PCR Nifty :{{tile.text1| number : '1.2-2'}}</h6>
+           
+      </mat-card>
+      
+      </div>
+    
+ 
+<div class="InsideContent1">
+  <div class="InsideContent">
+  <mat-card class='bnoptionssupport animate__flipOutX'  *ngFor="let tile of bnoptionssupport">
+    <h6>Bank Sup:{{tile.text1}}</h6>
+    
+  </mat-card>
+ 
+  <mat-card class='bnoptionsresistance animate__flipOutX'  *ngFor="let tile of bnoptionsresistance">
+    <h6>Bank Res:{{tile.text1}}</h6>
+    
+  </mat-card>
   </div>
+  <div class="InsideContent">
+  <mat-card class='n50optionssupport animate__flipOutX'  *ngFor="let tile of n50optionssupport">
+    <h6>Nifty Supp:{{tile.text1}}</h6>
+    
+  </mat-card>
+  <mat-card class='n50optionsresistance animate__flipOutX'  *ngFor="let tile of n50optionsresistance">
+    <h6>Nifty Res:{{tile.text1}}</h6>
+    
+  </mat-card>
+  
+</div>
+      
+<owl-clock [type]="'flipbox'"></owl-clock>    
+</div>
+    
+</div>   
+     
+        
+    
+    
+    
+   
+   
+    
+ 
+    
+  
   </div>
 </nav>

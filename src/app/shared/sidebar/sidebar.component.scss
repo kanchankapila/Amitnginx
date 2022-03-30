@@ -124,13 +124,13 @@
       }
       &.nav-profile {
         .nav-link {
-          height: auto;
+          height: 10px;
           line-height: 1;
-          border-top: 0;
-          padding: 8rem 0;
+          border-top: 3;
+          padding: 6rem 0;
           .nav-profile-image {
             width: 60px;
-            height: 60px;
+            height: 10px;
             img {
               width: 60px;
               height: 60px;
@@ -157,7 +157,7 @@
         }
       }
       &.sidebar-actions {
-        margin-top: 1rem;
+        margin-top: 0.1rem;
         .nav-link {
           border-top: 0;
           display: block;
@@ -184,7 +184,7 @@
       }
     }
     &.sub-menu {
-      margin-bottom: 20px;
+      margin-bottom: 5px;
       margin-top:0;
       list-style: none;
 
@@ -281,7 +281,7 @@
                 @include display-flex;
                 @include align-items(center);
                 background: $sidebar-menu-hover-bg;
-                padding: 0.5rem 1.4rem;
+                padding: 0.5rem 0.4rem;
                 left: $sidebar-width-icon;
                 position: absolute;
                 text-align: left;

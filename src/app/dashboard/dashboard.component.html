@@ -36,65 +36,7 @@
   </div>
 
   </marquee></div></div>
-<div class="InsideContent"></div>
-<div class="row">
-  <div class="col-md-2 stretch-card grid-margin">
-    <div class="card bg-gradient-success card-img-holder text-white">
-      <div class="card-body">
-        
-        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
-        <h4 class="font-weight-normal mb-1">NIFTY 50
-         
-         </h4>
-        <h4 [ngClass]="{'fontgreen2 mb-5' : tile.text4 > 0 ,'fontred2 mb-5': 0 > tile.text4 }" *ngFor="let tile of mcniftyrt">{{tile.text2}}<br>({{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%)<br>Dec:{{tile.text5}}&nbsp;&nbsp;Adv{{tile.text6}}</h4>
-        
-          
-            
-       
-        <h6 class="card-text"></h6>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2 stretch-card grid-margin">
-    <div class="card bg-gradient-primary card-img-holder text-white">
-      <div class="card-body">
-        <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                  
-        <h4 class="font-weight-normal mb-1">BANK NIFTY</h4>
-        <h4 [ngClass]="{'fontgreen2 mb-' : tile.text4 > 0 ,'fontred2 mb-5': 0 > tile.text4 }" *ngFor="let tile of mcbniftyrt">{{tile.text2}}<br>({{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%)</h4>
-        <h6 class="card-text"></h6>
-      </div>
-    </div>
-  </div>
 
- 
-  <div class="InsideContent">
-  <mat-card [ngClass]="{'pcrg animate__flipOutX ' : tile.text1 > 1.2 ,'pcrr animate__flipOutX ': 0.80 > tile.text1 }"  *ngFor="let tile of pcrnsenifty">
-    <h6>PCR Nifty :{{tile.text1| number : '1.2-2'}}</h6>
-       
-  </mat-card>
-  <mat-card [ngClass]="{'pcrg animate__flipOutX ' : tile.text1 > 1.2 ,'pcrr animate__flipOutX ': 0.80 > tile.text1 }"  *ngFor="let tile of pcrnsebnifty">
-    <h6>PCR BNifty :{{tile.text1| number : '1.2-2'}}</h6>
-  </mat-card>
-  <mat-card [ngClass]="{'vixgg animate__flipOutX ' : tile.text4 > 0 ,'vixr animate__flipOutX ': 0 > tile.text4 }"  *ngFor="let tile of mcniftyvixrt">
-    <h6>Vix :{{tile.text2| number : '1.2-2'}}</h6> 
-  </mat-card>
-</div>
-  
-  <div class="InsideContent1">
-    <div class="InsideContent">
-<mat-card [ngClass]="{'n50cardg animate__flipOutX fontgreen' : tile.text4 > 0 ,'n50cardr animate__flipOutX fontred': 0 > tile.text4 }" *ngFor="let tile of mcniftyrt">
-  <h6>{{tile.text1}}&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;{{tile.text3}}&nbsp;&nbsp;{{tile.text4}}%</h6>
-  
-</mat-card>
-<mat-card [ngClass]="{'n50cardg animate__flipOutX fontgreen' : tile.text4 > 0 ,'n50cardr animate__flipOutX fontred': 0 > tile.text4 }" *ngFor="let tile of mcbniftyrt">
-  <h6>{{tile.text1}}&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;{{tile.text3}}&nbsp;&nbsp;{{tile.text4}}%</h6>
-  
-</mat-card> 
-    </div>
-    
-    
-</div>    
-</div>
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark light purple">
       <div class="ng-autocomplete ng autocomplete" width="20px" style=float:right>
@@ -121,40 +63,19 @@
   <!-- Collapsible content -->
 </mdb-navbar>
   <div class="InsideContent">
-<mat-card class='n50optionssupport animate__flipOutX'  *ngFor="let tile of n50optionssupport">
-  <h6>Nifty Max Supp:{{tile.text1}}</h6>
-  
-</mat-card>
-<mat-card class='n50optionsresistance animate__flipOutX'  *ngFor="let tile of n50optionsresistance">
-  <h6>Nifty Max Res:{{tile.text1}}</h6>
-  
-</mat-card>
 
 
 
 
   
-<button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Daily:{{niftydi}}</button>
-<button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Monthly:{{niftymi}}</button>
-<button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Weekly:{{niftywi}}</button>  
 </div>
 
 
 <div class="InsideContent">
-<mat-card class='bnoptionssupport animate__flipOutX'  *ngFor="let tile of bnoptionssupport">
-  <h6>Bank Nifty Max Supp:{{tile.text1}}</h6>
-  
-</mat-card>
-<mat-card class='bnoptionsresistance animate__flipOutX'  *ngFor="let tile of bnoptionsresistance">
-  <h6>Bank Nifty Max Res:{{tile.text1}}</h6>
-  
-</mat-card>
 
 
 
-<button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Daily:{{bniftydi}}</button>
-<button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Monthly:{{bniftymi}}</button>
-<button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Weekly:{{bniftywi}}</button>  
+
 </div>
 
 
@@ -210,79 +131,7 @@
 
   
   </p-tabPanel>
-  <p-tabPanel header="Nifty 50">
-    <div id="n50" style=float:left width="600px" class="btnn50 shiny">Nifty 50</div>
-
-    <div>
-      
-     
-    </div>
-    
-    
-    
-    
-      <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Daily:{{niftydi}}</button>
-      <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Monthly:{{niftymi}}</button>
-      <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Weekly:{{niftywi}}</button>  
-      
-  </p-tabPanel>
-  <p-tabPanel header="Bank Nifty">
-    <div id="nb" style=float:left width="600px" class="btnbn shiny">Nifty Bank</div>
-    <marquee class="col">
-      <div class="col" style="display:inline">
-        <span *ngFor="let ind of banknifty">
-          {{ind.text1}}&nbsp;{{ind.text2}}&nbsp;{{ind.text3}}&nbsp;({{ind.text4}})&nbsp;Adv: {{ind.text5}}&nbsp;Dec:
-          {{ind.text6}}&nbsp;Top Gainer: {{ind.text7}}&nbsp;{{ind.text8}}&nbsp;{{ind.text9}}&nbsp;{{ind.text10}}&nbsp;Top
-          Loser: {{ind.text11}}&nbsp;{{ind.text12}}&nbsp;{{ind.text13}}&nbsp;{{ind.text14}}</span>
-    
-      </div>
-    
-    </marquee>
-    <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Daily:{{bniftydi}}</button>
-      <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Monthly:{{bniftymi}}</button>
-      <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Weekly:{{bniftywi}}</button>  
-      
-    <div style="display: block;float:left" class="chart">
-      <canvas baseChart width="1500" height="600" [datasets]="labelMFL6" [labels]="lineChartLabels6"
-        [options]="lineChartOptions4" [chartType]="ChartType4" (chartHover)="chartHovered4($event)"
-        (chartClick)="chartClicked4($event)"></canvas>
-    </div>
-    <mat-card
-      [ngClass]="{'mat-cardgreen1' : tile.text5 > 0 , 'mat-cardred1': 0 > tile.text5 ,'fontgreen':tile.text5 > 0,'fontred': 0 > tile.text5 }"
-      *ngFor="let tile of bankniftystocks">
-      <h6>{{tile.text1}}</h6>
-      <h6>{{tile.text2}}&nbsp;({{tile.text3}}%)</h6>
-      <h6>{{tile.text4}}</h6>
-    </mat-card>
-    
-  </p-tabPanel>
-  <p-tabPanel header="Nifty Pharma">
-    <div id="np" style=float:left width="600px" class="btnnp shiny">Nifty Pharma</div>
-
-    <div class="InsideContent1">
-    <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Daily:{{pniftydi}}</button>
-      <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Monthly:{{pniftymi}}</button>
-      <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Weekly:{{pniftywi}}</button>  
-      </div>
-      <div>
-      <div class="InsideContent1">
-        <div style="display: block;float:left" class="chart">
-          <canvas baseChart width="1500" height="600" [datasets]="labelMFL8" [labels]="lineChartLabelsph"
-            [options]="lineChartOptions4" [chartType]="ChartType4" (chartHover)="chartHovered4($event)"
-            (chartClick)="chartClicked4($event)"></canvas>
-        </div>
-    
-    <mat-card
-      [ngClass]="{'mat-cardgreen1' : tile.text5 > 0 , 'mat-cardred1': 0 > tile.text5,'fontgreen':tile.text5 > 0,'fontred': 0 > tile.text5  }"
-      *ngFor="let tile of niftyphstocks">
-      <h6>{{tile.text1}}</h6>
-      <h6>{{tile.text2}}&nbsp;({{tile.text3}}%)</h6>
-      <h6>{{tile.text4}}</h6>
-    </mat-card>
-    </div>
-    </div>
-    
-  </p-tabPanel>
+  
 </p-tabView>
 
 
@@ -355,28 +204,13 @@
 
 
 <div class="InsideContent">
-<button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Nifty Pharma</button>
-<button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Daily:{{pniftydi}}</button>
-<button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Monthly:{{pniftymi}}</button>
-<button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Weekly:{{pniftywi}}</button>  
 </div>
 <div class="InsideContent">
   <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Nifty Metal</button>
-<button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Daily:{{niftymetaldi}}</button>
-<button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Monthly:{{niftymetalmi}}</button>
-<button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Weekly:{{niftymetalwi}}</button>  
 </div>
 <div class="InsideContent">
-  <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Nifty Financial Service</button>
-  <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Daily:{{niftyfindi}}</button>
-  <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Monthly:{{niftyfinmi}}</button>
-  <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Weekly:{{niftyfinwi}}</button>  
   </div>
   <div class="InsideContent">
-    <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Nifty IT</button>
-    <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Daily:{{niftyitdi}}</button>
-    <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Monthly:{{niftyitmi}}</button>
-    <button style=float:left type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark">Weekly:{{niftyitwi}}</button>  
     </div>
     
   </div>      
@@ -385,46 +219,6 @@
   (click)="scroll('ov')">Overall</button>
 <button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark" (click)="scroll('sv')">SectorWise
   View</button>
-<button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark" (click)="scroll('n50')">Nifty
-  50</button>
-<button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark" (click)="scroll('nb')">Nifty
-  Bank</button>
-<button type="button" class="btn btn-outline-success" data-mdb-ripple-color="dark" (click)="scroll('np')">Nifty
-  Pharma</button>
-
-
-  <div class="InsideContent">
-<div id="ov" style=float:left width="900px" color="indigo" class="btnvbs shiny">Very Bullish Sectors D+W+M</div>
-
-<mat-card class="mat-cardsectorg"
-  
-  *ngFor="let tile of mcsectoroveralldwm">
-  <h6>{{tile.text1}}</h6>
-  
-</mat-card>
-</div>
-
-<div class="InsideContent">
-  <div id="ov" style=float:left width="900px" color="indigo" class="btnvbs shiny">Very Bullish Sectors D+W</div>
-  
-  <mat-card class="mat-cardsectorg"
-    
-    *ngFor="let tile of mcsectoroveralldw">
-    <h6>{{tile.text1}}</h6>
-    
-  </mat-card>
-  </div>
-  <div class="InsideContent">
-    <div id="ov" style=float:left width="900px" color="indigo" class="btnvbs shiny">Very Bullish Sectors D</div>
-    
-    <mat-card class="mat-cardsectorg"
-      
-      *ngFor="let tile of mcsectoroveralld">
-      <h6>{{tile.text1}}</h6>
-      
-    </mat-card>
-    </div>
-      
 
 <div id="ov" style=float:left width="900px" color="indigo" class="btnoverall shiny">Overall</div>
 <div class="InsideContent1">

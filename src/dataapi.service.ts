@@ -447,10 +447,7 @@ export class DataapiService {
   }
   
     
-  
-  getbnifty(){
-    return this.http.get('http://localhost:3000/banknifty')
-  }
+ 
   getmcbankniftyrealtime(){
     return this.http.get('http://localhost:3000/mcbankniftyrealtime')
   }
@@ -516,18 +513,19 @@ export class DataapiService {
   getmctim(mcsymbol){
     return this.http.get('http://localhost:3000/mctim?mcsymbol='+mcsymbol)
   }
-  getmcniftytid(){
-    return this.http.get('http://localhost:3000/mcniftytid')
-  }
-  getniftyt50indicators(){
-    return this.http.get('http://localhost:3000/mcniftytid')
-  }
   getmcnifty50() {
     return this.http.get('http://localhost:3000/mcnifty50')
   }
   getnifty50frequent(){
     return this.http.get('http://localhost:3000/nifty50frequent')
   }
+  getmcshare(mcsymbol,eqsymbol) {
+    return this.http.get('http://localhost:3000/mcshare?mcsymbol='+mcsymbol+'&&eqsymbol='+eqsymbol)
+  }
+  getmcsharefrequent(mcsymbol,eqsymbol){
+    return this.http.get('http://localhost:3000/mcsharefrequent?mcsymbol='+mcsymbol+'&&eqsymbol='+eqsymbol)
+  }
+ 
 
   getmcniftybank() {
     return this.http.get('http://localhost:3000/mcniftybank')
@@ -541,30 +539,6 @@ export class DataapiService {
   }
   getniftypharmafrequent(){
     return this.http.get('http://localhost:3000/niftypharmafrequent')
-  }
-  getmcniftytiw(){
-    return this.http.get('http://localhost:3000/mcniftytiw')
-  }
-  getmcbniftytid(){
-    return this.http.get('http://localhost:3000/mcbniftytid')
-  }
-  getmcbniftytim(){
-    return this.http.get('http://localhost:3000/mcbniftytim')
-  }
-  getmcbniftytiw(){
-    return this.http.get('http://localhost:3000/mcbniftytiw')
-  }
-  getmcniftytim(){
-    return this.http.get('http://localhost:3000/mcniftytim')
-  }
-  getmcpniftytim(){
-    return this.http.get('http://localhost:3000/mcpniftytim')
-  }
-  getmcpniftytiw(){
-    return this.http.get('http://localhost:3000/mcpniftytiw')
-  }
-  getmcpniftytid(){
-    return this.http.get('http://localhost:3000/mcpniftytid')
   }
   getnse(){
     return this.http.get('http://localhost:3000/nse')
@@ -787,34 +761,18 @@ export class DataapiService {
   }
   
   
-  getbanknifty(){
-    return this.http.get('http://localhost:3000/banknifty1')
-  }
-  getbankniftystocks(){
-    return this.http.get('http://localhost:3000/bankniftystocks')
-  }
+ 
+  
   
  
-  getniftypharmasnr(){
-    return this.http.get('http://localhost:3000/pharmasnr')
-  }
-  getniftypharma(){
-    return this.http.get('http://localhost:3000/pharma')
-  }
-  getniftypharmastocks(){
-    return this.http.get('http://localhost:3000/pharmastocks')
-  }
+ 
   getniftypharmadetails(){
     return this.http.get('http://localhost:3000/pharmadetails')
   }
   
-  getbankniftysnr(){
-    return this.http.get('http://localhost:3000/bankniftysnr')
-  }
+ 
   
-  getnifty50(){
-    return this.http.get('http://localhost:3000/nifty50')
-  }
+ 
 
   
   gettlbu(){

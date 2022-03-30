@@ -8,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarComponent implements OnInit {
   public uiBasicCollapsed = false;
   public samplePagesCollapsed = false;
-  
+  visibleSidebar1;
+  visibleSidebar2;
+  visibleSidebar3;
+  visibleSidebar4;
+  visibleSidebar5;
   constructor() { }
 
   ngOnInit() {

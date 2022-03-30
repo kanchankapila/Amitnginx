@@ -26,7 +26,8 @@ const routes: Routes = [
   { path: 'nifty50', loadChildren: () => import('./nifty50/nifty50.module').then(m => m.Nifty50Module) }, 
   { path: 'niftybank', loadChildren: () => import('./niftybank/niftybank.module').then(m => m.NiftybankModule) },  
   { path: 'Dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }, 
-  { path: 'Ohlc',loadChildren: () => import('./ohlc/ohlc.module').then(m => m.OhlcModule) },
+  //{ path: 'Ohlc', loadChildren: () => import('./ohlc/ohlc.module').then(m => m.OhlcModule) },
+  { path: 'Stock',loadChildren: () => import('./stock/stock.module').then(m => m.StockModule) },
   { path: 'basic-ui', loadChildren: () => import('./basic-ui/basic-ui.module').then(m => m.BasicUiModule) },
   { path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsDemoModule) },
   { path: 'forms', loadChildren: () => import('./forms/form.module').then(m => m.FormModule) },
@@ -36,6 +37,9 @@ const routes: Routes = [
   { path: 'apps', loadChildren: () => import('./apps/apps.module').then(m => m.AppsModule) },
   { path: 'user-pages', loadChildren: () => import('./user-pages/user-pages.module').then(m => m.UserPagesModule) },
   { path: 'error-pages', loadChildren: () => import('./error-pages/error-pages.module').then(m => m.ErrorPagesModule) },
+  { path: 'sidebar', loadChildren: () => import('./shared/sidebar/sidebar.module').then(m => m.SidebarModule) },
+  { path: 'navbar', loadChildren: () => import('./shared/navbar/navbar.module').then(m => m.NavbarModule) },
+
 ];
 
 @NgModule({

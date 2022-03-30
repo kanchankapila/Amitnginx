@@ -67,7 +67,7 @@ var moment = require('moment');
 app.get('/mcnifty50', (req, res) => {
   
 
-  var requestArray = [
+  var requestArray1 = [
     
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=5d&type=area' },
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1m&type=area' },
@@ -80,18 +80,18 @@ app.get('/mcnifty50', (req, res) => {
    
   ];
   
-  let getApi = function (opt, callback) {
+  let getApi1 = function (opt, callback) {
     request(opt, (err, response, body) => {
         callback(err, JSON.parse(body));
     });
   };
   
-  const functionArray = requestArray.map((opt) => { 
-    return (callback) => getApi(opt, callback); 
+  const functionArray1 = requestArray1.map((opt) => { 
+    return (callback) => getApi1(opt, callback); 
   });
   
   async.parallel(
-    functionArray, (err, results) => {
+    functionArray1, (err, results) => {
         if (err) {
             console.error('Error: ', err);
         } else {
@@ -104,7 +104,7 @@ app.get('/mcnifty50', (req, res) => {
 app.get('/nifty50frequent', (req, res) => {
   
 
-  var requestArray = [
+  var requestArray2 = [
     {url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area'},
     { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?field=RSI' },
     { url: 'https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%2050'},
@@ -113,18 +113,18 @@ app.get('/nifty50frequent', (req, res) => {
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=json&type=0&ind_id=9'}
   ];
   
-  let getApi = function (opt, callback) {
+  let getApi2 = function (opt, callback) {
     request(opt, (err, response, body) => {
         callback(err, JSON.parse(body));
     });
   };
   
-  const functionArray = requestArray.map((opt) => { 
-    return (callback) => getApi(opt, callback); 
+  const functionArray2 = requestArray2.map((opt) => { 
+    return (callback) => getApi2(opt, callback); 
   });
   
   async.parallel(
-    functionArray, (err, results) => {
+    functionArray2, (err, results) => {
         if (err) {
             console.error('Error: ', err);
         } else {
@@ -138,7 +138,7 @@ app.get('/nifty50frequent', (req, res) => {
 app.get('/mcniftybank', (req, res) => {
   
 
-  var requestArray = [
+  var requestArray3 = [
     
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=23&range=5d&type=area' },
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=23&range=1m&type=area' },
@@ -151,18 +151,18 @@ app.get('/mcniftybank', (req, res) => {
    
   ];
   
-  let getApi = function (opt, callback) {
+  let getApi3 = function (opt, callback) {
     request(opt, (err, response, body) => {
         callback(err, JSON.parse(body));
     });
   };
   
-  const functionArray = requestArray.map((opt) => { 
-    return (callback) => getApi(opt, callback); 
+  const functionArray3 = requestArray3.map((opt) => { 
+    return (callback) => getApi3(opt, callback); 
   });
   
   async.parallel(
-    functionArray, (err, results) => {
+    functionArray3, (err, results) => {
         if (err) {
             console.error('Error: ', err);
         } else {
@@ -175,7 +175,7 @@ app.get('/mcniftybank', (req, res) => {
 app.get('/niftybankfrequent', (req, res) => {
   
 
-  var requestArray = [
+  var requestArray4 = [
     {url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=23&range=1d&type=area'},
     { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bnbx?field=RSI' },
     { url: 'https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%20BANK'},
@@ -184,18 +184,18 @@ app.get('/niftybankfrequent', (req, res) => {
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=json&type=0&ind_id=23'}
   ];
   
-  let getApi = function (opt, callback) {
+  let getApi4 = function (opt, callback) {
     request(opt, (err, response, body) => {
         callback(err, JSON.parse(body));
     });
   };
   
-  const functionArray = requestArray.map((opt) => { 
-    return (callback) => getApi(opt, callback); 
+  const functionArray4 = requestArray4.map((opt) => { 
+    return (callback) => getApi4(opt, callback); 
   });
   
   async.parallel(
-    functionArray, (err, results) => {
+    functionArray4, (err, results) => {
         if (err) {
             console.error('Error: ', err);
         } else {
@@ -209,7 +209,7 @@ app.get('/niftybankfrequent', (req, res) => {
 app.get('/mcniftypharma', (req, res) => {
   
 
-  var requestArray = [
+  var requestArray5 = [
     
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=5d&type=area' },
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=1m&type=area' },
@@ -222,18 +222,18 @@ app.get('/mcniftypharma', (req, res) => {
    
   ];
   
-  let getApi = function (opt, callback) {
+  let getApi5 = function (opt, callback) {
     request(opt, (err, response, body) => {
         callback(err, JSON.parse(body));
     });
   };
   
-  const functionArray = requestArray.map((opt) => { 
-    return (callback) => getApi(opt, callback); 
+  const functionArray5 = requestArray5.map((opt) => { 
+    return (callback) => getApi5(opt, callback); 
   });
   
   async.parallel(
-    functionArray, (err, results) => {
+    functionArray5, (err, results) => {
         if (err) {
             console.error('Error: ', err);
         } else {
@@ -246,7 +246,7 @@ app.get('/mcniftypharma', (req, res) => {
 app.get('/niftypharmafrequent', (req, res) => {
   
 
-  var requestArray = [
+  var requestArray6 = [
     {url: 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=1d&type=area'},
     { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bcpr?field=RSI' },
     { url: 'https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%20PHARMA'},
@@ -255,18 +255,100 @@ app.get('/niftypharmafrequent', (req, res) => {
     { url: 'https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=json&type=0&ind_id=9'}
   ];
   
-  let getApi = function (opt, callback) {
+  let getApi6 = function (opt, callback) {
     request(opt, (err, response, body) => {
         callback(err, JSON.parse(body));
     });
   };
   
-  const functionArray = requestArray.map((opt) => { 
-    return (callback) => getApi(opt, callback); 
+  const functionArray6 = requestArray6.map((opt) => { 
+    return (callback) => getApi6(opt, callback); 
   });
   
   async.parallel(
-    functionArray, (err, results) => {
+    functionArray6, (err, results) => {
+        if (err) {
+            console.error('Error: ', err);
+        } else {
+            res.json(results);
+        }
+  }); 
+})
+
+
+//This is MC Stock Data Details used in OHLC component using parallel api run
+app.get('/mcshare', (req, res) => {
+  
+  let mcsymbol = req.query.mcsymbol
+  let eqsymbol = req.query.eqsymbol
+  console.log(mcsymbol)
+  
+  var requestArray7 = [
+    
+    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/W/'+mcsymbol+'?field=RSI' },
+     { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/M/'+mcsymbol+'?field=RSI' },
+    { url: 'https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode='+eqsymbol+'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=1w' },
+    { url: 'https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode='+eqsymbol+'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=1m' },
+    { url: 'https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode='+eqsymbol+'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=3m' },
+    { url: 'https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode='+eqsymbol+'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=6m' },
+    { url: 'https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode='+eqsymbol+'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=1y'}
+    
+   
+  ];
+  
+  let getApi7 = function (opt, callback) {
+    request(opt, (err, response, body) => {
+        callback(err, JSON.parse(body));
+    });
+  };
+  
+  const functionArray7 = requestArray7.map((opt) => { 
+    return (callback) => getApi7(opt, callback); 
+  });
+  
+  async.parallel(
+    functionArray7, (err, results) => {
+        if (err) {
+            console.error('Error: ', err);
+        } else {
+          res.json(results);
+        }
+  }); 
+})
+
+
+//This is MC Share Details used in OHLC component using parallel api run
+app.get('/mcsharefrequent', (req, res) => {
+  let mcsymbol = req.query.mcsymbol;
+  let eqsymbol = req.query.eqsymbol;
+
+
+  var requestArray9 = [
+    { url: 'https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=NSE%3A'+eqsymbol},
+    { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/'+mcsymbol+'?field=RSI' },
+    { url: 'https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId='+mcsymbol+'&resolution=1D'},
+    { url: 'https://api.moneycontrol.com/mcapi/v1/extdata/mc-insights?scId=' + mcsymbol + '&type=d' },
+    { url: 'https://api.moneycontrol.com/mcapi/v1/extdata/mc-insights?scId='+mcsymbol+'&type=c' },
+    { url: 'https://api.moneycontrol.com/mcapi/v1/extdata/mc-essentials?scId='+mcsymbol+'&type=ed'},
+    { url: 'https://json.bselivefeeds.indiatimes.com/ETLiveFeedChartRead/livechartsnew?scripcode=' + eqsymbol + 'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company&uptodataid=&period=1d' }  
+    
+    
+    
+  ];
+  
+  let getApi9 = function (opt, callback) {
+    request(opt, (err, response, body) => {
+      callback(err, JSON.parse(body));
+      
+    });
+  };
+  
+  const functionArray9 = requestArray9.map((opt) => { 
+    return (callback) => getApi9(opt, callback); 
+  });
+  
+  async.parallel(
+    functionArray9, (err, results) => {
         if (err) {
             console.error('Error: ', err);
         } else {
@@ -2542,54 +2624,7 @@ app.get('/pharmadetails', function (req, res) {
 
 
 })
-///////////////////////////////////Money control Pharma Details ,used in Dashboard Module
-app.get('/pharma', function (req, res) {
 
-  var url6 = 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=1d&type=area';
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-
-      res.json(JSON.parse(response.body))
-
-
-    }
-  })
-
-
-})
-///////////////////////////////////Money control Pharma Stocks ,used in Dashboard Module
-app.get('/pharmastocks', function (req, res) {
-
-  var url6 = 'https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=json&type=0&ind_id=41';
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-
-      res.json(JSON.parse(response.body))
-
-
-    }
-  })
-
-
-})
-///////////////////////////////////Money control Pharma SnR ,used in Dashboard Module
-app.get('/pharmasnr', function (req, res) {
-
-  var url6 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bcpr?fields=sentiments,pivotLevels,sma,ema';
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-
-      res.json(JSON.parse(response.body).data)
-
-
-    }
-  })
-
-
-})
 ///////////////////////////////////Money control Bank Nifty Details ,used in Dashboard Module
 /////////////////////To get realtime data from moneycontrol////////////////////////
 app.get('/mcniftyrealtime', function (req, res) {
@@ -3003,133 +3038,7 @@ app.get('/mctim', function (req, res) {
 })
 
 
-app.get('/mcniftytid', function (req, res) {
 
-  let mcsymbol = req.query.mcsymbol
-
-  var url6 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?field=RSI';
-  //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-      res.json(JSON.parse(response.body).data)
-}
-  })
-
-})
-app.get('/mcniftytiw', function (req, res) {
-
-  let mcsymbol = req.query.mcsymbol
-
-  var url6 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3BNSX?field=RSI';
-  //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-      res.json(JSON.parse(response.body).data)
-}
-  })
-
-})
-
-app.get('/mcniftytim', function (req, res) {
-
-  let mcsymbol = req.query.mcsymbol
-
-  var url6 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3BNSX?field=RSI';
-  //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-      res.json(JSON.parse(response.body).data)
-}
-  })
-
-})
-app.get('/mcbniftytid', function (req, res) {
-
-  let mcsymbol = req.query.mcsymbol
-//console.log(mcsymbol)
-  var url6 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bnbx?field=RSI';
-  //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-      res.json(JSON.parse(response.body).data)
-}
-  })
-
-})
-app.get('/mcbniftytiw', function (req, res) {
-
-  let mcsymbol = req.query.mcsymbol
-//console.log(mcsymbol)
-  var url6 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3Bnbx?field=RSI';
-  //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-      res.json(JSON.parse(response.body).data)
-}
-  })
-
-})
-app.get('/mcbniftytim', function (req, res) {
-
-  let mcsymbol = req.query.mcsymbol
-//console.log(mcsymbol)
-  var url6 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3Bnbx?field=RSI';
-  //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-      res.json(JSON.parse(response.body).data)
-}
-  })
-
-})
-app.get('/mcpniftytid', function (req, res) {
-
-  let mcsymbol = req.query.mcsymbol
-//console.log(mcsymbol)
-  var url6 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bcpr?field=RSI';
-  //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-      res.json(JSON.parse(response.body).data)
-}
-  })
-
-})
-app.get('/mcpniftytiw', function (req, res) {
-
-  let mcsymbol = req.query.mcsymbol
-//console.log(mcsymbol)
-  var url6 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3Bcpr?field=RSI';
-  //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-      res.json(JSON.parse(response.body).data)
-}
-  })
-
-})
-app.get('/mcpniftytim', function (req, res) {
-
-  let mcsymbol = req.query.mcsymbol
-//console.log(mcsymbol)
-  var url6 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3Bcpr?field=RSI';
-  //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-      res.json(JSON.parse(response.body).data)
-}
-  })
-
-})
 ///////////////////////////////////Money control NIFTY METALS MONTHLY Details ,used in Dashboard Module
 app.get('/niftymetalm', function (req, res) {
 
@@ -3256,131 +3165,6 @@ app.get('/mcsectorgraph', function (req, res) {
   let indid = req.query.indid
 
   var url11 = 'https://appfeeds.moneycontrol.com//jsonapi//market//graph&format=json&ind_id=4&range=1d&type=area';
-  request(url11, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-      res.json(JSON.parse(response.body))
-
-
-    }
-  })
-
-
-})
-////////////////////////////////////////////MC BANK NIFTY/////////////////////////////////////////////////////////
-app.get('/banknifty1', function (req, res) {
-
-  var url11 = 'https://appfeeds.moneycontrol.com//jsonapi//market//graph&format=json&ind_id=23&range=1d&type=area';
-  request(url11, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-      res.json(JSON.parse(response.body))
-
-
-    }
-  })
-
-
-})
-////////////////////////////////////////////MC BANK NIFTY STOCKS/////////////////////////////////////////////////////////
-app.get('/bankniftystocks', function (req, res) {
-
-  var url11 = 'https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=json&type=0&ind_id=23';
-  request(url11, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-      res.json(JSON.parse(response.body))
-
-
-    }
-  })
-
-
-})
-////////////////////////////////////////////////BANK NIFTY SNR///////////////////////////////////////////////////////
-app.get('/bankniftysnr', function (req, res) {
-
-  var url11 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bnbx?fields=sentiments,pivotLevels,sma,ema';
-  request(url11, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-      res.json(JSON.parse(response.body).data)
-
-
-    }
-  })
-
-
-})
-
-////////////////////////////////////////////MC NIFTY 50/////////////////////////////////////////////////////////
-app.get('/nifty50', function (req, res) {
-
-  var url11 = 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area';
-  request(url11, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-      res.json(JSON.parse(response.body))
-
-
-    }
-  })
-
-
-})
-
-////////////////////////////////////////////MC NIFTY 50 5 days/////////////////////////////////////////////////////////
-app.get('/nifty505d', function (req, res) {
-
-  var url11 = 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=5d&type=area';
-  request(url11, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-      res.json(JSON.parse(response.body))
-
-
-    }
-  })
-
-
-})
-
-////////////////////////////////////////////MC NIFTY 50 3 months/////////////////////////////////////////////////////////
-app.get('/nifty503m', function (req, res) {
-
-  var url11 = 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=3m&type=area';
-  request(url11, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-      res.json(JSON.parse(response.body))
-
-
-    }
-  })
-
-
-})
-
-////////////////////////////////////////////MC NIFTY 50 6 months/////////////////////////////////////////////////////////
-app.get('/nifty506m', function (req, res) {
-
-  var url11 = 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=6m&type=area';
-  request(url11, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-      res.json(JSON.parse(response.body))
-
-
-    }
-  })
-
-
-})
-
-////////////////////////////////////////////MC NIFTY 50 1 yr/////////////////////////////////////////////////////////
-app.get('/nifty501yr', function (req, res) {
-
-  var url11 = 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1yr&type=area';
   request(url11, function (error, response, html) {//console.log(response)
     if (!error) {
 
@@ -4120,7 +3904,7 @@ request(options2, (err, response, body) => {
   } else {
     ( res.json(JSON.parse(body)));
     
-    console.log('this is response:', (response.body))
+    
     //console.log( 'this is response:',(response.header))
   }
 });
@@ -4141,7 +3925,7 @@ request(options2, (err, response, body) => {
           //console.log(JSON.parse(response.body))
          // res.json(JSON.parse(response.body).data)
          res.json(JSON.parse((response.body)))
-    
+         console.log('this is response:', (response.body))
     
         }
       })
@@ -4159,7 +3943,7 @@ request(options2, (err, response, body) => {
             //console.log((response.body))
             //res.json(JSON.parse(response.body).data)
             res.json(JSON.parse((response.body)))
-      
+            console.log('this is response:', (response.body))
           }
         })
       

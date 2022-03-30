@@ -141,7 +141,7 @@ $sidebar-submenu-item-padding: .75rem 2rem .75rem 2rem;
 $sidebar-icon-font-size: 1.125rem;
 $sidebar-arrow-font-size: .625rem;
 
-$sidebar-profile-bg: transparent;
+$sidebar-profile-bg: primary;
 $sidebar-profile-padding: .75rem 1.625rem .75rem 1.188rem;
 
 $sidebar-icon-only-menu-padding: .5rem 1.625rem .5rem 1.188rem;
@@ -154,7 +154,7 @@ $icon-only-menu-bg-light: $sidebar-bg;
 
 ///////// NAVBAR ////////
 
-$navbar-height: 100px;
+$navbar-height: 120px;
 $navbar-bg: primary;
 $navbar-menu-color: #9c9fa6;
 $navbar-font-size: .875rem;
@@ -253,12 +253,12 @@ $table-inverse-color: color(white);
 ////////// MEASUREMENT AND PROPERTY VARIABLES //////////
 
 $border-property: 1px solid $border-color;
-$card-spacing-y: 2.5rem;
-$card-padding-y: 2.5rem;
-$card-padding-x: 2.5rem;
+$card-spacing-y: 0.5rem;
+$card-padding-y: 0.5rem;
+$card-padding-x: 0.5rem;
 $card-border-radius: .3125rem;
 $card-description-color: #76838f;
-$grid-gutter-width: 40px;
+$grid-gutter-width: 20px;
 $action-transition-duration: 0.25s;
 $action-transition-timing-function: ease;
 ////////// OTHER VARIABLES //////////

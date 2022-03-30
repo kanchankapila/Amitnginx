@@ -37,12 +37,128 @@ export interface stockindicatorsmtile{
   text4: string;
  
 }
-export interface stockbbtile{
+export interface mcaptile{
   text1: string;
   text2: string;
-  
- 
+  text3: string;
 }
+export interface nptile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface pbvtile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface pegttmtile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface pettmtile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface srtile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface beta1tile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface ema26tile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface ema50tile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface ema100tile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface ema200tile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface macdtile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface macdstile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface mfitile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface rsitile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface sma30tile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface sma50tile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface sma100tile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface sma200tile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface yr1rtrntile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface rtrn1yvsnftytile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface positivetile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface negativetile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface neutraltile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+
+
 export interface stockematile{
   text1: string;
   text2: string;
@@ -129,7 +245,30 @@ export class StockComponent implements OnInit {
   stockindicators: stockindicatorstile[] = [];
   stockindicatorsw: stockindicatorswtile[] = [];
   stockindicatorsm: stockindicatorsmtile[] = [];
-  stockbb: stockbbtile[] = [];
+  mcap: mcaptile[] = [];
+  np: nptile[] = [];
+  pbv: pbvtile[] = [];
+  pegttm: pegttmtile[] = [];
+  pettm: pettmtile[] = [];
+  sr: srtile[] = [];
+  beta1: beta1tile[] = [];
+  ema26: ema26tile[] = [];
+  ema50: ema50tile[] = [];
+  ema100: ema100tile[] = [];
+  ema200: ema200tile[] = [];
+  mfi: mfitile[] = [];
+  rsi: rsitile[] = [];
+  macd: macdstile[] = [];
+  macds: macdstile[] = [];
+  sma30: sma30tile[] = [];
+  sma50: sma50tile[] = [];
+  sma100: sma100tile[] = [];
+  sma200: sma200tile[] = [];
+  yr1rtrn: yr1rtrntile[] = [];
+  rtrn1yvsnfty: rtrn1yvsnftytile[] = [];
+  positive: positivetile[] = [];
+  negative: negativetile[] = [];
+  neutral: neutraltile[] = [];
   stockema: stockematile[] = [];
   stocksma: stocksmatile[] = [];
  
@@ -212,11 +351,10 @@ export class StockComponent implements OnInit {
       this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
       
     });  
-   // this.getmcshare(this.mcsymbol);
+    this.getmcshare(this.mcsymbol,this.eqsymbol);
     this.getmcsharefrequent(this.mcsymbol,this.eqsymbol); 
-    this.getmcsharefrequent1(this.mcsymbol,this.eqsymbol); 
     setInterval(() => { this.getmcsharefrequent(this.mcsymbol, this.eqsymbol) }, 30000);
-    setInterval(() => { this.getmcsharefrequent1(this.mcsymbol, this.eqsymbol) }, 30000);
+    this.gettrendlynestocks1(this.tlid,this.tlname,this.eqsymbol)
  
   }
 //   buildpcrgraph() {
@@ -328,12 +466,375 @@ export class StockComponent implements OnInit {
 //                         }
 //                       }}},}}
            
-  getmcsharefrequent(mcsymbol,eqsymbol) {
-    this.dataApi.getmcsharefrequent(this.mcsymbol,this.eqsymbol).subscribe(data5 => {
+
+ 
+ 
+  getmcshare(mcsymbol,eqsymbol) {
+    this.dataApi.getmcshare(this.mcsymbol,this.eqsymbol).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-     /////////////To get Stock Today Resistances and Indicators/////////////
+ 
+  console.log(nestedItems)
+
+
+      ///////////////////////////////////////////////////////////////
+       ////////////To get Nifty 5day Resistances and Indicators/////////////
+      
+       let val5 = 0;
+       while (val5 != 2000) {
+         val5 = val5 + 1
+         this.stockDatasnrr1w.push(nestedItems[0]['data']['pivotLevels'][0].pivotLevel.r1),
+         this.stockDatasnrr2w.push(nestedItems[0]['data']['pivotLevels'][0].pivotLevel.r2),
+         this.stockDatasnrr3w.push(nestedItems[0]['data']['pivotLevels'][0].pivotLevel.r3),
+         this.stockDatasnrs3w.push(nestedItems[0]['data']['pivotLevels'][0].pivotLevel.s3),
+         this.stockDatasnrs2w.push(nestedItems[0]['data']['pivotLevels'][0].pivotLevel.s2),
+         this.stockDatasnrs1w.push(nestedItems[0]['data']['pivotLevels'][0].pivotLevel.s1)
+       }
+       
+       
+       for (let val in nestedItems[0]['data']['crossover']) {
+         this.stockindicatorsw.push({text1:nestedItems[0]['data']['crossover'][val]['displayValue'],text3:nestedItems[0]['data']['crossover'][val]['indication'],text2:nestedItems[0]['data']['crossover'][val]['period'],text4:nestedItems[0]['data']['crossover'][val]['period']})
+       }
+     
+      for (let val1 in nestedItems[0]['data']['indicators']) {
+        if (nestedItems[0]['data']['indicators'][val1]['id'] != 'bollinger') {
+          this.stockindicatorsw.push({ text1: nestedItems[0]['data']['indicators'][val1].displayName, text2: nestedItems[0]['data']['indicators'][val1].id, text3: nestedItems[0]['data']['indicators'][val1].indication, text4: nestedItems[0]['data']['indicators'][val1].value })
+        }
+      }
+        
+        
+       
+     
+  
+      
+
+//       ////////////To get Nifty 5 day Price///////////////////////
+     
+      this.stock5ddata.length = 0;
+      this.stock5dLabels.length = 0;
+      for (let val in nestedItems[2]['query']['results']['quotedata']) {
+        this.stock5ddata.unshift(nestedItems[2]['query']['results']['quotedata'][val][1])
+        this.stock5dLabels.unshift((new Date(nestedItems[2]['query']['results']['quotedata'][val][0])).toLocaleString("en-US", {timeZone: "Asia/Kolkata"}))
+       
+      }
+      
+     
+      this.stock5dData = [{
+        label: 'Price',
+        data: this.stock5ddata,
+        borderWidth: 1,
+        fill: false
+      },{ label: 'R1',
+      data: this.stockDatasnrr1w,
+      borderWidth: 1,
+      bordercolor:'#D98880',
+          fill: false
+        },
+        {
+        label: 'R2',
+        data: this.stockDatasnrr2w,
+        borderWidth: 1,
+        borderColor: '#e3256b',
+          fill: false
+        }
+        , {
+          label: 'R3',
+      data: this.stockDatasnrr3w,
+          borderWidth: 1,
+          borderColor: '#c84343',
+      fill: false}, {
+        label: 'S1',
+    data: this.stockDatasnrs1w,
+        borderWidth: 1,
+        borderColor: '#90b590',
+    fill: false}, {
+      label: 'S2',
+  data: this.stockDatasnrs2w,
+      borderWidth: 1,
+      borderColor: '#09c51b',
+  fill: false}, {
+    label: 'S3',
+data: this.stockDatasnrs3w,
+    borderWidth: 1,
+    borderColor: '#375f00',
+fill: false}];
+    
+      this.stock5dLabels = this.stock5dLabels;
+      this.stock5dOptions = {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            }
+          }]
+        },
+        legend: {
+          display: true
+        },
+        elements: {
+          point: {
+            radius: 0
+          }
+        }
+      };
+    
+      this.stock5dColors = [
+        {
+          borderColor: '#2d0365'
+        }
+      ];
+//   /////////////////////////////////////////////////////////////////
+      
+//        ////////////To get Nifty 1 month Resistances and Indicators/////////////
+      
+       let val1m = 0;
+       while (val1m != 12000) {
+         val1m = val1m + 1
+         this.stockDatasnrr1m.push(nestedItems[1]['data']['pivotLevels'][0].pivotLevel.r1),
+         this.stockDatasnrr2m.push(nestedItems[1]['data']['pivotLevels'][0].pivotLevel.r2),
+         this.stockDatasnrr3m.push(nestedItems[1]['data']['pivotLevels'][0].pivotLevel.r3),
+         this.stockDatasnrs3m.push(nestedItems[1]['data']['pivotLevels'][0].pivotLevel.s3),
+         this.stockDatasnrs2m.push(nestedItems[1]['data']['pivotLevels'][0].pivotLevel.s2),
+         this.stockDatasnrs1m.push(nestedItems[1]['data']['pivotLevels'][0].pivotLevel.s1)
+       }
+       
+       
+       for (let val in nestedItems[1]['data']['crossover']) {
+         this.stockindicatorsm.push({text1:nestedItems[1]['data']['crossover'][val]['displayValue'],text3:nestedItems[1]['data']['crossover'][val]['indication'],text2:nestedItems[1]['data']['crossover'][val]['period'],text4:nestedItems[1]['data']['crossover'][val]['period']})
+       }
+     
+      for (let val1 in nestedItems[1]['data']['indicators']) {
+        if (nestedItems[1]['data']['indicators'][val1]['id'] != 'bollinger') {
+          this.stockindicatorsm.push({ text1: nestedItems[1]['data']['indicators'][val1].displayName, text2: nestedItems[1]['data']['indicators'][val1].id, text3: nestedItems[1]['data']['indicators'][val1].indication, text4: nestedItems[1]['data']['indicators'][val1].value })
+        }
+      }
+        
+        
+       
+     
+  
+      
+
+//       ////////////To get Nifty 1 month Price///////////////////////
+     
+      this.stock1mdata.length = 0;
+      this.stock1mLabels.length = 0;
+      for (let val in nestedItems[3]['query']['results']['quotedata']) {
+        this.stock1mdata.unshift(nestedItems[3]['query']['results']['quotedata'][val][1])
+        this.stock1mLabels.unshift(new Date(nestedItems[3]['query']['results']['quotedata'][val][0]).toLocaleString("en-US", {timeZone: "Asia/Kolkata"}))
+       
+      }
+      
+     
+      this.stock1mData = [{
+        label: 'Price',
+        data: this.stock1mdata,
+        borderWidth: 1,
+        fill: false
+      },{ label: 'R1',
+      data: this.stockDatasnrr1m,
+      borderWidth: 1,
+      bordercolor:'#D98880',
+          fill: false
+        },
+        {
+        label: 'R2',
+        data: this.stockDatasnrr2m,
+        borderWidth: 1,
+        borderColor: '#e3256b',
+          fill: false
+        }
+        , {
+          label: 'R3',
+      data: this.stockDatasnrr3m,
+          borderWidth: 1,
+          borderColor: '#c84343',
+      fill: false}, {
+        label: 'S1',
+    data: this.stockDatasnrs1m,
+        borderWidth: 1,
+        borderColor: '#90b590',
+    fill: false}, {
+      label: 'S2',
+  data: this.stockDatasnrs2m,
+      borderWidth: 1,
+      borderColor: '#09c51b',
+  fill: false}, {
+    label: 'S3',
+data: this.stockDatasnrs3m,
+    borderWidth: 1,
+    borderColor: '#375f00',
+fill: false}];
+    
+      this.stock1mLabels = this.stock1mLabels;
+      this.stock1mOptions = {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            }
+          }]
+        },
+        legend: {
+          display: true
+        },
+        elements: {
+          point: {
+            radius: 0
+          }
+        }
+      };
+    
+      this.stock1mColors = [
+        {
+          borderColor: '#2d0365'
+        }
+      ];
+// //////////////////////////////////////////////////////////////////
+//       ////////////////Nifty 3 months/////////////////////////////
+      for (let val in nestedItems[4]['query']['results']['quotedata']) {
+        this.stock3mdata.unshift(nestedItems[4]['query']['results']['quotedata'][val][1])
+        this.stock3mLabels.unshift(new Date(nestedItems[4]['query']['results']['quotedata'][val][0]).toLocaleString("en-US", {timeZone: "Asia/Kolkata"}))
+     
+      }
+    
+     
+      this.stock3mData = [{
+        label: 'Price',
+        data: this.stock3mdata,
+        borderWidth: 1,
+        fill: false
+      }];
+  
+      this.stock3mLabels = this.stock3mLabels;
+      this.stock3mOptions = {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            }
+          }]
+        },
+        legend: {
+          display: false
+        },
+        elements: {
+          point: {
+            radius: 0
+          }
+        }
+      };
+  
+      this.stock3mColors = [
+        {
+          borderColor: '#115dcd'
+        }
+      ];
+//   ////////////////////////////////////////////////////////////////////
+//       //////////////////NIfty 6 months///////////////////////////////
+
+      this.stock6mdata.length = 0;
+      this.stock6mLabels.length = 0;
+      for (let val in nestedItems[5]['query']['results']['quotedata']) {
+        this.stock6mdata.unshift(nestedItems[5]['query']['results']['quotedata'][val][1])
+        this.stock6mLabels.unshift(new Date(nestedItems[5]['query']['results']['quotedata'][val][0]).toLocaleString("en-US", {timeZone: "Asia/Kolkata"}))
+       
+      }
+      
+     
+      this.stock6mData = [{
+        label: 'Price',
+        data: this.stock6mdata,
+        borderWidth: 1,
+        fill: false
+      }];
+    
+      this.stock6mLabels = this.stock6mLabels;
+      this.stock6mOptions = {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            }
+          }]
+        },
+        legend: {
+          display: false
+        },
+        elements: {
+          point: {
+            radius: 0
+          }
+        }
+      };
+    
+      this.stock6mColors = [
+        {
+          borderColor: '#5a7f84'
+        }
+      ];
+    
+   
+ 
+
+
+//  ///////////////////Nifty 1 year/////////////////////////////////////
+
+      this.stock1yrdata.length = 0;
+      this.stock1yrLabels.length = 0;
+      for (let val in nestedItems[6]['query']['results']['quotedata']) {
+        this.stock1yrdata.unshift(nestedItems[6]['query']['results']['quotedata'][val][1])
+        this.stock1yrLabels.unshift(new Date(nestedItems[6]['query']['results']['quotedata'][val][0]).toLocaleString("en-US", {timeZone: "Asia/Kolkata"}))
+     
+      }
+    
+  
+      this.stock1yrData = [{
+        label: 'Price',
+        data: this.stock1yrdata,
+        borderWidth: 1,
+        fill: false
+      }];
+  
+      this.stock1yrLabels = this.stock1yrLabels;
+      this.stock1yrOptions = {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            }
+          }]
+        },
+        legend: {
+          display: false
+        },
+        elements: {
+          point: {
+            radius: 0
+          }
+        }
+      };
+  
+      this.stock1yrColors = [
+        {
+          borderColor: '#c154c1'
+        }
+      ];
+
+     }, err => {
+       console.log(err)
+     })
+   }
+
+  
+   getmcsharefrequent(mcsymbol,eqsymbol) {
+    this.dataApi.getmcsharefrequent(this.mcsymbol,this.eqsymbol).subscribe(data6 => {
+      let nestedItems = Object.keys(data6).map(key => {
+        return data6[key];
+      });
+      
+       /////////////To get Stock Today Resistances and Indicators/////////////
      this.stockDatasnrr1.length = 0;
      this.stockDatasnrr2.length = 0;
      this.stockDatasnrr3.length = 0;
@@ -344,30 +845,33 @@ export class StockComponent implements OnInit {
      let val = 0;
      while (val != 400) {
        val = val + 1
-       this.stockDatasnrr1.push(nestedItems[1]['pivotLevels'][0].pivotLevel.r1),
-       this.stockDatasnrr2.push(nestedItems[1]['pivotLevels'][0].pivotLevel.r2),
-       this.stockDatasnrr3.push(nestedItems[1]['pivotLevels'][0].pivotLevel.r3),
-       this.stockDatasnrs3.push(nestedItems[1]['pivotLevels'][0].pivotLevel.s3),
-       this.stockDatasnrs2.push(nestedItems[1]['pivotLevels'][0].pivotLevel.s2),
-       this.stockDatasnrs1.push(nestedItems[1]['pivotLevels'][0].pivotLevel.s1)
+       this.stockDatasnrr1.push(nestedItems[1]['data']['pivotLevels'][0].pivotLevel.r1),
+       this.stockDatasnrr2.push(nestedItems[1]['data']['pivotLevels'][0].pivotLevel.r2),
+       this.stockDatasnrr3.push(nestedItems[1]['data']['pivotLevels'][0].pivotLevel.r3),
+       this.stockDatasnrs3.push(nestedItems[1]['data']['pivotLevels'][0].pivotLevel.s3),
+       this.stockDatasnrs2.push(nestedItems[1]['data']['pivotLevels'][0].pivotLevel.s2),
+       this.stockDatasnrs1.push(nestedItems[1]['data']['pivotLevels'][0].pivotLevel.s1)
      }
   
      this.stockindicators.length = 0;
-     for (let val in nestedItems[1]['crossover']) {
-       this.stockindicators.push({text1:nestedItems[1]['crossover'][val]['displayValue'],text3:nestedItems[1]['crossover'][val]['indication'],text2:nestedItems[1]['crossover'][val]['period'],text4:nestedItems[1]['crossover'][val]['period']})
+     for (let val in nestedItems[1]['data']['crossover']) {
+       this.stockindicators.push({text1:nestedItems[1]['data']['crossover'][val]['displayValue'],text3:nestedItems[1]['data']['crossover'][val]['indication'],text2:nestedItems[1]['data']['crossover'][val]['period'],text4:nestedItems[1]['data']['crossover'][val]['period']})
      }
      
-    for (let val1 in nestedItems[1]['indicators']) {
-      if (nestedItems[1]['indicators'][val1]['id'] != 'bollinger') {
-        this.stockindicators.push({ text1: nestedItems[1]['indicators'][val1].displayName, text2: nestedItems[1]['indicators'][val1].id, text3: nestedItems[1]['indicators'][val1].indication, text4: nestedItems[1]['indicators'][val1].value })
+    for (let val1 in nestedItems[1]['data']['indicators']) {
+      if (nestedItems[1]['data']['indicators'][val1]['id'] != 'bollinger') {
+        this.stockindicators.push({ text1: nestedItems[1]['data']['indicators'][val1].displayName, text2: nestedItems[1]['data']['indicators'][val1].id, text3: nestedItems[1]['data']['indicators'][val1].indication, text4: nestedItems[1]['data']['indicators'][val1].value })
       }
-//  ////////////To get Nifty Today Price///////////////////////
- 
+    }
+
+      //  ////////////To get Nifty Today Price///////////////////////
+     
+     
 this.stockdata.length = 0;
 this.stockLabels.length = 0;
-for (let val in nestedItems[0][1]['chartActulaData']) {
- this.stockdata.push(nestedItems[0][1]['chartActulaData'][val]["value"])
- this.stockLabels.push(nestedItems[0][1]['chartActulaData'][val]["time"])
+for (let val in nestedItems[6]['query']['results']['quotedata']) {
+ this.stockdata.unshift(nestedItems[6]['query']['results']['quotedata'][val][1])
+ this.stockLabels.unshift((new Date(nestedItems[6]['query']['results']['quotedata'][val][0]).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })))
 
 }
 
@@ -437,379 +941,7 @@ this.stockChartColors = [
  }
 ];
     
-      console.log(nestedItems)
-    }   
-  }, err => {
-    console.log(err)
-  })
-}
- 
- 
- 
-  getmcshare(mcsymbol) {
-    this.dataApi.getmcshare(this.mcsymbol).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
- 
-  console.log(nestedItems)
-
-
-      ///////////////////////////////////////////////////////////////
-       ////////////To get Nifty 5day Resistances and Indicators/////////////
       
-//        let val5 = 0;
-//        while (val5 != 2000) {
-//          val5 = val5 + 1
-//          this.stockDatan50snrr1w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.r1),
-//          this.stockDatan50snrr2w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.r2),
-//          this.stockDatan50snrr3w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.r3),
-//          this.stockDatan50snrs3w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.s3),
-//          this.stockDatan50snrs2w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.s2),
-//          this.stockDatan50snrs1w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.s1)
-//        }
-       
-       
-//        for (let val in nestedItems[5]['data']['crossover']) {
-//          this.nifty50indicatorsw.push({text1:nestedItems[5]['data']['crossover'][val]['displayValue'],text3:nestedItems[5]['data']['crossover'][val]['indication'],text2:nestedItems[5]['data']['crossover'][val]['period'],text4:nestedItems[5]['data']['crossover'][val]['period']})
-//        }
-     
-//       for (let val1 in nestedItems[5]['data']['indicators']) {
-//         if (nestedItems[5]['data']['indicators'][val1]['id'] != 'bollinger') {
-//           this.nifty50indicatorsw.push({ text1: nestedItems[5]['data']['indicators'][val1].displayName, text2: nestedItems[5]['data']['indicators'][val1].id, text3: nestedItems[5]['data']['indicators'][val1].indication, text4: nestedItems[5]['data']['indicators'][val1].value })
-//         }
-//       }
-        
-        
-       
-     
-  
-      
-
-//       ////////////To get Nifty 5 day Price///////////////////////
-     
-//       this.nifty505ddata.length = 0;
-//       this.nifty505dLabels.length = 0;
-//       for (let val in nestedItems[0]['graph'].values) {
-//         this.nifty505ddata.push(nestedItems[0]['graph'].values[val]["_value"])
-//         this.nifty505dLabels.push(nestedItems[0]['graph'].values[val]["_time"])
-       
-//       }
-      
-     
-//       this.stock5dData = [{
-//         label: 'Price',
-//         data: this.nifty505ddata,
-//         borderWidth: 1,
-//         fill: false
-//       },{ label: 'R1',
-//       data: this.stockDatan50snrr1w,
-//       borderWidth: 1,
-//       bordercolor:'#D98880',
-//           fill: false
-//         },
-//         {
-//         label: 'R2',
-//         data: this.stockDatan50snrr2w,
-//         borderWidth: 1,
-//         borderColor: '#e3256b',
-//           fill: false
-//         }
-//         , {
-//           label: 'R3',
-//       data: this.stockDatan50snrr3w,
-//           borderWidth: 1,
-//           borderColor: '#c84343',
-//       fill: false}, {
-//         label: 'S1',
-//     data: this.stockDatan50snrs1w,
-//         borderWidth: 1,
-//         borderColor: '#90b590',
-//     fill: false}, {
-//       label: 'S2',
-//   data: this.stockDatan50snrs2w,
-//       borderWidth: 1,
-//       borderColor: '#09c51b',
-//   fill: false}, {
-//     label: 'S3',
-// data: this.stockDatan50snrs3w,
-//     borderWidth: 1,
-//     borderColor: '#375f00',
-// fill: false}];
-    
-//       this.stock5dLabels = this.nifty505dLabels;
-//       this.stock5dOptions = {
-//         scales: {
-//           yAxes: [{
-//             ticks: {
-//               beginAtZero: false
-//             }
-//           }]
-//         },
-//         legend: {
-//           display: true
-//         },
-//         elements: {
-//           point: {
-//             radius: 0
-//           }
-//         }
-//       };
-    
-//       this.stock5dColors = [
-//         {
-//           borderColor: '#2d0365'
-//         }
-//       ];
-//   /////////////////////////////////////////////////////////////////
-      
-//        ////////////To get Nifty 1 month Resistances and Indicators/////////////
-      
-//        let val1m = 0;
-//        while (val1m != 12000) {
-//          val1m = val1m + 1
-//          this.stockDatan50snrr1m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.r1),
-//          this.stockDatan50snrr2m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.r2),
-//          this.stockDatan50snrr3m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.r3),
-//          this.stockDatan50snrs3m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.s3),
-//          this.stockDatan50snrs2m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.s2),
-//          this.stockDatan50snrs1m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.s1)
-//        }
-       
-       
-//        for (let val in nestedItems[6]['data']['crossover']) {
-//          this.nifty50indicatorsm.push({text1:nestedItems[6]['data']['crossover'][val]['displayValue'],text3:nestedItems[6]['data']['crossover'][val]['indication'],text2:nestedItems[6]['data']['crossover'][val]['period'],text4:nestedItems[6]['data']['crossover'][val]['period']})
-//        }
-     
-//       for (let val1 in nestedItems[6]['data']['indicators']) {
-//         if (nestedItems[6]['data']['indicators'][val1]['id'] != 'bollinger') {
-//           this.nifty50indicatorsm.push({ text1: nestedItems[6]['data']['indicators'][val1].displayName, text2: nestedItems[6]['data']['indicators'][val1].id, text3: nestedItems[6]['data']['indicators'][val1].indication, text4: nestedItems[6]['data']['indicators'][val1].value })
-//         }
-//       }
-        
-        
-       
-     
-  
-      
-
-//       ////////////To get Nifty 1 month Price///////////////////////
-     
-//       this.nifty501mdata.length = 0;
-//       this.nifty501mLabels.length = 0;
-//       for (let val in nestedItems[1]['graph'].values) {
-//         this.nifty501mdata.push(nestedItems[1]['graph'].values[val]["_value"])
-//         this.nifty501mLabels.push(nestedItems[1]['graph'].values[val]["_time"])
-       
-//       }
-      
-     
-//       this.stock1mData = [{
-//         label: 'Price',
-//         data: this.nifty501mdata,
-//         borderWidth: 1,
-//         fill: false
-//       },{ label: 'R1',
-//       data: this.stockDatan50snrr1m,
-//       borderWidth: 1,
-//       bordercolor:'#D98880',
-//           fill: false
-//         },
-//         {
-//         label: 'R2',
-//         data: this.stockDatan50snrr2m,
-//         borderWidth: 1,
-//         borderColor: '#e3256b',
-//           fill: false
-//         }
-//         , {
-//           label: 'R3',
-//       data: this.stockDatan50snrr3m,
-//           borderWidth: 1,
-//           borderColor: '#c84343',
-//       fill: false}, {
-//         label: 'S1',
-//     data: this.stockDatan50snrs1m,
-//         borderWidth: 1,
-//         borderColor: '#90b590',
-//     fill: false}, {
-//       label: 'S2',
-//   data: this.stockDatan50snrs2m,
-//       borderWidth: 1,
-//       borderColor: '#09c51b',
-//   fill: false}, {
-//     label: 'S3',
-// data: this.stockDatan50snrs3m,
-//     borderWidth: 1,
-//     borderColor: '#375f00',
-// fill: false}];
-    
-//       this.stock1mLabels = this.nifty501mLabels;
-//       this.stock1mOptions = {
-//         scales: {
-//           yAxes: [{
-//             ticks: {
-//               beginAtZero: false
-//             }
-//           }]
-//         },
-//         legend: {
-//           display: true
-//         },
-//         elements: {
-//           point: {
-//             radius: 0
-//           }
-//         }
-//       };
-    
-//       this.stock1mColors = [
-//         {
-//           borderColor: '#2d0365'
-//         }
-//       ];
-// //////////////////////////////////////////////////////////////////
-//       ////////////////Nifty 3 months/////////////////////////////
-//       for (let val in nestedItems[2]['graph'].values) {
-//         this.nifty503mdata.push(nestedItems[2]['graph'].values[val]["_value"])
-//         this.nifty503mLabels.push(nestedItems[2]['graph'].values[val]["_time"])
-     
-//       }
-    
-     
-//       this.stock3mData = [{
-//         label: 'Price',
-//         data: this.nifty503mdata,
-//         borderWidth: 1,
-//         fill: false
-//       }];
-  
-//       this.stock3mLabels = this.nifty503mLabels;
-//       this.stock3mOptions = {
-//         scales: {
-//           yAxes: [{
-//             ticks: {
-//               beginAtZero: false
-//             }
-//           }]
-//         },
-//         legend: {
-//           display: false
-//         },
-//         elements: {
-//           point: {
-//             radius: 0
-//           }
-//         }
-//       };
-  
-//       this.stock3mColors = [
-//         {
-//           borderColor: '#115dcd'
-//         }
-//       ];
-//   ////////////////////////////////////////////////////////////////////
-//       //////////////////NIfty 6 months///////////////////////////////
-
-//        //this.nifty506mdata.length = 0;
-//       //this.nifty506mLabels.length = 0;
-//       for (let val in nestedItems[3]['graph'].values) {
-//         this.nifty506mdata.push(nestedItems[3]['graph'].values[val]["_value"])
-//         this.nifty506mLabels.push(nestedItems[3]['graph'].values[val]["_time"])
-       
-//       }
-      
-     
-//       this.stock6mData = [{
-//         label: 'Price',
-//         data: this.nifty506mdata,
-//         borderWidth: 1,
-//         fill: false
-//       }];
-    
-//       this.stock6mLabels = this.nifty506mLabels;
-//       this.stock6mOptions = {
-//         scales: {
-//           yAxes: [{
-//             ticks: {
-//               beginAtZero: false
-//             }
-//           }]
-//         },
-//         legend: {
-//           display: false
-//         },
-//         elements: {
-//           point: {
-//             radius: 0
-//           }
-//         }
-//       };
-    
-//       this.stock6mColors = [
-//         {
-//           borderColor: '#5a7f84'
-//         }
-//       ];
-    
-   
- 
-
-
-//  ///////////////////Nifty 1 year/////////////////////////////////////
-
-//       //this.nifty501yrdata.length = 0;
-//       //this.nifty501yrLabels.length = 0;
-//       for (let val in nestedItems[4]['graph'].values) {
-//         this.nifty501yrdata.push(nestedItems[4]['graph'].values[val]["_value"])
-//         this.nifty501yrLabels.push(nestedItems[4]['graph'].values[val]["_time"])
-     
-//       }
-    
-  
-//       this.stock1yrData = [{
-//         label: 'Price',
-//         data: this.nifty501yrdata,
-//         borderWidth: 1,
-//         fill: false
-//       }];
-  
-//       this.stock1yrLabels = this.nifty501yrLabels;
-//       this.stock1yrOptions = {
-//         scales: {
-//           yAxes: [{
-//             ticks: {
-//               beginAtZero: false
-//             }
-//           }]
-//         },
-//         legend: {
-//           display: false
-//         },
-//         elements: {
-//           point: {
-//             radius: 0
-//           }
-//         }
-//       };
-  
-//       this.stock1yrColors = [
-//         {
-//           borderColor: '#c154c1'
-//         }
-//       ];
-
-     }, err => {
-       console.log(err)
-     })
-   }
-
-  
-   getmcsharefrequent1(mcsymbol,eqsymbol) {
-    this.dataApi.getmcsharefrequent1(this.mcsymbol,this.eqsymbol).subscribe(data6 => {
-      let nestedItems = Object.keys(data6).map(key => {
-        return data6[key];
-      });
 
   // /////////////////////////////EMA/SMA from Kite //////////////////////
   
@@ -820,11 +952,269 @@ this.stockChartColors = [
    this.stocksma.push({text1:nestedItems[0]['sma5'],text2:nestedItems[0]['sma10'],text3:nestedItems[0]['sma20'],text4:nestedItems[0]['sma30'],text5:nestedItems[0]['sma50'],text6:nestedItems[0]['sma100'],text7:nestedItems[0]['sma200']})
 
 
-     console.log(nestedItems)
+     
   }, err => {
     console.log(err)
   })
 }
+
+gettrendlynestocks1(tlid,tlname,eqsymbol) {
+  this.dataApi.gettrendlynestocks1(tlid,tlname,eqsymbol).subscribe(data5 => {
+    let nestedItems = Object.keys(data5).map(key => {
+      return data5[key];
+    });
+    console.log(nestedItems)
+    if (nestedItems[1]['MCAP_Q']['lt1']) {
+      if (nestedItems[1]['MCAP_Q']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
+      }
+      else if (nestedItems[1]['MCAP_Q']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
+      }
+      else if (nestedItems[1]['MCAP_Q']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
+      }
+    }
+
+    if (nestedItems[1]['NP_Q']['lt2']) {
+      if (nestedItems[1]['NP_Q']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['NP_Q']['value'], text2: nestedItems[1]['NP_Q']['lt2'], text3: nestedItems[1]['NP_Q']['st2'] })
+      }
+      else if (nestedItems[1]['NP_Q']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['NP_Q']['value'], text2: nestedItems[1]['NP_Q']['lt2'], text3: nestedItems[1]['NP_Q']['st2'] })
+      }
+      else if (nestedItems[1]['NP_Q']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['NP_Q']['value'], text2: nestedItems[1]['NP_Q']['lt2'], text3: nestedItems[1]['NP_Q']['st2'] })
+      }
+    }
+
+    if (nestedItems[1]['PBV_A']['st1']) {
+      if (nestedItems[1]['PBV_A']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['PBV_A']['lt1'], text2: nestedItems[1]['PBV_A']['st1'], text3: nestedItems[1]['PBV_A']['value'] })
+      }
+      else if (nestedItems[1]['PBV_A']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['PBV_A']['lt1'], text2: nestedItems[1]['PBV_A']['st1'], text3: nestedItems[1]['PBV_A']['value'] })
+      }
+      else if (nestedItems[1]['PBV_A']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['PBV_A']['lt1'], text2: nestedItems[1]['PBV_A']['st1'], text3: nestedItems[1]['PBV_A']['value'] })
+      }
+    }
+
+    if (nestedItems[1]['PE_TTM']['lt1']) {
+      if (nestedItems[1]['PE_TTM']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['PE_TTM']['lt1'], text2: nestedItems[1]['PE_TTM']['title'], text3: nestedItems[1]['PE_TTM']['value'] })
+      }
+      else if (nestedItems[1]['PE_TTM']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['PE_TTM']['lt1'], text2: nestedItems[1]['PE_TTM']['title'], text3: nestedItems[1]['PE_TTM']['value'] })
+      }
+      else if (nestedItems[1]['PE_TTM']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['PE_TTM']['lt1'], text2: nestedItems[1]['PE_TTM']['title'], text3: nestedItems[1]['PE_TTM']['value'] })
+      }
+    }
+
+    if (nestedItems[1]['SR_Q']['lt1']) {
+      if (nestedItems[1]['SR_Q']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['SR_Q']['lt2'], text2: nestedItems[1]['SR_Q']['st2'], text3: nestedItems[1]['SR_Q']['value'] })
+      }
+      else if (nestedItems[1]['SR_Q']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['SR_Q']['lt2'], text2: nestedItems[1]['SR_Q']['st2'], text3: nestedItems[1]['SR_Q']['value'] })
+      }
+      else if (nestedItems[1]['SR_Q']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['SR_Q']['lt2'], text2: nestedItems[1]['SR_Q']['st2'], text3: nestedItems[1]['SR_Q']['value'] })
+      }
+    }
+
+    if (nestedItems[1]['beta_1Y']['lt1']) {
+      if (nestedItems[1]['beta_1Y']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['beta_1Y']['lt1'], text2: nestedItems[1]['beta_1Y']['st1'], text3: nestedItems[1]['beta_1Y']['value'] })
+      }
+      else if (nestedItems[1]['beta_1Y']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['beta_1Y']['lt1'], text2: nestedItems[1]['beta_1Y']['st1'], text3: nestedItems[1]['beta_1Y']['value'] })
+      }
+      else if (nestedItems[1]['beta_1Y']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['beta_1Y']['lt1'], text2: nestedItems[1]['beta_1Y']['st1'], text3: nestedItems[1]['beta_1Y']['value'] })
+      }
+    }
+
+    if (nestedItems[1]['ema_26']['lt1']) {
+      if (nestedItems[1]['ema_26']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['value'] })
+      }
+      else if (nestedItems[1]['ema_26']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['value'] })
+      }
+      else if (nestedItems[1]['ema_26']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['value'] })
+      }
+    }
+
+    if (nestedItems[1]['ema_50']['lt1']) {
+      if (nestedItems[1]['ema_50']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['value'] })
+      }
+      else if (nestedItems[1]['ema_50']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['value'] })
+      }
+      else if (nestedItems[1]['ema_50']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['value'] })
+      }
+    }
+	
+if (nestedItems[1]['ema_100']['lt1']) {
+      if (nestedItems[1]['ema_100']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['value'] })
+      }
+      else if (nestedItems[1]['ema_100']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['value'] })
+      }
+      else if (nestedItems[1]['ema_100']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['value'] })
+      }
+    }
+	
+if (nestedItems[1]['ema_200']['lt1']) {
+      if (nestedItems[1]['ema_200']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_200']['st1'], text3: nestedItems[1]['ema_200']['value'] })
+      }
+      else if (nestedItems[1]['ema_200']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_200']['st1'], text3: nestedItems[1]['ema_200']['value'] })
+      }
+      else if (nestedItems[1]['ema_200']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_200']['st1'], text3: nestedItems[1]['ema_200']['value'] })
+      }
+    }
+
+if (nestedItems[1]['sma_30']['lt1']) {
+      if (nestedItems[1]['sma_30']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['value'] })
+      }
+      else if (nestedItems[1]['sma_30']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['value'] })
+      }
+      else if (nestedItems[1]['sma_30']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['value'] })
+      }
+    }
+	
+if (nestedItems[1]['sma_50']['lt1']) {
+      if (nestedItems[1]['sma_50']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['value'] })
+      }
+      else if (nestedItems[1]['sma_50']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['value'] })
+      }
+      else if (nestedItems[1]['sma_50']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['value'] })
+      }
+    }
+	
+if (nestedItems[1]['sma_100']['lt1']) {
+      if (nestedItems[1]['sma_100']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['value'] })
+      }
+      else if (nestedItems[1]['sma_100']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['value'] })
+      }
+      else if (nestedItems[1]['sma_100']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['value'] })
+      }
+    }
+	
+if (nestedItems[1]['sma_200']['lt1']) {
+      if (nestedItems[1]['sma_200']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_200']['st1'], text3: nestedItems[1]['sma_200']['value'] })
+      }
+      else if (nestedItems[1]['sma_200']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_200']['st1'], text3: nestedItems[1]['sma_200']['value'] })
+      }
+      else if (nestedItems[1]['sma_200']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_200']['st1'], text3: nestedItems[1]['sma_200']['value'] })
+      }
+    }
+    if (nestedItems[1]['macd']['lt1']) {
+      if (nestedItems[1]['macd']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['value'] })
+      }
+      else if (nestedItems[1]['macd']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['value'] })
+      }
+      else if (nestedItems[1]['macd']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['value'] })
+      }
+    }
+
+    if (nestedItems[1]['macdsignal']['lt1']) {
+      if (nestedItems[1]['macdsignal']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
+      }
+      else if (nestedItems[1]['macdsignal']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
+      }
+      else if (nestedItems[1]['macdsignal']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
+      }
+    }
+
+    if (nestedItems[1]['mfi']['lt1']) {
+      if (nestedItems[1]['mfi']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['value'] })
+      }
+      else if (nestedItems[1]['mfi']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['value'] })
+      }
+      else if (nestedItems[1]['mfi']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['value'] })
+      }
+    }
+
+    if (nestedItems[1]['rsi']['lt1']) {
+      if (nestedItems[1]['rsi']['color1'] == 'positive') {
+        this.positive.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['value'] })
+      }
+      else if (nestedItems[1]['rsi']['color1'] == 'negative') {
+        this.negative.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['value'] })
+      }
+      else if (nestedItems[1]['rsi']['color1'] == 'neutral') {
+        this.neutral.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['value'] })
+      }
+    }
+
+  
+  //   this.brokertarget.push({ text1: nestedItems[1]['broker_avg_target']['lt1'], text2: nestedItems[1]['broker_avg_target']['st1'], text3: nestedItems[1]['broker_avg_target']['color1'] })
+  //   console.log(this.brokertarget)
+  //   this.ema_26.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['color1'], text4: nestedItems[1]['ema_26']['value'] })
+  //   this.ema_50.push({text1:nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['color1'],text4: nestedItems[1]['ema_50']['value']  })
+  //   this.ema_100.push({text1:nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_100']['value']  })
+  //   this.ema_200.push({text1:nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_200']['value']  })
+  //   this.sma_30.push({text1:nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['color1'],text4: nestedItems[1]['sma_30']['value'] })
+  //   this.sma_50.push({text1:nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['color1'],text4: nestedItems[1]['sma_50']['value']  })
+  //   this.sma_100.push({text1:nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'],text4: nestedItems[1]['sma_100']['value']  })
+  //   this.sma_200.push({text1:nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'],text4: nestedItems[1]['sma_200']['value']  })
+  //   this.macd.push({text1:nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['color1'],text4: nestedItems[1]['macd']['value']  })
+  //   this.macdsignal.push({text1:nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['color1'],text4: nestedItems[1]['macdsignal']['value']  })
+  //   this.rsi.push({text1:nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['color1'],text4: nestedItems[1]['rsi']['value']  })
+  //   this.mfi.push({text1:nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['color1'],text4: nestedItems[1]['mfi']['value']  })
+  //   if (nestedItems[1]['broker_recodown_6M']['lt1']) {
+  //     this.brokerrecodowngrade.push({ text1: nestedItems[1]['broker_recodown_6M']['lt1'], text2: nestedItems[1]['broker_recodown_6M']['st1'], text3: nestedItems[1]['broker_recodown_6M']['color1'] })
+  //  }
+  //  else if (nestedItems[1]['broker_recoup_6M']['lt1']) {
+  //    this.brokerrecoupgrade.push({ text1: nestedItems[1]['broker_recoup_6M']['lt1'], text2: nestedItems[1]['broker_recoup_6M']['st1'], text3: nestedItems[1]['broker_recoup_6M']['color1'] })
+  //  }
+  //  else if(nestedItems[1]['broker_targetup_6M']['lt1']){
+  //    this.brokertargetupgrade.push({text1:nestedItems[1]['broker_targetup_6M']['lt1'], text2: nestedItems[1]['broker_targetup_6M']['st1'], text3: nestedItems[1]['broker_targetup_6M']['color1'] })
+  //  }
+  //  else if (nestedItems[1]['broker_targetdown_6M']['lt1']) {
+  //    this.brokertargetdowngrade.push({ text1: nestedItems[1]['broker_targetdown_6M']['lt1'], text2: nestedItems[1]['broker_targetdown_6M']['st1'], text3: nestedItems[1]['broker_targetdown_6M']['color1'] })
+  //  }
+   
+    
+    
+    
+  }, err => {
+    console.log(err)
+  })
+}
+
   
   
 }

@@ -8,8 +8,7 @@ import { formatDate } from '@angular/common';
 //import { OwlClockModule } from 'owl-ng';
 //import { OwlFanMenuModule } from 'owl-ng';
 import * as mdb from 'mdb-ui-kit'; // lib
-//import { Input } from 'mdb-ui-kit'; // module
-//import ApexCharts from 'apexcharts';
+
 import { ChartType } from 'chart.js';
 import { Chart } from 'chart.js';
 
@@ -84,7 +83,9 @@ export interface Tile {
   text3: string;
 
 }
-
+export interface pcrniftytile {
+  text1: string;
+}
 export interface Tile1 {
   cols: number;
   rows: number;
@@ -242,94 +243,7 @@ export interface chrtinktilesemacrs920 {
   text4: string;
   text5: string;
 }
-export interface bankniftystockstiles {
 
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-}
-export interface niftybbdtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface niftybbwtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface niftybbmtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface bniftybbdtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface bniftybbwtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface bniftybbmtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface pniftybbdtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface pniftybbwtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface pniftybbmtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface niftyphstockstiles {
-
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-}
 export interface alerttiles {
   
   text1: any;
@@ -352,111 +266,6 @@ export interface indicestiles {
   text10: string;
   
 }
-export interface bniftytimtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface bniftytidtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface bniftytiwtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface pniftytimtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface pniftytidtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface pniftytiwtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface niftytidtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface niftytimtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface pcrniftytile {
-
-  text1: string;
-
-
-
-}
-export interface pcrnseniftytile {
-text1: number;
-}
-
-export interface pcrnsebniftytile {
-  text1: number;
-}
-
-export interface niftytiwtile {
-  text2: string;
-  text1: string;
-  text3: string;
-  text4: string;
-
-
-}
-export interface bankniftytiles {
-
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-  text6: string;
-  text7: string;
-  text8: string;
-  text9: string;
-  text10: string;
-  text11: string;
-  text12: string;
-  text13: string;
-  text14: string;
-  
-}
 export interface newscardtile {
   
   text1: string;
@@ -466,19 +275,6 @@ export interface newscardtile {
   text5: string;
 }
 
-export interface n50optionssupporttile {
-  text1: string;
- }
-export interface n50optionsresistancetile {
-  text1: string;
- }
-export interface bnoptionssupporttile {
-  text1: string;
- }
-export interface bnoptionsresistancetile {
-  text1: string;
-}
-
 export interface gsectorstiles {
 
   text1: string;
@@ -486,20 +282,7 @@ export interface gsectorstiles {
   text3: string;
   text4: string;
 }
-export interface nifty50tiles {
 
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface banknifty1tiles {
-
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
 export interface gsecstocksdetailstiles {
 
   text1: string;
@@ -558,9 +341,22 @@ export interface mcsectoroveralltiledw {
 export interface mcsectoroveralltiled {
   text1: string;
   }
+export interface nifty50tiles{
+  text1: string;
+  text2: string;
+  text3: string;
+  text4: string;
 
+  }
 
-    
+  export interface banknifty1tiles{
+    text1: string;
+    text2: string;
+    text3: string;
+    text4: string;
+  
+    }
+      
 
 
 
@@ -580,13 +376,10 @@ export class DashboardComponent implements OnInit {
   showFiller = false;
   options: any;
   tiles11: Tile11[] = [];
-  n50optionssupport: n50optionssupporttile[] = [];
-  n50optionsresistance: n50optionsresistancetile[] = [];
-  bnoptionssupport: bnoptionssupporttile[] = [];
-  bnoptionsresistance: n50optionsresistancetile[] = [];
-  mcniftyrt: mcniftyrttiles[] = [];
+ 
+  
   newscard: newscardtile[] = [];
-  mcbniftyrt: mcbniftyrttiles[] = [];
+  
  
   tlid = [];
   vixgraphtime = [];
@@ -597,6 +390,9 @@ export class DashboardComponent implements OnInit {
   tableData: any
   stockList: any
   sectorList: any
+  pcrnifty: pcrniftytile[] = [];
+  mcniftyrt: mcniftyrttiles[] = [];
+  mcbniftyrt: mcbniftyrttiles[] = [];
   mcadvvalue: any
   mcdecvalue: any
   mcadvvalue1: any
@@ -677,23 +473,15 @@ export class DashboardComponent implements OnInit {
   tiles: Tile[] = [];
   tiles1: Tile1[] = [];
   result: resulttiles[] = [];
-  niftytid: niftytidtile[] = [];
+ 
   mcsectoroveralldwm: mcsectoroveralltiledwm[] = [];
   mcsectoroveralldw: mcsectoroveralltiledw[] = [];
   mcsectoroveralld: mcsectoroveralltiled[] = [];
   nsindices1: nsindices1tiles[] = [];
   nsindices: nsindicestiles[] = [];
-  niftybbd: niftybbdtile[] = [];
-  niftytiw: niftytiwtile[] = [];
-  pcrnifty: pcrniftytile[] = [];
-  pcrnsenifty: pcrnseniftytile[] = [];
-  pcrnsebnifty: pcrnsebniftytile[] = [];
   gsectors: gsectorstiles[] = [];
   gsecstocksdetails: gsecstocksdetailstiles[] = [];
   gsectorsdetails: gsectorsdetailstiles[] = []
-  niftybbw: niftybbwtile[] = [];
-  niftytim: niftytimtile[] = [];
-  niftybbm: niftybbmtile[] = [];
   trafficChartData: any
   trafficChartLabels: any
   trafficChartOptions: any
@@ -703,26 +491,8 @@ export class DashboardComponent implements OnInit {
   RssData2: NewsRss;
   advsectors = [];
   decsectors = [];
-  optionwc = [];
-  optionwp = [];
-  optionbwc = [];
-  optionbwp = [];
-  bniftytid: bniftytidtile[] = [];
-  bniftybbd: bniftybbdtile[] = [];
-  bniftytiw: bniftytiwtile[] = [];
-  bniftybbw: bniftybbwtile[] = [];
-  bniftytim: bniftytimtile[] = [];
-  bniftybbm: bniftybbmtile[] = [];
-  pniftytid: pniftytidtile[] = [];
-  pniftybbd: pniftybbdtile[] = [];
-  pniftytiw: pniftytiwtile[] = [];
-  pniftybbw: pniftybbwtile[] = [];
-  pniftytim: pniftytimtile[] = [];
-  pniftybbm: pniftybbmtile[] = [];
   chrtinkvs: chrtinktilesvs[] = [];
   tg: tgtiles[] = [];
-  bankniftystocks: bankniftystockstiles[] = [];
-  niftyphstocks: niftyphstockstiles[] = [];
   tltg: tltgtiles[] = [];
   indicestreemap = [];
   nextexpiry:any
@@ -744,8 +514,8 @@ export class DashboardComponent implements OnInit {
   chrtinkemacrs920: chrtinktilesemacrs920[] = [];
   indices: indicestiles[] = [];
   nifty50: nifty50tiles[] = [];
-  banknifty: bankniftytiles[] = [];
   banknifty1: banknifty1tiles[] = [];
+  
   dblist = { 'mydb': [] }
   chart: any;
   chart1: any;
@@ -981,8 +751,7 @@ export class DashboardComponent implements OnInit {
     console.log(e);
   }
   ngOnInit() {
-    this.getmcniftyrealtime()
-    this.getmcbankniftyrealtime()
+    
     this.GetRssFeedData()
     this.primengConfig.ripple = true;
     {
@@ -992,14 +761,7 @@ export class DashboardComponent implements OnInit {
       setInterval(() => { this.gnewsapiall() }, 300000);
     }
     
-    {
-      setInterval(() => { this.getmcniftyrealtime() }, 5000);
-      setInterval(() => { this.getmcbankniftyrealtime() }, 5000);
-      
-      
-      
-      
-  }
+    
     {
       setInterval(() => { this.nsedataadvdec() }, 1200000);
     }
@@ -1017,7 +779,7 @@ export class DashboardComponent implements OnInit {
     
     { setInterval(() => { this.getUpdate() }, 30000); }
     
-    { setInterval(() => { this.nsedataniftyoi() }, 30000); }
+    
     this.stockList = stocks.default.Data
     this.sectorList = sectors.default.Data
     this.stock = stocks.default.Data
@@ -1030,12 +792,11 @@ export class DashboardComponent implements OnInit {
     this.getbqadvdec()
     this.getResults()
     //this.getetimesnews()
-    this.nsedataniftyoi()
-    this.nsedatabniftyoi()
+    
     this.nseresults()
     this.nseinstrading()
     this.getbqgainingsectors()
-    //this.getbankniftysnr()
+ 
     this.getmcsectoroverallviewdwm('moneycontrol')
     this.getmcsectoroverallviewdw('moneycontrol')
     this.getmcsectoroverallviewd('moneycontrol')
@@ -1044,29 +805,20 @@ export class DashboardComponent implements OnInit {
     this.gettl52l()
    
     //this.mcsymbol1="'in%3BNSX'"
-    this.getmcniftytid()
-    this.getmcniftytiw()
-    this.getmcniftytim()
-    this.getmcbniftytid()
+    
     this.nsedataadvdec()
-    this.getmcbniftytiw()
-    this.getmcbniftytim()
-    this.getmcpniftytid()
-    this.getmcpniftytiw()
-    this.getmcpniftytim()
+   
     this.gettlnear52h()
     this.gettlnear52l()
     this.getetimpdata()
-    this.getbanknifty()
+  
    
     
     this.gettlbu()
     this.gettlob()
     
-    this.getbankniftystocks()
-    this.getniftypharma()
-    this.getniftypharmastocks()
-    this.getniftypharmasnr()
+  
+   
     this.getcnxitd()
     this.getcnxitm()
     this.getcnxitw()
@@ -1141,208 +893,8 @@ export class DashboardComponent implements OnInit {
     })
   }
   
-  nsedataniftyoi() {
-    this.dataApi.nsedataniftyoi().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.pcrnsenifty.length = 0;
-      this.optionwc.length = 0;
-      this.n50optionsresistance.length = 0;
-      this.optionwp.length = 0;
-      this.n50optionssupport.length = 0;
 
-      //console.log(nestedItems[1]['CE'].totOI)
-      //console.log(nestedItems[1]['PE'].totOI)
-this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].totOI)})
-      for (let val in nestedItems[1]['data']) {
-        if (nestedItems[1]['data'][val]['CE']) {
-          if ((nestedItems[1]['data'][val]['CE']).length !== 0) {
-        
-        this.optionwc.push(nestedItems[1]['data'][val]['CE'].openInterest);
-          }
-        }
-      }
-      for (let val in nestedItems[1]['data']) {
-        if (nestedItems[1]['data'][val]['CE']) {
-          var maxc = this.optionwc.reduce((a, b) => Math.max(a, b));  // 5
-        }
-      }
-     
-            for (let val in nestedItems[1]['data']) {
-              if (nestedItems[1]['data'][val]['CE']) {
-              if (nestedItems[1]['data'][val]['CE'].openInterest == maxc) {
-                this.n50optionsresistance.push({ text1: nestedItems[1]['data'][val]['CE'].strikePrice })
-             }
-              }
-            
-          
-        if (nestedItems[1]['data'][val]['PE']) {
-          if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
-            // console.log("Put")
-            // console.log(nestedItems[1]['data'][val]['PE'].changeinOpenInterest, nestedItems[1]['data'][val]['PE'].strikePrice)
-        
-            this.optionwp.push(nestedItems[1]['data'][val]['PE'].openInterest);
-          }
-        }
-      }
-      
-        const maxp = this.optionwp.reduce((a, b) => Math.max(a, b));  // 5
-        console.log("maximum"+maxp)
-     for (let val in nestedItems[1]['data']) {
-       if (nestedItems[1]['data'][val]['PE']) {
-         if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
-     
-           if (nestedItems[1]['data'][val]['PE'].openInterest == maxp) {
-             this.n50optionssupport.push({ text1: nestedItems[1]['data'][val]['PE'].strikePrice })
-            
-           }
-         }
-       }
-     }
-        
-      
-      
-    }, err => {
-      console.log(err)
-    })
-  }
-  nsedatabniftyoi() {
-    this.dataApi.nsedatabniftyoi().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.pcrnsebnifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].totOI)})
     
-     
-      for (let val in nestedItems[1]['data']) {
-        if (nestedItems[1]['data'][val]['CE']) {
-          if ((nestedItems[1]['data'][val]['CE']).length !== 0) {
-        
-        this.optionbwc.push(nestedItems[1]['data'][val]['CE'].openInterest);
-          }
-        }
-      }
-      for (let val in nestedItems[1]['data']) {
-        if (nestedItems[1]['data'][val]['CE']) {
-          var maxbc = this.optionbwc.reduce((a, b) => Math.max(a, b));  // 5
-        }
-      }
-      console.log("maximum"+maxbc)
-            for (let val in nestedItems[1]['data']) {
-              if (nestedItems[1]['data'][val]['CE']) {
-              if (nestedItems[1]['data'][val]['CE'].openInterest == maxbc) {
-                this.bnoptionsresistance.push({ text1: nestedItems[1]['data'][val]['CE'].strikePrice })
-             }
-              }
-            
-          
-        if (nestedItems[1]['data'][val]['PE']) {
-          if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
-            // console.log("Put")
-            // console.log(nestedItems[1]['data'][val]['PE'].changeinOpenInterest, nestedItems[1]['data'][val]['PE'].strikePrice)
-        
-            this.optionbwp.push(nestedItems[1]['data'][val]['PE'].openInterest);
-          }
-        }
-      }
-      
-        const maxbp = this.optionbwp.reduce((a, b) => Math.max(a, b));  // 5
-        console.log("maximum"+maxbp)
-     for (let val in nestedItems[1]['data']) {
-       if (nestedItems[1]['data'][val]['PE']) {
-         if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
-     
-           if (nestedItems[1]['data'][val]['PE'].openInterest == maxbp) {
-             this.bnoptionssupport.push({ text1: nestedItems[1]['data'][val]['PE'].strikePrice })
-            
-           }
-         }
-       }
-     }
-        
-      
-      
-    }, err => {
-      console.log(err)
-    })
-  }
-  
-  getbanknifty() {
-    this.dataApi.getbanknifty().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      for (let val in nestedItems[1].values) {
-        this.lineChartData6.push(nestedItems[1].values[val]["_value"])
-        this.lineChartLabels6.push(nestedItems[1].values[val]["_time"])
-      }
-    }, err => {
-      console.log(err)
-    })
-  }
-  getmcniftyrealtime() {
-    this.dataApi.getmcniftyrealtime().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      console.log(nestedItems)
-      this.mcniftyrt.length = 0;
-      
-      this.mcniftyrt.push({ text1: nestedItems[82], text2: nestedItems[79], text3: nestedItems[83], text4: nestedItems[84], text5: nestedItems[1], text6: nestedItems[40] })
-      this.mcadvvalue1 = nestedItems[40];
-      this.mcdecvalue1 = nestedItems[1];
-      this.trafficChartData = [
-        {
-          data: [this.mcadvvalue1, this.mcdecvalue1],
-        }
-      ];
-      
-      this.trafficChartLabels =  ['Advance', 'Decline'];
-      
-      this.trafficChartOptions = {
-        responsive: true,
-        animation: {
-          animateScale: true,
-          animateRotate: true
-        },
-        legend: false,
-      };
-      
-      this.trafficChartColors = [
-        {
-          backgroundColor: [
-            'rgba(177, 148, 250, 1)',
-            'rgba(254, 112, 150, 1)',
-            'rgba(132, 217, 210, 1)'
-          ],
-          borderColor: [
-            'rgba(177, 148, 250, .2)',
-            'rgba(254, 112, 150, .2)',
-            'rgba(132, 217, 210, .2)'
-          ]
-        }
-      ];
-    
-    }, err => {
-      console.log(err)
-    })
-  }
-  getmcbankniftyrealtime() {
-    this.dataApi.getmcbankniftyrealtime().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      console.log(data5)
-      this.mcbniftyrt.length = 0;
-      
-      this.mcbniftyrt.push({text1:nestedItems[82],text2:nestedItems[79],text3:nestedItems[83],text4:nestedItems[84]})
-    }, err => {
-      console.log(err)
-    })
-  }
-      
-     
       
       getmmmarkets() {
         this.dataApi.getmmmarkets().subscribe(data5 => {
@@ -1458,272 +1010,6 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       console.log(err)
     })
   }
-  getmcniftytid() {
-    this.dataApi.getmcniftytid().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      console.log(nestedItems)
-      this.niftydi=(nestedItems[15]["indication"])
-     
-      
-       for (let val in nestedItems[14]) {
-         if (nestedItems[14][val].id != 'bollinger') {
-           //
-           
-           this.niftytid.push({ text1: nestedItems[14][val].displayName, text2: nestedItems[14][val].id, text3: nestedItems[14][val].indication, text4: nestedItems[14][val].value })
-         }
-
-         else if (nestedItems[14][val].id == 'bollinger') {
-           for (let val1 in data5["indicators"][9]["value"]) {
-           this.niftybbd.push({ text1: nestedItems[14][9]["value"][val1].value, text2: nestedItems[14][9]["value"][val1].id, text3: nestedItems[14][9]["value"][val1].upperband, text4: nestedItems[14][9].value[val1].lowerband })
-          }
-        }
-
-      }
-     
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-  
-  getmcniftytiw() {
-    this.dataApi.getmcniftytiw().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      
-      this.niftywi=(nestedItems[15]["indication"])
-      
-       for (let val in nestedItems[14]) {
-         if (nestedItems[14][val].id != 'bollinger') {
-           //
-           
-           this.niftytiw.push({ text1: nestedItems[14][val].displayName, text2: nestedItems[14][val].id, text3: nestedItems[14][val].indication, text4: nestedItems[14][val].value })
-         }
-
-         else if (nestedItems[14][val].id == 'bollinger') {
-           for (let val1 in data5["indicators"][9]["value"]) {
-           this.niftybbw.push({ text1: nestedItems[14][9]["value"][val1].value, text2: nestedItems[14][9]["value"][val1].id, text3: nestedItems[14][9]["value"][val1].upperband, text4: nestedItems[14][9].value[val1].lowerband })
-          }
-        }
-
-      }
-     
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-  getmcpniftytid() {
-    this.dataApi.getmcpniftytid().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.pniftydi=(nestedItems[15]["indication"])
-     
-      
-       for (let val in nestedItems[14]) {
-         if (nestedItems[14][val].id != 'bollinger') {
-           //
-           
-           this.pniftytid.push({ text1: nestedItems[14][val].displayName, text2: nestedItems[14][val].id, text3: nestedItems[14][val].indication, text4: nestedItems[14][val].value })
-         }
-
-         else if (nestedItems[14][val].id == 'bollinger') {
-           for (let val1 in data5["indicators"][9]["value"]) {
-           this.pniftybbd.push({ text1: nestedItems[14][9]["value"][val1].value, text2: nestedItems[14][9]["value"][val1].id, text3: nestedItems[14][9]["value"][val1].upperband, text4: nestedItems[14][9].value[val1].lowerband })
-          }
-        }
-
-      }
-
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-  getmcpniftytim() {
-    this.dataApi.getmcpniftytim().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.pniftymi=(nestedItems[15]["indication"])
-     
-      
-       for (let val in nestedItems[14]) {
-         if (nestedItems[14][val].id != 'bollinger') {
-           //
-          
-           this.pniftytim.push({ text1: nestedItems[14][val].displayName, text2: nestedItems[14][val].id, text3: nestedItems[14][val].indication, text4: nestedItems[14][val].value })
-         }
-
-         else if (nestedItems[14][val].id == 'bollinger') {
-           for (let val1 in data5["indicators"][9]["value"]) {
-           this.pniftybbm.push({ text1: nestedItems[14][9]["value"][val1].value, text2: nestedItems[14][9]["value"][val1].id, text3: nestedItems[14][9]["value"][val1].upperband, text4: nestedItems[14][9].value[val1].lowerband })
-          }
-        }
-
-      }
-
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-  getmcpniftytiw() {
-    this.dataApi.getmcpniftytiw().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.pniftywi=(nestedItems[15]["indication"])
-     
-      
-       for (let val in nestedItems[14]) {
-         if (nestedItems[14][val].id != 'bollinger') {
-           //
-         
-           this.pniftytiw.push({ text1: nestedItems[14][val].displayName, text2: nestedItems[14][val].id, text3: nestedItems[14][val].indication, text4: nestedItems[14][val].value })
-         }
-
-         else if (nestedItems[14][val].id == 'bollinger') {
-           for (let val1 in data5["indicators"][9]["value"]) {
-           this.pniftybbw.push({ text1: nestedItems[14][9]["value"][val1].value, text2: nestedItems[14][9]["value"][val1].id, text3: nestedItems[14][9]["value"][val1].upperband, text4: nestedItems[14][9].value[val1].lowerband })
-          }
-        }
-
-      }
-
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
- 
-  getmcniftytim() {
-    this.dataApi.getmcniftytim().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-   
-      this.niftymi=(nestedItems[15]["indication"])
-      
-       for (let val in nestedItems[14]) {
-         if (nestedItems[14][val].id != 'bollinger') {
-           //
-           
-           this.niftytim.push({ text1: nestedItems[14][val].displayName, text2: nestedItems[14][val].id, text3: nestedItems[14][val].indication, text4: nestedItems[14][val].value })
-         }
-
-         else if (nestedItems[14][val].id == 'bollinger') {
-           for (let val1 in data5["indicators"][9]["value"]) {
-           this.niftybbm.push({ text1: nestedItems[14][9]["value"][val1].value, text2: nestedItems[14][9]["value"][val1].id, text3: nestedItems[14][9]["value"][val1].upperband, text4: nestedItems[14][9].value[val1].lowerband })
-          }
-        }
-
-      }
-
-      
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-  getmcbniftytid() {
-    this.dataApi.getmcbniftytid().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.bniftydi=(nestedItems[15]["indication"])
-
-     
-      
-       for (let val in nestedItems[14]) {
-         if (nestedItems[14][val].id != 'bollinger') {
-           //
-         
-           this.bniftytid.push({ text1: nestedItems[14][val].displayName, text2: nestedItems[14][val].id, text3: nestedItems[14][val].indication, text4: nestedItems[14][val].value })
-         }
-
-         else if (nestedItems[14][val].id == 'bollinger') {
-           for (let val1 in data5["indicators"][9]["value"]) {
-             
-           this.bniftybbd.push({ text1: nestedItems[14][9]["value"][val1].value, text2: nestedItems[14][9]["value"][val1].id, text3: nestedItems[14][9]["value"][val1].upperband, text4: nestedItems[14][9].value[val1].lowerband })
-          }
-        }
-
-      }
-
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-  getmcbniftytiw() {
-    this.dataApi.getmcbniftytiw().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.bniftywi=(nestedItems[15]["indication"])
-     
-      
-       for (let val in nestedItems[14]) {
-         if (nestedItems[14][val].id != 'bollinger') {
-           //
-           
-           this.bniftytiw.push({ text1: nestedItems[14][val].displayName, text2: nestedItems[14][val].id, text3: nestedItems[14][val].indication, text4: nestedItems[14][val].value })
-         }
-
-         else if (nestedItems[14][val].id == 'bollinger') {
-           for (let val1 in data5["indicators"][9]["value"]) {
-           this.bniftybbw.push({ text1: nestedItems[14][9]["value"][val1].value, text2: nestedItems[14][9]["value"][val1].id, text3: nestedItems[14][9]["value"][val1].upperband, text4: nestedItems[14][9].value[val1].lowerband })
-          }
-        }
-
-      }
-
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-  getmcbniftytim() {
-    this.dataApi.getmcbniftytim().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.bniftymi=(nestedItems[15]["indication"])
-     
-      
-       for (let val in nestedItems[14]) {
-         if (nestedItems[14][val].id != 'bollinger') {
-           //
-           
-           this.bniftytim.push({ text1: nestedItems[14][val].displayName, text2: nestedItems[14][val].id, text3: nestedItems[14][val].indication, text4: nestedItems[14][val].value })
-         }
-
-         else if (nestedItems[14][val].id == 'bollinger') {
-           for (let val1 in data5["indicators"][9]["value"]) {
-           this.bniftybbm.push({ text1: nestedItems[14][9]["value"][val1].value, text2: nestedItems[14][9]["value"][val1].id, text3: nestedItems[14][9]["value"][val1].upperband, text4: nestedItems[14][9].value[val1].lowerband })
-          }
-        }
-
-      }
-
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
   getUpdate() {
     this.dataApi.getUpdate().subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
@@ -1744,20 +1030,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
   
   
   
-  getniftypharma() {
-    this.dataApi.getniftypharma().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      for (let val in nestedItems[1].values) {
-        this.lineChartDataph.push(nestedItems[1].values[val]["_value"])
-        this.lineChartLabelsph.push(nestedItems[1].values[val]["_time"])
-
-      }
-    }, err => {
-      console.log(err)
-    })
-  }
+  
   timecheck() {
     var runned = false;
     var d = new Date();
@@ -1859,78 +1132,6 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       console.log(err)
     })
   }
-
-
-  getbankniftystocks() {
-    this.dataApi.getbankniftystocks().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      for (let val in nestedItems[0]) {
-
-        this.bankniftystocks.push({ text1: nestedItems[0][val].shortname, text2: nestedItems[0][val].change, text3: nestedItems[0][val].percentchange, text4: nestedItems[0][val].lastvalue, text5: nestedItems[0][val].direction })
-      }
-
-    }, err => {
-      console.log(err)
-    })
-  }
-
-  getniftypharmastocks() {
-    this.dataApi.getniftypharmastocks().subscribe(data6 => {
-      let nestedItems1 = Object.keys(data6).map(key => {
-        return data6[key];
-      });
-      for (let val in nestedItems1[0]) {
-
-
-        this.niftyphstocks.push({ text1: nestedItems1[0][val].shortname, text2: nestedItems1[0][val].change, text3: nestedItems1[0][val].percentchange, text4: nestedItems1[0][val].lastvalue, text5: nestedItems1[0][val].direction })
-      }
-
-    }, err => {
-      console.log(err)
-    })
-  }
-
-  
-  getbankniftysnr() {
-    this.dataApi.getbankniftysnr().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-
-      let val = 0;
-      while (val != 400) {
-        val = val + 1
-        this.lineChartDatabnsnrr1.push(nestedItems[0][0].pivotLevel.r1),
-          this.lineChartDatabnsnrr2.push(nestedItems[0][0].pivotLevel.r2),
-          this.lineChartDatabnsnrr3.push(nestedItems[0][0].pivotLevel.r3), this.lineChartDatabnsnrs3.push(nestedItems[0][0].pivotLevel.s3), this.lineChartDatabnsnrs2.push(nestedItems[0][0].pivotLevel.s2), this.lineChartDatabnsnrs1.push(nestedItems[0][0].pivotLevel.s1)
-      }
-    }, err => {
-      console.log(err)
-    })
-  }
-  getniftypharmasnr() {
-    this.dataApi.getniftypharmasnr().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-
-      let val = 0;
-      while (val != 400) {
-        val = val + 1
-        this.lineChartDataphsnrr1.push(nestedItems[0][0].pivotLevel.r1),
-          this.lineChartDataphsnrr2.push(nestedItems[0][0].pivotLevel.r2),
-          this.lineChartDataphsnrr3.push(nestedItems[0][0].pivotLevel.r3),
-          this.lineChartDataphsnrs3.push(nestedItems[0][0].pivotLevel.s3),
-          this.lineChartDataphsnrs2.push(nestedItems[0][0].pivotLevel.s2),
-          this.lineChartDataphsnrs1.push(nestedItems[0][0].pivotLevel.s1)
-      }
-    }, err => {
-      console.log(err)
-    })
-  }
-
  
   
   getmcoverall() {

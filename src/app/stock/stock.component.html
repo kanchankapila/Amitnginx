@@ -1,3 +1,43 @@
+<div class="InsideContent">
+<div class="col-lg-5 grid-margin stretch-card">
+  <div class="content card">
+    <h1 class="card-title">Positives</h1>
+   
+      <div *ngFor="let tile of positive">
+        <p class="grid-margin stretch-card text-green">{{tile.text1}}&nbsp;:{{tile.text3}}Cr.</p>
+       </div>
+   </div>
+  </div>
+
+  <div class="col-lg-5 grid-margin stretch-card">
+    <div class="content card">
+      <h1 class="card-title">Negatives</h1>
+     
+        <div *ngFor="let tile of negative">
+          <p class="text-red grid-margin stretch-card"
+          >{{tile.text2}}<br>{{tile.text3}}&nbsp;{{tile.text1}}
+        </p>
+         
+       
+      </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5 grid-margin stretch-card">
+      <div class="content card">
+        <h1 class="card-title">Neutrals</h1>
+      
+          <div *ngFor="let tile of neutral">
+            <p class="text-yellow grid-margin stretch-card"
+           >{{tile.text2}}<br>{{tile.text3}}&nbsp;{{tile.text1}}
+          </p>
+           
+          </div>
+        
+        </div>
+      </div>
+    </div>
+
 <p-tabView>
   <p-tabPanel header="Today">
     <div class="col-lg-18 grid-margin stretch-card">
@@ -148,26 +188,7 @@
       </div>
 
       
-      <div class="col-lg-13 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body" >
-            <h4 class="card-title">PCR</h4>
-            <div style="height: 200px">
-              <p-chart  type="line"  [width]="1000" [height]="200" [data]="basicData1" [options]="basicOptions1"></p-chart>
-              </div>
-        </div>
-        </div>
-      </div>
-      <div class="col-lg-13 grid-margin stretch-card ">
-        <div class="card">
-          <div class="card-body" >
-            <h4 class="card-title">VIX</h4>
-            <div style="height: 200px">
-            <p-chart  type="line"  [width]="1000" [height]="200" [data]="basicData" [options]="basicOptions"></p-chart>
-            </div>
-        </div>
-        </div>
-      </div>
+      
     
 
       
@@ -175,7 +196,7 @@
 
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-        <div class="card-body" *ngIf="lineChartData">
+        <div class="card-body" *ngIf="stockChartData">
           <h4 class="card-title">NIFTY - Today</h4>
           <canvas baseChart [chartType]="'line'" [datasets]="stockChartData" [labels]="stockChartLabels" [options]="stockChartOptions" [colors]="stockChartColors"></canvas>
         </div>
@@ -210,7 +231,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">stock - 5 Days</h4>
-        <canvas baseChart [chartType]="'line'" [datasets]="lineChart5dData" [labels]="lineChart5dLabels" [options]="lineChart5dOptions" [colors]="lineChart5dColors"></canvas>
+        <canvas baseChart [chartType]="'line'" [datasets]="stock5dData" [labels]="stock5dLabels" [options]="stock5dOptions" [colors]="stock5dColors"></canvas>
       </div>
     </div>
   </div>
@@ -244,7 +265,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">stock - 1 Month</h4>
-        <canvas baseChart [chartType]="'line'" [datasets]="lineChart1mData" [labels]="lineChart1mLabels" [options]="lineChart1mOptions" [colors]="lineChart1mColors"></canvas>
+        <canvas baseChart [chartType]="'line'" [datasets]="stock1mData" [labels]="stock1mLabels" [options]="stock1mOptions" [colors]="stock1mColors"></canvas>
       </div>
     </div>
   </div>
@@ -254,9 +275,9 @@
 <p-tabPanel header="3months">
   <div class="col-lg-15 grid-margin  stretch-card">
     <div class="card">
-      <div class="card-body" *ngIf="lineChart3mData">
+      <div class="card-body" *ngIf="stock3mData">
         <h4 class="card-title">NIFTY - 3 months</h4>
-        <canvas baseChart [chartType]="'line'" [datasets]="lineChart3mData" [labels]="lineChart3mLabels" [options]="lineChart3mOptions" [colors]="lineChart3mColors"></canvas>
+        <canvas baseChart [chartType]="'line'" [datasets]="stock3mData" [labels]="stock3mLabels" [options]="stock3mOptions" [colors]="stock3mColors"></canvas>
       </div>
     </div>
   </div>
@@ -267,7 +288,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">stock - 6 Months</h4>
-        <canvas baseChart [chartType]="'line'" [datasets]="lineChart6mData" [labels]="lineChart6mLabels" [options]="lineChart6mOptions" [colors]="lineChart6mColors"></canvas>
+        <canvas baseChart [chartType]="'line'" [datasets]="stock6mData" [labels]="stock6mLabels" [options]="stock6mOptions" [colors]="stock6mColors"></canvas>
       </div>
     </div>
   </div>
@@ -277,7 +298,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">NIFTY - 1 Year </h4>
-        <canvas baseChart [chartType]="'line'" [datasets]="lineChart1yrData" [labels]="lineChart1yrLabels" [options]="lineChart1yrOptions" [colors]="lineChart1yrColors"></canvas>
+        <canvas baseChart [chartType]="'line'" [datasets]="stock1yrData" [labels]="stock1yrLabels" [options]="stock1yrOptions" [colors]="stock1yrColors"></canvas>
       </div>
     </div>
   </div>
