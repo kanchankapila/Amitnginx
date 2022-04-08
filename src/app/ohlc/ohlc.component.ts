@@ -1,33 +1,16 @@
 import { Component, OnInit, LOCALE_ID } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
-import {AtomSpinnerModule} from 'angular-epic-spinners'
-import {ChartModule} from 'primeng/chart';
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
 import * as etsector from '../lists/etsectorlist'
 import * as etindex from '../lists/etindexlist'
 import * as mcindex from '../lists/mcsectorlist'
-//import { StockChart } from 'angular-highcharts';
 import {CardModule} from 'primeng/card';
 import {TabViewModule} from 'primeng/tabview';
-
-
-// If you are using ES6, then
-//import * as CanvasJS from '../lists/canvasjs.min.js';
-
-//import { Button } from 'mdb-ui-kit';
-//import * as Highcharts from "highcharts/highstock";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-//import * as mdb from 'mdb-ui-kit'; // lib
 import { ViewportScroller } from '@angular/common';
 import ApexCharts from 'apexcharts'
-//import { Input } from 'mdb-ui-kit'; // module
-//import { NgxSpinnerService } from "ngx-spinner";
-//import { ChangeDetectionStrategy } from '@angular/core';
-//import { BuiltinType, SelectorListContext } from '@angular/compiler';
-//import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
-//import { LinearGaugeComponent } from '@swimlane/ngx-charts';
 
 
 
@@ -723,6 +706,64 @@ export interface stockpcrtile {
 text1: number;
 }
 
+/////////////////////////////Amit 2.0////////////////////////////
+export interface stockcrossover {
+
+  text1: any;
+  text2: any;
+  text3: any;
+  
+}
+export interface stockindicatorstile{
+  text1: string;
+  text2: string;
+  text3: string;
+  text4: string;
+ 
+}
+export interface stockindicatorswtile{
+  text1: string;
+  text2: string;
+  text3: string;
+  text4: string;
+ 
+}
+export interface stockindicatorsmtile{
+  text1: string;
+  text2: string;
+  text3: string;
+  text4: string;
+ 
+}
+export interface stockbbtile{
+  text1: string;
+  text2: string;
+  
+ 
+}
+export interface stockematile{
+  text1: string;
+  text2: string;
+  text3: string;
+  text4: string;
+  text5: string;
+  text6: string;
+  text7: string;
+}
+export interface stocksmatile{
+  text1: string;
+  text2: string;
+  text3: string;
+  text4: string;
+  text5: string;
+  text6: string;
+  text7: string;
+  
+ 
+}
+
+//////////////////////////////////////////////////////////////////////////
+
 @Component({
 selector: 'app-ohlc',
 templateUrl: './ohlc.component.html',
@@ -730,19 +771,113 @@ templateUrl: './ohlc.component.html',
 styleUrls: ['./ohlc.component.scss']
 })
 export class OHLCComponent implements OnInit {
+/////////////////////////////Amit 2.0///////////////////////////////////
+  public stockdata: Array<number> = [];
+  public stockLabels: Array<any> = [];
+  public stockChartData: Array<any> = [];
+  public stockChartLabels: Array<number> = [];
+  public stockChartOptions: any;
+  public stockChartColors: any;
+  public stockpcrdata: Array<number> = [];
+  public stockpcrtime: Array<any> = [];
+  public stockvixdata: Array<number> = [];
+  public stockvixtime: Array<any> = [];
+  public stockData: Array<any> = [];
+  public stockOptions: any;
+  public stockColors: any;
+  public stock5ddata: Array<number> = [];
+  public stock5dLabels: Array<any> = [];
+  public stock5dData: Array<any> = [];
+  public stock5dOptions: any;
+  public stock5dColors: any;
+  public stock1mdata: Array<number> = [];
+  public stock1mLabels: Array<any> = [];
+  public stock1mData: Array<any> = [];
+  public stock1mOptions: any;
+  public stock1mColors: any;
+  public stock3mdata: Array<number> = [];
+  public stock3mLabels: Array<any> = [];
+  public stock3mData: Array<any> = [];
+  public stock3mOptions: any;
+  public stock3mColors: any;
+  public stock6mdata: Array<number> = [];
+  public stock6mLabels: Array<any> = [];
+  public stock6mData: Array<any> = [];
+  public stock6mOptions: any;
+  public stock6mColors: any;
+  public stock1yrdata: Array<number> = [];
+  public stock1yrLabels: Array<any> = [];
+  public stock1yrData: Array<any> = [];
+  public stock1yrOptions: any;
+  public stock1yrColors: any;
+  public stockpcrData: Array<any> = [];
+  public stockpcrLabels:Array<number>= [];
+  public stockpcrOptions: any;
+  public stockpcrColors: any;
+  public stockvixData: Array<any> = [];
+  public stockvixLabels:Array<number>= [];
+  public stockvixOptions: any;
+  public stockvixColors: any;
+  basicData: any;
+  basicOptions: any;
+  basicData1: any;
+  basicOptions1: any;
+  //chart: any;
+  stockcrossover: stockcrossover[] = [];
+  stockindicators: stockindicatorstile[] = [];
+  stockindicatorsw: stockindicatorswtile[] = [];
+  stockindicatorsm: stockindicatorsmtile[] = [];
+  stockbb: stockbbtile[] = [];
+  stockema: stockematile[] = [];
+  stocksma: stocksmatile[] = [];
+ 
+  public stockDatasnrr1: Array<number> = [];
+  public stockDatasnrr2: Array<number> = [];
+  public stockDatasnrr3: Array<number> = [];
+  public stockDatasnrs1: Array<number> = [];
+  public stockDatasnrs2: Array<number> = [];
+  public stockDatasnrs3: Array<number> = [];
+  public stockLabelssnrr1: Array<any> = [];
+  public stockLabelsnrr3: Array<any> = [];
+  public stockLabelssnrr2: Array<any> = [];
+  public stockLabelssnrs1: Array<any> = [];
+  public stockLabelssnrs2: Array<any> = [];
+  public stockLabelssnrs3: Array<any> = [];
+  public stockDatasnrr1w: Array<number> = [];
+  public stockDatasnrr2w: Array<number> = [];
+  public stockDatasnrr3w: Array<number> = [];
+  public stockDatasnrs1w: Array<number> = [];
+  public stockDatasnrs2w: Array<number> = [];
+  public stockDatasnrs3w: Array<number> = [];
+  public stockLabelssnrr1w: Array<any> = [];
+  public stockLabelsnrr3w: Array<any> = [];
+  public stockLabelssnrr2w: Array<any> = [];
+  public stockLabelssnrs1w: Array<any> = [];
+  public stockLabelssnrs2w: Array<any> = [];
+  public stockLabelssnrs3w: Array<any> = [];
+  public stockDatasnrr1m: Array<number> = [];
+  public stockDatasnrr2m: Array<number> = [];
+  public stockDatasnrr3m: Array<number> = [];
+  public stockDatasnrs1m: Array<number> = [];
+  public stockDatasnrs2m: Array<number> = [];
+  public stockDatasnrs3m: Array<number> = [];
+  public stockLabelssnrr1m: Array<any> = [];
+  public stockLabelsnrr3m: Array<any> = [];
+  public stockLabelssnrr2m: Array<any> = [];
+  public stockLabelssnrs1m: Array<any> = [];
+  public stockLabelssnrs2m: Array<any> = [];
+  public stockLabelssnrs3m: Array<any> = [];
+  basicData3: any;
+  basicOptions3: any;
+  /////////////////////////////////////////////////////////////////////////
+
 visibleSidebar1;
 visibleSidebar2;
-  
-  visibleSidebar3;
-  
-  visibleSidebar4;
-  
-  visibleSidebar5;
-
-basicData: any;
-basicOptions: any;
-// stock22: StockChart;
-// stock23: StockChart;
+visibleSidebar3;
+visibleSidebar4;
+visibleSidebar5;
+//basicData: any;
+//basicOptions: any;
 chart;
 dataSource: Object;
 title: string;
@@ -766,8 +901,7 @@ sectorid: any
 exchange: any
 indexid: any
 mcindexid: any
-  scripcode: any
-  
+scripcode: any
 stockoptionwc = [];
 stockoptionwp = [];
 sectreturn: any
@@ -789,14 +923,13 @@ NIFTYNEXT50unc: any
 NIFTY50adv: any
 indicatorssentiment: any
 movingaveragecrossoversentiment: any
-  masentiment: any
-  indicatorssentimentm: any
+masentiment: any
+indicatorssentimentm: any
 movingaveragecrossoversentimentm: any
 masentimentm: any
 indicatorssentimentw: any
 movingaveragecrossoversentimentw: any
 masentimentw: any
-
 NIFTY50dec: any
 NIFTY50unc: any
 NIFTYITadv: any
@@ -839,12 +972,9 @@ macd: macdtile[] = [];
 macdsignal:macdsignaltile[] = [];
 rsi:rsitile[] = [];
 mfi:mfitile[] = [];
-
-
 nsedelivQ: nsedelivQtiles[] = [];
 nseintraday: nseintradaytiles[] = [];
 nsepreopen: nsepreopentiles[] = [];
-
 ldiv: any
 dyield: any
 isin2: any
@@ -874,7 +1004,6 @@ dataTest: any
 phol: any
 pholmsg: any
 dataTest1: any
-
 dataTest2: any
 ChartType6: any
 eqsymbol: any
@@ -892,11 +1021,9 @@ STRONG_SELL = "STRONG_SELL"
 buy = "buy"
 sell = "sell"
 Bullish = "Bullish"
-
 details = []
 industry: any
 indicatormadate: any
-// element = document.getElementById("abc");
 sector: any
 currentprice: any
 pricechange: any
@@ -908,8 +1035,8 @@ volume: volumetile[] = [];
 uband: ubandtile[] = [];
 lband: lbandtile[] = [];
 hmsg: hmsgtile[] = [];
-  pmov: pmovtile[] = [];
-  newscard: newscardtile[] = [];
+pmov: pmovtile[] = [];
+newscard: newscardtile[] = [];
 kstats: kstatstile[] = [];
 listedindexname: listedindexnametile[] = [];
 csectorcompany: csectorcompanytile[] = [];
@@ -945,15 +1072,12 @@ industrycomparison: industrycomparisontile[] = [];
 indicator: indicatortile[] = [];
 LineChartData5comb = [];
 LineChartDataetindexcomb = [];
-
-  ti: titile[] = [];
-  tiw: tiwtile[] = [];
-  tim: timtile[] = [];
-  bbm: bbmtile[] = [];
-  bbw: bbwtile[] = [];
-  
+ti: titile[] = [];
+tiw: tiwtile[] = [];
+tim: timtile[] = [];
+bbm: bbmtile[] = [];
+bbw: bbwtile[] = [];
 timeframe:any
-
 Opportunities: opportile[] = [];
 strengths: strengthstile[] = [];
 dy: dytile[] = [];
@@ -961,8 +1085,8 @@ hgdata = [];
 threats: threatstile[] = [];
 weaknesses: weaknesstile[] = [];
 indication: indicationtile[] = [];
-  indicationw: indicationwtile[] = [];
-  indicationm: indicationmtile[] = [];
+indicationw: indicationwtile[] = [];
+indicationm: indicationmtile[] = [];
 volume1: volume1tile[] = [];
 ks: kstile[] = [];
 holding: holdingtile[] = [];
@@ -1129,7 +1253,7 @@ public lineChartData3: Array<number> = [];
 public lineChartData4: Array<number> = [];
 public lineChartData5: Array<number> = [];
 //public lineChartData5comb: Array<number> = [{ x:data, y }];
-public lineChartData8: Array<number> = [];
+
 public lineChartData9: Array<number> = [];
 public lineChartDataetindicescharts: Array<number> = [];
 public lineChartLabelstindicescharts: Array<number> = [];
@@ -1181,9 +1305,7 @@ public labelMFL5: Array<any> = [
 
 
 ];
-public labelMFL6: Array<any> = [
-  { data: this.lineChartData7, label: this.SystemName7 }
-];
+
 public labelMFL7: Array<any> = [
   { data: this.lineChartDatamacdm, label: this.SystemName8 },
   { data: this.lineChartDatasignalm, label: this.SystemName9 },
@@ -1468,16 +1590,13 @@ ngOnInit() {
   this.etsectors = etsector.default.Data
   this.etindexs = etindex.default.Data
   this.mcindexs = mcindex.default.Data
-  //console.log(this.etindexs)
+  
+  
 
-  ///Prime ng charts
-  this.lineStylesData = [{
-
-    data: this.lineChartData7, label: this.lineChartLabels7
-  }];
+ 
 
 
-  console.log()
+  
   this.route.queryParams.subscribe(params => {
 
     this.eqsymbol = this.stockList.filter(i => i.isin == params.stock)[0].symbol
@@ -1492,13 +1611,9 @@ ngOnInit() {
     this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
     
 
-
-    //this.getohlcDetails(params.stock, 'mydb')
+    
     this.gettrendlynestocks1(this.tlid,this.tlname,this.eqsymbol)
     this.getgooglenews(params.stock, 'googlenews')
-    //  this.getStockData(params.stock, 'stockDB')
-    //this.getsnrDetails(params.stock, 'investingpivot_D')
-    //this.getIndicatorsma(params.stock, 'investingMA_D')
     this.getnse()
     this.getmcswot(this.mcsymbol)
     this.getkite1(this.timeframe,this.eqsymbol)
@@ -1511,28 +1626,22 @@ ngOnInit() {
     this.getdbjdata(this.eqsymbol, 'jdata')
     this.getdbjdataall(this.eqsymbol, 'jdata')
     this.getmmpeers(this.stockid)
-    //this.opstraexpirydatesmonthly(this.eqsymbol)
     this.getmmtechscore(this.stockid)
     this.getmmpmov(this.stockid)
-    this.getnifty50()
     this.getetcompanydataohlc(this.companyid)
     this.getswot(this.mcsymbol)
     this.getmcswot(this.mcsymbol)
     this.gettrendlynestocks2(this.tlid)
     this.gettrendlynestocks3(this.tlid)
-    this.populateData()
     this.nsedatastockohlc1(this.eqsymbol)
     this.nsedatastockohlc2(this.eqsymbol)
     this.getmchistoricalrating(this.mcsymbol)
-    //this.populateDetails1(params.stock, 'mydb')
-    
     this.getmcindexdata()
     this.getmcsnr(this.mcsymbol)
     this.getmcsnrw(this.mcsymbol)
     this.getmcsnrm(this.mcsymbol)
     this.getmcsd(this.mcsymbol)
     this.getmcpv(this.mcsymbol)
-    
     this.getmcchartsdata(this.mcsymbol)
     this.getmcchartsdataohlc(this.mcsymbol)
     this.getbqbdetails(this.stockid)
@@ -1546,7 +1655,6 @@ ngOnInit() {
     this.getmmobv(this.stockid)
     this.getmmdow(this.stockid)
     this.getmcmovingaveragesview(this.stockisin,'moneycontrol')
-    //this.getbqpricestats(this.stockid)
     this.nsedatastockoi(this.eqsymbol)
     this.getbqfundamentals(this.stockid)
     this.getbqmovingaverages(this.stockid)
@@ -1567,28 +1675,14 @@ ngOnInit() {
     {
       setInterval(() => { this.gnewsapi(this.bqnames) }, 300000);
     }
-    const xAxisData = [];
-    const data1 = [];
-    const data2 = [];
+   
 
-
-
-
-
-
-
-
-  });
+});
 
 }
 
 
-populateData() {
 
-  for (let val in this.details) {
-    this.tiles.push({ text: this.details[val].averagePrice, cols: 1, rows: 1, color: 'lightgreen' })
-  }
-}
 
 gettrendlynestocks2(tlid) {
   this.dataApi.gettrendlynestocks2(tlid).subscribe(data5 => {
@@ -1619,6 +1713,8 @@ gettrendlynestocks3(tlid) {
   })
 }
 
+
+  
 gnewsapi(bqnames) {
   this.dataApi.gnewsapi(bqnames).subscribe(data5 => {
     let nestedItems = Object.keys(data5).map(key => {
@@ -1630,24 +1726,6 @@ gnewsapi(bqnames) {
       
         }
       
-  }, err => {
-    console.log(err)
-  })
-}
-getnifty50() {
-  this.dataApi.getnifty50().subscribe(data5 => {
-    let nestedItems = Object.keys(data5).map(key => {
-      return data5[key];
-    });
-
-
-    for (let val in nestedItems[1].values) {
-      this.lineChartData7.push(nestedItems[1].values[val]["_value"])
-      this.lineChartLabels7.push(nestedItems[1].values[val]["_time"])
-      //this.lineStylesData.push(nestedItems[1].values[val]["_value"])
-      //this.lineStylesData.labels.push(nestedItems[1].values[val]["_time"])
-
-    }
   }, err => {
     console.log(err)
   })
@@ -1767,14 +1845,15 @@ getmcchartsdata(mcsymbol) {
     let nestedItems = Object.keys(data3).map(key => {
       return data3[key];
     });
+    console.log(nestedItems)
     this.lineChartData5.length = 0;
     this.lineChartLabels5.length = 0;
     for (let val in nestedItems[5]) {
       this.lineChartData5.push(nestedItems[5][val].value)
 
-      this.lineChartLabels5.push(new Date(nestedItems[5][val].time * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }).replace(':', ''))
+      this.lineChartLabels5.push(new Date(nestedItems[5][val].time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }).replace(':', ''))
 
-      this.LineChartData5comb.push([new Date(nestedItems[5][val].time * 1000).toLocaleTimeString("en-IN"), nestedItems[5][val].value])
+      this.LineChartData5comb.push([new Date(nestedItems[5][val].time).toLocaleTimeString("en-IN"), nestedItems[5][val].value])
 
 
     }
@@ -1808,25 +1887,7 @@ getmcchartsdata(mcsymbol) {
     }
   };
   
-    // this.stock22 = new StockChart({
-    //   rangeSelector: {
-    //     selected: 1
-    //   },
-    //   title: {
-    //     text: this.stockname
-    //   },
-    //   series: [{
-    //     tooltip: {
-    //       valueDecimals: 2
-    //     },
-    //     name: this.stockname,
-    //     type: 'line',
-    //     data: this.LineChartData5comb
-    //   }]
-    // });
-
-
-
+    
 
   }, err => {
     console.log(err)
@@ -1900,23 +1961,6 @@ getkite1(timeframe,eqsymbol) {
 
 
 
-// populatesnrDetails(stock_isin, dbname) {
-//   this.SpinnerService.show();
-//   this.dataApi.getsnrDetails(stock_isin, dbname).subscribe(data5 => {
-//     this.dblist[dbname] = data5
-
-//     this.dataTest2 = data5
-//     for (let val in data5) {
-//       this.lineChartData2.push(data5[val].s3)
-
-//       this.lineChartLabels2.push(new Date(data5[val].date).toLocaleDateString("en-IN"))
-
-//     }
-//     this.SpinnerService.hide();
-//   }, err => {
-//     console.log(err)
-//   })
-// }
   getmcsnr(mcsymbol) {
   this.dataApi.getmcsnr(this.mcsymbol).subscribe(data5 => {
 
@@ -2341,76 +2385,8 @@ getmcpv(mcsymbol) {
   }
   )
 }
-populateIndicators(stock_isin, dbname) {
-  this.dataApi.getIndicators(stock_isin, dbname).subscribe(data5 => {
-    this.dblist[dbname] = data5
-
-    for (let val in data5) {
-      this.indicator.push({ text1: data5[val].technical_indicator, text2: data5[val].signal })
-      this.indicatordate = data5[val].date
-    }
-  }, err => {
-    console.log(err)
-  })
-}
-// populateyfindata(stock_isin, dbname) {
-//   this.dataApi.getyfindata(stock_isin, dbname).subscribe(data10 => {
-//     this.dblist[dbname] = data10
-
-//     this.dataTest2 = data10
-//     for (let val in data10) {
-//       this.industry = data10[val].industry
-//       this.sector = data10[val].sector
-//       this.price.push({ text: "200 Day's Average:  " + data10[val].twoHundredDayAverage, text1: "50 Day Average:  " + data10[val].fiftyDayAverage, cols: 1, rows: 1, color: 'lightblue' })
-//       this.financial.push({ text: "Earning's Quarterly Growth:" + data10[val].earningsQuarterlyGrowth, text1: "P/B:" + data10[val].priceToBook, text2: "PEG Ratio:" + data10[val].pegRatio, text3: "Book Value:" + data10[val].bookValue, text4: "Forward EPS:" + data10[val].forwardEps, text5: "Forward PE:" + data10[val].forwardPE, text6: "Trailing EPS:" + data10[val].trailingEps, text7: "Price to Sales 12mnths Trailing:" + data10[val].priceToSalesTrailing12Months, text8: "Profit Margins:" + data10[val].profitMargins })
-//       this.holding.push({ text: "Institutions Holding " + data10[val].heldPercentInstitutions, text1: "Insider Holding:" + data10[val].heldPercentInsiders })
-//       this.volume1.push({ text: "averageVolume:  " + data10[val].averageVolume, text1: "averageVolume10days:" + data10[val].averageVolume10days })
 
 
-
-
-//     }
-
-//   }, err => {
-//     console.log(err)
-//   })
-// }
-
-
-populateDetails1(stock_isin, dbname) {
-  this.dataApi.getohlcDetails(stock_isin, dbname).subscribe(data4 => {
-  
-    this.dblist[dbname] = data4
-    this.dataTest = data4
-    this.loader = false
-
-
-
-    for (let val in data4) {
-      this.lineChartData8.push(data4[val]["Deliverable Volume"])
-      // this.lineChartData.push(data4[val].High)
-      // this.lineChartData1.push(data4[val].Low)
-      // this.lineChartData2.push(data4[val].VWAP)
-      //this.lineChartData3.push(data4[val].Volume)
-      this.lineChartData4.push(data4[val].Devp)
-      //this.lineChartLabels.push(new Date(data4[val].Date).toLocaleDateString("en-IN"))
-      //this.lineChartLabels1.push(new Date(data4[val].Date).toLocaleDateString("en-IN"))
-      this.lineChartLabels2.push(new Date(data4[val].Date).toLocaleDateString("en-IN"))
-      this.lineChartLabels3.push(new Date(data4[val].Date).toLocaleDateString("en-IN"))
-      this.lineChartLabels4.push(new Date(data4[val].Date).toLocaleDateString("en-IN"))
-      this.lineChartLabels5r1.push(new Date(data4[val].Date).toLocaleDateString("en-IN"))
-
-    }
-
-
-
-
-
-  }, err => {
-    this.loader = false
-    console.log(err)
-  })
-}
 getohlcDetails(stock_isin, dbname) {
   this.loader1 = true
 
@@ -2445,34 +2421,6 @@ getgooglenews(stock_isin, dbname) {
   })
 }
 
-// getyfindata(stock_isin, dbname) {
-//   this.loader = true
-
-//   this.dataApi.getyfindata(stock_isin, dbname).subscribe(data3 => {
-//     this.dblist[dbname] = data3
-
-//     this.loader = false
-//   }, err => {
-//     this.loader = false
-//     console.log(err)
-//   })
-// }
-// getyfinstats(stock_isin, dbname) {
-
-//   this.dataApi.getyfinstats(stock_isin, dbname).subscribe(data3 => {
-//     this.dblist[dbname] = data3
-
-//     for (let val in data3) {
-
-
-//       this.finstats.push({ text1: data3[val].Attribute, text2: data3[val].Value })
-
-//     }
-
-//   }, err => {
-//     console.log(err)
-//   })
-// }
 
 getsnrDetails(stock_isin, dbname) {
 
@@ -2494,25 +2442,7 @@ getIndicators(stock_isin, dbname) {
   })
 
 }
-// getIndicatorsma(stock_isin, dbname) {
 
-//   this.dataApi.getIndicatorsma(stock_isin, dbname).subscribe(data2 => {
-//     this.dblist[dbname] = data2
-
-
-//     for (let val in data2) {
-
-
-//       this.indicatorma.push({ text: "EMA ", text1: "Period: " + data2[val].period, text2: data2[val].ema_value, text3: data2[val].ema_signal })
-//       this.indicatorma.push({ text: "SMA ", text1: "Period: " + data2[val].period, text2: data2[val].sma_value, text3: data2[val].sma_signal })
-//       this.indicatormadate = data2[val].date
-//     }
-
-//   }, err => {
-//     console.log(err)
-//   })
-
-// }
 getetcompanydataohlc(companyid) {
   this.dataApi.getetcompanydataohlc(companyid).subscribe(data5 => {
     let nestedItems = Object.keys(data5).map(key => {
@@ -2801,27 +2731,6 @@ getmmtechscore(stockid) {
   )
 }
 
-// getStockData(stock_isin, dbname) {
-//   this.dataApi.getStockData(stock_isin, dbname).subscribe(data1 => {
-//     this.dblist[dbname] = data1
-
-//     var details = this.dblist.stockDB[0].data
-//     var keysof = Object.keys(details)
-//     for (let i = 0; i < keysof.length; i++) {
-//       this.details.push(details[keysof[i]])
-
-//       this.day.push({ text: "Day High: " + this.details[i].dayHigh, text1: "Day Low: " + this.details[i].dayLow, text2: "Average Price: " + this.details[i].averagePrice, text3: "Open: " + this.details[i].open, text4: "Close: " + this.details[i].closePrice, text5: "Previous Close: " + this.details[i].previousClose, cols: 1, rows: 1, color: 'lighgreen' })
-//       //this.band.push({text: "Lower Band:"+this.details[i].pricebandlower,text1:"Upper Band:"+this.details[i].pricebandupper,text2:"Price Band"+this.details[i].priceBand , cols: 2, rows: 1, color: 'ligtblue'})
-//       this.wk.push({ text: "52Wk High: " + this.details[i].high52, text1: "52Wk Low: " + this.details[i].low52, cols: 2, rows: 1, color: '#DDBDF1' })
-//       this.percentage.push({ text: "% Change:" + this.details[i].pChange + "%", text1: "DeliverytoTraded: " + this.details[i].deliveryToTradedQuantity + "%", text2: "Total Traded Volume" + this.details[i].totalTradedVolume, cols: 1, rows: 1, color: '#DDBDF1' })
-
-
-
-//     }
-//   }, err => {
-//     console.log(err)
-//   })
-// }
 
 getbqbdetails(stockid) {
   this.dataApi.getbqbdetails(stockid).subscribe(data5 => {
@@ -3546,17 +3455,11 @@ getbqitnews(bqnames) {
     let nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
-
-
-
     for (let val in nestedItems) {
       this.news1.push(new Date(nestedItems[val]["published-at"]).toLocaleDateString("en-IN"))
       this.news1.push(nestedItems[val].headline)
     }
-
-
-
-  }, err => {
+ }, err => {
     console.log(err)
   }
   )
@@ -3573,22 +3476,10 @@ getbqpd(stockid) {
   }
   )
 }
-// scroll() {
-// console.log("scroll start")
-// this.element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-//}
+
 scroll(id) {
   this.vps.scrollToAnchor(id);
 }
-changeStock(stock_isin, dbname) {
- // this.getohlcDetails(stock_isin, 'mydb')
-  //this.getStockData(stock_isin, 'stockDB')
-  //this.getsnrDetails(stock_isin, 'investingpivot_D')
-
-}
-//changeStock1(stock_isin,dbname){
-// this.router.navigate(['/Ohlc'], {queryParams:{  stock: stock_isin  ,dbname : 'mydb' }} );
-//}
 
 
 }
@@ -3597,11 +3488,4 @@ changeStock(stock_isin, dbname) {
 
 
 
-function PlotChart(chart_name: any) {
-throw new Error('Function not implemented.');
-}
-
-function x(x: any, value: any, y: any, arg3: string) {
-throw new Error('Function not implemented.');
-}
 

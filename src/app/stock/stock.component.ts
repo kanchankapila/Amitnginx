@@ -4,11 +4,17 @@ import { PrimeNGConfig } from 'primeng/api';
 import { BaseChartDirective } from 'ng2-charts';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
+import { createChart } from 'lightweight-charts';
+
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
 import * as etsector from '../lists/etsectorlist'
 import * as etindex from '../lists/etindexlist'
 import * as mcindex from '../lists/mcsectorlist'
+import { NgApexchartsModule } from "ng-apexcharts";
+//import { seriesData, seriesDataLinear } from "./ohlc";
+
+
 export interface stockcrossover {
 
   text1: any;
@@ -21,6 +27,15 @@ export interface stockindicatorstile{
   text2: string;
   text3: string;
   text4: string;
+ 
+}
+export interface stockDatatiles{
+  x: number;
+  open: any;
+  high: any;
+  low: any;
+  close: any;
+  volume: any;
  
 }
 export interface stockindicatorswtile{
@@ -180,17 +195,27 @@ export interface stocksmatile{
  
 }
 
+
 @Component({
   selector: 'app-stock',
   templateUrl: './stock.component.html',
   styleUrls: ['./stock.component.scss']
 })
+  
 export class StockComponent implements OnInit {
- 
+  @ViewChild('chart-container')
+
+  public primaryXAxis: Object;
+  public primaryYAxis: Object;
+  public rows: Object;
+  public axes: Object;
+
   constructor(private primengConfig: PrimeNGConfig,private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
     
   }
-  public stockdata: Array<number> = [];
+  
+  
+  public stockdata1: Array<number> = [];
   public stockLabels: Array<any> = [];
   public stockChartData: Array<any> = [];
   public stockChartLabels: Array<number> = [];
@@ -200,7 +225,7 @@ export class StockComponent implements OnInit {
   public stockpcrtime: Array<any> = [];
   public stockvixdata: Array<number> = [];
   public stockvixtime: Array<any> = [];
-  public stockData: Array<any> = [];
+  public stockData1: Array<any> = [];
   public stockOptions: any;
   public stockColors: any;
   public stock5ddata: Array<number> = [];
@@ -245,6 +270,7 @@ export class StockComponent implements OnInit {
   stockindicators: stockindicatorstile[] = [];
   stockindicatorsw: stockindicatorswtile[] = [];
   stockindicatorsm: stockindicatorsmtile[] = [];
+  stockData: stockDatatiles[] = [];
   mcap: mcaptile[] = [];
   np: nptile[] = [];
   pbv: pbvtile[] = [];
@@ -308,6 +334,59 @@ export class StockComponent implements OnInit {
   public stockLabelssnrs1m: Array<any> = [];
   public stockLabelssnrs2m: Array<any> = [];
   public stockLabelssnrs3m: Array<any> = [];
+  public apexohlc = [];
+  public apexvolume: Array<any> = [];
+  //public stockData: object[]
+//     = [
+
+//     { x: new Date("2012-04-02"), open: 85.975716, high: 88.395714, low: 85.76857, close: 88.375717, volume: 14958790 },
+    
+//     { x: new Date("2012-04-03"), open: 89.614288, high: 90.315712, low: 88.93, close: 89.902855, volume: 20863990 },
+    
+//     { x: new Date("2012-04-04"), open: 89.192856, high: 89.408569, low: 88.14286, close: 89.187141, volume: 14324520 },
+    
+//     { x: new Date("2012-04-05"), open: 89.568573, high: 90.665718, low: 89.057144, close: 90.525711, volume: 16032450 },
+    
+//     { x: new Date("2012-04-09"), open: 89.447144, high: 91.405716, low: 89.328575, close: 90.889999, volume: 14938420 },
+    
+//     { x: new Date("2012-04-10"), open: 91.418571, high: 92, low: 89.428574, close: 89.777145, volume: 22243130 },
+//     { x: new Date("2012-05-02"), open: 85.975716, high: 88.395714, low: 85.76857, close: 88.375717, volume: 14958790 },
+    
+//     { x: new Date("2012-05-03"), open: 89.614288, high: 90.315712, low: 88.93, close: 89.902855, volume: 20863990 },
+    
+//     { x: new Date("2012-05-04"), open: 89.192856, high: 89.408569, low: 88.14286, close: 89.187141, volume: 14324520 },
+    
+//     { x: new Date("2012-05-05"), open: 89.568573, high: 90.665718, low: 89.057144, close: 90.525711, volume: 16032450 },
+    
+//     { x: new Date("2012-05-09"), open: 89.447144, high: 91.405716, low: 89.328575, close: 90.889999, volume: 14938420 },
+    
+//     { x: new Date("2012-05-10"), open: 91.418571, high: 92, low: 89.428574, close: 89.777145, volume: 22243130 },
+//     { x: new Date("2012-06-02"), open: 85.975716, high: 88.395714, low: 85.76857, close: 88.375717, volume: 14958790 },
+    
+//     { x: new Date("2012-06-03"), open: 89.614288, high: 90.315712, low: 88.93, close: 89.902855, volume: 20863990 },
+    
+//     { x: new Date("2012-06-04"), open: 89.192856, high: 89.408569, low: 88.14286, close: 89.187141, volume: 14324520 },
+    
+//     { x: new Date("2012-06-05"), open: 89.568573, high: 90.665718, low: 89.057144, close: 90.525711, volume: 16032450 },
+    
+//     { x: new Date("2012-06-09"), open: 89.447144, high: 91.405716, low: 89.328575, close: 90.889999, volume: 14938420 },
+    
+//     { x: new Date("2012-06-10"), open: 91.418571, high: 92, low: 89.428574, close: 89.777145, volume: 22243130 },
+    
+    
+// ]
+
+  //public apexohlc: Array<any> 
+//   public apexohlc: {
+//     x: Date;
+//     y: number;
+//   }[]
+//   public apexvolume:[ {
+//     x: Date;
+//     y: number[];
+// }]
+
+  
   basicData3: any;
   basicOptions3: any;
   stockList: any
@@ -326,6 +405,7 @@ export class StockComponent implements OnInit {
   stockid: any
   bqnames: any
   companyid: any
+  periods:any
   
 
   ngOnInit(): void {
@@ -336,7 +416,36 @@ export class StockComponent implements OnInit {
     this.etsectors = etsector.default.Data
     this.etindexs = etindex.default.Data
     this.mcindexs = mcindex.default.Data
+    this.primaryYAxis = {
 
+      plotOffset: 25,
+      
+      rowIndex: 1, opposedPosition: true,
+      
+      rangePadding: 'None',
+      
+      };
+      
+      this.primaryXAxis = { valueType: 'DateTime' };
+      
+      this.rows = [
+      
+      { height: '15%' },
+      
+      { height: '85%' }
+      
+      ];
+      
+      this.axes = [{
+      
+      name: 'secondary', opposedPosition: true, rowIndex: 0,
+      
+      }];
+      
+        
+        
+        
+      
     this.route.queryParams.subscribe(params => {
 
       this.eqsymbol = this.stockList.filter(i => i.isin == params.stock)[0].symbol
@@ -354,9 +463,17 @@ export class StockComponent implements OnInit {
     this.getmcshare(this.mcsymbol,this.eqsymbol);
     this.getmcsharefrequent(this.mcsymbol,this.eqsymbol); 
     setInterval(() => { this.getmcsharefrequent(this.mcsymbol, this.eqsymbol) }, 30000);
+    setInterval(() => { this.gettrendlynestocks2(this.tlid) }, 10000);
     this.gettrendlynestocks1(this.tlid,this.tlname,this.eqsymbol)
- 
-  }
+    this.gettrendlynestocks2(this.tlid)
+    this.gettrendlynestocks3(this.tlid)
+   
+    
+      
+    
+     }
+
+     
 //   buildpcrgraph() {
     
     
@@ -867,10 +984,10 @@ fill: false}];
       //  ////////////To get Nifty Today Price///////////////////////
      
      
-this.stockdata.length = 0;
+this.stockdata1.length = 0;
 this.stockLabels.length = 0;
 for (let val in nestedItems[6]['query']['results']['quotedata']) {
- this.stockdata.unshift(nestedItems[6]['query']['results']['quotedata'][val][1])
+ this.stockdata1.unshift(nestedItems[6]['query']['results']['quotedata'][val][1])
  this.stockLabels.unshift((new Date(nestedItems[6]['query']['results']['quotedata'][val][0]).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })))
 
 }
@@ -878,7 +995,7 @@ for (let val in nestedItems[6]['query']['results']['quotedata']) {
 
 this.stockChartData = [{
  label: 'Price',
- data: this.stockdata,
+ data: this.stockdata1,
  borderWidth: 1,
  fill: false
 },{ label: 'R1',
@@ -963,7 +1080,7 @@ gettrendlynestocks1(tlid,tlname,eqsymbol) {
     let nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
-    console.log(nestedItems)
+    //console.log(nestedItems)
     if (nestedItems[1]['MCAP_Q']['lt1']) {
       if (nestedItems[1]['MCAP_Q']['color1'] == 'positive') {
         this.positive.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
@@ -1206,10 +1323,51 @@ if (nestedItems[1]['sma_200']['lt1']) {
   //  else if (nestedItems[1]['broker_targetdown_6M']['lt1']) {
   //    this.brokertargetdowngrade.push({ text1: nestedItems[1]['broker_targetdown_6M']['lt1'], text2: nestedItems[1]['broker_targetdown_6M']['st1'], text3: nestedItems[1]['broker_targetdown_6M']['color1'] })
   //  }
+   }, err => {
+    console.log(err)
+  })
+  }
+ 
+
+gettrendlynestocks2(tlid) {
+  this.dataApi.gettrendlynestocks2(tlid).subscribe(data5 => {
+    let nestedItems = Object.keys(data5).map(key => {
+      return data5[key];
+    });
+    
+    // this.dscore.push({ text1:nestedItems[1]['stockData'][6],text2:nestedItems[1]['stockData'][9] })
+    // this.volscore.push({ text1:nestedItems[1]['stockData'][7],text2:nestedItems[1]['stockData'][10]  })
+    // this.mscore.push({ text1:nestedItems[1]['stockData'][8],text2:nestedItems[1]['stockData'][11]  })
+    // this.tllink="https://trendlyne.com/alerts/stock-alerts/"+this.eqsymbol+"/"+this.tlid+"/"+this.tlname
+    console.log(nestedItems)
+    this.stockData.length = 0;
+    for (let val in (nestedItems[1]['eodData'])) {
+      //let cal = 0;
+      //while (val != 100) {
+      //cal = cal + 1
+      //while (new Date(nestedItems[1]['eodData'][val][0]).getTime() != 1635760860000) {
+      
+       // this.apexvolume.push([new Date(nestedItems[1]['eodData'][val][0]).getTime(), ])
+      //this.apexohlc.push({ x: new Date(nestedItems[1]['eodData'][val][0]).getTime(), nestedItems[1]['eodData'][val][2], nestedItems[1]['eodData'][val][3], nestedItems[1]['eodData'][val][4], nestedItems[1]['eodData'][val][5],nestedItems[1]['eodData'][val][6] })
+      this.stockData.push({x: new Date(nestedItems[1]['eodData'][val][0]).getTime(),open:nestedItems[1]['eodData'][val][2],high:nestedItems[1]['eodData'][val][3],low:nestedItems[1]['eodData'][val][4],close:nestedItems[1]['eodData'][val][5],volume:nestedItems[1]['eodData'][val][6]})
+    }
+    
+    console.log(this.stockData)
    
-    
-    
-    
+  }, err => {
+    console.log(err)
+  })
+}
+
+
+gettrendlynestocks3(tlid) {
+  this.dataApi.gettrendlynestocks3(tlid).subscribe(data5 => {
+    let nestedItems = Object.keys(data5).map(key => {
+      return data5[key];
+    });
+    //console.log(nestedItems)
+        
+      
   }, err => {
     console.log(err)
   })

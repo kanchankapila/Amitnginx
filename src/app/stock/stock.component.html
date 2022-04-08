@@ -1,17 +1,37 @@
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+
+<ejs-rangenavigator> </ejs-rangenavigator>
+
+ 
+<ejs-stockchart id="chart-container" [primaryXAxis]="primaryXAxis">
+ 
+  <e-stockchart-series-collection>
+   
+  <e-stockchart-series [dataSource]="stockData" type="Candle" xName="x" yName="high" name="Gold" High="high" Low="low" Open="open" Close="close">
+   
+  </e-stockchart-series> 
+   
+  </e-stockchart-series-collection>
+   
+  </ejs-stockchart>
+
+
+
+
 <div class="InsideContent">
-<div class="col-lg-5 grid-margin stretch-card">
-  <div class="content card">
-    <h1 class="card-title">Positives</h1>
+<div class="col-lg-6 grid-margin stretch-card">
+  <div class="content bg-gradient-success card">
+    <h4 class="card-title">Positives</h4>
    
       <div *ngFor="let tile of positive">
-        <p class="grid-margin stretch-card text-green">{{tile.text1}}&nbsp;:{{tile.text3}}Cr.</p>
+        <p class="text-green  grid-margin stretch-card">{{tile.text1}}&nbsp;:{{tile.text3}}Cr.</p>
        </div>
    </div>
   </div>
 
-  <div class="col-lg-5 grid-margin stretch-card">
-    <div class="content card">
-      <h1 class="card-title">Negatives</h1>
+  <div class="col-lg-4 grid-margin stretch-card">
+    <div class="content bg-gradient-danger card">
+      <h4 class="card-title">Negatives</h4>
      
         <div *ngFor="let tile of negative">
           <p class="text-red grid-margin stretch-card"
@@ -24,8 +44,8 @@
     </div>
 
     <div class="col-lg-5 grid-margin stretch-card">
-      <div class="content card">
-        <h1 class="card-title">Neutrals</h1>
+      <div class="content bg-gradient-warning card">
+        <h4 class="card-title">Neutrals</h4>
       
           <div *ngFor="let tile of neutral">
             <p class="text-yellow grid-margin stretch-card"

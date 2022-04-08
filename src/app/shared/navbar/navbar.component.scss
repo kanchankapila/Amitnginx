@@ -44,8 +44,8 @@
   animation-duration: 2s;
 
 }
-.pcrg{
-  background: rgb(161, 248, 165);
+pcrg{
+  background-color: rgb(161, 248, 165);
   display: inline-block;
   margin: 1px;
   width: 150px;
@@ -54,8 +54,8 @@
   animation-duration: 2s;
 
 }
-.pcrr{
-  background: rgb(247, 155, 170);
+pcrr{
+  background-color: rgb(247, 155, 170);
   display: inline-block;
   margin: 1px;
   width: 150px;
@@ -64,8 +64,8 @@
   animation-duration: 2s;
 
 }
-.pcrr{
-  background: rgb(245, 236, 113);
+pcry{
+  background-color: rgb(245, 236, 113);
   display: inline-block;
   margin: 1px;
   width: 150px;
@@ -97,6 +97,16 @@
     margin: 1px;
     max-width: 300px;
     max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+  
+  }
+  .pcrg{
+    background: rgb(114, 240, 162);
+    display: inline-block;
+    margin: 1px;
+    width: 150px;
+    height: 50px;
     animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
     animation-duration: 2s;
   

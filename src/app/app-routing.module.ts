@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'nifty50', loadChildren: () => import('./nifty50/nifty50.module').then(m => m.Nifty50Module) }, 
   { path: 'niftybank', loadChildren: () => import('./niftybank/niftybank.module').then(m => m.NiftybankModule) },  
   { path: 'Dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }, 
-  //{ path: 'Ohlc', loadChildren: () => import('./ohlc/ohlc.module').then(m => m.OhlcModule) },
+  { path: 'Ohlc', loadChildren: () => import('./ohlc/ohlc.module').then(m => m.OhlcModule) },
   { path: 'Stock',loadChildren: () => import('./stock/stock.module').then(m => m.StockModule) },
   { path: 'basic-ui', loadChildren: () => import('./basic-ui/basic-ui.module').then(m => m.BasicUiModule) },
   { path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsDemoModule) },

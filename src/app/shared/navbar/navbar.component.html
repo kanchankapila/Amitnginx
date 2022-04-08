@@ -143,13 +143,13 @@
     <div class="InsideContent">   
       
     <div class="InsideContent1">
-      <mat-card [ngClass]="{'pcrg animate__flipOutX' : tile.text1 > 1.2 ,'pcrr animate__flipOutX': 0.80 > tile.text1 ,'pcry animate__flipOutX': tile.text1 == 0.80 }"  *ngFor="let tile of pcrnsebnifty">
-        <h6>PCR BNifty :{{tile.text1| number : '1.2-2'}}</h6>
-        
+      <mat-card [ngClass]="{'animate__flipOutX bnoptionssupport' : tile.text1 >= 1.2 ,'pcrr animate__flipOutX': 0.80 > tile.text1 ,'pcry animate__flipOutX': 1.2 > tile.text1 > 0.80 }"  *ngFor="let tile of pcrnsebnifty">
+        <h6>PCRB :{{tile.text1| number : '1.2-2'}}</h6>
+       
       </mat-card>
-      <mat-card [ngClass]="{'pcrg animate__flipOutX' : tile.text1 > 1.2 ,'pcrr animate__flipOutX': 0.80 > tile.text1,'pcry animate__flipOutX': tile.text1 == 0.80 }"  *ngFor="let tile of pcrnsenifty">
-        <h6>PCR Nifty :{{tile.text1| number : '1.2-2'}}</h6>
-           
+      <mat-card [ngClass]="{'animate__flipOutX bnoptionssupport' : tile.text1 >= 1.2 ,'pcrr animate__flipOutX': 0.80 > tile.text1,'pcry animate__flipOutX': 1.2 > tile.text1 > 0.80 }"  *ngFor="let tile of pcrnsenifty">
+        <h6>PCR :{{tile.text1| number : '1.2-2'}}</h6>
+        
       </mat-card>
       
       </div>

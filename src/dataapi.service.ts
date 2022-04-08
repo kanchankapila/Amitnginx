@@ -36,6 +36,10 @@ export class DataapiService {
    
     return this.http.post('http://localhost:3000/nsepostdata2',eqsymbol1) 
   }
+  getet1() {
+   
+    return this.http.get('http://localhost:3000/et1') 
+  }
   chartink(abc) {
     return this.http.post('http://localhost:3000/chartink',abc) 
   }

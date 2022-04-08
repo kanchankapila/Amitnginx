@@ -1,4 +1,31 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<div class="col-lg-18 grid-margin stretch-card">
+  <div class="content card">
+    <h4 class="card-title">Daily</h4>
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+      <div fxFlex="9" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of stockindicators">
+        <mat-card class="text-black cardbear grid-margin stretch-card"
+        [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
+                    'bg-gradient-bull1':tile.text3 === 'Oversold',
+                    'bg-gradient-bull2':tile.text3 === 'Strong Trend',
+                    'bg-gradient-bull3':tile.text3 === 'High Volatility',
+                    'bg-gradient-bear':tile.text3 === 'Bearish',
+                    'bg-gradient-bear1':tile.text3 === 'Overbought',
+                    'bg-gradient-bear2':tile.text3 === 'Weak Trend',
+                    'bg-gradient-bear3':tile.text3 === 'Low Volatility',
+                    'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
+        </mat-card>
+       
+      </div>
+    </div>
+    </div>
+  </div>
+
+
+
+ 
+
 <div class="InsideContent">
   <mat-card class='stockoptionssupport animate__flipOutX'  *ngFor="let tile of stockoptionssupport">
     <h6>Max Support:{{tile.text1}}</h6>
@@ -244,23 +271,32 @@ Momentum Score:<br><h6>{{tile.text1}}</h6>
     <button pButton type="button" (click)="visibleSidebar5 = true" icon="pi pi-arrow-right" label="Insights" class="p-button-raised p-button-success p-button-outlined "></button>
     </div>
  
-  <h2 style=float:center [ngClass]="{'fontgreen' : pricechange > 0 , 'fontred': 0 > pricechange   }">
-    {{stockname}}&nbsp;&nbsp;&nbsp; {{stockisin}}&nbsp; {{currentprice}}&nbsp; {{pricechange}}&nbsp; {{priceperchange}}
-  </h2>
-  Upper Circuit:{{nsestockuc}}&nbsp;&nbsp;Lower Circuit:{{nsestocklc}}
-     
-  
+ 
    
   
-  <div
-    [ngClass]="{'fontgreen' : sectreturn > 0 , 'fontred': 0 > sectreturn ,'fontgreen1' : stockreturn > 0 , 'fontred1': 0 > stockreturn}">
-    <h4>Sector Return: {{sectreturn}}%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stock Return: {{stockreturn}}%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sensex Return: {{sensexreturn}}%</h4>
+ 
+
+  <div class="col-lg-13 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body" >
+        <h3 class="card-title"> {{mmdelivcomp}}</h3>
+        <h2 style=float:center [ngClass]="{'fontgreen' : pricechange > 0 , 'fontred': 0 > pricechange   }">
+          {{stockname}}&nbsp;&nbsp;&nbsp; {{stockisin}}&nbsp; {{currentprice}}&nbsp; {{pricechange}}&nbsp; {{priceperchange}}
+        </h2>
+        Upper Circuit:{{nsestockuc}}&nbsp;&nbsp;Lower Circuit:{{nsestocklc}}
+        <div
+        [ngClass]="{'fontgreen' : sectreturn > 0 , 'fontred': 0 > sectreturn ,'fontgreen1' : stockreturn > 0 , 'fontred1': 0 > stockreturn}">
+        <h4>Sector Return: {{sectreturn}}%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stock Return: {{stockreturn}}%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sensex Return: {{sensexreturn}}%</h4>
+      </div> 
+        
+        <div style="height: 650px ; width: 1000px">
+        <p-chart type="line" [data]="basicData" width="1000px" height="600px" [options]="basicOptions"></p-chart>
+          </div>
+    </div>
+    </div>
   </div>
-  {{mmdelivcomp}}
-  <div class="InsideContent">
-    <h5>{{this.stockname}}</h5>
-    <p-chart type="line" [data]="basicData" width="1500px" height="600px" [options]="basicOptions"></p-chart>
-</div>
+ 
+ 
 <div>
   <p-tabView>
     <p-tabPanel header="Technicals">
@@ -665,14 +701,7 @@ Momentum Score:<br><h6>{{tile.text1}}</h6>
     </mat-card>
   </div>
   
-  <div class="InsideContent">
-
-    <div style="display: block;float:left" class="chart">
-      <canvas baseChart width="1250" height="400" [datasets]="labelMFL6" [labels]="lineChartLabels5"
-        [options]="lineChartOptions4" [chartType]="ChartType4" (chartHover)="chartHovered4($event)"
-        (chartClick)="chartClicked4($event)"></canvas>
-    </div>
-  </div>
+  
 
   Daily Indicator
   Sentiment:{{indicatorssentiment}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weekly
@@ -720,34 +749,7 @@ Momentum Score:<br><h6>{{tile.text1}}</h6>
 </div>
 
 
-<mat-card *ngFor="let tile of tiles">{{tile.text}}</mat-card>
-<mat-grid-list cols="10" rowHeight="70px" padding-left="20px" rowWidth="50px" gutterSize="5px">
 
-  <mat-grid-tile *ngFor="let tile of tiles" [colspan]="tile.cols" [rowspan]="tile.rows" [style.background]="tile.color"
-    [style.border]="tile.border">
-
-    <div class="container">
-      <section class="header">
-        <section class="header-start">
-
-        </section>
-        <section class="header-end">
-
-        </section>
-      </section>
-
-      <section class="footer">
-
-      </section>
-
-      <section class="body">
-        {{tile.text}}
-      </section>
-    </div>
-
-
-  </mat-grid-tile>
-</mat-grid-list>
 
 
 <div id="chart21"></div>

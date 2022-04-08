@@ -237,7 +237,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       }
       
         const maxp = this.optionwp.reduce((a, b) => Math.max(a, b));  // 5
-        console.log("maximum"+maxp)
+       // console.log("maximum"+maxp)
      for (let val in nestedItems[1]['data']) {
        if (nestedItems[1]['data'][val]['PE']) {
          if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
@@ -277,7 +277,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
           var maxbc = this.optionbwc.reduce((a, b) => Math.max(a, b));  // 5
         }
       }
-      console.log("maximum"+maxbc)
+      //console.log("maximum"+maxbc)
             for (let val in nestedItems[1]['data']) {
               if (nestedItems[1]['data'][val]['CE']) {
               if (nestedItems[1]['data'][val]['CE'].openInterest == maxbc) {
@@ -297,7 +297,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       }
       
         const maxbp = this.optionbwp.reduce((a, b) => Math.max(a, b));  // 5
-        console.log("maximum"+maxbp)
+        //console.log("maximum"+maxbp)
      for (let val in nestedItems[1]['data']) {
        if (nestedItems[1]['data'][val]['PE']) {
          if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
@@ -325,7 +325,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday })
       
     }
-    console.log(this.mcsymbol)
+   // console.log(this.mcsymbol)
     this.dataApi.getmcmovingaverages(this.mcsymbol).subscribe(data5 => {
 
 
@@ -339,7 +339,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+     // console.log(nestedItems)
       this.mcniftyrt.length = 0;
       
       this.mcniftyrt.push({ text1: nestedItems[82], text2: nestedItems[79], text3: nestedItems[83], text4: nestedItems[84], text5: nestedItems[1], text6: nestedItems[40] })
@@ -356,7 +356,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(data5)
+     // console.log(data5)
       this.mcbniftyrt.length = 0;
       
       this.mcbniftyrt.push({text1:nestedItems[82],text2:nestedItems[79],text3:nestedItems[83],text4:nestedItems[84]})
@@ -387,7 +387,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
   getmcinsight() {
     console.log("mc insight")
     var d = new Date();
-    console.log(d.getHours() + ":" + d.getMinutes())
+    //console.log(d.getHours() + ":" + d.getMinutes())
     this.mcsymbol.length = 0;
     for (let val in this.stock) {
       this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
@@ -410,7 +410,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       this.stockid.push({ stockid: this.stock[val].stockid, isin: this.stock[val].isin, name: this.stock[val].name })
       //console.log(this.stock[val].stockid)
     }
-    console.log(this.stockid)
+  //  console.log(this.stockid)
     
     this.dataApi.getmmstockinforeco(this.stockid).subscribe(data5 => {
 
@@ -424,9 +424,9 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
   getmccombine() {
     console.log("mc combine start")
     this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-    console.log('Date is' + this.datetoday)
+    //console.log('Date is' + this.datetoday)
     var d = new Date();
-    console.log(d.getHours()+":"+d.getMinutes())
+   // console.log(d.getHours()+":"+d.getMinutes())
     for (let val in this.stock1) {
       this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
       
@@ -463,7 +463,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
   chartink() {
     console.log("chartink start")
     this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-    console.log('Date is'+ this.datetoday)
+   // console.log('Date is'+ this.datetoday)
     
       this.abc.push({ name:'copy-buy-100-accuracy-morning-scanner-scan-at-9-30-4002',Date:this.datetoday })
       
@@ -482,9 +482,9 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     console.log("mc sector combine start")
     for (let val in this.sectorList) {
       this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-      console.log('Date is'+ this.datetoday)
+    //  console.log('Date is'+ this.datetoday)
       this.mcsectorsymbol.push({ mcsectorsymbol: this.sectorList[val].mcsectorsymbol, sectorid: this.sectorList[val].mcsectorid, name: this.sectorList[val].name,Date:this.datetoday })
-      console.log(this.sectorList[val].mcsectorsymbol)
+    //  console.log(this.sectorList[val].mcsectorsymbol)
     }
    
     this.dataApi.getmcsectorcombine(this.mcsectorsymbol).subscribe(data5 => {
@@ -500,11 +500,11 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     console.log("eq sector combine start")
     for (let val in this.stock) {
       this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-      console.log('Date is'+ this.datetoday)
+    
       this.eqsymbol1.push({ eqsymbol1: this.stock[val].symbol,name: this.stock[val].name,Date:this.datetoday })
       
     }
-    console.log(this.eqsymbol1)
+   
     this.dataApi.nsepostdata1(this.eqsymbol1).subscribe(data5 => {
 
 
@@ -517,11 +517,11 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     console.log("eq sector combine start")
     for (let val in this.fnostock) {
       this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-      console.log('Date is'+ this.datetoday)
+    
       this.eqsymbol1.push({ eqsymbol1: this.fnostock[val].symbol,Date:this.datetoday })
       
     }
-    console.log(this.eqsymbol1)
+   
     this.dataApi.nsepostdata2(this.eqsymbol1).subscribe(data5 => {
 
 
@@ -538,7 +538,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       //
       //this.getmoneycontroloverall(this.mcsymbol)
     }
-    //console.log(this.mcsymbol)
+  
     this.dataApi.getmoneycontroloveralldaily(this.mcsymbol).subscribe(data5 => {
 
 

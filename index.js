@@ -26,7 +26,7 @@ const fetch = require("node-fetch");
 const csrf = require('csurf');
 process.env.chartinkcsrf = 'IeyxllMLHFKfCD4Yby7Sw1g9XWJhX5XJjsGfwtnW'
 process.env.chartinkcookie = '_ga=GA1.2.2067931904.1621586668; bfp_sn_rf_8b2087b102c9e3e5ffed1c1478ed8b78=Direct; bafp=0590ba80-e319-11ea-a890-4395e7b43464; __gads=ID=eb4d407b97097fa6-22285d39c9c800fa:T=1621586677:RT=1621586677:S=ALNI_MZ3vScH0DJGPYFS_YkChWPH5KiAFg; remember_web_59ba36addc2b2f9401580f014c7f58ea4e30989d=eyJpdiI6IjFNR1pXdzlYUjlMa25jRGJ3K21FOWc9PSIsInZhbHVlIjoiV1pXSTlIWVZRYUErMllpQk1BMEVQa2tUN3R1bDFsbkZFWU5NeWdWbE4wbFByTEd1SHZRVTkrcDlUdTNoWTJySkVObTJ0cVNKanVpTTRmNlhjSExQak5lM3paNWt4MDVsdW9kQ2dGMG05ZkhXZDROeUlkVlg5U1B6MEdCdHlWQVwvSHZYZ0FGalRQQ2JFRlN6U0pZTXhMQVpESkRoNUlpbDJUWVZcL3FsVWdSMXJjeE1JTmhkMkJyK1dITmpiUUF6cGkiLCJtYWMiOiJlM2E1MzY2NzMwZTcwYWYyMjcxOTY0OGYxMDJhMTJiODkyNzQyMTUwOWZjODZlOTdmZDZlYThiMDFkNTM3Yzk4In0%3D; __utmz=102564947.1627487103.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utma=102564947.2067931904.1621586668.1629460093.1630149430.5; mnjs_session_depth=1%7C1630270688592; _gid=GA1.2.1238159065.1630270689; _yeti_currency_={"dataAsOf":"2021-08-27T00:00:00.000Z","generatedAt":"2021-08-28T15:00:47.619Z","conversions":{"USD":{"USD":1,"JPY":110.18620865572656,"BGN":1.6629538304565938,"CZK":21.735396649944732,"DKK":6.322846696709464,"GBP":0.7287050420882578,"HUF":298.3334750446391,"PLN":3.896522404557436,"RON":4.195221494770853,"SEK":8.702066150837515,"CHF":0.9179491539835047,"ISK":126.85996088767962,"NOK":8.806649094464756,"HRK":6.367315704446901,"RUB":74.01998129410765,"TRY":8.401411444605051,"AUD":1.3791344273446138,"BRL":5.245472323781992,"CAD":1.2680894481761755,"CNY":6.47861576396565,"HKD":7.790068871694584,"IDR":14428.152367995921,"ILS":3.231612958081796,"INR":73.71907150752487,"KRW":1169.7814811665676,"MXN":20.379729614828673,"MYR":4.19003486098121,"NZD":1.439248363234419,"PHP":49.95663634044724,"SGD":1.350905535243602,"THB":32.65538644673072,"ZAR":14.909956636340446,"EUR":0.8502678343678259},"GBP":{"USD":1.3722973524847437,"JPY":151.20824241858512,"BGN":2.282067138839947,"CZK":29.827427277924926,"DKK":8.676825782061306,"GBP":1,"HUF":409.4022379613316,"PLN":5.347187379671657,"RON":5.757091350361131,"SEK":11.941822339941426,"CHF":1.259699193727174,"ISK":174.0895884624809,"NOK":12.085341236596152,"HRK":8.737850483647014,"RUB":101.57742436087419,"TRY":11.529234682566539,"AUD":1.8925825233655766,"BRL":7.198347782458024,"CAD":1.7401957924460056,"CNY":8.890587260655987,"HKD":10.690290888300293,"IDR":19799.715295847287,"ILS":4.43473390663104,"INR":101.1644866574099,"KRW":1605.2880295905627,"MXN":27.967048994784314,"MYR":5.749973746543295,"NZD":1.975076718434594,"PHP":68.55535978903889,"SGD":1.8538440894717805,"THB":44.81290036521475,"ZAR":20.46089401771233,"EUR":1.1668202980059041}}}; bfp_sn_rt_8b2087b102c9e3e5ffed1c1478ed8b78=1630270689826; XSRF-TOKEN=eyJpdiI6ImxYbmtYZWJBQWdOMG1XdkZWYkIxOVE9PSIsInZhbHVlIjoiTk0rODBINVFERkRwNEQ3RXMybStWMkI3ZUpGWkhoVWx6elU1SldtcDVIUUFuRWtGY3J2R2RhR3Z5Snp0a2pJMiIsIm1hYyI6ImI2M2RiMTk5MDljNTgyNjhiZDIyYjI0NDhjM2YwMjE2ZWMxYzcwN2Q4NmE4Mjg2ZWI4ODVhZDg1MmRmNTJmOGEifQ%3D%3D; ci_session=eyJpdiI6Im5FZHF1WmU0T2lmVDJ3cjlnSDJmZGc9PSIsInZhbHVlIjoiTFg1U0k2YTVcL3dxRWFXclZhQlQ4Qkp4Q1BURll2RE1KT2JwU1FoMmFxakg5VVpYa3RCcFFoNTZPanJHZVFOVGUiLCJtYWMiOiI1Y2EyZmJmNGZkNDZmOWFhNGNiMzgyOGE1NTEwNGJiMTFkYWNlZWQ2NGUwZjVhODFmMDYyNGY5NzZiN2MzNDMzIn0%3D; _gat=1'
-process.env.trendlynecookie='_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _gid=GA1.2.634541037.1647631517; _gat=1; csrftoken=BntmUUS7yVYNNVnhgwL5TyRSCVYpIFzcvvlDHSRkcxDjObyOqz626Ipqm2Kgi3wj; .trendlyne=dz3qx4c2k1l0yjq3y01vpgmz58o6z90l'
+process.env.trendlynecookie='_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _gid=GA1.2.347519895.1649065025; _gat=1; csrftoken=StkPPTJQR96B1eNyk1kO8u7w0CxvszLE9GCFZXgYbaMa6XzTYRzzAYZtrgicRChA; .trendlyne=xl0m433d7ipeuh5in913buwwa5tw0su3'
 var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
 const fs =require('fs')
@@ -48,18 +48,18 @@ const axiosCookieJarSupport = require('axios-cookiejar-support').default;
 
 ///////For PostgresDB Connection/////////////
 
-var mongo = require('mongodb');
+//var mongo = require('mongodb');
 const { response } = require('express');
 const { json } = require('body-parser');
-var MongoClient = require('mongodb').MongoClient;
- var url = "mongodb://127.0.0.1 :27017/mydb?&connectTimeoutMS=2147483647&socketTimeoutMS=2147483647";
- const option = {
+//var MongoClient = require('mongodb').MongoClient;
+ //var url = "mongodb://127.0.0.1 :27017/mydb?&connectTimeoutMS=2147483647&socketTimeoutMS=2147483647";
+//  const option = {
 
-  socketTimeoutMS: 3000000,
-  keepAlive: true,
+//   socketTimeoutMS: 3000000,
+//   keepAlive: true,
  
-};
-var client = new MongoClient(url, option);
+// };
+//var client = new MongoClient(url, option);
 var moment = require('moment');
 
 
@@ -309,7 +309,7 @@ app.get('/mcshare', (req, res) => {
   async.parallel(
     functionArray7, (err, results) => {
         if (err) {
-            console.error('Error: ', err);
+            console.error('Error in mcshare: ', err);
         } else {
           res.json(results);
         }
@@ -338,6 +338,7 @@ app.get('/mcsharefrequent', (req, res) => {
   
   let getApi9 = function (opt, callback) {
     request(opt, (err, response, body) => {
+      console.log(err)
       callback(err, JSON.parse(body));
       
     });
@@ -350,7 +351,7 @@ app.get('/mcsharefrequent', (req, res) => {
   async.parallel(
     functionArray9, (err, results) => {
         if (err) {
-            console.error('Error: ', err);
+            console.error('Error in mcsharefrequent: ', err);
         } else {
             res.json(results);
         }
@@ -407,32 +408,32 @@ var gnewsyesterday= (yyyy + "-" + mm + "-" + (dd - 01))
 
 
 /////////////////////////////Mongo Atlas Configs////////////////////////////////////////////////
-async function main() {
+//async function main() {
   /**
    * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
    * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
    */
-  const uri = "mongodb://127.0.0.1:27017/BQ";
-  const client = new MongoClient(uri);
-  try {
-    // Connect to the MongoDB cluster
-    await client.connect();
-    // Make the appropriate DB calls
-    //await  listDatabases(client);
-  } catch (e) {
-    console.error(e);
-  } finally {
-    await client.close();
-  }
-}
-main().catch(console.error);
+//   const uri = "mongodb://127.0.0.1:27017/BQ";
+//   const client = new MongoClient(uri);
+//   try {
+//     // Connect to the MongoDB cluster
+//     await client.connect();
+//     // Make the appropriate DB calls
+//     //await  listDatabases(client);
+//   } catch (e) {
+//     console.error(e);
+//   } finally {
+//     await client.close();
+//   }
+// }
+// main().catch(console.error);
 
-app.use('/', express.static('/dist'));
-const options = {
-  webHook: {
-      port: 8443
-  }
-};
+// app.use('/', express.static('/dist'));
+// const options = {
+//   webHook: {
+//       port: 8443
+//   }
+// };
 
 // const MongoClient1 = require('mongodb').MongoClient1;
 // const uri = "mongodb+srv://amit:amit0605@cluster0.mxilo.mongodb.net/jdata?retryWrites=true&w=majority";
@@ -509,33 +510,33 @@ const options = {
 
 
 // when there's a post request to /webooks...
- app.post('/webhooks', function (req, res) {
+//  app.post('/webhooks', function (req, res) {
 
-   // respond with 200 OK
-   res.send('OK');
- });
+//    // respond with 200 OK
+//    res.send('OK');
+//  });
 
-app.get('/googlenews', (req, res) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+// app.get('/googlenews', (req, res) => {
+//   MongoClient.connect(url, function (err, db) {
+//     if (err) throw err;
+//     var allinone = "allinone"
+//     var dbo = db.db(req.query.dbname);
 
-    var stockname = req.query.stock
-    if (req.query.dbname == "googlenews") {
-      stockname = req.query.stock
+//     var stockname = req.query.stock
+//     if (req.query.dbname == "googlenews") {
+//       stockname = req.query.stock
 
-    }
+//     }
 
-    dbo.collection(stockname).find({}).toArray(function (err, docs) {
-      console.log(err)
+//     dbo.collection(stockname).find({}).toArray(function (err, docs) {
+//       console.log(err)
 
-      res.json(docs)
-    });
+//       res.json(docs)
+//     });
 
-  })
+//   })
 
-})
+// })
 ///////////////////////////////////////////// Market Mojos Data ,used in ohlc///////////////////////////////////////////
 
 
@@ -1621,13 +1622,13 @@ app.post('/bqbasicdetails', async function (req, res) {
       //var obj = JSON.parse(response.body).data
       //console.log(JSON.parse(response.body).data)
       //console.log(obj.sentiments.indication)
-      MongoClient.connect(url, option, function (err, db) {
-        if (err) throw err;
-        console.log(err)
-        var dbname = "BQ"
-        var dbo = db.db(dbname);
-        dbo.collection("PE").insertOne()
-      })
+  //     MongoClient.connect(url, option, function (err, db) {
+  //       if (err) throw err;
+  //       console.log(err)
+  //       var dbname = "BQ"
+  //       var dbo = db.db(dbname);
+  //       dbo.collection("PE").insertOne()
+  //     })
 
     }).catch((error) => {
       console.log(error)
@@ -1641,43 +1642,43 @@ app.post('/bqbasicdetails', async function (req, res) {
   }
 })
 
-app.post('/bqnews', async function (req, res) {
+// app.post('/bqnews', async function (req, res) {
 
-  let bqsymbol = req.body
+//   let bqsymbol = req.body
 
-  //console.log(req.body)
-  const promises = bqsymbol.map(symbol => {
-    axios.all([
-      axios.get('https://www.bloombergquint.com/next/feapi/stock/' + symbol.name + '/in-the-news'),
-      axios.get('https://www.bloombergquint.com/next/feapi/stock/' + symbol.bqsymbol + '/stock-dna')
-    ]).then((responseArr) => {
+//   //console.log(req.body)
+//   const promises = bqsymbol.map(symbol => {
+//     axios.all([
+//       axios.get('https://www.bloombergquint.com/next/feapi/stock/' + symbol.name + '/in-the-news'),
+//       axios.get('https://www.bloombergquint.com/next/feapi/stock/' + symbol.bqsymbol + '/stock-dna')
+//     ]).then((responseArr) => {
 
-      //var obj1 = ({ news:responseArr[0].data,Stock:symbol.name})
-      var obj2 = ({ PEratio: responseArr[1].data.data.peRatio, Stock: symbol.name })
-      var data1 = (responseArr[0].data)
-      //console.log(json)
-      data2 = data1["headline"]
-      for (let i in data2) {  }
+//       //var obj1 = ({ news:responseArr[0].data,Stock:symbol.name})
+//       var obj2 = ({ PEratio: responseArr[1].data.data.peRatio, Stock: symbol.name })
+//       var data1 = (responseArr[0].data)
+//       //console.log(json)
+//       data2 = data1["headline"]
+//       for (let i in data2) {  }
       
-      MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        console.log(err)
-        var dbname = "BQ"
-        var dbo = db.db(dbname);
-        //dbo.collection("BQ").insertOne()
-      })
+//   //     MongoClient.connect(url, function (err, db) {
+//   //       if (err) throw err;
+//   //       console.log(err)
+//   //       var dbname = "BQ"
+//   //       var dbo = db.db(dbname);
+//   //       //dbo.collection("BQ").insertOne()
+//   //     })
 
-    }).catch((error) => {
-      console.log(error)
-    })
-  })
+//   //   }).catch((error) => {
+//   //     console.log(error)
+//   //   })
+//   // })
 
-  try {
-    await Promise.all(promises)
-  } catch (e) {
-    console.log(e)
-  }
-})
+//   try {
+//     await Promise.all(promises)
+//   } catch (e) {
+//     console.log(e)
+//   }
+// })
 
 
 
@@ -1686,16 +1687,16 @@ app.post('/bqnews', async function (req, res) {
 
 /////////////////////////////////////////////MAIL FUNCTIONALITY //////////////////////////////////////////////////////////
 // Mail Sending Feature to send Div Snapshots over mail Used in Screeners component
-app.post("/sendmail", (req, res) => {
-  console.log("request came");
-  let user = req.body;
-  sendMail(user, info => {
-    console.log(`The mail has beed send 😃 and the id is ${info.messageId}`);
-    res.send(info);
-  });
-});
+// app.post("/sendmail", (req, res) => {
+//   console.log("request came");
+//   let user = req.body;
+//   sendMail(user, info => {
+//     console.log(`The mail has beed send 😃 and the id is ${info.messageId}`);
+//     res.send(info);
+//   });
+// });
 
-// async function sendMail(user, callback) {
+// // async function sendMail(user, callback) {
   
 //   let transporter = nodemailer.createTransport({
 //     host: "smtp.gmail.com",
@@ -1738,12 +1739,12 @@ app.post('/watchlistinsert', async function (req, res) {
 
 
  
-      MongoClient.connect(url, option, function (err, db) {
-        if (err) throw err;
-        var dbname = "watchlist"
-        var dbo = db.db(dbname);
-        dbo.collection("watchlist").insertMany(isin)
-      })
+      // MongoClient.connect(url, option, function (err, db) {
+      //   if (err) throw err;
+      //   var dbname = "watchlist"
+      //   var dbo = db.db(dbname);
+      //   dbo.collection("watchlist").insertMany(isin)
+      // })
 
    
 
@@ -1754,14 +1755,14 @@ app.post('/watchlistdelete', async function (req, res) {
 
   
   data = req.body
-  for (let i in data) {
-  MongoClient.connect(url, option, function (err, db) {
-      if (err) throw err;
-      var dbname = "watchlist"
-      var dbo = db.db(dbname);
-       dbo.collection("watchlist").deleteOne(data[i])
-    })
-  }
+  // for (let i in data) {
+  // MongoClient.connect(url, option, function (err, db) {
+  //     if (err) throw err;
+  //     var dbname = "watchlist"
+  //     var dbo = db.db(dbname);
+  //      dbo.collection("watchlist").deleteOne(data[i])
+  //   })
+  // }
 
 })
 
@@ -1772,46 +1773,46 @@ app.post('/watchlistdelete', async function (req, res) {
 app.get('/watchlistview', (req, res) => {
   var url2 = "mongodb://127.0.0.1:27017/";
 
-  MongoClient.connect(url2, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url2, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stock_name = req.query.stock
-    if (req.query.dbname == "watchlist") {
-      stock_name = req.query.stock
+  //   var stock_name = req.query.stock
+  //   if (req.query.dbname == "watchlist") {
+  //     stock_name = req.query.stock
 
-    }
+  //   }
 
-    dbo.collection("watchlist").find({}).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("watchlist").find({}).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 ////////////////////////////////////////////////////// Stocks added in Portfolio view////////////////////////////////////
 app.get('/portfolio', (req, res) => {
-  var url2 = "mongodb://127.0.0.1:27017/";
+ // var url2 = "mongodb://127.0.0.1:27017/";
 
-  MongoClient.connect(url2, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url2, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stock_name = req.query.stock
-    if (req.query.dbname == "Portfolio") {
-      stock_name = req.query.stock
+  //   var stock_name = req.query.stock
+  //   if (req.query.dbname == "Portfolio") {
+  //     stock_name = req.query.stock
 
-    }
+  //   }
 
-    dbo.collection("Portfolio").find({}).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("Portfolio").find({}).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 
@@ -1820,46 +1821,46 @@ app.get('/portfolio', (req, res) => {
 app.get('/portfolioAK', (req, res) => {
   var url2 = "mongodb://127.0.0.1:27017/";
 
-  MongoClient.connect(url2, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url2, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stock_name = req.query.stock
-    if (req.query.dbname == "PortfolioAK") {
-      stock_name = req.query.stock
+  //   var stock_name = req.query.stock
+  //   if (req.query.dbname == "PortfolioAK") {
+  //     stock_name = req.query.stock
 
-    }
+  //   }
 
-    dbo.collection("PortfolioAK").find({}).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("PortfolioAK").find({}).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 /////////////////////////////////////////////////// Stocks added in Portfolio of Kanchan Kapila (Kotak Securities) view
 app.get('/portfolioKK', (req, res) => {
   var url2 = "mongodb://127.0.0.1:27017/";
 
-  MongoClient.connect(url2, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url2, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stock_name = req.query.stock
-    if (req.query.dbname == "PortfolioKK") {
-      stock_name = req.query.stock
+  //   var stock_name = req.query.stock
+  //   if (req.query.dbname == "PortfolioKK") {
+  //     stock_name = req.query.stock
 
-    }
+  //   }
 
-    dbo.collection("PortfolioKK").find({}).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("PortfolioKK").find({}).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 
@@ -1886,14 +1887,14 @@ app.post('/mccombine', async function (req, res) {
       
       var obj1 = ({ indicationDaily: responseArr[0].data.data.sentiments.indication,indicationWeekly: responseArr[1].data.data.sentiments.indication,indicationMonthly: responseArr[2].data.data.sentiments.indication, isin: symbol.isin, name: symbol.name,Date:symbol.Date,Time:symbol.time })
       
-      MongoClient.connect(url,function (err, db) {
-        if (err) console.log(err)
-        var dbname = "moneycontrol"
-        var dbo = db.db(dbname);
-        dbo.collection("mcdwm").insertOne(obj1)
-        console.log("Object inserted in mcdwm")
-        db.close();
-      })
+  //     MongoClient.connect(url,function (err, db) {
+  //       if (err) console.log(err)
+  //       var dbname = "moneycontrol"
+  //       var dbo = db.db(dbname);
+  //       dbo.collection("mcdwm").insertOne(obj1)
+  //       console.log("Object inserted in mcdwm")
+  //       db.close();
+  //     })
 
     }).catch((error) => {
       console.log(error)
@@ -1920,14 +1921,14 @@ app.post('/mcvolume', async function (req, res) {
       
       // var obj1 = ({ indicationDaily: responseArr[0].data.data.sentiments.indication,indicationWeekly: responseArr[1].data.data.sentiments.indication,indicationMonthly: responseArr[2].data.data.sentiments.indication, isin: symbol.isin, name: symbol.name,Date:symbol.Date })
       
-       MongoClient.connect(url,function (err, db) {
-         if (err) console.log(err)
-         var dbname = "moneycontrol"
-         var dbo = db.db(dbname);
-         dbo.collection("mcvolume").insertOne(obj1)
-         console.log("Object inserted in mcvolume")
-         db.close();
-       })
+  //      MongoClient.connect(url,function (err, db) {
+  //        if (err) console.log(err)
+  //        var dbname = "moneycontrol"
+  //        var dbo = db.db(dbname);
+  //        dbo.collection("mcvolume").insertOne(obj1)
+  //        console.log("Object inserted in mcvolume")
+  //        db.close();
+  //      })
      
 
     }).catch((error) => {
@@ -1955,16 +1956,16 @@ app.post('/mcinsight', async function (req, res) {
   //console.log(response.data.data.insightData.price[3].shortDesc )    
       // var obj1 = ({ indicationDaily: responseArr[0].data.data.sentiments.indication,indicationWeekly: responseArr[1].data.data.sentiments.indication,indicationMonthly: responseArr[2].data.data.sentiments.indication, isin: symbol.isin, name: symbol.name,Date:symbol.Date })
       
-        MongoClient.connect(url,function (err, db) {
-          if (err) console.log(err)
-          var dbname = "moneycontrol"
-          var dbo = db.db(dbname);
-          dbo.collection("mcinsight").insertOne(obj1)
-          console.log("Object inserted in mcinsight")
-          db.close();
-        }).catch((error) => {
-          console.log(error)
-        })
+  //       MongoClient.connect(url,function (err, db) {
+  //         if (err) console.log(err)
+  //         var dbname = "moneycontrol"
+  //         var dbo = db.db(dbname);
+  //         dbo.collection("mcinsight").insertOne(obj1)
+  //         console.log("Object inserted in mcinsight")
+  //         db.close();
+  //       }).catch((error) => {
+  //         console.log(error)
+  //       })
      
 
     }).catch((error) => {
@@ -2006,20 +2007,20 @@ app.post('/moneycontrolti', async function (req, res) {
         
         }
        
-          MongoClient.connect(url, function (err, db) {
-            if (err) throw err;
-            console.log(err)
-            var dbname = "moneycontrol"
-            var dbo = db.db(dbname);
-            //dbo.createCollection("mctidaily12")
-            dbo.collection("mctidaily").createIndex({ _id: 1 }, { sparse: true })
+          // MongoClient.connect(url, function (err, db) {
+          //   if (err) throw err;
+          //   console.log(err)
+          //   var dbname = "moneycontrol"
+          //   var dbo = db.db(dbname);
+          //   //dbo.createCollection("mctidaily12")
+          //   dbo.collection("mctidaily").createIndex({ _id: 1 }, { sparse: true })
          
-            dbo.collection("mctidaily").insertMany(obj1)
+          //   dbo.collection("mctidaily").insertMany(obj1)
           
           
-            // db.close();
+          //   // db.close();
 
-          })
+          // })
         
       }
 
@@ -2047,12 +2048,12 @@ app.post('/moneycontroloveralldaily', async function (req, res) {
 
       var obj1 = ({ indication: response.data.data.sentiments.indication, isin: symbol.isin, name: symbol.name })
 
-      MongoClient.connect(url, option, function (err, db) {
-        if (err) throw err;
-        var dbname = "moneycontrol"
-        var dbo = db.db(dbname);
-        dbo.collection("mcdaily").insertOne(obj1)
-      })
+  //     MongoClient.connect(url, option, function (err, db) {
+  //       if (err) throw err;
+  //       var dbname = "moneycontrol"
+  //       var dbo = db.db(dbname);
+  //       dbo.collection("mcdaily").insertOne(obj1)
+  //     })
 
     }).catch((error) => {
       console.log(error)
@@ -2080,13 +2081,13 @@ app.post('/mcsectorcombine', async function (req, res) {
 
       var obj1 = ({ indicationDaily: responseArr[0].data.data.sentiments.indication,indicationWeekly: responseArr[1].data.data.sentiments.indication,indicationMonthly: responseArr[2].data.data.sentiments.indication, isin: symbol.isin, name: symbol.name })
       
-      MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        console.log(err)
-        var dbname = "moneycontrol"
-        var dbo = db.db(dbname);
-        dbo.collection("mcsectordwm").insertOne(obj1)
-      })
+  //     MongoClient.connect(url, function (err, db) {
+  //       if (err) throw err;
+  //       console.log(err)
+  //       var dbname = "moneycontrol"
+  //       var dbo = db.db(dbname);
+  //       dbo.collection("mcsectordwm").insertOne(obj1)
+  //     })
 
     }).catch((error) => {
       console.log(error)
@@ -2114,12 +2115,12 @@ app.post('/moneycontroloverall', async function (req, res) {
 
       var obj1 = ({ indication: response.data.data.pricepercentchange, isin: symbol.isin, name: symbol.name })
 
-      MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        var dbname = "moneycontrol"
-        var dbo = db.db(dbname);
-        dbo.collection("mcppchange").insertOne(obj1)
-      })
+  //     MongoClient.connect(url, function (err, db) {
+  //       if (err) throw err;
+  //       var dbname = "moneycontrol"
+  //       var dbo = db.db(dbname);
+  //       dbo.collection("mcppchange").insertOne(obj1)
+  //     })
 
     }).catch((error) => {
       console.log(error)
@@ -2145,12 +2146,12 @@ app.post('/pscore', async function (req, res) {
       var obj1=({ pscore: response.data.data.insightData.financials.piotroskiData.score, isin: symbol.isin, name: symbol.name,Date:symbol.Date });
      
 
-      MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        var dbname = "moneycontrol"
-        var dbo = db.db(dbname);
-        dbo.collection("pscore").insertOne(obj1)
-      })
+      // MongoClient.connect(url, function (err, db) {
+      //   if (err) throw err;
+      //   var dbname = "moneycontrol"
+      //   var dbo = db.db(dbname);
+      //   dbo.collection("pscore").insertOne(obj1)
+      // })
      
       //  var obj1=({ pscore: response.data.data.insightData.financials.piotroskiData.score, isin: symbol.isin, name: symbol.name });
       //  MongoClient.connect(url, function(err, db) {
@@ -2217,12 +2218,12 @@ app.post('/pscore', async function (req, res) {
         // //var obj3 = Object.assign(obj1, obj2)
         // var obj3 = merge(obj1, obj2)
         // console.log(obj3)
-         MongoClient.connect(url, function (err, db) {
-           if (err) throw err;
-           var dbname = "moneycontrol"
-           var dbo = db.db(dbname);
-           dbo.collection("movingaverages").insertMany(obj1)
-         })
+      //    MongoClient.connect(url, function (err, db) {
+      //      if (err) throw err;
+      //      var dbname = "moneycontrol"
+      //      var dbo = db.db(dbname);
+      //      dbo.collection("movingaverages").insertMany(obj1)
+      //    })
   
       }).catch((error) => {
         console.log(error)
@@ -2245,130 +2246,130 @@ app.post('/pscore', async function (req, res) {
 
 //////////////////////////////////////////////Read Current Stock Data like Percentage of all stocks from mc/////////////////////////////////
 app.get('/mccurrent', (req, res) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stockname = req.query.stock
-    var mysort = { indication: -1 };
-    if (req.query.dbname == "moneycontrol") {
-      stockname = req.query.stock
+  //   var stockname = req.query.stock
+  //   var mysort = { indication: -1 };
+  //   if (req.query.dbname == "moneycontrol") {
+  //     stockname = req.query.stock
 
-    }
+  //   }
 
-    dbo.collection("mcppchange").find().sort(mysort).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("mcppchange").find().sort(mysort).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 //////////////////////////////////////////////Read Current Stock Data P Score of all stocks from mc/////////////////////////////////
 app.get('/mcpscore', (req, res) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stockname = req.query.stock
-    var mysort = { pscore: -1 };
-    if (req.query.dbname == "moneycontrol") {
-      stockname = req.query.stock
+  //   var stockname = req.query.stock
+  //   var mysort = { pscore: -1 };
+  //   if (req.query.dbname == "moneycontrol") {
+  //     stockname = req.query.stock
 
-    }
+  //   }
 
-    dbo.collection("pscore").find().sort(mysort).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("pscore").find().sort(mysort).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 //////////////////////////////////////////////Read Current Stock Daily View of all stocks from mc/////////////////////////////////
 app.get('/mcoverallviewdaily', (req, res) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stockname = req.query.stock
-    if (req.query.dbname == "moneycontrol") {
-      stockname = req.query.stock
+  //   var stockname = req.query.stock
+  //   if (req.query.dbname == "moneycontrol") {
+  //     stockname = req.query.stock
 
-    }
+  //   }
 
-    dbo.collection("mcdaily").find({ indication: "Very Bullish" }).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("mcdaily").find({ indication: "Very Bullish" }).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 //////////////////////////////////////////////Read Current sector Data View D/W/M from mc/////////////////////////////////
 app.get('/mcsectoroverallviewdwm', (req, res) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stockname = req.query.stock
-    if (req.query.dbname == "moneycontrol") {
-      stockname = req.query.stock
+  //   var stockname = req.query.stock
+  //   if (req.query.dbname == "moneycontrol") {
+  //     stockname = req.query.stock
 
-    }
+  //   }
 
-    dbo.collection("mcsectordwm").find({ $and: [{ indicationDaily: "Very Bullish" }, { indicationWeekly: "Very Bullish" }, { indicationMonthly: "Very Bullish" }] }).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("mcsectordwm").find({ $and: [{ indicationDaily: "Very Bullish" }, { indicationWeekly: "Very Bullish" }, { indicationMonthly: "Very Bullish" }] }).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 /////////////////////////////////////////Moneycontrol View for sector view D/W
 app.get('/mcsectoroverallviewdw', (req, res) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stockname = req.query.stock
-    if (req.query.dbname == "moneycontrol") {
-      stockname = req.query.stock
+  //   var stockname = req.query.stock
+  //   if (req.query.dbname == "moneycontrol") {
+  //     stockname = req.query.stock
 
-    }
+  //   }
 
-    dbo.collection("mcsectordwm").find({ $and: [{ indicationDaily: "Very Bullish" }, { indicationWeekly: "Very Bullish" }] }).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("mcsectordwm").find({ $and: [{ indicationDaily: "Very Bullish" }, { indicationWeekly: "Very Bullish" }] }).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 ///////////////////////////////////////Moneycontrol View for sector view Daily
 app.get('/mcsectoroverallviewd', (req, res) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stockname = req.query.stock
-    if (req.query.dbname == "moneycontrol") {
-      stockname = req.query.stock
+  //   var stockname = req.query.stock
+  //   if (req.query.dbname == "moneycontrol") {
+  //     stockname = req.query.stock
 
-    }
+  //   }
 
-    dbo.collection("mcsectordwm").find({  indicationDaily: "Very Bullish" } ).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("mcsectordwm").find({  indicationDaily: "Very Bullish" } ).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 
@@ -2376,45 +2377,45 @@ app.get('/mcsectoroverallviewd', (req, res) => {
 
 
 app.get('/mcoverallviewweekly', (req, res) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stockname = req.query.stock
-    if (req.query.dbname == "moneycontrol") {
-      stockname = req.query.stock
+  //   var stockname = req.query.stock
+  //   if (req.query.dbname == "moneycontrol") {
+  //     stockname = req.query.stock
 
-    }
+  //   }
 
-    dbo.collection("mcweekly").find({ indication: "Very Bullish" }).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("mcweekly").find({ indication: "Very Bullish" }).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 
 })
 ////////////////////////////////////////////////////MC COMBINE VIEW/////////////////////////////////////////////////////
 app.get('/mccombineview', (req, res) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stockname = req.query.stock
-    if (req.query.dbname == "moneycontrol") {
-      stockname = req.query.stock
+  //   var stockname = req.query.stock
+  //   if (req.query.dbname == "moneycontrol") {
+  //     stockname = req.query.stock
 
-    }
+  //   }
 
-    dbo.collection("mcdwm").find({ $and: [{ indicationDaily: "Very Bullish" }, { indicationWeekly: "Very Bullish" }] }).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("mcdwm").find({ $and: [{ indicationDaily: "Very Bullish" }, { indicationWeekly: "Very Bullish" }] }).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 
@@ -2424,133 +2425,133 @@ app.get('/mcmovingaveragesview', (req, res) => {
   let dbname = req.query.dbname
   //console.log(dbname)
   //console.log(stockisin)
-    MongoClient.connect(url, function (err, db) {
-      if (err) throw err;
-      var dbo = db.db(req.query.dbname);
-      dbo.collection("movingaverages").find({ isin:stockisin}).toArray(function (err, docs) {
-        console.log(err)
+    // MongoClient.connect(url, function (err, db) {
+    //   if (err) throw err;
+    //   var dbo = db.db(req.query.dbname);
+    //   dbo.collection("movingaverages").find({ isin:stockisin}).toArray(function (err, docs) {
+    //     console.log(err)
   
-        res.json(docs)
-      });
-    })
+    //     res.json(docs)
+    //   });
+    // })
    
   })
 
 
 //////////////////////////////////////////////To get mcvolume view///////////////////////////////////////////////////////////
 app.get('/mcvolumeview', (req, res) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) console.log(err);
-    //var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) console.log(err);
+  //   //var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
     
-    var stockname = req.query.stock
-    var mysort = { PChangeper: -1 };
-    if (req.query.dbname == "moneycontrol") {
-      stockname = req.query.stock
+  //   var stockname = req.query.stock
+  //   var mysort = { PChangeper: -1 };
+  //   if (req.query.dbname == "moneycontrol") {
+  //     stockname = req.query.stock
 
-    }
+  //   }
 
-    dbo.collection("mcvolume").find().sort(mysort).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("mcvolume").find().sort(mysort).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 
 /////////////////////////// To Delete DB moneycontrol,collection mcdwm before creating new one///////////////////////////////
 app.get('/dropdbmcdwm', function (req, res) {
 
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    console.log(err)
-    var dbname = "moneycontrol"
-    var dbo = db.db(dbname);
-    dbo.collection("mcdwm").drop((err, dropOK) => {
-      if (err) {
-        console.error("There is an error::", err);
-        return;
-      }
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   console.log(err)
+  //   var dbname = "moneycontrol"
+  //   var dbo = db.db(dbname);
+  //   dbo.collection("mcdwm").drop((err, dropOK) => {
+  //     if (err) {
+  //       console.error("There is an error::", err);
+  //       return;
+  //     }
 
-      if (dropOK) console.log("mcdwm Collection deleted");
-    })
-  });
+  //     if (dropOK) console.log("mcdwm Collection deleted");
+  //   })
+  // });
 });
 /////////////////////////// To Delete DB moneycontrol,collection mcdwm before creating new one///////////////////////////////
 app.get('/dropdbmcvolume', function (req, res) {
 
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    console.log(err)
-    var dbname = "moneycontrol"
-    var dbo = db.db(dbname);
-    dbo.collection("mcvolume").drop((err, dropOK) => {
-      if (err) {
-        console.error("There is an error::", err);
-        return;
-      }
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   console.log(err)
+  //   var dbname = "moneycontrol"
+  //   var dbo = db.db(dbname);
+  //   dbo.collection("mcvolume").drop((err, dropOK) => {
+  //     if (err) {
+  //       console.error("There is an error::", err);
+  //       return;
+  //     }
 
-      if (dropOK) console.log("mcvolume Collection deleted");
-    })
-  });
+  //     if (dropOK) console.log("mcvolume Collection deleted");
+  //   })
+  // });
 });
 ////////////////////////////////////////////////////To Delete Pscore Table////////////////////////////////////////////////////
 app.get('/droppscore', function (req, res) {
 
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    console.log(err)
-    var dbname = "moneycontrol"
-    var dbo = db.db(dbname);
-    dbo.collection("pscore").drop((err, dropOK) => {
-      if (err) {
-        console.error("There is an error::", err);
-        return;
-      }
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   console.log(err)
+  //   var dbname = "moneycontrol"
+  //   var dbo = db.db(dbname);
+  //   dbo.collection("pscore").drop((err, dropOK) => {
+  //     if (err) {
+  //       console.error("There is an error::", err);
+  //       return;
+  //     }
 
-      if (dropOK) console.log("pscore Collection deleted");
-    })
-  });
+  //     if (dropOK) console.log("pscore Collection deleted");
+  //   })
+  // });
 });
 
 /////////////////////////To Delete DB moneycontrol,collection mcsectordwm before creating new one////////////////////////////
 app.get('/dropmcsectordwm', function (req, res) {
 
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    console.log(err)
-    var dbname = "moneycontrol"
-    var dbo = db.db(dbname);
-    dbo.collection("mcsectordwm").drop((err, dropOK) => {
-      if (err) {
-        console.error("There is an error::", err);
-        return;
-      }
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   console.log(err)
+  //   var dbname = "moneycontrol"
+  //   var dbo = db.db(dbname);
+  //   dbo.collection("mcsectordwm").drop((err, dropOK) => {
+  //     if (err) {
+  //       console.error("There is an error::", err);
+  //       return;
+  //     }
 
-      if (dropOK) console.log("mcsectordwm Collection deleted");
-    })
-  });
+  //     if (dropOK) console.log("mcsectordwm Collection deleted");
+  //   })
+  // });
 });
 
 //////////////////////////////////// To delete mcmoving averages db at 9 15///////////////////////////////////////////////////
 app.get('/dropmcmovingaverages', function (req, res) {
 
-  MongoClient.connect(url, function (err, db) {
-    if (err) Console.log('Could not drop mcmoving averages');
-    console.log(err)
-    var dbname = "moneycontrol"
-    var dbo = db.db(dbname);
-    dbo.collection("movingaverages").drop((err, dropOK) => {
-      if (err) {
-        console.error("There is an error::", err);
-        return;
-      }
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) Console.log('Could not drop mcmoving averages');
+  //   console.log(err)
+  //   var dbname = "moneycontrol"
+  //   var dbo = db.db(dbname);
+  //   dbo.collection("movingaverages").drop((err, dropOK) => {
+  //     if (err) {
+  //       console.error("There is an error::", err);
+  //       return;
+  //     }
 
-      if (dropOK) console.log("movingaverages Collection deleted");
-    })
-  });
+  //     if (dropOK) console.log("movingaverages Collection deleted");
+  //   })
+  // });
 });
 
 /////////////////////////////////////MONEYCONTROL GET REQUETS/////////////////////////////////////////////////
@@ -2567,12 +2568,12 @@ app.post('/moneycontroloverallweekly', async function (req, res) {
 
       var obj1 = ({ indication: response.data.data.sentiments.indication, isin: symbol.isin, name: symbol.name })
 
-      MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        var dbname = "moneycontrol"
-        var dbo = db.db(dbname);
-        dbo.collection("mcweekly").insertOne(obj1)
-      })
+    //   MongoClient.connect(url, function (err, db) {
+    //     if (err) throw err;
+    //     var dbname = "moneycontrol"
+    //     var dbo = db.db(dbname);
+    //     dbo.collection("mcweekly").insertOne(obj1)
+    //   })
 
     }).catch((error) => {
       console.log(error)
@@ -3310,69 +3311,69 @@ app.get('/fnodata', function (req, res) {
 /////////////////////////////////////////////////Jugaad Data////////////////////////////////////////////////////////////////
 
 app.get('/dbdata1', (req, res) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stockname = req.query.stock
-    //var mysort = { DELIV_PER: -1 };
-    if (req.query.dbname == "jdata") {
-      stockname = req.query.stock
-      //console.log(stockname)
-    }
+  //   var stockname = req.query.stock
+  //   //var mysort = { DELIV_PER: -1 };
+  //   if (req.query.dbname == "jdata") {
+  //     stockname = req.query.stock
+  //     //console.log(stockname)
+  //   }
 
-    dbo.collection("allinone").find({ $and:[{DELIV_PER :{$gt:90}}] }).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("allinone").find({ $and:[{DELIV_PER :{$gt:90}}] }).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 
 
 
 app.get('/dbjdata', (req, res) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stockname = req.query.stock
-    //var mysort = { DELIV_PER: -1 };
-    if (req.query.dbname == "jdata") {
-      stockname = req.query.stock
-      //console.log(stockname)
-    }
+  //   var stockname = req.query.stock
+  //   //var mysort = { DELIV_PER: -1 };
+  //   if (req.query.dbname == "jdata") {
+  //     stockname = req.query.stock
+  //     //console.log(stockname)
+  //   }
 
-    dbo.collection("allinone").find({ $and: [{ SYMBOL: stockname }, { $or: [{ DATE1: yesterday1.format('DD-MMM-Y') },{ DATE1:datetoday}, { DATE1: yesterday2.format('DD-MMM-Y') }, { DATE1: yesterday3.format('DD-MMM-Y') }, { DATE1: yesterday4.format('DD-MMM-Y') }, { DATE1: yesterday5.format('DD-MMM-Y') }, { DATE1: yesterday6.format('DD-MMM-Y') }] }] }).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("allinone").find({ $and: [{ SYMBOL: stockname }, { $or: [{ DATE1: yesterday1.format('DD-MMM-Y') },{ DATE1:datetoday}, { DATE1: yesterday2.format('DD-MMM-Y') }, { DATE1: yesterday3.format('DD-MMM-Y') }, { DATE1: yesterday4.format('DD-MMM-Y') }, { DATE1: yesterday5.format('DD-MMM-Y') }, { DATE1: yesterday6.format('DD-MMM-Y') }] }] }).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 app.get('/dbjdataall', (req, res) => {
-  MongoClient.connect(url, function (err, db) {
-    if (err) throw err;
-    var allinone = "allinone"
-    var dbo = db.db(req.query.dbname);
+  // MongoClient.connect(url, function (err, db) {
+  //   if (err) throw err;
+  //   var allinone = "allinone"
+  //   var dbo = db.db(req.query.dbname);
 
-    var stockname = req.query.stock
-    //var mysort = { DATE1: -1 };
-    if (req.query.dbname == "jdata") {
-      stockname = req.query.stock
-      //console.log(stockname)
-    }
+  //   var stockname = req.query.stock
+  //   //var mysort = { DATE1: -1 };
+  //   if (req.query.dbname == "jdata") {
+  //     stockname = req.query.stock
+  //     //console.log(stockname)
+  //   }
 
-    dbo.collection("allinone").find({ SYMBOL: stockname }).toArray(function (err, docs) {
-      console.log(err)
+  //   dbo.collection("allinone").find({ SYMBOL: stockname }).toArray(function (err, docs) {
+  //     console.log(err)
 
-      res.json(docs)
-    });
-  })
+  //     res.json(docs)
+  //   });
+  // })
 
 })
 
@@ -3541,6 +3542,26 @@ app.get('/etnews', function (req, res) {
   })
 })
 })
+app.get('/et1', function (req, res) {
+
+  let mcsymbol = req.query.mcsymbol
+
+  var url6 = 'https://json.bselivefeeds.indiatimes.com/ET_Community/companypagedata?companyid=8581';
+  //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
+  request(url6, function (error, response, html) {
+    if (!error) {
+        console.log("et1")
+      res.json(JSON.parse(response.body))
+
+
+
+
+
+    }
+  })
+
+})
+
 
 app.get('/ethgainers', function (req, res) {
 
@@ -3828,17 +3849,18 @@ app.post('/etcompanydata', async function (req, res) {
       
       
    
-      MongoClient.connect(url, option, function (err, db) {
-        if (err) throw err;
-        var dbname = "ET"
-        var dbo = db.db(dbname);
-       dbo.collection("ETmapping2").insertMany(obj1)
-      })}
+      // MongoClient.connect(url, option, function (err, db) {
+      //   if (err) throw err;
+      //   var dbname = "ET"
+      //   var dbo = db.db(dbname);
+      //  dbo.collection("ETmapping2").insertMany(obj1)
+      // })
+    }
 
-    }).catch((error) => {
-      console.log(error)
-    })
-  })
+   }).catch((error) => {
+       console.log(error)
+     })
+   })
 
   try {
     await Promise.all(promises)
@@ -3925,7 +3947,7 @@ request(options2, (err, response, body) => {
           //console.log(JSON.parse(response.body))
          // res.json(JSON.parse(response.body).data)
          res.json(JSON.parse((response.body)))
-         console.log('this is response:', (response.body))
+         
     
         }
       })
@@ -3940,10 +3962,12 @@ request(options2, (err, response, body) => {
         request(url6, function (error, response, html) {
           if (!error) {
       
-            //console.log((response.body))
+            console.log((response.body))
             //res.json(JSON.parse(response.body).data)
-            res.json(JSON.parse((response.body)))
-            console.log('this is response:', (response.body))
+            res.json(((response.body)))
+           
+          } else {
+            console.log(error)
           }
         })
       
@@ -3969,33 +3993,33 @@ request(options2, (err, response, body) => {
 
 })
 /////////////////////////////////////Trendlyne Top Losers////////////////////////////////////////////////
-app.get('/tltl', function (req, res) {
+// app.get('/tltl', function (req, res) {
 
-  let returnedname = req.query.returnedname
+//   let returnedname = req.query.returnedname
 
-  var url6 = 'https://trendlyne.com/fundamentals/json-screener/17098/10/0/index/'+returnedname
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-
-      res.json(JSON.parse(response.body))
-      var obj = JSON.parse(response.body)
-      //console.log(JSON.parse(response.body))
-      //console.log(obj.screenData)
-      MongoClient.connect(url, function (err, db) {
-        if (err) throw err;
-        var dbname = "sampledb"
-        var dbo = db.db(dbname);
-        dbo.collection("samplecollection").insertMany(obj.screenData)
-
-      })
+//   var url6 = 'https://trendlyne.com/fundamentals/json-screener/17098/10/0/index/'+returnedname
+//   request(url6, function (error, response, html) {
+//     if (!error) {
 
 
-    }
-  })
+//       res.json(JSON.parse(response.body))
+//       var obj = JSON.parse(response.body)
+//       //console.log(JSON.parse(response.body))
+//       //console.log(obj.screenData)
+//       MongoClient.connect(url, function (err, db) {
+//         if (err) throw err;
+//         var dbname = "sampledb"
+//         var dbo = db.db(dbname);
+//         dbo.collection("samplecollection").insertMany(obj.screenData)
+
+//       })
 
 
-})
+//     }
+//   })
+
+
+// })
 ///////////////////////////////////////////TrendLyne Future Price Gainers ///////////////////////////////////////////////////
 app.get('/tlfpg', function (req, res) {
 
@@ -4570,22 +4594,20 @@ app.post('/trendlynepostdvm', async function (req, res) {
     axios.get('https://trendlyne.com/mapp/v1/stock/web/ohlc/' + symbol.tlid).then((response) => {
       obj1=({ Date: symbol.Date,Time:symbol.time, Name: symbol.name,DurabilityScore: response.data.body.stockData[6], VolatilityScore: response.data.body.stockData[7], MomentumScore: response.data.body.stockData[8]  })
       
-      // var obj1 = ({ indicationDaily: responseArr[0].data.data.sentiments.indication,indicationWeekly: responseArr[1].data.data.sentiments.indication,indicationMonthly: responseArr[2].data.data.sentiments.indication, isin: symbol.isin, name: symbol.name,Date:symbol.Date })
-      //console.log(response.data.body.stockData)
-        MongoClient.connect(url,function (err, db) {
-          if (err) console.log(err)
-          var dbname = "Trendlyne"
-          var dbo = db.db(dbname);
-          dbo.collection("score").insertOne(obj1,forceServerObjectId=true,function (err,data) {
+    //     MongoClient.connect(url,function (err, db) {
+    //       if (err) console.log(err)
+    //       var dbname = "Trendlyne"
+    //       var dbo = db.db(dbname);
+    //       dbo.collection("score").insertOne(obj1,forceServerObjectId=true,function (err,data) {
 
-            if(err!=null){
-                return console.log(err);
-            }
-            console.log(data.ops);
-            console.log("Trendlyne Score Inserted.....");
-        });
-        db.close();
-    });
+    //         if(err!=null){
+    //             return console.log(err);
+    //         }
+    //         console.log(data.ops);
+    //         console.log("Trendlyne Score Inserted.....");
+    //     });
+    //     db.close();
+    // });
          
      
 
@@ -4942,13 +4964,13 @@ app.post('/nsepostdata1', async function (req, res) {
       .then(data => {
         if (data.data['securityWiseDP']['deliveryToTradedQuantity']) {
           obj=({ symbol: symbol.eqsymbol1, percentage: data.data['securityWiseDP']['deliveryToTradedQuantity'] })
-          MongoClient.connect(url, function (err, db) {
-            if (err) console.log("Mongo error");
-            var dbname = "nse"
-                  var dbo = db.db(dbname);
+        //   MongoClient.connect(url, function (err, db) {
+        //     if (err) console.log("Mongo error");
+        //     var dbname = "nse"
+        //           var dbo = db.db(dbname);
                
-            dbo.collection("nse").insertOne(obj)
-        })
+        //     dbo.collection("nse").insertOne(obj)
+        // })
    
         } else { console.log("No deliveryToTradedQuantity present ") }
       }
@@ -4991,20 +5013,20 @@ app.post('/nsepostdata2', async function (req, res) {
         //console.log(data.data['filtered'])
           if (data.data['filtered']['CE']['totOI'] && data.data['filtered']['PE']['totOI']) {
             var obj=({ symbol: symbol.eqsymbol1, pcr: data.data['filtered']['PE']['totOI']/data.data['filtered']['CE']['totOI'] })
-            MongoClient.connect(url, function (err, db) {
-              if (err) console.log("Mongo error");
-              var dbname = "nse"
-              var dbo = db.db(dbname);
+        //     MongoClient.connect(url, function (err, db) {
+        //       if (err) console.log("Mongo error");
+        //       var dbname = "nse"
+        //       var dbo = db.db(dbname);
               
-              dbo.collection("nsepcr").insertOne(obj,forceServerObjectId=true,function (err,data) {
+        //       dbo.collection("nsepcr").insertOne(obj,forceServerObjectId=true,function (err,data) {
 
-                if(err!=null){
-                    return console.log(err);
-                }
-                console.log(data.ops);
-            });
-            db.close();
-        });
+        //         if(err!=null){
+        //             return console.log(err);
+        //         }
+        //         console.log(data.ops);
+        //     });
+        //     db.close();
+        // });
          // }) 
      
           } else { console.log("No Put/Call present ") }
@@ -5036,164 +5058,164 @@ app.post('/nsepostdata2', async function (req, res) {
 /////////////////////////////////////////////////////////////CHARTINK///////////////////////////////////////////////////////
 
 
-app.post('/chartink', async function (req, res) {
-  let abc = req.body
+// app.post('/chartink', async function (req, res) {
+//   let abc = req.body
  
-  var obj1 = [];
-  const promises = abc.map(symbol => {
+//   var obj1 = [];
+//   const promises = abc.map(symbol => {
    
-      // axios.get('https://www.nseindia.com/api/quote-equity?symbol='+symbol.eqsymbol1+'&section=trade_info').then((responseArr) => {
-      // var obj=(response.data.data)
-      //data3 = (response.data["dot_summary"]["scoreText"])
-      instance.get('https://chartink.com/screener/'+symbol.name)
-    .then(data => instance.get('https://chartink.com/screener/'+symbol.name))
-        .then(data => 
-        //MongoClient.connect(url, function (err, db) {
-      // if (err) console.log("Mongo error");
-       //var dbname = "chartink"
-             //var dbo = db.db(dbname);
-           //obj1.push({ symbol: symbol.eqsymbol1, CE: data.data['CE']['TotOI'],PE: data.data['PE']['TotOI'] })
-       console.log((data.data))
-          //   dbo.collection("chartink").insertOne(obj)
-  //})
-     )
+//       // axios.get('https://www.nseindia.com/api/quote-equity?symbol='+symbol.eqsymbol1+'&section=trade_info').then((responseArr) => {
+//       // var obj=(response.data.data)
+//       //data3 = (response.data["dot_summary"]["scoreText"])
+//       instance.get('https://chartink.com/screener/'+symbol.name)
+//     .then(data => instance.get('https://chartink.com/screener/'+symbol.name))
+//         .then(data => 
+//         //MongoClient.connect(url, function (err, db) {
+//       // if (err) console.log("Mongo error");
+//        //var dbname = "chartink"
+//              //var dbo = db.db(dbname);
+//            //obj1.push({ symbol: symbol.eqsymbol1, CE: data.data['CE']['TotOI'],PE: data.data['PE']['TotOI'] })
+//       // console.log((data.data))
+//           //   dbo.collection("chartink").insertOne(obj)
+//   //})
+//     // )
 
  
       
       
       
     
-    //.catch(data => console.error(res.data))   
-    }).catch((error) => {
-      console.log(error)
-    })
-  //})
+//     // .catch(data => console.error(res.data))   
+//     // }).catch((error) => {
+//     //   console.log(error)
+//     // })
+//  // })
 
-  try {
-    await Promise.all(promises)
-  } catch (e) {
-    console.log(e)
-  }
-})
+//   // try {
+//   //   await Promise.all(promises)
+//   // } catch (e) {
+//   //   console.log(e)
+//   // }
+// })
 
 ////******Chart ink Data ************************* */
 
 //###############Chartink Post request to get price volume action Stocks#######/////
-app.get('/chartinkpvbreakout', csrfProtection, (req, res) => {
+// app.get('/chartinkpvbreakout', csrfProtection, (req, res) => {
 
-  var url11 = 'https://chartink.com/screener/process';
-  request(url11, function (error, response, html) {
-    if (!error) {
+//   var url11 = 'https://chartink.com/screener/process';
+//   request(url11, function (error, response, html) {
+//     if (!error) {
       
      
      
     
       
-      chrome.getCookies('https://chartink.com/screener/process', function (err, cookies) {
+//       chrome.getCookies('https://chartink.com/screener/process', function (err, cookies) {
        
        
-      });
-      var options1 = {
-        url: 'https://chartink.com/screener/process',
-        method: 'POST', // Don't forget this line
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          //'sentry-trace':'bee4fc456bfb413f875623b9e55bb9a3-81fb8133b1de3a2f-1',
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36',
-          'authority': 'chartink.com',
-          'sec-ch-ua': '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
-          'dnt': '1',
-          'x-csrf-token': process.env.chartinkcsrf,
-          'sec-ch-ua-mobile': '?0',
-          'ci_session': 'eyJpdiI6Ilg3WVlxaTI4aEIrb2tXUlV0QlBBOUE9PSIsInZhbHVlIjoiSlNTRDZ1dmZhaVc1MWJCTHQ4YjRsaGhoMnYyV2RHU0pFVkZLMmtOTjNOZ0g0Vm1KMFdyb1lkSVlnQ3hsMFRSUyIsIm1hYyI6IjBiZWY4YWNjNjE5Y2UxNTVmYjBkMzQ3ZThjMTBiY2M3NWRjMjliYzFiYzgwYTlmMzhlNDUyZDRjYWJlNWMyZTkifQ%3D%3D',
-          'XSRF-TOKEN':'eyJpdiI6IktWZkRBNVEwRVRtS2djNFJ6VVhwRUE9PSIsInZhbHVlIjoiOUlKcmY4ZzN0cVo3ZGZOcmpmZWNJK1J6R2MrOWtCbXZucjdKRXZOV3gxdmRlUU92SmFjbkp4VEIwRk1ubDNKbiIsIm1hYyI6ImUxZTI0YzA4ZjNlMmM0NWFlYTg0Y2E0MzI0ZTgxZjJiNjliNDc2MWU1ZmMzYzU3NWJlZmQ0MjYwMWEwZTNjZDIifQ%3D%3D',
-          'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-          'accept': 'application/json, text/javascript, */*; q=0.01',
-          'x-requested-with': 'XMLHttpRequest',
+//       });
+//       var options1 = {
+//         url: 'https://chartink.com/screener/process',
+//         method: 'POST', // Don't forget this line
+//         headers: {
+//           'Content-Type': 'application/x-www-form-urlencoded',
+//           //'sentry-trace':'bee4fc456bfb413f875623b9e55bb9a3-81fb8133b1de3a2f-1',
+//           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36',
+//           'authority': 'chartink.com',
+//           'sec-ch-ua': '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
+//           'dnt': '1',
+//           'x-csrf-token': process.env.chartinkcsrf,
+//           'sec-ch-ua-mobile': '?0',
+//           'ci_session': 'eyJpdiI6Ilg3WVlxaTI4aEIrb2tXUlV0QlBBOUE9PSIsInZhbHVlIjoiSlNTRDZ1dmZhaVc1MWJCTHQ4YjRsaGhoMnYyV2RHU0pFVkZLMmtOTjNOZ0g0Vm1KMFdyb1lkSVlnQ3hsMFRSUyIsIm1hYyI6IjBiZWY4YWNjNjE5Y2UxNTVmYjBkMzQ3ZThjMTBiY2M3NWRjMjliYzFiYzgwYTlmMzhlNDUyZDRjYWJlNWMyZTkifQ%3D%3D',
+//           'XSRF-TOKEN':'eyJpdiI6IktWZkRBNVEwRVRtS2djNFJ6VVhwRUE9PSIsInZhbHVlIjoiOUlKcmY4ZzN0cVo3ZGZOcmpmZWNJK1J6R2MrOWtCbXZucjdKRXZOV3gxdmRlUU92SmFjbkp4VEIwRk1ubDNKbiIsIm1hYyI6ImUxZTI0YzA4ZjNlMmM0NWFlYTg0Y2E0MzI0ZTgxZjJiNjliNDc2MWU1ZmMzYzU3NWJlZmQ0MjYwMWEwZTNjZDIifQ%3D%3D',
+//           'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+//           'accept': 'application/json, text/javascript, */*; q=0.01',
+//           'x-requested-with': 'XMLHttpRequest',
 
-          'origin': 'https://chartink.com',
-          'sec-fetch-site': 'same-origin',
-          'sec-fetch-mode': 'cors',
-          'sec-fetch-dest': 'empty',
-          'referer': 'https://chartink.com/screener/price-volume-breakout-254',
-          'accept-language': 'en-US,en;q=0.9',
-          'cookie': process.env.chartinkcookie
+//           'origin': 'https://chartink.com',
+//           'sec-fetch-site': 'same-origin',
+//           'sec-fetch-mode': 'cors',
+//           'sec-fetch-dest': 'empty',
+//           'referer': 'https://chartink.com/screener/price-volume-breakout-254',
+//           'accept-language': 'en-US,en;q=0.9',
+//           'cookie': process.env.chartinkcookie
 
 
-        },
-        form: {
-          'scan_clause': '( {cash} ( latest close > 100 and latest "close - 1 candle ago close / 1 candle ago close * 100" > 5 and latest volume > latest sma( latest volume , 20 ) * 5 ) )'
+//         },
+//         form: {
+//           'scan_clause': '( {cash} ( latest close > 100 and latest "close - 1 candle ago close / 1 candle ago close * 100" > 5 and latest volume > latest sma( latest volume , 20 ) * 5 ) )'
       
-        }
-      };
+//         }
+//       };
 
-      request(options1, (err, response, body) => {
-        if (err) {
-          //console.log(err);
-        } else {
-          (res.json(JSON.parse(body)));
-          //console.log('this is response:', (response.body).data)
-          //console.log( 'this is response:',(response.header))
-        }
-      });
-    }
-  })
-})
+//       request(options1, (err, response, body) => {
+//         if (err) {
+//           //console.log(err);
+//         } else {
+//           (res.json(JSON.parse(body)));
+//           //console.log('this is response:', (response.body).data)
+//           //console.log( 'this is response:',(response.header))
+//         }
+//       });
+//     }
+//   })
+// })
 //###############Chartink Post request to get price volume action Stocks#######/////
-app.get('/chartinkbullishmomentum', csrfProtection, (req, res) => {
+// app.get('/chartinkbullishmomentum', csrfProtection, (req, res) => {
 
-  var url11 = 'https://chartink.com/screener/process';
-  request(url11, function (error, response, html) {
-    if (!error) {
+//   var url11 = 'https://chartink.com/screener/process';
+//   request(url11, function (error, response, html) {
+//     if (!error) {
       
      
      
     
       
      
-      var options2 = {
-        url: 'https://chartink.com/screener/process',
-        method: 'POST', // Don't forget this line
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          //'sentry-trace':'bee4fc456bfb413f875623b9e55bb9a3-81fb8133b1de3a2f-1',
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36',
-          'authority': 'chartink.com',
-          'sec-ch-ua': '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
-          'dnt': '1',
-          'x-csrf-token': process.env.chartinkcsrf,
-          'sec-ch-ua-mobile': '?0',
-          'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-          'accept': 'application/json, text/javascript, */*; q=0.01',
-          'x-requested-with': 'XMLHttpRequest',
+//       var options2 = {
+//         url: 'https://chartink.com/screener/process',
+//         method: 'POST', // Don't forget this line
+//         headers: {
+//           'Content-Type': 'application/x-www-form-urlencoded',
+//           //'sentry-trace':'bee4fc456bfb413f875623b9e55bb9a3-81fb8133b1de3a2f-1',
+//           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36',
+//           'authority': 'chartink.com',
+//           'sec-ch-ua': '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
+//           'dnt': '1',
+//           'x-csrf-token': process.env.chartinkcsrf,
+//           'sec-ch-ua-mobile': '?0',
+//           'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+//           'accept': 'application/json, text/javascript, */*; q=0.01',
+//           'x-requested-with': 'XMLHttpRequest',
 
-          'origin': 'https://chartink.com',
-          'sec-fetch-site': 'same-origin',
-          'sec-fetch-mode': 'cors',
-          'sec-fetch-dest': 'empty',
-          'referer': 'https://chartink.com/screener/bullish-momentum-191',
-          'accept-language': 'en-US,en;q=0.9',
-          'cookie': process.env.chartinkcookie
+//           'origin': 'https://chartink.com',
+//           'sec-fetch-site': 'same-origin',
+//           'sec-fetch-mode': 'cors',
+//           'sec-fetch-dest': 'empty',
+//           'referer': 'https://chartink.com/screener/bullish-momentum-191',
+//           'accept-language': 'en-US,en;q=0.9',
+//           'cookie': process.env.chartinkcookie
 
 
-        },
-        form: {
-          'scan_clause': '( {cash} ( latest close > 50 and latest volume > latest sma( volume,20 ) and latest sma( close,20 ) > latest sma( close,50 ) and latest rsi( 14 ) > 50 and latest close > latest sma( close, 50 ) and latest close > 1 day ago high and latest sma( volume,20 ) > 500000 ) ) '
+//         },
+//         form: {
+//           'scan_clause': '( {cash} ( latest close > 50 and latest volume > latest sma( volume,20 ) and latest sma( close,20 ) > latest sma( close,50 ) and latest rsi( 14 ) > 50 and latest close > latest sma( close, 50 ) and latest close > 1 day ago high and latest sma( volume,20 ) > 500000 ) ) '
       
-        }
-      };
+//         }
+//       };
 
-      request(options2, (err, response, body) => {
-        if (err) {
+//       request(options2, (err, response, body) => {
+//         if (err) {
          
-        } else {
-          (res.json(JSON.parse(body)));
+//         } else {
+//           (res.json(JSON.parse(body)));
        
-        }
-      });
-    }
-  })
-})
+//         }
+//       });
+//     }
+//   })
+// })
     
 
 
