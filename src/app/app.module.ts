@@ -1,8 +1,8 @@
 import { BrowserModule,HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { createChart, CrosshairMode } from "lightweight-charts";
+
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-//import { ChartModule } from 'primeng/chart';
+import { ChartModule } from 'primeng/chart';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
 import { CardModule, } from 'primeng/card';
@@ -12,10 +12,10 @@ import { OwlClockModule } from 'owl-ng';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CandleSeriesService, CategoryService} from '@syncfusion/ej2-angular-charts';
+
 import { ChartsModule } from 'ng-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { ChartModule } from '@syncfusion/ej2-angular-charts';
+
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
@@ -38,8 +38,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {MatTabsModule} from '@angular/material/tabs';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ChartAllModule, RangeNavigatorAllModule} from '@syncfusion/ej2-angular-charts';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,8 +56,6 @@ import { ChartAllModule, RangeNavigatorAllModule} from '@syncfusion/ej2-angular-
     AppRoutingModule,
     NgbModule,
     FlexLayoutModule,
-    ChartAllModule,
-    RangeNavigatorAllModule,
     SidebarModule,
     ButtonModule,
     ChartModule,
@@ -77,7 +73,6 @@ import { ChartAllModule, RangeNavigatorAllModule} from '@syncfusion/ej2-angular-
     AppRoutingModule,
     MatSidenavModule,
     ButtonsModule,
-    ChartModule,
     NgbModule,
     NgxEchartsModule.forRoot({  echarts: () => import('echarts')}),
     FormsModule,
@@ -97,7 +92,7 @@ import { ChartAllModule, RangeNavigatorAllModule} from '@syncfusion/ej2-angular-
           }),
    
   ],
-  providers: [{ provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig }, { provide: Window, useValue: window },CandleSeriesService, CategoryService],
+  providers: [{ provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig }, { provide: Window, useValue: window }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

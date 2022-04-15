@@ -4,14 +4,14 @@ import { PrimeNGConfig } from 'primeng/api';
 import { BaseChartDirective } from 'ng2-charts';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-import { createChart } from 'lightweight-charts';
+
 
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
 import * as etsector from '../lists/etsectorlist'
 import * as etindex from '../lists/etindexlist'
 import * as mcindex from '../lists/mcsectorlist'
-import { NgApexchartsModule } from "ng-apexcharts";
+
 //import { seriesData, seriesDataLinear } from "./ohlc";
 
 
@@ -203,8 +203,7 @@ export interface stocksmatile{
 })
   
 export class StockComponent implements OnInit {
-  @ViewChild('chart-container')
-
+ 
   public primaryXAxis: Object;
   public primaryYAxis: Object;
   public rows: Object;
@@ -336,56 +335,6 @@ export class StockComponent implements OnInit {
   public stockLabelssnrs3m: Array<any> = [];
   public apexohlc = [];
   public apexvolume: Array<any> = [];
-  //public stockData: object[]
-//     = [
-
-//     { x: new Date("2012-04-02"), open: 85.975716, high: 88.395714, low: 85.76857, close: 88.375717, volume: 14958790 },
-    
-//     { x: new Date("2012-04-03"), open: 89.614288, high: 90.315712, low: 88.93, close: 89.902855, volume: 20863990 },
-    
-//     { x: new Date("2012-04-04"), open: 89.192856, high: 89.408569, low: 88.14286, close: 89.187141, volume: 14324520 },
-    
-//     { x: new Date("2012-04-05"), open: 89.568573, high: 90.665718, low: 89.057144, close: 90.525711, volume: 16032450 },
-    
-//     { x: new Date("2012-04-09"), open: 89.447144, high: 91.405716, low: 89.328575, close: 90.889999, volume: 14938420 },
-    
-//     { x: new Date("2012-04-10"), open: 91.418571, high: 92, low: 89.428574, close: 89.777145, volume: 22243130 },
-//     { x: new Date("2012-05-02"), open: 85.975716, high: 88.395714, low: 85.76857, close: 88.375717, volume: 14958790 },
-    
-//     { x: new Date("2012-05-03"), open: 89.614288, high: 90.315712, low: 88.93, close: 89.902855, volume: 20863990 },
-    
-//     { x: new Date("2012-05-04"), open: 89.192856, high: 89.408569, low: 88.14286, close: 89.187141, volume: 14324520 },
-    
-//     { x: new Date("2012-05-05"), open: 89.568573, high: 90.665718, low: 89.057144, close: 90.525711, volume: 16032450 },
-    
-//     { x: new Date("2012-05-09"), open: 89.447144, high: 91.405716, low: 89.328575, close: 90.889999, volume: 14938420 },
-    
-//     { x: new Date("2012-05-10"), open: 91.418571, high: 92, low: 89.428574, close: 89.777145, volume: 22243130 },
-//     { x: new Date("2012-06-02"), open: 85.975716, high: 88.395714, low: 85.76857, close: 88.375717, volume: 14958790 },
-    
-//     { x: new Date("2012-06-03"), open: 89.614288, high: 90.315712, low: 88.93, close: 89.902855, volume: 20863990 },
-    
-//     { x: new Date("2012-06-04"), open: 89.192856, high: 89.408569, low: 88.14286, close: 89.187141, volume: 14324520 },
-    
-//     { x: new Date("2012-06-05"), open: 89.568573, high: 90.665718, low: 89.057144, close: 90.525711, volume: 16032450 },
-    
-//     { x: new Date("2012-06-09"), open: 89.447144, high: 91.405716, low: 89.328575, close: 90.889999, volume: 14938420 },
-    
-//     { x: new Date("2012-06-10"), open: 91.418571, high: 92, low: 89.428574, close: 89.777145, volume: 22243130 },
-    
-    
-// ]
-
-  //public apexohlc: Array<any> 
-//   public apexohlc: {
-//     x: Date;
-//     y: number;
-//   }[]
-//   public apexvolume:[ {
-//     x: Date;
-//     y: number[];
-// }]
-
   
   basicData3: any;
   basicOptions3: any;
@@ -416,36 +365,6 @@ export class StockComponent implements OnInit {
     this.etsectors = etsector.default.Data
     this.etindexs = etindex.default.Data
     this.mcindexs = mcindex.default.Data
-    this.primaryYAxis = {
-
-      plotOffset: 25,
-      
-      rowIndex: 1, opposedPosition: true,
-      
-      rangePadding: 'None',
-      
-      };
-      
-      this.primaryXAxis = { valueType: 'DateTime' };
-      
-      this.rows = [
-      
-      { height: '15%' },
-      
-      { height: '85%' }
-      
-      ];
-      
-      this.axes = [{
-      
-      name: 'secondary', opposedPosition: true, rowIndex: 0,
-      
-      }];
-      
-        
-        
-        
-      
     this.route.queryParams.subscribe(params => {
 
       this.eqsymbol = this.stockList.filter(i => i.isin == params.stock)[0].symbol
@@ -1342,13 +1261,6 @@ gettrendlynestocks2(tlid) {
     console.log(nestedItems)
     this.stockData.length = 0;
     for (let val in (nestedItems[1]['eodData'])) {
-      //let cal = 0;
-      //while (val != 100) {
-      //cal = cal + 1
-      //while (new Date(nestedItems[1]['eodData'][val][0]).getTime() != 1635760860000) {
-      
-       // this.apexvolume.push([new Date(nestedItems[1]['eodData'][val][0]).getTime(), ])
-      //this.apexohlc.push({ x: new Date(nestedItems[1]['eodData'][val][0]).getTime(), nestedItems[1]['eodData'][val][2], nestedItems[1]['eodData'][val][3], nestedItems[1]['eodData'][val][4], nestedItems[1]['eodData'][val][5],nestedItems[1]['eodData'][val][6] })
       this.stockData.push({x: new Date(nestedItems[1]['eodData'][val][0]).getTime(),open:nestedItems[1]['eodData'][val][2],high:nestedItems[1]['eodData'][val][3],low:nestedItems[1]['eodData'][val][4],close:nestedItems[1]['eodData'][val][5],volume:nestedItems[1]['eodData'][val][6]})
     }
     

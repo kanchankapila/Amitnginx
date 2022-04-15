@@ -55,7 +55,7 @@
              
             
             ],
-            "vendorChunk": true,
+            "vendorChunk": false,
             "extractLicenses": false,
             "buildOptimizer": false,
             "sourceMap": true,
@@ -72,18 +72,18 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": true,
+              "sourceMap": false,
               
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "25mb",
-                  "maximumError": "40mb"
+                  "maximumWarning": "50mb",
+                  "maximumError": "70mb"
                 }
               ]
             }
