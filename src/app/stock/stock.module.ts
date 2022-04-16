@@ -8,8 +8,13 @@ import { ChartsModule } from 'ng2-charts';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
-
-
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import stock from 'highcharts/modules/stock.src';
+import more from 'highcharts/highcharts-more.src';
+export function highchartsModules() {
+  // apply Highcharts Modules to this array
+  return [stock, more];
+}
 const routes: Routes = [
   
   { path: '', component: StockComponent },
@@ -20,6 +25,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     NgbModule,
+    ChartModule,
     MatCardModule,
     FlexLayoutModule,
     MatButtonModule,
@@ -29,7 +35,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [{ provide: HIGHCHARTS_MODULES, useFactory: highchartsModules }],
   exports: [RouterModule]
 })
 export class StockModule { }

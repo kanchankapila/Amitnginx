@@ -4,6 +4,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { BaseChartDirective } from 'ng2-charts';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
+import { StockChart } from 'angular-highcharts';
 
 
 import * as  stocks from '../lists/stocklist'
@@ -203,17 +204,15 @@ export interface stocksmatile{
 })
   
 export class StockComponent implements OnInit {
+  stockhighcharts: StockChart;
  
-  public primaryXAxis: Object;
-  public primaryYAxis: Object;
-  public rows: Object;
-  public axes: Object;
 
   constructor(private primengConfig: PrimeNGConfig,private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
     
   }
   
-  
+  public stockhcdate: Array<any> = [];
+  public stockhcvalue: Array<any>  = [];
   public stockdata1: Array<number> = [];
   public stockLabels: Array<any> = [];
   public stockChartData: Array<any> = [];
@@ -386,11 +385,7 @@ export class StockComponent implements OnInit {
     this.gettrendlynestocks1(this.tlid,this.tlname,this.eqsymbol)
     this.gettrendlynestocks2(this.tlid)
     this.gettrendlynestocks3(this.tlid)
-   
-    
-      
-    
-     }
+  }
 
      
 //   buildpcrgraph() {
@@ -904,14 +899,51 @@ fill: false}];
      
      
 this.stockdata1.length = 0;
-this.stockLabels.length = 0;
+      this.stockLabels.length = 0;
+      this.stockhcdate.length = 0;
+      this.stockhcvalue.length = 0;
 for (let val in nestedItems[6]['query']['results']['quotedata']) {
  this.stockdata1.unshift(nestedItems[6]['query']['results']['quotedata'][val][1])
  this.stockLabels.unshift((new Date(nestedItems[6]['query']['results']['quotedata'][val][0]).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })))
+  this.stockhcdate.unshift([(new Date(nestedItems[6]['query']['results']['quotedata'][val][0])).getTime()])
+  this.stockhcvalue.unshift([(nestedItems[6]['query']['results']['quotedata'][val][1])])
+      }
+      console.log(this.stockhcdate)
 
-}
-
-
+      this.stockhighcharts = new StockChart({
+        rangeSelector: {
+          selected: 1
+        },
+        title: {
+          text: 'AAPL Stock Price'
+        },
+        xAxis: {
+          type: 'datetime',
+         // labels:{format: '{value:%H:%M}'},
+          categories: this.stockhcdate,
+        }, 
+        legend: {
+          enabled: true,
+          itemStyle: {
+            fontSize: '11px',
+            fontWeight: 'normal'
+            }
+        },    
+  
+        series: [{
+          type: 'line',
+          data: this.stockhcvalue,
+      }]
+        // series: [{
+        //   tooltip: {
+        //     valueDecimals: 2
+        //   },
+        //   name: 'AAPL',	
+        //   type: undefined,
+        //   data: this.stockhcdata
+        // }]
+      });
+      
 this.stockChartData = [{
  label: 'Price',
  data: this.stockdata1,
