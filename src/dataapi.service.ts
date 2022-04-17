@@ -523,8 +523,8 @@ export class DataapiService {
   getnifty50frequent(){
     return this.http.get('http://localhost:3000/nifty50frequent')
   }
-  getmcshare(mcsymbol,eqsymbol) {
-    return this.http.get('http://localhost:3000/mcshare?mcsymbol='+mcsymbol+'&&eqsymbol='+eqsymbol)
+  getmcshare(mcsymbol,eqsymbol,stockid) {
+    return this.http.get('http://localhost:3000/mcshare?mcsymbol='+mcsymbol+'&&eqsymbol='+eqsymbol+'&&stockid='+stockid)
   }
   getmcsharefrequent(mcsymbol,eqsymbol){
     return this.http.get('http://localhost:3000/mcsharefrequent?mcsymbol='+mcsymbol+'&&eqsymbol='+eqsymbol)

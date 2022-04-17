@@ -201,6 +201,7 @@
         <div class="card-body" *ngIf="stockChartData">
           <h4 class="card-title">NIFTY - Today</h4>
           <canvas baseChart [chartType]="'line'" [datasets]="stockChartData" [labels]="stockChartLabels" [options]="stockChartOptions" [colors]="stockChartColors"></canvas>
+          <div [chart]="stockhighcharts"></div>
         </div>
       </div>
     </div>
@@ -307,6 +308,74 @@
 
 </p-tabPanel>
 </p-tabView>
+<div class="col-lg-15 grid-margin stretch-card ">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title">EMA Crossover</h1>
+      <div echarts [options]="options3"></div>
+    </div>
+  </div>
+</div>
 
-<div [chart]="stockhighcharts"></div>
+<div class="col-lg-15 grid-margin stretch-card ">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title">DMA</h1>
+      <div echarts [options]="options4"></div>
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-15 grid-margin stretch-card ">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">MACD</h4>
+      <div echarts [options]="options1"></div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-15 grid-margin stretch-card ">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">RSI</h4>
+      <div echarts [options]="options2"></div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-15 grid-margin stretch-card ">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">MACD</h4>
+      <div echarts [options]="options5"></div>
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-15 grid-margin stretch-card ">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">MACD</h4>
+      <div echarts [options]="options6"></div>
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-15 grid-margin stretch-card ">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">MACD</h4>
+      <div echarts [options]="options7"></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+ 
+ 
+ 
+
+
+
   

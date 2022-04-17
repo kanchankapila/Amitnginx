@@ -5,10 +5,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StockComponent } from './stock.component';
 import { MatCardModule } from '@angular/material/card';
 import { ChartsModule } from 'ng2-charts';
+
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import { NgxEchartsModule } from 'ngx-echarts';
 import stock from 'highcharts/modules/stock.src';
 import more from 'highcharts/highcharts-more.src';
 export function highchartsModules() {
@@ -30,8 +33,10 @@ const routes: Routes = [
     FlexLayoutModule,
     MatButtonModule,
     NgbModule,
+    
     TabViewModule,
     ChartsModule,
+    NgxEchartsModule.forRoot({echarts: () => import('echarts')}),
     RouterModule.forChild(routes),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

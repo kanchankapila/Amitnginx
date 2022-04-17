@@ -58,6 +58,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     SidebarModule,
     ButtonModule,
+    
     ChartModule,
     OwlClockModule,
     //OwlGalleriaModule,
@@ -74,7 +75,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSidenavModule,
     ButtonsModule,
     NgbModule,
-    NgxEchartsModule.forRoot({  echarts: () => import('echarts')}),
+    //NgxEchartsModule.forRoot({  echarts: () => import('echarts')}),
     FormsModule,
     BrowserAnimationsModule,
     MatButtonModule,

@@ -280,6 +280,7 @@ app.get('/mcshare', (req, res) => {
   
   let mcsymbol = req.query.mcsymbol
   let eqsymbol = req.query.eqsymbol
+  let stockid = req.query.stockid
   console.log(mcsymbol)
   console.log(eqsymbol)
   console.log("This is mcshare")
@@ -291,7 +292,8 @@ app.get('/mcshare', (req, res) => {
     { url: 'https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode='+eqsymbol+'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=1m' },
     { url: 'https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode='+eqsymbol+'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=3m' },
     { url: 'https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode='+eqsymbol+'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=6m' },
-    { url: 'https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode='+eqsymbol+'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=1y'}
+    { url: 'https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode=' + eqsymbol + 'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=1y' },
+    { url: 'https://frapi.marketsmojo.com/stocks_Pricemovement/pricemovement_info?sid=' + stockid + '&exchange=1&1y=1&' }
     
    
   ];
