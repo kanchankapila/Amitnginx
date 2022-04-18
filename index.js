@@ -2,6 +2,7 @@
 const async = require("async")
 const express = require('express');
 var https = require('https');
+var compression = require('compression');
 const merge = require('deepmerge')
 var http = require('http')
 const app = express();
@@ -14,6 +15,7 @@ const chrome = require('chrome-cookies-secure');
 const cors = require('cors');
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
+app.use(compression());
 const bodyParser = require("body-parser");
 const request = require('request')
 app.use(cors());
@@ -2754,7 +2756,7 @@ request(options2, (err, response, body) => {
     
           console.log("This is tendlynestocks2")
          // res.json(JSON.parse(response.body).data)
-         //res.json(JSON.parse((response.body)))
+         res.json(JSON.parse((response.body)))
          
     
         }
@@ -4023,18 +4025,8 @@ app.get('/gnewsapiall', function (req, res) {
 })
 
 
-process.env.GOOGLE_APPLICATION_CREDENTIALS = "E:/Stock Website/Firebase/sinuous-myth-279614-firebase-adminsdk-f7fam-8c74a2b46f.json";
-
-
-var privateKey  = fs.readFileSync('E:/Stock Website/stockapp/amitstockweb/key.pem', 'utf8');
-var certificate = fs.readFileSync('E:/Stock Website/stockapp/amitstockweb/server.crt', 'utf8');
-
-var credentials = {key: privateKey, cert: certificate};
-var httpServer = http.createServer(app);
-//var httpsServer = https.createServer(credentials, app);
 app.use(express.static(__dirname+"/dist"));
   
-  //app.use("/app", express.static("/dist/PurpleAdmin-Free-Angular-Admin-Template-master/stockjavagithub"));
 app.get("/*", function (req, res) {
 
   res.sendFile(path.join(__dirname +'/dist/index.html'));
@@ -4043,8 +4035,6 @@ app.get('/ngsw-worker.js', function(request, response) {
   response.sendFile(path.resolve(__dirname, '/dist/', 'ngsw-worker.js'));
 })
 http.createServer({
-  key: fs.readFileSync('E:/Stock Website/stockapp/amitstockweb/key.pem'),
-  cert: fs.readFileSync('E:/Stock Website/stockapp/amitstockweb/server.crt')
 }, app)
 .listen(3000, function () {
   console.log('Example app listening on port 3000! Go to https://localhost:3000/')

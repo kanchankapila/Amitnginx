@@ -5,7 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StockComponent } from './stock.component';
 import { MatCardModule } from '@angular/material/card';
 import { ChartsModule } from 'ng2-charts';
-
+import {HttpClientModule, HttpErrorResponse} from '@angular/common/http';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,7 +33,7 @@ const routes: Routes = [
     FlexLayoutModule,
     MatButtonModule,
     NgbModule,
-    
+    HttpClientModule,
     TabViewModule,
     ChartsModule,
     NgxEchartsModule.forRoot({echarts: () => import('echarts')}),

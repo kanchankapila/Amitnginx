@@ -84,13 +84,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatButtonToggleModule,
     MatTabsModule,
     HttpClientModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-          enabled: environment.production,
+    // ServiceWorkerModule.register('ngsw-worker.js', {
+    //       enabled: environment.production,
             
-            // Register the ServiceWorker as soon as the app is stable
-            // or after 30 seconds (whichever comes first).
-            registrationStrategy: 'registerWhenStable:30000'
-          }),
+    //         // Register the ServiceWorker as soon as the app is stable
+    //         // or after 30 seconds (whichever comes first).
+    //         registrationStrategy: 'registerWhenStable:30000'
+    //       }),
    
   ],
   providers: [{ provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig }, { provide: Window, useValue: window }],

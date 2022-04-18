@@ -5,8 +5,8 @@ import { BaseChartDirective } from 'ng2-charts';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { StockChart } from 'angular-highcharts';
-import { HttpClient } from '@angular/common/http';
 
+import { HttpClient } from '@angular/common/http';
 
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
@@ -255,7 +255,7 @@ export interface stockhcdatatile{
   
 export class StockComponent implements OnInit {
   stockhighcharts: StockChart;
- 
+  totalAngularPackages;
 
   constructor( private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
     
@@ -514,14 +514,14 @@ export class StockComponent implements OnInit {
 
    
   
-  loadData() {
-    this.http.get<any[]>(this.apiUrl)
-      .subscribe(data => {
-        this.users = data;
-        console.log(this.users)
-        console.log(data)
-      });
-  }
+  loadData() : void {
+    this.http.get<any>('https://frapi.marketsmojo.com/stocks_Pricemovement/pricemovement_info?sid=1002699&exchange=1&page=3&cards=4&1m=1&').subscribe(data => {
+      this.totalAngularPackages = data.data;
+      console.log(this.totalAngularPackages)
+  })
+    }
+        
+   
   
 
      
@@ -740,7 +740,7 @@ fill: false}];
           }]
         },
         legend: {
-          display: true
+          display: false
         },
         elements: {
           point: {
@@ -847,7 +847,7 @@ fill: false}];
           }]
         },
         legend: {
-          display: true
+          display: false
         },
         elements: {
           point: {
@@ -1131,7 +1131,7 @@ this.stockChartOptions = {
    }]
  },
  legend: {
-   display: true
+   display: false
  },
  elements: {
    point: {
