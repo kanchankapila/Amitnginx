@@ -1,6 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { StockRoutingModule } from './stock-routing.module';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StockComponent } from './stock.component';
 import { MatCardModule } from '@angular/material/card';
@@ -18,10 +19,6 @@ export function highchartsModules() {
   // apply Highcharts Modules to this array
   return [stock, more];
 }
-const routes: Routes = [
-  
-  { path: '', component: StockComponent },
-];
 
 @NgModule({
   declarations: [StockComponent],
@@ -32,15 +29,16 @@ const routes: Routes = [
     MatCardModule,
     FlexLayoutModule,
     MatButtonModule,
-    NgbModule,
+    NgModule,
     HttpClientModule,
     TabViewModule,
     ChartsModule,
+    StockRoutingModule,
     NgxEchartsModule.forRoot({echarts: () => import('echarts')}),
-    RouterModule.forChild(routes),
+   
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{ provide: HIGHCHARTS_MODULES, useFactory: highchartsModules }],
-  exports: [RouterModule]
+  
 })
 export class StockModule { }

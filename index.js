@@ -3,7 +3,7 @@ const async = require("async")
 const express = require('express');
 var https = require('https');
 var compression = require('compression');
-const merge = require('deepmerge')
+
 var http = require('http')
 const app = express();
 const port = 3000
@@ -2756,7 +2756,7 @@ request(options2, (err, response, body) => {
     
           console.log("This is tendlynestocks2")
          // res.json(JSON.parse(response.body).data)
-         res.json(JSON.parse((response.body)))
+         res.json(html2json((response.body)))
          
     
         }

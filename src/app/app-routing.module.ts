@@ -39,6 +39,7 @@ const routes: Routes = [
   //{ path: 'error-pages', loadChildren: () => import('./error-pages/error-pages.module').then(m => m.ErrorPagesModule) },
   { path: 'sidebar', loadChildren: () => import('./shared/sidebar/sidebar.module').then(m => m.SidebarModule) },
   { path: 'navbar', loadChildren: () => import('./shared/navbar/navbar.module').then(m => m.NavbarModule) },
+  { path: 'nifty', loadChildren: () => import('./nifty/nifty.module').then(m => m.NiftyModule) },
 
 ];
 
