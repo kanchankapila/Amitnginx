@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NiftyRoutingModule } from './nifty-routing.module';
 import { NiftyComponent } from './nifty.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { BaseChartDirective } from 'ng2-charts';
 import { MatCardModule } from '@angular/material/card';
 import { ChartsModule } from 'ng2-charts';
 import { FlexLayoutModule } from '@angular/flex-layout';

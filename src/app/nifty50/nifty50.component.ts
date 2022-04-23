@@ -1,9 +1,10 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
+import { ChartType, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { ViewportScroller } from '@angular/common';
-
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 export interface nifty50stockstiles {
 
   text1: string;
@@ -75,7 +76,7 @@ export interface niftysmatile{
 })
 export class Nifty50Component implements OnInit {
  
-  constructor(private dataApi: DataapiService,private window: Window, private primengConfig: PrimeNGConfig,private vps: ViewportScroller) {
+  constructor(private http: HttpClient,private dataApi: DataapiService,private window: Window, private primengConfig: PrimeNGConfig,private vps: ViewportScroller) {
     
   }
   
@@ -85,9 +86,8 @@ export class Nifty50Component implements OnInit {
   public niftypcrtime: Array<any> = [];
   public niftyvixdata: Array<number> = [];
   public niftyvixtime: Array<any> = [];
-  public lineChartData: Array<any> = [];
+  public lineChartData: any[] = [];
   public lineChartLabels: Array<number> = [];
-  public lineChartOptions: any;
   public lineChartColors: any;
   public nifty505ddata: Array<number> = [];
   public nifty505dLabels: Array<any> = [];
@@ -179,10 +179,30 @@ export class Nifty50Component implements OnInit {
   public lineChartLabelsn50snrs3m: Array<any> = [];
   basicData3: any;
   basicOptions3: any;
+  public lineChartOptions:ChartOptions = {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: false
+        }
+      }]
+    },
+    legend: {
+     position: 'top'
+              },
+    
+    elements: {
+      point: {
+        radius: 0
+      }
+    }
+  };
+ 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
-    this.getmcnifty50();
+   // this.getmcnifty50();
     this.getnifty50frequent(); 
+    this.getvixdata();
    
     setInterval(() => { this.getnifty50frequent() }, 30000);
  
@@ -218,11 +238,11 @@ export class Nifty50Component implements OnInit {
           }
         },
           plugins: {
-            legend: {
-              labels: {
-                color: '#495057'
-              }
-            }
+            // legend: {
+            //   labels: {
+            //     color: '#495057'
+            //   }
+            // }
           },
           scales: {
             x: {
@@ -272,11 +292,11 @@ buildvixgraph() {
                     }
                   },
                     plugins: {
-                      legend: {
-                        labels: {
-                          color: '#495057'
-                        }
-                      }
+                      // legend: {
+                      //   labels: {
+                      //     color: '#495057'
+                      //   }
+                      // }
                     },
                     scales: {
                       x: {
@@ -425,23 +445,7 @@ data: this.lineChartDatan50snrs3,
 fill: false}];
    
      this.lineChartLabels = this.nifty50Labels;
-     this.lineChartOptions = {
-       scales: {
-         yAxes: [{
-           ticks: {
-             beginAtZero: false
-           }
-         }]
-       },
-       legend: {
-         display: true
-       },
-       elements: {
-         point: {
-           radius: 0
-         }
-       }
-     };
+     
    
      this.lineChartColors = [
        {
@@ -456,39 +460,39 @@ fill: false}];
  
  
  
-  getmcnifty50() {
-    this.dataApi.getmcnifty50().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
+//   getmcnifty50() {
+//     this.dataApi.getmcnifty50().subscribe(data5 => {
+//       let nestedItems = Object.keys(data5).map(key => {
+//         return data5[key];
+//       });
  
-  console.log(nestedItems)
+//   console.log(nestedItems)
 
 
-      ///////////////////////////////////////////////////////////////
-       ////////////To get Nifty 5day Resistances and Indicators/////////////
+//       ///////////////////////////////////////////////////////////////
+//        ////////////To get Nifty 5day Resistances and Indicators/////////////
       
-       let val5 = 0;
-       while (val5 != 2000) {
-         val5 = val5 + 1
-         this.lineChartDatan50snrr1w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.r1),
-         this.lineChartDatan50snrr2w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.r2),
-         this.lineChartDatan50snrr3w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.r3),
-         this.lineChartDatan50snrs3w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.s3),
-         this.lineChartDatan50snrs2w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.s2),
-         this.lineChartDatan50snrs1w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.s1)
-       }
+//        let val5 = 0;
+//        while (val5 != 2000) {
+//          val5 = val5 + 1
+//          this.lineChartDatan50snrr1w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.r1),
+//          this.lineChartDatan50snrr2w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.r2),
+//          this.lineChartDatan50snrr3w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.r3),
+//          this.lineChartDatan50snrs3w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.s3),
+//          this.lineChartDatan50snrs2w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.s2),
+//          this.lineChartDatan50snrs1w.push(nestedItems[5]['data']['pivotLevels'][0].pivotLevel.s1)
+//        }
        
        
-       for (let val in nestedItems[5]['data']['crossover']) {
-         this.nifty50indicatorsw.push({text1:nestedItems[5]['data']['crossover'][val]['displayValue'],text3:nestedItems[5]['data']['crossover'][val]['indication'],text2:nestedItems[5]['data']['crossover'][val]['period'],text4:nestedItems[5]['data']['crossover'][val]['period']})
-       }
+//        for (let val in nestedItems[5]['data']['crossover']) {
+//          this.nifty50indicatorsw.push({text1:nestedItems[5]['data']['crossover'][val]['displayValue'],text3:nestedItems[5]['data']['crossover'][val]['indication'],text2:nestedItems[5]['data']['crossover'][val]['period'],text4:nestedItems[5]['data']['crossover'][val]['period']})
+//        }
      
-      for (let val1 in nestedItems[5]['data']['indicators']) {
-        if (nestedItems[5]['data']['indicators'][val1]['id'] != 'bollinger') {
-          this.nifty50indicatorsw.push({ text1: nestedItems[5]['data']['indicators'][val1].displayName, text2: nestedItems[5]['data']['indicators'][val1].id, text3: nestedItems[5]['data']['indicators'][val1].indication, text4: nestedItems[5]['data']['indicators'][val1].value })
-        }
-      }
+//       for (let val1 in nestedItems[5]['data']['indicators']) {
+//         if (nestedItems[5]['data']['indicators'][val1]['id'] != 'bollinger') {
+//           this.nifty50indicatorsw.push({ text1: nestedItems[5]['data']['indicators'][val1].displayName, text2: nestedItems[5]['data']['indicators'][val1].id, text3: nestedItems[5]['data']['indicators'][val1].indication, text4: nestedItems[5]['data']['indicators'][val1].value })
+//         }
+//       }
         
         
        
@@ -496,106 +500,106 @@ fill: false}];
   
       
 
-      ////////////To get Nifty 5 day Price///////////////////////
+//       ////////////To get Nifty 5 day Price///////////////////////
      
-      this.nifty505ddata.length = 0;
-      this.nifty505dLabels.length = 0;
-      for (let val in nestedItems[0]['graph'].values) {
-        this.nifty505ddata.push(nestedItems[0]['graph'].values[val]["_value"])
-        this.nifty505dLabels.push(nestedItems[0]['graph'].values[val]["_time"])
+//       this.nifty505ddata.length = 0;
+//       this.nifty505dLabels.length = 0;
+//       for (let val in nestedItems[0]['graph'].values) {
+//         this.nifty505ddata.push(nestedItems[0]['graph'].values[val]["_value"])
+//         this.nifty505dLabels.push(nestedItems[0]['graph'].values[val]["_time"])
        
-      }
+//       }
       
      
-      this.lineChart5dData = [{
-        label: 'Price',
-        data: this.nifty505ddata,
-        borderWidth: 1,
-        fill: false
-      },{ label: 'R1',
-      data: this.lineChartDatan50snrr1w,
-      borderWidth: 1,
-      bordercolor:'#D98880',
-          fill: false
-        },
-        {
-        label: 'R2',
-        data: this.lineChartDatan50snrr2w,
-        borderWidth: 1,
-        borderColor: '#e3256b',
-          fill: false
-        }
-        , {
-          label: 'R3',
-      data: this.lineChartDatan50snrr3w,
-          borderWidth: 1,
-          borderColor: '#c84343',
-      fill: false}, {
-        label: 'S1',
-    data: this.lineChartDatan50snrs1w,
-        borderWidth: 1,
-        borderColor: '#90b590',
-    fill: false}, {
-      label: 'S2',
-  data: this.lineChartDatan50snrs2w,
-      borderWidth: 1,
-      borderColor: '#09c51b',
-  fill: false}, {
-    label: 'S3',
-data: this.lineChartDatan50snrs3w,
-    borderWidth: 1,
-    borderColor: '#375f00',
-fill: false}];
+//       this.lineChart5dData = [{
+//         label: 'Price',
+//         data: this.nifty505ddata,
+//         borderWidth: 1,
+//         fill: false
+//       },{ label: 'R1',
+//       data: this.lineChartDatan50snrr1w,
+//       borderWidth: 1,
+//       bordercolor:'#D98880',
+//           fill: false
+//         },
+//         {
+//         label: 'R2',
+//         data: this.lineChartDatan50snrr2w,
+//         borderWidth: 1,
+//         borderColor: '#e3256b',
+//           fill: false
+//         }
+//         , {
+//           label: 'R3',
+//       data: this.lineChartDatan50snrr3w,
+//           borderWidth: 1,
+//           borderColor: '#c84343',
+//       fill: false}, {
+//         label: 'S1',
+//     data: this.lineChartDatan50snrs1w,
+//         borderWidth: 1,
+//         borderColor: '#90b590',
+//     fill: false}, {
+//       label: 'S2',
+//   data: this.lineChartDatan50snrs2w,
+//       borderWidth: 1,
+//       borderColor: '#09c51b',
+//   fill: false}, {
+//     label: 'S3',
+// data: this.lineChartDatan50snrs3w,
+//     borderWidth: 1,
+//     borderColor: '#375f00',
+// fill: false}];
     
-      this.lineChart5dLabels = this.nifty505dLabels;
-      this.lineChart5dOptions = {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false
-            }
-          }]
-        },
-        legend: {
-          display: true
-        },
-        elements: {
-          point: {
-            radius: 0
-          }
-        }
-      };
+//       this.lineChart5dLabels = this.nifty505dLabels;
+//       this.lineChart5dOptions = {
+//         scales: {
+//           yAxes: [{
+//             ticks: {
+//               beginAtZero: false
+//             }
+//           }]
+//         },
+//         legend: {
+//           display: true
+//         },
+//         elements: {
+//           point: {
+//             radius: 0
+//           }
+//         }
+//       };
     
-      this.lineChart5dColors = [
-        {
-          borderColor: '#2d0365'
-        }
-      ];
-  /////////////////////////////////////////////////////////////////
+//       this.lineChart5dColors = [
+//         {
+//           borderColor: '#2d0365'
+//         }
+//       ];
+//   /////////////////////////////////////////////////////////////////
       
-       ////////////To get Nifty 1 month Resistances and Indicators/////////////
+//        ////////////To get Nifty 1 month Resistances and Indicators/////////////
       
-       let val1m = 0;
-       while (val1m != 12000) {
-         val1m = val1m + 1
-         this.lineChartDatan50snrr1m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.r1),
-         this.lineChartDatan50snrr2m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.r2),
-         this.lineChartDatan50snrr3m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.r3),
-         this.lineChartDatan50snrs3m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.s3),
-         this.lineChartDatan50snrs2m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.s2),
-         this.lineChartDatan50snrs1m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.s1)
-       }
+//        let val1m = 0;
+//        while (val1m != 12000) {
+//          val1m = val1m + 1
+//          this.lineChartDatan50snrr1m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.r1),
+//          this.lineChartDatan50snrr2m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.r2),
+//          this.lineChartDatan50snrr3m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.r3),
+//          this.lineChartDatan50snrs3m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.s3),
+//          this.lineChartDatan50snrs2m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.s2),
+//          this.lineChartDatan50snrs1m.push(nestedItems[6]['data']['pivotLevels'][0].pivotLevel.s1)
+//        }
        
        
-       for (let val in nestedItems[6]['data']['crossover']) {
-         this.nifty50indicatorsm.push({text1:nestedItems[6]['data']['crossover'][val]['displayValue'],text3:nestedItems[6]['data']['crossover'][val]['indication'],text2:nestedItems[6]['data']['crossover'][val]['period'],text4:nestedItems[6]['data']['crossover'][val]['period']})
-       }
+//        for (let val in nestedItems[6]['data']['crossover']) {
+//          this.nifty50indicatorsm.push({text1:nestedItems[6]['data']['crossover'][val]['displayValue'],text3:nestedItems[6]['data']['crossover'][val]['indication'],text2:nestedItems[6]['data']['crossover'][val]['period'],text4:nestedItems[6]['data']['crossover'][val]['period']})
+//        }
      
-      for (let val1 in nestedItems[6]['data']['indicators']) {
-        if (nestedItems[6]['data']['indicators'][val1]['id'] != 'bollinger') {
-          this.nifty50indicatorsm.push({ text1: nestedItems[6]['data']['indicators'][val1].displayName, text2: nestedItems[6]['data']['indicators'][val1].id, text3: nestedItems[6]['data']['indicators'][val1].indication, text4: nestedItems[6]['data']['indicators'][val1].value })
-        }
-      }
+//       for (let val1 in nestedItems[6]['data']['indicators']) {
+//         if (nestedItems[6]['data']['indicators'][val1]['id'] != 'bollinger') {
+//           this.nifty50indicatorsm.push({ text1: nestedItems[6]['data']['indicators'][val1].displayName, text2: nestedItems[6]['data']['indicators'][val1].id, text3: nestedItems[6]['data']['indicators'][val1].indication, text4: nestedItems[6]['data']['indicators'][val1].value })
+//         }
+//       }
         
         
        
@@ -603,217 +607,225 @@ fill: false}];
   
       
 
-      ////////////To get Nifty 1 month Price///////////////////////
+//       ////////////To get Nifty 1 month Price///////////////////////
      
-      this.nifty501mdata.length = 0;
-      this.nifty501mLabels.length = 0;
-      for (let val in nestedItems[1]['graph'].values) {
-        this.nifty501mdata.push(nestedItems[1]['graph'].values[val]["_value"])
-        this.nifty501mLabels.push(nestedItems[1]['graph'].values[val]["_time"])
+//       this.nifty501mdata.length = 0;
+//       this.nifty501mLabels.length = 0;
+//       for (let val in nestedItems[1]['graph'].values) {
+//         this.nifty501mdata.push(nestedItems[1]['graph'].values[val]["_value"])
+//         this.nifty501mLabels.push(nestedItems[1]['graph'].values[val]["_time"])
        
-      }
+//       }
       
      
-      this.lineChart1mData = [{
-        label: 'Price',
-        data: this.nifty501mdata,
-        borderWidth: 1,
-        fill: false
-      },{ label: 'R1',
-      data: this.lineChartDatan50snrr1m,
-      borderWidth: 1,
-      bordercolor:'#D98880',
-          fill: false
-        },
-        {
-        label: 'R2',
-        data: this.lineChartDatan50snrr2m,
-        borderWidth: 1,
-        borderColor: '#e3256b',
-          fill: false
-        }
-        , {
-          label: 'R3',
-      data: this.lineChartDatan50snrr3m,
-          borderWidth: 1,
-          borderColor: '#c84343',
-      fill: false}, {
-        label: 'S1',
-    data: this.lineChartDatan50snrs1m,
-        borderWidth: 1,
-        borderColor: '#90b590',
-    fill: false}, {
-      label: 'S2',
-  data: this.lineChartDatan50snrs2m,
-      borderWidth: 1,
-      borderColor: '#09c51b',
-  fill: false}, {
-    label: 'S3',
-data: this.lineChartDatan50snrs3m,
-    borderWidth: 1,
-    borderColor: '#375f00',
-fill: false}];
+//       this.lineChart1mData = [{
+//         label: 'Price',
+//         data: this.nifty501mdata,
+//         borderWidth: 1,
+//         fill: false
+//       },{ label: 'R1',
+//       data: this.lineChartDatan50snrr1m,
+//       borderWidth: 1,
+//       bordercolor:'#D98880',
+//           fill: false
+//         },
+//         {
+//         label: 'R2',
+//         data: this.lineChartDatan50snrr2m,
+//         borderWidth: 1,
+//         borderColor: '#e3256b',
+//           fill: false
+//         }
+//         , {
+//           label: 'R3',
+//       data: this.lineChartDatan50snrr3m,
+//           borderWidth: 1,
+//           borderColor: '#c84343',
+//       fill: false}, {
+//         label: 'S1',
+//     data: this.lineChartDatan50snrs1m,
+//         borderWidth: 1,
+//         borderColor: '#90b590',
+//     fill: false}, {
+//       label: 'S2',
+//   data: this.lineChartDatan50snrs2m,
+//       borderWidth: 1,
+//       borderColor: '#09c51b',
+//   fill: false}, {
+//     label: 'S3',
+// data: this.lineChartDatan50snrs3m,
+//     borderWidth: 1,
+//     borderColor: '#375f00',
+// fill: false}];
     
-      this.lineChart1mLabels = this.nifty501mLabels;
-      this.lineChart1mOptions = {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false
-            }
-          }]
-        },
-        legend: {
-          display: true
-        },
-        elements: {
-          point: {
-            radius: 0
-          }
-        }
-      };
+//       this.lineChart1mLabels = this.nifty501mLabels;
+//       this.lineChart1mOptions = {
+//         scales: {
+//           yAxes: [{
+//             ticks: {
+//               beginAtZero: false
+//             }
+//           }]
+//         },
+//         legend: {
+//           display: true
+//         },
+//         elements: {
+//           point: {
+//             radius: 0
+//           }
+//         }
+//       };
     
-      this.lineChart1mColors = [
-        {
-          borderColor: '#2d0365'
-        }
-      ];
-//////////////////////////////////////////////////////////////////
-      ////////////////Nifty 3 months/////////////////////////////
-      for (let val in nestedItems[2]['graph'].values) {
-        this.nifty503mdata.push(nestedItems[2]['graph'].values[val]["_value"])
-        this.nifty503mLabels.push(nestedItems[2]['graph'].values[val]["_time"])
+//       this.lineChart1mColors = [
+//         {
+//           borderColor: '#2d0365'
+//         }
+//       ];
+// //////////////////////////////////////////////////////////////////
+//       ////////////////Nifty 3 months/////////////////////////////
+//       for (let val in nestedItems[2]['graph'].values) {
+//         this.nifty503mdata.push(nestedItems[2]['graph'].values[val]["_value"])
+//         this.nifty503mLabels.push(nestedItems[2]['graph'].values[val]["_time"])
      
-      }
+//       }
     
      
-      this.lineChart3mData = [{
-        label: 'Price',
-        data: this.nifty503mdata,
-        borderWidth: 1,
-        fill: false
-      }];
+//       this.lineChart3mData = [{
+//         label: 'Price',
+//         data: this.nifty503mdata,
+//         borderWidth: 1,
+//         fill: false
+//       }];
   
-      this.lineChart3mLabels = this.nifty503mLabels;
-      this.lineChart3mOptions = {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false
-            }
-          }]
-        },
-        legend: {
-          display: false
-        },
-        elements: {
-          point: {
-            radius: 0
-          }
-        }
-      };
+//       this.lineChart3mLabels = this.nifty503mLabels;
+//       this.lineChart3mOptions = {
+//         scales: {
+//           yAxes: [{
+//             ticks: {
+//               beginAtZero: false
+//             }
+//           }]
+//         },
+//         legend: {
+//           display: false
+//         },
+//         elements: {
+//           point: {
+//             radius: 0
+//           }
+//         }
+//       };
   
-      this.lineChart3mColors = [
-        {
-          borderColor: '#115dcd'
-        }
-      ];
-  ////////////////////////////////////////////////////////////////////
-      //////////////////NIfty 6 months///////////////////////////////
+//       this.lineChart3mColors = [
+//         {
+//           borderColor: '#115dcd'
+//         }
+//       ];
+//   ////////////////////////////////////////////////////////////////////
+//       //////////////////NIfty 6 months///////////////////////////////
 
-       //this.nifty506mdata.length = 0;
-      //this.nifty506mLabels.length = 0;
-      for (let val in nestedItems[3]['graph'].values) {
-        this.nifty506mdata.push(nestedItems[3]['graph'].values[val]["_value"])
-        this.nifty506mLabels.push(nestedItems[3]['graph'].values[val]["_time"])
+//        //this.nifty506mdata.length = 0;
+//       //this.nifty506mLabels.length = 0;
+//       for (let val in nestedItems[3]['graph'].values) {
+//         this.nifty506mdata.push(nestedItems[3]['graph'].values[val]["_value"])
+//         this.nifty506mLabels.push(nestedItems[3]['graph'].values[val]["_time"])
        
-      }
+//       }
       
      
-      this.lineChart6mData = [{
-        label: 'Price',
-        data: this.nifty506mdata,
-        borderWidth: 1,
-        fill: false
-      }];
+//       this.lineChart6mData = [{
+//         label: 'Price',
+//         data: this.nifty506mdata,
+//         borderWidth: 1,
+//         fill: false
+//       }];
     
-      this.lineChart6mLabels = this.nifty506mLabels;
-      this.lineChart6mOptions = {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false
-            }
-          }]
-        },
-        legend: {
-          display: false
-        },
-        elements: {
-          point: {
-            radius: 0
-          }
-        }
-      };
+//       this.lineChart6mLabels = this.nifty506mLabels;
+//       this.lineChart6mOptions = {
+//         scales: {
+//           yAxes: [{
+//             ticks: {
+//               beginAtZero: false
+//             }
+//           }]
+//         },
+//         legend: {
+//           display: false
+//         },
+//         elements: {
+//           point: {
+//             radius: 0
+//           }
+//         }
+//       };
     
-      this.lineChart6mColors = [
-        {
-          borderColor: '#5a7f84'
-        }
-      ];
+//       this.lineChart6mColors = [
+//         {
+//           borderColor: '#5a7f84'
+//         }
+//       ];
     
    
  
 
 
- ///////////////////Nifty 1 year/////////////////////////////////////
+//  ///////////////////Nifty 1 year/////////////////////////////////////
 
-      //this.nifty501yrdata.length = 0;
-      //this.nifty501yrLabels.length = 0;
-      for (let val in nestedItems[4]['graph'].values) {
-        this.nifty501yrdata.push(nestedItems[4]['graph'].values[val]["_value"])
-        this.nifty501yrLabels.push(nestedItems[4]['graph'].values[val]["_time"])
+//       //this.nifty501yrdata.length = 0;
+//       //this.nifty501yrLabels.length = 0;
+//       for (let val in nestedItems[4]['graph'].values) {
+//         this.nifty501yrdata.push(nestedItems[4]['graph'].values[val]["_value"])
+//         this.nifty501yrLabels.push(nestedItems[4]['graph'].values[val]["_time"])
      
-      }
+//       }
     
   
-      this.lineChart1yrData = [{
-        label: 'Price',
-        data: this.nifty501yrdata,
-        borderWidth: 1,
-        fill: false
-      }];
+//       this.lineChart1yrData = [{
+//         label: 'Price',
+//         data: this.nifty501yrdata,
+//         borderWidth: 1,
+//         fill: false
+//       }];
   
-      this.lineChart1yrLabels = this.nifty501yrLabels;
-      this.lineChart1yrOptions = {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false
-            }
-          }]
-        },
-        legend: {
-          display: false
-        },
-        elements: {
-          point: {
-            radius: 0
-          }
-        }
-      };
+//       this.lineChart1yrLabels = this.nifty501yrLabels;
+//       this.lineChart1yrOptions = {
+//         scales: {
+//           yAxes: [{
+//             ticks: {
+//               beginAtZero: false
+//             }
+//           }]
+//         },
+//         legend: {
+//           display: false
+//         },
+//         elements: {
+//           point: {
+//             radius: 0
+//           }
+//         }
+//       };
   
-      this.lineChart1yrColors = [
-        {
-          borderColor: '#c154c1'
-        }
-      ];
+//       this.lineChart1yrColors = [
+//         {
+//           borderColor: '#c154c1'
+//         }
+//       ];
 
-    }, err => {
-      console.log(err)
+//     }, err => {
+//       console.log(err)
+//     })
+//   }
+  getvixdata() {
+    this.http.get('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY').subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
     })
-  }
-
+    
+}
   
 
      

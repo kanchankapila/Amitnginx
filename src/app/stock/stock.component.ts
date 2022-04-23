@@ -1,12 +1,12 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
-import { BaseChartDirective } from 'ng2-charts';
+
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { StockChart } from 'angular-highcharts';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
@@ -15,6 +15,8 @@ import * as etindex from '../lists/etindexlist'
 import * as mcindex from '../lists/mcsectorlist'
 
 //import { seriesData, seriesDataLinear } from "./ohlc";
+import {from,Observable} from 'rxjs';
+
 
 
 export interface stockcrossover {
@@ -468,7 +470,7 @@ export class StockComponent implements OnInit {
   options7: any;
   users = [];
 
-  apiUrl = 'https://frapi.marketsmojo.com/stocks_Pricemovement/pricemovement_info?sid=1002699&exchange=1&page=3&cards=4&1m=1&';
+  
   
 
   ngOnInit(): void {
@@ -512,16 +514,38 @@ export class StockComponent implements OnInit {
     
   }
 
+ 
+  
+ 
    
   
-  loadData() : void {
-    this.http.get<any>('https://frapi.marketsmojo.com/stocks_Pricemovement/pricemovement_info?sid=1002699&exchange=1&page=3&cards=4&1m=1&').subscribe(data => {
-      this.totalAngularPackages = data.data;
-      console.log(this.totalAngularPackages)
-  })
-    }
+  loadData(): void {
+    
+    
+ 
+    this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1yr&type=area').subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
+    })
+    
+  }
         
-   
+  // loadData(): Observable<any> {
+  //     return from(
+  //       fetch(
+  //         'https://frapi.marketsmojo.com/stocks_Pricemovement/pricemovement_info?sid=1002699&exchange=1&page=3&cards=4&1m=1&', // the url you are trying to access
+  //         {
+  //           headers: {
+  //             'Content-Type': 'application/json',
+  //           },
+  //           method: 'GET', // GET, POST, PUT, DELETE
+  //           mode: 'no-cors' // the most important option
+  //         }
+  //       ))
+  //   }
+  
   
 
      
@@ -1023,7 +1047,8 @@ fill: false}];
        this.stockDatasnrs1.push(nestedItems[1]['data']['pivotLevels'][0].pivotLevel.s1)
      }
   
-     this.stockindicators.length = 0;
+      this.stockindicators.length = 0;
+      this.stockcrossover.length = 0;
      for (let val in nestedItems[1]['data']['crossover']) {
        this.stockindicators.push({text1:nestedItems[1]['data']['crossover'][val]['displayValue'],text3:nestedItems[1]['data']['crossover'][val]['indication'],text2:nestedItems[1]['data']['crossover'][val]['period'],text4:nestedItems[1]['data']['crossover'][val]['period']})
      }

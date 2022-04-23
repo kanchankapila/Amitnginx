@@ -109,14 +109,14 @@
     </p-sidebar>
      <div class="InsideContent">
       <div class="col-md-5 ">
-        <div class="card bg-gradient-success card-img-holder text-white">
+        <div class="card bg-gradient-primary card-img-holder text-white">
           <div class="card-body">
             
             <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
-            <h4 class="font-weight-normal mb-1">NIFTY 50
+            <h4 class="font-weight-normal mb-1">
              
              </h4>
-            <h4 [ngClass]="{'fontgreen2 mb-5' : tile.text4 > 0 ,'fontred2 mb-5': 0 > tile.text4 }" *ngFor="let tile of mcniftyrt">{{tile.text2}}<br>({{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%)<br>Dec:{{tile.text5}}&nbsp;&nbsp;Adv{{tile.text6}}</h4>
+            <h4 [ngClass]="{'bg-gradient-success mb-1 ' : tile.text4 > 0 ,'bg-gradient-danger mb-1 ': 0 > tile.text4 }" *ngFor="let tile of mcniftyrt"><br>&nbsp;NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;({{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%)<br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}</h4>
             
               
                 
@@ -129,8 +129,8 @@
         <div class="card bg-gradient-primary card-img-holder text-white">
           <div class="card-body">
             <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                  
-            <h4 class="font-weight-normal mb-1">BANK NIFTY</h4>
-            <h4 [ngClass]="{'fontgreen2 mb-' : tile.text4 > 0 ,'fontred2 mb-5': 0 > tile.text4 }" *ngFor="let tile of mcbniftyrt">{{tile.text2}}<br>({{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%)</h4>
+            <h4 class="font-weight-normal mb-1"></h4>
+            <h4 [ngClass]="{'bg-gradient-success mb-1 ' : tile.text4 > 0 ,'bg-gradient-danger mb-1 ': 0 > tile.text4 }" *ngFor="let tile of mcbniftyrt"><br>&nbsp;BANK NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;({{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%)<br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}</h4>
             <h6 class="card-text"></h6>
           </div>
         </div>
@@ -143,14 +143,17 @@
     <div class="InsideContent">   
       
     <div class="InsideContent1">
-      <mat-card [ngClass]="{'animate__flipOutX bnoptionssupport' : tile.text1 >= 1.2 ,'pcrr animate__flipOutX': 0.80 > tile.text1 ,'pcry animate__flipOutX': 1.2 > tile.text1 > 0.80 }"  *ngFor="let tile of pcrnsebnifty">
+      
+      <mat-card [ngClass]="{'animate__flipOutX bnoptionssupport' : tile.text1 >= 1.2 ,'bnoptionsresistance animate__flipOutX': 0.80 > tile.text1 ,'bnoptionsneutral animate__flipOutX': 1.2 > tile.text1 > 0.80 }"  *ngFor="let tile of pcrnsebnifty">
         <h6>PCRB :{{tile.text1| number : '1.2-2'}}</h6>
        
       </mat-card>
-      <mat-card [ngClass]="{'animate__flipOutX bnoptionssupport' : tile.text1 >= 1.2 ,'pcrr animate__flipOutX': 0.80 > tile.text1,'pcry animate__flipOutX': 1.2 > tile.text1 > 0.80 }"  *ngFor="let tile of pcrnsenifty">
+      <mat-card [ngClass]="{'animate__flipOutX bnoptionssupport' : tile.text1 >= 1.2 ,'bnoptionsresistance animate__flipOutX': 0.80 > tile.text1,'bnoptionsneutral animate__flipOutX': 1.2 > tile.text1 > 0.80 }"  *ngFor="let tile of pcrnsenifty">
         <h6>PCR :{{tile.text1| number : '1.2-2'}}</h6>
         
       </mat-card>
+    
+      
       
       </div>
     

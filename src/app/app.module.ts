@@ -23,10 +23,10 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TodoComponent } from './apps/todo-list/todo/todo.component';
+
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
-import { TodoListComponent } from './apps/todo-list/todo-list.component';
+
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavbarModule, ButtonsModule } from 'angular-bootstrap-md'
 import { NgApexchartsModule } from "ng-apexcharts";
@@ -44,8 +44,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     NavbarComponent,
     SidebarComponent,
     FooterComponent,
-    TodoListComponent,
-    TodoComponent,
+   
     SpinnerComponent,
     ContentAnimateDirective,
     ChartsModule

@@ -1,13 +1,11 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { StockRoutingModule } from './stock-routing.module';
 import { CommonModule } from '@angular/common';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StockComponent } from './stock.component';
 import { MatCardModule } from '@angular/material/card';
 import { ChartsModule } from 'ng2-charts';
 import {HttpClientModule, HttpErrorResponse} from '@angular/common/http';
-
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
@@ -29,7 +27,7 @@ export function highchartsModules() {
     MatCardModule,
     FlexLayoutModule,
     MatButtonModule,
-    NgModule,
+    
     HttpClientModule,
     TabViewModule,
     ChartsModule,

@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { DataapiService } from '../../../dataapi.service';
 import { formatDate } from '@angular/common';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import * as sectors from '../../lists/mcsectorlist';
 import * as fnostocks from '../../lists/fnostocks';
 import * as bqstock from '../../lists/bqlist'
@@ -36,7 +37,8 @@ export interface mcbniftyrttiles {
   text2: string;
   text3: string;
   text4: string;
- 
+  text5: string;
+  text6: string;
   
 }
 export interface newscardtile {
@@ -115,7 +117,7 @@ export class NavbarComponent implements OnInit {
   visibleSidebar4;
   visibleSidebar5;
   
-  constructor(private primengConfig: PrimeNGConfig,config: NgbDropdownConfig, private window: Window, private route: ActivatedRoute, private router: Router,private dataApi: DataapiService) {
+  constructor(private http: HttpClient,private primengConfig: PrimeNGConfig,config: NgbDropdownConfig, private window: Window, private route: ActivatedRoute, private router: Router,private dataApi: DataapiService) {
     config.placement = 'bottom-right';
   }
 
@@ -136,7 +138,7 @@ export class NavbarComponent implements OnInit {
     this.fnostock = fnostocks.default.Data
     this.etstocks = etstock.default.Data
     this.bqstocks=bqstock.default.Data
-    
+    this.toggleSidebar()
     this.data = this.stock
     this.primengConfig.ripple = true;
   }
@@ -144,15 +146,12 @@ export class NavbarComponent implements OnInit {
   selectEvent(stock_isin) {
     
     this.window.open("http://localhost:4200/Ohlc?stock=" + stock_isin + "&&dbname=" + 'mydb', "_blank")
-    //this.router.navigate(['/Ohlc'], { queryParams: { stock: stock_isin, dbname: 'mydb' } });
-
-    // do something with selected item
+    
   }
 
   onChangeSearch(val: string) {
 
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
+  
   }
 
   onFocused(abc) {
@@ -335,16 +334,18 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     )
   }
   getmcniftyrealtime() {
-    this.dataApi.getmcniftyrealtime().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-     // console.log(nestedItems)
+   
+      this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3BNSX').subscribe(data5 => {
+        let nestedItems = Object.keys(data5).map(key => {
+          return data5[key];
+        });
+        
+    
       this.mcniftyrt.length = 0;
       
-      this.mcniftyrt.push({ text1: nestedItems[82], text2: nestedItems[79], text3: nestedItems[83], text4: nestedItems[84], text5: nestedItems[1], text6: nestedItems[40] })
-      this.mcadvvalue1 = nestedItems[40];
-      this.mcdecvalue1 = nestedItems[1];
+      this.mcniftyrt.push({ text1: nestedItems[2]['pricecurrent'], text2: nestedItems[2]['pricecurrent'], text3: nestedItems[2]['pricechange'], text4: nestedItems[2]['pricepercentchange'], text5: nestedItems[2]['adv'], text6: nestedItems[2]['decl'] })
+      this.mcadvvalue1 = nestedItems[2]['adv'];
+      this.mcdecvalue1 = nestedItems[2]['decl'];
       
      
     }, err => {
@@ -352,14 +353,15 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     })
   }
   getmcbankniftyrealtime() {
-    this.dataApi.getmcbankniftyrealtime().subscribe(data5 => {
+    this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3Bnbx').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-     // console.log(data5)
-      this.mcbniftyrt.length = 0;
+    
+  
+    this.mcbniftyrt.length = 0;
       
-      this.mcbniftyrt.push({text1:nestedItems[82],text2:nestedItems[79],text3:nestedItems[83],text4:nestedItems[84]})
+      this.mcbniftyrt.push({text1: nestedItems[2]['pricecurrent'], text2: nestedItems[2]['pricecurrent'], text3: nestedItems[2]['pricechange'], text4: nestedItems[2]['pricepercentchange'], text5: nestedItems[2]['adv'], text6: nestedItems[2]['decl'] })
     }, err => {
       console.log(err)
     })

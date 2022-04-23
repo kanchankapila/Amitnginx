@@ -6,12 +6,13 @@
 
 <p-tabView>
     <p-tabPanel header="Today">
-      <div class="col-lg-18 grid-margin stretch-card">
+      <div class="InsideContent">
+      <div class="col-lg-7 grid-margin stretch-card">
         <div class="content card">
-          <h4 class="card-title">Daily</h4>
+          <h4 class="mb-5">Daily Technical Indicators</h4>
           <div fxLayout="row wrap" fxLayoutGap="16px grid">
-            <div fxFlex="9" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of nifty50indicators">
-              <mat-card class="text-black cardbear grid-margin stretch-card"
+            <div fxFlex="25" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of nifty50indicators">
+              <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
               [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
                           'bg-gradient-bull1':tile.text3 === 'Oversold',
                           'bg-gradient-bull2':tile.text3 === 'Strong Trend',
@@ -27,7 +28,31 @@
           </div>
           </div>
         </div>
-  
+        
+        <div class="col-lg-5 grid-margin stretch-card">
+          <div class="content card">
+            
+            <h4 class="mb-4">Crossover</h4>
+            <div fxLayout="row wrap" fxLayoutGap="16px grid">
+              <div fxFlex="30" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of nifty50crossover">
+                <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
+                [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
+                            'bg-gradient-bull1':tile.text3 === 'Oversold',
+                            'bg-gradient-bull2':tile.text3 === 'Strong Trend',
+                            'bg-gradient-bull3':tile.text3 === 'High Volatility',
+                            'bg-gradient-bear':tile.text3 === 'Bearish',
+                            'bg-gradient-bear1':tile.text3 === 'Overbought',
+                            'bg-gradient-bear2':tile.text3 === 'Weak Trend',
+                            'bg-gradient-bear3':tile.text3 === 'Low Volatility',
+                            'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
+                </mat-card>
+               
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+    
   
         <div class="col-lg-12 stretch-card">
           <div class="card">
@@ -157,7 +182,7 @@
         <div class="col-lg-13 grid-margin stretch-card">
           <div class="card">
             <div class="card-body" >
-              <h4 class="card-title">PCR</h4>
+              <h4 class="mb-5">PCR</h4>
               <div style="height: 200px">
                 <p-chart  type="line"  [width]="1000" [height]="200" [data]="basicData1" [options]="basicOptions1"></p-chart>
                 </div>
@@ -167,7 +192,7 @@
         <div class="col-lg-13 grid-margin stretch-card ">
           <div class="card">
             <div class="card-body" >
-              <h4 class="card-title">VIX</h4>
+              <h4 class="mb-5">VIX</h4>
               <div style="height: 200px">
               <p-chart  type="line"  [width]="1000" [height]="200" [data]="basicData" [options]="basicOptions"></p-chart>
               </div>
@@ -181,8 +206,9 @@
   
       <div class="col-lg-15 grid-margin stretch-card ">
         <div class="card">
-          <div class="card-body" *ngIf="lineChartData">
+          <div class="card-body" >
             <h4 class="card-title">NIFTY - Today</h4>
+            <div style="display: block" ></div>
             <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"></canvas>
           </div>
         </div>
@@ -216,7 +242,7 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">NIFTY50 - 5 Days</h4>
-          <canvas baseChart [chartType]="'line'" [datasets]="lineChart5dData" [labels]="lineChart5dLabels" [options]="lineChart5dOptions" [colors]="lineChart5dColors"></canvas>
+          <canvas baseChart [chartType]="'line'" [datasets]="lineChart5dData" [labels]="lineChart5dLabels" [options]="lineChartOptions" [colors]="lineChart5dColors"></canvas>
         </div>
       </div>
     </div>
@@ -250,7 +276,7 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">NIFTY50 - 1 Month</h4>
-          <canvas baseChart [chartType]="'line'" [datasets]="lineChart1mData" [labels]="lineChart1mLabels" [options]="lineChart1mOptions" [colors]="lineChart1mColors"></canvas>
+          <canvas baseChart [chartType]="'line'" [datasets]="lineChart1mData" [labels]="lineChart1mLabels" [options]="lineChartOptions" [colors]="lineChart1mColors"></canvas>
         </div>
       </div>
     </div>
@@ -260,9 +286,9 @@
   <p-tabPanel header="3months">
     <div class="col-lg-15 grid-margin  stretch-card">
       <div class="card">
-        <div class="card-body" *ngIf="lineChart3mData">
+        <div class="card-body" >
           <h4 class="card-title">NIFTY - 3 months</h4>
-          <canvas baseChart [chartType]="'line'" [datasets]="lineChart3mData" [labels]="lineChart3mLabels" [options]="lineChart3mOptions" [colors]="lineChart3mColors"></canvas>
+          <canvas baseChart [chartType]="'line'" [datasets]="lineChart3mData" [labels]="lineChart3mLabels" [options]="lineChartOptions" [colors]="lineChart3mColors"></canvas>
         </div>
       </div>
     </div>
@@ -273,7 +299,7 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">NIFTY50 - 6 Months</h4>
-          <canvas baseChart [chartType]="'line'" [datasets]="lineChart6mData" [labels]="lineChart6mLabels" [options]="lineChart6mOptions" [colors]="lineChart6mColors"></canvas>
+          <canvas baseChart [chartType]="'line'" [datasets]="lineChart6mData" [labels]="lineChart6mLabels" [options]="lineChartOptions" [colors]="lineChart6mColors"></canvas>
         </div>
       </div>
     </div>
@@ -283,7 +309,7 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">NIFTY - 1 Year </h4>
-          <canvas baseChart [chartType]="'line'" [datasets]="lineChart1yrData" [labels]="lineChart1yrLabels" [options]="lineChart1yrOptions" [colors]="lineChart1yrColors"></canvas>
+          <canvas baseChart [chartType]="'line'" [datasets]="lineChart1yrData" [labels]="lineChart1yrLabels" [options]="lineChartOptions" [colors]="lineChart1yrColors"></canvas>
         </div>
       </div>
     </div>
@@ -313,5 +339,5 @@
       </div>
       </div>
     </div>
-  
-    
+    <div [chart]="stockhighcharts"></div> 
+   

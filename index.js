@@ -1,16 +1,20 @@
 
 const async = require("async")
 const express = require('express');
-var https = require('https');
+const cluster = require('cluster');
 var compression = require('compression');
-
+const numCPUs = require('os').cpus().length;
 var http = require('http')
 const app = express();
 const port = 3000
 var cookieSession = require('cookie-session')
 const { JSDOM } = require( "jsdom" );
 const { window } = new JSDOM( "" );
-const $ = require( "jquery" )( window );
+const $ = require("jquery")(window);
+const responseTime = require('response-time')
+
+const redis = require('redis');
+const client = redis.createClient();
 const chrome = require('chrome-cookies-secure');
 const cors = require('cors');
 var cookieParser = require('cookie-parser');
@@ -35,14 +39,37 @@ const fs =require('fs')
 const axios = require('axios');
 const cheerio = require('cheerio');
 var html2json = require('html2json').html2json;
+//Create a middleware that adds a X-Response-Time header to responses.
+app.use(responseTime());
+// app.use((req,res,next)=>{
+//   res.header('Acces-Control-Allow-Origin','*');
+//   res.header('Acces-Control-Allow-Methods','GET,POST,PUT,PATCH,DELETE');
+//   res.header('Acces-Contorl-Allow-Methods','Content-Type');
+//   next(); 
+// })
+if (cluster.isMaster) {
+  console.log(`Master ${process.pid} is running`);
 
+  // Fork workers.
+  for (let i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
 
+  //Check if work id is died
+  cluster.on('exit', (worker, code, signal) => {
+    console.log(`worker ${worker.process.pid} died`);
+  });
 
-// const server = https.createSamitstockweberver({
-//   key: fs.readFileSync('E:/Stock Website/stockapp/amitstockweb/key.pem'),
-//   cert: fs.readFileSync('E:/Stock Website/stockapp/amitstockweb/server.crt')
-// }, app);
-const token = '1869116798:AAHmOnd_R4vqQZpAdYpT--EPdXuP8WjZc00';
+} else {
+  // This is Workers can share any TCP connection
+  // It will be initialized using express
+  console.log(`Worker ${process.pid} started`);
+
+  app.get('/cluster', (req, res) => {
+    let worker = cluster.worker.id;
+    res.send(`Running on worker with id ==> ${worker}`);
+  });
+
 const axiosCookieJarSupport = require('axios-cookiejar-support').default;
   const tough = require('tough-cookie');
 
@@ -52,15 +79,7 @@ const axiosCookieJarSupport = require('axios-cookiejar-support').default;
 //var mongo = require('mongodb');
 const { response } = require('express');
 const { json } = require('body-parser');
-//var MongoClient = require('mongodb').MongoClient;
- //var url = "mongodb://127.0.0.1 :27017/mydb?&connectTimeoutMS=2147483647&socketTimeoutMS=2147483647";
-//  const option = {
 
-//   socketTimeoutMS: 3000000,
-//   keepAlive: true,
- 
-// };
-//var client = new MongoClient(url, option);
 var moment = require('moment');
 
 
@@ -100,7 +119,15 @@ app.get('/mcnifty50', (req, res) => {
         }
   }); 
 })
-
+  app.get('/test', async function (req, res) {
+    try {
+      const response = await axios.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=5d&type=area');
+      console.log(JSON.parse((response.body).data));
+    } catch (error) {
+      console.error(error);
+    }
+  });
+  
 //This is Nifty 50 Details used in nifty50 component using parallel api run
 app.get('/nifty50frequent', (req, res) => {
   
@@ -4034,9 +4061,12 @@ app.get("/*", function (req, res) {
 app.get('/ngsw-worker.js', function(request, response) {
   response.sendFile(path.resolve(__dirname, '/dist/', 'ngsw-worker.js'));
 })
-http.createServer({
-}, app)
-.listen(3000, function () {
-  console.log('Example app listening on port 3000! Go to https://localhost:3000/')
-})
-
+// http.createServer({
+// }, app)
+// .listen(3000, function () {
+//   console.log('Example app listening on port 3000! Go to http://localhost:3000/')
+// })
+app.listen(3000, function() {
+  console.log('Your node is running on port 3000');
+});
+}
