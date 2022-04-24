@@ -22,9 +22,7 @@ const routes: Routes = [
   //{ path: 'Homepage', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) }, 
   //{ path: 'Treemaps', loadChildren: () => import('./treemaps/treemaps.module').then(m => m.TreemapsModule) }, 
   //{ path: 'Analytics', loadChildren: () => import('./analytics/analytics.module').then(m => m.AnalyticsModule) }, 
-  { path: 'niftypharma', loadChildren: () => import('./niftypharma/niftypharma.module').then(m => m.NiftypharmaModule) },  
-  { path: 'nifty50', loadChildren: () => import('./nifty50/nifty50.module').then(m => m.Nifty50Module) }, 
-  { path: 'niftybank', loadChildren: () => import('./niftybank/niftybank.module').then(m => m.NiftybankModule) },  
+  
   { path: 'Dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }, 
   { path: 'Ohlc', loadChildren: () => import('./ohlc/ohlc.module').then(m => m.OhlcModule) },
   { path: 'Stock',loadChildren: () => import('./stock/stock.module').then(m => m.StockModule) },
@@ -40,6 +38,8 @@ const routes: Routes = [
   { path: 'sidebar', loadChildren: () => import('./shared/sidebar/sidebar.module').then(m => m.SidebarModule) },
   { path: 'navbar', loadChildren: () => import('./shared/navbar/navbar.module').then(m => m.NavbarModule) },
   { path: 'nifty', loadChildren: () => import('./nifty/nifty.module').then(m => m.NiftyModule) },
+  { path: 'banknifty', loadChildren: () => import('./banknifty/banknifty.module').then(m => m.BankniftyModule) },
+  { path: 'pharmanifty', loadChildren: () => import('./pharmanifty/pharmanifty.module').then(m => m.PharmaniftyModule) },
 
 ];
 

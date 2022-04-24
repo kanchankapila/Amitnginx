@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    //"module": "esnext",
     "module": "commonjs",
     "target": "es5",
     "esModuleInterop": true,
@@ -29,6 +30,7 @@
     ]
   },
   "angularCompilerOptions": {
+    //"enableIvy": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": false
     

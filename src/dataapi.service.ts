@@ -753,6 +753,9 @@ export class DataapiService {
   gettrendlynestocks3(tlid){
     return this.http.get('http://localhost:3000/trendlynestocks3?tlid='+tlid)
   }
+  gettrendlynenifty() {
+    return this.http.get('http://localhost:3000/trendlynenifty')
+  }
 
   getniftytradersallstocks(){
     return this.http.get('http://localhost:3000/niftytradersallstocks')

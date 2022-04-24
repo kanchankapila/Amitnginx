@@ -1,8 +1,10 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+
+import { PharmaniftyRoutingModule } from './pharmanifty-routing.module';
+import { PharmaniftyComponent } from './pharmanifty.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { Nifty50Component } from './nifty50.component';
+import { BaseChartDirective } from 'ng2-charts';
 import { MatCardModule } from '@angular/material/card';
 import { ChartsModule } from 'ng2-charts';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -10,27 +12,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
 import { ChartModule } from 'primeng/chart';
 
-const routes: Routes = [
-  
-  { path: '', component: Nifty50Component },
-];
-
 @NgModule({
-  declarations: [Nifty50Component],
+  declarations: [
+    PharmaniftyComponent
+  ],
   imports: [
     CommonModule,
-    ChartModule,
+    PharmaniftyRoutingModule,
+    FlexLayoutModule,
     NgbModule,
     MatCardModule,
-    FlexLayoutModule,
     MatButtonModule,
-    NgbModule,
-    TabViewModule,
     ChartsModule,
-    RouterModule.forChild(routes),
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers:[]
+    TabViewModule,
+    ChartModule
 
+  ]
 })
-export class Nifty50Module { }
+export class PharmaniftyModule { }

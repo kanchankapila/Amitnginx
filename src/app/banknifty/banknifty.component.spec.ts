@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NiftybankComponent } from './Niftybank.component';
+import { BankniftyComponent } from './banknifty.component';
 
-describe('NiftybankComponent', () => {
-  let component: NiftybankComponent;
-  let fixture: ComponentFixture<NiftybankComponent>;
+describe('BankniftyComponent', () => {
+  let component: BankniftyComponent;
+  let fixture: ComponentFixture<BankniftyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NiftybankComponent ]
+      declarations: [ BankniftyComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NiftybankComponent);
+    fixture = TestBed.createComponent(BankniftyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
