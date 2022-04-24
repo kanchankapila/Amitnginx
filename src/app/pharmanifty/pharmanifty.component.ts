@@ -115,8 +115,7 @@ export class PharmaniftyComponent implements OnInit {
   public stockhcdate: Array<any> = [];
   public pharmaniftydata: Array<number> = [];
   public pharmaniftyLabels: Array<any> = [];
-  public niftypcrdata: Array<number> = [];
-  public niftypcrtime: Array<any> = [];
+ 
   public niftyvixdata: Array<number> = [];
   public niftyvixtime: Array<any> = [];
   public lineChartData: Array<any> = [];
@@ -143,9 +142,7 @@ export class PharmaniftyComponent implements OnInit {
   public pharmanifty1yrLabels: Array<any> = [];
   public lineChart1yrData: Array<any> = [];
   public lineChart1yrLabels: Array<number> = [];
-  public lineChartpcrData: Array<any> = [];
-  public lineChartpcrLabels: Array<number> = [];
-  public lineChartpcrOptions: any;
+  
   public lineChartvixData: Array<any> = [];
   public lineChartvixLabels: Array<number> = [];
   public lineChartvixOptions: any;
@@ -242,14 +239,14 @@ export class PharmaniftyComponent implements OnInit {
     this.getpharmanifty6m();
     this.getpharmaniftytoday()
     this.getpharmaniftyvix()
-    this.getpharmaniftypcr()
+ 
     this.getpharmaniftysentiments()
     this.gettrendlynenifty()
     this.getpharmanifty1yr();
     setInterval(() => { this.getpharmaniftysmaema() }, 30000);
     setInterval(() => { this.getmcpharmaniftystocks()}, 30000);
     setInterval(() => { this.getpharmaniftyvix() }, 30000);
-     setInterval(() => { this.getpharmaniftypcr()}, 30000);
+    
     
     setInterval(() => { this.getpharmaniftytoday() }, 30000);
 
@@ -333,35 +330,7 @@ export class PharmaniftyComponent implements OnInit {
         console.log(err)
       })
   }  
-  getpharmaniftypcr() {
-    this.http.get('https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      
-       /////////////////////NIfty PCR from niftytraders////////////////////
-       this.niftypcrdata.length = 0;
-       this.niftypcrtime.length = 0;
-       for (let val in nestedItems[3]['data']) {
-         this.niftypcrdata.push(nestedItems[3]['data'][val]['pcr'])
-         this.niftypcrtime.push(new Date(nestedItems[3]['data'][val]['time']).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }))
-       }
-      
-       this.lineChartpcrData = [{
-        label: 'PCR',
-        data: this.niftypcrdata,
-        borderWidth: 1,
-         fill: false,
-         maintainAspectRatio: false
-      }];
-
-      this.lineChartpcrLabels = this.niftypcrtime;
-    
-    }, err => {
-      console.log(err)
-    })
-  }
-  getpharmaniftysmaema() {
+   getpharmaniftysmaema() {
     this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%20PHARMA').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
