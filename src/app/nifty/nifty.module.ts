@@ -11,6 +11,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
 import { ChartModule } from 'primeng/chart';
+import { of } from 'rxjs'; 
+import { map } from 'rxjs/operators';
+import {Observable} from 'rxjs'
+import axios from 'axios';
+import {from} from 'rxjs';
 
 @NgModule({
   declarations: [

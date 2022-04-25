@@ -40,6 +40,7 @@ const routes: Routes = [
   { path: 'nifty', loadChildren: () => import('./nifty/nifty.module').then(m => m.NiftyModule) },
   { path: 'banknifty', loadChildren: () => import('./banknifty/banknifty.module').then(m => m.BankniftyModule) },
   { path: 'pharmanifty', loadChildren: () => import('./pharmanifty/pharmanifty.module').then(m => m.PharmaniftyModule) },
+  { path: 'Share', loadChildren: () => import('./share/share.module').then(m => m.ShareModule) },
 
 ];
 

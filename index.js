@@ -2571,8 +2571,14 @@ request(options2, (err, response, body) => {
         if (!error) {
     
           console.log("This is tendlynestocks2")
-         // res.json(JSON.parse(response.body).data)
-         res.json(html2json((response.body)))
+          try {
+            res.json(JSON.parse(response.body).data)
+          } catch (e) {
+            console.log("Error in tendlynestocks2")
+          }
+        
+         // 
+         
          
     
         }
@@ -2583,22 +2589,28 @@ request(options2, (err, response, body) => {
 	
    //////////////////////////To get nifty trendlyne details/////////////////////////////////////////////
   
-   app.get('/trendlynenifty', function (req, res) {
+  app.get('/trendlynenifty', function (req, res) {
     
     var url6 = 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1887'
-      request(url6, function (error, response, html) {
-        if (!error) {
+    request(url6, function (error, response, html) {
+      if (!error) {
     
-          console.log("This is tendlynenifty")
-         //res.json(JSON.parse(response.body))
-         //res.json(html2json((response.body)))
-         
+        console.log("This is tendlynenifty")
+        //res.json(JSON.parse(response.body))
+        //res.json(html2json((response.body)))
+        try {
+          res.json(JSON.parse(response.body))
+        } catch (e) {
+          console.log("Error in tendlynenifty")
+        }
     
-        }else{"Currently issue in trendlynenifty"}
-      })
+        //  }else{"Currently issue in trendlynenifty"}
+      }
     
     
     })
+  });
+  
 	
 
 	////////////////////////////////////////////TrendLyne Stocks///////////////////////////////////////////

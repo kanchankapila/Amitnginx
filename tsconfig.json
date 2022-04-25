@@ -2,10 +2,12 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    //"module": "esnext",
-    "module": "commonjs",
+    "module": "esnext",
+    //"module": "commonjs",
     "target": "es5",
     "esModuleInterop": true,
+    
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
    
     // "paths": {
@@ -30,7 +32,7 @@
     ]
   },
   "angularCompilerOptions": {
-    //"enableIvy": true,
+    "enableIvy": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": false
     
