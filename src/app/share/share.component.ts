@@ -1,13 +1,11 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
-
+import { ChartType, ChartOptions } from 'chart.js';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { StockChart } from 'angular-highcharts';
-
 import { HttpClient,HttpHeaders } from '@angular/common/http';
-
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
 import * as etsector from '../lists/etsectorlist'
@@ -270,44 +268,29 @@ export class ShareComponent implements OnInit {
   public stockLabels: Array<any> = [];
   public stockChartData: Array<any> = [];
   public stockChartLabels: Array<number> = [];
-  public stockChartOptions: any;
-  public stockChartColors: any;
   public stockpcrdata: Array<number> = [];
   public stockpcrtime: Array<any> = [];
   public stockvixdata: Array<number> = [];
   public stockvixtime: Array<any> = [];
   public stockData1: Array<any> = [];
   public stockOptions: any;
-  public stockColors: any;
   public stock5ddata: Array<number> = [];
   public stock5dLabels: Array<any> = [];
   public stock5dData: Array<any> = [];
-  public stock5dOptions: any;
-  public stock5dColors: any;
   public stock1mdata: Array<number> = [];
   public stock1mLabels: Array<any> = [];
   public stock1mData: Array<any> = [];
-  public stock1mOptions: any;
-  public stock1mColors: any;
   public stock3mdata: Array<number> = [];
   public stock3mLabels: Array<any> = [];
   public stock3mData: Array<any> = [];
-  public stock3mOptions: any;
-  public stock3mColors: any;
   public stock6mdata: Array<number> = [];
   public stock6mLabels: Array<any> = [];
   public stock6mData: Array<any> = [];
-  public stock6mOptions: any;
-  public stock6mColors: any;
   public stock1yrdata: Array<number> = [];
   public stock1yrLabels: Array<any> = [];
   public stock1yrData: Array<any> = [];
-  public stock1yrOptions: any;
-  public stock1yrColors: any;
   public stockpcrData: Array<any> = [];
   public stockpcrLabels: Array<number> = [];
-  public stockpcrOptions: any;
-  public stockpcrColors: any;
   public stockvixData: Array<any> = [];
   public stockvixLabels: Array<number> = [];
   public lineChartmacdwLabels: Array<any> = [];
@@ -359,8 +342,6 @@ export class ShareComponent implements OnInit {
   scoret: scorettile[] = [];
   hmsg: hmsgtile[] = [];
 
-  public stockvixOptions: any;
-  public stockvixColors: any;
   basicData: any;
   weatherdata: any;
   mmdelivcomp: any;
@@ -440,7 +421,30 @@ export class ShareComponent implements OnInit {
   public stockLabelssnrs3m: Array<any> = [];
   public apexohlc = [];
   public apexvolume: Array<any> = [];
-  
+  public stockChartOptions:ChartOptions = {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: false
+        }
+      }]
+    },
+    legend: {
+     position: 'top'
+              },
+    
+    elements: {
+      point: {
+        radius: 0
+      }
+    }
+   
+  };
+  public stockChartColors = [
+    {
+      borderColor: '#2d0365'
+    }
+   ];
   basicData3: any;
   basicOptions3: any;
   stockList: any
@@ -498,9 +502,9 @@ export class ShareComponent implements OnInit {
     this.getmcshare(this.mcsymbol, this.eqsymbol, this.stockid);
     this.getmcsharefrequent(this.mcsymbol, this.eqsymbol);
     setInterval(() => { this.getmcsharefrequent(this.mcsymbol, this.eqsymbol) }, 30000);
-    setInterval(() => { this.gettrendlynestocks2(this.tlid) }, 10000);
+    setInterval(() => { this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol) }, 10000);
     this.gettrendlynestocks1(this.tlid, this.tlname, this.eqsymbol)
-    this.gettrendlynestocks2(this.tlid)
+    this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol)
     this.gettrendlynestocks3(this.tlid)
     this.loadData()
     this.getmmmacd(this.stockid)
@@ -532,137 +536,7 @@ export class ShareComponent implements OnInit {
     
   }
         
-  // loadData(): Observable<any> {
-  //     return from(
-  //       fetch(
-  //         'https://frapi.marketsmojo.com/stocks_Pricemovement/pricemovement_info?sid=1002699&exchange=1&page=3&cards=4&1m=1&', // the url you are trying to access
-  //         {
-  //           headers: {
-  //             'Content-Type': 'application/json',
-  //           },
-  //           method: 'GET', // GET, POST, PUT, DELETE
-  //           mode: 'no-cors' // the most important option
-  //         }
-  //       ))
-  //   }
-  
-  
-
-     
-  //   buildpcrgraph() {
-    
-    
-  //     this.basicData1 = {
-      
-  //       labels: this.niftypcrtime,
-      
-      
-  //       datasets: [
-  //         {
-  //           label: "value",
-  //           //backgroundColor: this.getRandomColor(),
-  //           backgroundColor: '#ebedef',
-  //           data: this.niftypcrdata,
-  //           fill: false
-  //         },
-  //       ]
-  //     };
-  //     var footerLine14 = this.niftypcrdata
-  //     //console.log(footerLine1 )
-   
-  //     this.basicOptions1 = {
-      
-  //       responsive: true,
-  //       tooltips: {
-  //         callbacks: {
-  //           beforeFooter: function (tooltipItems, data) {
-  //             return 'Current Pcr:' + footerLine14[tooltipItems[0].index];
-  //           }
-  //         },
-  //           plugins: {
-  //             legend: {
-  //               labels: {
-  //                 color: '#495057'
-  //               }
-  //             }
-  //           },
-  //           scales: {
-  //             x: {
-  //               ticks: {
-  //                 color: '#D98880'
-  //               },
-  //               grid: {
-  //                 color: '#D98880'
-  //               }
-  //             },
-  //             y: {
-  //               ticks: {
-  //                 color: '#D98880'
-  //               },
-  //               grid: {
-  //                 color: '#D98880'
-  //               }
-  //             }}},}}
-  // buildvixgraph() {
-    
-    
-  //               this.basicData = {
-                
-  //                 labels: this.niftyvixtime,
-                
-                
-  //                 datasets: [
-  //                   {
-  //                     label: "value",
-  //                     //backgroundColor: this.getRandomColor(),
-  //                     backgroundColor: '#ebedef',
-  //                     data: this.niftyvixdata,
-  //                     fill: false
-  //                   },
-  //                 ]
-  //               };
-  //               var footerLine14 = this.niftyvixdata
-  //               //console.log(footerLine1 )
-             
-  //               this.basicOptions = {
-                
-  //                 responsive: true,
-  //                 tooltips: {
-  //                   callbacks: {
-  //                     beforeFooter: function (tooltipItems, data) {
-  //                       return 'Current Vix:' + footerLine14[tooltipItems[0].index];
-  //                     }
-  //                   },
-  //                     plugins: {
-  //                       legend: {
-  //                         labels: {
-  //                           color: '#495057'
-  //                         }
-  //                       }
-  //                     },
-  //                     scales: {
-  //                       x: {
-  //                         ticks: {
-  //                           color: '#D98880'
-  //                         },
-  //                         grid: {
-  //                           color: '#D98880'
-  //                         }
-  //                       },
-  //                       y: {
-  //                         ticks: {
-  //                           color: '#D98880'
-  //                         },
-  //                         grid: {
-  //                           color: '#D98880'
-  //                         }
-  //                       }}},}}
-           
-
  
-  
-
-
   getmcshare(mcsymbol,eqsymbol,stockid) {
     this.dataApi.getmcshare(this.mcsymbol,this.eqsymbol,this.stockid).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
@@ -755,29 +629,7 @@ data: this.stockDatasnrs3w,
 fill: false}];
     
       this.stock5dLabels = this.stock5dLabels;
-      this.stock5dOptions = {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false
-            }
-          }]
-        },
-        legend: {
-          display: false
-        },
-        elements: {
-          point: {
-            radius: 0
-          }
-        }
-      };
     
-      this.stock5dColors = [
-        {
-          borderColor: '#2d0365'
-        }
-      ];
 //   /////////////////////////////////////////////////////////////////
       
 //        ////////////To get Nifty 1 month Resistances and Indicators/////////////
@@ -862,29 +714,7 @@ data: this.stockDatasnrs3m,
 fill: false}];
     
       this.stock1mLabels = this.stock1mLabels;
-      this.stock1mOptions = {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false
-            }
-          }]
-        },
-        legend: {
-          display: false
-        },
-        elements: {
-          point: {
-            radius: 0
-          }
-        }
-      };
-    
-      this.stock1mColors = [
-        {
-          borderColor: '#2d0365'
-        }
-      ];
+      
 // //////////////////////////////////////////////////////////////////
 //       ////////////////Nifty 3 months/////////////////////////////
       for (let val in nestedItems[4]['query']['results']['quotedata']) {
@@ -902,29 +732,7 @@ fill: false}];
       }];
   
       this.stock3mLabels = this.stock3mLabels;
-      this.stock3mOptions = {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false
-            }
-          }]
-        },
-        legend: {
-          display: false
-        },
-        elements: {
-          point: {
-            radius: 0
-          }
-        }
-      };
-  
-      this.stock3mColors = [
-        {
-          borderColor: '#115dcd'
-        }
-      ];
+     
 //   ////////////////////////////////////////////////////////////////////
 //       //////////////////NIfty 6 months///////////////////////////////
 
@@ -945,29 +753,7 @@ fill: false}];
       }];
     
       this.stock6mLabels = this.stock6mLabels;
-      this.stock6mOptions = {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false
-            }
-          }]
-        },
-        legend: {
-          display: false
-        },
-        elements: {
-          point: {
-            radius: 0
-          }
-        }
-      };
-    
-      this.stock6mColors = [
-        {
-          borderColor: '#5a7f84'
-        }
-      ];
+      
     
    
  
@@ -992,30 +778,7 @@ fill: false}];
       }];
   
       this.stock1yrLabels = this.stock1yrLabels;
-      this.stock1yrOptions = {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: false
-            }
-          }]
-        },
-        legend: {
-          display: false
-        },
-        elements: {
-          point: {
-            radius: 0
-          }
-        }
-      };
-  
-      this.stock1yrColors = [
-        {
-          borderColor: '#c154c1'
-        }
-      ];
-
+     
      }, err => {
        console.log(err)
      })
@@ -1147,29 +910,8 @@ borderColor: '#375f00',
 fill: false}];
 
 this.stockChartLabels = this.stockLabels;
-this.stockChartOptions = {
- scales: {
-   yAxes: [{
-     ticks: {
-       beginAtZero: false
-     }
-   }]
- },
- legend: {
-   display: false
- },
- elements: {
-   point: {
-     radius: 0
-   }
- }
-};
 
-this.stockChartColors = [
- {
-   borderColor: '#2d0365'
- }
-];
+
     
       
 
@@ -1442,28 +1184,22 @@ if (nestedItems[1]['sma_200']['lt1']) {
   }
  
 
-gettrendlynestocks2(tlid) {
-  this.dataApi.gettrendlynestocks2(tlid).subscribe(data5 => {
-    let nestedItems = Object.keys(data5).map(key => {
-      return data5[key];
-    });
-    
-    // this.dscore.push({ text1:nestedItems[1]['stockData'][6],text2:nestedItems[1]['stockData'][9] })
-    // this.volscore.push({ text1:nestedItems[1]['stockData'][7],text2:nestedItems[1]['stockData'][10]  })
-    // this.mscore.push({ text1:nestedItems[1]['stockData'][8],text2:nestedItems[1]['stockData'][11]  })
-    // this.tllink="https://trendlyne.com/alerts/stock-alerts/"+this.eqsymbol+"/"+this.tlid+"/"+this.tlname
-    console.log(nestedItems)
-    this.stockData.length = 0;
-    for (let val in (nestedItems[1]['eodData'])) {
-      this.stockData.push({x: new Date(nestedItems[1]['eodData'][val][0]).getTime(),open:nestedItems[1]['eodData'][val][2],high:nestedItems[1]['eodData'][val][3],low:nestedItems[1]['eodData'][val][4],close:nestedItems[1]['eodData'][val][5],volume:nestedItems[1]['eodData'][val][6]})
-    }
-    
-    console.log(this.stockData)
-   
-  }, err => {
-    console.log(err)
-  })
-}
+  gettrendlynestocks2(tlid,tlname,eqsymbol) {
+    this.dataApi.gettrendlynestocks2(tlid,tlname,eqsymbol).subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
+      // this.dscore.push({ text1:nestedItems[1]['stockData'][6],text2:nestedItems[1]['stockData'][9] })
+      // this.volscore.push({ text1:nestedItems[1]['stockData'][7],text2:nestedItems[1]['stockData'][10]  })
+      // this.mscore.push({ text1:nestedItems[1]['stockData'][8],text2:nestedItems[1]['stockData'][11]  })
+      // this.tllink="https://trendlyne.com/alerts/stock-alerts/"+this.eqsymbol+"/"+this.tlid+"/"+this.tlname
+        
+    }, err => {
+      console.log(err)
+    })
+  }
+  
 
 
 gettrendlynestocks3(tlid) {

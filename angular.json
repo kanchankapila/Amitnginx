@@ -26,6 +26,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              
               "src/manifest.webmanifest"
               
             ],
@@ -81,10 +82,10 @@
               "sourceMap": false,
               
               "namedChunks": true,
-              "aot": true,
+              "aot": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",
@@ -127,6 +128,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              
               "src/manifest.webmanifest"
             ],
             "styles": [

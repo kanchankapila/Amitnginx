@@ -243,7 +243,7 @@ export class BankniftyComponent implements OnInit {
     this.getbankniftyvix()
     this.getbankniftypcr()
     this.getbankniftysentiments()
-    this.gettrendlynenifty()
+    
     this.getbanknifty1yr();
     setInterval(() => { this.getbankniftysmaema() }, 30000);
     setInterval(() => { this.getmcbankniftystocks()}, 30000);
@@ -253,23 +253,6 @@ export class BankniftyComponent implements OnInit {
     setInterval(() => { this.getbankniftytoday() }, 30000);
 
   
-  }
-  gettrendlynenifty() {
-    this.dataApi.gettrendlynenifty().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-    // this.http.get('https://trendlyne.com/equity/getStockMetricParameterList/1887/',{headers: {'set-cookie':'csrftoken=UdCOt4TuEtdES39jXF2do7Sxm9xvPDFW4BBTkhEtDI4M93qULm9M9gb7t7mM4vxL; expires=Sat, 22 Apr 2023 22:36:25 GMT; Max-Age=31449600; Path=/; SameSite=Lax','cookie':'_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _gid=GA1.2.1363348430.1650748663; csrftoken=UdCOt4TuEtdES39jXF2do7Sxm9xvPDFW4BBTkhEtDI4M93qULm9M9gb7t7mM4vxL; .trendlyne=vvd6ghws3icett72qn91snttaywv0chw; _gat=1'}}).subscribe(data5 => {
-    //   let nestedItems = Object.keys(data5).map(key => {
-    //     return data5[key];
-    //   });
-     
-      console.log(nestedItems)
-
-    }, err => {
-      console.log(err)
-    })
-   
   }
   getbankniftysentiments() {
     this.bankniftysentiments.length = 0;

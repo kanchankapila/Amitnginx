@@ -114,23 +114,8 @@ export class NiftyComponent implements OnInit {
   constructor(private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig, private vps: ViewportScroller) {
     const instance = axios.create({
       //baseURL: 'https://www.nseindia.com/',
-      // timeout: 1000,
-      url: 'https://trendlyne.com/equity/getStockMetricParameterList/' ,
-      method: 'GET', // Don't forget this line
-      headers: {
-        "accept": "application/json, text/javascript, */*; q=0.01",
-        "accept-language": "en-US,en;q=0.9",
-        "sec-ch-ua": "\"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
-        "sec-ch-ua-mobile": "?0",
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-origin",
-        "x-requested-with": "XMLHttpRequest",
-        "cookie": '_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _gid=GA1.2.1363348430.1650748663; _gat=1; csrftoken=UdCOt4TuEtdES39jXF2do7Sxm9xvPDFW4BBTkhEtDI4M93qULm9M9gb7t7mM4vxL; .trendlyne=vvd6ghws3icett72qn91snttaywv0chw'
-      },
-     
-  
-  
+     // timeout: 1000,
+     headers: {'Access-Control-Allow-Origin': '*'}
     });
   }
   stockhighcharts: StockChart;
@@ -178,6 +163,10 @@ export class NiftyComponent implements OnInit {
   basicOptions1: any;
   chart: any;
   date: any;
+  //tlid:any
+  tlid = '1887';
+  tlname = 'NIFTY50';
+  eqsymbol='nifty-50'
   nifty50sentiments: nifty50sentimentstiles[] = [];
   
   nifty50stocks: nifty50stockstiles[] = [];
@@ -271,7 +260,7 @@ export class NiftyComponent implements OnInit {
     this.getniftyvix()
     this.getniftypcr()
     this.getniftysentiments()
-    this.gettrendlynenifty()
+    this.gettrendlynestocks1(this.tlid,this.tlname,this.eqsymbol)
     this.getnifty1yr();
     setInterval(() => { this.getnifty50smaema() }, 30000);
     setInterval(() => { this.getmcnifty50stocks()}, 30000);
@@ -283,33 +272,22 @@ export class NiftyComponent implements OnInit {
   
   }
   
-  gettrendlynenifty() {
-    // this.dataApi.gettrendlynenifty().subscribe(data5 => {
-    //   let nestedItems = Object.keys(data5).map(key => {
-    //     return data5[key];
-    //   });
-    // this.http.get('https://trendlyne.com/equity/getStockMetricParameterList/1887/',{headers: {'set-cookie':'csrftoken=UdCOt4TuEtdES39jXF2do7Sxm9xvPDFW4BBTkhEtDI4M93qULm9M9gb7t7mM4vxL; expires=Sat, 22 Apr 2023 22:36:25 GMT; Max-Age=31449600; Path=/; SameSite=Lax','cookie':'_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _gid=GA1.2.1363348430.1650748663; csrftoken=UdCOt4TuEtdES39jXF2do7Sxm9xvPDFW4BBTkhEtDI4M93qULm9M9gb7t7mM4vxL; .trendlyne=vvd6ghws3icett72qn91snttaywv0chw; _gat=1'}}).subscribe(data5 => {
-    //   let nestedItems = Object.keys(data5).map(key => {
-    //     return data5[key];
-    //   });
-      // GET request using axios with error handling
-     
-      axios.get('https://trendlyne.com/equity/getStockMetricParameterList/1887').then(resp => {
-
-        console.log(resp.data);
-    });
-
-    // }, err => {
-    //   console.log(err)
-    // })
-    axios.get('https://trendlyne.com/equity/getStockMetricParameterList/1887/')
-    .then((response) => {
-      console.log(response.data);
-      console.log(response.status);
-      console.log(response.statusText);
-      console.log(response.headers);
-      console.log(response.config);
-    });
+  gettrendlynestocks1(tlid,tlname,eqsymbol) {
+    this.dataApi.gettrendlynestocks1(this.tlid,this.tlname,this.eqsymbol).subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+   
+      console.log(nestedItems);
+     })
+    // axios.get('https://trendlyne.com/equity/getStockMetricParameterList/1887/')
+    // .then((response) => {
+    //   console.log(response.data);
+    //   console.log(response.status);
+    //   console.log(response.statusText);
+    //   console.log(response.headers);
+       
+    // });
   }
   
   getniftysentiments() {

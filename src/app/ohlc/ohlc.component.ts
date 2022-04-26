@@ -1523,7 +1523,8 @@ ngOnInit() {
     
 
     
-    this.gettrendlynestocks1(this.tlid,this.tlname,this.eqsymbol)
+    this.gettrendlynestocks1(this.tlid, this.tlname, this.eqsymbol)
+    this.gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol)
     this.getgooglenews(params.stock, 'googlenews')
     this.getnse()
     this.getmcswot(this.mcsymbol)
@@ -1542,8 +1543,8 @@ ngOnInit() {
     this.getetcompanydataohlc(this.companyid)
     this.getswot(this.mcsymbol)
     this.getmcswot(this.mcsymbol)
-    this.gettrendlynestocks2(this.tlid)
-    this.gettrendlynestocks3(this.tlid)
+   // this.gettrendlynestocks2(this.tlid)
+    //this.gettrendlynestocks3(this.tlid)
     this.nsedatastockohlc1(this.eqsymbol)
     this.nsedatastockohlc2(this.eqsymbol)
     this.getmchistoricalrating(this.mcsymbol)
@@ -1587,12 +1588,12 @@ ngOnInit() {
 
 
 
-gettrendlynestocks2(tlid) {
-  this.dataApi.gettrendlynestocks2(tlid).subscribe(data5 => {
+gettrendlynestocks2(tlid,tlname,eqsymbol) {
+  this.dataApi.gettrendlynestocks2(tlid,tlname,eqsymbol).subscribe(data5 => {
     let nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
-    
+    console.log(nestedItems)
     this.dscore.push({ text1:nestedItems[1]['stockData'][6],text2:nestedItems[1]['stockData'][9] })
     this.volscore.push({ text1:nestedItems[1]['stockData'][7],text2:nestedItems[1]['stockData'][10]  })
     this.mscore.push({ text1:nestedItems[1]['stockData'][8],text2:nestedItems[1]['stockData'][11]  })

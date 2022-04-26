@@ -25,7 +25,7 @@ const routes: Routes = [
   
   { path: 'Dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }, 
   { path: 'Ohlc', loadChildren: () => import('./ohlc/ohlc.module').then(m => m.OhlcModule) },
-  { path: 'Stock',loadChildren: () => import('./stock/stock.module').then(m => m.StockModule) },
+  //{ path: 'Stock',loadChildren: () => import('./stock/stock.module').then(m => m.StockModule) },
   //{ path: 'basic-ui', loadChildren: () => import('./basic-ui/basic-ui.module').then(m => m.BasicUiModule) },
   //{ path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsDemoModule) },
   //{ path: 'forms', loadChildren: () => import('./forms/form.module').then(m => m.FormModule) },
