@@ -24,83 +24,83 @@ export class DataapiService {
   }
 
   setData(data){
-    return this.http.post('http://localhost:3000/save',data)
+    return this.http.post('http://localhost:8089/api/save',data)
   }
   setwatchlist(isin){
-    return this.http.post('http://localhost:3000/watchlistinsert',isin)
+    return this.http.post('http://localhost:8089/api/watchlistinsert',isin)
   }
   nsepostdata1(eqsymbol1) {
-    return this.http.post('http://localhost:3000/nsepostdata1',eqsymbol1) 
+    return this.http.post('http://localhost:8089/api/nsepostdata1',eqsymbol1) 
   }
   nsepostdata2(eqsymbol1) {
    
-    return this.http.post('http://localhost:3000/nsepostdata2',eqsymbol1) 
+    return this.http.post('http://localhost:8089/api/nsepostdata2',eqsymbol1) 
   }
   getet1() {
    
-    return this.http.get('http://localhost:3000/et1') 
+    return this.http.get('http://localhost:8089/api/et1') 
   }
   chartink(abc) {
-    return this.http.post('http://localhost:3000/chartink',abc) 
+    return this.http.post('http://localhost:8089/api/chartink',abc) 
   }
   chartinkpvbreakout() {
-    return this.http.get('http://localhost:3000/chartinkpvbreakout') 
+    return this.http.get('http://localhost:8089/api/chartinkpvbreakout') 
   }
   gettlfpg() {
-    return this.http.get('http://localhost:3000/tlfpg') 
+    return this.http.get('http://localhost:8089/api/tlfpg') 
   }
   gettlfcg() {
-    return this.http.get('http://localhost:3000/tlfcg') 
+    return this.http.get('http://localhost:8089/api/tlfcg') 
   }
   gettlfmav() {
-    return this.http.get('http://localhost:3000/tlfmav') 
+    return this.http.get('http://localhost:8089/api/tlfmav') 
   }
   gettlfmac() {
-    return this.http.get('http://localhost:3000/tlfmac') 
+    return this.http.get('http://localhost:8089/api/tlfmac') 
   }
   gettloig() {
-    return this.http.get('http://localhost:3000/tloig') 
+    return this.http.get('http://localhost:8089/api/tloig') 
   }
   gettloil() {
-    return this.http.get('http://localhost:3000/tloil') 
+    return this.http.get('http://localhost:8089/api/tloil') 
   }
   gettloip() {
-    return this.http.get('http://localhost:3000/tloip') 
+    return this.http.get('http://localhost:8089/api/tloip') 
   }
   gettloid() {
-    return this.http.get('http://localhost:3000/tloid') 
+    return this.http.get('http://localhost:8089/api/tloid') 
   }
   gettloipg() {
-    return this.http.get('http://localhost:3000/tloipg') 
+    return this.http.get('http://localhost:8089/api/tloipg') 
   }
   gettloicg() {
-    return this.http.get('http://localhost:3000/tloicg') 
+    return this.http.get('http://localhost:8089/api/tloicg') 
   }
   gettlropd() {
-    return this.http.get('http://localhost:3000/tlropd') 
+    return this.http.get('http://localhost:8089/api/tlropd') 
   }
   gettlropw() {
-    return this.http.get('http://localhost:3000/tlropw') 
+    return this.http.get('http://localhost:8089/api/tlropw') 
   }
   
   gettlrupw() {
-    return this.http.get('http://localhost:3000/tlrupw') 
+    return this.http.get('http://localhost:8089/api/tlrupw') 
   }
   
   gettlrupd() {
-    return this.http.get('http://localhost:3000/tlrupd') 
+    return this.http.get('http://localhost:8089/api/tlrupd') 
   }
   chartinkbullishmomentum() {
-    return this.http.get('http://localhost:3000/chartinkbullishmomentum')  
+    return this.http.get('http://localhost:8089/api/chartinkbullishmomentum')  
   }
   gnewsapi(stockname) {
-    return this.http.get('http://localhost:3000/gnewsapi?&&stockname='+stockname)
+    return this.http.get('http://localhost:8089/api/gnewsapi?&&stockname='+stockname)
   }
   gnewsapiall() {
-    return this.http.get('http://localhost:3000/gnewsapiall')
+    return this.http.get('http://localhost:8089/api/gnewsapiall')
   }
   deletewatchlist(isin){
-    return this.http.post('http://localhost:3000/watchlistdelete',isin)
+    return this.http.post('http://localhost:8089/api/watchlistdelete',isin)
   }
 
 
@@ -112,662 +112,649 @@ export class DataapiService {
   
 
 
-
-  getStockDetails(stock,dbname){
-    return this.http.get('http://localhost:3000/dashboard1?stock='+stock+"&&dbname="+dbname)
-  }
-  getwatchlistview(dbname){
-    return this.http.get('http://localhost:3000/watchlistview?dbname='+dbname)
-  }
-  getUpdate(){
-    return this.http.get('http://localhost:3000/getUpdate')
-  }
-  getIndicators(stock,dbname){
-    return this.http.get('http://localhost:3000/indicators1?stock='+stock+"&&dbname="+dbname)
-  }
   getkite1(timeframe,eqsymbol){
-    return this.http.get('http://localhost:3000/kite1?timeframe='+timeframe+'&eqsymbol='+eqsymbol)
+    return this.http.get('http://localhost:8089/api/kite1?timeframe='+timeframe+'&eqsymbol='+eqsymbol)
   }
   getkitestockreports(){
-    return this.http.get('http://localhost:3000/kitestockreports')
+    return this.http.get('http://localhost:8089/api/kitestockreports')
   }
   getnsetry1(symbol){
-    return this.http.get('http://localhost:3000/nsetry1?symbol='+symbol)
+    return this.http.get('http://localhost:8089/api/nsetry1?symbol='+symbol)
   }
  
  nseresults(){
-    return this.http.get('http://localhost:3000/nseresults')
+    return this.http.get('http://localhost:8089/api/nseresults')
   }
   nseinstrading() {
-    return this.http.get('http://localhost:3000/nseinstrading')
+    return this.http.get('http://localhost:8089/api/nseinstrading')
   }
   nsedatastockohlc1(stock){
-    return this.http.get('http://localhost:3000/nsedatastockohlc1?stock='+stock)
+    return this.http.get('http://localhost:8089/api/nsedatastockohlc1?stock='+stock)
   }
   nsedatasioi(){
-    return this.http.get('http://localhost:3000/nsedatasioi')
+    return this.http.get('http://localhost:8089/api/nsedatasioi')
   }
   nsedatastockoi(stock){
-    return this.http.get('http://localhost:3000/nsedatastockoi?stock='+stock)
+    return this.http.get('http://localhost:8089/api/nsedatastockoi?stock='+stock)
   }
   nsedatapioii(){
-    return this.http.get('http://localhost:3000/nsedatapioii')
+    return this.http.get('http://localhost:8089/api/nsedatapioii')
   }
   nsedataniftyoi(){
-    return this.http.get('http://localhost:3000/nsedataniftyoi')
+    return this.http.get('http://localhost:8089/api/nsedataniftyoi')
   }
   nsedatabniftyoi(){
-    return this.http.get('http://localhost:3000/nsedatabniftyoi')
+    return this.http.get('http://localhost:8089/api/nsedatabniftyoi')
   }
   opstradatanifty(nextexpiry) {
-    return this.http.get('http://localhost:3000/opstradatanifty?nextexpiry=' + nextexpiry)
+    return this.http.get('http://localhost:8089/api/opstradatanifty?nextexpiry=' + nextexpiry)
    }
   opstradatabanknifty(nextexpiry) {
-    return this.http.get('http://localhost:3000/opstradatabanknifty?nextexpiry=' + nextexpiry)
+    return this.http.get('http://localhost:8089/api/opstradatabanknifty?nextexpiry=' + nextexpiry)
    }
   opstrastockdata(eqsymbol,nextexpirymonthly) {
-    return this.http.get('http://localhost:3000/opstrastockdata?nextexpirymonthly='+nextexpirymonthly+'&eqsymbol='+eqsymbol)
+    return this.http.get('http://localhost:8089/api/opstrastockdata?nextexpirymonthly='+nextexpirymonthly+'&eqsymbol='+eqsymbol)
   
   }
   opstraexpirydatesmonthly(eqsymbol){
-    return this.http.get('http://localhost:3000/opstraexpirydatesmonthly')
+    return this.http.get('http://localhost:8089/api/opstraexpirydatesmonthly')
   }
   
   opstraexpirydates(){
-    return this.http.get('http://localhost:3000/opstraexpirydates')
+    return this.http.get('http://localhost:8089/api/opstraexpirydates')
   }
   nsedataadvdec(){
-    return this.http.get('http://localhost:3000/nsedataadvdec')
+    return this.http.get('http://localhost:8089/api/nsedataadvdec')
   }
   nsestockhistdata(stock) {
-    return this.http.get('http://localhost:3000/nsestockhistdata?stock='+stock)
+    return this.http.get('http://localhost:8089/api/nsestockhistdata?stock='+stock)
   }
   nsedataindices(){
-    return this.http.get('http://localhost:3000/nsedataindices')
+    return this.http.get('http://localhost:8089/api/nsedataindices')
   }
 
   
   nsedatastockohlc2(stock){
-    return this.http.get('http://localhost:3000/nsedatastockohlc2?stock='+stock)
+    return this.http.get('http://localhost:8089/api/nsedatastockohlc2?stock='+stock)
   }
   nsedata3(){
-    return this.http.get('http://localhost:3000/nsedata3')
+    return this.http.get('http://localhost:8089/api/nsedata3')
   }
   getmccurrent(dbname){
-    return this.http.get('http://localhost:3000/mccurrent?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/mccurrent?dbname='+dbname)
   }
   getIndicatorsma(stock,dbname){
-    return this.http.get('http://localhost:3000/indicatorsma1?stock='+stock+"&&dbname="+dbname)
+    return this.http.get('http://localhost:8089/api/indicatorsma1?stock='+stock+"&&dbname="+dbname)
   }
   
   sendEmail(user){
-    return this.http.post('http://localhost:3000/sendmail',user)
+    return this.http.post('http://localhost:8089/api/sendmail',user)
   }
   
   getStockData(stock,dbname){
-    //return this.http.get('http://localhost:3000/aone1?allinone='+allinone+"&&dbname="+dbname)
+    //return this.http.get('http://localhost:8089/api/aone1?allinone='+allinone+"&&dbname="+dbname)
    
-    return this.http.get('http://localhost:3000/stockdb?stock='+stock+"&&dbname="+dbname)
+    return this.http.get('http://localhost:8089/api/stockdb?stock='+stock+"&&dbname="+dbname)
   }
   getchartinkvshocker(dbname){
-    //return this.http.get('http://localhost:3000/aone1?allinone='+allinone+"&&dbname="+dbname)
+    //return this.http.get('http://localhost:8089/api/aone1?allinone='+allinone+"&&dbname="+dbname)
    
-    return this.http.get('http://localhost:3000/chartinkvshocker?'+"dbname="+dbname)
+    return this.http.get('http://localhost:8089/api/chartinkvshocker?'+"dbname="+dbname)
   }
 
   getchartinkemacrs59(dbname){
-    //return this.http.get('http://localhost:3000/aone1?allinone='+allinone+"&&dbname="+dbname)
+    //return this.http.get('http://localhost:8089/api/aone1?allinone='+allinone+"&&dbname="+dbname)
    
-    return this.http.get('http://localhost:3000/chartinkemacrs59?'+"dbname="+dbname)
+    return this.http.get('http://localhost:8089/api/chartinkemacrs59?'+"dbname="+dbname)
   }
   getchartinkemacrs920(dbname){
-    //return this.http.get('http://localhost:3000/aone1?allinone='+allinone+"&&dbname="+dbname)
+    //return this.http.get('http://localhost:8089/api/aone1?allinone='+allinone+"&&dbname="+dbname)
    
-    return this.http.get('http://localhost:3000/chartinkemacrs920?'+"dbname="+dbname)
+    return this.http.get('http://localhost:8089/api/chartinkemacrs920?'+"dbname="+dbname)
   }
   getchartinkgapup(dbname){
-    //return this.http.get('http://localhost:3000/aone1?allinone='+allinone+"&&dbname="+dbname)
+    //return this.http.get('http://localhost:8089/api/aone1?allinone='+allinone+"&&dbname="+dbname)
    
-    return this.http.get('http://localhost:3000/chartinkgapup?'+"dbname="+dbname)
+    return this.http.get('http://localhost:8089/api/chartinkgapup?'+"dbname="+dbname)
   }
   getchartinkgapdown(dbname){
-    //return this.http.get('http://localhost:3000/aone1?allinone='+allinone+"&&dbname="+dbname)
+    //return this.http.get('http://localhost:8089/api/aone1?allinone='+allinone+"&&dbname="+dbname)
    
-    return this.http.get('http://localhost:3000/chartinkgapdown?'+"dbname="+dbname)
+    return this.http.get('http://localhost:8089/api/chartinkgapdown?'+"dbname="+dbname)
   }
   
   getmcpscore(dbname){
-    return this.http.get('http://localhost:3000/mcpscore?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/mcpscore?dbname='+dbname)
   }
 
 
   getohlcDetails(stock,dbname){
-    return this.http.get('http://localhost:3000/ohlc1?stock='+stock+"&&dbname="+dbname)
+    return this.http.get('http://localhost:8089/api/ohlc1?stock='+stock+"&&dbname="+dbname)
   }
   getgooglenews(stock,dbname){
-    return this.http.get('http://localhost:3000/googlenews?stock='+stock+"&&dbname="+dbname)
+    return this.http.get('http://localhost:8089/api/googlenews?stock='+stock+"&&dbname="+dbname)
   }
   getgnewsone(dbname){
-    return this.http.get('http://localhost:3000/gnewsaone?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/gnewsaone?dbname='+dbname)
   }
   getportfolio(dbname){
-    return this.http.get('http://localhost:3000/portfolio?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/portfolio?dbname='+dbname)
   }
   getportfolioAK(dbname){
-    return this.http.get('http://localhost:3000/portfolioAK?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/portfolioAK?dbname='+dbname)
   }
   
   getdbdata1(dbname) {
     
-    return this.http.get('http://localhost:3000/dbdata1?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/dbdata1?dbname='+dbname)
   }
   getdbjdata(eqsymbol,dbname) {
   
-    return this.http.get('http://localhost:3000/dbjdata?stock='+eqsymbol+'&&dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/dbjdata?stock='+eqsymbol+'&&dbname='+dbname)
   }
   getdbjdataall(eqsymbol,dbname) {
   
-    return this.http.get('http://localhost:3000/dbjdataall?stock='+eqsymbol+'&&dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/dbjdataall?stock='+eqsymbol+'&&dbname='+dbname)
   }
   getportfolioKK(dbname){
-    return this.http.get('http://localhost:3000/portfolioKK?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/portfolioKK?dbname='+dbname)
   }
   getGainers(){
-    return this.http.get('http://localhost:3000/Gainers')
+    return this.http.get('http://localhost:8089/api/Gainers')
   }
   getResults(){
-    return this.http.get('http://localhost:3000/Results')
+    return this.http.get('http://localhost:8089/api/Results')
   }
   getmmmarkets(){
-    return this.http.get('http://localhost:3000/mmmarkets')
+    return this.http.get('http://localhost:8089/api/mmmarkets')
   }
   
   getsnrDetails(stock,dbname){
-  return this.http.get('http://localhost:3000/snr1?stock='+stock+"&&dbname=investingpivot_D")
+  return this.http.get('http://localhost:8089/api/snr1?stock='+stock+"&&dbname=investingpivot_D")
   }
   getbqmovement(stockid){
-    return this.http.get('http://localhost:3000/bqmovement?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/bqmovement?stockid='+stockid)
   }
   
   getbqgainingsectors(){
-    return this.http.get('http://localhost:3000/bqgainingsectors')
+    return this.http.get('http://localhost:8089/api/bqgainingsectors')
   }
   getbqgainingsectorsstocks(sectorid){
-    return this.http.get('http://localhost:3000/bqgainingsectorsstocks?sectorid='+sectorid)
+    return this.http.get('http://localhost:8089/api/bqgainingsectorsstocks?sectorid='+sectorid)
   }
   getbqgainingsectorsstocksdetails(sectorid){
-    return this.http.get('http://localhost:3000/bqgainingsectorsstocksdetails?sectorid='+sectorid)
+    return this.http.get('http://localhost:8089/api/bqgainingsectorsstocksdetails?sectorid='+sectorid)
   }
   getmmmacd(stockid){
-    return this.http.get('http://localhost:3000/mmmacd?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/mmmacd?stockid='+stockid)
   }
   getmmstockinfo(stockid){
-    return this.http.get('http://localhost:3000/mmstockinfo?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/mmstockinfo?stockid='+stockid)
   }
   getmmpmov(stockid){
-    return this.http.get('http://localhost:3000/mmpmov?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/mmpmov?stockid='+stockid)
   }
   getbqadvdec(){
-    return this.http.get('http://localhost:3000/bqadvdec')
+    return this.http.get('http://localhost:8089/api/bqadvdec')
   }
   getnsexchange(){
-    return this.http.get('http://localhost:3000/nsexchange')
+    return this.http.get('http://localhost:8089/api/nsexchange')
   }
   getsescreener(){
-    return this.http.get('http://localhost:3000/sescreener')
+    return this.http.get('http://localhost:8089/api/sescreener')
   }
   getmmrsi(stockid){
-    return this.http.get('http://localhost:3000/mmrsi?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/mmrsi?stockid='+stockid)
   }
   getmmbb(stockid){
-    return this.http.get('http://localhost:3000/mmbb?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/mmbb?stockid='+stockid)
   }
   getmmma(stockid){
-    return this.http.get('http://localhost:3000/mmma?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/mmma?stockid='+stockid)
   }
   getmmkst(stockid){
-    return this.http.get('http://localhost:3000/mmkst?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/mmkst?stockid='+stockid)
   }
   getmmdow(stockid){
-    return this.http.get('http://localhost:3000/mmdow?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/mmdow?stockid='+stockid)
   }
   getmmobv(stockid){
-    return this.http.get('http://localhost:3000/mmobv?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/mmobv?stockid='+stockid)
   }
   getmmbank(indid){
-    return this.http.get('http://localhost:3000/mmbank?indid='+indid)
+    return this.http.get('http://localhost:8089/api/mmbank?indid='+indid)
   }
   getmmpeers(stockid){
-    return this.http.get('http://localhost:3000/mmpeers?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/mmpeers?stockid='+stockid)
   }
   getmmtechscore(stockid){
-    return this.http.get('http://localhost:3000/mmtechscore?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/mmtechscore?stockid='+stockid)
   }
   getbqma(type){
-    return this.http.get('http://localhost:3000/bqma?type='+type)
+    return this.http.get('http://localhost:8089/api/bqma?type='+type)
   }
   getbqpdvd(type){
-    return this.http.get('http://localhost:3000/bqpdvd?type='+type)
+    return this.http.get('http://localhost:8089/api/bqpdvd?type='+type)
   }
   getbqpdvi(type){
-    return this.http.get('http://localhost:3000/bqpdvi?type='+type)
+    return this.http.get('http://localhost:8089/api/bqpdvi?type='+type)
   }
   getbqpivd(type){
-    return this.http.get('http://localhost:3000/bqpivd?type='+type)
+    return this.http.get('http://localhost:8089/api/bqpivd?type='+type)
   }
   getbqpivi(type){
-    return this.http.get('http://localhost:3000/bqpivi?type='+type)
+    return this.http.get('http://localhost:8089/api/bqpivi?type='+type)
   }
   getbqpfvi(type){
-    return this.http.get('http://localhost:3000/bqpfvi?type='+type)
+    return this.http.get('http://localhost:8089/api/bqpfvi?type='+type)
   }
   getbq52h(type){
-    return this.http.get('http://localhost:3000/bq52wkh?type='+type)
+    return this.http.get('http://localhost:8089/api/bq52wkh?type='+type)
   }
   getbq52l(type){
-    return this.http.get('http://localhost:3000/bq52wkl?type='+type)
+    return this.http.get('http://localhost:8089/api/bq52wkl?type='+type)
   }
   getbqc52h(type){
-    return this.http.get('http://localhost:3000/bqc52h?type='+type)
+    return this.http.get('http://localhost:8089/api/bqc52h?type='+type)
   }
   getbqc52l(type){
-    return this.http.get('http://localhost:3000/bqc52l?type='+type)
+    return this.http.get('http://localhost:8089/api/bqc52l?type='+type)
   }
   getbqvolatile(type){
-    return this.http.get('http://localhost:3000/bqvolatile?type='+type)
+    return this.http.get('http://localhost:8089/api/bqvolatile?type='+type)
   }
   getbqffh(type){
-    return this.http.get('http://localhost:3000/bqffh?type='+type)
+    return this.http.get('http://localhost:8089/api/bqffh?type='+type)
   }
   getbqrfl(type){
-    return this.http.get('http://localhost:3000/bqrfl?type='+type)
+    return this.http.get('http://localhost:8089/api/bqrfl?type='+type)
   }
   getbqbulkdeal(type){
-    return this.http.get('http://localhost:3000/bqbulkdeal?type='+type)
+    return this.http.get('http://localhost:8089/api/bqbulkdeal?type='+type)
   }
   getbqblockdeal(type){
-    return this.http.get('http://localhost:3000/bqblockdeal?type='+type)
+    return this.http.get('http://localhost:8089/api/bqblockdeal?type='+type)
   }
   getbqinsider(type){
-    return this.http.get('http://localhost:3000/bqinsider?type='+type)
+    return this.http.get('http://localhost:8089/api/bqinsider?type='+type)
   }
   getbqob(type){
-    return this.http.get('http://localhost:3000/bqob?type='+type)
+    return this.http.get('http://localhost:8089/api/bqob?type='+type)
   }
   getbqos(type){
-    return this.http.get('http://localhost:3000/bqos?type='+type)
+    return this.http.get('http://localhost:8089/api/bqos?type='+type)
   }
   getbqtg(){
-    return this.http.get('http://localhost:3000/bqtg')
+    return this.http.get('http://localhost:8089/api/bqtg')
   }
   getbqtl(){
-    return this.http.get('http://localhost:3000/bqtl')
+    return this.http.get('http://localhost:8089/api/bqtl')
   }
   getbqpricestats(stockid){
-    return this.http.get('http://localhost:3000/bqprickestats?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/bqprickestats?stockid='+stockid)
   }
   getbqfundamentals(stockid){
-    return this.http.get('http://localhost:3000/bqfundamentals?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/bqfundamentals?stockid='+stockid)
   }
   getbqmovingaverages(stockid){
-    return this.http.get('http://localhost:3000/bqmovingaverages?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/bqmovingaverages?stockid='+stockid)
   }
   getbqdelvol(stockid){
-    return this.http.get('http://localhost:3000/bqdelvol?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/bqdelvol?stockid='+stockid)
   }
   getbqqresults(stockid){
-    return this.http.get('http://localhost:3000/bqqresults?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/bqqresults?stockid='+stockid)
   }
   getbqtr(stockid){
-    return this.http.get('http://localhost:3000/bqtr?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/bqtr?stockid='+stockid)
   }
   getbqss(stockid){
-    return this.http.get('http://localhost:3000/bqss?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/bqss?stockid='+stockid)
   }
   getbqsc(stockid){
-    return this.http.get('http://localhost:3000/bqsc?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/bqsc?stockid='+stockid)
   }
   getbqph(stockid){
-    return this.http.get('http://localhost:3000/bqph?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/bqph?stockid='+stockid)
   }
   getbqks(stockisin){
-    return this.http.get('http://localhost:3000/bqks?stockisin='+stockisin)
+    return this.http.get('http://localhost:8089/api/bqks?stockisin='+stockisin)
   }
   getbqannouncements(stockisin){
-    return this.http.get('http://localhost:3000/bqannouncements?stockisin='+stockisin)
+    return this.http.get('http://localhost:8089/api/bqannouncements?stockisin='+stockisin)
   }
   getbqca(stockid){
-    return this.http.get('http://localhost:3000/bqca?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/bqca?stockid='+stockid)
   }
   getbqitnews(bqnames) {
     
-    return this.http.get('http://localhost:3000/bqitnews?bqnames='+bqnames)
+    return this.http.get('http://localhost:8089/api/bqitnews?bqnames='+bqnames)
   }
   getbqpd(stockid){
-    return this.http.get('http://localhost:3000/bqpd?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/bqpd?stockid='+stockid)
   }
   getbqbdetails(stockid){
-    return this.http.get('http://localhost:3000/bqbdetails?stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/bqbdetails?stockid='+stockid)
   }
   
     
  
   getmcbankniftyrealtime(){
-    return this.http.get('http://localhost:3000/mcbankniftyrealtime')
+    return this.http.get('http://localhost:8089/api/mcbankniftyrealtime')
   }
   getmcniftyrealtime(){
-    return this.http.get('http://localhost:3000/mcniftyrealtime')
+    return this.http.get('http://localhost:8089/api/mcniftyrealtime')
   }
   
   getmcvixrealtime(){
-    return this.http.get('http://localhost:3000/mcvixrealtime')
+    return this.http.get('http://localhost:8089/api/mcvixrealtime')
   }
   getmcvixgraph(){
-    return this.http.get('http://localhost:3000/mcvixgraph')
+    return this.http.get('http://localhost:8089/api/mcvixgraph')
   }
   getntniftypcr() {
-    return this.http.get('http://localhost:3000/ntniftypcr')
+    return this.http.get('http://localhost:8089/api/ntniftypcr')
   }
   getadg(){
-    return this.http.get('http://localhost:3000/adanigreen')
+    return this.http.get('http://localhost:8089/api/adanigreen')
   }
   getetimesnews(){
-    return this.http.get('http://localhost:3000/etimesnews')
+    return this.http.get('http://localhost:8089/api/etimesnews')
   }
   getetsmacrossover(){
-    return this.http.get('http://localhost:3000/etsmacrossover')
+    return this.http.get('http://localhost:8089/api/etsmacrossover')
   }
   getetsmabullishcrossover(){
-    return this.http.get('http://localhost:3000/etsmabullishcrossover')
+    return this.http.get('http://localhost:8089/api/etsmabullishcrossover')
   }
   getetvolumeshocker(){
-    return this.http.get('http://localhost:3000/etvolumeshocker')
+    return this.http.get('http://localhost:8089/api/etvolumeshocker')
   }
   getethgainer(){
-    return this.http.get('http://localhost:3000/ethgainers')
+    return this.http.get('http://localhost:8089/api/ethgainers')
   }
   getethloser(){
-    return this.http.get('http://localhost:3000/ethlosers')
+    return this.http.get('http://localhost:8089/api/ethlosers')
   }
   getmcsnr(mcsymbol){
-    return this.http.get('http://localhost:3000/moneycontrolsnr?mcsymbol='+mcsymbol)
+    return this.http.get('http://localhost:8089/api/moneycontrolsnr?mcsymbol='+mcsymbol)
   }
   getmcsnrm(mcsymbol){
-    return this.http.get('http://localhost:3000/moneycontrolsnrm?mcsymbol='+mcsymbol)
+    return this.http.get('http://localhost:8089/api/moneycontrolsnrm?mcsymbol='+mcsymbol)
   }
   getmcsnrindex(mcindexsymbol){
-    return this.http.get('http://localhost:3000/moneycontrolsnrindex?mcindexsymbol='+mcindexsymbol)
+    return this.http.get('http://localhost:8089/api/moneycontrolsnrindex?mcindexsymbol='+mcindexsymbol)
   }
   getswot(mcsymbol){
-    return this.http.get('http://localhost:3000/swot?mcsymbol='+mcsymbol)
+    return this.http.get('http://localhost:8089/api/swot?mcsymbol='+mcsymbol)
   }
   getmcswot(mcsymbol){
-    return this.http.get('http://localhost:3000/mcswot?mcsymbol='+mcsymbol)
+    return this.http.get('http://localhost:8089/api/mcswot?mcsymbol='+mcsymbol)
   }
  
   getmcsnrw(mcsymbol){
-    return this.http.get('http://localhost:3000/moneycontrolsnrw?mcsymbol='+mcsymbol)
+    return this.http.get('http://localhost:8089/api/moneycontrolsnrw?mcsymbol='+mcsymbol)
   }
   getmcti(mcsymbol){
-    return this.http.get('http://localhost:3000/mcti?mcsymbol='+mcsymbol)
+    return this.http.get('http://localhost:8089/api/mcti?mcsymbol='+mcsymbol)
   }
   getmctiw(mcsymbol){
-    return this.http.get('http://localhost:3000/mctiw?mcsymbol='+mcsymbol)
+    return this.http.get('http://localhost:8089/api/mctiw?mcsymbol='+mcsymbol)
   }
   getmctim(mcsymbol){
-    return this.http.get('http://localhost:3000/mctim?mcsymbol='+mcsymbol)
+    return this.http.get('http://localhost:8089/api/mctim?mcsymbol='+mcsymbol)
   }
   getmcnifty50() {
-    return this.http.get('http://localhost:3000/mcnifty50')
+    return this.http.get('http://localhost:8089/api/mcnifty50')
   }
   getnifty50frequent(){
-    return this.http.get('http://localhost:3000/nifty50frequent')
+    return this.http.get('http://localhost:8089/api/nifty50frequent')
   }
   getmcshare(mcsymbol,eqsymbol,stockid) {
-    return this.http.get('http://localhost:3000/mcshare?mcsymbol='+mcsymbol+'&&eqsymbol='+eqsymbol+'&&stockid='+stockid)
+    return this.http.get('http://localhost:8089/api/mcshare?mcsymbol='+mcsymbol+'&&eqsymbol='+eqsymbol+'&&stockid='+stockid)
   }
   getmcsharefrequent(mcsymbol,eqsymbol){
-    return this.http.get('http://localhost:3000/mcsharefrequent?mcsymbol='+mcsymbol+'&&eqsymbol='+eqsymbol)
+    return this.http.get('http://localhost:8089/api/mcsharefrequent?mcsymbol='+mcsymbol+'&&eqsymbol='+eqsymbol)
   }
  
 
   getmcniftybank() {
-    return this.http.get('http://localhost:3000/mcniftybank')
+    return this.http.get('http://localhost:8089/api/mcniftybank')
   }
   getniftybankfrequent(){
-    return this.http.get('http://localhost:3000/niftybankfrequent')
+    return this.http.get('http://localhost:8089/api/niftybankfrequent')
   }
 
   getmcniftypharma() {
-    return this.http.get('http://localhost:3000/mcniftypharma')
+    return this.http.get('http://localhost:8089/api/mcniftypharma')
   }
   getniftypharmafrequent(){
-    return this.http.get('http://localhost:3000/niftypharmafrequent')
+    return this.http.get('http://localhost:8089/api/niftypharmafrequent')
   }
   getnse(){
-    return this.http.get('http://localhost:3000/nse')
+    return this.http.get('http://localhost:8089/api/nse')
   }
   getnse1(){
-    return this.http.get('http://localhost:3000/nse1')
+    return this.http.get('http://localhost:8089/api/nse1')
   }
   getnse2(){
-    return this.http.get('http://localhost:3000/nse2')
+    return this.http.get('http://localhost:8089/api/nse2')
   }
   gettltg(returnedname){
-    return this.http.get('http://localhost:3000/tltg?returnedname='+returnedname)
+    return this.http.get('http://localhost:8089/api/tltg?returnedname='+returnedname)
   }
   gettltl(returnedname){
-    return this.http.get('http://localhost:3000/tltl?returnedname='+returnedname)
+    return this.http.get('http://localhost:8089/api/tltl?returnedname='+returnedname)
   }
   gettl52h(){
-    return this.http.get('http://localhost:3000/tl52h')
+    return this.http.get('http://localhost:8089/api/tl52h')
   }
   gettl52l(){
-    return this.http.get('http://localhost:3000/tl52l')
+    return this.http.get('http://localhost:8089/api/tl52l')
   }
   gettlnear52h(){
-    return this.http.get('http://localhost:3000/tlnear52h')
+    return this.http.get('http://localhost:8089/api/tlnear52h')
   }
   gettlnear52l(){
-    return this.http.get('http://localhost:3000/tlnear52l')
+    return this.http.get('http://localhost:8089/api/tlnear52l')
   }
   getmcchartsdata(mcsymbol){
-    return this.http.get('http://localhost:3000/mcchartsdata?mcsymbol='+mcsymbol)
+    return this.http.get('http://localhost:8089/api/mcchartsdata?mcsymbol='+mcsymbol)
   }
   getmcchartsdataohlc(mcsymbol){
-    return this.http.get('http://localhost:3000/mcchartsdataohlc?mcsymbol='+mcsymbol)
+    return this.http.get('http://localhost:8089/api/mcchartsdataohlc?mcsymbol='+mcsymbol)
   }
   getmchistoricalrating(mcsymbol){
-    return this.http.get('http://localhost:3000/mchistoricalrating?mcsymbol='+mcsymbol)
+    return this.http.get('http://localhost:8089/api/mchistoricalrating?mcsymbol='+mcsymbol)
   }
   gettlvs(returnedname) {
     
-    return this.http.get('http://localhost:3000/tlvs?returnedname='+returnedname)
+    return this.http.get('http://localhost:8089/api/tlvs?returnedname='+returnedname)
   }
   gettlrsiall() {
     
-    return this.http.get('http://localhost:3000/tlrsiall')
+    return this.http.get('http://localhost:8089/api/tlrsiall')
   }
   gettlvhg(returnedname){
-    return this.http.get('http://localhost:3000/tlvhg?returnedname='+returnedname)
+    return this.http.get('http://localhost:8089/api/tlvhg?returnedname='+returnedname)
   }
 
   getmcoverall(){
-    return this.http.get('http://localhost:3000/mcoverall')
+    return this.http.get('http://localhost:8089/api/mcoverall')
   }
   getmoneycontroloveralldaily(mcsymbol){
-    return this.http.post('http://localhost:3000/moneycontroloveralldaily',mcsymbol)
+    return this.http.post('http://localhost:8089/api/moneycontroloveralldaily',mcsymbol)
   }
   getmcmovingaverages(mcsymbol){
-    return this.http.post('http://localhost:3000/mcmovingaverages',mcsymbol)
+    return this.http.post('http://localhost:8089/api/mcmovingaverages',mcsymbol)
   }
   getetcompanydata(companyid){
-    return this.http.post('http://localhost:3000/etcompanydata',companyid)
+    return this.http.post('http://localhost:8089/api/etcompanydata',companyid)
   }
   getetcompanydataohlc(companyid){
-    return this.http.get('http://localhost:3000/etcompanydataohlc?companyid='+companyid)
+    return this.http.get('http://localhost:8089/api/etcompanydataohlc?companyid='+companyid)
   }
   getetsectordetails(sectorid,etsectorname){
-    return this.http.get('http://localhost:3000/etsectordetails?sectorid='+sectorid+'&&etsectorname='+etsectorname)
+    return this.http.get('http://localhost:8089/api/etsectordetails?sectorid='+sectorid+'&&etsectorname='+etsectorname)
   }
   getetindexdetails(indexid,exchange){
-    return this.http.get('http://localhost:3000/etindexdetails?indexid='+indexid+'&&exchange='+exchange)
+    return this.http.get('http://localhost:8089/api/etindexdetails?indexid='+indexid+'&&exchange='+exchange)
   }
   
   getmmstockinforeco(stockid){
-    return this.http.post('http://localhost:3000/mmstockinforeco',stockid)
+    return this.http.post('http://localhost:8089/api/mmstockinforeco',stockid)
   }
   getmccombine(mcsymbol){
-    return this.http.post('http://localhost:3000/mccombine',mcsymbol)
+    return this.http.post('http://localhost:8089/api/mccombine',mcsymbol)
   }
   gettrendlynepostdvm(tlid){
-    return this.http.post('http://localhost:3000/trendlynepostdvm',tlid)
+    return this.http.post('http://localhost:8089/api/trendlynepostdvm',tlid)
   }
   getmcmovingaveragesview(stockisin,dbname) {
     
-    return this.http.get('http://localhost:3000/mcmovingaveragesview?stockisin='+stockisin+"&&dbname="+dbname)
+    return this.http.get('http://localhost:8089/api/mcmovingaveragesview?stockisin='+stockisin+"&&dbname="+dbname)
   }
   getmcsectorcombine(mcsectorsymbol){
-    return this.http.post('http://localhost:3000/mcsectorcombine',mcsectorsymbol)
+    return this.http.post('http://localhost:8089/api/mcsectorcombine',mcsectorsymbol)
   }
   getmoneycontrolti(mcsymbol){
-    return this.http.post('http://localhost:3000/moneycontrolti',mcsymbol)
+    return this.http.post('http://localhost:8089/api/moneycontrolti',mcsymbol)
   }
   getbqbasicdetails(bqsymbol){
-    return this.http.post('http://localhost:3000/bqbasicdetails',bqsymbol)
+    return this.http.post('http://localhost:8089/api/bqbasicdetails',bqsymbol)
   }
   getbqnews(bqsymbol){
-    return this.http.post('http://localhost:3000/bqnews',bqsymbol)
+    return this.http.post('http://localhost:8089/api/bqnews',bqsymbol)
   }
   getindd(mcsymbol){
-    return this.http.post('http://localhost:3000/indd',mcsymbol)
+    return this.http.post('http://localhost:8089/api/indd',mcsymbol)
   }
  
   getmoneycontroloverallweekly(mcsymbol){
-    return this.http.post('http://localhost:3000/moneycontroloverallweekly',mcsymbol)
+    return this.http.post('http://localhost:8089/api/moneycontroloverallweekly',mcsymbol)
   }
   getmoneycontroloverall(mcsymbol){
-    return this.http.post('http://localhost:3000/moneycontroloverall',mcsymbol)
+    return this.http.post('http://localhost:8089/api/moneycontroloverall',mcsymbol)
   }
   getpscore(mcsymbol){
-    return this.http.post('http://localhost:3000/pscore',mcsymbol)
+    return this.http.post('http://localhost:8089/api/pscore',mcsymbol)
   }
   
   getmoneycontroloverall1(mcsymbol){
-    return this.http.get('http://localhost:3000/moneycontroloverall1'+mcsymbol)
+    return this.http.get('http://localhost:8089/api/moneycontroloverall1'+mcsymbol)
   }
   getmcvolume(mcsymbol){
-    return this.http.post('http://localhost:3000/mcvolume',mcsymbol)
+    return this.http.post('http://localhost:8089/api/mcvolume',mcsymbol)
   }
   getmcinsight(mcsymbol){
-    return this.http.post('http://localhost:3000/mcinsight',mcsymbol)
+    return this.http.post('http://localhost:8089/api/mcinsight',mcsymbol)
   }
 
   getdropdbmcdwm(){
-    return this.http.get('http://localhost:3000/dropdbmcdwm')
+    return this.http.get('http://localhost:8089/api/dropdbmcdwm')
   }
   getdropdbmcvolume() {
-    return this.http.get('http://localhost:3000/dropdbmcvolume')
+    return this.http.get('http://localhost:8089/api/dropdbmcvolume')
   }
   getdropmcmovingaverages(){
-    return this.http.get('http://localhost:3000/dropmcmovingaverages')
+    return this.http.get('http://localhost:8089/api/dropmcmovingaverages')
   }
   getdroppscore(){
-    return this.http.get('http://localhost:3000/droppscore')
+    return this.http.get('http://localhost:8089/api/droppscore')
   }
   getmcoverallviewdaily(dbname){
-    return this.http.get('http://localhost:3000/mcoverallviewdaily?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/mcoverallviewdaily?dbname='+dbname)
   }
   getmcvolumeview(dbname){
-    return this.http.get('http://localhost:3000/mcvolumeview?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/mcvolumeview?dbname='+dbname)
   }
 
   getmcsectoroverallviewdwm(dbname){
-    return this.http.get('http://localhost:3000/mcsectoroverallviewdwm?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/mcsectoroverallviewdwm?dbname='+dbname)
   }
   getmcsectoroverallviewdw(dbname){
-    return this.http.get('http://localhost:3000/mcsectoroverallviewdw?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/mcsectoroverallviewdw?dbname='+dbname)
   }
   getmcsectoroverallviewd(dbname){
-    return this.http.get('http://localhost:3000/mcsectoroverallviewd?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/mcsectoroverallviewd?dbname='+dbname)
   }
   getmccombineview(dbname){
-    return this.http.get('http://localhost:3000/mccombineview?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/mccombineview?dbname='+dbname)
   }
   
   
   getmcoverallviewweekly(dbname){
-    return this.http.get('http://localhost:3000/mcoverallviewweekly?dbname='+dbname)
+    return this.http.get('http://localhost:8089/api/mcoverallviewweekly?dbname='+dbname)
   }
   gettlvhl(returnedname){
-    return this.http.get('http://localhost:3000/tlvhl?returnedname='+returnedname)
+    return this.http.get('http://localhost:8089/api/tlvhl?returnedname='+returnedname)
   }
   gettlrvpd(returnedname){
-    return this.http.get('http://localhost:3000/tlrvpd?returnedname='+returnedname)
+    return this.http.get('http://localhost:8089/api/tlrvpd?returnedname='+returnedname)
   }
   getnsedata(){
-    return this.http.get('http://localhost:3000/nsedata')
+    return this.http.get('http://localhost:8089/api/nsedata')
   }
   getbqoptionsindexweekly(){
-    return this.http.get('http://localhost:3000/bqoptionsindexweekly')
+    return this.http.get('http://localhost:8089/api/bqoptionsindexweekly')
   }
   getbqoptionsindexmonthly(){
-    return this.http.get('http://localhost:3000/bqoptionsindexmonthly')
+    return this.http.get('http://localhost:8089/api/bqoptionsindexmonthly')
   }
   getbqoptionsbnindexweekly(){
-    return this.http.get('http://localhost:3000/bqoptionsbnindexweekly')
+    return this.http.get('http://localhost:8089/api/bqoptionsbnindexweekly')
   }
   getbqoptionsbnindexmonthly(){
-    return this.http.get('http://localhost:3000/bqoptionsbnindexmonthly')
+    return this.http.get('http://localhost:8089/api/bqoptionsbnindexmonthly')
   }
   getbqoptionslexpiryindex(){
-    return this.http.get('http://localhost:3000/bqoptionslexpiryindex')
+    return this.http.get('http://localhost:8089/api/bqoptionslexpiryindex')
   }
   getbqoptionslexpirystock(){
-    return this.http.get('http://localhost:3000/bqoptionslexpirystock')
+    return this.http.get('http://localhost:8089/api/bqoptionslexpirystock')
   }
   getbqoptionsputcallrindex(){
-    return this.http.get('http://localhost:3000/bqoptionsputcallrindex')
+    return this.http.get('http://localhost:8089/api/bqoptionsputcallrindex')
   }
   getbqoptionsputcallrstock(){
-    return this.http.get('http://localhost:3000/bqoptionsputcallrstock')
+    return this.http.get('http://localhost:8089/api/bqoptionsputcallrstock')
   }
   getbqsectoralmovement(){
-    return this.http.get('http://localhost:3000/bqsectoralmovement')
+    return this.http.get('http://localhost:8089/api/bqsectoralmovement')
   }
   getfnodata(){
-    return this.http.get('http://localhost:3000/fnodata')
+    return this.http.get('http://localhost:8089/api/fnodata')
   }
   getetindices(){
-    return this.http.get('http://localhost:3000/etindices')
+    return this.http.get('http://localhost:8089/api/etindices')
   }
   gettrendingstocks(){
-    return this.http.get('http://localhost:3000/trendingstocks')
+    return this.http.get('http://localhost:8089/api/trendingstocks')
   }
   gettrendlynestocks1(tlid,tlname,eqsymbol){
-    return this.http.get('http://localhost:3000/trendlynestocks1?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
+    return this.http.get('http://localhost:8089/api/trendlynestocks1?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
   }
   gettrendlynestocks2(tlid,tlname,eqsymbol){
-    return this.http.get('http://localhost:3000/trendlynestocks2?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
+    return this.http.get('http://localhost:8089/api/trendlynestocks2?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
   }
   // gettrendlynestocks2(tlid){
-  //   return this.http.get('http://localhost:3000/trendlynestocks2?tlid='+tlid)
+  //   return this.http.get('http://localhost:8089/api/trendlynestocks2?tlid='+tlid)
   // }
   gettrendlynestocks3(tlid){
-    return this.http.get('http://localhost:3000/trendlynestocks3?tlid='+tlid)
+    return this.http.get('http://localhost:8089/api/trendlynestocks3?tlid='+tlid)
   }
   gettrendlynenifty(tlid) {
-    return this.http.get('http://localhost:3000/trendlynenifty?tlid='+tlid)
+    return this.http.get('http://localhost:8089/api/trendlynenifty?tlid='+tlid)
   }
 
   getniftytradersallstocks(){
-    return this.http.get('http://localhost:3000/niftytradersallstocks')
+    return this.http.get('http://localhost:8089/api/niftytradersallstocks')
   }
   getetpost1(){
-    return this.http.get('http://localhost:3000/etpost1')
+    return this.http.get('http://localhost:8089/api/etpost1')
   }
   getetDIIBuying() {
-    return this.http.get('http://localhost:3000/etDIIBuying') 
+    return this.http.get('http://localhost:8089/api/etDIIBuying') 
   }
   
   
@@ -777,7 +764,7 @@ export class DataapiService {
  
  
   getniftypharmadetails(){
-    return this.http.get('http://localhost:3000/pharmadetails')
+    return this.http.get('http://localhost:8089/api/pharmadetails')
   }
   
  
@@ -786,103 +773,103 @@ export class DataapiService {
 
   
   gettlbu(){
-    return this.http.get('http://localhost:3000/tlbu')
+    return this.http.get('http://localhost:8089/api/tlbu')
   }
   gettlob(){
-    return this.http.get('http://localhost:3000/tlob')
+    return this.http.get('http://localhost:8089/api/tlob')
   }
     //Used in ohlc.component.ts
   getmcsd(mcsymbol){
-    return this.http.get('http://localhost:3000/mcsd?mcsymbol='+mcsymbol)
+    return this.http.get('http://localhost:8089/api/mcsd?mcsymbol='+mcsymbol)
   }
   //Used in Portfolio.component.ts
   getmcsd1(mcsymbol1) {
    
-    return this.http.get('http://localhost:3000/mcsd1?mcsymbol1='+mcsymbol1)
+    return this.http.get('http://localhost:8089/api/mcsd1?mcsymbol1='+mcsymbol1)
   }
   getmcstockdetails(mcindexid) {
    
-    return this.http.get('http://localhost:3000/mcstockdetails?mcindexid='+mcindexid)
+    return this.http.get('http://localhost:8089/api/mcstockdetails?mcindexid='+mcindexid)
   }
   getmcstockdetails1(mcindexid1) {
    
-    return this.http.get('http://localhost:3000/mcstockdetails1?mcindexid1='+mcindexid1)
+    return this.http.get('http://localhost:8089/api/mcstockdetails1?mcindexid1='+mcindexid1)
   }
   getmcindexchart(mcindexid) {
    
-    return this.http.get('http://localhost:3000/mcindexchart?mcindexid='+mcindexid)
+    return this.http.get('http://localhost:8089/api/mcindexchart?mcindexid='+mcindexid)
   }
   //Used in portfolio.component.ts
   getmcsd2(mcsymbol2){
-    return this.http.get('http://localhost:3000/mcsd2?mcsymbol2='+mcsymbol2)
+    return this.http.get('http://localhost:8089/api/mcsd2?mcsymbol2='+mcsymbol2)
   }
   getmcpv(mcsymbol2){
-    return this.http.get('http://localhost:3000/mcpv?mcsymbol='+mcsymbol2)
+    return this.http.get('http://localhost:8089/api/mcpv?mcsymbol='+mcsymbol2)
   }
   
   getniftymetald(){
-    return this.http.get('http://localhost:3000/niftymetald')
+    return this.http.get('http://localhost:8089/api/niftymetald')
   }
   getniftymetalw(){
-    return this.http.get('http://localhost:3000/niftymetalw')
+    return this.http.get('http://localhost:8089/api/niftymetalw')
   }
   getniftymetalm(){
-    return this.http.get('http://localhost:3000/niftymetalm')
+    return this.http.get('http://localhost:8089/api/niftymetalm')
   }
   getcnxitd(){
-    return this.http.get('http://localhost:3000/cnxitd')
+    return this.http.get('http://localhost:8089/api/cnxitd')
   }
   getcnxitw(){
-    return this.http.get('http://localhost:3000/cnxitw')
+    return this.http.get('http://localhost:8089/api/cnxitw')
   }
   getcnxitm(){
-    return this.http.get('http://localhost:3000/cnxitm')
+    return this.http.get('http://localhost:8089/api/cnxitm')
   }
   getniftyfind(){
-    return this.http.get('http://localhost:3000/niftyfind')
+    return this.http.get('http://localhost:8089/api/niftyfind')
   }
   getniftyfinw(){
-    return this.http.get('http://localhost:3000/niftyfinw')
+    return this.http.get('http://localhost:8089/api/niftyfinw')
   }
   getniftyfinm(){
-    return this.http.get('http://localhost:3000/niftyfinm')
+    return this.http.get('http://localhost:8089/api/niftyfinm')
   }
   getmcsectors(){
-    return this.http.get('http://localhost:3000/mcsectors')
+    return this.http.get('http://localhost:8089/api/mcsectors')
   }
   getmcsectorsdetailsd(mcsectorsymbol){
-    return this.http.get('http://localhost:3000/mcsectorsdetailsd?mcsectorsymbol='+mcsectorsymbol)
+    return this.http.get('http://localhost:8089/api/mcsectorsdetailsd?mcsectorsymbol='+mcsectorsymbol)
   }
   getmcsectorgraph(indid){
-    return this.http.get('http://localhost:3000/mcsectorgraph?indid='+indid)
+    return this.http.get('http://localhost:8089/api/mcsectorgraph?indid='+indid)
   }
   getmcsectorsdetailsw(mcsectorsymbol){
-    return this.http.get('http://localhost:3000/mcsectorsdetailsw?mcsectorsymbol='+mcsectorsymbol)
+    return this.http.get('http://localhost:8089/api/mcsectorsdetailsw?mcsectorsymbol='+mcsectorsymbol)
   }
   getmcsectorsdetailsm(mcsectorsymbol){
-    return this.http.get('http://localhost:3000/mcsectorsdetailsm?mcsectorsymbol='+mcsectorsymbol)
+    return this.http.get('http://localhost:8089/api/mcsectorsdetailsm?mcsectorsymbol='+mcsectorsymbol)
   }
   getetsectors(){
-    return this.http.get('http://localhost:3000/etsectors')
+    return this.http.get('http://localhost:8089/api/etsectors')
   }
   getetimpdata(){
-    return this.http.get('http://localhost:3000/etimpdata')
+    return this.http.get('http://localhost:8089/api/etimpdata')
   }
  
   getetrecos(){
-    return this.http.get('http://localhost:3000/etrecos')
+    return this.http.get('http://localhost:8089/api/etrecos')
   }
   getmmrecos(){
-    return this.http.get('http://localhost:3000/mmrecos')
+    return this.http.get('http://localhost:8089/api/mmrecos')
   }
   getmmmaxbuyrecos(){
-    return this.http.get('http://localhost:3000/mmmaxbuyrecos')
+    return this.http.get('http://localhost:8089/api/mmmaxbuyrecos')
   }
   getetmacdbuy(){
-    return this.http.get('http://localhost:3000/etmacdbuy')
+    return this.http.get('http://localhost:8089/api/etmacdbuy')
   }
   getetmacdsell(){
-    return this.http.get('http://localhost:3000/etmacdsell')
+    return this.http.get('http://localhost:8089/api/etmacdsell')
   }
  
 

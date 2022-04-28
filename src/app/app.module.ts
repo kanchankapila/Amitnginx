@@ -13,7 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ChartsModule } from 'ng-charts';
+//import { ChartsModule } from 'ng-charts';
 import { NgxEchartsModule } from 'ngx-echarts';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -34,7 +34,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
-import { ServiceWorkerModule } from '@angular/service-worker';
+import { ServiceWorkerModule,SwRegistrationOptions } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import {MatTabsModule} from '@angular/material/tabs';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -47,7 +47,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
    
     SpinnerComponent,
     ContentAnimateDirective,
-    ChartsModule
+   
     
   ],
   imports: [
@@ -79,16 +79,24 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
+    //ChartsModule,
     AutocompleteLibModule,
     MatButtonToggleModule,
     MatTabsModule,
     HttpClientModule,
+    
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    }),
+    })
+  // , {
+  //     enabled: environment.production,
+  //     // Register the ServiceWorker as soon as the application is stable
+  //     // or after 30 seconds (whichever comes first).
+  //     registrationStrategy: 'registerWhenStable:30000'
+  //   }),
    
    
   ],

@@ -515,6 +515,8 @@ export class ShareComponent implements OnInit {
     this.getmmkst(this.stockid)
     this.getmmobv(this.stockid)
     this.getmmdow(this.stockid)
+    this.getniftysentiments()
+
     
   }
 
@@ -535,7 +537,16 @@ export class ShareComponent implements OnInit {
     })
     
   }
-        
+  getniftysentiments() {
+    let headers = new HttpHeaders();
+    headers = headers.append('Access-Control-Allow-Origin', 'https://www-mojo.geojit.com');
+    this.http.get<any>('https://www.marketsmojo.com/technical_card/getCardInfo?sid=363433&se=nse&cardlist=sectRsi_rsi_w', { headers }).subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
+    });
+    }
  
   getmcshare(mcsymbol,eqsymbol,stockid) {
     this.dataApi.getmcshare(this.mcsymbol,this.eqsymbol,this.stockid).subscribe(data5 => {

@@ -2336,16 +2336,7 @@ getsnrDetails(stock_isin, dbname) {
   })
 
 }
-getIndicators(stock_isin, dbname) {
 
-  this.dataApi.getIndicators(stock_isin, dbname).subscribe(data2 => {
-    this.dblist[dbname] = data2
-
-  }, err => {
-    console.log(err)
-  })
-
-}
 
 getetcompanydataohlc(companyid) {
   this.dataApi.getetcompanydataohlc(companyid).subscribe(data5 => {

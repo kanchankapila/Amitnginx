@@ -42,9 +42,9 @@ var html2json = require('html2json').html2json;
 //Create a middleware that adds a X-Response-Time header to responses.
 app.use(responseTime());
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
-    res.header("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
     next(); // Important
 })
 if (cluster.isMaster) {
@@ -65,7 +65,7 @@ if (cluster.isMaster) {
   // It will be initialized using express
   console.log(`Worker ${process.pid} started`);
 
-  app.get('/cluster', (req, res) => {
+  app.get('/api/cluster', (req, res) => {
     let worker = cluster.worker.id;
     res.send(`Running on worker with id ==> ${worker}`);
   });
@@ -83,10 +83,10 @@ const { json } = require('body-parser');
 var moment = require('moment');
 
 
-  app.get('/test', async function (req, res) {
+  app.get('/api/test', async function (req, res) {
     try {
       const response = await axios.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=5d&type=area');
-      console.log(JSON.parse((response.body).data));
+     // console.log(JSON.parse((response.body).data));
     } catch (error) {
       console.error(error);
     }
@@ -94,14 +94,14 @@ var moment = require('moment');
 
 
 //This is MC Stock Data Details used in OHLC component using parallel api run
-app.get('/mcshare', (req, res) => {
+app.get('/api/mcshare', (req, res) => {
   
   let mcsymbol = req.query.mcsymbol
   let eqsymbol = req.query.eqsymbol
   let stockid = req.query.stockid
-  console.log(mcsymbol)
-  console.log(eqsymbol)
-  console.log("This is mcshare")
+  //console.log(mcsymbol)
+  //console.log(eqsymbol)
+  //console.log("This is mcshare")
   var requestArray7 = [
     
     { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/W/'+mcsymbol+'?field=RSI' },
@@ -138,7 +138,7 @@ app.get('/mcshare', (req, res) => {
 
 
 //This is MC Share Details used in OHLC component using parallel api run
-app.get('/mcsharefrequent', (req, res) => {
+app.get('/api/mcsharefrequent', (req, res) => {
   let mcsymbol = req.query.mcsymbol;
   let eqsymbol = req.query.eqsymbol;
   console.log("This is mcsharefrequent")
@@ -231,7 +231,7 @@ var gnewsyesterday= (yyyy + "-" + mm + "-" + (dd - 01))
 
 
 /////////////////////////////////////////////////1.MarketMojos MACD,used in OHLC component/////////////////////////////////////////////////////
-app.get('/mmmacd', function (req, res) {
+app.get('/api/mmmacd', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -249,7 +249,7 @@ app.get('/mmmacd', function (req, res) {
 
 })
 //////////////////////////////////////////////////2.MarketMojos RSI,used in OHLC component/////////////////////////////////////////////////////////
-app.get('/mmrsi', function (req, res) {
+app.get('/api/mmrsi', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -267,7 +267,7 @@ app.get('/mmrsi', function (req, res) {
 
 })
 /////////////////////////////////////////////////////3.MarketMojos Bollinger Bands,used in OHLC component/////////////////////////////////////////
-app.get('/mmbb', function (req, res) {
+app.get('/api/mmbb', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -285,7 +285,7 @@ app.get('/mmbb', function (req, res) {
 
 })
 ////////////////////////////////////////////////////////4.MarketMojos Moving Averages,used in OHLC component/////////////////////////////////////
-app.get('/mmma', function (req, res) {
+app.get('/api/mmma', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -303,7 +303,7 @@ app.get('/mmma', function (req, res) {
 
 })
 ////////////////////////////////////////////////////////5.Market Mojos KST,used in OHLC component////////////////////////////////////////
-app.get('/mmkst', function (req, res) {
+app.get('/api/mmkst', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -322,7 +322,7 @@ app.get('/mmkst', function (req, res) {
 })
 
 //////////////////////////////////////////////////////////6.MarketMojos DOW,used in OHLC component/////////////////////////////////////////////
-app.get('/mmdow', function (req, res) {
+app.get('/api/mmdow', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -341,7 +341,7 @@ app.get('/mmdow', function (req, res) {
 })
 
 ///////////////////////////////////////////////////////////7.MarketMojos OBV,used in OHLC component/////////////////////////////////////////////
-app.get('/mmobv', function (req, res) {
+app.get('/api/mmobv', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -361,7 +361,7 @@ app.get('/mmobv', function (req, res) {
 
 ///////////////////////////////////////////////////////////7.MarketMojos Markets,used in OHLC component/////////////////////////////////////////////
 
-app.get('/mmmarkets', function (req, res) {
+app.get('/api/mmmarkets', function (req, res) {
 
   //let mcsymbol = req.query.mcsymbol
 
@@ -381,7 +381,7 @@ app.get('/mmmarkets', function (req, res) {
 
 })
 ///////////////////////////////////////////////////////////7.MarketMojos StockInfo,used in OHLC component/////////////////////////////////////////////
-app.get('/mmstockinfo', function (req, res) {
+app.get('/api/mmstockinfo', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -405,7 +405,7 @@ app.get('/mmstockinfo', function (req, res) {
 
 ///#########################Market mojos Data ******************************//  
 
-app.get('/mmrecos', function (req, res) {
+app.get('/api/mmrecos', function (req, res) {
 
   var url11 = 'https://www.marketsmojo.com/recommendation/api/getRecos.php?sortColumn=DATE&sortDirection=desc&page=1&pageSize=250&format=json&TPeriod%5B%5D=1week&CType%5B%5D=2&CType%5B%5D=1&CType%5B%5D=3';
   request(url11, function (error, response, html) {
@@ -416,7 +416,7 @@ app.get('/mmrecos', function (req, res) {
   })
 })
 
-app.get('/mmmaxbuyrecos', function (req, res) {
+app.get('/api/mmmaxbuyrecos', function (req, res) {
 
   var url11 = 'https://www.marketsmojo.com/recommendation/api/getRecos.php?List=buy&sortColumn=MAXCAL&sortDirection=asc&page=1&pageSize=50&format=json';
   request(url11, function (error, response, html) {
@@ -429,7 +429,7 @@ app.get('/mmmaxbuyrecos', function (req, res) {
 
 
 ///////////////////////////////////////////////////////////7.MarketMojos Peers,used in OHLC component/////////////////////////////////////////////
-app.get('/mmpeers', function (req, res) {
+app.get('/api/mmpeers', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -443,7 +443,7 @@ app.get('/mmpeers', function (req, res) {
   })
 
 })
-app.get('/mmpmov', function (req, res) {
+app.get('/api/mmpmov', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -458,7 +458,7 @@ app.get('/mmpmov', function (req, res) {
 
 })
 ///////////////////////////////////////////////////////////7.MarketMojos TECH Score,used in OHLC component/////////////////////////////////////////////
-app.get('/mmtechscore', function (req, res) {
+app.get('/api/mmtechscore', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -476,7 +476,7 @@ app.get('/mmtechscore', function (req, res) {
 
 ////////////////////////////////////////////////////BLOOMBERG QUINT////////////////////////////////////////////////////
 /////////////////////////////////////////////////////1.Bloomber quint Most Active,used in Screeners component
-app.get('/bqma', function (req, res) {
+app.get('/api/bqma', function (req, res) {
 
   let type = req.query.type
   
@@ -492,7 +492,7 @@ app.get('/bqma', function (req, res) {
   })
 })
 ////////////////////////////////////////////////////2.Bloomber quint Price Increase Volume Increase,used in Bullish component
-app.get('/bqpivi', function (req, res) {
+app.get('/api/bqpivi', function (req, res) {
 
   let type = req.query.type
   
@@ -508,7 +508,7 @@ app.get('/bqpivi', function (req, res) {
   })
 })
 ///////////////////////////////////////////////////////3.Bloomberg quint Price Increase Volume Decrease,used in Bullish component
-app.get('/bqpivd', function (req, res) {
+app.get('/api/bqpivd', function (req, res) {
 
   let type = req.query.type
   
@@ -524,7 +524,7 @@ app.get('/bqpivd', function (req, res) {
   })
 })
 /////////////////////////////////////////////////////4.Bloomber quint Price Decrease Volume Increase,used in Bearish component
-app.get('/bqpdvi', function (req, res) {
+app.get('/api/bqpdvi', function (req, res) {
 
   let type = req.query.type
   
@@ -540,7 +540,7 @@ app.get('/bqpdvi', function (req, res) {
   })
 })
 /////////////////////////////////////////////////////5.Bloomber quint Price Decrease Volume Decrease,used in Bearish component
-app.get('/bqpdvd', function (req, res) {
+app.get('/api/bqpdvd', function (req, res) {
 
   let type = req.query.type
   
@@ -556,7 +556,7 @@ app.get('/bqpdvd', function (req, res) {
   })
 })
 /////////////////////////////////////////////////////6.Bloomber quint Price Flat Volume Increase,Not used 
-app.get('/bqpfvi', function (req, res) {
+app.get('/api/bqpfvi', function (req, res) {
 
   let type = req.query.type
   
@@ -572,7 +572,7 @@ app.get('/bqpfvi', function (req, res) {
   })
 })
 ///////////////////////////////////////////////////////7.Bloomber quint hitting 52 wk high,used in Bullish component
-app.get('/bq52wkh', function (req, res) {
+app.get('/api/bq52wkh', function (req, res) {
 
   let type = req.query.type
   
@@ -588,7 +588,7 @@ app.get('/bq52wkh', function (req, res) {
   })
 })
 /////////////////////////////////////////////////////////8.Bloomber quint hitting 52 wk low,used in Bearish component
-app.get('/bq52wkl', function (req, res) {
+app.get('/api/bq52wkl', function (req, res) {
 
   let type = req.query.type
   
@@ -604,7 +604,7 @@ app.get('/bq52wkl', function (req, res) {
   })
 })
 ////////////////////////////////////////////////////////9.Bloomber quint close to  52 wk high,used in Bullish component
-app.get('/bqc52h', function (req, res) {
+app.get('/api/bqc52h', function (req, res) {
 
   let type = req.query.type
   
@@ -620,7 +620,7 @@ app.get('/bqc52h', function (req, res) {
   })
 })
 /////////////////////////////////////////////////////10.Bloomberg quint close to  52 wk low,used in Bearish component
-app.get('/bqc52l', function (req, res) {
+app.get('/api/bqc52l', function (req, res) {
 
   let type = req.query.type
   
@@ -636,7 +636,7 @@ app.get('/bqc52l', function (req, res) {
   })
 })
 ////////////////////////////////////////////////////////11.Bloomber quint high volatility,not used
-app.get('/bqvolatile', function (req, res) {
+app.get('/api/bqvolatile', function (req, res) {
 
   let type = req.query.type
   
@@ -652,7 +652,7 @@ app.get('/bqvolatile', function (req, res) {
   })
 })
 /////////////////////////////////////////////////////////////////12.Bloomber quint Fall from High,not used
-app.get('/bqffh', function (req, res) {
+app.get('/api/bqffh', function (req, res) {
 
   let type = req.query.type
   
@@ -668,7 +668,7 @@ app.get('/bqffh', function (req, res) {
   })
 })
 ///////////////////////////////////////////////////////////////13.Bloomber quint recovery from low,not used
-app.get('/bqrfl', function (req, res) {
+app.get('/api/bqrfl', function (req, res) {
 
   let type = req.query.type
   
@@ -684,7 +684,7 @@ app.get('/bqrfl', function (req, res) {
   })
 })
 /////////////////////////////////////////////////////////////////////14.Bloomber quint Bulk Deals,not used
-app.get('/bqbulkdeal', function (req, res) {
+app.get('/api/bqbulkdeal', function (req, res) {
 
   let type = req.query.type
   
@@ -700,7 +700,7 @@ app.get('/bqbulkdeal', function (req, res) {
   })
 })
 //////////////////////////////////////////////////////////////////////15.Bloomber quint Block Deals,not used
-app.get('/bqblockdeal', function (req, res) {
+app.get('/api/bqblockdeal', function (req, res) {
 
   let type = req.query.type
   
@@ -716,7 +716,7 @@ app.get('/bqblockdeal', function (req, res) {
   })
 })
 ///////////////////////////////////////////////////////////////////////16.Bloomber quint Insider Trading ,not used
-app.get('/bqinsider', function (req, res) {
+app.get('/api/bqinsider', function (req, res) {
 
   let type = req.query.type
   
@@ -732,7 +732,7 @@ app.get('/bqinsider', function (req, res) {
   })
 })
 ////////////////////////////////////////////////////////////////17.Bloomber quint Only Buyers,used in Bullish component
-app.get('/bqob', function (req, res) {
+app.get('/api/bqob', function (req, res) {
 
   let type = req.query.type
   
@@ -748,7 +748,7 @@ app.get('/bqob', function (req, res) {
   })
 })
 ////////////////////////////////////////////////////////////////////////18.Bloomber quint Only Sellers,used in Bearish component
-app.get('/bqos', function (req, res) {
+app.get('/api/bqos', function (req, res) {
 
   let type = req.query.type
   
@@ -764,7 +764,7 @@ app.get('/bqos', function (req, res) {
   })
 })
 //////////////////////////////////////////////////////////////////19.Bloomber quint Top Gainers,used in Bullish component
-app.get('/bqtg', function (req, res) {
+app.get('/api/bqtg', function (req, res) {
 
   //let type = req.query.type
   // console.log(type)
@@ -779,7 +779,7 @@ app.get('/bqtg', function (req, res) {
   })
 })
 //////////////////////////////////////////////////////////////20.Bloomber quint Top Losers,used in Bearish component
-app.get('/bqtl', function (req, res) {
+app.get('/api/bqtl', function (req, res) {
 
    var url6 = 'https://www.bloombergquint.com/feapi/markets/indices/stock-stats?duration=1D&type=top_losers&filter_key=index&filter_value=129';
   request(url6, function (error, response, html) {
@@ -791,7 +791,7 @@ app.get('/bqtl', function (req, res) {
 })
 //##################Bloombergquint Data ##################################//
 /////////////////////////////////////////////Bloombergquint Movement/////////////////////////////////////////////////
-app.get('/bqmovement', function (req, res) {
+app.get('/api/bqmovement', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -809,7 +809,7 @@ app.get('/bqmovement', function (req, res) {
 
 })
 /////////////////////////////////////////////Bloombergquint Price Stats/////////////////////////////////////////////////
-app.get('/bqpricestats', function (req, res) {
+app.get('/api/bqpricestats', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -827,7 +827,7 @@ app.get('/bqpricestats', function (req, res) {
 
 })
 /////////////////////////////////////////////Bloombergquint Fundamentals/////////////////////////////////////////////////
-app.get('/bqfundamentals', function (req, res) {
+app.get('/api/bqfundamentals', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -845,7 +845,7 @@ app.get('/bqfundamentals', function (req, res) {
 
 })
 /////////////////////////////////////////////Bloombergquint Moving Averages/////////////////////////////////////////////////
-app.get('/bqmovingaverages', function (req, res) {
+app.get('/api/bqmovingaverages', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -863,7 +863,7 @@ app.get('/bqmovingaverages', function (req, res) {
 
 })
 /////////////////////////////////////////////Bloombergquint Delivery Volumes/////////////////////////////////////////////////
-app.get('/bqdelvol', function (req, res) {
+app.get('/api/bqdelvol', function (req, res) {
   let stockid = req.query.stockid
 
   var url6 = 'https://www.bloombergquint.com/next/feapi/stock/' + stockid + '/delivery-volumes';
@@ -880,7 +880,7 @@ app.get('/bqdelvol', function (req, res) {
 
 })
 /////////////////////////////////////////////Bloombergquint Quarterly Results/////////////////////////////////////////////////
-app.get('/bqqresults', function (req, res) {
+app.get('/api/bqqresults', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -898,7 +898,7 @@ app.get('/bqqresults', function (req, res) {
 
 })
 /////////////////////////////////////////////Bloombergquint Total Returns/////////////////////////////////////////////////
-app.get('/bqtr', function (req, res) {
+app.get('/api/bqtr', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -916,7 +916,7 @@ app.get('/bqtr', function (req, res) {
 
 })
 /////////////////////////////////////////////Bloombergquint ShareHolding Snapshot/////////////////////////////////////////////////
-app.get('/bqss', function (req, res) {
+app.get('/api/bqss', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -934,7 +934,7 @@ app.get('/bqss', function (req, res) {
 
 })
 /////////////////////////////////////////////Bloombergquint Shareholding Comparison/////////////////////////////////////////////////
-app.get('/bqsc', function (req, res) {
+app.get('/api/bqsc', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -952,7 +952,7 @@ app.get('/bqsc', function (req, res) {
 
 })
 /////////////////////////////////////////////Bloombergquint Promoter Holding/////////////////////////////////////////////////
-app.get('/bqph', function (req, res) {
+app.get('/api/bqph', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -970,7 +970,7 @@ app.get('/bqph', function (req, res) {
 
 })
 /////////////////////////////////////////////Bloombergquint Key Stats/////////////////////////////////////////////////
-app.get('/bqks', function (req, res) {
+app.get('/api/bqks', function (req, res) {
 
   let stockisin = req.query.stockisin
 
@@ -988,7 +988,7 @@ app.get('/bqks', function (req, res) {
 
 })
 /////////////////////////////////////////////Bloombergquint Announcements/////////////////////////////////////////////////
-app.get('/bqannouncements', function (req, res) {
+app.get('/api/bqannouncements', function (req, res) {
 
   let stockisin = req.query.stockisin
   //console.log(stockisin)
@@ -1007,7 +1007,7 @@ app.get('/bqannouncements', function (req, res) {
 
 })
 /////////////////////////////////////////////Bloombergquint Corporate Announcements/////////////////////////////////////////////////
-app.get('/bqca', function (req, res) {
+app.get('/api/bqca', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -1025,7 +1025,7 @@ app.get('/bqca', function (req, res) {
 
 })
 /////////////////////////////////////////////Bloombergquint Peer Details/////////////////////////////////////////////////
-app.get('/bqpd', function (req, res) {
+app.get('/api/bqpd', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -1044,7 +1044,7 @@ app.get('/bqpd', function (req, res) {
 })
 
 /////////////////////////////////////////////Bloombergquint in the news/////////////////////////////////////////////////
-app.get('/bqitnews', function (req, res) {
+app.get('/api/bqitnews', function (req, res) {
 
   let bqnames = req.query.bqnames
   //console.log(bqnames)
@@ -1066,7 +1066,7 @@ app.get('/bqitnews', function (req, res) {
 
 //////////////////////////////////////////Bloomberquint News////////////////////////////////////////////////////////////
 
-app.get('/bqnews', function (req, res) {
+app.get('/api/bqnews', function (req, res) {
 
   let bqname = req.query.bqname
 
@@ -1082,7 +1082,7 @@ app.get('/bqnews', function (req, res) {
 })
 
 
-app.get('/bqbdetails', function (req, res) {
+app.get('/api/bqbdetails', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -1103,7 +1103,7 @@ app.get('/bqbdetails', function (req, res) {
 })
 
 
-app.get('/bqgainingsectorsstocks', function (req, res) {
+app.get('/api/bqgainingsectorsstocks', function (req, res) {
 
   let sectorid = req.query.sectorid
 //console.log(sectorid)
@@ -1117,7 +1117,7 @@ app.get('/bqgainingsectorsstocks', function (req, res) {
   })
 
 })
-app.get('/bqgainingsectorsstocksdetails', function (req, res) {
+app.get('/api/bqgainingsectorsstocksdetails', function (req, res) {
 
   let sectorid = req.query.sectorid
 //console.log(sectorid)
@@ -1135,7 +1135,7 @@ app.get('/bqgainingsectorsstocksdetails', function (req, res) {
 })
 
 
-app.get('/bqadvdec', function (req, res) {
+app.get('/api/bqadvdec', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 //onsole.log(mcsymbol)
@@ -1151,7 +1151,7 @@ app.get('/bqadvdec', function (req, res) {
 })
 
 
-app.get('/bqsectoralmovement', function (req, res) {
+app.get('/api/bqsectoralmovement', function (req, res) {
 
  var url6 = 'https://www.bloombergquint.com/feapi/markets/sectoral-movements?limit=100';
   //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
@@ -1164,7 +1164,7 @@ app.get('/bqsectoralmovement', function (req, res) {
   })
 
 })
-app.get('/bqoptionslexpiryindex', function (req, res) {
+app.get('/api/bqoptionslexpiryindex', function (req, res) {
 
   var url6 = 'https://www.bloombergquint.com/feapi/markets/options/put-call-ratio/last-expiry?security-type=index&limit=200';
    //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
@@ -1177,7 +1177,7 @@ app.get('/bqoptionslexpiryindex', function (req, res) {
    })
  
  })
- app.get('/bqoptionslexpirystock', function (req, res) {
+ app.get('/api/bqoptionslexpirystock', function (req, res) {
 
   var url6 = 'https://www.bloombergquint.com/feapi/markets/options/put-call-ratio/last-expiry?security-type=stock&limit=200';
    //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
@@ -1190,7 +1190,7 @@ app.get('/bqoptionslexpiryindex', function (req, res) {
    })
  
  })
- app.get('/bqoptionsputcallrindex', function (req, res) {
+ app.get('/api/bqoptionsputcallrindex', function (req, res) {
 
   var url6 = 'https://www.bloombergquint.com/feapi/markets/options/put-call-ratio?security-type=index&limit=20';
    //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
@@ -1204,7 +1204,7 @@ app.get('/bqoptionslexpiryindex', function (req, res) {
  
  })
 
- app.get('/bqoptionsputcallrstock', function (req, res) {
+ app.get('/api/bqoptionsputcallrstock', function (req, res) {
 
   var url6 = 'https://www.bloombergquint.com/feapi/markets/options/put-call-ratio?security-type=stock&limit=20';
    //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
@@ -1218,7 +1218,7 @@ app.get('/bqoptionslexpiryindex', function (req, res) {
  
  })
 
-app.get('/bqoptionsindexweekly', function (req, res) {
+app.get('/api/bqoptionsindexweekly', function (req, res) {
 
   var url6 = 'https://www.bloombergquint.com/feapi/markets/options/NIFTY%2050/?expiry=1w';
    //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
@@ -1231,7 +1231,7 @@ app.get('/bqoptionsindexweekly', function (req, res) {
    })
  
  })
- app.get('/bqoptionsindexmonthly', function (req, res) {
+ app.get('/api/bqoptionsindexmonthly', function (req, res) {
 
   var url6 = 'https://www.bloombergquint.com/feapi/markets/options/NIFTY%2050/?expiry=1m';
    //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
@@ -1246,7 +1246,7 @@ app.get('/bqoptionsindexweekly', function (req, res) {
  })
 
 
-app.get('/bqoptionsbnindexweekly', function (req, res) {
+app.get('/api/bqoptionsbnindexweekly', function (req, res) {
 
   var url6 = 'https://www.bloombergquint.com/feapi/markets/options/NIFTY%20BANK/?expiry=1w';
    //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
@@ -1259,7 +1259,7 @@ app.get('/bqoptionsbnindexweekly', function (req, res) {
    })
  
  })
- app.get('/bqoptionsbnindexmonthly', function (req, res) {
+ app.get('/api/bqoptionsbnindexmonthly', function (req, res) {
 
   var url6 = 'https://www.bloombergquint.com/feapi/markets/options/NIFTY%20BANK/?expiry=1m';
    //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
@@ -1272,7 +1272,7 @@ app.get('/bqoptionsbnindexweekly', function (req, res) {
    })
  
  })
-app.get('/bqgainingsectors', function (req, res) {
+app.get('/api/bqgainingsectors', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 //console.log(mcsymbol)
@@ -1289,7 +1289,7 @@ app.get('/bqgainingsectors', function (req, res) {
 
 
 ///////////////////////////////////Money control Price Volume Details for each stock,used in OHLC Module
-app.get('/mcpv', function (req, res) {
+app.get('/api/mcpv', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -1307,7 +1307,7 @@ app.get('/mcpv', function (req, res) {
 
 })
 ///////////////////////////////////Money control Pharma Details ,used in Dashboard Module
-app.get('/pharmadetails', function (req, res) {
+app.get('/api/pharmadetails', function (req, res) {
 
   var url6 = 'https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3Bcpr';
   request(url6, function (error, response, html) {
@@ -1325,7 +1325,7 @@ app.get('/pharmadetails', function (req, res) {
 
 ///////////////////////////////////Money control Bank Nifty Details ,used in Dashboard Module
 /////////////////////To get realtime data from moneycontrol////////////////////////
-app.get('/mcniftyrealtime', function (req, res) {
+app.get('/api/mcniftyrealtime', function (req, res) {
 
   var url7 = 'https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3BNSX';
   request(url7, function (error, response, html) {
@@ -1335,7 +1335,7 @@ app.get('/mcniftyrealtime', function (req, res) {
   })
 })
 
-app.get('/mcbankniftyrealtime', function (req, res) {
+app.get('/api/mcbankniftyrealtime', function (req, res) {
 
   var url7 = 'https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3Bnbx';
   request(url7, function (error, response, html) {console.log(error)
@@ -1346,7 +1346,7 @@ app.get('/mcbankniftyrealtime', function (req, res) {
 })
 ////////////////////////////India VIX Data from moneycontrol//////////////////////////
 
-app.get('/mcvixrealtime', function (req, res) {
+app.get('/api/mcvixrealtime', function (req, res) {
 
   var url9 = 'https://appfeeds.moneycontrol.com/jsonapi/market/indices&format=json&t_device=iphone&t_app=MC&t_version=48&ind_id=36';
   request(url9, function (error, response, html) {
@@ -1365,7 +1365,7 @@ app.get('/mcvixrealtime', function (req, res) {
 /////////////////////////VIX GRAPH//////////////////////////////////////////
 
 
-app.get('/mcvixgraph', function (req, res) {
+app.get('/api/mcvixgraph', function (req, res) {
 
   var url9 = 'https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area';
   request(url9, function (error, response, html) {
@@ -1382,7 +1382,7 @@ app.get('/mcvixgraph', function (req, res) {
 
 })
 ///////////////////////////////////Money control CNX Details ,used in Dashboard Module
-app.get('/cnxitd', function (req, res) {
+app.get('/api/cnxitd', function (req, res) {
 
   var url9 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bcnit?fields=sentiments,pivotLevels,sma,ema';
   request(url9, function (error, response, html) {
@@ -1399,7 +1399,7 @@ app.get('/cnxitd', function (req, res) {
 
 })
 ///////////////////////////////////Money control CNXIT Daily Details ,used in Dashboard Module
-app.get('/cnxitw', function (req, res) {
+app.get('/api/cnxitw', function (req, res) {
 
   var url9 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3Bcnit?fields=sentiments,pivotLevels,sma,ema';
   request(url9, function (error, response, html) {
@@ -1416,7 +1416,7 @@ app.get('/cnxitw', function (req, res) {
 
 })
 ///////////////////////////////////Money control CNXIT Monthly Details ,used in Dashboard Module
-app.get('/cnxitm', function (req, res) {
+app.get('/api/cnxitm', function (req, res) {
 
   var url9 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3Bcnit?fields=sentiments,pivotLevels,sma,ema';
   request(url9, function (error, response, html) {
@@ -1433,7 +1433,7 @@ app.get('/cnxitm', function (req, res) {
 
 })
 ///////////////////////////////////Money control Nifty Metal Daily Details ,used in Dashboard Module
-app.get('/niftymetald', function (req, res) {
+app.get('/api/niftymetald', function (req, res) {
 
   var url10 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BCNXM?fields=sentiments,pivotLevels,sma,ema';
   request(url10, function (error, response, html) {
@@ -1449,7 +1449,7 @@ app.get('/niftymetald', function (req, res) {
 
 })
 ///////////////////////////////////Money control NIFTY METALS WEEKLY Details ,used in Dashboard Module
-app.get('/niftymetalw', function (req, res) {
+app.get('/api/niftymetalw', function (req, res) {
 
   var url10 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3BCNXM?fields=sentiments,pivotLevels,sma,ema';
   request(url10, function (error, response, html) {
@@ -1466,7 +1466,7 @@ app.get('/niftymetalw', function (req, res) {
 })
 /////////////////////////////////////Money Control Support and Resistance,Used in OHLC and Sector//////////////////////////////////////
 
-app.get('/moneycontrolsnr', function (req, res) {
+app.get('/api/moneycontrolsnr', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -1484,7 +1484,7 @@ app.get('/moneycontrolsnr', function (req, res) {
 
 })
 ///////////////////////////////////////Money Control Support and Resistance Sector,Used in Sector//////////////////////////////////////
-app.get('/moneycontrolsnrindex', function (req, res) {
+app.get('/api/moneycontrolsnrindex', function (req, res) {
 
   let mcindexsymbol = (req.query.mcindexsymbol).replace(/;/, "%3B")
 //console.log(mcindexsymbol)
@@ -1503,7 +1503,7 @@ app.get('/moneycontrolsnrindex', function (req, res) {
 })
 
 ////////////////////////////////////////Get Money Control Stock SWOT Data,Used in OHLC/////////////////////////
-app.get('/swot', function (req, res) {
+app.get('/api/swot', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -1521,7 +1521,7 @@ app.get('/swot', function (req, res) {
 
 })
 ////////////////////////////////////////Get Money Control Stock SWOT Data,Used in OHLC/////////////////////////
-app.get('/mcswot', function (req, res) {
+app.get('/api/mcswot', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -1539,7 +1539,7 @@ app.get('/mcswot', function (req, res) {
 
 })
 ////////////////////////////////////////Get Money Control Stock Data,Used in OHLC/////////////////////////
-app.get('/mcsd', function (req, res) {
+app.get('/api/mcsd', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -1559,7 +1559,7 @@ app.get('/mcsd', function (req, res) {
 
 })
 ////////////////////////////////////////Get Money Control Stock Data,Used in Portfolio/////////////////////////
-app.get('/mcsd1', function (req, res) {
+app.get('/api/mcsd1', function (req, res) {
 
   let mcsymbol1 = req.query.mcsymbol1
 
@@ -1577,7 +1577,7 @@ app.get('/mcsd1', function (req, res) {
 
 })
 ////////////////////////////////////////Get Money Control Stock Data,Used in Portfolio/////////////////////////
-app.get('/mcsd2', function (req, res) {
+app.get('/api/mcsd2', function (req, res) {
 
   let mcsymbol2 = req.query.mcsymbol2
 
@@ -1595,7 +1595,7 @@ app.get('/mcsd2', function (req, res) {
 
 })
 ////////////////////////////////////////Get Money Control Stock Tickers/////////////////////////
-app.get('/moneycontrolchartdata', function (req, res) {
+app.get('/api/moneycontrolchartdata', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -1616,7 +1616,7 @@ app.get('/moneycontrolchartdata', function (req, res) {
 })
 
 ////////////////////////////////////////Get Money Control Historical Rating of a stock/////////////////////////
-app.get('/mchistoricalrating', function (req, res) {
+app.get('/api/mchistoricalrating', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -1637,7 +1637,7 @@ app.get('/mchistoricalrating', function (req, res) {
 })
 
 
-app.get('/moneycontrolsnrw', function (req, res) {
+app.get('/api/moneycontrolsnrw', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -1656,7 +1656,7 @@ app.get('/moneycontrolsnrw', function (req, res) {
   })
 
 })
-app.get('/moneycontrolsnrm', function (req, res) {
+app.get('/api/moneycontrolsnrm', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -1676,7 +1676,7 @@ app.get('/moneycontrolsnrm', function (req, res) {
 
 })
 
-app.get('/mcti', function (req, res) {
+app.get('/api/mcti', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -1695,7 +1695,7 @@ app.get('/mcti', function (req, res) {
   })
 
 })
-app.get('/mctiw', function (req, res) {
+app.get('/api/mctiw', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -1715,7 +1715,7 @@ app.get('/mctiw', function (req, res) {
 
 })
 
-app.get('/mctim', function (req, res) {
+app.get('/api/mctim', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -1738,7 +1738,7 @@ app.get('/mctim', function (req, res) {
 
 
 ///////////////////////////////////Money control NIFTY METALS MONTHLY Details ,used in Dashboard Module
-app.get('/niftymetalm', function (req, res) {
+app.get('/api/niftymetalm', function (req, res) {
 
   var url10 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3BCNXM?fields=sentiments,pivotLevels,sma,ema';
   request(url10, function (error, response, html) {
@@ -1754,7 +1754,7 @@ app.get('/niftymetalm', function (req, res) {
 
 })
 ///////////////////////////////////Money control NIFTY FINANCE Daily Details ,used in Dashboard Module
-app.get('/niftyfind', function (req, res) {
+app.get('/api/niftyfind', function (req, res) {
 
   var url11 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bcnxf?fields=sentiments,pivotLevels,sma,ema';
   request(url11, function (error, response, html) {//console.log(response)
@@ -1768,7 +1768,7 @@ app.get('/niftyfind', function (req, res) {
 })
 
 ///////////////////////////////////Money control NIFTY FINANCE WEEKLY Details ,used in Dashboard Module
-app.get('/niftyfinw', function (req, res) {
+app.get('/api/niftyfinw', function (req, res) {
 
   var url11 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3Bcnxf?fields=sentiments,pivotLevels,sma,ema';
   request(url11, function (error, response, html) {//console.log(response)
@@ -1783,7 +1783,7 @@ app.get('/niftyfinw', function (req, res) {
 
 })
 ///////////////////////////////////Money control NIFTY FINANCE Monthlyly Details ,used in Dashboard Module
-app.get('/niftyfinm', function (req, res) {
+app.get('/api/niftyfinm', function (req, res) {
 
   var url11 = 'https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3Bcnxf?fields=sentiments,pivotLevels,sma,ema';
   request(url11, function (error, response, html) {//console.log(response)
@@ -1801,7 +1801,7 @@ app.get('/niftyfinm', function (req, res) {
 
 ///////////////////////////////////Money control SECTOR Details ,used in Dashboard Module
 
-app.get('/mcsectors', function (req, res) {
+app.get('/api/mcsectors', function (req, res) {
 
   var url11 = 'https://appfeeds.moneycontrol.com/appxml/indices_5_EN.json';
   request(url11, function (error, response, html) {//console.log(response)
@@ -1813,7 +1813,7 @@ app.get('/mcsectors', function (req, res) {
 })
 
 ///////////////////////////////////Money control SECTORS DAILY Details ,used in Dashboard Module
-app.get('/mcsectorsdetailsd', function (req, res) {
+app.get('/api/mcsectorsdetailsd', function (req, res) {
   let mcsectorsymbol = (req.query.mcsectorsymbol).replace(/;/, "%3B");
   
   //let  =mcsectorsymbol
@@ -1829,7 +1829,7 @@ app.get('/mcsectorsdetailsd', function (req, res) {
 })
 
 ///////////////////////////////////Money control SECTORS WEEKLY Details ,used in Dashboard Module
-app.get('/mcsectorsdetailsw', function (req, res) {
+app.get('/api/mcsectorsdetailsw', function (req, res) {
   let mcsectorsymbol = (req.query.mcsectorsymbol).replace(/;/, "%3B");
   
   //let  =mcsectorsymbol
@@ -1844,7 +1844,7 @@ app.get('/mcsectorsdetailsw', function (req, res) {
   })
 })
 ///////////////////////////////////Money control SECTORS MONTHLY Details ,used in Dashboard Module
-app.get('/mcsectorsdetailsm', function (req, res) {
+app.get('/api/mcsectorsdetailsm', function (req, res) {
   let mcsectorsymbol = (req.query.mcsectorsymbol).replace(/;/, "%3B");
   
   //let  =mcsectorsymbol
@@ -1859,7 +1859,7 @@ app.get('/mcsectorsdetailsm', function (req, res) {
   })
 })
 //////////////////////////////////////////MC SECTOR///////////////////////////////////////////////////////
-app.get('/mcsectorgraph', function (req, res) {
+app.get('/api/mcsectorgraph', function (req, res) {
   let indid = req.query.indid
 
   var url11 = 'https://appfeeds.moneycontrol.com//jsonapi//market//graph&format=json&ind_id=4&range=1d&type=area';
@@ -1875,7 +1875,7 @@ app.get('/mcsectorgraph', function (req, res) {
 
 })
 ////////////////////////////////////////////MC STOCK DETAILS of an Index/////////////////////////////////////////////////////////
-app.get('/mcstockdetails', function (req, res) {
+app.get('/api/mcstockdetails', function (req, res) {
   let mcindexid = req.query.mcindexid
   var url11 = 'https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=json&type=0&ind_id='+mcindexid;
   request(url11, function (error, response, html) {//console.log(response)
@@ -1892,7 +1892,7 @@ app.get('/mcstockdetails', function (req, res) {
 
 
 ////////////////////////////////////////////MC STOCK DETAILS of an Index/////////////////////////////////////////////////////////
-app.get('/mcstockdetails1', function (req, res) {
+app.get('/api/mcstockdetails1', function (req, res) {
   let mcindexid1 = req.query.mcindexid1
   var url11 = 'https://appfeeds.moneycontrol.com/jsonapi/market/marketmap&format=json&type=0&ind_id='+mcindexid1;
   request(url11, function (error, response, html) {//console.log(response)
@@ -1907,7 +1907,7 @@ app.get('/mcstockdetails1', function (req, res) {
 
 })
 ////////////////////////////////////////////MC INDEX DETAILS /////////////////////////////////////////////////////////
-app.get('/mcindexchart', function (req, res) {
+app.get('/api/mcindexchart', function (req, res) {
   let mcindexid = req.query.mcindexid
   var url11 = 'https://appfeeds.moneycontrol.com//jsonapi//market//graph&format=json&ind_id='+mcindexid+'&range=1d&type=area'+mcindexid;
   request(url11, function (error, response, html) {//console.log(response)
@@ -1924,7 +1924,7 @@ app.get('/mcindexchart', function (req, res) {
 
 
 ////////////////////////////////////////MC TRENDING STOCKS////////////////////////////////////////////////////////////
-app.get('/trendingstocks', function (req, res) {
+app.get('/api/trendingstocks', function (req, res) {
 
   var url11 = 'https://www.moneycontrol.com/commonstore/commonfiles/trending_stocks.json?classic=true';
   request(url11, function (error, response, html) {//console.log(response)
@@ -1937,7 +1937,7 @@ app.get('/trendingstocks', function (req, res) {
 
 
 ////////////////////////////////////////////MC OVERALL VIEW/////////////////////////////////////////////////////////
-app.get('/mcoverall', function (req, res) {
+app.get('/api/mcoverall', function (req, res) {
 
   var url11 = 'https://www.moneycontrol.com/mc/widget/mfnavonetimeinvestment/get_chart_value1?classic=true';
   request(url11, function (error, response, html) {
@@ -1957,7 +1957,7 @@ app.get('/mcoverall', function (req, res) {
 
 
 
-app.get('/mcchartsdataohlc', function (req, res) {
+app.get('/api/mcchartsdataohlc', function (req, res) {
   let mcsymbol = req.query.mcsymbol
   var url11 = 'https://priceapi.moneycontrol.com/techCharts/techChartController/history?symbol=BEL&resolution=5&from=1619949639&to=1620042745';
   request(url11, function (error, response, html) {
@@ -1971,7 +1971,7 @@ app.get('/mcchartsdataohlc', function (req, res) {
 })
 
 
-app.get('/mcchartsdata', function (req, res) {
+app.get('/api/mcchartsdata', function (req, res) {
   let mcsymbol = req.query.mcsymbol
   var url11 = 'https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + mcsymbol + '&type=B';
   request(url11, function (error, response, html) {
@@ -1985,7 +1985,7 @@ app.get('/mcchartsdata', function (req, res) {
 })
 
 ////////////////////////////////////////////MC FnO DATA////////////////////////////
-app.get('/fnodata', function (req, res) {
+app.get('/api/fnodata', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -2006,7 +2006,7 @@ app.get('/fnodata', function (req, res) {
 
 
 //##############################################################STOCK EDGE###################################################
-app.get('/sescreener', function (req, res) {
+app.get('/api/sescreener', function (req, res) {
 
  
   var url6 = 'https://api.stockedge.com/Api/FundamentalAlertsApi/GetSavedFundamentalAlertsByType/7002?relevantListings=10&page=1&pageSize=10&lang=en';
@@ -2023,7 +2023,7 @@ app.get('/sescreener', function (req, res) {
 ///############# ET Now Data ##################################//
 //###########################################ET GET REQUESTS#####################################################
 
-app.get('/etimpdata', function (req, res) {
+app.get('/api/etimpdata', function (req, res) {
 
   let stockid = req.query.stockid
 
@@ -2039,7 +2039,7 @@ app.get('/etimpdata', function (req, res) {
   })
 });
   ////////////////////////////////ET Index Data /////////////////////////////////////////////////////////////////////
-  app.get('/etindices', function (req, res) {
+  app.get('/api/etindices', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -2054,7 +2054,7 @@ app.get('/etimpdata', function (req, res) {
     }
   })
   
-  app.get('/etimesnews', function (req, res) {
+  app.get('/api/etimesnews', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -2073,7 +2073,7 @@ app.get('/etimpdata', function (req, res) {
 })
 
 
-app.get('/nsexchange', function (req, res) {
+app.get('/api/nsexchange', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -2094,7 +2094,7 @@ app.get('/nsexchange', function (req, res) {
 
 
 
-app.get('/etsmacrossover', function (req, res) {
+app.get('/api/etsmacrossover', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -2114,7 +2114,7 @@ app.get('/etsmacrossover', function (req, res) {
 
 })
 
-app.get('/etvolumeshocker', function (req, res) {
+app.get('/api/etvolumeshocker', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
   
@@ -2134,7 +2134,7 @@ app.get('/etvolumeshocker', function (req, res) {
 
 })
 
-app.get('/etsmabullishcrossover', function (req, res) {
+app.get('/api/etsmabullishcrossover', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
   
@@ -2155,7 +2155,7 @@ app.get('/etsmabullishcrossover', function (req, res) {
 })
 
 ///////////////////////////////////////////GET ET News/////////////////////////////////////////////////////////
-app.get('/etnews', function (req, res) {
+app.get('/api/etnews', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -2169,7 +2169,7 @@ app.get('/etnews', function (req, res) {
   })
 })
 })
-app.get('/et1', function (req, res) {
+app.get('/api/et1', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -2190,7 +2190,7 @@ app.get('/et1', function (req, res) {
 })
 
 
-app.get('/ethgainers', function (req, res) {
+app.get('/api/ethgainers', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -2209,7 +2209,7 @@ app.get('/ethgainers', function (req, res) {
   })
 
 })
-app.get('/ethlosers', function (req, res) {
+app.get('/api/ethlosers', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -2231,7 +2231,7 @@ app.get('/ethlosers', function (req, res) {
 
 
 
-app.get('/Results', function (req, res) {
+app.get('/api/Results', function (req, res) {
   let mcsymbol = req.query.mcsymbol
 
   var url11 = 'https://etmarketsapis.indiatimes.com/ET_Stats/boardMeeting?pagesize=50&pageno=1&sortby=meetingDateStr&sortorder=asc&companyid=0&year=0&filtertype=latest&duration=U&marketcap=All';
@@ -2242,7 +2242,7 @@ app.get('/Results', function (req, res) {
   })
 })
 
-app.get('/etmacdbuy', function (req, res) {
+app.get('/api/etmacdbuy', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -2261,7 +2261,7 @@ app.get('/etmacdbuy', function (req, res) {
   })
 
 })
-app.get('/etmacdsell', function (req, res) {
+app.get('/api/etmacdsell', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -2282,7 +2282,7 @@ app.get('/etmacdsell', function (req, res) {
 })
 
 
-app.get('/etcompanydataohlc', function (req, res) {
+app.get('/api/etcompanydataohlc', function (req, res) {
 
   let companyid = req.query.companyid
 
@@ -2302,7 +2302,7 @@ app.get('/etcompanydataohlc', function (req, res) {
 
 })
 
-app.get('/etindexdetails', function (req, res) {
+app.get('/api/etindexdetails', function (req, res) {
   let indexid = req.query.indexid
   let exchange = req.query.exchange
   var url6 = 'https://etmarketsapis.indiatimes.com/ET_Stats/getIndexByIds?indexid='+indexid+'&exchange='+exchange+'&pagesize=300&sortorder=desc&sortby=percentChange&company=true&pageno=1';
@@ -2324,7 +2324,7 @@ app.get('/etindexdetails', function (req, res) {
 
 
 
-app.get('/etsectors', function (req, res) {
+app.get('/api/etsectors', function (req, res) {
 
   var url11 = 'https://etmarketsapis.indiatimes.com/ET_Stats/sectorperformance?pagesize=3000&exchange=NSE&pageno=1&marketcap=';
   request(url11, function (error, response, html) {
@@ -2339,7 +2339,7 @@ app.get('/etsectors', function (req, res) {
 
 })
 
-app.get('/etrecos', function (req, res) {
+app.get('/api/etrecos', function (req, res) {
 
   var url11 = 'https://economictimes.indiatimes.com/viewandrecofeed.cms?feedtype=sjson';
   request(url11, function (error, response, html) {
@@ -2365,7 +2365,7 @@ app.get('/etrecos', function (req, res) {
 //###########################################ET POST REQUESTS#####################################################
 
 ///########################ET now post request to get FII buying data ###############//
-app.get('/etpost1', (req, res) => {
+app.get('/api/etpost1', (req, res) => {
   var url11 = 'https://etmarketsapis.indiatimes.com/ET_Screeners/getFilteredData';
   request(url11, function (error, response, html) {
     if (!error) {
@@ -2416,7 +2416,7 @@ request(options2, (err, response, body) => {
 })
 
   
-app.get('/etDIIBuying', (req, res) => {
+app.get('/api/etDIIBuying', (req, res) => {
   var url11 = 'https://etmarketsapis.indiatimes.com/ET_Screeners/getFilteredData';
   request(url11, function (error, response, html) {
     if (!error) {
@@ -2518,7 +2518,7 @@ app.post('/etcompanydata', async function (req, res) {
 ////////////////////////////////////////////////**************Trendlyne GET stock******************************/
 
 ////////////////////////////////To get Brokerage Upgrades and other details///////////////////////////////////
-app.get('/trendlynestocks1', (req, res) => {
+app.get('/api/trendlynestocks1', (req, res) => {
   let tlid = req.query.tlid
   let tlname = req.query.tlname
   let eqsymbol = req.query.eqsymbol
@@ -2574,7 +2574,7 @@ request(options2, (err, response, body) => {
 
   //////////////////////////To get Durability/Momentum/Volatility SCORE/////////////////////////////////////////////
   
-  // app.get('/trendlynestocks2', function (req, res) {
+  // app.get('/api/trendlynestocks2', function (req, res) {
   //   let tlid = req.query.tlid
   //   var url6 = 'https://trendlyne.com/mapp/v1/stock/web/ohlc/'+tlid+'/SMA'
   //     request(url6, function (error, response, html) {
@@ -2597,7 +2597,7 @@ request(options2, (err, response, body) => {
     
     
   //  })
-   app.get('/trendlynestocks2', (req, res) => {
+   app.get('/api/trendlynestocks2', (req, res) => {
     let tlid = req.query.tlid
     let tlname = req.query.tlname
     let eqsymbol = req.query.eqsymbol
@@ -2643,7 +2643,7 @@ request(options2, (err, response, body) => {
         //console.log(err);
     } else {
     // ( res.json(JSON.parse(body)));
-      console.log((body))
+     // console.log((body))
       }
   });
   }
@@ -2654,7 +2654,7 @@ request(options2, (err, response, body) => {
   
 
 	////////////////////////////////////////////TrendLyne Stocks///////////////////////////////////////////
-    app.get('/trendlynestocks3', function (req, res) {
+    app.get('/api/trendlynestocks3', function (req, res) {
       let tlid = req.query.tlid
       var url6 = 'https://trendlyne.com/fundamentals/get-fundamental_results/'+tlid+'/'
         request(url6, function (error, response, html) {
@@ -2672,7 +2672,7 @@ request(options2, (err, response, body) => {
       })
 	  
 	/////////////////////////////////////Trendlyne Top Gainers////////////////////////////////////////////////
-	app.get('/tltg', function (req, res) {
+	app.get('/api/tltg', function (req, res) {
 
   let returnedname = req.query.returnedname
 
@@ -2690,7 +2690,7 @@ request(options2, (err, response, body) => {
 
 })
 ///////////////////////////////////////////TrendLyne Future Price Gainers ///////////////////////////////////////////////////
-app.get('/tlfpg', function (req, res) {
+app.get('/api/tlfpg', function (req, res) {
 
   
 
@@ -2709,7 +2709,7 @@ app.get('/tlfpg', function (req, res) {
 
 })
 ///////////////////////////////////////////TrendLyne Future Contract Gainers ///////////////////////////////////////////////////
-app.get('/tlfcg', function (req, res) {
+app.get('/api/tlfcg', function (req, res) {
 
   
 
@@ -2729,7 +2729,7 @@ app.get('/tlfcg', function (req, res) {
 })
 
 ///////////////////////////////////////////TrendLyne Future most active value ///////////////////////////////////////////////////
-app.get('/tlfmav', function (req, res) {
+app.get('/api/tlfmav', function (req, res) {
 
   
 
@@ -2749,7 +2749,7 @@ app.get('/tlfmav', function (req, res) {
 })
 
 ///////////////////////////////////////////TrendLyne Future most active contract ///////////////////////////////////////////////////
-app.get('/tlfmac', function (req, res) {
+app.get('/api/tlfmac', function (req, res) {
 
   
 
@@ -2769,7 +2769,7 @@ app.get('/tlfmac', function (req, res) {
 })
 
 ///////////////////////////////////////////TrendLyne OI Gainers ///////////////////////////////////////////////////
-app.get('/tloig', function (req, res) {
+app.get('/api/tloig', function (req, res) {
 
   
 
@@ -2789,7 +2789,7 @@ app.get('/tloig', function (req, res) {
 })
 
 ///////////////////////////////////////////TrendLyne OI Losers ///////////////////////////////////////////////////
-app.get('/tloil', function (req, res) {
+app.get('/api/tloil', function (req, res) {
 
   
 
@@ -2809,7 +2809,7 @@ app.get('/tloil', function (req, res) {
 })
 
 ///////////////////////////////////////////TrendLyne OI Premium ///////////////////////////////////////////////////
-app.get('/tloip', function (req, res) {
+app.get('/api/tloip', function (req, res) {
 
   
 
@@ -2829,7 +2829,7 @@ app.get('/tloip', function (req, res) {
 })
 
 ///////////////////////////////////////////TrendLyne OI Put gainers ///////////////////////////////////////////////////
-app.get('/tloipg', function (req, res) {
+app.get('/api/tloipg', function (req, res) {
 
   
 
@@ -2850,7 +2850,7 @@ app.get('/tloipg', function (req, res) {
 
 
 ///////////////////////////////////////////TrendLyne OI Discount ///////////////////////////////////////////////////
-app.get('/tloid', function (req, res) {
+app.get('/api/tloid', function (req, res) {
 
   
 
@@ -2871,7 +2871,7 @@ app.get('/tloid', function (req, res) {
 
 
 ///////////////////////////////////////////TrendLyne OI call Gainers ///////////////////////////////////////////////////
-app.get('/tloicg', function (req, res) {
+app.get('/api/tloicg', function (req, res) {
 
   
 
@@ -2892,7 +2892,7 @@ app.get('/tloicg', function (req, res) {
 
 
 ///////////////////////////////////////////TrendLyne Relative Outperformance versus Nifty500 over day ///////////////////////////////////////////////////
-app.get('/tlropd', function (req, res) {
+app.get('/api/tlropd', function (req, res) {
 
   
 
@@ -2911,7 +2911,7 @@ app.get('/tlropd', function (req, res) {
 
 })
 ///////////////////////////////////////////TrendLyne Relative Outperformance versus Nifty500 over week ///////////////////////////////////////////////////
-app.get('/tlropw', function (req, res) {
+app.get('/api/tlropw', function (req, res) {
 
   
 
@@ -2930,7 +2930,7 @@ app.get('/tlropw', function (req, res) {
 
 })
 ///////////////////////////////////////////TrendLyne Relative Underformance versus Nifty500 over day ///////////////////////////////////////////////////
-app.get('/tlrupd', function (req, res) {
+app.get('/api/tlrupd', function (req, res) {
 
   
 
@@ -2949,7 +2949,7 @@ app.get('/tlrupd', function (req, res) {
 
 })
 ///////////////////////////////////////////TrendLyne Relative underformance versus Nifty500 over week ///////////////////////////////////////////////////
-app.get('/tlrupuw', function (req, res) {
+app.get('/api/tlrupuw', function (req, res) {
 
   
 
@@ -2968,7 +2968,7 @@ app.get('/tlrupuw', function (req, res) {
 
 })
 ///////////////////////////////////////////TrendLyne 52 week High ///////////////////////////////////////////////////
-app.get('/tl52h', function (req, res) {
+app.get('/api/tl52h', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -2988,7 +2988,7 @@ app.get('/tl52h', function (req, res) {
 })
 
 //////////////////////////////////////////////TrendLyne 52wk Low///////////////////////////////////////////////////////
-app.get('/tl52l', function (req, res) {
+app.get('/api/tl52l', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -3007,7 +3007,7 @@ app.get('/tl52l', function (req, res) {
 
 })
 //////////////////////////////////////////////TrendLyne near 52 wk High///////////////////////////////////////////////////////
-app.get('/tlnear52h', function (req, res) {
+app.get('/api/tlnear52h', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -3026,7 +3026,7 @@ app.get('/tlnear52h', function (req, res) {
 
 })
 //////////////////////////////////////////////TrendLyne near 52 wk Low///////////////////////////////////////////////////////
-app.get('/tlnear52l', function (req, res) {
+app.get('/api/tlnear52l', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -3045,7 +3045,7 @@ app.get('/tlnear52l', function (req, res) {
 
 })
 //////////////////////////////////////////////TrendLyne Volume Shockers///////////////////////////////////////////////////////
-app.get('/tlvs', function (req, res) {
+app.get('/api/tlvs', function (req, res) {
 
   let returnedname = req.query.returnedname
 
@@ -3066,7 +3066,7 @@ app.get('/tlvs', function (req, res) {
 
 //////////////////////////////////////////////TrendLyne RSI for all///////////////////////////////////////////////////////
 
-app.get('/tlrsiall', function (req, res) {
+app.get('/api/tlrsiall', function (req, res) {
 
 
 
@@ -3085,7 +3085,7 @@ app.get('/tlrsiall', function (req, res) {
 
 })
 //////////////////////////////////////////////TrendLyne High Volume High Gain///////////////////////////////////////////////////////
-app.get('/tlvhg', function (req, res) {
+app.get('/api/tlvhg', function (req, res) {
 
   let returnedname = req.query.returnedname
 
@@ -3104,7 +3104,7 @@ app.get('/tlvhg', function (req, res) {
 
 })
 //////////////////////////////////////////////TrendLyne High Volume Low Gain///////////////////////////////////////////////////////
-app.get('/tlvhl', function (req, res) {
+app.get('/api/tlvhl', function (req, res) {
 
   let returnedname = req.query.returnedname
 
@@ -3124,7 +3124,7 @@ app.get('/tlvhl', function (req, res) {
 
 })
 //////////////////////////////////////////////TrendLyne Rising Volumes Per Day///////////////////////////////////////////////////////
-app.get('/tlrvpd', function (req, res) {
+app.get('/api/tlrvpd', function (req, res) {
 
   let returnedname = req.query.returnedname
 
@@ -3143,7 +3143,7 @@ app.get('/tlrvpd', function (req, res) {
 
 })
 //////////////////////////////////////////////TrendLyne Brokerage Upgrade///////////////////////////////////////////////////////
-app.get('/tlbu', function (req, res) {
+app.get('/api/tlbu', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -3163,7 +3163,7 @@ app.get('/tlbu', function (req, res) {
 })
 
 //////////////////////////////////////////////TrendLyne Only Buyers///////////////////////////////////////////////////////
-app.get('/tlob', function (req, res) {
+app.get('/api/tlob', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -3186,7 +3186,7 @@ app.get('/tlob', function (req, res) {
       
     
   
-app.get('/nse', function (req, res) {
+app.get('/api/nse', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -3205,7 +3205,7 @@ app.get('/nse', function (req, res) {
 })
 //////////////////////////////////////////////Trendlyne //////////////////////////////////////////////////////////////
 
-app.get('/nse1', function (req, res) {
+app.get('/api/nse1', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -3224,7 +3224,7 @@ app.get('/nse1', function (req, res) {
 })
 
 //////////////////////////////////////////////Trendlyne //////////////////////////////////////////////////////////////
-app.get('/nse2', function (req, res) {
+app.get('/api/nse2', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
 
@@ -3296,7 +3296,7 @@ app.post('/trendlynepostdvm', async function (req, res) {
 //###########################################################################################################################
 ///////////////////////////////////////////////////Rediff///////////////////////////////////////////////////////////////
 
-app.get('/Gainers', function (req, res) {
+app.get('/api/Gainers', function (req, res) {
 
   var url = 'https://money.rediff.com/gainers';
   request(url, function (error, response, html) {
@@ -3361,7 +3361,7 @@ const sessionConfig = {
 
 
 app.use(session(sessionConfig));
-app.get('/trendlynepost', function (req, res) {
+app.get('/api/trendlynepost', function (req, res) {
   req=fetch("https://trendlyne.com/equity/api/getLivePriceList/", {
   "headers": {
     "accept": "application/json, text/javascript, */*; q=0.01",
@@ -3386,7 +3386,7 @@ app.get('/trendlynepost', function (req, res) {
 })
 
 // To get Stock Historical Data from NSE India
-app.get('/nsestockhistdata', function (req, res) {
+app.get('/api/nsestockhistdata', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/historical/cm/equity?symbol='+stock+'&series=[%22EQ%22]&from=09-03-2021&to='+todaydate))
@@ -3399,7 +3399,7 @@ app.get('/nsestockhistdata', function (req, res) {
 
 //NSE Insider Trading
 
-app.get('/nseinstrading', function (req, res) {
+app.get('/api/nseinstrading', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/corporates-pit?'))
@@ -3409,7 +3409,7 @@ app.get('/nseinstrading', function (req, res) {
 
 
 
-app.get('/nsedatastockohlc2', function (req, res) {
+app.get('/api/nsedatastockohlc2', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/quote-equity?symbol='+stock+'&section=trade_info'))
@@ -3418,7 +3418,7 @@ app.get('/nsedatastockohlc2', function (req, res) {
 })
 
 
-app.get('/nseresults', function (req, res) {
+app.get('/api/nseresults', function (req, res) {
   //let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/event-calendar?index=equities&subject=Financial%20Results'), {
@@ -3436,7 +3436,7 @@ app.get('/nseresults', function (req, res) {
     .catch(data => console.error(res.response))
 })
 
-app.get('/nsedatastockohlc1', function (req, res) {
+app.get('/api/nsedatastockohlc1', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/quote-equity?symbol='+stock))
@@ -3460,7 +3460,7 @@ app.get('/nsedatastockohlc1', function (req, res) {
 })
     
   /// Indices related Data from nseindia// To be used in ////  
-app.get('/nsedata2', function (req, res) {
+app.get('/api/nsedata2', function (req, res) {
     
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%2050'))
@@ -3470,7 +3470,7 @@ app.get('/nsedata2', function (req, res) {
  /// F&O related Data from nseindia// To be used in Future and Options ////  
 
 
-app.get('/nsedata4', function (req, res) {
+app.get('/api/nsedata4', function (req, res) {
     
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/liveEquity-derivatives?index=top20_contracts'))
@@ -3479,7 +3479,7 @@ app.get('/nsedata4', function (req, res) {
 })  
 
 //Nifty Indices Advance Decline Data
-app.get('/nsedataadvdec', function (req, res) {
+app.get('/api/nsedataadvdec', function (req, res) {
     
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www1.nseindia.com/common/json/indicesAdvanceDeclines.json'))
@@ -3487,7 +3487,7 @@ app.get('/nsedataadvdec', function (req, res) {
     .catch(data => console.error(res.response))
 })
 //Nifty Indices Change in indices prices
-app.get('/nsedataindices', function (req, res) {
+app.get('/api/nsedataindices', function (req, res) {
     
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www1.nseindia.com/homepage/Indices1.json'))
@@ -3495,7 +3495,7 @@ app.get('/nsedataindices', function (req, res) {
     //.catch(data => console.error(res.response.data))
 })
 //Nifty Stock showing increase in OI
-app.get('/nsedatasioi', function (req, res) {
+app.get('/api/nsedatasioi', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www1.nseindia.com/live_market/dynaContent/live_analysis/oi_spurts/topPositiveOIChangeData.json'))
@@ -3505,7 +3505,7 @@ app.get('/nsedatasioi', function (req, res) {
   
 })
 //Nifty Indices and stocks showing price increase  OI increase
-app.get('/nsedatapioii', function (req, res) {
+app.get('/api/nsedatapioii', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www1.nseindia.com/live_market/dynaContent/live_analysis/oi_spurts/riseInPriceRiseInOI.json'))
@@ -3516,7 +3516,7 @@ app.get('/nsedatapioii', function (req, res) {
 })
 //NSE Nifty Openinterest Data
 
-app.get('/nsedataniftyoi', function (req, res) {
+app.get('/api/nsedataniftyoi', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY'))
@@ -3527,7 +3527,7 @@ app.get('/nsedataniftyoi', function (req, res) {
 })
 //NSE Banknifty OI Data
 
-app.get('/nsedatabniftyoi', function (req, res) {
+app.get('/api/nsedatabniftyoi', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY'))
@@ -3537,7 +3537,7 @@ app.get('/nsedatabniftyoi', function (req, res) {
   
 })
 //NSE nifty Pharma OI Data
-app.get('/nsedatapniftyoi', function (req, res) {
+app.get('/api/nsedatapniftyoi', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY'))
@@ -3548,7 +3548,7 @@ app.get('/nsedatapniftyoi', function (req, res) {
 })
 
 
-app.get('/nsedatastockoi', function (req, res) {
+app.get('/api/nsedatastockoi', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/option-chain-equities?symbol='+stock))
@@ -3558,7 +3558,7 @@ app.get('/nsedatastockoi', function (req, res) {
   
 })
 
-app.get('/nse22', function (req, res) {
+app.get('/api/nse22', function (req, res) {
   let mcsymbol = req.query.mcsymbol
 
   // url11=('https://www1.nseindia.com/corporates/corpInfo/equities/getResultCalendar.jsp?Symbol=&Industry=&Period=All%20Forthcoming&Purpose=&period=All%20Forthcoming&symbol=&industry=&purpose=');
@@ -3685,7 +3685,7 @@ app.post('/nsepostdata2', async function (req, res) {
   })
 ///////////////////////////////////////OPSTRA/////////////////////////////////////////////////////////////////////////
 //To get Expiry Dates Weekly
-app.get('/opstraexpirydates', function (req, res) {
+app.get('/api/opstraexpirydates', function (req, res) {
 
   var url11 = 'https://opstra.definedge.com/api/weeklies';
   request(url11, function (error, response, html) {
@@ -3701,7 +3701,7 @@ app.get('/opstraexpirydates', function (req, res) {
 })
 
 //To get Expiry Dates Monthly
-app.get('/opstraexpirydatesmonthly', function (req, res) {
+app.get('/api/opstraexpirydatesmonthly', function (req, res) {
 
   var url11 = 'https://opstra.definedge.com/api/monthlies';
   request(url11, function (error, response, html) {
@@ -3718,7 +3718,7 @@ app.get('/opstraexpirydatesmonthly', function (req, res) {
 
 
 // To get Nifty PCR Data from Opstra
-app.get('/opstradatanifty', function (req, res) {
+app.get('/api/opstradatanifty', function (req, res) {
   let nextexpiry = req.query.nextexpiry
   
 
@@ -3735,7 +3735,7 @@ app.get('/opstradatanifty', function (req, res) {
 
 })
 //To get BANK NIFTY Data from Opstra
-app.get('/opstradatabanknifty', function (req, res) {
+app.get('/api/opstradatabanknifty', function (req, res) {
   let nextexpiry = req.query.nextexpiry
   
 
@@ -3752,7 +3752,7 @@ app.get('/opstradatabanknifty', function (req, res) {
 
 })
 //To get stock data from Opstra
-app.get('/opstrastockdata', function (req, res) {
+app.get('/api/opstrastockdata', function (req, res) {
   let nextexpirymonthly = req.query.nextexpirymonthly
   let eqsymbol = req.query.eqsymbol
  
@@ -3773,7 +3773,7 @@ app.get('/opstrastockdata', function (req, res) {
 
 /////////////////////////////////////////////Kite/Zerodha/Stock Reports///////////////////////////////////////////////////
 //Getting Technicals from Zerodha
-app.get('/kite1', function (req, res) {
+app.get('/api/kite1', function (req, res) {
   let timeframe = req.query.timeframe
   let eqsymbol = req.query.eqsymbol
   
@@ -3788,7 +3788,7 @@ app.get('/kite1', function (req, res) {
   })
 })
 
-app.get('/kitestockreports',csrfProtection, (req, res) => {
+app.get('/api/kitestockreports',csrfProtection, (req, res) => {
   var url11 = 'https://stockreports.zerodha.com/api/pdf/';
   request(url11, function (error, response, html) {
     if (!error) {
@@ -3855,7 +3855,7 @@ request(options1, (err, response, body) => {
 
 /////////////////////////////////////*****************************NIFTY TRADERS******************///////////////////////////
 
-app.get('/niftytradersallstocks', function (req, res) {
+app.get('/api/niftytradersallstocks', function (req, res) {
 
   var url11 = 'https://api.niftytrader.in/api/NIndex/stocks_list_api';
   request(url11, function (error, response, html) {//console.log(response)
@@ -3870,7 +3870,7 @@ app.get('/niftytradersallstocks', function (req, res) {
 
 
 
-app.get('/ntniftypcr', function (req, res) {
+app.get('/api/ntniftypcr', function (req, res) {
 
   var url11 = 'https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr';
   request(url11, function (error, response, html) {//console.log(response)
@@ -3884,7 +3884,7 @@ app.get('/ntniftypcr', function (req, res) {
 })
 ///////////////////////////////////GOOGLE NEWS API ///////////////////////////////
 
-app.get('/gnewsapi', function (req, res) {
+app.get('/api/gnewsapi', function (req, res) {
   let stockname = (req.query.stockname).replace(/ /, "%20A")
   let stockname1 = (req.query.stockname).replace(' Ltd.', "")
   
@@ -3898,7 +3898,7 @@ app.get('/gnewsapi', function (req, res) {
     }
   })
 })
-app.get('/gnewsapiall', function (req, res) {
+app.get('/api/gnewsapiall', function (req, res) {
   
   
   var url11 = 'https://newsapi.org/v2/everything?domains=moneycontrol.com,economictimes.indiatimes.com&from='+gnewsyesterday+'&to='+gnewsdatetoday+'&sortBy=popularity&apiKey=28bda70739cc4024ba3f30223e8c25a8';
@@ -3913,21 +3913,18 @@ app.get('/gnewsapiall', function (req, res) {
 })
 
 
-app.use(express.static(__dirname+"/dist"));
+app.use(express.static(__dirname+"/"));
   
-app.get("/*", function (req, res) {
+app.get("/", function (req, res) {
 
   res.sendFile(path.join(__dirname +'/dist/index.html'));
 });
-app.get('/ngsw-worker.js', function(request, response) {
-  response.sendFile(path.resolve(__dirname, '/dist/', 'ngsw-worker.js'));
-})
-// http.createServer({
-// }, app)
-// .listen(3000, function () {
-//   console.log('Example app listening on port 3000! Go to http://localhost:3000/')
+// app.get('/api/ngsw-worker.js', function(request, response) {
+//   response.sendFile(path.join(__dirname + '/dist/ngsw-worker.js'));
+//   console.log(__dirname)
 // })
-app.listen(3000, function() {
+
+app.listen(8089, function() {
   console.log('Your node is running on port 3000');
 });
 }

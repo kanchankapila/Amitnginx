@@ -777,7 +777,7 @@ export class DashboardComponent implements OnInit {
   this.gnewsapiall()
   
     
-    { setInterval(() => { this.getUpdate() }, 30000); }
+   
     
     
     this.stockList = stocks.default.Data
@@ -1010,23 +1010,6 @@ export class DashboardComponent implements OnInit {
       console.log(err)
     })
   }
-  getUpdate() {
-    this.dataApi.getUpdate().subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.alert.length = 0;
-      for (let val in nestedItems[1]) {
-        
-      this.alert.push({text1:(new Date(nestedItems[1][val]["channel_post"].date*1000)).toLocaleTimeString("en-US"),text2:nestedItems[1][val]["channel_post"].text})
-        // console.log(nestedItems[1][val]["channel_post"].text)
-        // console.log(nestedItems[1][val]["channel_post"].date)
-      }
-
-    }, err => {
-      console.log(err)
-    })
-   }
   
   
   
