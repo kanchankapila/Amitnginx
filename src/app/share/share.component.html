@@ -1,3 +1,69 @@
+<div class="InsideContent">
+  <div class="col-lg-7 grid-margin stretch-card">
+    <div class="content card">
+      <h4 class="mb-5">Daily Technical Indicators</h4>
+      <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex="25" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of stockindicators trackBy: trackByFuntion">
+          <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
+          [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
+                      'bg-gradient-bull1':tile.text3 === 'Oversold',
+                      'bg-gradient-bull2':tile.text3 === 'Strong Trend',
+                      'bg-gradient-bull3':tile.text3 === 'High Volatility',
+                      'bg-gradient-bear':tile.text3 === 'Bearish',
+                      'bg-gradient-bear1':tile.text3 === 'Overbought',
+                      'bg-gradient-bear2':tile.text3 === 'Weak Trend',
+                      'bg-gradient-bear3':tile.text3 === 'Low Volatility',
+                      'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
+          </mat-card>
+         
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="InsideContent1">
+    <div class="col-lg-13 grid-margin stretch-card">
+      <div class="content card">
+        
+        <h4 class="mb-4">Crossover</h4>
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+          <div fxFlex="30" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of stockcrossover trackBy: trackByFuntion1">
+            <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
+            [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
+                        'bg-gradient-bull1':tile.text3 === 'Oversold',
+                        'bg-gradient-bull2':tile.text3 === 'Strong Trend',
+                        'bg-gradient-bull3':tile.text3 === 'High Volatility',
+                        'bg-gradient-bear':tile.text3 === 'Bearish',
+                        'bg-gradient-bear1':tile.text3 === 'Overbought',
+                        'bg-gradient-bear2':tile.text3 === 'Weak Trend',
+                        'bg-gradient-bear3':tile.text3 === 'Low Volatility',
+                        'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
+            </mat-card>
+           
+          </div>
+        </div>
+        </div>
+      </div>
+    
+    <div class="col-lg-13 grid-margin stretch-card">
+      <div class="content card">
+        
+        <h4 class="mb-4">Sentiment</h4>
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+          <div fxFlex="30" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of stocksentiments trackBy: trackByFuntion2">
+            <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
+            [ngClass]="{'bg-gradient-bull':tile.text1 === 'Bullish',
+                        'bg-gradient-bull1':tile.text1 === 'Very Bullish',
+                        'bg-gradient-bear':tile.text1 === 'Bearish',
+                        'bg-gradient-bear1':tile.text1 === 'Very Bearish',
+                        'bg-gradient-warning':tile.text1 === 'Neutral'}">{{tile.text2}}<br>{{tile.text1}}
+            </mat-card>
+           
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 <div class="InsideContent">
@@ -42,27 +108,7 @@
     
     <p-tabView>
       <p-tabPanel header="Today">
-        <div class="col-lg-18 grid-margin stretch-card">
-          <div class="content card">
-            <h4 class="card-title">Daily</h4>
-            <div fxLayout="row wrap" fxLayoutGap="16px grid">
-              <div fxFlex="9" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of stockindicators">
-                <mat-card class="text-black cardbear grid-margin stretch-card"
-                [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
-                            'bg-gradient-bull1':tile.text3 === 'Oversold',
-                            'bg-gradient-bull2':tile.text3 === 'Strong Trend',
-                            'bg-gradient-bull3':tile.text3 === 'High Volatility',
-                            'bg-gradient-bear':tile.text3 === 'Bearish',
-                            'bg-gradient-bear1':tile.text3 === 'Overbought',
-                            'bg-gradient-bear2':tile.text3 === 'Weak Trend',
-                            'bg-gradient-bear3':tile.text3 === 'Low Volatility',
-                            'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
-                </mat-card>
-               
-              </div>
-            </div>
-            </div>
-          </div>
+        
     
     
           <div class="col-lg-12 stretch-card">
@@ -200,7 +246,7 @@
           <div class="card">
             <div class="card-body" *ngIf="stockChartData">
               <h4 class="card-title">NIFTY - Today</h4>
-              <canvas baseChart [chartType]="'line'" [datasets]="stockChartData" [labels]="stockChartLabels" [options]="stockChartOptions" [colors]="stockChartColors"></canvas>
+              <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="stockChartOptions" [colors]="stockChartColors"></canvas>
               <div [chart]="stockhighcharts"></div>
             </div>
           </div>
