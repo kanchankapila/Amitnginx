@@ -41,12 +41,20 @@ const cheerio = require('cheerio');
 var html2json = require('html2json').html2json;
 //Create a middleware that adds a X-Response-Time header to responses.
 app.use(responseTime());
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, x-requested-with");
-    next(); // Important
-})
+var allowCrossDomain=function(req, res,next){
+
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
+    res.header("Access-Control-Allow-Headers", "Origin,Content-Type, X-Requested-With,Accept, Cache-Control");
+  if ('OPTIONS' == req.method) {
+    res.send(200);
+  }
+  else {
+    next();
+  }
+}; // Important
+app.use(allowCrossDomain);
+
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
 
@@ -3924,7 +3932,7 @@ app.get("/", function (req, res) {
 //   console.log(__dirname)
 // })
 
-app.listen(8090, function() {
+app.listen(3000, function() {
   console.log('Your node is running on port 3000');
 });
 }

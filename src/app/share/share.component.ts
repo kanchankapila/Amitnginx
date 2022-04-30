@@ -539,7 +539,8 @@ export class ShareComponent implements OnInit {
   }
   getniftysentiments() {
     let headers = new HttpHeaders();
-    headers = headers.append('Access-Control-Allow-Origin', 'https://www-mojo.geojit.com');
+    headers = headers.append('Access-Control-Allow-Origin', '^');
+    
     this.http.get<any>('https://www.marketsmojo.com/technical_card/getCardInfo?sid=363433&se=nse&cardlist=sectRsi_rsi_w', { headers }).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
