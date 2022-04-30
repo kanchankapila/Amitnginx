@@ -12,8 +12,8 @@ import { ButtonModule } from 'primeng/button';
 
 import { CardModule, } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
-import { GestureConfig } from 'owl-ng';
-import { OwlClockModule } from 'owl-ng';
+//import { GestureConfig } from 'owl-ng';
+//import { OwlClockModule } from 'owl-ng';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -43,7 +43,7 @@ const routes: Routes = [
     CardModule,
     SidebarModule,
     MatButtonModule,
-    OwlClockModule,
+   // OwlClockModule,
     RouterModule.forChild(routes),
     NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
   ],

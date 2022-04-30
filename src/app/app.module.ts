@@ -7,8 +7,8 @@ import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
 import { CardModule, } from 'primeng/card';
 import { AppRoutingModule } from './app-routing.module';
-import { GestureConfig } from 'owl-ng';
-import { OwlClockModule } from 'owl-ng';
+//import { GestureConfig } from 'owl-ng';
+//import { OwlClockModule } from 'owl-ng';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -59,7 +59,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ButtonModule,
     
     ChartModule,
-    OwlClockModule,
+    //OwlClockModule,
     //OwlGalleriaModule,
     ReactiveFormsModule,
     NgxEchartsModule.forRoot({echarts: () => import('echarts')}),
@@ -100,7 +100,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
    
    
   ],
-  providers: [{ provide: HAMMER_GESTURE_CONFIG, useClass: GestureConfig }, { provide: Window, useValue: window }],
+  providers: [ { provide: Window, useValue: window }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
