@@ -1,12 +1,13 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
-import { ChartType, ChartOptions } from 'chart.js';
+import { ChartOptions } from 'chart.js';
 //import 'chartjs-chart-financial';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { StockChart } from 'angular-highcharts';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
 import * as etsector from '../lists/etsectorlist'
@@ -458,24 +459,33 @@ export class ShareComponent implements OnInit {
   public stockLabelssnrs3m: Array<any> = [];
   public apexohlc = [];
   public apexvolume: Array<any> = [];
-  public stockChartOptions:ChartOptions = {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: false
-        }
-      }]
-    },
-    legend: {
-     position: 'top'
-              },
-    
+  public stockChartOptions: ChartConfiguration['options'] = {
     elements: {
-      point: {
-        radius: 0
+      line: {
+        tension: 0.5
       }
+    },
+    scales: {
+      // We use this empty structure as a placeholder for dynamic theming.
+      x: {},
+      'y-axis-0':
+        {
+          position: 'left',
+        },
+      'y-axis-1': {
+        position: 'right',
+        grid: {
+          color: 'rgba(255,0,0,0.3)',
+        },
+        ticks: {
+          color: 'red'
+        }
+      }
+    },
+
+    plugins: {
+      legend: { display: true },
     }
-   
   };
   public stockChartColors = [
     {

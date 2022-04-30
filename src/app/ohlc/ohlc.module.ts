@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { OHLCComponent } from './ohlc.component';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { MatButtonModule } from '@angular/material/button';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ChartModule } from 'primeng/chart';
@@ -36,7 +36,7 @@ const routes: Routes = [
     NgbModule,
     TabViewModule,
     MDBBootstrapModule,
-    ChartsModule,
+    NgChartsModule,
     HttpClientModule,
     
     ChartModule,

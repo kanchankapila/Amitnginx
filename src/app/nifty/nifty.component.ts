@@ -1,6 +1,7 @@
 import { Component, OnInit,ViewChild, Injectable } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
+import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { of } from 'rxjs'; 
 import { map } from 'rxjs/operators';
@@ -11,7 +12,7 @@ import { ViewportScroller } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { StockChart } from 'angular-highcharts';
-import { ChartType, ChartOptions } from 'chart.js';
+import {ChartOptions } from 'chart.js';
 
 export interface nifty50stockstiles {
 
@@ -223,25 +224,56 @@ export class NiftyComponent implements OnInit {
       borderColor: '#2d0365'
     }
   ];
-  public lineChartOptions:ChartOptions = {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: false
-        }
-      }]
-    },
-    legend: {
-     position: 'top'
-              },
-    
+  public lineChartOptions: ChartConfiguration['options'] = {
     elements: {
-      point: {
-        radius: 0
+      line: {
+        tension: 0.5
       }
+    },
+    scales: {
+      // We use this empty structure as a placeholder for dynamic theming.
+      x: {},
+      'y-axis-0':
+        {
+          position: 'left',
+        },
+      'y-axis-1': {
+        position: 'right',
+        grid: {
+          color: 'rgba(255,0,0,0.3)',
+        },
+        ticks: {
+          color: 'red'
+        }
+      }
+    },
+
+    plugins: {
+      legend: { display: true },
     }
-   
   };
+  public lineChartType: ChartType = 'line';
+  // public lineChartOptions: ChlineChartartOptions = {
+  //   options: {
+  //     scales: {
+  //       yAxis: [{
+  //         ticks: {
+  //           beginAtZero: false
+  //         }
+  //       }]
+  //     }
+  //     ,
+  //     legend: {
+  //       position: 'top'
+  //     },
+    
+  //     elements: {
+  //       point: {
+  //         radius: 0
+  //       }
+  //     }
+  //   }
+  // };
  
  
 

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './main.component';
 import { Routes, RouterModule } from '@angular/router';
-import { ChartsModule  } from 'ng2-charts';
+import { NgChartsModule  } from 'ng2-charts';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 const routes: Routes = [
@@ -13,7 +13,7 @@ const routes: Routes = [
   declarations: [MainComponent],
   imports: [
     CommonModule,
-    ChartsModule,
+    NgChartsModule,
     RouterModule.forChild(routes),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

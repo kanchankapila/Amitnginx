@@ -4,7 +4,9 @@ import { ShareRoutingModule } from './share-routing.module';
 import { ShareComponent } from './share.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
-import { ChartsModule } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
+//import 'chartjs-chart-financial';
+//import { CandlestickController, CandlestickElement, OhlcController, OhlcElement } from 'chartjs-chart-financial';
 import {HttpClientModule, HttpErrorResponse} from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,7 +35,7 @@ export function highchartsModules() {
     MatButtonModule,
     HttpClientModule,
     TabViewModule,
-    ChartsModule,
+    NgChartsModule,
     NgxEchartsModule.forRoot({echarts: () => import('echarts')}),
    
   ]

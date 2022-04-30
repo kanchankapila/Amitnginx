@@ -213,15 +213,10 @@ export class BankniftyComponent implements OnInit {
   ];
   public lineChartOptions:ChartOptions = {
     scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: false
-        }
-      }]
+      yAxes: {
+       
+      }
     },
-    legend: {
-     position: 'top'
-              },
     
     elements: {
       point: {
