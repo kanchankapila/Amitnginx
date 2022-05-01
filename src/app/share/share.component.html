@@ -1,8 +1,5 @@
 
-  <canvas baseChart height="100" [data]="stockChartData" [options]="financialChartOptions"
-          [type]="financialChartType"
-          [plugins]="financialChartPlugins">
-  </canvas>
+ 
 
 <div class="InsideContent">
   <div class="col-lg-7 grid-margin stretch-card">
@@ -349,12 +346,15 @@
       </div>
     </p-tabPanel>
     <p-tabPanel header="1 Year">
-      <div class="col-lg-15 grid-margin  stretch-card">
+      <div class="col-lg-18 grid-margin  stretch-card">
         <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">NIFTY - 1 Year </h4>
-            <canvas baseChart  [datasets]="stock1yrData" [labels]="stock1yrLabels" [type]="lineChartType" [options]="stockChartOptions" ></canvas>
-          </div>
+          
+            <h4 class="mb-2">Stock - 1 Year </h4>
+            <canvas baseChart height="150" [data]="stockChartData" [options]="financialChartOptions"
+          [type]="financialChartType"
+          [plugins]="financialChartPlugins">
+  </canvas>
+         
         </div>
       </div>
     

@@ -4,6 +4,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { StockChart } from 'angular-highcharts';
+import epochSeconds from "epoch-seconds";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
@@ -13,7 +14,7 @@ import * as mcindex from '../lists/mcsectorlist'
 import 'chartjs-adapter-date-fns';
 import 'chartjs-chart-financial';
 import { BaseChartDirective } from 'ng2-charts';
-import { Chart, ChartConfiguration, ChartType } from 'chart.js';
+import { Chart,ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
 import { enUS } from 'date-fns/locale';
 import { add, parseISO } from 'date-fns';
 import { CandlestickController, CandlestickElement, OhlcController, OhlcElement } from 'chartjs-chart-financial';
@@ -300,19 +301,11 @@ export interface stockohlctile
   
 export class ShareComponent implements OnInit {
   stockhighcharts: StockChart;
-  totalAngularPackages;
-  barCount = 60;
-  initialDateStr = '2017-04-01T00:00:00';
-  // public financialChartData: ChartConfiguration['data'] = {
-  //   datasets: [ {
-  //     label: 'CHRT - Chart.js Corporation',
-  //     data: this.loadData()
-  //   } ]
-  // };
+  
 
   public financialChartOptions: ChartConfiguration['options'] = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
     scales: {
       x: {
         time: {
@@ -513,64 +506,21 @@ export class ShareComponent implements OnInit {
   public stockLabelssnrs3m: Array<any> = [];
   public apexohlc = [];
   public apexvolume: Array<any> = [];
- 
-
-  // randomBar(date: Date, lastClose: number): { c: number; x: number; h: number; l: number; o: number } {
-  //   this.http.get('https://api.niftytrader.in/webapi/Live/livechartsBySymbol?symbol=' + this.eqsymbol).subscribe(data5 => {
-  //     let nestedItems = Object.keys(data5).map(key => {
-  //       return data5[key];
-  //     });
-  //     for (let val in nestedItems[3]) {
-  //       const date = nestedItems[3][val]['created_at'];
-  //       const open = nestedItems[3][val].open;
-  //       const high = nestedItems[3][val].high;
-  //       const low = nestedItems[3][val].low;
-  //       const close = nestedItems[3][val].close;
-        
-        
-  //     }
-    
-  //     return {
-  //       c: close,
-  //       x: +date,
-  //       h: high,
-  //       l: low,
-  //       o: open,
-        
-  //       };
-      
-      
-  // }
-
-  // getRandomData(dateStr: string, count: number): { c: number; x: number; h: number; l: number; o: number }[] {
-  //   let date = parseISO(dateStr);
-  //   const data = [ this.randomBar(date, 30) ];
-  //   while (data.length < count) {
-  //     date = add(date, { days: 1 });
-  //     if (date.getDay() <= 5) {
-  //       data.push(this.randomBar(date, data[data.length - 1].c));
-  //     }
-  //   }
-  //   return data;
-  // }
-
-  
- 
   public stockChartType: ChartType = 'line';
   public stockChartData: ChartConfiguration['data']
-  // public stockChartOptions:ChartOptions = {
-  //   scales: {
+  public stockChartOptions:ChartOptions = {
+    scales: {
       
-  //   },
+    },
    
     
-  //   elements: {
-  //     point: {
-  //       radius: 0
-  //     }
-  //   }
+    elements: {
+      point: {
+        radius: 0
+      }
+    }
    
-  // };
+  };
   basicData3: any;
   basicOptions3: any;
   stockList: any
@@ -632,7 +582,7 @@ export class ShareComponent implements OnInit {
     // this.gettrendlynestocks1(this.tlid, this.tlname, this.eqsymbol)
     // this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol)
     // this.gettrendlynestocks3(this.tlid)
-     this.loadData(this.eqsymbol)
+     this.getstock1yr(this.eqsymbol)
     // this.getmmmacd(this.stockid)
     this.getstocktoday(this.mcsymbol)
     this.getstockmaema(this.eqsymbol)
@@ -645,49 +595,53 @@ export class ShareComponent implements OnInit {
     // this.getmmkst(this.stockid)
     // this.getmmobv(this.stockid)
     // this.getmmdow(this.stockid)
-    this.getniftysentiments()
+    this.getmcstocktodayohlc(this.mcsymbol)
+    this.getetsharetoday()
 
     
   }
 
- 
+  
   
  
    
   
-  loadData(eqsymbol) {
+  getstock1yr(eqsymbol) {
     
-    
+    const result = epochSeconds()
+    console.log(result)
+   
+    const day = new Date().getDay()
+    console.log(day)
+
+    const date = new Date().getDate()
+    console.log(date)
+
+    const date1 = Date.now()
+    console.log(new Date(date1))
  
     this.http.get('https://api.niftytrader.in/webapi/Live/livechartsBySymbol?symbol='+this.eqsymbol).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+      
       for (let val in nestedItems[3]) {
         this.stockohlc.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(),o: nestedItems[3][val].open,h: nestedItems[3][val].high, l: nestedItems[3][val].low,c: nestedItems[3][val].close })
       }
-      console.log(this.stockohlc)
+      
         
         this.stockChartData  = {
      datasets: [ {
-      label: 'CHRT - Chart.js Corporation',
+      label: this.stockname,
     data: this.stockohlc
      } ]
- };
-       
-
-               
-      
-    
+    };
     })
  
   }
-  getniftysentiments() {
-    let headers = new HttpHeaders();
-    headers = headers.append('Access-Control-Allow-Origin', '^');
+  getetsharetoday() {
     
-    this.http.get<any>('https://www.marketsmojo.com/technical_card/getCardInfo?sid=363433&se=nse&cardlist=sectRsi_rsi_w', { headers }).subscribe(data5 => {
+    this.http.get('https://json.bselivefeeds.indiatimes.com/ET_Community/currenttick?scripcode=ALOKINDSEQ&exchangeid=50&datatype=intraday&tagId=10648&directions=all&callback=serviceHit.autoLoadResultCallback&scripcodetype=company').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -701,7 +655,7 @@ export class ShareComponent implements OnInit {
         let nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
-        console.log(nestedItems)
+       // console.log(nestedItems)
         this.stocksentiments.push({ text1: nestedItems[2]['sentiments']['indication'],text2:"Daily"})
       }, err => {
         console.log(err)
@@ -728,14 +682,23 @@ export class ShareComponent implements OnInit {
         console.log(err)
       })
     }
-    getstocktoday(mcsymbol) {
+    getmcstocktodayohlc(mcsymbol) {
+    
+      this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
+        let nestedItems = Object.keys(data5).map(key => {
+          return data5[key];
+        });
+        console.log(nestedItems)
+      });
+      }
+      getstocktoday(mcsymbol) {
       ////////////To get Share Today Price///////////////////////
   
   this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId='+this.mcsymbol+'&resolution=1D').subscribe(data5 => {
     let nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
-    console.log(nestedItems)
+  //  console.log(nestedItems)
     this.stockdata.length = 0;
     this.stockLabels.length = 0;
     for (let val in nestedItems[6]) {
@@ -744,7 +707,7 @@ export class ShareComponent implements OnInit {
      // this.stockhcdate.push({x:(nestedItems[1].values[val]["_time"]),y:(nestedItems[1].values[val]["_value"])})     
     
     }
-    console.log(this.stockLabels)
+  //   console.log(this.stockLabels)
   }, err => {
     console.log(err)
   })
