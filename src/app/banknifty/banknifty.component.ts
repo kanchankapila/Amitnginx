@@ -211,34 +211,22 @@ export class BankniftyComponent implements OnInit {
       borderColor: '#2d0365'
     }
   ];
-  public lineChartOptions: ChartConfiguration['options'] = {
-    elements: {
-      line: {
-        tension: 0.5
-      }
-    },
+  public lineChartType: ChartType = 'line';
+  public lineChartOptions:ChartOptions = {
     scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
-      x: {},
-      'y-axis-0':
-        {
-          position: 'left',
-        },
-      'y-axis-1': {
-        position: 'right',
-        grid: {
-          color: 'rgba(255,0,0,0.3)',
-        },
-        ticks: {
-          color: 'red'
-        }
-      }
+      
     },
-
-    plugins: {
-      legend: { display: true },
+   
+    
+    elements: {
+      point: {
+        radius: 0
+      }
     }
+   
   };
+ 
+ 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     this.getmcbankniftystocks();

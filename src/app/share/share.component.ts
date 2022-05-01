@@ -1,19 +1,22 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
-import { ChartOptions } from 'chart.js';
-//import 'chartjs-chart-financial';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { StockChart } from 'angular-highcharts';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
 import * as etsector from '../lists/etsectorlist'
 import * as etindex from '../lists/etindexlist'
 import * as mcindex from '../lists/mcsectorlist'
-//import { CandlestickController, CandlestickElement, OhlcController, OhlcElement } from 'chartjs-chart-financial';
+import 'chartjs-adapter-date-fns';
+import 'chartjs-chart-financial';
+import { BaseChartDirective } from 'ng2-charts';
+import { Chart, ChartConfiguration, ChartType } from 'chart.js';
+import { enUS } from 'date-fns/locale';
+import { add, parseISO } from 'date-fns';
+import { CandlestickController, CandlestickElement, OhlcController, OhlcElement } from 'chartjs-chart-financial';
 
 //import { seriesData, seriesDataLinear } from "./ohlc";
 import {from,Observable} from 'rxjs';
@@ -277,6 +280,16 @@ export interface stockcrossovermtile {
   text4: any;
   
 }
+export interface stockohlctile
+{
+  c: number;
+  o: number;
+  h: number;
+  l: number;
+  x: number;
+  
+  
+}
 
 
 @Component({
@@ -288,17 +301,58 @@ export interface stockcrossovermtile {
 export class ShareComponent implements OnInit {
   stockhighcharts: StockChart;
   totalAngularPackages;
+  barCount = 60;
+  initialDateStr = '2017-04-01T00:00:00';
+  // public financialChartData: ChartConfiguration['data'] = {
+  //   datasets: [ {
+  //     label: 'CHRT - Chart.js Corporation',
+  //     data: this.loadData()
+  //   } ]
+  // };
 
+  public financialChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        time: {
+          unit: 'day'
+        },
+        adapters: {
+          date: {
+            locale: enUS
+          }
+        },
+        ticks: {
+          source: 'auto'
+        }
+      }
+    }
+  };
+  public financialChartColors = [
+    {
+      borderColor: 'black',
+      backgroundColor: 'rgba(255,0,0,0.3)',
+    },
+  ];
+
+  public financialChartLegend = true;
+  public financialChartType: ChartType = 'candlestick';
+  public financialChartPlugins = [];
+
+  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+
+  
   constructor( private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
-    
+    Chart.register(CandlestickController, OhlcController, CandlestickElement, OhlcElement);
   }
   
   public stockhcdate: Array<any> = [];
-  
+  public stockohlc: stockohlctile[] =[] ;
   public stockhcvalue: Array<any> = [];
   public stockdata1: Array<number> = [];
   public stockLabels: Array<any> = [];
-  public stockChartData: Array<any> = [];
+  //public stockChartData: Array<any> = [];
   public stockChartLabels: Array<number> = [];
   public stockpcrdata: Array<number> = [];
   public stockpcrtime: Array<any> = [];
@@ -459,39 +513,64 @@ export class ShareComponent implements OnInit {
   public stockLabelssnrs3m: Array<any> = [];
   public apexohlc = [];
   public apexvolume: Array<any> = [];
-  public stockChartOptions: ChartConfiguration['options'] = {
-    elements: {
-      line: {
-        tension: 0.5
-      }
-    },
-    scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
-      x: {},
-      'y-axis-0':
-        {
-          position: 'left',
-        },
-      'y-axis-1': {
-        position: 'right',
-        grid: {
-          color: 'rgba(255,0,0,0.3)',
-        },
-        ticks: {
-          color: 'red'
-        }
-      }
-    },
+ 
 
-    plugins: {
-      legend: { display: true },
-    }
-  };
-  public stockChartColors = [
-    {
-      borderColor: '#2d0365'
-    }
-   ];
+  // randomBar(date: Date, lastClose: number): { c: number; x: number; h: number; l: number; o: number } {
+  //   this.http.get('https://api.niftytrader.in/webapi/Live/livechartsBySymbol?symbol=' + this.eqsymbol).subscribe(data5 => {
+  //     let nestedItems = Object.keys(data5).map(key => {
+  //       return data5[key];
+  //     });
+  //     for (let val in nestedItems[3]) {
+  //       const date = nestedItems[3][val]['created_at'];
+  //       const open = nestedItems[3][val].open;
+  //       const high = nestedItems[3][val].high;
+  //       const low = nestedItems[3][val].low;
+  //       const close = nestedItems[3][val].close;
+        
+        
+  //     }
+    
+  //     return {
+  //       c: close,
+  //       x: +date,
+  //       h: high,
+  //       l: low,
+  //       o: open,
+        
+  //       };
+      
+      
+  // }
+
+  // getRandomData(dateStr: string, count: number): { c: number; x: number; h: number; l: number; o: number }[] {
+  //   let date = parseISO(dateStr);
+  //   const data = [ this.randomBar(date, 30) ];
+  //   while (data.length < count) {
+  //     date = add(date, { days: 1 });
+  //     if (date.getDay() <= 5) {
+  //       data.push(this.randomBar(date, data[data.length - 1].c));
+  //     }
+  //   }
+  //   return data;
+  // }
+
+  
+ 
+  public stockChartType: ChartType = 'line';
+  public stockChartData: ChartConfiguration['data']
+  // public stockChartOptions:ChartOptions = {
+  //   scales: {
+      
+  //   },
+   
+    
+  //   elements: {
+  //     point: {
+  //       radius: 0
+  //     }
+  //   }
+   
+  // };
   basicData3: any;
   basicOptions3: any;
   stockList: any
@@ -576,7 +655,7 @@ export class ShareComponent implements OnInit {
  
    
   
-  loadData(eqsymbol): void {
+  loadData(eqsymbol) {
     
     
  
@@ -585,8 +664,24 @@ export class ShareComponent implements OnInit {
         return data5[key];
       });
       console.log(nestedItems)
-    })
+      for (let val in nestedItems[3]) {
+        this.stockohlc.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(),o: nestedItems[3][val].open,h: nestedItems[3][val].high, l: nestedItems[3][val].low,c: nestedItems[3][val].close })
+      }
+      console.log(this.stockohlc)
+        
+        this.stockChartData  = {
+     datasets: [ {
+      label: 'CHRT - Chart.js Corporation',
+    data: this.stockohlc
+     } ]
+ };
+       
+
+               
+      
     
+    })
+ 
   }
   getniftysentiments() {
     let headers = new HttpHeaders();

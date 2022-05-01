@@ -196,7 +196,7 @@
         <div class="card-body" >
           <h4 class="mb-5">NIFTY - Today</h4>
           <div style="display: block" ></div>
-          <canvas baseChart height="100" [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"></canvas>
+          <canvas baseChart height="100" [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" ></canvas>
         </div>
       </div>
     </div>
@@ -205,7 +205,7 @@
       <div class="card">
         <div class="card-body" >
           PCR
-          <canvas baseChart height="50" [chartType]="'line'" [datasets]="lineChartpcrData" [labels]="lineChartpcrLabels" [options]="lineChartOptions" [colors]="lineChartColors"></canvas>
+          <canvas baseChart height="50" [type]="lineChartType" [datasets]="lineChartpcrData" [labels]="lineChartpcrLabels" [options]="lineChartOptions"></canvas>
         </div>
       </div>
     </div>
@@ -215,7 +215,7 @@
       <div class="card">
         <div class="card-body" >
           VIX
-          <canvas baseChart height="50" [chartType]="'line'" [datasets]="lineChartvixData" [labels]="lineChartvixLabels" [options]="lineChartOptions" [colors]="lineChartColors"></canvas>
+          <canvas baseChart height="50" [type]="lineChartType" [datasets]="lineChartvixData" [labels]="lineChartvixLabels" [options]="lineChartOptions"></canvas>
        </div>
       </div>
     </div>
@@ -278,7 +278,7 @@
       <div class="card">
         <div class="card-body">
           <h4 class="mb-5">NIFTY50 - 1 Week</h4>
-          <canvas baseChart height="100" [chartType]="'line'" [datasets]="lineChart5dData" [labels]="lineChart5dLabels" [options]="lineChartOptions" [colors]="lineChartColors"></canvas>
+          <canvas baseChart height="100" [type]="lineChartType" [datasets]="lineChart5dData" [labels]="lineChart5dLabels" [options]="lineChartOptions"></canvas>
         </div>
       </div>
     </div>
@@ -342,7 +342,7 @@
       <div class="card">
         <div class="card-body">
           <h4 class="mb-5">NIFTY50 - 1 Month</h4>
-          <canvas baseChart height="100" [chartType]="'line'" [datasets]="lineChart1mData" [labels]="lineChart1mLabels" [options]="lineChartOptions" [colors]="lineChartColors"></canvas>
+          <canvas baseChart height="100"  [datasets]="lineChart1mData" [labels]="lineChart1mLabels" [type]="lineChartType" [options]="lineChartOptions"></canvas>
         </div>
       </div>
     </div>
@@ -354,7 +354,7 @@
       <div class="card">
         <div class="card-body" >
           <h4 class="mb-5">NIFTY - 3 months</h4>
-          <canvas baseChart height="100" [chartType]="'line'" [datasets]="lineChart3mData" [labels]="lineChart3mLabels" [options]="lineChartOptions" [colors]="lineChartColors"></canvas>
+          <canvas baseChart height="100"  [datasets]="lineChart3mData" [labels]="lineChart3mLabels" [type]="lineChartType" [options]="lineChartOptions"></canvas>
         </div>
       </div>
     </div>
@@ -365,7 +365,7 @@
       <div class="card">
         <div class="card-body">
           <h4 class="mb-5">NIFTY50 - 6 Months</h4>
-          <canvas baseChart height="100" [chartType]="'line'" [datasets]="lineChart6mData" [labels]="lineChart6mLabels" [options]="lineChartOptions" [colors]="lineChartColors"></canvas>
+          <canvas baseChart height="100"  [datasets]="lineChart6mData" [labels]="lineChart6mLabels" [type]="lineChartType" [options]="lineChartOptions"></canvas>
         </div>
       </div>
     </div>
@@ -375,7 +375,7 @@
       <div class="card">
         <div class="card-body">
           <h4 class="mb-5">NIFTY - 1 Year </h4>
-          <canvas baseChart height="100" [chartType]="'line'" [datasets]="lineChart1yrData" [labels]="lineChart1yrLabels" [options]="lineChartOptions" [colors]="lineChartColors"></canvas>
+          <canvas baseChart height="100"  [datasets]="lineChart1yrData" [labels]="lineChart1yrLabels" [type]="lineChartType" [options]="lineChartOptions"></canvas>
         </div>
       </div>
     </div>

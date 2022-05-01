@@ -224,56 +224,21 @@ export class NiftyComponent implements OnInit {
       borderColor: '#2d0365'
     }
   ];
-  public lineChartOptions: ChartConfiguration['options'] = {
-    elements: {
-      line: {
-        tension: 0.5
-      }
-    },
-    scales: {
-      // We use this empty structure as a placeholder for dynamic theming.
-      x: {},
-      'y-axis-0':
-        {
-          position: 'left',
-        },
-      'y-axis-1': {
-        position: 'right',
-        grid: {
-          color: 'rgba(255,0,0,0.3)',
-        },
-        ticks: {
-          color: 'red'
-        }
-      }
-    },
-
-    plugins: {
-      legend: { display: true },
-    }
-  };
+  
   public lineChartType: ChartType = 'line';
-  // public lineChartOptions: ChlineChartartOptions = {
-  //   options: {
-  //     scales: {
-  //       yAxis: [{
-  //         ticks: {
-  //           beginAtZero: false
-  //         }
-  //       }]
-  //     }
-  //     ,
-  //     legend: {
-  //       position: 'top'
-  //     },
+  public lineChartOptions:ChartOptions = {
+    scales: {
+      
+    },
+   
     
-  //     elements: {
-  //       point: {
-  //         radius: 0
-  //       }
-  //     }
-  //   }
-  // };
+    elements: {
+      point: {
+        radius: 0
+      }
+    }
+   
+  };
  
  
 

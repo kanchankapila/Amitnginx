@@ -1,3 +1,9 @@
+
+  <canvas baseChart height="100" [data]="stockChartData" [options]="financialChartOptions"
+          [type]="financialChartType"
+          [plugins]="financialChartPlugins">
+  </canvas>
+
 <div class="InsideContent">
   <div class="col-lg-7 grid-margin stretch-card">
     <div class="content card">
@@ -246,7 +252,7 @@
           <div class="card">
             <div class="card-body" *ngIf="stockChartData">
               <h4 class="card-title">NIFTY - Today</h4>
-              <canvas baseChart [chartType]="'line'" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="stockChartOptions" [colors]="stockChartColors"></canvas>
+              <canvas baseChart  [datasets]="lineChartData" [labels]="lineChartLabels" [type]="lineChartType" [options]="stockChartOptions" ></canvas>
               <div [chart]="stockhighcharts"></div>
             </div>
           </div>
@@ -280,7 +286,7 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">stock - 5 Days</h4>
-            <canvas baseChart [chartType]="'line'" [datasets]="stock5dData" [labels]="stock5dLabels" [options]="stockChartOptions" [colors]="stockChartColors"></canvas>
+            <canvas baseChart  [datasets]="stock5dData" [labels]="stock5dLabels" [type]="lineChartType" [options]="stockChartOptions" ></canvas>
           </div>
         </div>
       </div>
@@ -314,7 +320,7 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">stock - 1 Month</h4>
-            <canvas baseChart [chartType]="'line'" [datasets]="stock1mData" [labels]="stock1mLabels" [options]="stockChartOptions" [colors]="stockChartColors"></canvas>
+            <canvas baseChart  [datasets]="stock1mData" [labels]="stock1mLabels" [type]="lineChartType" [options]="stockChartOptions" ></canvas>
           </div>
         </div>
       </div>
@@ -326,7 +332,7 @@
         <div class="card">
           <div class="card-body" *ngIf="stock3mData">
             <h4 class="card-title">NIFTY - 3 months</h4>
-            <canvas baseChart [chartType]="'line'" [datasets]="stock3mData" [labels]="stock3mLabels" [options]="stockChartOptions" [colors]="stockChartColors"></canvas>
+            <canvas baseChart  [datasets]="stock3mData" [labels]="stock3mLabels" [type]="lineChartType" [options]="stockChartOptions" ></canvas>
           </div>
         </div>
       </div>
@@ -337,7 +343,7 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">stock - 6 Months</h4>
-            <canvas baseChart [chartType]="'line'" [datasets]="stock6mData" [labels]="stock6mLabels" [options]="stockChartOptions" [colors]="stockChartColors"></canvas>
+            <canvas baseChart  [datasets]="stock6mData" [labels]="stock6mLabels" [type]="lineChartType" [options]="stockChartOptions" ></canvas>
           </div>
         </div>
       </div>
@@ -347,7 +353,7 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">NIFTY - 1 Year </h4>
-            <canvas baseChart [chartType]="'line'" [datasets]="stock1yrData" [labels]="stock1yrLabels" [options]="stockChartOptions" [colors]="stockChartColors"></canvas>
+            <canvas baseChart  [datasets]="stock1yrData" [labels]="stock1yrLabels" [type]="lineChartType" [options]="stockChartOptions" ></canvas>
           </div>
         </div>
       </div>

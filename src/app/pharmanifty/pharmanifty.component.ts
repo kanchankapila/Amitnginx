@@ -209,53 +209,21 @@ export class PharmaniftyComponent implements OnInit {
       borderColor: '#2d0365'
     }
   ];
-  // public lineChartOptions:ChartOptions = {
-  //   scales: {
-  //     yAxes: [{
-  //       ticks: {
-  //         beginAtZero: false
-  //       }
-  //     }]
-  //   },
-  //   legend: {
-  //    position: 'top'
-  //             },
-    
-  //   elements: {
-  //     point: {
-  //       radius: 0
-  //     }
-  //   }
-   
-  // };
-  public lineChartOptions: ChartOptions =  {
-    responsive: false,
+  public lineChartType: ChartType = 'line';
+  public lineChartOptions:ChartOptions = {
     scales: {
-  
-      xAxes: {
-  
-  
-      },
+      
     },
-    plugins: {
-      // datalabels: {
-      //   display: true,
-      //   align: 'top',
-      //   anchor: 'end',
-      //   color: "#2756B3",
-      //   //color: "#222",
-  
-      //   font: {
-      //     family: 'FontAwesome',
-      //     size: 14
-      //   },
-  
-      },
-     
-  
+   
+    
+    elements: {
+      point: {
+        radius: 0
+      }
     }
-  
- // };
+   
+  };
+ 
   
  
   ngOnInit(): void {
