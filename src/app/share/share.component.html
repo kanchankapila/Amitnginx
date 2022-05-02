@@ -243,7 +243,17 @@
         
     
           
-          
+          <div class="col-lg-18 grid-margin  stretch-card">
+            <div class="card">
+              
+                <h4 class="mb-2">Stock Today </h4>
+                <canvas baseChart height="150" [data]="etstockChartData" [options]="financialChartOptions"
+              [type]="financialChartType"
+              [plugins]="financialChartPlugins">
+      </canvas>
+             
+            </div>
+          </div>
     
         <div class="col-lg-15 grid-margin stretch-card ">
           <div class="card">
@@ -254,6 +264,7 @@
             </div>
           </div>
         </div>
+        
         
     
       </p-tabPanel>

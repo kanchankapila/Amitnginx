@@ -292,6 +292,16 @@ export interface stockohlctile
   
   
 }
+export interface etstockohlctodaytile
+{
+  c: number;
+  o: number;
+  h: number;
+  l: number;
+  x: number;
+  
+  
+}
 
 
 @Component({
@@ -342,7 +352,8 @@ export class ShareComponent implements OnInit {
   }
   
   public stockhcdate: Array<any> = [];
-  public stockohlc: stockohlctile[] =[] ;
+  public stockohlc: stockohlctile[] = [];
+  public etstockohlctoday: etstockohlctodaytile[] =[] ;
   public stockhcvalue: Array<any> = [];
   public stockdata1: Array<number> = [];
   public stockLabels: Array<any> = [];
@@ -509,6 +520,7 @@ export class ShareComponent implements OnInit {
   public apexvolume: Array<any> = [];
   public stockChartType: ChartType = 'line';
   public stockChartData: ChartConfiguration['data']
+  public etstockChartData: ChartConfiguration['data']
   public stockChartOptions:ChartOptions = {
     scales: {
       
@@ -658,9 +670,18 @@ export class ShareComponent implements OnInit {
           return data[key];
         });
       
-         console.log(nestedItems)
-      });
-  
+        console.log(nestedItems[0]['results']['quote'])
+        for (let val in (nestedItems[0]['results']['quote'])){
+          this.etstockohlctoday.push({x:new Date(nestedItems[0]['results']['quote'][val].Date).getTime(),o:nestedItems[0]['results']['quote'][val].Open,h:nestedItems[0]['results']['quote'][val].High,l:nestedItems[0]['results']['quote'][val].Low,c:nestedItems[0]['results']['quote'][val].Close})
+        }
+      console.log(this.etstockohlctoday)
+      this.etstockChartData  = {
+        datasets: [ {
+         label: this.stockname,
+       data: this.etstockohlctoday
+        } ]
+       };
+       })
       }
       
     getstocksentiments(mcsymbol) {
