@@ -2063,7 +2063,23 @@ app.get('/api/etimpdata', function (req, res) {
 
     }
   })
+})
+
+  app.get('/api/etsharetoday', function (req, res) {
+
+    let eqsymbol = req.query.eqsymbol
   
+    var url6 = 'https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company'
+    request(url6, function (error, response, html) {
+      if (!error) {
+  
+  
+        res.json(JSON.parse(response.body))
+  
+  
+      }
+    })
+  })
   app.get('/api/etimesnews', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
@@ -2178,7 +2194,7 @@ app.get('/api/etnews', function (req, res) {
 	}
   })
 })
-})
+
 app.get('/api/et1', function (req, res) {
 
   let mcsymbol = req.query.mcsymbol
