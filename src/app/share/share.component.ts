@@ -657,10 +657,7 @@ export class ShareComponent implements OnInit {
         let nestedItems = Object.keys(data).map(key => {
           return data[key];
         });
-      // this.http.get('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company').subscribe(data5 => {
-      //   let nestedItems = Object.keys(data5).map(key => {
-      //     return data5[key];
-      //   });
+      
          console.log(nestedItems)
       });
   
