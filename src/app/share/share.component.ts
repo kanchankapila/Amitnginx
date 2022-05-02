@@ -609,8 +609,8 @@ export class ShareComponent implements OnInit {
      this.getmmobv(this.stockid)
      this.getmmdow(this.stockid)
     this.getmcstocktodayohlc(this.mcsymbol)
+   
     this.getetsharetoday(this.eqsymbol)
-    this.getetsharetoday1(this.eqsymbol)
     
   }
 
@@ -652,18 +652,9 @@ export class ShareComponent implements OnInit {
     })
     
   }
-  getetsharetoday(eqsymbol) {
-    
-    this.http.get('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      console.log(nestedItems)
-    });
-
-    }
-    getetsharetoday1(eqsymbol) {
-      this.dataApi.getetsharetoday1(this.eqsymbol).subscribe(data => {
+  
+    getetsharetoday(eqsymbol) {
+      this.dataApi.getetsharetoday(this.eqsymbol).subscribe(data => {
         
   
         let nestedItems = Object.keys(data).map(key => {

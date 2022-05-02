@@ -461,7 +461,7 @@ export class DataapiService {
   getetimesnews(){
     return this.http.get('http://localhost:8090/api/etimesnews')
   }
-  getetsharetoday1(eqsymbol){
+  getetsharetoday(eqsymbol){
     return this.http.get('http://localhost:8090/api/etsharetoday?eqsymbol='+eqsymbol)
   }
   getetsmacrossover(){
