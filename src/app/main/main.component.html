@@ -81,7 +81,7 @@
             </ul>
           </div>
         </div>
-        <canvas baseChart #visitSaleChart [chartType]="'bar'" [datasets]="visitSaleChartData" [labels]="visitSaleChartLabels" [options]="visitSaleChartOptions" [colors]="visitSaleChartColors"></canvas>
+        <canvas baseChart #visitSaleChart [datasets]="visitSaleChartData" [labels]="visitSaleChartLabels" [options]="visitSaleChartOptions" [colors]="visitSaleChartColors"></canvas>
       </div>
     </div>
   </div>
@@ -89,7 +89,7 @@
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Traffic Sources</h4>
-        <canvas baseChart [chartType]="'doughnut'" [datasets]="trafficChartData" [labels]="trafficChartLabels" [options]="trafficChartOptions" [colors]="trafficChartColors"></canvas>
+        <canvas baseChart  [datasets]="trafficChartData" [labels]="trafficChartLabels" [options]="trafficChartOptions" [colors]="trafficChartColors"></canvas>
         <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4">
           <ul>
             <li>

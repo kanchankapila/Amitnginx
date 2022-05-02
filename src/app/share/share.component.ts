@@ -578,23 +578,23 @@ export class ShareComponent implements OnInit {
     // this.getmcstock(this.mcsymbol, this.eqsymbol, this.stockid);
     // this.getmcstockfrequent(this.mcsymbol, this.eqsymbol);
     // setInterval(() => { this.getmcstockfrequent(this.mcsymbol, this.eqsymbol) }, 30000);
-    // setInterval(() => { this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol) }, 10000);
-    // this.gettrendlynestocks1(this.tlid, this.tlname, this.eqsymbol)
-    // this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol)
-    // this.gettrendlynestocks3(this.tlid)
+     setInterval(() => { this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol) }, 10000);
+     this.gettrendlynestocks1(this.tlid, this.tlname, this.eqsymbol)
+     this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol)
+     this.gettrendlynestocks3(this.tlid)
      this.getstock1yr(this.eqsymbol)
-    // this.getmmmacd(this.stockid)
+     this.getmmmacd(this.stockid)
     this.getstocktoday(this.mcsymbol)
     this.getstockmaema(this.eqsymbol)
     setInterval(() => { this.getstocktoday(this.mcsymbol) }, 30000);
      this.getstocksentiments(this.mcsymbol);
-    // this.getmmrsi(this.stockid)
-    // this.getmmma(this.stockid)
-    // this.getmmstockinfo(this.stockid)
-    // this.getmmbb(this.stockid)
-    // this.getmmkst(this.stockid)
-    // this.getmmobv(this.stockid)
-    // this.getmmdow(this.stockid)
+     this.getmmrsi(this.stockid)
+     this.getmmma(this.stockid)
+     this.getmmstockinfo(this.stockid)
+     this.getmmbb(this.stockid)
+     this.getmmkst(this.stockid)
+     this.getmmobv(this.stockid)
+     this.getmmdow(this.stockid)
     this.getmcstocktodayohlc(this.mcsymbol)
     this.getetsharetoday()
 
@@ -824,7 +824,729 @@ export class ShareComponent implements OnInit {
         console.log(err)
       })
     }
-   
+    gettrendlynestocks1(tlid,tlname,eqsymbol) {
+      this.dataApi.gettrendlynestocks1(tlid,tlname,eqsymbol).subscribe(data5 => {
+        let nestedItems = Object.keys(data5).map(key => {
+          return data5[key];
+        });
+        //console.log(nestedItems)
+        if (nestedItems[1]['MCAP_Q']['lt1']) {
+          if (nestedItems[1]['MCAP_Q']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
+          }
+          else if (nestedItems[1]['MCAP_Q']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
+          }
+          else if (nestedItems[1]['MCAP_Q']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
+          }
+        }
+    
+        if (nestedItems[1]['NP_Q']['lt2']) {
+          if (nestedItems[1]['NP_Q']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['NP_Q']['value'], text2: nestedItems[1]['NP_Q']['lt2'], text3: nestedItems[1]['NP_Q']['st2'] })
+          }
+          else if (nestedItems[1]['NP_Q']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['NP_Q']['value'], text2: nestedItems[1]['NP_Q']['lt2'], text3: nestedItems[1]['NP_Q']['st2'] })
+          }
+          else if (nestedItems[1]['NP_Q']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['NP_Q']['value'], text2: nestedItems[1]['NP_Q']['lt2'], text3: nestedItems[1]['NP_Q']['st2'] })
+          }
+        }
+    
+        if (nestedItems[1]['PBV_A']['st1']) {
+          if (nestedItems[1]['PBV_A']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['PBV_A']['lt1'], text2: nestedItems[1]['PBV_A']['st1'], text3: nestedItems[1]['PBV_A']['value'] })
+          }
+          else if (nestedItems[1]['PBV_A']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['PBV_A']['lt1'], text2: nestedItems[1]['PBV_A']['st1'], text3: nestedItems[1]['PBV_A']['value'] })
+          }
+          else if (nestedItems[1]['PBV_A']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['PBV_A']['lt1'], text2: nestedItems[1]['PBV_A']['st1'], text3: nestedItems[1]['PBV_A']['value'] })
+          }
+        }
+    
+        if (nestedItems[1]['PE_TTM']['lt1']) {
+          if (nestedItems[1]['PE_TTM']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['PE_TTM']['lt1'], text2: nestedItems[1]['PE_TTM']['title'], text3: nestedItems[1]['PE_TTM']['value'] })
+          }
+          else if (nestedItems[1]['PE_TTM']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['PE_TTM']['lt1'], text2: nestedItems[1]['PE_TTM']['title'], text3: nestedItems[1]['PE_TTM']['value'] })
+          }
+          else if (nestedItems[1]['PE_TTM']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['PE_TTM']['lt1'], text2: nestedItems[1]['PE_TTM']['title'], text3: nestedItems[1]['PE_TTM']['value'] })
+          }
+        }
+    
+        if (nestedItems[1]['SR_Q']['lt1']) {
+          if (nestedItems[1]['SR_Q']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['SR_Q']['lt2'], text2: nestedItems[1]['SR_Q']['st2'], text3: nestedItems[1]['SR_Q']['value'] })
+          }
+          else if (nestedItems[1]['SR_Q']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['SR_Q']['lt2'], text2: nestedItems[1]['SR_Q']['st2'], text3: nestedItems[1]['SR_Q']['value'] })
+          }
+          else if (nestedItems[1]['SR_Q']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['SR_Q']['lt2'], text2: nestedItems[1]['SR_Q']['st2'], text3: nestedItems[1]['SR_Q']['value'] })
+          }
+        }
+    
+        if (nestedItems[1]['beta_1Y']['lt1']) {
+          if (nestedItems[1]['beta_1Y']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['beta_1Y']['lt1'], text2: nestedItems[1]['beta_1Y']['st1'], text3: nestedItems[1]['beta_1Y']['value'] })
+          }
+          else if (nestedItems[1]['beta_1Y']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['beta_1Y']['lt1'], text2: nestedItems[1]['beta_1Y']['st1'], text3: nestedItems[1]['beta_1Y']['value'] })
+          }
+          else if (nestedItems[1]['beta_1Y']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['beta_1Y']['lt1'], text2: nestedItems[1]['beta_1Y']['st1'], text3: nestedItems[1]['beta_1Y']['value'] })
+          }
+        }
+    
+        if (nestedItems[1]['ema_26']['lt1']) {
+          if (nestedItems[1]['ema_26']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['value'] })
+          }
+          else if (nestedItems[1]['ema_26']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['value'] })
+          }
+          else if (nestedItems[1]['ema_26']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['value'] })
+          }
+        }
+    
+        if (nestedItems[1]['ema_50']['lt1']) {
+          if (nestedItems[1]['ema_50']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['value'] })
+          }
+          else if (nestedItems[1]['ema_50']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['value'] })
+          }
+          else if (nestedItems[1]['ema_50']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['value'] })
+          }
+        }
+      
+    if (nestedItems[1]['ema_100']['lt1']) {
+          if (nestedItems[1]['ema_100']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['value'] })
+          }
+          else if (nestedItems[1]['ema_100']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['value'] })
+          }
+          else if (nestedItems[1]['ema_100']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['value'] })
+          }
+        }
+      
+    if (nestedItems[1]['ema_200']['lt1']) {
+          if (nestedItems[1]['ema_200']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_200']['st1'], text3: nestedItems[1]['ema_200']['value'] })
+          }
+          else if (nestedItems[1]['ema_200']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_200']['st1'], text3: nestedItems[1]['ema_200']['value'] })
+          }
+          else if (nestedItems[1]['ema_200']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_200']['st1'], text3: nestedItems[1]['ema_200']['value'] })
+          }
+        }
+    
+    if (nestedItems[1]['sma_30']['lt1']) {
+          if (nestedItems[1]['sma_30']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['value'] })
+          }
+          else if (nestedItems[1]['sma_30']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['value'] })
+          }
+          else if (nestedItems[1]['sma_30']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['value'] })
+          }
+        }
+      
+    if (nestedItems[1]['sma_50']['lt1']) {
+          if (nestedItems[1]['sma_50']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['value'] })
+          }
+          else if (nestedItems[1]['sma_50']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['value'] })
+          }
+          else if (nestedItems[1]['sma_50']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['value'] })
+          }
+        }
+      
+    if (nestedItems[1]['sma_100']['lt1']) {
+          if (nestedItems[1]['sma_100']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['value'] })
+          }
+          else if (nestedItems[1]['sma_100']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['value'] })
+          }
+          else if (nestedItems[1]['sma_100']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['value'] })
+          }
+        }
+      
+    if (nestedItems[1]['sma_200']['lt1']) {
+          if (nestedItems[1]['sma_200']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_200']['st1'], text3: nestedItems[1]['sma_200']['value'] })
+          }
+          else if (nestedItems[1]['sma_200']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_200']['st1'], text3: nestedItems[1]['sma_200']['value'] })
+          }
+          else if (nestedItems[1]['sma_200']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_200']['st1'], text3: nestedItems[1]['sma_200']['value'] })
+          }
+        }
+        if (nestedItems[1]['macd']['lt1']) {
+          if (nestedItems[1]['macd']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['value'] })
+          }
+          else if (nestedItems[1]['macd']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['value'] })
+          }
+          else if (nestedItems[1]['macd']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['value'] })
+          }
+        }
+    
+        if (nestedItems[1]['macdsignal']['lt1']) {
+          if (nestedItems[1]['macdsignal']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
+          }
+          else if (nestedItems[1]['macdsignal']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
+          }
+          else if (nestedItems[1]['macdsignal']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
+          }
+        }
+    
+        if (nestedItems[1]['mfi']['lt1']) {
+          if (nestedItems[1]['mfi']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['value'] })
+          }
+          else if (nestedItems[1]['mfi']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['value'] })
+          }
+          else if (nestedItems[1]['mfi']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['value'] })
+          }
+        }
+    
+        if (nestedItems[1]['rsi']['lt1']) {
+          if (nestedItems[1]['rsi']['color1'] == 'positive') {
+            this.positive.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['value'] })
+          }
+          else if (nestedItems[1]['rsi']['color1'] == 'negative') {
+            this.negative.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['value'] })
+          }
+          else if (nestedItems[1]['rsi']['color1'] == 'neutral') {
+            this.neutral.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['value'] })
+          }
+        }
+    
+      
+      //   this.brokertarget.push({ text1: nestedItems[1]['broker_avg_target']['lt1'], text2: nestedItems[1]['broker_avg_target']['st1'], text3: nestedItems[1]['broker_avg_target']['color1'] })
+      //   console.log(this.brokertarget)
+      //   this.ema_26.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['color1'], text4: nestedItems[1]['ema_26']['value'] })
+      //   this.ema_50.push({text1:nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['color1'],text4: nestedItems[1]['ema_50']['value']  })
+      //   this.ema_100.push({text1:nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_100']['value']  })
+      //   this.ema_200.push({text1:nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_200']['value']  })
+      //   this.sma_30.push({text1:nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['color1'],text4: nestedItems[1]['sma_30']['value'] })
+      //   this.sma_50.push({text1:nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['color1'],text4: nestedItems[1]['sma_50']['value']  })
+      //   this.sma_100.push({text1:nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'],text4: nestedItems[1]['sma_100']['value']  })
+      //   this.sma_200.push({text1:nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'],text4: nestedItems[1]['sma_200']['value']  })
+      //   this.macd.push({text1:nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['color1'],text4: nestedItems[1]['macd']['value']  })
+      //   this.macdsignal.push({text1:nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['color1'],text4: nestedItems[1]['macdsignal']['value']  })
+      //   this.rsi.push({text1:nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['color1'],text4: nestedItems[1]['rsi']['value']  })
+      //   this.mfi.push({text1:nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['color1'],text4: nestedItems[1]['mfi']['value']  })
+      //   if (nestedItems[1]['broker_recodown_6M']['lt1']) {
+      //     this.brokerrecodowngrade.push({ text1: nestedItems[1]['broker_recodown_6M']['lt1'], text2: nestedItems[1]['broker_recodown_6M']['st1'], text3: nestedItems[1]['broker_recodown_6M']['color1'] })
+      //  }
+      //  else if (nestedItems[1]['broker_recoup_6M']['lt1']) {
+      //    this.brokerrecoupgrade.push({ text1: nestedItems[1]['broker_recoup_6M']['lt1'], text2: nestedItems[1]['broker_recoup_6M']['st1'], text3: nestedItems[1]['broker_recoup_6M']['color1'] })
+      //  }
+      //  else if(nestedItems[1]['broker_targetup_6M']['lt1']){
+      //    this.brokertargetupgrade.push({text1:nestedItems[1]['broker_targetup_6M']['lt1'], text2: nestedItems[1]['broker_targetup_6M']['st1'], text3: nestedItems[1]['broker_targetup_6M']['color1'] })
+      //  }
+      //  else if (nestedItems[1]['broker_targetdown_6M']['lt1']) {
+      //    this.brokertargetdowngrade.push({ text1: nestedItems[1]['broker_targetdown_6M']['lt1'], text2: nestedItems[1]['broker_targetdown_6M']['st1'], text3: nestedItems[1]['broker_targetdown_6M']['color1'] })
+      //  }
+       }, err => {
+        console.log(err)
+      })
+      }
+     
+    
+    gettrendlynestocks2(tlid,tlname,eqsymbol) {
+      this.dataApi.gettrendlynestocks2(tlid,tlname,eqsymbol).subscribe(data5 => {
+        let nestedItems = Object.keys(data5).map(key => {
+          return data5[key];
+        });
+        console.log(nestedItems)
+        // this.dscore.push({ text1:nestedItems[1]['stockData'][6],text2:nestedItems[1]['stockData'][9] })
+        // this.volscore.push({ text1:nestedItems[1]['stockData'][7],text2:nestedItems[1]['stockData'][10]  })
+        // this.mscore.push({ text1:nestedItems[1]['stockData'][8],text2:nestedItems[1]['stockData'][11]  })
+        // this.tllink="https://trendlyne.com/alerts/stock-alerts/"+this.eqsymbol+"/"+this.tlid+"/"+this.tlname
+          
+      }, err => {
+        console.log(err)
+      })
+    }
+    
+    gettrendlynestocks3(tlid) {
+      this.dataApi.gettrendlynestocks3(tlid).subscribe(data5 => {
+        let nestedItems = Object.keys(data5).map(key => {
+          return data5[key];
+        });
+        //console.log(nestedItems)
+            
+          
+      }, err => {
+        console.log(err)
+      })
+      }
+      ////////////////////////////////Market Mojo///////////////////////////////
+      getmmmacd(stockid) {
+        this.dataApi.getmmmacd(stockid).subscribe(data5 => {
+          let nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+      
+      
+          for (let val in nestedItems[0]["stock"]) {
+      
+            this.lineChartDatamacdm.push(nestedItems[0]["stock"][val].macd)
+            this.lineChartDatasignalm.push(nestedItems[0]["stock"][val].signal)
+            this.lineChartDatapricemacdm.push(nestedItems[0]["stock"][val].price)
+            this.lineChartmacdmLabels.push(nestedItems[0]["stock"][val].date)
+            this.lineChartDatagrademacdm.push(nestedItems[0]["stock"][val].grade)
+          }
+          this.options1 = {
+            legend: {
+              data: ['macd', 'signal', 'price'],
+              align: 'left',
+            },
+            tooltip: {},
+            xAxis: {
+              data: this.lineChartmacdmLabels,
+      
+      
+            },
+            yAxis: {},
+            series: [
+              {
+                name: 'macd',
+                type: 'line',
+                data: this.lineChartDatamacdm,
+                animationDelay: (idx) => idx * 10,
+              },
+              {
+                name: 'signal',
+                type: 'line',
+                data: this.lineChartDatasignalm,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+              {
+                name: 'price',
+                type: 'line',
+                data: this.lineChartDatapricemacdm,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+      
+            ],
+            animationEasing: 'elasticOut',
+            animationDelayUpdate: (idx) => idx * 5,
+          };
+      
+      
+      
+        }, err => {
+          console.log(err)
+        }
+        )
+      }
+      getmmrsi(stockid) {
+        this.dataApi.getmmrsi(stockid).subscribe(data5 => {
+          let nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+      
+          for (let val in nestedItems[0]["stock"]) {
+      
+            this.lineChartDatarsim.push(nestedItems[0]["stock"][val].rsi)
+            this.lineChartDataubandm.push(nestedItems[0]["stock"][val].uband)
+            this.lineChartDatalbandm.push(nestedItems[0]["stock"][val].lband)
+            this.lineChartDatapricersim.push(nestedItems[0]["stock"][val].price)
+            this.lineChartrsimLabels.push(nestedItems[0]["stock"][val].date)
+          }
+          this.options2 = {
+            legend: {
+              data: ['rsi', 'uband', 'lband'],
+              align: 'left',
+            },
+            tooltip: {},
+            xAxis: {
+              data: this.lineChartrsimLabels,
+      
+            },
+            yAxis: {},
+            series: [
+              {
+                name: 'rsi',
+                type: 'line',
+                data: this.lineChartDatarsim,
+                animationDelay: (idx) => idx * 10,
+              },
+              {
+                name: 'uband',
+                type: 'line',
+                data: this.lineChartDataubandm,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+              {
+                name: 'lband',
+                type: 'line',
+                data: this.lineChartDatalbandm,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+            ],
+            animationEasing: 'elasticOut',
+            animationDelayUpdate: (idx) => idx * 5,
+          };
+      
+      
+      
+        }, err => {
+          console.log(err)
+        }
+        )
+      }
+      getmmbb(stockid) {
+        this.dataApi.getmmbb(stockid).subscribe(data5 => {
+          let nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+      
+          for (let val in nestedItems[0]["stock"]) {
+      
+            this.lineChartDatabbuband.push(nestedItems[0]["stock"][val].uband)
+            this.lineChartDatabblband.push(nestedItems[0]["stock"][val].lband)
+            this.lineChartDatabbdma20.push(nestedItems[0]["stock"][val].dma20)
+            this.lineChartDatabbdate.push(nestedItems[0]["stock"][val].date)
+            this.lineChartDatabbprice.push(nestedItems[0]["stock"][val].price)
+          }
+          this.options4 = {
+            legend: {
+              data: ['dma20', 'price', 'uband', 'lband'],
+              align: 'left',
+            },
+            tooltip: {},
+            xAxis: {
+              data: this.lineChartDatabbdate,
+      
+            },
+            yAxis: {},
+            series: [
+              {
+                name: 'dma20',
+                type: 'line',
+                data: this.lineChartDatabbdma20,
+                animationDelay: (idx) => idx * 10,
+              },
+              {
+                name: 'price',
+                type: 'line',
+                data: this.lineChartDatabbprice,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+              {
+                name: 'lband',
+                type: 'line',
+                data: this.lineChartDatabblband,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+              {
+                name: 'uband',
+                type: 'line',
+                data: this.lineChartDatabbuband,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+            ],
+            animationEasing: 'elasticOut',
+            animationDelayUpdate: (idx) => idx * 5,
+          };
+      
+      
+      
+      
+      
+        }, err => {
+          console.log(err)
+        }
+        )
+      }
+      getmmma(stockid) {
+        this.dataApi.getmmma(stockid).subscribe(data5 => {
+          let nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+      
+          for (let val in nestedItems[0]["stock"]) {
+      
+            this.lineChartDatamaday50m.push(nestedItems[0]["stock"][val].day50)
+            this.lineChartDatamaday200m.push(nestedItems[0]["stock"][val].day200)
+            this.lineChartDatamapricem.push(nestedItems[0]["stock"][val].price)
+            this.lineChartDatamadate.push(nestedItems[0]["stock"][val].date)
+            this.lineChartDatamaflag.push(nestedItems[0]["stock"][val].flag)
+          }
+          this.options3 = {
+            legend: {
+              data: ['day50', 'day200', 'price'],
+              align: 'left',
+            },
+            tooltip: {},
+            xAxis: {
+              data: this.lineChartDatamadate,
+              //silent: false,
+              //splitLine: {
+              //show: false,
+              //},
+            },
+            yAxis: {},
+            series: [
+              {
+                name: 'day50',
+                type: 'line',
+                data: this.lineChartDatamaday50m,
+                animationDelay: (idx) => idx * 10,
+              },
+              {
+                name: 'day200',
+                type: 'line',
+                data: this.lineChartDatamaday200m,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+              {
+                name: 'price',
+                type: 'line',
+                data: this.lineChartDatamapricem,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+            ],
+            animationEasing: 'elasticOut',
+            animationDelayUpdate: (idx) => idx * 5,
+          };
+      
+      
+      
+        }, err => {
+          console.log(err)
+        }
+        )
+      }
+      getmmkst(stockid) {
+        this.dataApi.getmmkst(stockid).subscribe(data5 => {
+          let nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+      
+          for (let val in nestedItems[0]["stock"]) {
+      
+            this.lineChartDatakst.push(nestedItems[0]["stock"][val].kst)
+            this.lineChartDatakstsignal.push(nestedItems[0]["stock"][val].signal)
+            this.lineChartDatakstprice.push(nestedItems[0]["stock"][val].price)
+            this.lineChartDatakstdate.push(nestedItems[0]["stock"][val].date)
+            //   this.lineChartrsimLabels.push(nestedItems[0]["stock"][val].date)
+          }
+          this.options5 = {
+            legend: {
+              data: ['kst', 'price', 'signal'],
+              align: 'left',
+            },
+            tooltip: {},
+            xAxis: {
+              data: this.lineChartDatakstdate,
+              //silent: false,
+              //splitLine: {
+              //show: false,
+              //},
+            },
+            yAxis: {},
+            series: [
+              {
+                name: 'kst',
+                type: 'line',
+                data: this.lineChartDatakst,
+                animationDelay: (idx) => idx * 10,
+              },
+              {
+                name: 'signal',
+                type: 'line',
+                data: this.lineChartDatakstsignal,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+              {
+                name: 'price',
+                type: 'line',
+                data: this.lineChartDatakstprice,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+            ],
+            animationEasing: 'elasticOut',
+            animationDelayUpdate: (idx) => idx * 5,
+          };
+      
+      
+      
+        }, err => {
+          console.log(err)
+        }
+        )
+      }
+      getmmdow(stockid) {
+        this.dataApi.getmmdow(stockid).subscribe(data5 => {
+          let nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+      
+          for (let val in nestedItems[0]["stock"]) {
+      
+            this.lineChartDatadowdate.push(nestedItems[0]["stock"][val].date)
+            this.lineChartDatadowprice.push(nestedItems[0]["stock"][val].price)
+            this.lineChartDatadowscore.push(nestedItems[0]["stock"][val].score)
+            this.lineChartDatadowflag.push(nestedItems[0]["stock"][val].flag)
+            //   this.lineChartrsimLabels.push(nestedItems[0]["stock"][val].date)
+          }
+          this.options7 = {
+            legend: {
+              data: ['score', 'price', 'flag'],
+              align: 'left',
+            },
+            tooltip: {},
+            xAxis: {
+              data: this.lineChartDatadowdate
+            },
+            //silent: false,
+            //splitLine: {
+            //show: false,
+            //},
+      
+            yAxis: {},
+            series: [
+              {
+                name: 'score',
+                type: 'bar',
+                data: this.lineChartDatadowscore,
+                animationDelay: (idx) => idx * 10,
+              },
+              {
+                name: 'price',
+                type: 'line',
+                data: this.lineChartDatadowprice,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+              {
+                name: 'flag',
+                type: 'line',
+                data: this.lineChartDatadowflag,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+            ],
+            animationEasing: 'elasticOut',
+            animationDelayUpdate: (idx) => idx * 5,
+          };
+      
+        }, err => {
+          console.log(err)
+        }
+        )
+      }
+      getmmobv(stockid) {
+        this.dataApi.getmmobv(stockid).subscribe(data5 => {
+          let nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+      
+          for (let val in nestedItems[0]["stock"]) {
+      
+            this.lineChartDataobvdate.push(nestedItems[0]["stock"][val].date)
+            this.lineChartDataobv.push(nestedItems[0]["stock"][val].obv)
+            this.lineChartDataobvprice.push(nestedItems[0]["stock"][val].price)
+            //   this.lineChartDatapricersim.push(nestedItems[0]["stock"][val].price)
+            //   this.lineChartrsimLabels.push(nestedItems[0]["stock"][val].date)
+          }
+          this.options6 = {
+            legend: {
+              data: ['obv', 'price'],
+              align: 'left',
+            },
+            tooltip: {},
+            xAxis: {
+              data: this.lineChartDataobvdate,
+              //silent: false,
+              //splitLine: {
+              //show: false,
+              //},
+            },
+            yAxis: {},
+            series: [
+              {
+                name: 'obv',
+                type: 'line',
+                data: this.lineChartDataobv,
+                animationDelay: (idx) => idx * 10,
+              },
+              {
+                name: 'price',
+                type: 'line',
+                data: this.lineChartDataobvprice,
+                animationDelay: (idx) => idx * 10 + 100,
+              },
+      
+            ],
+            animationEasing: 'elasticOut',
+            animationDelayUpdate: (idx) => idx * 5,
+          };
+      
+      
+      
+      
+        }, err => {
+          console.log(err)
+        }
+        )
+      }
+      getmmstockinfo(stockid) {
+        this.dataApi.getmmstockinfo(stockid).subscribe(data5 => {
+          let nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+      
+      console.log(nestedItems)
+      
+          for (let val in nestedItems[5]) {
+            this.hmsg.push({ text: nestedItems[5][val].header, text1: nestedItems[5][val].msg, text2: nestedItems[5][val].dir })
+          }
+          for (let val in nestedItems[4]["popup"]) {
+            this.mmdelivcomp=nestedItems[4]["popup"][val] 
+          }
+          this.score.push({ text: nestedItems[2].score, text1: "Score" })
+          this.scoret.push({ text: nestedItems[2].scoreText, text1: "Reco" })
+      
+          this.fscore.push({ text: nestedItems[2].f_clr, text1: nestedItems[2].f_dir, text2: nestedItems[2].f_pts, text3: nestedItems[2].f_txt, text4: "Financial" })
+          this.qscore.push({ text: nestedItems[2].q_clr, text1: nestedItems[2].q_dir, text2: nestedItems[2].q_rank, text3: nestedItems[2].q_txt, text4: "Quality" })
+          this.vscore.push({ text: nestedItems[2].v_clr, text1: nestedItems[2].v_rank, text2: nestedItems[2].v_txt, text3: "Valuation" })
+          this.techscore.push({ text: nestedItems[2].tech_clr, text1: nestedItems[2].tech_score, text2: nestedItems[2].tech_txt, text3: "Tech" })
+      
+        }, err => {
+          console.log(err)
+        }
+        )
+      }
+      
+    
+  
 }
 
 

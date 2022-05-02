@@ -1,6 +1,6 @@
 {
-  "name": "amitversion2",
-  "version": "4.0.0",
+  "name": "amitnginx1.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -44,6 +44,7 @@
     "axios-cookiejar-support": "^1.0.1",
     "body-parser": "^1.19.2",
     "bootstrap": "^4.5.3",
+    "buffer": "^6.0.3",
     "chart.js": "^3.7.0",
     "chartjs-adapter-date-fns": "^2.0.0",
     "chartjs-chart-financial": "^0.1.1",
@@ -63,6 +64,7 @@
     "epoch-timeago": "^1.1.9",
     "es-module-loader": "^2.3.0",
     "es6-module-loader": "^0.17.11",
+    "events": "^3.3.0",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "fs": "^0.0.1-security",
@@ -98,6 +100,7 @@
     "sqlite3": "^5.0.4",
     "stream": "^0.0.2",
     "stream-browserify": "^3.0.0",
+    "string_decoder": "^1.3.0",
     "timers": "^0.1.1",
     "tough-cookie": "^4.0.0",
     "uuid": "^8.3.2",
@@ -129,7 +132,7 @@
     "protractor": "~7.0.0",
     "resize-observer-polyfill": "^1.5.1",
     "ts-node": "^7.0.0",
-    "tslib": "^2.3.1",
+    "tslib": "^2.4.0",
     "typescript": "^4.5.5"
   }
 }
