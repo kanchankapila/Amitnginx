@@ -2555,9 +2555,11 @@ app.get('/api/trendlynestocks1', (req, res) => {
     if (!error) {
      
       console.log('Cookies: ', req.cookies)
+      console.log('Cookies: ', res.cookies)
 
       // Cookies that have been signed
-      console.log('Signed Cookies: ', req.signedCookies)    
+      console.log('Signed Cookies: ', req.signedCookies)  
+      console.log('Signed Cookies: ', res.signedCookies)  
       
 chrome.getCookies('https://trendlyne.com/equity/getStockMetricParameterList/'+tlid+'/', function(err, cookies) {
     

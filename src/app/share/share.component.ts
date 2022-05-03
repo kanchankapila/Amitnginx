@@ -292,6 +292,16 @@ export interface stockohlctile
   
   
 }
+export interface stockohlc5dtile
+{
+  c: number;
+  o: number;
+  h: number;
+  l: number;
+  x: number;
+  
+  
+}
 export interface etstockohlctodaytile
 {
   c: number;
@@ -353,6 +363,7 @@ export class ShareComponent implements OnInit {
   
   public stockhcdate: Array<any> = [];
   public stockohlc: stockohlctile[] = [];
+  public stockohlc5d: stockohlc5dtile[] = [];
   public etstockohlctoday: etstockohlctodaytile[] =[] ;
   public stockhcvalue: Array<any> = [];
   public stockdata1: Array<number> = [];
@@ -520,6 +531,7 @@ export class ShareComponent implements OnInit {
   public apexvolume: Array<any> = [];
   public stockChartType: ChartType = 'line';
   public stockChartData: ChartConfiguration['data']
+  public stockChartData5d: ChartConfiguration['data']
   public etstockChartData: ChartConfiguration['data']
   public stockChartOptions:ChartOptions = {
     scales: {
@@ -675,9 +687,18 @@ export class ShareComponent implements OnInit {
         const myArray = datefromapi.split("T");
         let finaldate = myArray[0];
         console.log("this is final date" + finaldate)
-        console.log("this is latest date" +latest_date)
-        //this.stockohlc.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(),o: nestedItems[3][val].open,h: nestedItems[3][val].high, l: nestedItems[3][val].low,c: nestedItems[3][val].close })
+        console.log("this is latest date" + latest_date)
+        while(latest_date != finaldate){
+        this.stockohlc5d.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(),o: nestedItems[3][val].open,h: nestedItems[3][val].high, l: nestedItems[3][val].low,c: nestedItems[3][val].close })
+        }
       }
+      this.stockChartData5d  = {
+        datasets: [ {
+         label: this.stockname,
+       data: this.stockohlc5d
+        } ]
+           };
+         
     })
     
   }

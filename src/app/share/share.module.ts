@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShareRoutingModule } from './share-routing.module';
 import { ShareComponent } from './share.component';
+import { DatePipe } from '@angular/common'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
 import { NgChartsModule } from 'ng2-charts';
@@ -42,5 +43,6 @@ export function highchartsModules() {
    
   ],
   schemas: [],
+  providers: [DatePipe]
 })
 export class ShareModule { }
