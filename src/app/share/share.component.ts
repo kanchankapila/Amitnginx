@@ -610,22 +610,32 @@ export class ShareComponent implements OnInit {
      this.getmmdow(this.stockid)
     this.getmcstocktodayohlc(this.mcsymbol)
    
+    //this.getetsharetoday(this.eqsymbol)
     this.getetsharetoday(this.eqsymbol)
-    this. getetsharetodaytest(this.eqsymbol)
+    setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 30000);
   }
 
   
-  getetsharetodaytest(eqsymbol) {
+  getetsharetoday(eqsymbol) {
    
     this.http.get<any>('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       console.log(nestedItems)
-      for (let val in nestedItems[3]) {
-       // this.etstockohlctoday.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(),o: nestedItems[3][val].open,h: nestedItems[3][val].high, l: nestedItems[3][val].low,c: nestedItems[3][val].close })
-      }
       
+      console.log(nestedItems[0]['results']['quote'])
+      for (let val in (nestedItems[0]['results']['quote'])){
+        this.etstockohlctoday.push({x:new Date(nestedItems[0]['results']['quote'][val].Date).getTime(),o:nestedItems[0]['results']['quote'][val].Open,h:nestedItems[0]['results']['quote'][val].High,l:nestedItems[0]['results']['quote'][val].Low,c:nestedItems[0]['results']['quote'][val].Close})
+      }
+    console.log(this.etstockohlctoday)
+    this.etstockChartData  = {
+      datasets: [ {
+       label: this.stockname,
+     data: this.etstockohlctoday
+      } ]
+     };
+     
         
   
     })
@@ -636,18 +646,10 @@ export class ShareComponent implements OnInit {
    
   
   getstock1yr(eqsymbol) {
-    
-    const result = epochSeconds()
-    console.log(result)
-   
-    const day = new Date().getDay()
-    console.log(day)
-
-    const date = new Date().getDate()
-    console.log(date)
-
-    const date1 = Date.now()
-    console.log(new Date(date1))
+    var myCurrentDate=new Date();
+    var myPastDate=new Date(myCurrentDate);
+    myPastDate.setDate(myPastDate.getDate() - 8);
+    console.log(myPastDate)
  
     this.http.get('https://api.niftytrader.in/webapi/Live/livechartsBySymbol?symbol='+this.eqsymbol).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
@@ -669,27 +671,27 @@ export class ShareComponent implements OnInit {
     
   }
   
-    getetsharetoday(eqsymbol) {
-      this.dataApi.getetsharetoday(this.eqsymbol).subscribe(data => {
+    // getetsharetoday(eqsymbol) {
+    //   this.dataApi.getetsharetoday(this.eqsymbol).subscribe(data => {
         
   
-        let nestedItems = Object.keys(data).map(key => {
-          return data[key];
-        });
+    //     let nestedItems = Object.keys(data).map(key => {
+    //       return data[key];
+    //     });
       
-        console.log(nestedItems[0]['results']['quote'])
-        for (let val in (nestedItems[0]['results']['quote'])){
-          this.etstockohlctoday.push({x:new Date(nestedItems[0]['results']['quote'][val].Date).getTime(),o:nestedItems[0]['results']['quote'][val].Open,h:nestedItems[0]['results']['quote'][val].High,l:nestedItems[0]['results']['quote'][val].Low,c:nestedItems[0]['results']['quote'][val].Close})
-        }
-      console.log(this.etstockohlctoday)
-      this.etstockChartData  = {
-        datasets: [ {
-         label: this.stockname,
-       data: this.etstockohlctoday
-        } ]
-       };
-       })
-      }
+    //     console.log(nestedItems[0]['results']['quote'])
+    //     for (let val in (nestedItems[0]['results']['quote'])){
+    //       this.etstockohlctoday.push({x:new Date(nestedItems[0]['results']['quote'][val].Date).getTime(),o:nestedItems[0]['results']['quote'][val].Open,h:nestedItems[0]['results']['quote'][val].High,l:nestedItems[0]['results']['quote'][val].Low,c:nestedItems[0]['results']['quote'][val].Close})
+    //     }
+    //   console.log(this.etstockohlctoday)
+    //   this.etstockChartData  = {
+    //     datasets: [ {
+    //      label: this.stockname,
+    //    data: this.etstockohlctoday
+    //     } ]
+    //    };
+    //    })
+    //   }
       
     getstocksentiments(mcsymbol) {
       this.stocksentiments.length = 0;
