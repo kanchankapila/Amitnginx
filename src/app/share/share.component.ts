@@ -689,9 +689,9 @@ export class ShareComponent implements OnInit {
         let finaldate = myArray[0];
         console.log("this is final date" + finaldate)
         console.log("this is latest date" + latest_date)
-        // while(finaldate != latest_date ){
-        // this.stockohlc5d.unshift({ x: new Date(nestedItems[3][val]['created_at']).getTime(),o: nestedItems[3][val].open,h: nestedItems[3][val].high, l: nestedItems[3][val].low,c: nestedItems[3][val].close })
-        // }
+          while( finaldate < latest_date ){
+         this.stockohlc5d.unshift({ x: new Date(nestedItems[3][val]['created_at']).getTime(),o: nestedItems[3][val].open,h: nestedItems[3][val].high, l: nestedItems[3][val].low,c: nestedItems[3][val].close })
+         }
       }
       this.stockChartData5d  = {
         datasets: [ {
