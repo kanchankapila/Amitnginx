@@ -663,7 +663,8 @@ export class ShareComponent implements OnInit {
     myPastDate.setDate(myPastDate.getDate() - 8);
     console.log(myPastDate)
     let latest_date =this.datepipe.transform(myPastDate, 'yyyy-MM-dd');
- 
+    this.stockohlc.length = 0;
+    this.stockohlc5d.length = 0;
     this.http.get('https://api.niftytrader.in/webapi/Live/livechartsBySymbol?symbol='+this.eqsymbol).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
@@ -688,9 +689,9 @@ export class ShareComponent implements OnInit {
         let finaldate = myArray[0];
         console.log("this is final date" + finaldate)
         console.log("this is latest date" + latest_date)
-        while(latest_date != finaldate){
-        this.stockohlc5d.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(),o: nestedItems[3][val].open,h: nestedItems[3][val].high, l: nestedItems[3][val].low,c: nestedItems[3][val].close })
-        }
+        // while(finaldate != latest_date ){
+        // this.stockohlc5d.unshift({ x: new Date(nestedItems[3][val]['created_at']).getTime(),o: nestedItems[3][val].open,h: nestedItems[3][val].high, l: nestedItems[3][val].low,c: nestedItems[3][val].close })
+        // }
       }
       this.stockChartData5d  = {
         datasets: [ {
