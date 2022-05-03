@@ -1,7 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
-
+import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { StockChart } from 'angular-highcharts';
@@ -347,7 +347,7 @@ export class ShareComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   
-  constructor( private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
+  constructor(public datepipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
     Chart.register(CandlestickController, OhlcController, CandlestickElement, OhlcElement);
   }
   
@@ -650,6 +650,7 @@ export class ShareComponent implements OnInit {
     var myPastDate=new Date(myCurrentDate);
     myPastDate.setDate(myPastDate.getDate() - 8);
     console.log(myPastDate)
+    let latest_date =this.datepipe.transform(myPastDate, 'yyyy-MM-dd');
  
     this.http.get('https://api.niftytrader.in/webapi/Live/livechartsBySymbol?symbol='+this.eqsymbol).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
@@ -666,7 +667,17 @@ export class ShareComponent implements OnInit {
       label: this.stockname,
     data: this.stockohlc
      } ]
-    };
+        };
+      
+       
+      for (let val in nestedItems[3]) {
+        let datefromapi=nestedItems[3][val]['created_at']
+        const myArray = datefromapi.split("T");
+        let finaldate = myArray[0];
+        console.log("this is final date" + finaldate)
+        console.log("this is latest date" +latest_date)
+        //this.stockohlc.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(),o: nestedItems[3][val].open,h: nestedItems[3][val].high, l: nestedItems[3][val].low,c: nestedItems[3][val].close })
+      }
     })
     
   }
