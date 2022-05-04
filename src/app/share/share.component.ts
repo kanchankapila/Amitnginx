@@ -292,7 +292,7 @@ export interface stockohlctile
   
   
 }
-export interface stockohlc5dtile
+export interface stockohlc1wtile
 {
   c: number;
   o: number;
@@ -363,7 +363,7 @@ export class ShareComponent implements OnInit {
   
   public stockhcdate: Array<any> = [];
   public stockohlc: stockohlctile[] = [];
-  public stockohlc5d: stockohlc5dtile[] = [];
+  public stockohlc1w: stockohlc1wtile[] = [];
   public etstockohlctoday: etstockohlctodaytile[] =[] ;
   public stockhcvalue: Array<any> = [];
   public stockdata1: Array<number> = [];
@@ -376,9 +376,9 @@ export class ShareComponent implements OnInit {
   public stockvixtime: Array<any> = [];
   public stockData1: Array<any> = [];
   public stockOptions: any;
-  public stock5ddata: Array<number> = [];
-  public stock5dLabels: Array<any> = [];
-  public stock5dData: Array<any> = [];
+  public stock1wdata: Array<number> = [];
+  public stock1wLabels: Array<any> = [];
+  public stock1wData: Array<any> = [];
   public stock1mdata: Array<number> = [];
   public stock1mLabels: Array<any> = [];
   public stock1mData: Array<any> = [];
@@ -531,7 +531,7 @@ export class ShareComponent implements OnInit {
   public apexvolume: Array<any> = [];
   public stockChartType: ChartType = 'line';
   public stockChartData: ChartConfiguration['data']
-  public stockChartData5d: ChartConfiguration['data']
+  public stockChartData1w: ChartConfiguration['data']
   public etstockChartData: ChartConfiguration['data']
   public stockChartOptions:ChartOptions = {
     scales: {
@@ -606,7 +606,11 @@ export class ShareComponent implements OnInit {
     // setInterval(() => { this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol) }, 10000);
      this.gettrendlynestocks1(this.tlid, this.tlname, this.eqsymbol)
      this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol)
-     this.gettrendlynestocks3(this.tlid)
+    this.gettrendlynestocks3(this.tlid)
+    this.getshare3m(this.eqsymbol)
+    this.getshare1m(this.eqsymbol)
+    this.getshare6m(this.eqsymbol)
+    this.getshare1w(this.eqsymbol)
      this.getstock1yr(this.eqsymbol)
      this.getmmmacd(this.stockid)
     this.getstocktoday(this.mcsymbol)
@@ -631,12 +635,13 @@ export class ShareComponent implements OnInit {
   getetsharetoday(eqsymbol) {
    
     this.http.get<any>('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company').subscribe(data5 => {
+      (response: Response) => { console.log(response) }
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
       
-      console.log(nestedItems[0]['results']['quote'])
+      this.etstockohlctoday.length=0;
+     
       for (let val in (nestedItems[0]['results']['quote'])){
         this.etstockohlctoday.push({x:new Date(nestedItems[0]['results']['quote'][val].Date).getTime(),o:nestedItems[0]['results']['quote'][val].Open,h:nestedItems[0]['results']['quote'][val].High,l:nestedItems[0]['results']['quote'][val].Low,c:nestedItems[0]['results']['quote'][val].Close})
       }
@@ -658,13 +663,10 @@ export class ShareComponent implements OnInit {
    
   
   getstock1yr(eqsymbol) {
-    var myCurrentDate=new Date();
-    var myPastDate=new Date(myCurrentDate);
-    myPastDate.setDate(myPastDate.getDate() - 8);
-    console.log(myPastDate)
-    let latest_date =this.datepipe.transform(myPastDate, 'yyyy-MM-dd');
+   
+   
     this.stockohlc.length = 0;
-    this.stockohlc5d.length = 0;
+    
     this.http.get('https://api.niftytrader.in/webapi/Live/livechartsBySymbol?symbol='+this.eqsymbol).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
@@ -683,49 +685,123 @@ export class ShareComponent implements OnInit {
         };
       
        
-      for (let val in nestedItems[3]) {
-        let datefromapi=nestedItems[3][val]['created_at']
-        const myArray = datefromapi.split("T");
-        let finaldate = myArray[0];
-        console.log("this is final date" + finaldate)
-        console.log("this is latest date" + latest_date)
-          while( finaldate < latest_date ){
-         this.stockohlc5d.unshift({ x: new Date(nestedItems[3][val]['created_at']).getTime(),o: nestedItems[3][val].open,h: nestedItems[3][val].high, l: nestedItems[3][val].low,c: nestedItems[3][val].close })
-         }
-      }
-      this.stockChartData5d  = {
-        datasets: [ {
-         label: this.stockname,
-       data: this.stockohlc5d
-        } ]
-           };
-         
+          
     })
     
   }
+  getshare3m(eqsymbol) {
+    ////////////////Nifty 3 months/////////////////////////////
+   
+    this.http.get('https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=3m').subscribe(data5 => {
+     let nestedItems = Object.keys(data5).map(key => {
+       return data5[key];
+     });
+      console.log(nestedItems)
+      for (let val in nestedItems[0]['results']['quotedata']) {
+        this.stock3mdata.unshift(nestedItems[0]['results']['quotedata'][val][1])
+        this.stock3mLabels.unshift(new Date(nestedItems[0]['results']['quotedata'][val][0]).toLocaleString("en-US", { timeZone: "Asia/Kolkata" }))
+      }
+ }), err => {
+   console.log(err)
+ }
+   
+ 
   
-    // getetsharetoday(eqsymbol) {
-    //   this.dataApi.getetsharetoday(this.eqsymbol).subscribe(data => {
+   this.stock3mData = [{
+     label: 'Price',
+     data: this.stock3mdata,
+     borderWidth: 1,
+     fill: false
+   }];
+
+    this.stock3mLabels = this.stock3mLabels;
+ 
+}
+
+  getshare1w(eqsymbol) {
+         ////////////////Nifty 1 Week/////////////////////////////
         
+         this.http.get('https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=1w').subscribe(data5 => {
+          let nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+           console.log(nestedItems)
+           for (let val in nestedItems[0]['results']['quotedata']) {
+             this.stock1wdata.unshift(nestedItems[0]['results']['quotedata'][val][1])
+             this.stock1wLabels.unshift(new Date(nestedItems[0]['results']['quotedata'][val][0]).toLocaleString("en-US", { timeZone: "Asia/Kolkata" }))
+           }
+      }), err => {
+        console.log(err)
+      }
+        
+      
+       
+        this.stock1wData = [{
+          label: 'Price',
+          data: this.stock1wdata,
+          borderWidth: 1,
+          fill: false
+        }];
+    
+         this.stock1wLabels = this.stock1wLabels;
+      
+  }
+  getshare1m(eqsymbol) {
+    ////////////////Nifty 3 months/////////////////////////////
+   
+    this.http.get('https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=1m').subscribe(data5 => {
+     let nestedItems = Object.keys(data5).map(key => {
+       return data5[key];
+     });
+      console.log(nestedItems)
+      for (let val in nestedItems[0]['results']['quotedata']) {
+        this.stock1mdata.unshift(nestedItems[0]['results']['quotedata'][val][1])
+        this.stock1mLabels.unshift(new Date(nestedItems[0]['results']['quotedata'][val][0]).toLocaleString("en-US", { timeZone: "Asia/Kolkata" }))
+      }
+ }), err => {
+   console.log(err)
+ }
+   
+ 
   
-    //     let nestedItems = Object.keys(data).map(key => {
-    //       return data[key];
-    //     });
-      
-    //     console.log(nestedItems[0]['results']['quote'])
-    //     for (let val in (nestedItems[0]['results']['quote'])){
-    //       this.etstockohlctoday.push({x:new Date(nestedItems[0]['results']['quote'][val].Date).getTime(),o:nestedItems[0]['results']['quote'][val].Open,h:nestedItems[0]['results']['quote'][val].High,l:nestedItems[0]['results']['quote'][val].Low,c:nestedItems[0]['results']['quote'][val].Close})
-    //     }
-    //   console.log(this.etstockohlctoday)
-    //   this.etstockChartData  = {
-    //     datasets: [ {
-    //      label: this.stockname,
-    //    data: this.etstockohlctoday
-    //     } ]
-    //    };
-    //    })
-    //   }
-      
+   this.stock1mData = [{
+     label: 'Price',
+     data: this.stock1mdata,
+     borderWidth: 1,
+     fill: false
+   }];
+
+   this.stock1mLabels = this.stock1mLabels;
+ 
+  }  
+  getshare6m(eqsymbol) {
+    ////////////////Nifty 3 months/////////////////////////////
+   
+    this.http.get('https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=6m').subscribe(data5 => {
+     let nestedItems = Object.keys(data5).map(key => {
+       return data5[key];
+     });
+      console.log(nestedItems)
+      for (let val in nestedItems[0]['results']['quotedata']) {
+        this.stock6mdata.unshift(nestedItems[0]['results']['quotedata'][val][1])
+        this.stock6mLabels.unshift(new Date(nestedItems[0]['results']['quotedata'][val][0]).toLocaleString("en-US", { timeZone: "Asia/Kolkata" }))
+      }
+ }), err => {
+   console.log(err)
+ }
+   
+ 
+  
+   this.stock6mData = [{
+     label: 'Price',
+     data: this.stock6mdata,
+     borderWidth: 1,
+     fill: false
+   }];
+
+   this.stock6mLabels = this.stock6mLabels;
+ 
+}    
     getstocksentiments(mcsymbol) {
       this.stocksentiments.length = 0;
       this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/'+this.mcsymbol+'?field=RSI').subscribe(data5 => {
@@ -766,7 +842,7 @@ export class ShareComponent implements OnInit {
         let nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
-        console.log(nestedItems)
+       // console.log(nestedItems)
       });
       }
       getstocktoday(mcsymbol) {
@@ -1161,7 +1237,7 @@ export class ShareComponent implements OnInit {
         let nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
-        console.log(nestedItems)
+        //console.log(nestedItems)
         // this.dscore.push({ text1:nestedItems[1]['stockData'][6],text2:nestedItems[1]['stockData'][9] })
         // this.volscore.push({ text1:nestedItems[1]['stockData'][7],text2:nestedItems[1]['stockData'][10]  })
         // this.mscore.push({ text1:nestedItems[1]['stockData'][8],text2:nestedItems[1]['stockData'][11]  })
@@ -1601,7 +1677,7 @@ export class ShareComponent implements OnInit {
             return data5[key];
           });
       
-      console.log(nestedItems)
+      //console.log(nestedItems)
       
           for (let val in nestedItems[5]) {
             this.hmsg.push({ text: nestedItems[5][val].header, text1: nestedItems[5][val].msg, text2: nestedItems[5][val].dir })

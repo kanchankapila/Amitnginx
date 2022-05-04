@@ -72,7 +72,7 @@
 <div class="InsideContent">
     <div class="col-lg-6 grid-margin stretch-card">
       <div class="content bg-gradient-success card">
-        <h4 class="card-title">Positives</h4>
+        <h4 class="mb-5">Positives</h4>
        
           <div *ngFor="let tile of positive">
             <p class="text-green  grid-margin stretch-card">{{tile.text1}}&nbsp;:{{tile.text3}}Cr.</p>
@@ -82,7 +82,7 @@
     
       <div class="col-lg-4 grid-margin stretch-card">
         <div class="content bg-gradient-danger card">
-          <h4 class="card-title">Negatives</h4>
+          <h4 class="mb-5">Negatives</h4>
          
             <div *ngFor="let tile of negative">
               <p class="text-red grid-margin stretch-card"
@@ -96,7 +96,7 @@
     
         <div class="col-lg-5 grid-margin stretch-card">
           <div class="content bg-gradient-warning card">
-            <h4 class="card-title">Neutrals</h4>
+            <h4 class="mb-5">Neutrals</h4>
           
               <div *ngFor="let tile of neutral">
                 <p class="text-yellow grid-margin stretch-card"
@@ -260,10 +260,10 @@
         
     
       </p-tabPanel>
-    <p-tabPanel header="5 days">
+    <p-tabPanel header="1 Week">
       <div class="col-lg-18 grid-margin stretch-card">
-        <div class="content card">
-          <h4 class="card-title">Weekly</h4>
+        
+          <h4 class="mb-5">Weekly</h4>
           <div fxLayout="row wrap" fxLayoutGap="16px grid">
             <div fxFlex="9" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of stockindicatorsw">
               <mat-card class="text-black cardbear grid-margin stretch-card"
@@ -278,27 +278,27 @@
                           'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
               </mat-card>
              
-            </div>
+            
           </div>
           </div>
         </div>
-      <div class="col-lg-18 grid-margin  stretch-card">
-        <div class="card">
-          <h4 class="mb-2">Stock Today </h4>
-                <canvas baseChart height="150" [data]="stockChartData5d" [options]="financialChartOptions"
-              [type]="financialChartType"
-              [plugins]="financialChartPlugins">
-      </canvas>
+        <div class="col-lg-15 grid-margin  stretch-card">
+          <div class="card">
+           
+              <h4 class="mb-5">stock - 1 Week</h4>
+              <canvas baseChart  [datasets]="stock1wData" [labels]="stock1wLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
+           
           </div>
-      </div>
-    
+        </div>
+      
+      
     </p-tabPanel>
     <p-tabPanel header="1 month">
       
     
         <div class="col-lg-18 grid-margin stretch-card">
-          <div class="content card">
-            <h4 class="card-title">Monthly</h4>
+          
+            <h4 class="mb-5">Monthly</h4>
             <div fxLayout="row wrap" fxLayoutGap="16px grid">
               <div fxFlex="9" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of stockindicatorsm">
                 <mat-card class="text-black cardbear grid-margin stretch-card"
@@ -313,16 +313,16 @@
                             'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
                 </mat-card>
                
-              </div>
+            
             </div>
             </div>
           </div>
       <div class="col-lg-15 grid-margin  stretch-card">
         <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">stock - 1 Month</h4>
-            <canvas baseChart  [datasets]="stock1mData" [labels]="stock1mLabels" [type]="lineChartType" [options]="stockChartOptions" ></canvas>
-          </div>
+          
+            <h4 class="mb-5">stock - 1 Month</h4>
+            <canvas baseChart  [datasets]="stock1mData" [labels]="stock1mLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
+         
         </div>
       </div>
     
@@ -332,8 +332,8 @@
       <div class="col-lg-15 grid-margin  stretch-card">
         <div class="card">
           <div class="card-body" *ngIf="stock3mData">
-            <h4 class="card-title">NIFTY - 3 months</h4>
-            <canvas baseChart  [datasets]="stock3mData" [labels]="stock3mLabels" [type]="lineChartType" [options]="stockChartOptions" ></canvas>
+            <h4 class="mb-5">NIFTY - 3 months</h4>
+            <canvas baseChart  [datasets]="stock3mData" [labels]="stock3mLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
           </div>
         </div>
       </div>
@@ -342,10 +342,10 @@
     <p-tabPanel header="6 months">
       <div class="col-lg-15 grid-margin  stretch-card">
         <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">stock - 6 Months</h4>
-            <canvas baseChart  [datasets]="stock6mData" [labels]="stock6mLabels" [type]="lineChartType" [options]="stockChartOptions" ></canvas>
-          </div>
+         
+            <h4 class="mb-5">stock - 6 Months</h4>
+            <canvas baseChart  [datasets]="stock6mData" [labels]="stock6mLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
+         
         </div>
       </div>
     </p-tabPanel>
@@ -366,62 +366,62 @@
     </p-tabView>
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-        <div class="card-body">
-          <h1 class="card-title">EMA Crossover</h1>
+      
+          <h1 class="mb-5">EMA Crossover</h1>
           <div echarts [options]="options3"></div>
-        </div>
+       
       </div>
     </div>
     
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-        <div class="card-body">
-          <h1 class="card-title">DMA</h1>
+        
+          <h1 class="mb-5">DMA</h1>
           <div echarts [options]="options4"></div>
-        </div>
+       
       </div>
     </div>
     
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">MACD</h4>
+       
+          <h4 class="mb-5">MACD</h4>
           <div echarts [options]="options1"></div>
-        </div>
+       
       </div>
     </div>
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">RSI</h4>
+       
+          <h4 class="mb-5">RSI</h4>
           <div echarts [options]="options2"></div>
-        </div>
+        
       </div>
     </div>
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">MACD</h4>
+       
+          <h4 class="mb-5">KST</h4>
           <div echarts [options]="options5"></div>
-        </div>
+       
       </div>
     </div>
     
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">MACD</h4>
+       
+          <h4 class="mb-5">OBV</h4>
           <div echarts [options]="options6"></div>
-        </div>
+        
       </div>
     </div>
     
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">MACD</h4>
+        
+          <h4 class="mb-5">DOW</h4>
           <div echarts [options]="options7"></div>
-        </div>
+      
       </div>
     </div>
     

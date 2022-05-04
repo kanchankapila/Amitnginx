@@ -2554,19 +2554,23 @@ app.get('/api/trendlynestocks1', (req, res) => {
   request(url11, function (error, response, html) {
     if (!error) {
      
+    //  chrome.getCookies('https://trendlyne.com/equity/getStockMetricParameterList/' + tlid + '/', 'jar', function(err, jar) {
+	//request({url: 'https://trendlyne.com/equity/getStockMetricParameterList/' + tlid + '/', jar: jar}, function (err, response, body) {
+    //console.log(response);
+   ///Explore more/////
+    //  chrome.getCookies('https://trendlyne.com/equity/getStockMetricParameterList/' + tlid + '/', function (err, cookies) {
+      //  console.log(cookies)
+      //})
+    
+	
+
       
-      
-chrome.getCookies('https://trendlyne.com/equity/getStockMetricParameterList/'+tlid+'/', function(err, cookies) {
+      chrome.getCookies('https://trendlyne.com/equity/getStockMetricParameterList/' + tlid + '/', function (err, cookies) {
    
 });
-const url = 'https://www.yourUrl.com/';
 
-const myFunction = async () => {
-    const cookies = await chrome.getCookiesPromised('https://trendlyne.com/equity/getStockMetricParameterList/'+tlid+'/')
-    // ..... Use the cookies
-  console.log(cookies)
-  myFunction()
-}
+
+
     
 
 
