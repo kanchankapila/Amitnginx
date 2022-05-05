@@ -1262,7 +1262,7 @@ export class ShareComponent implements OnInit {
       }
       ////////////////////////////////Market Mojo///////////////////////////////
       getmmmacd(stockid) {
-        this.http.get('https://www.marketsmojo.com/technical_card/getCardInfo?sid='+this.stockid +'&se=nse&cardlist=sectRsi_rsi_w').subscribe(data5 => {
+        this.http.get('https://www.marketsmojo.com/technical_card/getCardInfo?sid='+this.stockid +'&se=nse&cardlist=sectMacd_macd_w').subscribe(data5 => {
           let nestedItems = Object.keys(data5).map(key => {
             return data5[key];
           });

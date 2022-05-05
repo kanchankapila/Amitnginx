@@ -42,7 +42,6 @@
     "async-es": "^3.2.3",
     "axios": "^0.26.0",
     "axios-cookiejar-support": "^1.0.1",
-    "body-parser": "^1.19.2",
     "bootstrap": "^4.5.3",
     "buffer": "^6.0.3",
     "chart.js": "^3.7.0",
