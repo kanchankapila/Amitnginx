@@ -1262,56 +1262,56 @@ export class ShareComponent implements OnInit {
       }
       ////////////////////////////////Market Mojo///////////////////////////////
       getmmmacd(stockid) {
-        this.dataApi.getmmmacd(stockid).subscribe(data5 => {
+        this.http.get('https://www.marketsmojo.com/technical_card/getCardInfo?sid='+this.stockid +'&se=nse&cardlist=sectRsi_rsi_w').subscribe(data5 => {
           let nestedItems = Object.keys(data5).map(key => {
             return data5[key];
           });
+          console.log(nestedItems)
+      
+          // for (let val in nestedItems[0]["stock"]) {
+      
+          //   this.lineChartDatamacdm.push(nestedItems[0]["stock"][val].macd)
+          //   this.lineChartDatasignalm.push(nestedItems[0]["stock"][val].signal)
+          //   this.lineChartDatapricemacdm.push(nestedItems[0]["stock"][val].price)
+          //   this.lineChartmacdmLabels.push(nestedItems[0]["stock"][val].date)
+          //   this.lineChartDatagrademacdm.push(nestedItems[0]["stock"][val].grade)
+          // }
+          // this.options1 = {
+          //   legend: {
+          //     data: ['macd', 'signal', 'price'],
+          //     align: 'left',
+          //   },
+          //   tooltip: {},
+          //   xAxis: {
+          //     data: this.lineChartmacdmLabels,
       
       
-          for (let val in nestedItems[0]["stock"]) {
+          //   },
+          //   yAxis: {},
+          //   series: [
+          //     {
+          //       name: 'macd',
+          //       type: 'line',
+          //       data: this.lineChartDatamacdm,
+          //       animationDelay: (idx) => idx * 10,
+          //     },
+          //     {
+          //       name: 'signal',
+          //       type: 'line',
+          //       data: this.lineChartDatasignalm,
+          //       animationDelay: (idx) => idx * 10 + 100,
+          //     },
+          //     {
+          //       name: 'price',
+          //       type: 'line',
+          //       data: this.lineChartDatapricemacdm,
+          //       animationDelay: (idx) => idx * 10 + 100,
+          //     },
       
-            this.lineChartDatamacdm.push(nestedItems[0]["stock"][val].macd)
-            this.lineChartDatasignalm.push(nestedItems[0]["stock"][val].signal)
-            this.lineChartDatapricemacdm.push(nestedItems[0]["stock"][val].price)
-            this.lineChartmacdmLabels.push(nestedItems[0]["stock"][val].date)
-            this.lineChartDatagrademacdm.push(nestedItems[0]["stock"][val].grade)
-          }
-          this.options1 = {
-            legend: {
-              data: ['macd', 'signal', 'price'],
-              align: 'left',
-            },
-            tooltip: {},
-            xAxis: {
-              data: this.lineChartmacdmLabels,
-      
-      
-            },
-            yAxis: {},
-            series: [
-              {
-                name: 'macd',
-                type: 'line',
-                data: this.lineChartDatamacdm,
-                animationDelay: (idx) => idx * 10,
-              },
-              {
-                name: 'signal',
-                type: 'line',
-                data: this.lineChartDatasignalm,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-              {
-                name: 'price',
-                type: 'line',
-                data: this.lineChartDatapricemacdm,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-      
-            ],
-            animationEasing: 'elasticOut',
-            animationDelayUpdate: (idx) => idx * 5,
-          };
+          //   ],
+          //   animationEasing: 'elasticOut',
+          //   animationDelayUpdate: (idx) => idx * 5,
+          // };
       
       
       
