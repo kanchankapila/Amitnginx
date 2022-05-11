@@ -190,10 +190,14 @@ export class NavbarComponent implements OnInit {
 
 
   nsedataniftyoi() {
-    this.dataApi.nsedataniftyoi().subscribe(data5 => {
+    
+    this.http.get<any>('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY').subscribe(data5 => {
+      (response: Response) => { console.log(response) }
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      
+
       this.pcrnsenifty.length = 0;
       this.optionwc.length = 0;
       this.n50optionsresistance.length = 0;
@@ -256,7 +260,8 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     })
   }
   nsedatabniftyoi() {
-    this.dataApi.nsedatabniftyoi().subscribe(data5 => {
+    this.http.get<any>('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY').subscribe(data5 => {
+      (response: Response) => { console.log(response) }
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -377,7 +382,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
       
     }
-   // console.log(this.mcsymbol)
+    console.log(this.mcsymbol)
     this.dataApi.getmcvolume(this.mcsymbol).subscribe(data5 => {
 
 

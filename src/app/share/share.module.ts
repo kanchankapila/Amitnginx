@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShareRoutingModule } from './share-routing.module';
 import { ShareComponent } from './share.component';
-import { DatePipe } from '@angular/common'
+
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
 import { NgChartsModule } from 'ng2-charts';
@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import { NgxEchartsModule } from 'ngx-echarts';
-
+import {CookieService} from 'ngx-cookie-service';
 import stock from 'highcharts/modules/stock.src';
 import more from 'highcharts/highcharts-more.src';
 import 'chartjs-adapter-date-fns';
@@ -43,6 +43,6 @@ export function highchartsModules() {
    
   ],
   schemas: [],
-  providers: [DatePipe]
+  providers: [CookieService]
 })
 export class ShareModule { }

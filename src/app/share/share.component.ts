@@ -1,11 +1,14 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
-import { DatePipe } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
+import { v4 as uuidv4 } from 'uuid';
+import axios from "axios";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { StockChart } from 'angular-highcharts';
 import epochSeconds from "epoch-seconds";
+import { createFetch, base, accept, parse } from 'http-client'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
@@ -106,30 +109,27 @@ export interface hmsgtile {
   text: string;
   text1: string;
   text2: string;
-  text3: string;
+ 
   
   }
-  export interface vscoretile {
+export interface vscoretile {
   text: string;
   text1: string;
   text2: string;
-  text3: string;
+}
   
-  }
   export interface fscoretile {
   text: string;
   text1: string;
   text2: string;
-  text3: string;
-  text4: string;
+
   
   }
   export interface qscoretile {
   text: string;
   text1: string;
   text2: string;
-  text3: string;
-  text4: string;
+ 
   }
   
 export interface srtile{
@@ -323,6 +323,8 @@ export interface etstockohlctodaytile
 export class ShareComponent implements OnInit {
   stockhighcharts: StockChart;
   
+  cookieValue = '';
+
 
   public financialChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -357,8 +359,12 @@ export class ShareComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
 
   
-  constructor(public datepipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
+  constructor(private cookieService:CookieService,private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
     Chart.register(CandlestickController, OhlcController, CandlestickElement, OhlcElement);
+  
+  this.cookieService.set('X-Auth-Token', uuidv4());
+  this.cookieValue = this.cookieService.get('X-Auth-Token');
+  
   }
   
   public stockhcdate: Array<any> = [];
@@ -486,11 +492,19 @@ export class ShareComponent implements OnInit {
   stockema: stockematile[] = [];
   stocksma: stocksmatile[] = [];
   public stockdata: Array<number> = [];
+  public delivperc: Array<number> = [];
+  public delivperctime: Array<number> = [];
+  public volume: Array<number> = [];
+  public volumetime: Array<number> = [];
   
   stockhcdata: stockhcdatatile[] = [];
   stocksentiments: stocksentimentstiles[] = [];
   public lineChartData: Array<any> = [];
   public lineChartLabels: Array<number> = [];
+  public DelivData: Array<any> = [];
+  public DelivLabels: Array<number> = [];
+  public VolumeData: Array<any> = [];
+  public VolumeLabels: Array<number> = [];
   public stockDatasnrr1: Array<number> = [];
   public stockDatasnrr2: Array<number> = [];
   public stockDatasnrr3: Array<number> = [];
@@ -530,6 +544,7 @@ export class ShareComponent implements OnInit {
   public apexohlc = [];
   public apexvolume: Array<any> = [];
   public stockChartType: ChartType = 'line';
+  public DelivChartType: ChartType = 'bar';
   public stockChartData: ChartConfiguration['data']
   public stockChartData1w: ChartConfiguration['data']
   public etstockChartData: ChartConfiguration['data']
@@ -557,11 +572,19 @@ export class ShareComponent implements OnInit {
   eqsymbol: any
   tlid: any
   tlname: any
+  bbmsg: any
+  dowmsg: any
+  kstmsg: any
+  mamsg: any
+  macdmsg: any
+  obvmsg: any
+  rsimsg:any
   stockname: any
   stockisin: any
   mcsymbol: any
   mcsymbolname: any
   stockid: any
+  all_cookies: any;
   bqnames: any
   companyid: any
   periods: any
@@ -587,7 +610,7 @@ export class ShareComponent implements OnInit {
     this.etindexs = etindex.default.Data
     this.mcindexs = mcindex.default.Data
     this.route.queryParams.subscribe(params => {
-
+     
       this.eqsymbol = this.stockList.filter(i => i.isin == params.stock)[0].symbol
       this.tlid = this.stockList.filter(i => i.isin == params.stock)[0].tlid
       this.tlname = this.stockList.filter(i => i.isin == params.stock)[0].tlname
@@ -604,38 +627,32 @@ export class ShareComponent implements OnInit {
     // this.getmcstockfrequent(this.mcsymbol, this.eqsymbol);
     // setInterval(() => { this.getmcstockfrequent(this.mcsymbol, this.eqsymbol) }, 30000);
     // setInterval(() => { this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol) }, 10000);
-     this.gettrendlynestocks1(this.tlid, this.tlname, this.eqsymbol)
-     this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol)
+    this.gettrendlynestocks1(this.tlid)
+    this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol)
     this.gettrendlynestocks3(this.tlid)
     this.getshare3m(this.eqsymbol)
     this.getshare1m(this.eqsymbol)
+    this.getmmdata(this.stockid)
     this.getshare6m(this.eqsymbol)
     this.getshare1w(this.eqsymbol)
-     this.getstock1yr(this.eqsymbol)
-     this.getmmmacd(this.stockid)
+    this.getstock1yr(this.eqsymbol)
+    this.getntstockdetails() 
     this.getstocktoday(this.mcsymbol)
     this.getstockmaema(this.eqsymbol)
     setInterval(() => { this.getstocktoday(this.mcsymbol) }, 30000);
-     this.getstocksentiments(this.mcsymbol);
-     this.getmmrsi(this.stockid)
-     this.getmmma(this.stockid)
-     this.getmmstockinfo(this.stockid)
-     this.getmmbb(this.stockid)
-     this.getmmkst(this.stockid)
-     this.getmmobv(this.stockid)
-     this.getmmdow(this.stockid)
+    this.getstocksentiments(this.mcsymbol);
     this.getmcstocktodayohlc(this.mcsymbol)
-   
-    //this.getetsharetoday(this.eqsymbol)
     this.getetsharetoday(this.eqsymbol)
+   
     setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 30000);
+   // setInterval(() => {   this.getmmdata(this.stockid)}, 60000);
   }
 
   
   getetsharetoday(eqsymbol) {
    
     this.http.get<any>('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company').subscribe(data5 => {
-      (response: Response) => { console.log(response) }
+    
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
@@ -645,7 +662,7 @@ export class ShareComponent implements OnInit {
       for (let val in (nestedItems[0]['results']['quote'])){
         this.etstockohlctoday.push({x:new Date(nestedItems[0]['results']['quote'][val].Date).getTime(),o:nestedItems[0]['results']['quote'][val].Open,h:nestedItems[0]['results']['quote'][val].High,l:nestedItems[0]['results']['quote'][val].Low,c:nestedItems[0]['results']['quote'][val].Close})
       }
-    console.log(this.etstockohlctoday)
+
     this.etstockChartData  = {
       datasets: [ {
        label: this.stockname,
@@ -696,7 +713,7 @@ export class ShareComponent implements OnInit {
      let nestedItems = Object.keys(data5).map(key => {
        return data5[key];
      });
-      console.log(nestedItems)
+     
       for (let val in nestedItems[0]['results']['quotedata']) {
         this.stock3mdata.unshift(nestedItems[0]['results']['quotedata'][val][1])
         this.stock3mLabels.unshift(new Date(nestedItems[0]['results']['quotedata'][val][0]).toLocaleString("en-US", { timeZone: "Asia/Kolkata" }))
@@ -715,8 +732,386 @@ export class ShareComponent implements OnInit {
    }];
 
     this.stock3mLabels = this.stock3mLabels;
- 
-}
+   
+  }
+  getmmdata(stockid) {
+   
+    this.http.get('https://www.trading80.com/technical_card/getCardInfo?sid=' + this.stockid + '&se=bse&cardlist=sectPrice_techScore,sectPrice_indiScale,sectIndigraph_graph,sectMacd_macd_w,sectRsi_rsi_w,sectBb_bb_w,sectMa_ma_w,sectKst_kst_w,sectDow_dow_w,sectObv_obv_w').subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
+      this.fscore.push({ text: nestedItems[2]['sectPrice_indiScale'][0].fin_trend_clr, text1: nestedItems[2]['sectPrice_indiScale'][0].fin_trend_points, text2: nestedItems[2]['sectPrice_indiScale'][0].fin_trend_text })
+      this.qscore.push({ text: nestedItems[2]['sectPrice_indiScale'][0].quality_clr, text1: nestedItems[2]['sectPrice_indiScale'][0].quality_rank, text2: nestedItems[2]['sectPrice_indiScale'][0].quality_text })
+      this.techscore.push({ text: nestedItems[2]['sectPrice_indiScale'][0].tech_clr, text1: nestedItems[2]['sectPrice_indiScale'][0].tech_score, text2: nestedItems[2]['sectPrice_indiScale'][0].tech_text })
+      this.vscore.push ({text: nestedItems[2]['sectPrice_indiScale'][0].valuation_clr, text1: nestedItems[2]['sectPrice_indiScale'][0].valuation_rank, text2: nestedItems[2]['sectPrice_indiScale'][0].valuation_text})
+      
+      this.lineChartDatamacdm.length = 0;
+      this.lineChartDatasignalm.length = 0;
+      this.lineChartDatapricemacdm.length = 0;
+      this.lineChartDatagrademacdm.length = 0;
+     // this.msg = nestedItems[2]['sectBb_bb_m'].text
+      for (let val in nestedItems[2]['sectMacd_macd_w']["stock"]) {
+      
+        this.lineChartDatamacdm.push(nestedItems[2]['sectMacd_macd_w']["stock"][val].macd)
+        this.lineChartDatasignalm.push(nestedItems[2]['sectMacd_macd_w']["stock"][val].signal)
+        this.lineChartDatapricemacdm.push(nestedItems[2]['sectMacd_macd_w']["stock"][val].price)
+        this.lineChartmacdmLabels.push(nestedItems[2]['sectMacd_macd_w']["stock"][val].date)
+        this.lineChartDatagrademacdm.push(nestedItems[2]['sectMacd_macd_w']["stock"][val].grade)
+      }
+      this.macdmsg=nestedItems[2]['sectMacd_macd_w']['text']
+      this.options1 = {
+        legend: {
+          data: ['macd', 'signal', 'price'],
+          align: 'left',
+        },
+        tooltip: {},
+        xAxis: {
+          data: this.lineChartmacdmLabels,
+  
+  
+        },
+        yAxis: {},
+        series: [
+          {
+            name: 'macd',
+            type: 'line',
+            data: this.lineChartDatamacdm,
+            animationDelay: (idx) => idx * 10,
+          },
+          {
+            name: 'signal',
+            type: 'line',
+            data: this.lineChartDatasignalm,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+          {
+            name: 'price',
+            type: 'line',
+            data: this.lineChartDatapricemacdm,
+            animationDelay: (idx) => idx * 10 + 100,
+          }
+          
+  
+        ],
+        animationEasing: 'elasticOut',
+        animationDelayUpdate: (idx) => idx * 5,
+      };
+      this.lineChartDatarsim.length = 0;
+      this.lineChartDataubandm.length = 0;
+      this.lineChartDatalbandm.length = 0;
+      this.lineChartDatapricersim.length = 0;
+      this.lineChartrsimLabels.length = 0;
+  
+      for (let val in nestedItems[2]['sectRsi_rsi_w']["stock"]) {
+      
+        this.lineChartDatarsim.push(nestedItems[2]['sectRsi_rsi_w']["stock"][val].rsi)
+        this.lineChartDataubandm.push(nestedItems[2]['sectRsi_rsi_w']["stock"][val].uband)
+        this.lineChartDatalbandm.push(nestedItems[2]['sectRsi_rsi_w']["stock"][val].lband)
+        this.lineChartDatapricersim.push(nestedItems[2]['sectRsi_rsi_w']["stock"][val].price)
+        this.lineChartrsimLabels.push(nestedItems[2]['sectRsi_rsi_w']["stock"][val].date)
+      }
+      this.rsimsg=nestedItems[2]['sectRsi_rsi_w']['text']
+      this.options2 = {
+        legend: {
+          data: ['rsi', 'uband', 'lband'],
+          align: 'left',
+        },
+        tooltip: {},
+        xAxis: {
+          data: this.lineChartrsimLabels,
+  
+        },
+        yAxis: {},
+        series: [
+          {
+            name: 'rsi',
+            type: 'line',
+            data: this.lineChartDatarsim,
+            animationDelay: (idx) => idx * 10,
+          },
+          {
+            name: 'uband',
+            type: 'line',
+            data: this.lineChartDataubandm,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+          {
+            name: 'lband',
+            type: 'line',
+            data: this.lineChartDatalbandm,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+        ],
+        animationEasing: 'elasticOut',
+        animationDelayUpdate: (idx) => idx * 5,
+      };
+      this.lineChartDatamaday50m.length = 0;
+      this.lineChartDatamaday200m.length = 0;
+      this.lineChartDatamapricem.length = 0;
+      this.lineChartDatamadate.length = 0;
+      this.lineChartDatamaflag.length = 0;
+   
+      for (let val in nestedItems[2]['sectMa_ma_w']["stock"]) {
+      
+        this.lineChartDatamaday50m.push(nestedItems[2]['sectMa_ma_w']["stock"][val].day50)
+        this.lineChartDatamaday200m.push(nestedItems[2]['sectMa_ma_w']["stock"][val].day200)
+        this.lineChartDatamapricem.push(nestedItems[2]['sectMa_ma_w']["stock"][val].price)
+        this.lineChartDatamadate.push(nestedItems[2]['sectMa_ma_w']["stock"][val].date)
+        this.lineChartDatamaflag.push(nestedItems[2]['sectMa_ma_w']["stock"][val].flag)
+      }
+      this.mamsg=nestedItems[2]['sectMa_ma_w']['text']
+      this.options3 = {
+        legend: {
+          data: ['day50', 'day200', 'price'],
+          align: 'left',
+        },
+        tooltip: {},
+        xAxis: {
+          data: this.lineChartDatamadate,
+          //silent: false,
+          //splitLine: {
+          //show: false,
+          //},
+        },
+        yAxis: {},
+        series: [
+          {
+            name: 'day50',
+            type: 'line',
+            data: this.lineChartDatamaday50m,
+            animationDelay: (idx) => idx * 10,
+          },
+          {
+            name: 'day200',
+            type: 'line',
+            data: this.lineChartDatamaday200m,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+          {
+            name: 'price',
+            type: 'line',
+            data: this.lineChartDatamapricem,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+        ],
+        animationEasing: 'elasticOut',
+        animationDelayUpdate: (idx) => idx * 5,
+      };
+      this.lineChartDatabbuband.length = 0;
+      this.lineChartDatabblband.length = 0;
+      this.lineChartDatabbdma20.length = 0;
+      this.lineChartDatabbdate.length = 0;
+      this.lineChartDatabbprice.length = 0;
+      
+      for (let val in nestedItems[2]['sectBb_bb_w']["stock"]) {
+      
+        this.lineChartDatabbuband.push(nestedItems[2]['sectBb_bb_w']["stock"][val].uband)
+        this.lineChartDatabblband.push(nestedItems[2]['sectBb_bb_w']["stock"][val].lband)
+        this.lineChartDatabbdma20.push(nestedItems[2]['sectBb_bb_w']["stock"][val].dma20)
+        this.lineChartDatabbdate.push(nestedItems[2]['sectBb_bb_w']["stock"][val].date)
+        this.lineChartDatabbprice.push(nestedItems[2]['sectBb_bb_w']["stock"][val].price)
+      }
+      this.bbmsg=nestedItems[2]['sectBb_bb_w']['text']
+      this.options4 = {
+        legend: {
+          data: ['dma20', 'price', 'uband', 'lband'],
+          align: 'left',
+        },
+        tooltip: {},
+        xAxis: {
+          data: this.lineChartDatabbdate,
+  
+        },
+        yAxis: {},
+        series: [
+          {
+            name: 'dma20',
+            type: 'line',
+            data: this.lineChartDatabbdma20,
+            animationDelay: (idx) => idx * 10,
+          },
+          {
+            name: 'price',
+            type: 'line',
+            data: this.lineChartDatabbprice,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+          {
+            name: 'lband',
+            type: 'line',
+            data: this.lineChartDatabblband,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+          {
+            name: 'uband',
+            type: 'line',
+            data: this.lineChartDatabbuband,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+        ],
+        animationEasing: 'elasticOut',
+        animationDelayUpdate: (idx) => idx * 5,
+      };
+      this.lineChartDatakst.length = 0;
+        this.lineChartDatakstsignal.length = 0;
+        this.lineChartDatakstprice.length = 0;
+        this.lineChartDatakstdate.length = 0;
+      
+      for (let val in nestedItems[2]['sectKst_kst_w']["stock"]) {
+      
+        this.lineChartDatakst.push(nestedItems[2]['sectKst_kst_w']["stock"][val].kst)
+        this.lineChartDatakstsignal.push(nestedItems[2]['sectKst_kst_w']["stock"][val].signal)
+        this.lineChartDatakstprice.push(nestedItems[2]['sectKst_kst_w']["stock"][val].price)
+        this.lineChartDatakstdate.push(nestedItems[2]['sectKst_kst_w']["stock"][val].date)
+        //   this.lineChartrsimLabels.push(nestedItems[2]['sectKst_kst_w']["stock"][val].date)
+      }
+      this.kstmsg=nestedItems[2]['sectKst_kst_w']['text']
+      
+  
+      this.options5 = {
+        legend: {
+          data: ['kst', 'price', 'signal'],
+          align: 'left',
+        },
+        tooltip: {},
+        xAxis: {
+          data: this.lineChartDatakstdate,
+          //silent: false,
+          //splitLine: {
+          //show: false,
+          //},
+        },
+        yAxis: {},
+        series: [
+          {
+            name: 'kst',
+            type: 'line',
+            data: this.lineChartDatakst,
+            animationDelay: (idx) => idx * 10,
+          },
+          {
+            name: 'signal',
+            type: 'line',
+            data: this.lineChartDatakstsignal,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+          {
+            name: 'price',
+            type: 'line',
+            data: this.lineChartDatakstprice,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+        ],
+        animationEasing: 'elasticOut',
+        animationDelayUpdate: (idx) => idx * 5,
+      };
+      this.lineChartDatadowdate.length = 0;
+        this.lineChartDatadowprice.length = 0;
+        this.lineChartDatadowscore.length = 0;
+        this.lineChartDatadowflag.length = 0;
+      for (let val in nestedItems[2]['sectDow_dow_w']["stock"]) {
+      
+        this.lineChartDatadowdate.push(nestedItems[2]['sectDow_dow_w']["stock"][val].date)
+        this.lineChartDatadowprice.push(nestedItems[2]['sectDow_dow_w']["stock"][val].price)
+        this.lineChartDatadowscore.push(nestedItems[2]['sectDow_dow_w']["stock"][val].score)
+        this.lineChartDatadowflag.push(nestedItems[2]['sectDow_dow_w']["stock"][val].flag)
+        //   this.lineChartrsimLabels.push(nestedItems[2]['sectDow_dow_w']["stock"][val].date)
+      }
+      this.dowmsg=nestedItems[2]['sectDow_dow_w']['text']
+      this.options7 = {
+        legend: {
+          data: ['score', 'price', 'flag'],
+          align: 'left',
+        },
+        tooltip: {},
+        xAxis: {
+          data: this.lineChartDatadowdate
+        },
+        //silent: false,
+        //splitLine: {
+        //show: false,
+        //},
+  
+        yAxis: {},
+        series: [
+          {
+            name: 'score',
+            type: 'bar',
+            data: this.lineChartDatadowscore,
+            animationDelay: (idx) => idx * 10,
+          },
+          {
+            name: 'price',
+            type: 'line',
+            data: this.lineChartDatadowprice,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+          {
+            name: 'flag',
+            type: 'line',
+            data: this.lineChartDatadowflag,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+        ],
+        animationEasing: 'elasticOut',
+        animationDelayUpdate: (idx) => idx * 5,
+      };
+      this.lineChartDataobvdate.length = 0;
+      this.lineChartDataobv.length = 0;
+      this.lineChartDataobvprice.length = 0;
+     
+      for (let val in nestedItems[2]['sectObv_obv_w']["stock"]) {
+      
+        this.lineChartDataobvdate.push(nestedItems[2]['sectObv_obv_w']["stock"][val].date)
+        this.lineChartDataobv.push(nestedItems[2]['sectObv_obv_w']["stock"][val].obv)
+        this.lineChartDataobvprice.push(nestedItems[2]['sectObv_obv_w']["stock"][val].price)
+        //   this.lineChartDatapricersim.push(nestedItems[2]['sectObv_obv_w']["stock"][val].price)
+        //   this.lineChartrsimLabels.push(nestedItems[2]['sectObv_obv_w']["stock"][val].date)
+      }
+      this.obvmsg=nestedItems[2]['sectObv_obv_w']['text']
+      this.options6 = {
+        legend: {
+          data: ['obv', 'price'],
+          align: 'left',
+        },
+        tooltip: {},
+        xAxis: {
+          data: this.lineChartDataobvdate,
+          //silent: false,
+          //splitLine: {
+          //show: false,
+          //},
+        },
+        yAxis: {},
+        series: [
+          {
+            name: 'obv',
+            type: 'line',
+            data: this.lineChartDataobv,
+            animationDelay: (idx) => idx * 10,
+          },
+          {
+            name: 'price',
+            type: 'line',
+            data: this.lineChartDataobvprice,
+            animationDelay: (idx) => idx * 10 + 100,
+          },
+  
+        ],
+        animationEasing: 'elasticOut',
+        animationDelayUpdate: (idx) => idx * 5,
+      };
+  
+  
+  
+  
+    
+    }), err => {
+      console.log(err)
+    }
+    
+  }
 
   getshare1w(eqsymbol) {
          ////////////////Nifty 1 Week/////////////////////////////
@@ -725,7 +1120,7 @@ export class ShareComponent implements OnInit {
           let nestedItems = Object.keys(data5).map(key => {
             return data5[key];
           });
-           console.log(nestedItems)
+           
            for (let val in nestedItems[0]['results']['quotedata']) {
              this.stock1wdata.unshift(nestedItems[0]['results']['quotedata'][val][1])
              this.stock1wLabels.unshift(new Date(nestedItems[0]['results']['quotedata'][val][0]).toLocaleString("en-US", { timeZone: "Asia/Kolkata" }))
@@ -753,7 +1148,7 @@ export class ShareComponent implements OnInit {
      let nestedItems = Object.keys(data5).map(key => {
        return data5[key];
      });
-      console.log(nestedItems)
+      
       for (let val in nestedItems[0]['results']['quotedata']) {
         this.stock1mdata.unshift(nestedItems[0]['results']['quotedata'][val][1])
         this.stock1mLabels.unshift(new Date(nestedItems[0]['results']['quotedata'][val][0]).toLocaleString("en-US", { timeZone: "Asia/Kolkata" }))
@@ -781,7 +1176,7 @@ export class ShareComponent implements OnInit {
      let nestedItems = Object.keys(data5).map(key => {
        return data5[key];
      });
-      console.log(nestedItems)
+
       for (let val in nestedItems[0]['results']['quotedata']) {
         this.stock6mdata.unshift(nestedItems[0]['results']['quotedata'][val][1])
         this.stock6mLabels.unshift(new Date(nestedItems[0]['results']['quotedata'][val][0]).toLocaleString("en-US", { timeZone: "Asia/Kolkata" }))
@@ -809,7 +1204,7 @@ export class ShareComponent implements OnInit {
           return data5[key];
         });
         
-       // console.log(nestedItems)
+      
         this.stocksentiments.push({ text1: nestedItems[2]['sentiments']['indication'],text2:"Daily"})
       }, err => {
         console.log(err)
@@ -842,7 +1237,7 @@ export class ShareComponent implements OnInit {
         let nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
-       // console.log(nestedItems)
+       
       });
       }
       getstocktoday(mcsymbol) {
@@ -852,7 +1247,7 @@ export class ShareComponent implements OnInit {
     let nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
-  //  console.log(nestedItems)
+  
     this.stockdata.length = 0;
     this.stockLabels.length = 0;
     for (let val in nestedItems[6]) {
@@ -861,7 +1256,7 @@ export class ShareComponent implements OnInit {
      // this.stockhcdate.push({x:(nestedItems[1].values[val]["_time"]),y:(nestedItems[1].values[val]["_value"])})     
     
     }
-  //   console.log(this.stockLabels)
+
   }, err => {
     console.log(err)
   })
@@ -978,12 +1373,59 @@ export class ShareComponent implements OnInit {
         console.log(err)
       })
     }
-    gettrendlynestocks1(tlid,tlname,eqsymbol) {
-      this.dataApi.gettrendlynestocks1(tlid,tlname,eqsymbol).subscribe(data5 => {
+
+  getntstockdetails() {
+    // this.dataApi.getntstockdetails(this.eqsymbol).subscribe(data5 => {
+    //   let nestedItems = Object.keys(data5).map(key => {
+    //     return data5[key];
+    //   });
+    
+      this.dataApi.getntstockdetails(this.eqsymbol).subscribe(data5 => {
+        let nestedItems = Object.keys(data5).map(key => {
+              return data5[key];
+            });
+        console.log(nestedItems)
+        this.delivperc.length = 0;
+        this.delivperctime.length = 0;
+        for (let val in nestedItems[3].priceTable) {
+          this.delivperc.unshift(nestedItems[3].priceTable[val].delivery_percentage)
+          this.delivperctime.unshift(nestedItems[3].priceTable[val].created_at)
+        }
+        this.DelivData = [{
+          label: 'Delivery Percentage',
+          data: this.delivperc,
+          borderWidth: 1,
+          fill: false
+        }];
+     
+        this.DelivLabels = this.delivperctime;
+     
+        for (let val in nestedItems[3].priceTable) {
+          this.volume.unshift(nestedItems[3].priceTable[val].volume)
+          this.volumetime.unshift(nestedItems[3].priceTable[val].created_at)
+        }
+        this.VolumeData = [{
+          label: 'Volume',
+          data: this.volume,
+          borderWidth: 1,
+          fill: false
+        }];
+     
+        this.VolumeLabels = this.volumetime;
+     
+       
+      }, err => {
+        console.log(err)
+      }
+      )
+    
+  }
+    gettrendlynestocks1(tlid) {
+      this.dataApi.gettrendlynestocks1(tlid).subscribe(data5 => {
         let nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
-        //console.log(nestedItems)
+     
         if (nestedItems[1]['MCAP_Q']['lt1']) {
           if (nestedItems[1]['MCAP_Q']['color1'] == 'positive') {
             this.positive.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
@@ -1261,437 +1703,27 @@ export class ShareComponent implements OnInit {
       })
       }
       ////////////////////////////////Market Mojo///////////////////////////////
-      getmmmacd(stockid) {
-        this.http.get('https://www.marketsmojo.com/technical_card/getCardInfo?sid='+this.stockid +'&se=nse&cardlist=sectMacd_macd_w').subscribe(data5 => {
-          let nestedItems = Object.keys(data5).map(key => {
-            return data5[key];
-          });
-          console.log(nestedItems)
-      
-          // for (let val in nestedItems[0]["stock"]) {
-      
-          //   this.lineChartDatamacdm.push(nestedItems[0]["stock"][val].macd)
-          //   this.lineChartDatasignalm.push(nestedItems[0]["stock"][val].signal)
-          //   this.lineChartDatapricemacdm.push(nestedItems[0]["stock"][val].price)
-          //   this.lineChartmacdmLabels.push(nestedItems[0]["stock"][val].date)
-          //   this.lineChartDatagrademacdm.push(nestedItems[0]["stock"][val].grade)
-          // }
-          // this.options1 = {
-          //   legend: {
-          //     data: ['macd', 'signal', 'price'],
-          //     align: 'left',
-          //   },
-          //   tooltip: {},
-          //   xAxis: {
-          //     data: this.lineChartmacdmLabels,
-      
-      
-          //   },
-          //   yAxis: {},
-          //   series: [
-          //     {
-          //       name: 'macd',
-          //       type: 'line',
-          //       data: this.lineChartDatamacdm,
-          //       animationDelay: (idx) => idx * 10,
-          //     },
-          //     {
-          //       name: 'signal',
-          //       type: 'line',
-          //       data: this.lineChartDatasignalm,
-          //       animationDelay: (idx) => idx * 10 + 100,
-          //     },
-          //     {
-          //       name: 'price',
-          //       type: 'line',
-          //       data: this.lineChartDatapricemacdm,
-          //       animationDelay: (idx) => idx * 10 + 100,
-          //     },
-      
-          //   ],
-          //   animationEasing: 'elasticOut',
-          //   animationDelayUpdate: (idx) => idx * 5,
-          // };
-      
-      
-      
-        }, err => {
-          console.log(err)
-        }
-        )
-      }
-      getmmrsi(stockid) {
-        this.dataApi.getmmrsi(stockid).subscribe(data5 => {
-          let nestedItems = Object.keys(data5).map(key => {
-            return data5[key];
-          });
-      
-          for (let val in nestedItems[0]["stock"]) {
-      
-            this.lineChartDatarsim.push(nestedItems[0]["stock"][val].rsi)
-            this.lineChartDataubandm.push(nestedItems[0]["stock"][val].uband)
-            this.lineChartDatalbandm.push(nestedItems[0]["stock"][val].lband)
-            this.lineChartDatapricersim.push(nestedItems[0]["stock"][val].price)
-            this.lineChartrsimLabels.push(nestedItems[0]["stock"][val].date)
-          }
-          this.options2 = {
-            legend: {
-              data: ['rsi', 'uband', 'lband'],
-              align: 'left',
-            },
-            tooltip: {},
-            xAxis: {
-              data: this.lineChartrsimLabels,
-      
-            },
-            yAxis: {},
-            series: [
-              {
-                name: 'rsi',
-                type: 'line',
-                data: this.lineChartDatarsim,
-                animationDelay: (idx) => idx * 10,
-              },
-              {
-                name: 'uband',
-                type: 'line',
-                data: this.lineChartDataubandm,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-              {
-                name: 'lband',
-                type: 'line',
-                data: this.lineChartDatalbandm,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-            ],
-            animationEasing: 'elasticOut',
-            animationDelayUpdate: (idx) => idx * 5,
-          };
-      
-      
-      
-        }, err => {
-          console.log(err)
-        }
-        )
-      }
-      getmmbb(stockid) {
-        this.dataApi.getmmbb(stockid).subscribe(data5 => {
-          let nestedItems = Object.keys(data5).map(key => {
-            return data5[key];
-          });
-      
-          for (let val in nestedItems[0]["stock"]) {
-      
-            this.lineChartDatabbuband.push(nestedItems[0]["stock"][val].uband)
-            this.lineChartDatabblband.push(nestedItems[0]["stock"][val].lband)
-            this.lineChartDatabbdma20.push(nestedItems[0]["stock"][val].dma20)
-            this.lineChartDatabbdate.push(nestedItems[0]["stock"][val].date)
-            this.lineChartDatabbprice.push(nestedItems[0]["stock"][val].price)
-          }
-          this.options4 = {
-            legend: {
-              data: ['dma20', 'price', 'uband', 'lband'],
-              align: 'left',
-            },
-            tooltip: {},
-            xAxis: {
-              data: this.lineChartDatabbdate,
-      
-            },
-            yAxis: {},
-            series: [
-              {
-                name: 'dma20',
-                type: 'line',
-                data: this.lineChartDatabbdma20,
-                animationDelay: (idx) => idx * 10,
-              },
-              {
-                name: 'price',
-                type: 'line',
-                data: this.lineChartDatabbprice,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-              {
-                name: 'lband',
-                type: 'line',
-                data: this.lineChartDatabblband,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-              {
-                name: 'uband',
-                type: 'line',
-                data: this.lineChartDatabbuband,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-            ],
-            animationEasing: 'elasticOut',
-            animationDelayUpdate: (idx) => idx * 5,
-          };
-      
-      
-      
-      
-      
-        }, err => {
-          console.log(err)
-        }
-        )
-      }
-      getmmma(stockid) {
-        this.dataApi.getmmma(stockid).subscribe(data5 => {
-          let nestedItems = Object.keys(data5).map(key => {
-            return data5[key];
-          });
-      
-          for (let val in nestedItems[0]["stock"]) {
-      
-            this.lineChartDatamaday50m.push(nestedItems[0]["stock"][val].day50)
-            this.lineChartDatamaday200m.push(nestedItems[0]["stock"][val].day200)
-            this.lineChartDatamapricem.push(nestedItems[0]["stock"][val].price)
-            this.lineChartDatamadate.push(nestedItems[0]["stock"][val].date)
-            this.lineChartDatamaflag.push(nestedItems[0]["stock"][val].flag)
-          }
-          this.options3 = {
-            legend: {
-              data: ['day50', 'day200', 'price'],
-              align: 'left',
-            },
-            tooltip: {},
-            xAxis: {
-              data: this.lineChartDatamadate,
-              //silent: false,
-              //splitLine: {
-              //show: false,
-              //},
-            },
-            yAxis: {},
-            series: [
-              {
-                name: 'day50',
-                type: 'line',
-                data: this.lineChartDatamaday50m,
-                animationDelay: (idx) => idx * 10,
-              },
-              {
-                name: 'day200',
-                type: 'line',
-                data: this.lineChartDatamaday200m,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-              {
-                name: 'price',
-                type: 'line',
-                data: this.lineChartDatamapricem,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-            ],
-            animationEasing: 'elasticOut',
-            animationDelayUpdate: (idx) => idx * 5,
-          };
-      
-      
-      
-        }, err => {
-          console.log(err)
-        }
-        )
-      }
-      getmmkst(stockid) {
-        this.dataApi.getmmkst(stockid).subscribe(data5 => {
-          let nestedItems = Object.keys(data5).map(key => {
-            return data5[key];
-          });
-      
-          for (let val in nestedItems[0]["stock"]) {
-      
-            this.lineChartDatakst.push(nestedItems[0]["stock"][val].kst)
-            this.lineChartDatakstsignal.push(nestedItems[0]["stock"][val].signal)
-            this.lineChartDatakstprice.push(nestedItems[0]["stock"][val].price)
-            this.lineChartDatakstdate.push(nestedItems[0]["stock"][val].date)
-            //   this.lineChartrsimLabels.push(nestedItems[0]["stock"][val].date)
-          }
-          this.options5 = {
-            legend: {
-              data: ['kst', 'price', 'signal'],
-              align: 'left',
-            },
-            tooltip: {},
-            xAxis: {
-              data: this.lineChartDatakstdate,
-              //silent: false,
-              //splitLine: {
-              //show: false,
-              //},
-            },
-            yAxis: {},
-            series: [
-              {
-                name: 'kst',
-                type: 'line',
-                data: this.lineChartDatakst,
-                animationDelay: (idx) => idx * 10,
-              },
-              {
-                name: 'signal',
-                type: 'line',
-                data: this.lineChartDatakstsignal,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-              {
-                name: 'price',
-                type: 'line',
-                data: this.lineChartDatakstprice,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-            ],
-            animationEasing: 'elasticOut',
-            animationDelayUpdate: (idx) => idx * 5,
-          };
-      
-      
-      
-        }, err => {
-          console.log(err)
-        }
-        )
-      }
-      getmmdow(stockid) {
-        this.dataApi.getmmdow(stockid).subscribe(data5 => {
-          let nestedItems = Object.keys(data5).map(key => {
-            return data5[key];
-          });
-      
-          for (let val in nestedItems[0]["stock"]) {
-      
-            this.lineChartDatadowdate.push(nestedItems[0]["stock"][val].date)
-            this.lineChartDatadowprice.push(nestedItems[0]["stock"][val].price)
-            this.lineChartDatadowscore.push(nestedItems[0]["stock"][val].score)
-            this.lineChartDatadowflag.push(nestedItems[0]["stock"][val].flag)
-            //   this.lineChartrsimLabels.push(nestedItems[0]["stock"][val].date)
-          }
-          this.options7 = {
-            legend: {
-              data: ['score', 'price', 'flag'],
-              align: 'left',
-            },
-            tooltip: {},
-            xAxis: {
-              data: this.lineChartDatadowdate
-            },
-            //silent: false,
-            //splitLine: {
-            //show: false,
-            //},
-      
-            yAxis: {},
-            series: [
-              {
-                name: 'score',
-                type: 'bar',
-                data: this.lineChartDatadowscore,
-                animationDelay: (idx) => idx * 10,
-              },
-              {
-                name: 'price',
-                type: 'line',
-                data: this.lineChartDatadowprice,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-              {
-                name: 'flag',
-                type: 'line',
-                data: this.lineChartDatadowflag,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-            ],
-            animationEasing: 'elasticOut',
-            animationDelayUpdate: (idx) => idx * 5,
-          };
-      
-        }, err => {
-          console.log(err)
-        }
-        )
-      }
-      getmmobv(stockid) {
-        this.dataApi.getmmobv(stockid).subscribe(data5 => {
-          let nestedItems = Object.keys(data5).map(key => {
-            return data5[key];
-          });
-      
-          for (let val in nestedItems[0]["stock"]) {
-      
-            this.lineChartDataobvdate.push(nestedItems[0]["stock"][val].date)
-            this.lineChartDataobv.push(nestedItems[0]["stock"][val].obv)
-            this.lineChartDataobvprice.push(nestedItems[0]["stock"][val].price)
-            //   this.lineChartDatapricersim.push(nestedItems[0]["stock"][val].price)
-            //   this.lineChartrsimLabels.push(nestedItems[0]["stock"][val].date)
-          }
-          this.options6 = {
-            legend: {
-              data: ['obv', 'price'],
-              align: 'left',
-            },
-            tooltip: {},
-            xAxis: {
-              data: this.lineChartDataobvdate,
-              //silent: false,
-              //splitLine: {
-              //show: false,
-              //},
-            },
-            yAxis: {},
-            series: [
-              {
-                name: 'obv',
-                type: 'line',
-                data: this.lineChartDataobv,
-                animationDelay: (idx) => idx * 10,
-              },
-              {
-                name: 'price',
-                type: 'line',
-                data: this.lineChartDataobvprice,
-                animationDelay: (idx) => idx * 10 + 100,
-              },
-      
-            ],
-            animationEasing: 'elasticOut',
-            animationDelayUpdate: (idx) => idx * 5,
-          };
-      
-      
-      
-      
-        }, err => {
-          console.log(err)
-        }
-        )
-      }
       getmmstockinfo(stockid) {
-        this.dataApi.getmmstockinfo(stockid).subscribe(data5 => {
+        this.http.get('https://frapi.marketsmojo.com/stocks_stocksid/header_info?sid='+this.stockid+'&exchange=1').subscribe(data5 => {
           let nestedItems = Object.keys(data5).map(key => {
             return data5[key];
           });
       
-      //console.log(nestedItems)
+      console.log(nestedItems)
       
-          for (let val in nestedItems[5]) {
-            this.hmsg.push({ text: nestedItems[5][val].header, text1: nestedItems[5][val].msg, text2: nestedItems[5][val].dir })
-          }
-          for (let val in nestedItems[4]["popup"]) {
-            this.mmdelivcomp=nestedItems[4]["popup"][val] 
-          }
-          this.score.push({ text: nestedItems[2].score, text1: "Score" })
-          this.scoret.push({ text: nestedItems[2].scoreText, text1: "Reco" })
+          // for (let val in nestedItems[5]) {
+          //   this.hmsg.push({ text: nestedItems[5][val].header, text1: nestedItems[5][val].msg, text2: nestedItems[5][val].dir })
+          // }
+          // for (let val in nestedItems[4]["popup"]) {
+          //   this.mmdelivcomp=nestedItems[4]["popup"][val] 
+          // }
+          // this.score.push({ text: nestedItems[2].score, text1: "Score" })
+          // this.scoret.push({ text: nestedItems[2].scoreText, text1: "Reco" })
       
-          this.fscore.push({ text: nestedItems[2].f_clr, text1: nestedItems[2].f_dir, text2: nestedItems[2].f_pts, text3: nestedItems[2].f_txt, text4: "Financial" })
-          this.qscore.push({ text: nestedItems[2].q_clr, text1: nestedItems[2].q_dir, text2: nestedItems[2].q_rank, text3: nestedItems[2].q_txt, text4: "Quality" })
-          this.vscore.push({ text: nestedItems[2].v_clr, text1: nestedItems[2].v_rank, text2: nestedItems[2].v_txt, text3: "Valuation" })
-          this.techscore.push({ text: nestedItems[2].tech_clr, text1: nestedItems[2].tech_score, text2: nestedItems[2].tech_txt, text3: "Tech" })
+          // this.fscore.push({ text: nestedItems[2].f_clr, text1: nestedItems[2].f_dir, text2: nestedItems[2].f_pts, text3: nestedItems[2].f_txt, text4: "Financial" })
+          // this.qscore.push({ text: nestedItems[2].q_clr, text1: nestedItems[2].q_dir, text2: nestedItems[2].q_rank, text3: nestedItems[2].q_txt, text4: "Quality" })
+          // this.vscore.push({ text: nestedItems[2].v_clr, text1: nestedItems[2].v_rank, text2: nestedItems[2].v_txt, text3: "Valuation" })
+          // this.techscore.push({ text: nestedItems[2].tech_clr, text1: nestedItems[2].tech_score, text2: nestedItems[2].tech_txt, text3: "Tech" })
       
         }, err => {
           console.log(err)

@@ -1523,7 +1523,7 @@ ngOnInit() {
     
 
     
-    this.gettrendlynestocks1(this.tlid, this.tlname, this.eqsymbol)
+    this.gettrendlynestocks1(this.tlid)
     this.gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol)
     this.getgooglenews(params.stock, 'googlenews')
     this.getnse()
@@ -1698,8 +1698,8 @@ nsedatastockohlc2(eqsymbol) {
     console.log(err)
   })
 }
-gettrendlynestocks1(tlid,tlname,eqsymbol) {
-  this.dataApi.gettrendlynestocks1(tlid,tlname,eqsymbol).subscribe(data5 => {
+gettrendlynestocks1(tlid) {
+  this.dataApi.gettrendlynestocks1(tlid).subscribe(data5 => {
     let nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });

@@ -2,6 +2,7 @@
 const async = require("async")
 const express = require('express');
 const cluster = require('cluster');
+const { Pool, Client } = require('pg')
 var compression = require('compression');
 const numCPUs = require('os').cpus().length;
 var http = require('http')
@@ -13,7 +14,13 @@ const { JSDOM } = require( "jsdom" );
 const { window } = new JSDOM( "" );
 const $ = require("jquery")(window);
 const responseTime = require('response-time')
+app1.use(cookieSession({
+  name: 'Amit.kapila.2009@gmail.com',
+  keys: [/Akhilesh@2015/],
 
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 const redis = require('redis');
 const client = redis.createClient();
 const chrome = require('chrome-cookies-secure');
@@ -34,7 +41,7 @@ const fetch = require("node-fetch");
 const csrf = require('csurf');
 process.env.chartinkcsrf = 'IeyxllMLHFKfCD4Yby7Sw1g9XWJhX5XJjsGfwtnW'
 process.env.chartinkcookie = '_ga=GA1.2.2067931904.1621586668; bfp_sn_rf_8b2087b102c9e3e5ffed1c1478ed8b78=Direct; bafp=0590ba80-e319-11ea-a890-4395e7b43464; __gads=ID=eb4d407b97097fa6-22285d39c9c800fa:T=1621586677:RT=1621586677:S=ALNI_MZ3vScH0DJGPYFS_YkChWPH5KiAFg; remember_web_59ba36addc2b2f9401580f014c7f58ea4e30989d=eyJpdiI6IjFNR1pXdzlYUjlMa25jRGJ3K21FOWc9PSIsInZhbHVlIjoiV1pXSTlIWVZRYUErMllpQk1BMEVQa2tUN3R1bDFsbkZFWU5NeWdWbE4wbFByTEd1SHZRVTkrcDlUdTNoWTJySkVObTJ0cVNKanVpTTRmNlhjSExQak5lM3paNWt4MDVsdW9kQ2dGMG05ZkhXZDROeUlkVlg5U1B6MEdCdHlWQVwvSHZYZ0FGalRQQ2JFRlN6U0pZTXhMQVpESkRoNUlpbDJUWVZcL3FsVWdSMXJjeE1JTmhkMkJyK1dITmpiUUF6cGkiLCJtYWMiOiJlM2E1MzY2NzMwZTcwYWYyMjcxOTY0OGYxMDJhMTJiODkyNzQyMTUwOWZjODZlOTdmZDZlYThiMDFkNTM3Yzk4In0%3D; __utmz=102564947.1627487103.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utma=102564947.2067931904.1621586668.1629460093.1630149430.5; mnjs_session_depth=1%7C1630270688592; _gid=GA1.2.1238159065.1630270689; _yeti_currency_={"dataAsOf":"2021-08-27T00:00:00.000Z","generatedAt":"2021-08-28T15:00:47.619Z","conversions":{"USD":{"USD":1,"JPY":110.18620865572656,"BGN":1.6629538304565938,"CZK":21.735396649944732,"DKK":6.322846696709464,"GBP":0.7287050420882578,"HUF":298.3334750446391,"PLN":3.896522404557436,"RON":4.195221494770853,"SEK":8.702066150837515,"CHF":0.9179491539835047,"ISK":126.85996088767962,"NOK":8.806649094464756,"HRK":6.367315704446901,"RUB":74.01998129410765,"TRY":8.401411444605051,"AUD":1.3791344273446138,"BRL":5.245472323781992,"CAD":1.2680894481761755,"CNY":6.47861576396565,"HKD":7.790068871694584,"IDR":14428.152367995921,"ILS":3.231612958081796,"INR":73.71907150752487,"KRW":1169.7814811665676,"MXN":20.379729614828673,"MYR":4.19003486098121,"NZD":1.439248363234419,"PHP":49.95663634044724,"SGD":1.350905535243602,"THB":32.65538644673072,"ZAR":14.909956636340446,"EUR":0.8502678343678259},"GBP":{"USD":1.3722973524847437,"JPY":151.20824241858512,"BGN":2.282067138839947,"CZK":29.827427277924926,"DKK":8.676825782061306,"GBP":1,"HUF":409.4022379613316,"PLN":5.347187379671657,"RON":5.757091350361131,"SEK":11.941822339941426,"CHF":1.259699193727174,"ISK":174.0895884624809,"NOK":12.085341236596152,"HRK":8.737850483647014,"RUB":101.57742436087419,"TRY":11.529234682566539,"AUD":1.8925825233655766,"BRL":7.198347782458024,"CAD":1.7401957924460056,"CNY":8.890587260655987,"HKD":10.690290888300293,"IDR":19799.715295847287,"ILS":4.43473390663104,"INR":101.1644866574099,"KRW":1605.2880295905627,"MXN":27.967048994784314,"MYR":5.749973746543295,"NZD":1.975076718434594,"PHP":68.55535978903889,"SGD":1.8538440894717805,"THB":44.81290036521475,"ZAR":20.46089401771233,"EUR":1.1668202980059041}}}; bfp_sn_rt_8b2087b102c9e3e5ffed1c1478ed8b78=1630270689826; XSRF-TOKEN=eyJpdiI6ImxYbmtYZWJBQWdOMG1XdkZWYkIxOVE9PSIsInZhbHVlIjoiTk0rODBINVFERkRwNEQ3RXMybStWMkI3ZUpGWkhoVWx6elU1SldtcDVIUUFuRWtGY3J2R2RhR3Z5Snp0a2pJMiIsIm1hYyI6ImI2M2RiMTk5MDljNTgyNjhiZDIyYjI0NDhjM2YwMjE2ZWMxYzcwN2Q4NmE4Mjg2ZWI4ODVhZDg1MmRmNTJmOGEifQ%3D%3D; ci_session=eyJpdiI6Im5FZHF1WmU0T2lmVDJ3cjlnSDJmZGc9PSIsInZhbHVlIjoiTFg1U0k2YTVcL3dxRWFXclZhQlQ4Qkp4Q1BURll2RE1KT2JwU1FoMmFxakg5VVpYa3RCcFFoNTZPanJHZVFOVGUiLCJtYWMiOiI1Y2EyZmJmNGZkNDZmOWFhNGNiMzgyOGE1NTEwNGJiMTFkYWNlZWQ2NGUwZjVhODFmMDYyNGY5NzZiN2MzNDMzIn0%3D; _gat=1'
-process.env.trendlynecookie='_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; csrftoken=UdCOt4TuEtdES39jXF2do7Sxm9xvPDFW4BBTkhEtDI4M93qULm9M9gb7t7mM4vxL; .trendlyne=vvd6ghws3icett72qn91snttaywv0chw; _gid=GA1.2.178291800.1651476914; _gat=1'
+process.env.trendlynecookie='_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; csrftoken=pavxqVvnk54yxBt5xAVsMIapOHFzdK9wFtQvOtXPboT6jUVHhE1RaBi6kybaMX9u; .trendlyne=p79sshngf90pfkh21481db0zmh2u0djm; _gid=GA1.2.1417351663.1652194999'
 var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
 const fs =require('fs')
@@ -85,6 +92,59 @@ const axiosCookieJarSupport = require('axios-cookiejar-support').default;
 
 
 ///////For PostgresDB Connection/////////////
+
+const pool = new Pool({
+  user: "postgres",
+  host: "localhost",
+  database: "amit",
+  password: "amit0605",
+  port: "5432"
+});
+const client = new Client({
+  user: "amit",
+  host: "localhost",
+  database: "amit",
+  password: "amit0605",
+  port: "5432"
+  
+})
+//////////////////////////////////Moneycontrol Post request for MCvolume////////
+app.post('/api/mcvolume', async function (req, res) {
+
+  let mcsymbol = req.body
+
+  //console.log(req.body)
+  const promises = mcsymbol.map(symbol => {
+  
+      
+    axios.get('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/' + symbol.mcsymbol).then((response) => {
+      var obj1 = ({ Date: symbol.Date,Time:symbol.time, Name: symbol.name,Symbol:symbol.mcsymbol, "CurrentVol": response.data.data.VOL, "FiveDVol": response.data.data.DVolAvg5, "TenDVol": response.data.data.DVolAvg10, "TwentyDVol": response.data.data.DVolAvg20, "ThirtyDVol": response.data.data.DVolAvg30,"CPrice":response.data.data.pricecurrent,"PChangeper":response.data.data.pricepercentchange,"StockName":response.data.data.SC_FULLNM })
+      
+      console.log("executing mcvolume")
+      pool.query('INSERT INTO mcvolume (info)  VALUES ($1)', [obj1], (err, res) => {
+        console.log(err, res)
+        
+      })
+      pool.end()
+     
+      
+
+     
+
+    }).catch((error) => {
+      console.log(error)
+    })
+  })
+
+  try {
+    await Promise.all(promises)
+  } catch (e) {
+    console.log(e)
+  }
+})
+
+
+////////////////
 
 //var mongo = require('mongodb');
 const { response } = require('express');
@@ -241,133 +301,6 @@ var gnewsyesterday= (yyyy + "-" + mm + "-" + (dd - 01))
 
 
 /////////////////////////////////////////////////1.MarketMojos MACD,used in OHLC component/////////////////////////////////////////////////////
-app.get('/api/mmmacd', function (req, res) {
-
-  let stockid = req.query.stockid
-
-  var url6 = 'https://www.marketsmojo.com/technical_card/getCardInfo?sid=' + stockid + '&se=nse&cardlist=sectMacd_macd_m';
-  request(url6, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-
-      res.json(JSON.parse(response.body).data)
-
-
-    }
-  })
-
-
-})
-//////////////////////////////////////////////////2.MarketMojos RSI,used in OHLC component/////////////////////////////////////////////////////////
-app.get('/api/mmrsi', function (req, res) {
-
-  let stockid = req.query.stockid
-
-  var url6 = 'https://www.marketsmojo.com/technical_card/getCardInfo?sid=' + stockid + '&se=nse&cardlist=sectRsi_rsi_w';
-  request(url6, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-
-      res.json(JSON.parse(response.body).data)
-
-
-    }
-  })
-
-
-})
-/////////////////////////////////////////////////////3.MarketMojos Bollinger Bands,used in OHLC component/////////////////////////////////////////
-app.get('/api/mmbb', function (req, res) {
-
-  let stockid = req.query.stockid
-
-  var url6 = 'https://www.marketsmojo.com/technical_card/getCardInfo?sid=' + stockid + '&se=nse&cardlist=sectBb_bb_w';
-  request(url6, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-
-      res.json(JSON.parse(response.body).data)
-
-
-    }
-  })
-
-
-})
-////////////////////////////////////////////////////////4.MarketMojos Moving Averages,used in OHLC component/////////////////////////////////////
-app.get('/api/mmma', function (req, res) {
-
-  let stockid = req.query.stockid
-
-  var url6 = 'https://www.marketsmojo.com/technical_card/getCardInfo?sid=' + stockid + '&se=nse&cardlist=sectMa_ma_w';
-  request(url6, function (error, response, html) {
-    if (!error) {
-
-
-      res.json(JSON.parse(response.body).data)
-
-
-    }
-  })
-
-
-})
-////////////////////////////////////////////////////////5.Market Mojos KST,used in OHLC component////////////////////////////////////////
-app.get('/api/mmkst', function (req, res) {
-
-  let stockid = req.query.stockid
-
-  var url6 = 'https://www.marketsmojo.com/technical_card/getCardInfo?sid=' + stockid + '&se=nse&cardlist=sectKst_kst_w';
-  request(url6, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-
-      res.json(JSON.parse(response.body).data)
-
-
-    }
-  })
-
-
-})
-
-//////////////////////////////////////////////////////////6.MarketMojos DOW,used in OHLC component/////////////////////////////////////////////
-app.get('/api/mmdow', function (req, res) {
-
-  let stockid = req.query.stockid
-
-  var url6 = 'https://www.marketsmojo.com/technical_card/getCardInfo?sid=' + stockid + '&se=nse&cardlist=sectDow_dow_w';
-  request(url6, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-
-      res.json(JSON.parse(response.body).data)
-
-
-    }
-  })
-
-
-})
-
-///////////////////////////////////////////////////////////7.MarketMojos OBV,used in OHLC component/////////////////////////////////////////////
-app.get('/api/mmobv', function (req, res) {
-
-  let stockid = req.query.stockid
-
-  var url6 = 'https://www.marketsmojo.com/technical_card/getCardInfo?sid=' + stockid + '&se=nse&cardlist=sectObv_obv_w';
-  request(url6, function (error, response, html) {//console.log(response)
-    if (!error) {
-
-
-      res.json(JSON.parse(response.body).data)
-
-
-    }
-  })
-
-
-})
 
 ///////////////////////////////////////////////////////////7.MarketMojos Markets,used in OHLC component/////////////////////////////////////////////
 
@@ -2531,7 +2464,61 @@ app.post('/etcompanydata', async function (req, res) {
     console.log(e)
   }
 })
+app.get('/api/trendlynecookietest',csrfProtection, (req, res) => {
+  // var url11 = 'https://trendlyne.com/equity/getStockMetricParameterList/13';
+  // request(url11, function (error, response, html) {
+  //   if (!error) {
+  
+      
+chrome.getCookies('https://trendlyne.com/news-by-trendlyne/v4/', function(err, cookies) {
+  console.log(cookies) 
+  
+  
+    
+  
+  console.log('Cookies:', req.cookie);
+  console.log('Cookiesresponse:', res.cookies);
+ // console.log('Cookies:', req.cookies['_ga']);
+  //console.log('signed Cookies:', req.signedCookies.user);
+  
+});
+var options1 = {
+  url: "https://trendlyne.com/news-by-trendlyne/v4/",
+  method: 'GET', // Don't forget this line
+  "headers": {
+    "accept": "text/html, */*; q=0.01",
+    "accept-language": "en-US,en;q=0.9",
+    "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "x-requested-with": "XMLHttpRequest"
+  },
+  "referrer": "https://trendlyne.com/features/",
+  "referrerPolicy": "strict-origin-when-cross-origin",
+  "body": null,
+  "method": "GET",
+  "mode": "cors",
+  "credentials": "include"
+};
+request(options1, (err, response, body) => {
+  if (err) {
+      //console.log(err);
+  } else {
+    
+   // (res.json(JSON.parse(response.body)));
+    //( console.log(JSON.parse(response.body)));
+    //console.log('this is response:', (response.body).data)
+    //console.log( 'this is response:',(response.header))
+  }
+});
 
+//}
+ })
+// })
+  
 
 
 
@@ -2544,56 +2531,41 @@ app.post('/etcompanydata', async function (req, res) {
 ////////////////////////////////////////////////**************Trendlyne GET stock******************************/
 
 ////////////////////////////////To get Brokerage Upgrades and other details///////////////////////////////////
-app.get('/api/trendlynestocks1', (req, res) => {
+//app.use(session(sessionConfig));
+  app.get('/api/trendlynestocks1', (req, res) => {
   let tlid = req.query.tlid
   let tlname = req.query.tlname
   let eqsymbol = req.query.eqsymbol
   console.log("This is tendlynestocks1")
 
-  var url11 = 'https://trendlyne.com/equity/getStockMetricParameterList/'+tlid+'/';
+ 
+ 
+  var url11 = 'https://trendlyne.com/equity/getStockMetricParameterList/80210';
   request(url11, function (error, response, html) {
     if (!error) {
-     
-    //  chrome.getCookies('https://trendlyne.com/equity/getStockMetricParameterList/' + tlid + '/', 'jar', function(err, jar) {
-	//request({url: 'https://trendlyne.com/equity/getStockMetricParameterList/' + tlid + '/', jar: jar}, function (err, response, body) {
-    //console.log(response);
-   ///Explore more/////
-    //  chrome.getCookies('https://trendlyne.com/equity/getStockMetricParameterList/' + tlid + '/', function (err, cookies) {
-      //  console.log(cookies)
-      //})
-    
-	
-
-      
-      chrome.getCookies('https://trendlyne.com/equity/getStockMetricParameterList/' + tlid + '/', function (err, cookies) {
    
-});
-
-
-
-    
-
-
 
 var options2 = {
-  url: 'https://trendlyne.com/equity/getStockMetricParameterList/'+tlid+'/',
+  url: 'https://trendlyne.com/equity/getStockMetricParameterList/80210',
   method: 'GET', // Don't forget this line
-  headers: {
+  "headers": {
     "accept": "application/json, text/javascript, */*; q=0.01",
     "accept-language": "en-US,en;q=0.9",
-    "sec-ch-ua": "\"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
+    "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
     "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
     "sec-fetch-dest": "empty",
     "sec-fetch-mode": "cors",
     "sec-fetch-site": "same-origin",
     "x-requested-with": "XMLHttpRequest",
     "cookie": process.env.trendlynecookie
   },
-  "referrer": 'https://trendlyne.com/equity/'+tlid+'/'+eqsymbol+'/'+tlname+'/',
+  "referrer": "https://trendlyne.com/equity/80210/BDL/bharat-dynamics-ltd/",
   "referrerPolicy": "strict-origin-when-cross-origin",
   "body": null,
   "method": "GET",
-  "mode": "cors"
+  "mode": "cors",
+  "credentials": "include"
 };
 
 
@@ -2601,7 +2573,7 @@ request(options2, (err, response, body) => {
   if (err) {
       //console.log(err);
   } else {
-   ( res.json(JSON.parse(body)));
+    ( res.json(JSON.parse(body)));
     }
 });
 }
@@ -2612,79 +2584,16 @@ request(options2, (err, response, body) => {
 
   //////////////////////////To get Durability/Momentum/Volatility SCORE/////////////////////////////////////////////
   
-  // app.get('/api/trendlynestocks2', function (req, res) {
-  //   let tlid = req.query.tlid
-  //   var url6 = 'https://trendlyne.com/mapp/v1/stock/web/ohlc/'+tlid+'/SMA'
-  //     request(url6, function (error, response, html) {
-  //       if (!error) {
-    
-  //         console.log("This is tendlynestocks2")
-  //         try {
-  //           console.log(response.body)
-  //           res.json(JSON.parse(response.body))
-  //         } catch (e) {
-  //           console.log("Error in tendlynestocks2")
-  //         }
-        
-         
-         
-         
-    
-  //       }
-  //     })
-    
-    
-  //  })
-   app1.get('/api/trendlynestocks2', (req, res) => {
-    let tlid = req.query.tlid
-    let tlname = req.query.tlname
+  app.get('/api/trendlynestocks2', (req, res) => {
     let eqsymbol = req.query.eqsymbol
-    console.log("This is tendlynestocks2")
-  
-    var url11 = 'https://trendlyne.com/equity/getStockMetricParameterList/'+tlid+'/SMA';
+    console.log(eqsymbol)
+    var url11 = 'https://trendlyne.com/mapp/v1/stock/chart-data/175/SMA/';
     request(url11, function (error, response, html) {
       if (!error) {
-       
         
+        res.json(JSON.parse(response.body))
         
-  chrome.getCookies('https://trendlyne.com/equity/getStockMetricParameterList/'+tlid+'/SMA', function(err, cookies) {
-      
-  });
-      
-  
-  
-  
-  var options3 = {
-    url: 'https://trendlyne.com/equity/getStockMetricParameterList/'+tlid+'/SMA',
-    method: 'GET', // Don't forget this line
-    headers: {
-      "accept": "application/json, text/javascript, */*; q=0.01",
-      "accept-language": "en-US,en;q=0.9",
-      "sec-ch-ua": "\"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
-      "sec-ch-ua-mobile": "?0",
-      "sec-fetch-dest": "empty",
-      "sec-fetch-mode": "cors",
-      "sec-fetch-site": "same-origin",
-      "x-requested-with": "XMLHttpRequest",
-      "cookie": process.env.trendlynecookie
-    },
-    "referrer": 'https://trendlyne.com/equity/'+tlid+'/'+eqsymbol+'/'+tlname+'/',
-    "referrerPolicy": "strict-origin-when-cross-origin",
-    "body": null,
-    "method": "GET",
-    "mode": "cors"
-  };
-  
-  
-  request(options3, (err, response, body) => {
-    if (err) {
-        //console.log(err);
-    } else {
-     ( res.json(JSON.parse(body)));
-     // console.log((body))
-      }
-  });
-  }
+    }
     })
     
   })
@@ -3385,7 +3294,7 @@ instance.defaults.jar = new tough.CookieJar()
 
 const sessionConfig = {
   secret: 'MYSECRET',
-  name: 'amitstockweb',
+  name: '',
   resave: false,
   saveUninitialized: false,
   cookie : {
@@ -3552,28 +3461,7 @@ app.get('/api/nsedatapioii', function (req, res) {
     
   
 })
-//NSE Nifty Openinterest Data
 
-app.get('/api/nsedataniftyoi', function (req, res) {
-  let stock = req.query.stock
-  instance.get('https://www.nseindia.com/')
-    .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY'))
-    .then(data => res.json(data.data))
-    //.catch(data => console.error(res.response.data))
-    
-  
-})
-//NSE Banknifty OI Data
-
-app.get('/api/nsedatabniftyoi', function (req, res) {
-  let stock = req.query.stock
-  instance.get('https://www.nseindia.com/')
-    .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY'))
-    .then(data => res.json(data.data))
-    .catch(data => console.error(res.response))
-    
-  
-})
 //NSE nifty Pharma OI Data
 app.get('/api/nsedatapniftyoi', function (req, res) {
   let stock = req.query.stock
@@ -3847,9 +3735,9 @@ chrome.getCookies('https://stockreports.zerodha.com/api/pdf/', function(err, coo
   
     
   this.finalcookie=("'_ga=" + this.ga + ';' + ' _gid=' + this.gid + ';' + ' public_token=' + this.publictoken + ';' + ' messages='+this.messages+';'+' csrftoken='+this.csrf+';'+' sessionid='+this.sessionid+"'");
-  //console.log('Cookies:', req.cookies);
-  //console.log('Cookies:', req.cookies['_ga']);
-  //console.log('signed Cookies:', req.signedCookies.user);
+  console.log('Cookies:', req.cookies);
+  console.log('Cookies:', req.cookies['_ga']);
+  console.log('signed Cookies:', req.signedCookies.user);
   
 });
 var options1 = {
@@ -3888,7 +3776,8 @@ request(options1, (err, response, body) => {
 }
 })
 })
-    
+
+  
 
 
 /////////////////////////////////////*****************************NIFTY TRADERS******************///////////////////////////
@@ -3920,6 +3809,63 @@ app.get('/api/ntniftypcr', function (req, res) {
     }
   })
 })
+
+  /////////////Nifty trader POST request////////////////
+  
+  app.get('/api/ntstockdetails', (req, res) => {
+    let eqsymbol = req.query.eqsymbol
+    console.log(eqsymbol)
+    var url11 = 'https://api.niftytrader.in/webapi/Live/stockAnalysis';
+    request(url11, function (error, response, html) {
+      if (!error) {
+        
+        
+        
+  chrome.getCookies('https://api.niftytrader.in/webapi/Live/stockAnalysis', function(err, cookies) {
+      
+  });
+      
+  
+  
+  
+  var options2 = {
+    url: 'https://api.niftytrader.in/webapi/Live/stockAnalysis',
+    method: 'POST', // Don't forget this line
+    "headers": {
+      "accept": "application/json, text/plain, */*",
+      "accept-language": "en-US,en;q=0.9",
+      "content-type": "application/json",
+      "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-site"
+    },
+    "referrer": "https://www.niftytrader.in/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "body": '{\"symbol\":\"'+eqsymbol+'\"}',
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "omit"
+  }
+  
+  request(options2, (err, response, body) => {
+    if (err) {
+        //console.log(err);
+    } else {
+      ( res.json(JSON.parse(body)));
+     // console.log('this is response1:', (response.body))
+      //console.log( 'this is response:',(response.header))
+    }
+  });
+  }
+    })
+    
+  })
+  
+  
+  
 ///////////////////////////////////GOOGLE NEWS API ///////////////////////////////
 
 app.get('/api/gnewsapi', function (req, res) {

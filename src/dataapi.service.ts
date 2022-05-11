@@ -652,6 +652,10 @@ export class DataapiService {
   getmcinsight(mcsymbol){
     return this.http.post('http://localhost:8090/api/mcinsight',mcsymbol)
   }
+  getntstockdetails(eqsymbol) {
+    console.log(eqsymbol)
+    return this.http.get('http://localhost:8090/api/ntstockdetails?eqsymbol='+eqsymbol)
+  }
 
   getdropdbmcdwm(){
     return this.http.get('http://localhost:8090/api/dropdbmcdwm')
@@ -734,8 +738,8 @@ export class DataapiService {
   gettrendingstocks(){
     return this.http.get('http://localhost:8090/api/trendingstocks')
   }
-  gettrendlynestocks1(tlid,tlname,eqsymbol){
-    return this.http.get('http://localhost:8090/api/trendlynestocks1?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
+  gettrendlynestocks1(tlid){
+    return this.http.get('http://localhost:8090/api/trendlynestocks1?tlid='+tlid)
   }
   gettrendlynestocks2(tlid,tlname,eqsymbol){
     return this.http.get('http://localhost:8090/api/trendlynestocks2?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)

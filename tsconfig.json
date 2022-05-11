@@ -10,9 +10,9 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
    
-    // "paths": {
-    //   "tslib" : ["node_modules/tslib/tslib.d.ts"]
-    // },
+    //  "paths": {
+    //    "tslib" : ["./node_modules/tslib/tslib.d.ts"]
+    //  },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,

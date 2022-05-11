@@ -257,7 +257,7 @@ export class NiftyComponent implements OnInit {
     this.getniftyvix()
     this.getniftypcr()
     this.getniftysentiments()
-    this.gettrendlynestocks1(this.tlid,this.tlname,this.eqsymbol)
+    this.gettrendlynestocks1(this.tlid)
     this.getnifty1yr();
     setInterval(() => { this.getnifty50smaema() }, 30000);
     setInterval(() => { this.getmcnifty50stocks()}, 30000);
@@ -269,8 +269,8 @@ export class NiftyComponent implements OnInit {
   
   }
   
-  gettrendlynestocks1(tlid,tlname,eqsymbol) {
-    this.dataApi.gettrendlynestocks1(this.tlid,this.tlname,this.eqsymbol).subscribe(data5 => {
+  gettrendlynestocks1(tlid) {
+    this.dataApi.gettrendlynestocks1(this.tlid).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });

@@ -1,6 +1,56 @@
+<div class="InsideContent">
+<div class="col-md-1 ">
+  <div class="card1 text-black">
+    
+       <div  *ngFor="let tile of fscore" [ngClass]="{
+        'card2 bg-gradient-bull text-black':tile.text === 'green'||'Green',
+        'card3 bg-gradient-bear text-black':tile.text === 'red',
+        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}"><br>Financial<br>&nbsp;&nbsp;{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
 
- 
+    
+  </div>
+</div>
+</div>
 
+<div class="col-md-1 ">
+  <div class="card1 text-black">
+    
+       <div  *ngFor="let tile of qscore" [ngClass]="{
+        'card2 bg-gradient-bull text-black':tile.text === 'green'||'Green',
+        'card3 bg-gradient-bear text-black':tile.text === 'red',
+        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}"><br>Quality<br>{{tile.text2}}<br>{{tile.text1}}
+
+    
+  </div>
+</div>
+</div>
+
+<div class="col-md-1 ">
+  <div class="card1 text-black">
+    
+       <div  *ngFor="let tile of techscore" [ngClass]="{
+        'card2 bg-gradient-bull text-black':tile.text === 'green'||'Green',
+        'card3 bg-gradient-bear text-black':tile.text === 'red',
+        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}"><br>Technicals<br>{{tile.text2}}<br>{{tile.text1}}
+
+    
+  </div>
+</div>
+</div>
+
+<div class="col-md-2 ">
+  <div class="card1 text-black">
+    
+       <div  *ngFor="let tile of vscore" [ngClass]="{
+        'card2 bg-gradient-bull text-black':tile.text === 'green'||'Green',
+        'card3 bg-gradient-bear text-black':tile.text === 'red',
+        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}"><br>Valuation<br>{{tile.text2}}<br>&nbsp;{{tile.text1}}
+
+    
+  </div>
+</div>
+</div>
+</div>
 <div class="InsideContent">
   <div class="col-lg-7 grid-margin stretch-card">
     <div class="content card">
@@ -23,6 +73,7 @@
       </div>
       </div>
     </div>
+
     <div class="InsideContent1">
     <div class="col-lg-13 grid-margin stretch-card">
       <div class="content card">
@@ -46,7 +97,9 @@
         </div>
         </div>
       </div>
-    
+      <div [innerHtml]="msg"></div>
+     
+      
     <div class="col-lg-13 grid-margin stretch-card">
       <div class="content card">
         
@@ -108,7 +161,24 @@
             </div>
           </div>
         </div>
-    
+        <div class="InsideContent">
+        <div class="col-lg-6 grid-margin  stretch-card">
+          <div class="card">
+           
+              <h4 class="mb-5">Delivery Percentage</h4>
+              <canvas baseChart height="250" [datasets]="DelivData" [labels]="DelivLabels" [type]="DelivChartType" [options]="stockChartOptions" ></canvas>
+           
+          </div>
+        </div>
+        <div class="col-lg-6 grid-margin  stretch-card">
+          <div class="card">
+           
+              <h4 class="mb-5">Volume</h4>
+              <canvas baseChart height="250" [datasets]="VolumeData" [labels]="VolumeLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
+           
+          </div>
+        </div>
+      </div>
     <p-tabView>
       <p-tabPanel header="Today">
         
@@ -290,6 +360,70 @@
            
           </div>
         </div>
+        <div class="col-lg-15 grid-margin stretch-card ">
+          <div class="card">
+          
+              <h1 class="mb-5">EMA Crossover</h1>
+              <div echarts [options]="options3"></div>
+           
+          </div>
+        </div>
+        
+        <div class="col-lg-15 grid-margin stretch-card ">
+          <div class="card">
+            
+              <h1 class="mb-5">DMA</h1>
+              <div class="mb-5" [innerHtml]="msg"></div>
+              <div echarts [options]="options4"></div>
+           
+          </div>
+        </div>
+        
+        <div class="col-lg-15 grid-margin stretch-card ">
+          <div class="card">
+           
+              <h4 class="mb-5">MACD</h4>
+              <div echarts [options]="options1"></div>
+           
+          </div>
+        </div>
+        <div class="col-lg-15 grid-margin stretch-card ">
+          <div class="card">
+           
+              <h4 class="mb-5">RSI</h4>
+              <div echarts [options]="options2"></div>
+            
+          </div>
+        </div>
+        <div class="col-lg-15 grid-margin stretch-card ">
+          <div class="card">
+           
+              <h4 class="mb-5">KST</h4>
+              <div echarts [options]="options5"></div>
+           
+          </div>
+        </div>
+        
+        <div class="col-lg-15 grid-margin stretch-card ">
+          <div class="card">
+           
+              <h4 class="mb-5">OBV</h4>
+              <div echarts [options]="options6"></div>
+            
+          </div>
+        </div>
+        
+        <div class="col-lg-15 grid-margin stretch-card ">
+          <div class="card">
+            
+              <h4 class="mb-5">DOW</h4>
+              <div echarts [options]="options7"></div>
+          
+          </div>
+        </div>
+        
+        
+        
       
       
     </p-tabPanel>
@@ -364,10 +498,11 @@
     
     </p-tabPanel>
     </p-tabView>
+    
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-      
-          <h1 class="mb-5">EMA Crossover</h1>
+        <h1 class="mb-5" [innerHtml]="mamsg"></h1>
+          
           <div echarts [options]="options3"></div>
        
       </div>
@@ -375,8 +510,9 @@
     
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-        
-          <h1 class="mb-5">DMA</h1>
+       <h1 class="mb-5" [innerHtml]="bbmsg">&nbsp;</h1>
+         
+          
           <div echarts [options]="options4"></div>
        
       </div>
@@ -384,24 +520,24 @@
     
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-       
-          <h4 class="mb-5">MACD</h4>
+        <h1 class="mb-5" [innerHtml]="macdmsg"></h1>
+        
           <div echarts [options]="options1"></div>
        
       </div>
     </div>
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-       
-          <h4 class="mb-5">RSI</h4>
+        <h1 class="mb-5" [innerHtml]="rsimsg"></h1>
+      
           <div echarts [options]="options2"></div>
         
       </div>
     </div>
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-       
-          <h4 class="mb-5">KST</h4>
+        <h1 class="mb-5" [innerHtml]="kstmsg"></h1>
+         
           <div echarts [options]="options5"></div>
        
       </div>
@@ -409,8 +545,8 @@
     
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-       
-          <h4 class="mb-5">OBV</h4>
+        <h1 class="mb-5" [innerHtml]="obvmsg"></h1>
+          
           <div echarts [options]="options6"></div>
         
       </div>
@@ -418,13 +554,12 @@
     
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
-        
-          <h4 class="mb-5">DOW</h4>
+        <h1 class="mb-5" [innerHtml]="dowmsg"></h1>
+         
           <div echarts [options]="options7"></div>
       
       </div>
     </div>
-    
     
     
     
