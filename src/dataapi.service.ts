@@ -738,8 +738,8 @@ export class DataapiService {
   gettrendingstocks(){
     return this.http.get('http://localhost:8090/api/trendingstocks')
   }
-  gettrendlynestocks1(tlid){
-    return this.http.get('http://localhost:8090/api/trendlynestocks1?tlid='+tlid)
+  gettrendlynestocks1(tlid,tlname,eqsymbol){
+    return this.http.get('http://localhost:8090/api/trendlynestocks1?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
   }
   gettrendlynestocks2(tlid,tlname,eqsymbol){
     return this.http.get('http://localhost:8090/api/trendlynestocks2?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)

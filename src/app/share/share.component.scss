@@ -2,6 +2,15 @@
     display:flex;
     align-items: flex-start;
   }
+.text-green{
+  color:green;
+}
+.text-red{
+  color:red;
+}
+.text-yellow{
+  color:rgb(196, 196, 5);
+}
 
 .cardbear{
   width:110px;
@@ -62,28 +71,28 @@ cardpcr{
   height: 100px;
   width: 100px;
   text-align: center;
-  margin-right: 30px;
+  
 }
 .card2{
   border-radius: 50%;
   height: 100px;
   width: 100px;
   text-align: center;
-  margin-right: 30px;
+  
 }
 .card3{
   border-radius: 50%;
   height: 100px;
   width: 100px;
   text-align: center;
-  margin-right: 30px;
+  
 }
 .card4{
   border-radius: 50%;
   height: 100px;
   width: 100px;
   text-align: center;
-  margin-right: 30px;
+
 }
 .demo-chart2 {
   height: 100px;

@@ -1,4 +1,6 @@
 <div class="InsideContent">
+ 
+    
 <div class="col-md-1 ">
   <div class="card1 text-black">
     
@@ -50,6 +52,48 @@
   </div>
 </div>
 </div>
+<div class="col-md-1 ">
+  <div class="card1 text-black">
+    
+       <div  *ngFor="let tile of mscore" [ngClass]="{
+        'card2 bg-gradient-bull text-black':tile.text2 === 'positive',
+        'card3 bg-gradient-bear text-black':tile.text2 === 'negative',
+        'card4 bg-gradient-warning text-black':tile.text2 === 'neutral'}"><br>Momentum<br>&nbsp;&nbsp;{{tile.text1}}
+
+    
+  </div>
+</div>
+</div>
+
+<div class="col-md-1 ">
+  <div class="card1 text-black">
+    
+       <div  *ngFor="let tile of volscore" [ngClass]="{
+        'card2 bg-gradient-bull text-black':tile.text2 === 'positive',
+        'card3 bg-gradient-bear text-black':tile.text2 === 'negative',
+        'card4 bg-gradient-warning text-black':tile.text2 === 'neutral'}"><br>Volatility<br>&nbsp;&nbsp;{{tile.text1}}
+
+    
+  </div>
+</div>
+
+</div>
+
+<div class="col-md-1 ">
+  <div class="card1 text-black">
+    
+       <div  *ngFor="let tile of dscore" [ngClass]="{
+        'card2 bg-gradient-bull text-black':tile.text2 === 'positive',
+        'card3 bg-gradient-bear text-black':tile.text2 === 'negative',
+        'card4 bg-gradient-warning text-black':tile.text2 === 'neutral'}"><br>Durability<br>&nbsp;&nbsp;{{tile.text1}}
+
+    
+  
+
+</div>
+</div>
+</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button pButton type="button" (click)="visibleSidebar5 = true" icon="pi pi-arrow-right" label="Insights" style=float:right class="p-button-raised p-button-success p-button-outlined"></button>
 </div>
 <div class="InsideContent">
   <div class="col-lg-7 grid-margin stretch-card">
@@ -121,7 +165,36 @@
     </div>
   </div>
 
-
+  <p-sidebar [(visible)]="visibleSidebar5" [fullScreen]="true" [baseZIndex]="10000">
+    <h6 style="font-weight:normal">Broker's Insight</h6>
+    
+    <p *ngFor="let tile of brokertarget" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">{{tile.text1}}&nbsp;[{{tile.text2}}]</p>
+    
+    <p *ngFor="let tile of brokertargetupgrade" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
+    <p *ngFor="let tile of brokertargetdowngrade" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
+    <p *ngFor="let tile of brokerrecoupgrade" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
+    <p *ngFor="let tile of brokerrecodowngrade" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
+    <h6 style="font-weight:normal">Technicals</h6>
+    <h6 style="font-weight:normal">EMA</h6>
+    <p *ngFor="let tile of ema_26" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+    <p *ngFor="let tile of ema_50" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+    <p *ngFor="let tile of ema_100" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+    <p *ngFor="let tile of ema_200" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+    <h6 style="font-weight:normal">SMA</h6>
+    <p *ngFor="let tile of sma_30" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+    <p *ngFor="let tile of sma_50" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+    <p *ngFor="let tile of sma_100" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+    <p *ngFor="let tile of sma_200" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+    <h6 style="font-weight:normal">MACD</h6>
+    <p *ngFor="let tile of macd1" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+    <p *ngFor="let tile of macdsignal1" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+   
+    <h6 style="font-weight:normal">RSI</h6>
+    <p *ngFor="let tile of rsi1" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+    <h6 style="font-weight:normal">MFI</h6>
+    <p *ngFor="let tile of mfi1" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
+  </p-sidebar>
+  
 <div class="InsideContent">
     <div class="col-lg-6 grid-margin stretch-card">
       <div class="content bg-gradient-success card">

@@ -2515,13 +2515,13 @@ request(options1, (err, response, body) => {
 
  
  
-  var url11 = 'https://trendlyne.com/equity/getStockMetricParameterList/80210';
+  var url11 = 'https://trendlyne.com/equity/getStockMetricParameterList/'+tlid;
   request(url11, function (error, response, html) {
     if (!error) {
    
 
 var options2 = {
-  url: 'https://trendlyne.com/equity/getStockMetricParameterList/80210',
+  url: 'https://trendlyne.com/equity/getStockMetricParameterList/'+tlid,
   method: 'GET', // Don't forget this line
   "headers": {
     "accept": "application/json, text/javascript, */*; q=0.01",
@@ -2535,7 +2535,7 @@ var options2 = {
     "x-requested-with": "XMLHttpRequest",
     "cookie": process.env.trendlynecookie
   },
-  "referrer": "https://trendlyne.com/equity/80210/BDL/bharat-dynamics-ltd/",
+  "referrer": "https://trendlyne.com/equity/"+tlid+"/"+eqsymbol+"/"+tlname+"/",
   "referrerPolicy": "strict-origin-when-cross-origin",
   "body": null,
   "method": "GET",
@@ -2548,7 +2548,8 @@ request(options2, (err, response, body) => {
   if (err) {
       //console.log(err);
   } else {
-    ( res.json(JSON.parse(body)));
+    (res.json(JSON.parse(body)));
+   // console.log(JSON.parse(body))
     }
 });
 }
@@ -3736,8 +3737,7 @@ app.get('/api/ntniftypcr', function (req, res) {
         //console.log(err);
     } else {
       ( res.json(JSON.parse(body)));
-     // console.log('this is response1:', (response.body))
-      //console.log( 'this is response:',(response.header))
+    
     }
   });
   }

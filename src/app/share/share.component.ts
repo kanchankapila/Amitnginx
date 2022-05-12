@@ -131,6 +131,18 @@ export interface vscoretile {
   text2: string;
  
   }
+  export interface dscoretile {
+    text1: any;
+    text2: any;
+    }
+    export interface volscoretile {
+    text1: any;
+    text2: any;
+    }
+    export interface mscoretile {
+    text1: any;
+    text2: any;
+    }
   
 export interface srtile{
   text1: string;
@@ -162,6 +174,11 @@ export interface ema200tile{
   text2: string;
   text3: string;
 }
+export interface macd1tile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
 export interface macdtile{
   text1: string;
   text2: string;
@@ -178,6 +195,11 @@ export interface mfitile{
   text3: string;
 }
 export interface rsitile{
+  text1: string;
+  text2: string;
+  text3: string;
+}
+export interface rsi1tile{
   text1: string;
   text2: string;
   text3: string;
@@ -312,6 +334,144 @@ export interface etstockohlctodaytile
   
   
 }
+export interface brokerrecodowngradetile {
+
+  text1: string;
+  text2: string;
+  text3: string;
+  
+  
+  }
+  export interface brokerrecoupgradetile {
+  
+  text1: string;
+  text2: string;
+  text3: string;
+  
+  
+  }
+  export interface brokertargettile {
+  
+  text1: string;
+  text2: string;
+  text3: string;
+  
+  
+  }
+  export interface ema_26tile {
+  
+  text1: string;
+  text2: string;
+    text3: string;
+    text4: string;
+  }
+  export interface ema_50tile {
+  
+    text1: string;
+    text2: string;
+    text3: string;
+    text4: string;
+      
+      
+      }
+  export interface ema_100tile {
+  
+    text1: string;
+    text2: string;
+    text3: string;
+    text4: string;
+  }
+  export interface ema_200tile {
+  
+  text1: string;
+  text2: string;
+    text3: string;
+    text4: string;
+  }
+  export interface sma_30tile {
+  
+    text1: string;
+    text2: string;
+      text3: string;
+      text4: string;
+    }
+    export interface sma_50tile {
+    
+      text1: string;
+      text2: string;
+      text3: string;
+      text4: string;
+        
+        
+        }
+    export interface sma_100tile {
+    
+      text1: string;
+      text2: string;
+      text3: string;
+      text4: string;
+    }
+    export interface sma_200tile {
+    
+    text1: string;
+    text2: string;
+      text3: string;
+      text4: string;
+  }
+  export interface macd1tile {
+  
+    text1: string;
+    text2: string;
+      text3: string;
+      text4: string;
+    }
+    export interface macdsignal1tile {
+    
+      text1: string;
+      text2: string;
+      text3: string;
+      text4: string;
+        
+        
+        }
+    export interface rsi1tile {
+    
+      text1: string;
+      text2: string;
+      text3: string;
+      text4: string;
+  }
+  export interface newscardtile {
+    
+    text1: string;
+    text2: string;
+    text3: string;
+    text4: string;
+    text5: string;
+  }
+  export interface mfi1tile {
+    
+    text1: string;
+    text2: string;
+      text3: string;
+      text4: string;
+    }
+  export interface brokertargetdowngradetile {
+  
+  text1: string;
+  text2: string;
+  text3: string;
+  
+  
+  }
+  export interface brokertargetupgradetile {
+  
+  text1: string;
+  text2: string;
+  text3: string;
+  
+  
+  }
 
 
 @Component({
@@ -322,7 +482,7 @@ export interface etstockohlctodaytile
   
 export class ShareComponent implements OnInit {
   stockhighcharts: StockChart;
-  
+  visibleSidebar5;
   cookieValue = '';
 
 
@@ -447,11 +607,33 @@ export class ShareComponent implements OnInit {
   vscore: vscoretile[] = [];
   fscore: fscoretile[] = [];
   qscore: qscoretile[] = [];
+  dscore: dscoretile[] = [];
+volscore: volscoretile[] = [];
+mscore: mscoretile[] = [];
   techscore: techscoretile[] = [];
   score: scoretile[] = [];
   scoret: scorettile[] = [];
   hmsg: hmsgtile[] = [];
-
+  brokertarget: brokertargettile[] = [];
+  brokertargetdowngrade: brokertargetdowngradetile[] = [];
+  brokerrecoupgrade: brokerrecoupgradetile[] = [];
+  brokerrecodowngrade: brokerrecodowngradetile[] = [];
+  brokertargetupgrade: brokertargetupgradetile[] = [];
+  ema_26:ema_26tile[] = [];
+  ema_50:ema_50tile[] = [];
+  ema_100:ema_100tile[] = [];
+  ema_200: ema_200tile[] = [];
+  sma_30:sma_30tile[] = [];
+  sma_50:sma_50tile[] = [];
+  sma_100:sma_100tile[] = [];
+  sma_200: sma_200tile[] = [];
+  macd1: macd1tile[] = [];
+  macdsignal1:macdsignal1tile[] = [];
+  rsi1: rsi1tile[] = [];
+ // rsi:rsitile[] = [];
+  mfi1: mfi1tile[] = [];
+ // mfi:mfitile[] = [];
+  
   basicData: any;
   weatherdata: any;
   mmdelivcomp: any;
@@ -478,7 +660,7 @@ export class ShareComponent implements OnInit {
   ema200: ema200tile[] = [];
   mfi: mfitile[] = [];
   rsi: rsitile[] = [];
-  macd: macdstile[] = [];
+  macd: macdtile[] = [];
   macds: macdstile[] = [];
   sma30: sma30tile[] = [];
   sma50: sma50tile[] = [];
@@ -627,7 +809,7 @@ export class ShareComponent implements OnInit {
     // this.getmcstockfrequent(this.mcsymbol, this.eqsymbol);
     // setInterval(() => { this.getmcstockfrequent(this.mcsymbol, this.eqsymbol) }, 30000);
     // setInterval(() => { this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol) }, 10000);
-    this.gettrendlynestocks1(this.tlid)
+    this.gettrendlynestocks1(this.tlid,this.eqsymbol,this.tlname)
     this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol)
     this.gettrendlynestocks3(this.tlid)
     this.getshare3m(this.eqsymbol)
@@ -1420,8 +1602,8 @@ export class ShareComponent implements OnInit {
       )
     
   }
-    gettrendlynestocks1(tlid) {
-      this.dataApi.gettrendlynestocks1(tlid).subscribe(data5 => {
+    gettrendlynestocks1(tlid,eqsymbol,tlname) {
+      this.dataApi.gettrendlynestocks1(tlid,eqsymbol,tlname).subscribe(data5 => {
         let nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
@@ -1642,32 +1824,32 @@ export class ShareComponent implements OnInit {
         }
     
       
-      //   this.brokertarget.push({ text1: nestedItems[1]['broker_avg_target']['lt1'], text2: nestedItems[1]['broker_avg_target']['st1'], text3: nestedItems[1]['broker_avg_target']['color1'] })
-      //   console.log(this.brokertarget)
-      //   this.ema_26.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['color1'], text4: nestedItems[1]['ema_26']['value'] })
-      //   this.ema_50.push({text1:nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['color1'],text4: nestedItems[1]['ema_50']['value']  })
-      //   this.ema_100.push({text1:nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_100']['value']  })
-      //   this.ema_200.push({text1:nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_200']['value']  })
-      //   this.sma_30.push({text1:nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['color1'],text4: nestedItems[1]['sma_30']['value'] })
-      //   this.sma_50.push({text1:nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['color1'],text4: nestedItems[1]['sma_50']['value']  })
-      //   this.sma_100.push({text1:nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'],text4: nestedItems[1]['sma_100']['value']  })
-      //   this.sma_200.push({text1:nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'],text4: nestedItems[1]['sma_200']['value']  })
-      //   this.macd.push({text1:nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['color1'],text4: nestedItems[1]['macd']['value']  })
-      //   this.macdsignal.push({text1:nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['color1'],text4: nestedItems[1]['macdsignal']['value']  })
-      //   this.rsi.push({text1:nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['color1'],text4: nestedItems[1]['rsi']['value']  })
-      //   this.mfi.push({text1:nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['color1'],text4: nestedItems[1]['mfi']['value']  })
-      //   if (nestedItems[1]['broker_recodown_6M']['lt1']) {
-      //     this.brokerrecodowngrade.push({ text1: nestedItems[1]['broker_recodown_6M']['lt1'], text2: nestedItems[1]['broker_recodown_6M']['st1'], text3: nestedItems[1]['broker_recodown_6M']['color1'] })
-      //  }
-      //  else if (nestedItems[1]['broker_recoup_6M']['lt1']) {
-      //    this.brokerrecoupgrade.push({ text1: nestedItems[1]['broker_recoup_6M']['lt1'], text2: nestedItems[1]['broker_recoup_6M']['st1'], text3: nestedItems[1]['broker_recoup_6M']['color1'] })
-      //  }
-      //  else if(nestedItems[1]['broker_targetup_6M']['lt1']){
-      //    this.brokertargetupgrade.push({text1:nestedItems[1]['broker_targetup_6M']['lt1'], text2: nestedItems[1]['broker_targetup_6M']['st1'], text3: nestedItems[1]['broker_targetup_6M']['color1'] })
-      //  }
-      //  else if (nestedItems[1]['broker_targetdown_6M']['lt1']) {
-      //    this.brokertargetdowngrade.push({ text1: nestedItems[1]['broker_targetdown_6M']['lt1'], text2: nestedItems[1]['broker_targetdown_6M']['st1'], text3: nestedItems[1]['broker_targetdown_6M']['color1'] })
-      //  }
+        this.brokertarget.push({ text1: nestedItems[1]['broker_avg_target']['lt1'], text2: nestedItems[1]['broker_avg_target']['st1'], text3: nestedItems[1]['broker_avg_target']['color1'] })
+        console.log(this.brokertarget)
+        this.ema_26.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['color1'], text4: nestedItems[1]['ema_26']['value'] })
+        this.ema_50.push({text1:nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['color1'],text4: nestedItems[1]['ema_50']['value']  })
+        this.ema_100.push({text1:nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_100']['value']  })
+        this.ema_200.push({text1:nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_200']['value']  })
+        this.sma_30.push({text1:nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['color1'],text4: nestedItems[1]['sma_30']['value'] })
+        this.sma_50.push({text1:nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['color1'],text4: nestedItems[1]['sma_50']['value']  })
+        this.sma_100.push({text1:nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'],text4: nestedItems[1]['sma_100']['value']  })
+        this.sma_200.push({text1:nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'],text4: nestedItems[1]['sma_200']['value']  })
+        this.macd1.push({text1:nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['color1'],text4: nestedItems[1]['macd']['value']  })
+        this.macdsignal1.push({text1:nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['color1'],text4: nestedItems[1]['macdsignal']['value']  })
+        this.rsi1.push({text1:nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['color1'],text4: nestedItems[1]['rsi']['value']  })
+        this.mfi1.push({text1:nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['color1'],text4: nestedItems[1]['mfi']['value']  })
+        if (nestedItems[1]['broker_recodown_6M']['lt1']) {
+          this.brokerrecodowngrade.push({ text1: nestedItems[1]['broker_recodown_6M']['lt1'], text2: nestedItems[1]['broker_recodown_6M']['st1'], text3: nestedItems[1]['broker_recodown_6M']['color1'] })
+       }
+       else if (nestedItems[1]['broker_recoup_6M']['lt1']) {
+         this.brokerrecoupgrade.push({ text1: nestedItems[1]['broker_recoup_6M']['lt1'], text2: nestedItems[1]['broker_recoup_6M']['st1'], text3: nestedItems[1]['broker_recoup_6M']['color1'] })
+       }
+       else if(nestedItems[1]['broker_targetup_6M']['lt1']){
+         this.brokertargetupgrade.push({text1:nestedItems[1]['broker_targetup_6M']['lt1'], text2: nestedItems[1]['broker_targetup_6M']['st1'], text3: nestedItems[1]['broker_targetup_6M']['color1'] })
+       }
+       else if (nestedItems[1]['broker_targetdown_6M']['lt1']) {
+         this.brokertargetdowngrade.push({ text1: nestedItems[1]['broker_targetdown_6M']['lt1'], text2: nestedItems[1]['broker_targetdown_6M']['st1'], text3: nestedItems[1]['broker_targetdown_6M']['color1'] })
+       }
        }, err => {
         console.log(err)
       })
@@ -1679,10 +1861,10 @@ export class ShareComponent implements OnInit {
         let nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
-        //console.log(nestedItems)
-        // this.dscore.push({ text1:nestedItems[1]['stockData'][6],text2:nestedItems[1]['stockData'][9] })
-        // this.volscore.push({ text1:nestedItems[1]['stockData'][7],text2:nestedItems[1]['stockData'][10]  })
-        // this.mscore.push({ text1:nestedItems[1]['stockData'][8],text2:nestedItems[1]['stockData'][11]  })
+        console.log(nestedItems)
+         this.dscore.push({ text1:nestedItems[1]['stockData'][6],text2:nestedItems[1]['stockData'][9] })
+         this.volscore.push({ text1:nestedItems[1]['stockData'][7],text2:nestedItems[1]['stockData'][10]  })
+         this.mscore.push({ text1:nestedItems[1]['stockData'][8],text2:nestedItems[1]['stockData'][11]  })
         // this.tllink="https://trendlyne.com/alerts/stock-alerts/"+this.eqsymbol+"/"+this.tlid+"/"+this.tlname
           
       }, err => {
