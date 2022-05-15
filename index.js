@@ -108,7 +108,7 @@ app.post('/api/mcvolume', async function (req, res) {
         console.log(err, res)
         
       })
-      pool.end()
+     // pool.end()
      
       
 
@@ -126,10 +126,40 @@ app.post('/api/mcvolume', async function (req, res) {
   }
 })
 
+app.post('/api/mcvolume1', async function (req, res) {
 
-////////////////
+  let mcsymbol1 = req.body
 
-//var mongo = require('mongodb');
+  //console.log(req.body)
+  const promises = mcsymbol1.map(symbol => {
+  
+      
+    axios.get('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/' + symbol.mcsymbol1).then((response) => {
+      var obj1 = ({ Date: symbol.Date,Time:symbol.time, Name: symbol.name,Symbol:symbol.mcsymbol, "CurrentVol": response.data.data.VOL, "FiveDVol": response.data.data.DVolAvg5, "TenDVol": response.data.data.DVolAvg10, "TwentyDVol": response.data.data.DVolAvg20, "ThirtyDVol": response.data.data.DVolAvg30,"CPrice":response.data.data.pricecurrent,"PChangeper":response.data.data.pricepercentchange,"StockName":response.data.data.SC_FULLNM })
+      
+      console.log("executing mcvolume1")
+      pool.query('INSERT INTO mcvolume (info)  VALUES ($1)', [obj1], (err, res) => {
+        console.log(err, res)
+        
+      })
+     // pool.end()
+     
+      
+
+     
+
+    }).catch((error) => {
+      console.log(error)
+    })
+  })
+
+  try {
+    await Promise.all(promises)
+  } catch (e) {
+    console.log(e)
+  }
+})
+
 const { response } = require('express');
 const { json } = require('body-parser');
 
@@ -152,9 +182,7 @@ app.get('/api/mcshare', (req, res) => {
   let mcsymbol = req.query.mcsymbol
   let eqsymbol = req.query.eqsymbol
   let stockid = req.query.stockid
-  //console.log(mcsymbol)
-  //console.log(eqsymbol)
-  //console.log("This is mcshare")
+ 
   var requestArray7 = [
     
     { url: 'https://priceapi.moneycontrol.com/pricefeed/techindicator/W/'+mcsymbol+'?field=RSI' },
@@ -2560,9 +2588,9 @@ request(options2, (err, response, body) => {
 
   //////////////////////////To get Durability/Momentum/Volatility SCORE/////////////////////////////////////////////
   
-  app.get('/api/trendlynestocks2', (req, res) => {
+  app.get('/api/trendlynestocks12', (req, res) => {
     let eqsymbol = req.query.eqsymbol
-    console.log(eqsymbol)
+    //console.log(eqsymbol)
     var url11 = 'https://trendlyne.com/mapp/v1/stock/chart-data/175/SMA/';
     request(url11, function (error, response, html) {
       if (!error) {
@@ -2577,17 +2605,17 @@ request(options2, (err, response, body) => {
   
 
 	////////////////////////////////////////////TrendLyne Stocks///////////////////////////////////////////
-    app.get('/api/trendlynestocks3', function (req, res) {
+    app.get('/api/trendlynestocks31', function (req, res) {
       let tlid = req.query.tlid
       var url6 = 'https://trendlyne.com/fundamentals/get-fundamental_results/'+tlid+'/'
         request(url6, function (error, response, html) {
           if (!error) {
       
             console.log("This is tendlynestocks3")
-            res.json(((response.body)))
+           // res.json(((response.body)))
            
           } else {
-            console.log(error)
+          //  console.log(error)
           }
         })
       
@@ -2936,7 +2964,7 @@ app.get('/api/tlnear52h', function (req, res) {
 
   var url6 = 'https://trendlyne.com/fundamentals/json-screener/17101/5/0/index/NIFTY500/nifty-500/'
   request(url6, function (error, response, html) {
-    console.log()
+    //console.log()
     if (!error) {
 
 
@@ -3698,7 +3726,7 @@ app.get('/api/ntniftypcr', function (req, res) {
   
   app.get('/api/ntstockdetails', (req, res) => {
     let eqsymbol = req.query.eqsymbol
-    console.log(eqsymbol)
+    //console.log(eqsymbol)
     var url11 = 'https://api.niftytrader.in/webapi/Live/stockAnalysis';
     request(url11, function (error, response, html) {
       if (!error) {

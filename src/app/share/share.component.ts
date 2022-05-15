@@ -534,7 +534,7 @@ export class ShareComponent implements OnInit {
   public stockhcvalue: Array<any> = [];
   public stockdata1: Array<number> = [];
   public stockLabels: Array<any> = [];
-  //public stockChartData: Array<any> = [];
+  
   public stockChartLabels: Array<number> = [];
   public stockpcrdata: Array<number> = [];
   public stockpcrtime: Array<any> = [];
@@ -562,7 +562,7 @@ export class ShareComponent implements OnInit {
   public stockvixData: Array<any> = [];
   public stockvixLabels: Array<number> = [];
   public lineChartmacdwLabels: Array<any> = [];
-  public lineChartmacdmLabels: Array<any> = [];
+  public lineChartmacdmLabels: Array<number> = [];;
   public lineChartDatamacdm: Array<number> = [];
   public lineChartDatasignalm: Array<number> = [];
   public lineChartDatapricemacdm: Array<number> = [];
@@ -728,6 +728,13 @@ mscore: mscoretile[] = [];
   public stockChartType: ChartType = 'line';
   public DelivChartType: ChartType = 'bar';
   public stockChartData: ChartConfiguration['data']
+  public macdChartData: ChartConfiguration['data']
+  public rsiChartData: ChartConfiguration['data']
+  public maChartData: ChartConfiguration['data']
+  public bbChartData: ChartConfiguration['data']
+  public kstChartData: ChartConfiguration['data']
+  public dowChartData: ChartConfiguration['data']
+  public obvChartData: ChartConfiguration['data']
   public stockChartData1w: ChartConfiguration['data']
   public etstockChartData: ChartConfiguration['data']
   public stockChartOptions:ChartOptions = {
@@ -770,15 +777,7 @@ mscore: mscoretile[] = [];
   bqnames: any
   companyid: any
   periods: any
-  options1: any;
-  options2: any;
-
-  options3: any;
-  options4: any;
-  options5: any;
-  options6: any;
-  options7: any;
-  users = [];
+  
 
   
   
@@ -827,7 +826,7 @@ mscore: mscoretile[] = [];
     this.getetsharetoday(this.eqsymbol)
    
     setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 30000);
-   // setInterval(() => {   this.getmmdata(this.stockid)}, 60000);
+   
   }
 
   
@@ -942,43 +941,23 @@ mscore: mscoretile[] = [];
         this.lineChartDatagrademacdm.push(nestedItems[2]['sectMacd_macd_w']["stock"][val].grade)
       }
       this.macdmsg=nestedItems[2]['sectMacd_macd_w']['text']
-      this.options1 = {
-        legend: {
-          data: ['macd', 'signal', 'price'],
-          align: 'left',
-        },
-        tooltip: {},
-        xAxis: {
-          data: this.lineChartmacdmLabels,
-  
-  
-        },
-        yAxis: {},
-        series: [
+      this.macdChartData = {
+        
+        datasets: [
           {
-            name: 'macd',
-            type: 'line',
-            data: this.lineChartDatamacdm,
-            animationDelay: (idx) => idx * 10,
+            label: 'macd',
+            data: this.lineChartDatamacdm
           },
           {
-            name: 'signal',
-            type: 'line',
-            data: this.lineChartDatasignalm,
-            animationDelay: (idx) => idx * 10 + 100,
+            label: 'signal',
+            data: this.lineChartDatasignalm
           },
           {
-            name: 'price',
-            type: 'line',
-            data: this.lineChartDatapricemacdm,
-            animationDelay: (idx) => idx * 10 + 100,
-          }
-          
-  
-        ],
-        animationEasing: 'elasticOut',
-        animationDelayUpdate: (idx) => idx * 5,
-      };
+            label: 'price',
+            data: this.lineChartDatapricemacdm
+          }],
+          labels:this.lineChartmacdmLabels
+           };
       this.lineChartDatarsim.length = 0;
       this.lineChartDataubandm.length = 0;
       this.lineChartDatalbandm.length = 0;
@@ -994,40 +973,23 @@ mscore: mscoretile[] = [];
         this.lineChartrsimLabels.push(nestedItems[2]['sectRsi_rsi_w']["stock"][val].date)
       }
       this.rsimsg=nestedItems[2]['sectRsi_rsi_w']['text']
-      this.options2 = {
-        legend: {
-          data: ['rsi', 'uband', 'lband'],
-          align: 'left',
-        },
-        tooltip: {},
-        xAxis: {
-          data: this.lineChartrsimLabels,
-  
-        },
-        yAxis: {},
-        series: [
+      this.rsiChartData = {
+        
+        datasets: [
           {
-            name: 'rsi',
-            type: 'line',
-            data: this.lineChartDatarsim,
-            animationDelay: (idx) => idx * 10,
+            label: 'RSI',
+            data: this.lineChartDatarsim
           },
           {
-            name: 'uband',
-            type: 'line',
-            data: this.lineChartDataubandm,
-            animationDelay: (idx) => idx * 10 + 100,
+            label: 'uband',
+            data: this.lineChartDataubandm
           },
           {
-            name: 'lband',
-            type: 'line',
-            data: this.lineChartDatalbandm,
-            animationDelay: (idx) => idx * 10 + 100,
-          },
-        ],
-        animationEasing: 'elasticOut',
-        animationDelayUpdate: (idx) => idx * 5,
-      };
+            label: 'lband',
+            data: this.lineChartDatalbandm
+          }],
+          labels:this.lineChartrsimLabels
+           };
       this.lineChartDatamaday50m.length = 0;
       this.lineChartDatamaday200m.length = 0;
       this.lineChartDatamapricem.length = 0;
@@ -1043,43 +1005,25 @@ mscore: mscoretile[] = [];
         this.lineChartDatamaflag.push(nestedItems[2]['sectMa_ma_w']["stock"][val].flag)
       }
       this.mamsg=nestedItems[2]['sectMa_ma_w']['text']
-      this.options3 = {
-        legend: {
-          data: ['day50', 'day200', 'price'],
-          align: 'left',
-        },
-        tooltip: {},
-        xAxis: {
-          data: this.lineChartDatamadate,
-          //silent: false,
-          //splitLine: {
-          //show: false,
-          //},
-        },
-        yAxis: {},
-        series: [
+      
+      this.maChartData = {
+        
+        datasets: [
           {
-            name: 'day50',
-            type: 'line',
-            data: this.lineChartDatamaday50m,
-            animationDelay: (idx) => idx * 10,
-          },
-          {
-            name: 'day200',
-            type: 'line',
-            data: this.lineChartDatamaday200m,
-            animationDelay: (idx) => idx * 10 + 100,
-          },
-          {
-            name: 'price',
-            type: 'line',
+            label: 'Price',
             data: this.lineChartDatamapricem,
-            animationDelay: (idx) => idx * 10 + 100,
           },
-        ],
-        animationEasing: 'elasticOut',
-        animationDelayUpdate: (idx) => idx * 5,
-      };
+          {
+            label: '200d MA',
+            data: this.lineChartDatamaday200m
+          },
+          {
+            label: '50d MA',
+            data: this.lineChartDatamaday50m
+          }],
+          labels:this.lineChartDatamadate
+           };
+     
       this.lineChartDatabbuband.length = 0;
       this.lineChartDatabblband.length = 0;
       this.lineChartDatabbdma20.length = 0;
@@ -1095,46 +1039,29 @@ mscore: mscoretile[] = [];
         this.lineChartDatabbprice.push(nestedItems[2]['sectBb_bb_w']["stock"][val].price)
       }
       this.bbmsg=nestedItems[2]['sectBb_bb_w']['text']
-      this.options4 = {
-        legend: {
-          data: ['dma20', 'price', 'uband', 'lband'],
-          align: 'left',
-        },
-        tooltip: {},
-        xAxis: {
-          data: this.lineChartDatabbdate,
-  
-        },
-        yAxis: {},
-        series: [
+      
+      this.bbChartData = {
+        
+        datasets: [
           {
-            name: 'dma20',
-            type: 'line',
-            data: this.lineChartDatabbdma20,
-            animationDelay: (idx) => idx * 10,
-          },
-          {
-            name: 'price',
-            type: 'line',
-            data: this.lineChartDatabbprice,
-            animationDelay: (idx) => idx * 10 + 100,
-          },
-          {
-            name: 'lband',
-            type: 'line',
-            data: this.lineChartDatabblband,
-            animationDelay: (idx) => idx * 10 + 100,
-          },
-          {
-            name: 'uband',
-            type: 'line',
+            label: 'BB uband',
             data: this.lineChartDatabbuband,
-            animationDelay: (idx) => idx * 10 + 100,
           },
-        ],
-        animationEasing: 'elasticOut',
-        animationDelayUpdate: (idx) => idx * 5,
-      };
+          {
+            label: 'BB lband',
+            data: this.lineChartDatabblband
+          },
+          {
+            label: 'Price',
+            data: this.lineChartDatabbprice
+          },
+          {
+            label: 'dma20',
+            data: this.lineChartDatabbdma20
+        }],
+          labels:this.lineChartDatabbdate
+           };
+     
       this.lineChartDatakst.length = 0;
         this.lineChartDatakstsignal.length = 0;
         this.lineChartDatakstprice.length = 0;
@@ -1151,43 +1078,25 @@ mscore: mscoretile[] = [];
       this.kstmsg=nestedItems[2]['sectKst_kst_w']['text']
       
   
-      this.options5 = {
-        legend: {
-          data: ['kst', 'price', 'signal'],
-          align: 'left',
-        },
-        tooltip: {},
-        xAxis: {
-          data: this.lineChartDatakstdate,
-          //silent: false,
-          //splitLine: {
-          //show: false,
-          //},
-        },
-        yAxis: {},
-        series: [
+      this.kstChartData = {
+        
+        datasets: [
           {
-            name: 'kst',
-            type: 'line',
+            label: 'KST',
             data: this.lineChartDatakst,
-            animationDelay: (idx) => idx * 10,
           },
           {
-            name: 'signal',
-            type: 'line',
-            data: this.lineChartDatakstsignal,
-            animationDelay: (idx) => idx * 10 + 100,
+            label: 'Signal',
+            data:this.lineChartDatakstsignal
           },
           {
-            name: 'price',
-            type: 'line',
-            data: this.lineChartDatakstprice,
-            animationDelay: (idx) => idx * 10 + 100,
-          },
-        ],
-        animationEasing: 'elasticOut',
-        animationDelayUpdate: (idx) => idx * 5,
-      };
+            label: 'Price',
+            data: this.lineChartDatakstprice
+          }
+         ],
+          labels:this.lineChartDatakstdate
+           };
+     
       this.lineChartDatadowdate.length = 0;
         this.lineChartDatadowprice.length = 0;
         this.lineChartDatadowscore.length = 0;
@@ -1201,44 +1110,25 @@ mscore: mscoretile[] = [];
         //   this.lineChartrsimLabels.push(nestedItems[2]['sectDow_dow_w']["stock"][val].date)
       }
       this.dowmsg=nestedItems[2]['sectDow_dow_w']['text']
-      this.options7 = {
-        legend: {
-          data: ['score', 'price', 'flag'],
-          align: 'left',
-        },
-        tooltip: {},
-        xAxis: {
-          data: this.lineChartDatadowdate
-        },
-        //silent: false,
-        //splitLine: {
-        //show: false,
-        //},
-  
-        yAxis: {},
-        series: [
+      this.dowChartData = {
+        
+        datasets: [
+          
           {
-            name: 'score',
-            type: 'bar',
-            data: this.lineChartDatadowscore,
-            animationDelay: (idx) => idx * 10,
+            label: 'score',
+            data: this.lineChartDatadowscore
           },
           {
-            name: 'price',
-            type: 'line',
-            data: this.lineChartDatadowprice,
-            animationDelay: (idx) => idx * 10 + 100,
+            label: 'Price',
+            data: this.lineChartDatadowprice
           },
           {
-            name: 'flag',
-            type: 'line',
-            data: this.lineChartDatadowflag,
-            animationDelay: (idx) => idx * 10 + 100,
-          },
-        ],
-        animationEasing: 'elasticOut',
-        animationDelayUpdate: (idx) => idx * 5,
-      };
+            label: 'flag',
+            data: this.lineChartDatadowflag
+        }],
+          labels:this.lineChartDatadowdate
+           };
+     
       this.lineChartDataobvdate.length = 0;
       this.lineChartDataobv.length = 0;
       this.lineChartDataobvprice.length = 0;
@@ -1252,39 +1142,22 @@ mscore: mscoretile[] = [];
         //   this.lineChartrsimLabels.push(nestedItems[2]['sectObv_obv_w']["stock"][val].date)
       }
       this.obvmsg=nestedItems[2]['sectObv_obv_w']['text']
-      this.options6 = {
-        legend: {
-          data: ['obv', 'price'],
-          align: 'left',
-        },
-        tooltip: {},
-        xAxis: {
-          data: this.lineChartDataobvdate,
-          //silent: false,
-          //splitLine: {
-          //show: false,
-          //},
-        },
-        yAxis: {},
-        series: [
+      
+      this.obvChartData = {
+        
+        datasets: [
           {
-            name: 'obv',
-            type: 'line',
+            label: 'OBV',
             data: this.lineChartDataobv,
-            animationDelay: (idx) => idx * 10,
           },
           {
-            name: 'price',
-            type: 'line',
-            data: this.lineChartDataobvprice,
-            animationDelay: (idx) => idx * 10 + 100,
+            label: 'Price',
+            data: this.lineChartDataobvprice
           },
-  
-        ],
-        animationEasing: 'elasticOut',
-        animationDelayUpdate: (idx) => idx * 5,
-      };
-  
+         ],
+          labels:this.lineChartDataobvdate
+           };
+     
   
   
   
@@ -1294,7 +1167,144 @@ mscore: mscoretile[] = [];
     }
     
   }
-
+  trackByFuntion(index, item) {
+    // console.log( 'TrackBy:', item.text2, 'at index', index );
+     return item.text2
+   }
+   trackByFuntion1(index1, item1) {
+     //console.log( 'TrackBy:', item1.text1, 'at index', index1);
+     return item1.text1
+    }
+   trackByFuntion2(index2, item2) {
+     //console.log( 'TrackBy:', item2.text1, 'at index', index2 );
+     return item2.text1
+    }
+   trackByFuntion3(index3, item3) {
+     //console.log( 'TrackBy:', item3.text1, 'at index', index3 );
+     return item3.text1;
+    }
+   trackByFuntion4(index4, item4) {
+     //console.log( 'TrackBy:', item4.text2, 'at index', index4 );
+     item4.text2;
+    }
+   trackByFuntion5(index5, item5) {
+     //console.log( 'TrackBy:', item5.text1, 'at index', index5 );
+     return item5.text1;
+    }
+   trackByFuntion6(index6, item6) {
+     //console.log( 'TrackBy:', item6.text1, 'at index', index6 );
+      return item6.text1;
+    }
+   trackByFuntion7(index7, item7) {
+     //console.log( 'TrackBy:', item7.text1, 'at index', index7 );
+     return item7.text1;
+    }
+   trackByFuntion8(index8, item8) {
+     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+     return item8.text3 ;
+   }
+   trackByFuntion9(index9, item9) {
+     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+     return item9.text3 ;
+   }
+   trackByFuntion10(index10, item10) {
+     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+     return item10.text3 ;
+   }
+   trackByFuntion11(index11, item11) {
+     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+     return item11.text3 ;
+    }
+   
+     
+     trackByFuntion12(index12, item12) {
+       //console.log( 'TrackBy:', item2.text1, 'at index', index2 );
+       return item12.text1
+      }
+     trackByFuntion13(index13, item13) {
+       //console.log( 'TrackBy:', item3.text1, 'at index', index3 );
+       return item13.text1;
+      }
+     trackByFuntion14(index14, item14) {
+       //console.log( 'TrackBy:', item4.text2, 'at index', index4 );
+       item14.text2;
+      }
+     trackByFuntion15(index15, item15) {
+       //console.log( 'TrackBy:', item5.text1, 'at index', index5 );
+       return item15.text1;
+      }
+     trackByFuntion16(index16, item16) {
+       //console.log( 'TrackBy:', item6.text1, 'at index', index6 );
+        return item16.text1;
+      }
+     trackByFuntion17(index17, item17) {
+       //console.log( 'TrackBy:', item7.text1, 'at index', index7 );
+       return item17.text1;
+      }
+     trackByFuntion18(index18, item18) {
+       //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+       return item18.text3 ;
+     }
+     trackByFuntion19(index19, item19) {
+       //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+       return item19.text3 ;
+     }
+     trackByFuntion20(index20, item20) {
+       //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+       return item20.text3 ;
+     }
+     trackByFuntion21(index21, item21) {
+       //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+       return item21.text3 ;
+      }trackByFuntion22(index22, item22) {
+    // console.log( 'TrackBy:', item.text2, 'at index', index );
+     return item22.text2
+   }
+   trackByFuntion23(index23, item23) {
+     //console.log( 'TrackBy:', item1.text1, 'at index', index1);
+     return item23.text1
+    }
+   trackByFuntion24(index24, item24) {
+     //console.log( 'TrackBy:', item2.text1, 'at index', index2 );
+     return item24.text1
+    }
+   trackByFuntion25(index25, item25) {
+     //console.log( 'TrackBy:', item3.text1, 'at index', index3 );
+     return item25.text1;
+    }
+   trackByFuntion26(index26, item26) {
+     //console.log( 'TrackBy:', item4.text2, 'at index', index4 );
+     item26.text2;
+    }
+   trackByFuntion27(index27, item27) {
+     //console.log( 'TrackBy:', item5.text1, 'at index', index5 );
+     return item27.text1;
+    }
+   trackByFuntion28(index28, item28) {
+     //console.log( 'TrackBy:', item6.text1, 'at index', index6 );
+      return item28.text1;
+    }
+   trackByFuntion29(index29, item29) {
+     //console.log( 'TrackBy:', item7.text1, 'at index', index7 );
+     return item29.text1;
+    }
+   trackByFuntion30(index30, item30) {
+     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+     return item30.text3 ;
+   }
+   trackByFuntion31(index31, item31) {
+     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+     return item31.text3 ;
+   }
+   trackByFuntion32(index32, item32) {
+     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+     return item32.text3 ;
+   }
+   trackByFuntion33(index33, item33) {
+     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+     return item33.text3 ;
+    }
+ 
   getshare1w(eqsymbol) {
          ////////////////Nifty 1 Week/////////////////////////////
         

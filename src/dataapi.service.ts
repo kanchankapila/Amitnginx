@@ -649,6 +649,9 @@ export class DataapiService {
   getmcvolume(mcsymbol){
     return this.http.post('http://localhost:8090/api/mcvolume',mcsymbol)
   }
+  getmcvolume1(mcsymbol1){
+    return this.http.post('http://localhost:8090/api/mcvolume',mcsymbol1)
+  }
   getmcinsight(mcsymbol){
     return this.http.post('http://localhost:8090/api/mcinsight',mcsymbol)
   }

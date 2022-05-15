@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as stocks from '../../lists/stocklist';
+import * as stocks1 from '../../lists/list1';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { DataapiService } from '../../../dataapi.service';
@@ -95,6 +96,7 @@ export class NavbarComponent implements OnInit {
   bnoptionsresistance: n50optionsresistancetile[] = [];
   companyid = [];
   mcsymbol = [];
+  mcsymbol1 = [];
   optionwc = [];
   optionwp = [];
   optionbwc = [];
@@ -125,6 +127,7 @@ export class NavbarComponent implements OnInit {
 
     
     this.stock = stocks.default.Data
+    this.stock1 = stocks1.default.Data
     this.nsedataniftyoi()
     this.nsedatabniftyoi()
     { setInterval(() => { this.nsedataniftyoi() }, 30000); }
@@ -374,9 +377,11 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       
    
   getmcvolume() {
+    this.getmcvolume1()
     console.log("mc volume")
     var d = new Date();
-    console.log(d.getHours()+":"+d.getMinutes())
+    console.log(d.getHours() + ":" + d.getMinutes())
+    this.mcsymbol.length = 0;
     for (let val in this.stock) {
       this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
       this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
@@ -384,6 +389,25 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     }
     console.log(this.mcsymbol)
     this.dataApi.getmcvolume(this.mcsymbol).subscribe(data5 => {
+
+
+    }, err => {
+      console.log(err)
+    }
+    )
+  }
+  getmcvolume1() {
+    console.log("mc volume1")
+    var d = new Date();
+    console.log(d.getHours() + ":" + d.getMinutes())
+    this.mcsymbol1.length = 0;
+    for (let val in this.stock1) {
+      this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
+      this.mcsymbol1.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
+      
+    }
+    console.log(this.mcsymbol1)
+    this.dataApi.getmcvolume1(this.mcsymbol1).subscribe(data5 => {
 
 
     }, err => {
@@ -466,7 +490,12 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     }
     )
   }
-  
+  navigatenifty() {
+    this.window.open("http://localhost:4200/nifty", "_blank") 
+  }
+  navigatebanknifty() {
+    this.window.open("http://localhost:4200/banknifty", "_blank") 
+  }
   chartink() {
     console.log("chartink start")
     this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
