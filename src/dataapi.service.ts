@@ -40,6 +40,11 @@ export class DataapiService {
    
     return this.http.get('http://localhost:8090/api/et1') 
   }
+  
+  getsample() {
+   
+    return this.http.get('http://localhost:8090/api/csrfEndpoint') 
+  }
   chartink(abc) {
     return this.http.post('http://localhost:8090/api/chartink',abc) 
   }

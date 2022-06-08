@@ -126,6 +126,18 @@ app.post('/api/mcvolume', async function (req, res) {
   }
 })
 
+  app.get('/api/csrfEndpoint', csrfProtection, (req, res, next) => {
+    res.cookie('XSRF-TOKEN', req.csrfToken(), { httpOnly: false });
+    //console.log(req)
+    var url11 = 'https://stockreports.zerodha.com/api/pdf/';
+  request(url11, function (error, response, html) {
+    if (!error) {
+
+      console.log(response.headers)
+     
+}
+  })
+  });
 app.post('/api/mcvolume1', async function (req, res) {
 
   let mcsymbol1 = req.body
@@ -2588,7 +2600,7 @@ request(options2, (err, response, body) => {
 
   //////////////////////////To get Durability/Momentum/Volatility SCORE/////////////////////////////////////////////
   
-  app.get('/api/trendlynestocks12', (req, res) => {
+  app.get('/api/trendlynestocks2', (req, res) => {
     let eqsymbol = req.query.eqsymbol
     //console.log(eqsymbol)
     var url11 = 'https://trendlyne.com/mapp/v1/stock/chart-data/175/SMA/';
@@ -2605,7 +2617,7 @@ request(options2, (err, response, body) => {
   
 
 	////////////////////////////////////////////TrendLyne Stocks///////////////////////////////////////////
-    app.get('/api/trendlynestocks31', function (req, res) {
+    app.get('/api/trendlynestocks3', function (req, res) {
       let tlid = req.query.tlid
       var url6 = 'https://trendlyne.com/fundamentals/get-fundamental_results/'+tlid+'/'
         request(url6, function (error, response, html) {

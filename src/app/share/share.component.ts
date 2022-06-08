@@ -90,11 +90,7 @@ export interface pettmtile{
   text2: string;
   text3: string;
 }
-export interface hmsgtile {
-  text: string;
-  text1: string;
-  text2: string;
-  }
+
   export interface scoretile {
   text: string;
   text1: string;
@@ -613,7 +609,7 @@ mscore: mscoretile[] = [];
   techscore: techscoretile[] = [];
   score: scoretile[] = [];
   scoret: scorettile[] = [];
-  hmsg: hmsgtile[] = [];
+  hmsg: any;
   brokertarget: brokertargettile[] = [];
   brokertargetdowngrade: brokertargetdowngradetile[] = [];
   brokerrecoupgrade: brokerrecoupgradetile[] = [];
@@ -812,6 +808,8 @@ mscore: mscoretile[] = [];
     this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol)
     this.gettrendlynestocks3(this.tlid)
     this.getshare3m(this.eqsymbol)
+    this.getzerodha()
+    this.getkotak()
     this.getshare1m(this.eqsymbol)
     this.getmmdata(this.stockid)
     this.getshare6m(this.eqsymbol)
@@ -828,8 +826,27 @@ mscore: mscoretile[] = [];
     setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 30000);
    
   }
-
+  getkotak() {
+   
+    this.http.get<any>('https://kayal.trendlyne.com/broker-webview/all-in-one-screener-get/kayal/?perPageCount=25&pageNumber=0&screenpk=82596&groupType=all&groupName=').subscribe(data5 => {
+    
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
+     
+     
+     
+        
   
+    })
+ 
+    
+    }
+ 
+ 
+
+ 
   getetsharetoday(eqsymbol) {
    
     this.http.get<any>('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company').subscribe(data5 => {
@@ -915,13 +932,23 @@ mscore: mscoretile[] = [];
     this.stock3mLabels = this.stock3mLabels;
    
   }
+  getzerodha() {
+   
+    this.http.get('https://stockreports.zerodha.com/api/pdf/').subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
+    });
+  }
   getmmdata(stockid) {
    
     this.http.get('https://www.trading80.com/technical_card/getCardInfo?sid=' + this.stockid + '&se=bse&cardlist=sectPrice_techScore,sectPrice_indiScale,sectIndigraph_graph,sectMacd_macd_w,sectRsi_rsi_w,sectBb_bb_w,sectMa_ma_w,sectKst_kst_w,sectDow_dow_w,sectObv_obv_w').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+      this.hmsg = (nestedItems[2].sectPrice_techScore['header_msg'])
+      //this.hmsg.push({ text:nestedItems[2].sectPrice_techScore['header_msg'], text1: nestedItems[2].sectPrice_techScore['score'], text2: nestedItems[2].sectPrice_techScore['tech_text'] })
       this.fscore.push({ text: nestedItems[2]['sectPrice_indiScale'][0].fin_trend_clr, text1: nestedItems[2]['sectPrice_indiScale'][0].fin_trend_points, text2: nestedItems[2]['sectPrice_indiScale'][0].fin_trend_text })
       this.qscore.push({ text: nestedItems[2]['sectPrice_indiScale'][0].quality_clr, text1: nestedItems[2]['sectPrice_indiScale'][0].quality_rank, text2: nestedItems[2]['sectPrice_indiScale'][0].quality_text })
       this.techscore.push({ text: nestedItems[2]['sectPrice_indiScale'][0].tech_clr, text1: nestedItems[2]['sectPrice_indiScale'][0].tech_score, text2: nestedItems[2]['sectPrice_indiScale'][0].tech_text })
@@ -1303,7 +1330,11 @@ mscore: mscoretile[] = [];
    trackByFuntion33(index33, item33) {
      //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
      return item33.text3 ;
-    }
+   }
+   trackByFuntion34(index34, item34) {
+    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+    return item34.text3 ;
+   }
  
   getshare1w(eqsymbol) {
          ////////////////Nifty 1 Week/////////////////////////////
@@ -1871,7 +1902,8 @@ mscore: mscoretile[] = [];
         let nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
-        console.log(nestedItems)
+        
+         
          this.dscore.push({ text1:nestedItems[1]['stockData'][6],text2:nestedItems[1]['stockData'][9] })
          this.volscore.push({ text1:nestedItems[1]['stockData'][7],text2:nestedItems[1]['stockData'][10]  })
          this.mscore.push({ text1:nestedItems[1]['stockData'][8],text2:nestedItems[1]['stockData'][11]  })
@@ -1901,7 +1933,7 @@ mscore: mscoretile[] = [];
             return data5[key];
           });
       
-      console.log(nestedItems)
+      console.log("mmstockinfo"+nestedItems)
       
           // for (let val in nestedItems[5]) {
           //   this.hmsg.push({ text: nestedItems[5][val].header, text1: nestedItems[5][val].msg, text2: nestedItems[5][val].dir })

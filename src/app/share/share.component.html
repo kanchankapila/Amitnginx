@@ -1,3 +1,6 @@
+<br>
+<br>
+<div [innerHtml]="hmsg"></div>
 <div class="InsideContent">
  
     
@@ -106,10 +109,12 @@
                       'bg-gradient-bull1':tile.text3 === 'Oversold',
                       'bg-gradient-bull2':tile.text3 === 'Strong Trend',
                       'bg-gradient-bull3':tile.text3 === 'High Volatility',
+                      'bg-gradient-bull4':tile.text3 === 'Outperformer',
                       'bg-gradient-bear':tile.text3 === 'Bearish',
                       'bg-gradient-bear1':tile.text3 === 'Overbought',
                       'bg-gradient-bear2':tile.text3 === 'Weak Trend',
                       'bg-gradient-bear3':tile.text3 === 'Low Volatility',
+                      'bg-gradient-bear4':tile.text3 === 'Underperformer',
                       'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
           </mat-card>
          
