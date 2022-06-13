@@ -1,0 +1,24 @@
+
+    <div class="col-lg-13 grid-margin stretch-card">
+        <div class="content card">
+          
+          <h4 class="mb-4">Global Markets</h4>
+          <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <div fxFlex="11" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of globalmarket trackBy: trackByFuntion1">
+          <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
+          [ngClass]="{'bg-gradient-bull':tile.text3 > 0,
+                    'bg-gradient-bear':0 > tile.text3 ,
+                     'bg-gradient-warning':tile.text3 == 0}">&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text2}}<br>&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text1}}<br>&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text3}}%<br>&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text4}}
+          </mat-card>
+         
+        </div>
+      </div>
+      </div>
+      </div>
+      <div class="col-lg-15 grid-margin stretch-card ">
+        <div class="card">
+          <canvas baseChart height="350" [data]="advdecChartData" [options]="advdecChartOptions" [type]="advdecChartType" [options]="advdecChartOptions"></canvas>
+        </div>
+      </div>
+    
+   

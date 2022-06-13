@@ -39,7 +39,7 @@ var allowCrossDomain=function(req, res,next){
     res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
     res.header("Access-Control-Allow-Headers", "Origin,Content-Type, X-Requested-With,Accept, Cache-Control");
   if ('OPTIONS' == req.method) {
-    res.send(200);
+    res.sendStatus(200);
   }
   else {
     next();
@@ -126,18 +126,7 @@ app.post('/api/mcvolume', async function (req, res) {
   }
 })
 
-  app.get('/api/csrfEndpoint', csrfProtection, (req, res, next) => {
-    res.cookie('XSRF-TOKEN', req.csrfToken(), { httpOnly: false });
-    //console.log(req)
-    var url11 = 'https://stockreports.zerodha.com/api/pdf/';
-  request(url11, function (error, response, html) {
-    if (!error) {
-
-      console.log(response.headers)
-     
-}
-  })
-  });
+  
 app.post('/api/mcvolume1', async function (req, res) {
 
   let mcsymbol1 = req.body
@@ -3226,23 +3215,6 @@ app.post('/trendlynepostdvm', async function (req, res) {
     axios.get('https://trendlyne.com/mapp/v1/stock/web/ohlc/' + symbol.tlid).then((response) => {
       obj1=({ Date: symbol.Date,Time:symbol.time, Name: symbol.name,DurabilityScore: response.data.body.stockData[6], VolatilityScore: response.data.body.stockData[7], MomentumScore: response.data.body.stockData[8]  })
       
-    //     MongoClient.connect(url,function (err, db) {
-    //       if (err) console.log(err)
-    //       var dbname = "Trendlyne"
-    //       var dbo = db.db(dbname);
-    //       dbo.collection("score").insertOne(obj1,forceServerObjectId=true,function (err,data) {
-
-    //         if(err!=null){
-    //             return console.log(err);
-    //         }
-    //         console.log(data.ops);
-    //         console.log("Trendlyne Score Inserted.....");
-    //     });
-    //     db.close();
-    // });
-         
-     
-
     }).catch((error) => {
       console.log(error)
     })
@@ -3269,13 +3241,6 @@ instance.defaults.jar = new tough.CookieJar()
 
 //////////////////////////////////////////////////////Upcoming Results Data from NSE///////////////////////////////////////
 
- 
-   // axios.get('https://www1.nseindia.com/corporates/corpInfo/equities/getResultCalendar.jsp?Symbol=&Industry=&Period=All%20Forthcoming&Purpose=&period=All%20Forthcoming&symbol=&industry=&purpose=').then((response) => {
-
-
-  
-/// Stock related Data from nseindia// To be used in OHLC////
-// const axios = require('axios').default;
 
 const sessionConfig = {
   secret: 'MYSECRET',
@@ -3372,19 +3337,6 @@ app.get('/api/nsedatastockohlc1', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/quote-equity?symbol='+stock))
-      // headers: {
-      //   //cookie: res.headers['bm_sv=9C569B42FD024DAAE1EA21E9C6625106~sAy0A2tWyRGfKiKgjYablYBwApJeI7lHR2L4QM6VUe6RLHSCnWqb+/8xIleZ/RXz5qq466jHokK0jwchB7mcm9dPG3TyfavX2KkiUtjSJYGPB2wCUwDl9rsDviygHC9qzGdl/s3XEqmEPsjYtDJEOJZxlYsd2wMfd2wBqe8hDNk=; Domain=.nseindia.com; Path=/; Max-Age=7191; HttpOnly'],
-        
-      //     "User-Agent": "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)",
-      //   "Referer": "http://www.nseindia.com/",
-      //     "Host": "http://www.nseindia.com/",
-      //   "Accept": '*/*',
-      //   "Sec-Fetch-Site":'same-site',
-      //     "sameSite": 'none' // cookie is returned as a header
-      // }
-      
-   // })
-    
     .then(data => res.json(data.data))
     .catch(data => console.error(res.response))
     
@@ -3487,8 +3439,6 @@ app.get('/api/nse22', function (req, res) {
 })
 
 
-
-
 ////////////////////////////////////////////NSE POST DATA/////////////////////////////////////////////////////////////
 
 app.post('/nsepostdata1', async function (req, res) {
@@ -3503,14 +3453,7 @@ app.post('/nsepostdata1', async function (req, res) {
       .then(data => {
         if (data.data['securityWiseDP']['deliveryToTradedQuantity']) {
           obj=({ symbol: symbol.eqsymbol1, percentage: data.data['securityWiseDP']['deliveryToTradedQuantity'] })
-        //   MongoClient.connect(url, function (err, db) {
-        //     if (err) console.log("Mongo error");
-        //     var dbname = "nse"
-        //           var dbo = db.db(dbname);
-               
-        //     dbo.collection("nse").insertOne(obj)
-        // })
-   
+        
         } else { console.log("No deliveryToTradedQuantity present ") }
       }
     )
@@ -3528,7 +3471,7 @@ app.post('/nsepostdata1', async function (req, res) {
     
     .catch(data => console.error("There is error"))   
 
-  //})
+  
   
   
   try {
@@ -3552,22 +3495,7 @@ app.post('/nsepostdata2', async function (req, res) {
         //console.log(data.data['filtered'])
           if (data.data['filtered']['CE']['totOI'] && data.data['filtered']['PE']['totOI']) {
             var obj=({ symbol: symbol.eqsymbol1, pcr: data.data['filtered']['PE']['totOI']/data.data['filtered']['CE']['totOI'] })
-        //     MongoClient.connect(url, function (err, db) {
-        //       if (err) console.log("Mongo error");
-        //       var dbname = "nse"
-        //       var dbo = db.db(dbname);
-              
-        //       dbo.collection("nsepcr").insertOne(obj,forceServerObjectId=true,function (err,data) {
-
-        //         if(err!=null){
-        //             return console.log(err);
-        //         }
-        //         console.log(data.ops);
-        //     });
-        //     db.close();
-        // });
-         // }) 
-     
+        
           } else { console.log("No Put/Call present ") }
         }
       )
@@ -3602,8 +3530,8 @@ app.get('/api/opstraexpirydates', function (req, res) {
   request(url11, function (error, response, html) {
     if (!error) {
 
-      res.json(JSON.parse(response.body))
-
+     // console.log(JSON.parse(response))
+     // (((response.body)))
 
     }
   })

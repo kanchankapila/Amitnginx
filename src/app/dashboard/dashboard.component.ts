@@ -3,15 +3,9 @@ import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient } from "@angular/common/http";
 import { formatDate } from '@angular/common';
-
-
-//import { OwlClockModule } from 'owl-ng';
-//import { OwlFanMenuModule } from 'owl-ng';
 import * as mdb from 'mdb-ui-kit'; // lib
-
 import { ChartType } from 'chart.js';
 import { Chart } from 'chart.js';
-
 import * as xml2js from "xml2js";
 import { NewsRss } from './news-rss';
 import { DataapiService } from '../../dataapi.service'
@@ -829,7 +823,7 @@ export class DashboardComponent implements OnInit {
     this.getniftyfinw()
     this.getniftyfinm()
     this.getetindices()
-    
+   
    
     
     
@@ -847,6 +841,7 @@ export class DashboardComponent implements OnInit {
       console.log(err)
     })
   }
+ 
   nseinstrading(){
     this.dataApi.nseinstrading().subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
