@@ -810,6 +810,7 @@ mscore: mscoretile[] = [];
     this.getshare3m(this.eqsymbol)
     this.getzerodha()
     this.getkotak()
+    this.getkotakview(this.eqsymbol)
     this.getshare1m(this.eqsymbol)
     this.getmmdata(this.stockid)
     this.getshare6m(this.eqsymbol)
@@ -825,6 +826,19 @@ mscore: mscoretile[] = [];
    
     setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 30000);
    
+  }
+  getkotakview(eqsymbol) {
+    this.dataApi.getkotakview(eqsymbol).subscribe(data => {
+     
+
+      let nestedItems = Object.keys(data).map(key => {
+        return data[key];
+      });
+     console.log(nestedItems) 
+      
+      }, err => {
+      console.log(err)
+    })
   }
   getkotak() {
    
@@ -1512,11 +1526,21 @@ mscore: mscoretile[] = [];
       for (let val in nestedItems[2]['crossover']) {
         this.stockcrossover.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
       }
-       
+     
       for (let val1 in nestedItems[2]['indicators']) {
-        if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
-          this.stockindicators.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
-        }
+        if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger' ) {
+          if (nestedItems[2]['indicators'][val1]['id'] == 'beta_nse') {
+            this.stockindicators.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].value, text4: nestedItems[2]['indicators'][val1] })
+          }
+
+          else if (nestedItems[2]['indicators'][val1]['id'] == 'beta_bse') {
+            this.stockindicators.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].value, text4: nestedItems[2]['indicators'][val1] })
+          }
+          else {
+            this.stockindicators.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
+          }
+          }
+        
       }
         
       

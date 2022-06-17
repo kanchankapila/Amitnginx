@@ -622,6 +622,10 @@ export class DataapiService {
     
     return this.http.get('http://localhost:8090/api/mcmovingaveragesview?stockisin='+stockisin+"&&dbname="+dbname)
   }
+  getkotakview(eqsymbol) {
+    
+    return this.http.get('http://localhost:8090/api/kotakview?eqsymbol='+eqsymbol)
+  }
   getmcsectorcombine(mcsectorsymbol){
     return this.http.post('http://localhost:8090/api/mcsectorcombine',mcsectorsymbol)
   }

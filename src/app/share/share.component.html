@@ -100,10 +100,10 @@
 </div>
 <div class="InsideContent">
   <div class="col-lg-7 grid-margin stretch-card">
-    <div class="content card">
+    <div class="content card container">
       <h4 class="mb-5">Daily Technical Indicators</h4>
       <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div fxFlex="25" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of stockindicators trackBy: trackByFuntion7">
+        <div fxFlex="25" fxFlex.xs="100%" fxFlex.sm="25%"  *ngFor="let tile of stockindicators trackBy: trackByFuntion7">
           <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
           [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
                       'bg-gradient-bull1':tile.text3 === 'Oversold',
@@ -115,7 +115,9 @@
                       'bg-gradient-bear2':tile.text3 === 'Weak Trend',
                       'bg-gradient-bear3':tile.text3 === 'Low Volatility',
                       'bg-gradient-bear4':tile.text3 === 'Underperformer',
-                      'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
+                      'bg-gradient-warning':tile.text3 === 'Neutral',
+                      'bg-gradient-bull5':tile.text3 > 1,
+                      'bg-gradient-bear5':1 > tile.text3}">{{tile.text2}}<br>{{tile.text3}}
           </mat-card>
          
         </div>
@@ -125,7 +127,7 @@
 
     <div class="InsideContent1">
     <div class="col-lg-13 grid-margin stretch-card">
-      <div class="content card">
+      <div class="content card container">
         
         <h4 class="mb-4">Crossover</h4>
         <div fxLayout="row wrap" fxLayoutGap="16px grid">
@@ -150,7 +152,7 @@
      
       
     <div class="col-lg-13 grid-margin stretch-card">
-      <div class="content card">
+      <div class="content card container">
         
         <h4 class="mb-4">Sentiment</h4>
         <div fxLayout="row wrap" fxLayoutGap="16px grid">

@@ -139,8 +139,7 @@ pcry1{
   }
   .n50optionssupport{
     background: rgb(114, 240, 162);
-    display: inline-block;
-    margin: 1px;
+    display: block;
     width: 150px;
     height: 50px;
     animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
@@ -149,18 +148,24 @@ pcry1{
   }
   .bnoptionssupport{
     background: rgb(114, 240, 162);
-    display: inline-block;
-    margin: 1px;
-    width: 150px;
-    height: 50px;
+    max-width: 250px;
+    max-height: 50px;
     animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
     animation-duration: 2s;
-  
+    display:block;
   }
+  .noptionssupport{
+    background: rgb(114, 240, 162);
+    max-width: 250px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+    display:block;
+  }
+  
   .n50optionsresistance{
     background: rgb(247, 155, 170);
     display: inline-block;
-    margin: 1px;
     max-width: 250px;
     max-height: 50px;
     animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
@@ -168,26 +173,37 @@ pcry1{
   
   }
   .bnoptionsresistance{
-    background: rgb(247, 155, 170);
-    display: inline-block;
-    margin: 1px;
-    max-width: 250px;
-    max-height: 50px;
-    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
-    animation-duration: 2s;
-  
-  }
+  background: rgb(247, 155, 170);
+  max-width: 250px;
+  max-height: 50px;
+  animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 2s;
+  display:block;
+}
+.noptionsresistance{
+  background: rgb(247, 155, 170);
+  max-width: 250px;
+  max-height: 50px;
+  animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 2s;
+  display:block;
+}
   .bnoptionsneutral{
     background: rgb(246, 255, 119);
-    
-    margin: 1px;
     max-width: 250px;
     max-height: 50px;
     animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
     animation-duration: 2s;
-  
+    display:block;
   }
-  
+  .noptionsneutral{
+    background: rgb(246, 255, 119);
+    max-width: 250px;
+    max-height: 50px;
+    animation: flipOutX; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s;
+    display:block;
+  }
 .navbar {
   font-family: $type1-light;
   background: $navbar-bg;

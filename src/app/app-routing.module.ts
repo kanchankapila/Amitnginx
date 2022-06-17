@@ -43,6 +43,7 @@ const routes: Routes = [
   { path: 'Share', loadChildren: () => import('./share/share.module').then(m => m.ShareModule) },
   { path: 'testing', loadChildren: () => import('./testing/testing.module').then(m => m.TestingModule) },
   { path: 'homepage', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
+  { path: 'screeners', loadChildren: () => import('./screeners/screeners.module').then(m => m.ScreenersModule) },
 
 ];
 

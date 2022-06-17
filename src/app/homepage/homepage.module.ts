@@ -5,6 +5,7 @@ import { HomepageRoutingModule } from './homepage-routing.module';
 import { HomepageComponent } from './homepage.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgChartsModule } from 'ng2-charts';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { NgChartsModule } from 'ng2-charts';
     FlexLayoutModule,
     NgChartsModule 
 
-  ]
+  ],
+  providers: [ CookieService ],
 })
 export class HomepageModule { }

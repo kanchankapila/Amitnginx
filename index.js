@@ -21,13 +21,15 @@ const bodyParser = require("body-parser");
 const request = require('request')
 //app.use(cors());
 const path=require('path')
-//const session = require('express-session');
+const session = require('express-session');
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.raw());
 const fetch = require("node-fetch");
 const csrf = require('csurf');
-process.env.trendlynecookie='_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; csrftoken=pavxqVvnk54yxBt5xAVsMIapOHFzdK9wFtQvOtXPboT6jUVHhE1RaBi6kybaMX9u; .trendlyne=p79sshngf90pfkh21481db0zmh2u0djm; _gid=GA1.2.1417351663.1652194999'
+//process.env.trendlynecookie='_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _gid=GA1.2.1569867014.1655128119; csrftoken=E6Enh9jtzvrG703wPG1PegAZnUaBj3VzcGHg4yXWxUti90VcN1wkQfra96zoxdb; .trendlyne=s6snszghi8xrzcf8j8ys837ulsjphsxd'
+//process.env.trendlynecookie='_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _gid=GA1.2.1569867014.1655128119; csrftoken=z8g4Tb6TXT2SzjTUescAaZ1tPUQn45SX5MozUsI0WVCJOqItLbLtf1iXn3DjWQzm; .trendlyne=ifcvixwjgwe23cde7dtlmjs3xlmktp6j; _gat=1'
+//process.env.trendlynecookie=''
 var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
 const fs =require('fs')
@@ -37,7 +39,8 @@ var allowCrossDomain=function(req, res,next){
 
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
-    res.header("Access-Control-Allow-Headers", "Origin,Content-Type, X-Requested-With,Accept, Cache-Control");
+  res.header("Access-Control-Allow-Headers", "Origin,Content-Type, X-Requested-With,Accept, Cache-Control");
+   res.header("Access-Control-Allow-Headers", "Origin,Content-Type, X-Requested-With,Accept, Cache-Control");
   if ('OPTIONS' == req.method) {
     res.sendStatus(200);
   }
@@ -72,10 +75,7 @@ if (cluster.isMaster) {
 
 const axiosCookieJarSupport = require('axios-cookiejar-support').default;
   const tough = require('tough-cookie');
-
-
-///////For PostgresDB Connection/////////////
-
+ 
 const pool = new Pool({
   user: "postgres",
   host: "localhost",
@@ -91,6 +91,22 @@ const client = new Client({
   port: "5432"
   
 })
+const sessionConfig = {
+  secret: 'amit0605',
+  id_login: 'amit.kapila.2009@gmail.com',
+  resave: false,
+  saveUninitialized: false,
+  cookie : {
+    sameSite: 'Lax', // THIS is the config you are looing for.
+  }
+};
+
+
+  app.set('trust proxy', 1); // trust first proxy
+  sessionConfig.cookie.secure = true; // serve secure cookies
+
+
+
 //////////////////////////////////Moneycontrol Post request for MCvolume////////
 app.post('/api/mcvolume', async function (req, res) {
 
@@ -160,6 +176,23 @@ app.post('/api/mcvolume1', async function (req, res) {
     console.log(e)
   }
 })
+app.get('/api/kotakview', async function (req, res) {
+
+  let eqsymbol = req.query.eqsymbol
+
+      
+     
+      const result = await pool.query
+        
+        ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'CompanyShortName' = $1", [eqsymbol]);
+    // console.log(result.fields) 
+     res.json(result.rows)
+  //pool.end();
+
+     
+
+    })
+  
 
 const { response } = require('express');
 const { json } = require('body-parser');
@@ -277,8 +310,7 @@ var yesterday6 = moment().subtract(6, 'days');
 
 var today = new Date();
 
-global.document = new JSDOM('http://localhost:4200/Dashboard').window.document;
-console.log(document.cookie)
+
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
@@ -2527,7 +2559,75 @@ request(options1, (err, response, body) => {
 
 
 
+////********************************************Kotak Securities*****************/
+app.get('/api/kotakhealthscore', (req, res) => {
+  
+    console.log("This is Kotak Health Score")
+   // global.document = new JSDOM('https://trendlyne.com/getUserNavBar/').window.document;
+   // console.log(global.document.cookie.cookie)
 
+ 
+ 
+  var url11 = 'https://www.kotaksecurities.com/TSTerminal/Fundamentals/MasterData/GetHealthScoreScreenerData?sectorId=-1&marketCap=LC&healthScoreValue=A&defaultView=false';
+  request(url11, function (error, response, html) {
+    if (!error) {
+   
+
+      var options2 = {
+        url: 'https://mtrade.kotaksecurities.com/TSTerminal/Fundamentals/MasterData/GetHealthScoreScreenerData?sectorId=-1&marketCap=ALL&healthScoreValue=A&defaultView=true',
+        method: 'GET', // Don't forget this line
+        "headers": {
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+          "accept-language": "en-US,en;q=0.9",
+          "cache-control": "max-age=0",
+          "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"102\", \"Google Chrome\";v=\"102\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Windows\"",
+          "sec-fetch-dest": "document",
+          "sec-fetch-mode": "navigate",
+          "sec-fetch-site": "none",
+          "sec-fetch-user": "?1",
+          "upgrade-insecure-requests": "1",
+          "cookie": "_ga=GA1.2.1340509370.1653745738; _nv_did=253330646.1653745752.1585996377122177135239zqaz7; _gcl_au=1.1.873030795.1653745910; ORG36141=cab000d5-e326-4945-b583-d453ad82e69a; _fbp=fb.1.1653745914138.1241231693; _gid=GA1.2.675168011.1655284601; __stdf=0; __stgeo=\"0\"; __stp={\"visit\":\"returning\",\"uuid\":\"a9ce3eb2-3758-4168-9364-3a92b30979bb\",\"ck\":\"ZSGPW\"}; _nv_uid=253330646.1653745752.46ba573e-2c31-47df-bc30-44347db76191.1655284600.1655322664.6.0; _nv_utm=253330646.1653745752.6.2.dXRtc3JjPWdvb2dsZXx1dG1jY249KG5vdCBzZXQpfHV0bWNtZD1vcmdhbmljfHV0bWN0cj0obm90IHByb3ZpZGVkKXx1dG1jY3Q9KG5vdCBzZXQpfGdjbGlkPShub3Qgc2V0KQ==; _nv_ab_ver_6941_3655=4515; _nv_ab_cid=[\"4032\",\"3490\",\"2420\",\"3655\"]; _nv_hit=253330646.1655322954.cHZpZXc9Mw==; _uetsid=de457520ec8b11ec87534f87fb22df6a; _uetvid=53ce8fa0de8d11ec8991b5e9297a9184; ASP.NET_SessionId=audkpnbvnjcvyjujypffrvuz; _PLATFORMAUTH=D5F76307007C6DC202A1FFE1CF68408D2E4AD03C634BCD33A78247B911937F15788C846B6970D2DC74ADD47AF777D07205AE68828D118314D9CF0C8468044EF44AA7DA1970AFA5CC66D0C855499FC18E028E6D41F7B9B4797C667B541CDF7527EE038E96FFAAD58534CEE7E9592B61437CF319A9AD1711F9DCA53EBF831454F2ED76C889E647540D6CA6289B7176D75DFCAFFA6122E5049DBC5FEDF95CA5C95A41093FBA2B0F0D414CAF66D3AF1581938E7CD9527D76A239F5A538741CEE4321E9A5DA5383B8EDF6CFA399682DB12714CB16CF8FBB3BFB1020C0A29E52EF3EC7CC8ED4357B0B43F6D0B3E1A52947353BDED9724B2741B4142BBCA16B9120E400CFE2F31A0584A9585F3C141144E7C83B3DCBE9F7115B4F28574A6756BD70C6027D5BCCC4ACF675532BFECA46E3509D62A5487317797A4E462D07E2809BFF9C206A10DD4F489716CACBE3F6A54E9CD8CC44A7B10B979C3A9DB5F35191B6C38C9DE43EED54A529288B060FB699A1317BAD798398ECF7F750F1686218CD85B17977FF7F3C4843B5A87CF339313AC3D4D6E983F4A92853BA0B7ED946E1BAB8F6DDE122E3869DC94A12884EECC25D2C4F98DB80BB6ADFE684053566ED9AA152DFF30CEA8E219C94F3EFED13D977A23C27A6BE2180C56E46C7E5A26C357F32AE605E16E094A6FAA3951EF7A1FE1DBE5C8AE838BFCB75C9AD87A880BACD31DC185D87FE21FB0A771D836FCAD89621AA871986AF49FBF82C12327DCDDB344A233FA4B7DE39891E2304DDF57A9E748101E8CFEA104838DF06F57BD9427A1A7EA52CBC835E7B171762F91A853D3D24204AED19EBA8E70DDACC65B0A5CF16858120C51028D26581C7BBB9EBF3B48DC1297E1028E31791AAE7CC5FD241D98075095B3023233F5610CD00649A331B7624A9B2CA64A91F02BF5591C8C02BCDE7C541FD89AB1460DF39EF15; userTheme=; AppConnection=ZSGPW-824a37b9fa6b4fff9b98a18778a9aed1; __sts={\"sid\":1655370717349,\"tx\":1655370717349,\"url\":\"https%3A%2F%2Fmtrade.kotaksecurities.com%2FTSTerminal%2FRealTime%2FWatchList%2FSRWatchList\",\"pet\":1655370717349,\"set\":1655370717349}; __stbpnenable=0"
+        },
+        "referrerPolicy": "strict-origin-when-cross-origin",
+        "body": null,
+        "method": "GET"
+      };
+
+
+request(options2, (err, response, body) => {
+  if (err) {
+      //console.log(err);
+  } else {
+    res.json(JSON.parse(response.body));
+   
+
+
+    
+    const obj1 = ((JSON.parse(response.body)));
+    console.log(obj1.length)
+    console.log("executing kotaksecurities")
+
+    for (let i = 0; i < obj1.length; i += 1){
+      const obj2 = obj1[i];
+      console.log(obj2)
+      pool.query('INSERT INTO kotaksec (info) VALUES ($1)',[obj2], (err, res) => {
+        console.log(err, res)
+        
+      })
+      
+    }
+      
+     
+       
+ 
+    }
+});
+}
+  })
+  
+})
 
 
 ///*************************************Trendlyne********************************///
@@ -2540,7 +2640,9 @@ request(options1, (err, response, body) => {
   let tlid = req.query.tlid
   let tlname = req.query.tlname
   let eqsymbol = req.query.eqsymbol
-  console.log("This is tendlynestocks1")
+    console.log("This is tendlynestocks1")
+   // global.document = new JSDOM('https://trendlyne.com/getUserNavBar/').window.document;
+   // console.log(global.document.cookie.cookie)
 
  
  
@@ -3055,6 +3157,58 @@ app.get('/api/tlvhg', function (req, res) {
 
 
 })
+const chrome = require('chrome-cookies-secure');
+const puppeteer = require('puppeteer');
+
+const url = 'https://trendlyne.com/';
+
+const getCookies = (callback) => {
+    chrome.getCookies(url, 'puppeteer', function(err, cookies) {
+        if (err) {
+            console.log(err, 'error');
+            return
+        }
+        console.log(cookies, 'cookies');
+        callback(cookies);
+    }, 'Profile2') // e.g. 'Profile 2'
+}
+
+getCookies(async (cookies) => {
+    const browser = await puppeteer.launch({ 
+        headless: false
+    });
+    const page = await browser.newPage();
+
+    await page.setCookie(...cookies);
+    await page.goto(url);
+    await page.waitForTimeout(1000);
+    browser.close();
+});
+app.get('/api/test1', function (req, res) {
+
+  chrome.getCookies('https://trendlyne.com/getUserNavBar/', function(err, cookies) {
+    console.log(cookies);
+  });
+
+
+
+  var url6 ='https://trendlyne.com/getUserNavBar/'
+  request(url6, function (error, response, html) {
+    //console.log()
+    if (!error) {
+     
+      console.log(response.caseless.dict['set-cookie'])
+      //res.json(JSON.parse(response))
+     // console.log(response)
+
+
+    }
+  })
+
+
+
+})
+
 //////////////////////////////////////////////TrendLyne High Volume Low Gain///////////////////////////////////////////////////////
 app.get('/api/tlvhl', function (req, res) {
 
@@ -3241,20 +3395,6 @@ instance.defaults.jar = new tough.CookieJar()
 
 //////////////////////////////////////////////////////Upcoming Results Data from NSE///////////////////////////////////////
 
-
-const sessionConfig = {
-  secret: 'MYSECRET',
-  name: '',
-  resave: false,
-  saveUninitialized: false,
-  cookie : {
-    sameSite: 'none', // THIS is the config you are looing for.
-  }
-};
-
-
-  app.set('trust proxy', 1); // trust first proxy
-  sessionConfig.cookie.secure = true; // serve secure cookies
 
 
 //app.use(session(sessionConfig));

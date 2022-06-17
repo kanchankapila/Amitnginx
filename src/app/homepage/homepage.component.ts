@@ -1,9 +1,10 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
-import { HttpClient } from "@angular/common/http";
+import { HttpClient,HttpHeaders} from "@angular/common/http";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Chart, ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+import { CookieService } from 'ngx-cookie-service';
 export interface globalmarkettiles {
 
   text1: string;
@@ -20,10 +21,11 @@ export interface globalmarkettiles {
 })
 export class HomepageComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
-  constructor(private http: HttpClient,private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) { }
+  constructor(public cookieService: CookieService,private http: HttpClient,private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) { }
   globalmarket: globalmarkettiles[] = [];
   mcadvvalue: any
   mcdecvalue: any
+  user: string;
   public advData: Array<any> = [];
   public advLabels: Array<number> = [];
   public decData: Array<any> = [];
@@ -31,6 +33,7 @@ export class HomepageComponent implements OnInit {
   public advdecChartType: ChartType = 'line';
   public advdecChartOptions:ChartOptions = {
     scales: {},
+
     elements: {
       point: {
         radius: 0
@@ -41,6 +44,7 @@ export class HomepageComponent implements OnInit {
     this.getglobal()
     this.getadvdec()
     this.opstrafiidii()
+    
   }
   getglobal() {
    
@@ -49,7 +53,7 @@ export class HomepageComponent implements OnInit {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      
+     
       for (let val in nestedItems[2]) {
         for (let val1 in nestedItems[2][val]['data']) {
           this.globalmarket.push({ text1: nestedItems[2][val]['data'][val1].symbol,text2:nestedItems[2][val]['data'][val1].country,text3:nestedItems[2][val]['data'][val1].change_per,text4:nestedItems[2][val]['data'][val1].change_value,text5:nestedItems[2][val]['data'][val1].timestamp })
@@ -105,12 +109,18 @@ export class HomepageComponent implements OnInit {
     return item1.text1
    }
   opstrafiidii() {
+    console.log(document.cookie)
+   // this.cookieService.set('cookie','_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _gid=GA1.2.1569867014.1655128119; csrftoken=Fpues3hutZZ3i8S6FShRiVvk4uOXbl9tHBfdqByuhssEAISHMY6G5fXkfmwGI4Ov; .trendlyne=e3qcvnv4pt6rsd5avmsbj26fe6lzd8uo' );
+    //let headers: HttpHeaders = new HttpHeaders()
+    //headers = headers.append('cookie','_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _gid=GA1.2.1569867014.1655128119; csrftoken=j1Eh0zadbXX2a6wxeWMsyiN8tqMSwOXK8TSXab1ceRJkqLb4aiWHtuYjRjIeTSIb; .trendlyne=a7juoxwv02x77mw4wynxk1g43sjy9f36; _gat=1');
+   // headers = headers.append('cookie','_ga=GA1.2.775644955.1603113261; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _gid=GA1.2.1569867014.1655128119; csrftoken=Fpues3hutZZ3i8S6FShRiVvk4uOXbl9tHBfdqByuhssEAISHMY6G5fXkfmwGI4Ov; .trendlyne=e3qcvnv4pt6rsd5avmsbj26fe6lzd8uo')
+   // console.log(headers)
+    this.http.get<any>('https://trendlyne.com/equity/getStockMetricParameterList/71260').subscribe(data5 => {
    
-    this.http.get<any>('https://opstra.definedge.com/api/fiidiidata').subscribe(data5 => {
-    
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      
       console.log(nestedItems)
       for (let val in nestedItems) {
         
@@ -133,7 +143,7 @@ export class HomepageComponent implements OnInit {
       // }, err => {
       //   console.log(err)
 
-
+      
 
 
     
