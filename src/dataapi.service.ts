@@ -596,6 +596,9 @@ export class DataapiService {
   getmcmovingaverages(mcsymbol){
     return this.http.post('http://localhost:8090/api/mcmovingaverages',mcsymbol)
   }
+  getnr7(mcsymbol){
+    return this.http.post('http://localhost:8090/api/nr7',mcsymbol)
+  }
   getetcompanydata(companyid){
     return this.http.post('http://localhost:8090/api/etcompanydata',companyid)
   }
@@ -625,6 +628,10 @@ export class DataapiService {
   getkotakview(eqsymbol) {
     
     return this.http.get('http://localhost:8090/api/kotakview?eqsymbol='+eqsymbol)
+  }
+  getkotaksectorview(sectorid) {
+    
+    return this.http.get('http://localhost:8090/api/kotaksectorview?sectorid='+sectorid)
   }
   getmcsectorcombine(mcsectorsymbol){
     return this.http.post('http://localhost:8090/api/mcsectorcombine',mcsectorsymbol)

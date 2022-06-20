@@ -139,7 +139,7 @@ export interface vscoretile {
     text1: any;
     text2: any;
     }
-  
+    
 export interface srtile{
   text1: string;
   text2: string;
@@ -468,8 +468,15 @@ export interface brokerrecodowngradetile {
   
   
   }
-
-
+export interface divscoretile { text1: string; text2: string; }
+export interface rbsscoretile {text1: string;text2: string;}
+export interface kvscoretile { text1: string; text2: string; }
+export interface kqscoretile { text1: string; text2: string; }
+export interface omrscoretile {text1: string;text2: string;}
+export interface growthscoretile { text1: string; text2: string; }
+export interface healthscoretile {text1: string;text2: string;}
+export interface ppscoretile {text1: string;text2: string;}
+export interface sectorstockstile {text1: string;text2: string;text3: string;}
 @Component({
   selector: 'app-share',
   templateUrl: './share.component.html',
@@ -479,6 +486,7 @@ export interface brokerrecodowngradetile {
 export class ShareComponent implements OnInit {
   stockhighcharts: StockChart;
   visibleSidebar5;
+  visibleSidebar6;
   cookieValue = '';
 
 
@@ -609,6 +617,18 @@ mscore: mscoretile[] = [];
   techscore: techscoretile[] = [];
   score: scoretile[] = [];
   scoret: scorettile[] = [];
+  divscore: divscoretile[] = [];
+  rbsscore: rbsscoretile[] = [];
+  kvscore: kvscoretile[] = [];
+  kqscore:kqscoretile[] = [];
+  ppscore: ppscoretile[] = [];
+  growthscore: growthscoretile[] = [];
+  healthscore: healthscoretile[] = [];
+  omrscore: omrscoretile[] = [];
+  sectorstocks:sectorstockstile[] = [];
+  
+  
+ 
   hmsg: any;
   brokertarget: brokertargettile[] = [];
   brokertargetdowngrade: brokertargetdowngradetile[] = [];
@@ -629,7 +649,7 @@ mscore: mscoretile[] = [];
  // rsi:rsitile[] = [];
   mfi1: mfi1tile[] = [];
  // mfi:mfitile[] = [];
-  
+  nr7: any;
   basicData: any;
   weatherdata: any;
   mmdelivcomp: any;
@@ -637,6 +657,7 @@ mscore: mscoretile[] = [];
   basicData1: any;
   basicOptions1: any;
   companyname: string;
+  sectorid: any;
   //chart: any;
   
   stockindicators: stockindicatorstile[] = [];
@@ -834,11 +855,33 @@ mscore: mscoretile[] = [];
       let nestedItems = Object.keys(data).map(key => {
         return data[key];
       });
-     console.log(nestedItems) 
       
+      
+      this.divscore.push({ text1: nestedItems[0].dividendscore, text2: "Dividend" }),
+        this.growthscore.push({ text1: nestedItems[0].growthscore, text2: "Growth" }),
+        this.healthscore.push({ text1: nestedItems[0].healthscore, text2: "Health" }),
+        this.omrscore.push({ text1: nestedItems[0].overallmarketrank, text2: "Market Rank" }),
+        this.kqscore.push({text1:nestedItems[0].qualityscore,text2:"Quality" }),
+        this.rbsscore.push({ text1: nestedItems[0].rankbysector, text2: "Sector Rank" }),
+        this.kvscore.push({ text1: nestedItems[0].valuescore, text2: "Value" }),
+        this.ppscore.push({ text1: nestedItems[0].pastperformancescore, text2: "Past Performance" })
+        this.sectorid = nestedItems[0].sectorid
+      
+      this.dataApi.getkotaksectorview(this.sectorid).subscribe(data => {
+     
+
+        let nestedItems = Object.keys(data).map(key => {
+          return data[key];
+        });
+        console.log(nestedItems[0])
+        this.sectorstocks.push({text1:nestedItems[0].companyshortname,text2:nestedItems[0].rankbysector,text3:nestedItems[0].overallmarketrank})
+      });
+     
       }, err => {
       console.log(err)
     })
+   
+   
   }
   getkotak() {
    
@@ -1347,9 +1390,38 @@ mscore: mscoretile[] = [];
    }
    trackByFuntion34(index34, item34) {
     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item34.text3 ;
+    return item34.divscore ;
    }
- 
+   trackByFuntion35(index35, item35) {
+    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+    return item35.text3 ;
+   }
+   trackByFuntion36(index36, item36) {
+    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+    return item36.text3 ;
+   }
+   trackByFuntion37(index37, item37) {
+    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+    return item37.text3 ;
+   }
+   trackByFuntion38(index38, item38) {
+    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+    return item38.text3 ;
+   }
+   trackByFuntion39(index39, item39) {
+    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+    return item39.text3 ;
+   }
+   trackByFuntion40(index40, item40) {
+    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+    return item40.text3 ;
+   }
+  
+   trackByFuntion41(index41, item41) {
+    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+    return item41.text3 ;
+   }
+   
   getshare1w(eqsymbol) {
          ////////////////Nifty 1 Week/////////////////////////////
         
@@ -1622,16 +1694,14 @@ mscore: mscoretile[] = [];
     }
 
   getntstockdetails() {
-    // this.dataApi.getntstockdetails(this.eqsymbol).subscribe(data5 => {
-    //   let nestedItems = Object.keys(data5).map(key => {
-    //     return data5[key];
-    //   });
+   
     
       this.dataApi.getntstockdetails(this.eqsymbol).subscribe(data5 => {
         let nestedItems = Object.keys(data5).map(key => {
               return data5[key];
-            });
-        console.log(nestedItems)
+        });
+        
+        this.nr7=(nestedItems[3].stocktrend['nr7_today'])
         this.delivperc.length = 0;
         this.delivperctime.length = 0;
         for (let val in nestedItems[3].priceTable) {

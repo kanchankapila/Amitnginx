@@ -148,7 +148,7 @@ export class NavbarComponent implements OnInit {
   keyword = 'name';
   selectEvent(stock_isin) {
     
-    this.window.open("http://localhost:4200/Ohlc?stock=" + stock_isin + "&&dbname=" + 'mydb', "_blank")
+    this.window.open("http://localhost:4200/Share?stock="+stock_isin, "_blank")
     
   }
 
@@ -334,6 +334,22 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     }
    // console.log(this.mcsymbol)
     this.dataApi.getmcmovingaverages(this.mcsymbol).subscribe(data5 => {
+
+
+    }, err => {
+      console.log(err)
+    }
+    )
+  }
+  getnr7() {
+    console.log("NR7 start")
+    for (let val in this.stock) {
+      this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
+      this.mcsymbol.push({ eqsymbol: this.stock[val].eqsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday })
+      
+    }
+   // console.log(this.mcsymbol)
+    this.dataApi.getnr7(this.mcsymbol).subscribe(data5 => {
 
 
     }, err => {
