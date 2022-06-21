@@ -17,7 +17,7 @@ import * as stocks1 from '../lists/stocklist12'
 import * as etstock from '../lists/etlist'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { PrimeNGConfig } from 'primeng/api';
 import { startWith, map } from 'rxjs/operators';
@@ -461,7 +461,7 @@ export class DashboardComponent implements OnInit {
   stockid = [];
   basicData1: any;
   basicOptions1: any;
-  control = new FormControl();
+  control = new UntypedFormControl();
  
 
   tiles: Tile[] = [];

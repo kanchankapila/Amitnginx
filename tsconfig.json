@@ -4,7 +4,7 @@
     "baseUrl": "./",
     "module": "esnext",
     //"module": "commonjs",
-    "target": "es5",
+    "target": "es2020",
     "esModuleInterop": true,
     
     "allowJs": true,
