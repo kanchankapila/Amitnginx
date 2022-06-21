@@ -1700,7 +1700,7 @@ mscore: mscoretile[] = [];
         let nestedItems = Object.keys(data5).map(key => {
               return data5[key];
         });
-        
+        console.log(nestedItems)
         this.nr7=(nestedItems[3].stocktrend['nr7_today'])
         this.delivperc.length = 0;
         this.delivperctime.length = 0;

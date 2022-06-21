@@ -332,7 +332,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday })
       
     }
-   // console.log(this.mcsymbol)
+   
     this.dataApi.getmcmovingaverages(this.mcsymbol).subscribe(data5 => {
 
 
@@ -343,12 +343,14 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
   }
   getnr7() {
     console.log("NR7 start")
+    this.mcsymbol.length = 0;
     for (let val in this.stock) {
+      
       this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-      this.mcsymbol.push({ eqsymbol: this.stock[val].eqsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday })
+      this.mcsymbol.push({ eqsymbol: this.stock[val].symbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday })
       
     }
-   // console.log(this.mcsymbol)
+    console.log(this.mcsymbol)
     this.dataApi.getnr7(this.mcsymbol).subscribe(data5 => {
 
 

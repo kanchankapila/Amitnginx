@@ -3763,7 +3763,7 @@ app.get('/api/kite1', function (req, res) {
 
 /////////////////////////////////////*****************************NIFTY TRADERS******************///////////////////////////
 
-app.get('/api/niftytradersallstocks', function (req, res) {
+app.get('/api/niftytradersallstocks', async function (req, res) {
 
   var url11 = 'https://api.niftytrader.in/api/NIndex/stocks_list_api';
   request(url11, function (error, response, html) {//console.log(response)
@@ -3777,7 +3777,8 @@ app.get('/api/niftytradersallstocks', function (req, res) {
 })
 
 
-
+    
+  
 app.get('/api/ntniftypcr', function (req, res) {
 
   var url11 = 'https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr';
@@ -3800,14 +3801,7 @@ app.get('/api/ntniftypcr', function (req, res) {
     request(url11, function (error, response, html) {
       if (!error) {
         
-        
-        
- 
-      
-  
-  
-  
-  var options2 = {
+      var options2 = {
     url: 'https://api.niftytrader.in/webapi/Live/stockAnalysis',
     method: 'POST', // Don't forget this line
     "headers": {
@@ -3841,6 +3835,77 @@ app.get('/api/ntniftypcr', function (req, res) {
     })
     
   })
+
+  //////////////Nifty Trader Post Request to get nr7 for Stocks in nr7 database on postgres,dropdown in Actions submits request///////
+  
+  app.post('/api/nr7', async function (req, res) {
+    let eqsymbol = req.body
+   const promises = eqsymbol.map(symbol => {
+   console.log(eqsymbol)
+    var url11 = 'https://api.niftytrader.in/webapi/Live/stockAnalysis';
+      request(url11, function (error, response, html) {
+        if (error) {
+          console.log(error)
+        
+      }
+     else if (!error) {
+    var options2 = {
+    url: 'https://api.niftytrader.in/webapi/Live/stockAnalysis',
+    method: 'POST', // Don't forget this line
+    "headers": {
+     "accept": "application/json, text/plain, */*",
+     "accept-language": "en-US,en;q=0.9",
+     "content-type": "application/json",
+     "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
+     "sec-ch-ua-mobile": "?0",
+     "sec-ch-ua-platform": "\"Windows\"",
+     "sec-fetch-dest": "empty",
+     "sec-fetch-mode": "cors",
+     "sec-fetch-site": "same-site"
+    },
+    "referrer": "https://www.niftytrader.in/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "body": '{\"symbol\":\"'+symbol.eqsymbol+'\"}',
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "omit"
+   }
+   
+   request(options2, (err, response, body,res) => {
+    if (err) {
+      
+    } else {
+      data = JSON.parse(response.body)
+      data2 = data["resultData"]["stocktrend"]
+      obj1 = [];
+      for (let i in data2) {
+        if (i == 'nr7_today') {
+        console.log(data2['nr7_today'])
+          obj1.push({ stock: symbol.name, isin: symbol.isin, Date: symbol.Date, nr7: data2['nr7_today'] });
+        }
+      }
+      console.log(obj1)
+      console.log("executing nr7")
+      pool.query('INSERT INTO nr7 (info)  VALUES ($1)', obj1, (err, res) => {
+        console.log(err, res)
+        
+      })
+  
+   
+    
+    
+    }
+   });
+   }
+   })
+   })
+   try {
+    await Promise.all(promises)
+   } catch (e) {
+    console.log(e)
+   }
+  })
+
   
   
   
