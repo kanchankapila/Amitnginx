@@ -1,5 +1,22 @@
 <br>
 <br>
+
+<div class=" grid-margin stretch-card">
+  <div class="content  container">
+    
+    <div fxLayout="row wrap" fxLayoutGap="10px grid">
+      <div fxFlex="33" fxFlex.xs="100%" fxFlex.sm="100%"  *ngFor="let tile of stockdetails trackBy: trackByFuntion42">
+        
+        <div class="text-blue type1-bold cardbear1 grid-margin stretch-card" [ngClass]="{ 
+                    'bg-gradient-bull': tile.text3 > 0,
+                    'bg-gradient-bear2': 0 > tile.text3 ,
+                    'bg-gradient-bear5': tile.text3 == 0 }"><h1>{{tile.text1}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text4}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text3}}%</h1>
+      </div>
+       
+      </div>
+    </div>
+    </div>
+  </div>
 NR7:{{nr7}}
 <div class="InsideContent1">
   <button pButton type="button" (click)="visibleSidebar6 = true" icon="pi pi-arrow-right" label="Good/Bad/Neutral" class="p-button-raised p-button-success p-button-outlined"></button>

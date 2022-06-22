@@ -2,13 +2,12 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
-import { v4 as uuidv4 } from 'uuid';
+
 import axios from "axios";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { StockChart } from 'angular-highcharts';
-import epochSeconds from "epoch-seconds";
-import { createFetch, base, accept, parse } from 'http-client'
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
@@ -476,7 +475,8 @@ export interface omrscoretile {text1: string;text2: string;}
 export interface growthscoretile { text1: string; text2: string; }
 export interface healthscoretile {text1: string;text2: string;}
 export interface ppscoretile {text1: string;text2: string;}
-export interface sectorstockstile {text1: string;text2: string;text3: string;}
+export interface sectorstockstile { text1: string; text2: string; text3: string; }
+export interface stockdetailstile {text1: any;text2: any;text3: any;text4: any;}
 @Component({
   selector: 'app-share',
   templateUrl: './share.component.html',
@@ -526,8 +526,7 @@ export class ShareComponent implements OnInit {
   constructor(private cookieService:CookieService,private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
     Chart.register(CandlestickController, OhlcController, CandlestickElement, OhlcElement);
   
-  this.cookieService.set('X-Auth-Token', uuidv4());
-  this.cookieValue = this.cookieService.get('X-Auth-Token');
+  
   
   }
   
@@ -690,6 +689,7 @@ mscore: mscoretile[] = [];
   neutral: neutraltile[] = [];
   stockema: stockematile[] = [];
   stocksma: stocksmatile[] = [];
+  stockdetails: stockdetailstile[] = [];
   public stockdata: Array<number> = [];
   public delivperc: Array<number> = [];
   public delivperctime: Array<number> = [];
@@ -837,7 +837,8 @@ mscore: mscoretile[] = [];
     this.getshare6m(this.eqsymbol)
     this.getshare1w(this.eqsymbol)
     this.getstock1yr(this.eqsymbol)
-    this.getntstockdetails() 
+    this.getntstockdetails()
+    this.getmcstockrealtime() 
     this.getstocktoday(this.mcsymbol)
     this.getstockmaema(this.eqsymbol)
     setInterval(() => { this.getstocktoday(this.mcsymbol) }, 30000);
@@ -846,7 +847,7 @@ mscore: mscoretile[] = [];
     this.getetsharetoday(this.eqsymbol)
    
     setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 30000);
-   
+    setInterval(() => { this. getmcstockrealtime() }, 3000);
   }
   getkotakview(eqsymbol) {
     this.dataApi.getkotakview(eqsymbol).subscribe(data => {
@@ -890,7 +891,7 @@ mscore: mscoretile[] = [];
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+     // console.log(nestedItems) To be explored
      
      
      
@@ -900,7 +901,24 @@ mscore: mscoretile[] = [];
  
     
     }
- 
+    getmcstockrealtime() {
+   
+      this.http.get<any>('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+this.mcsymbol).subscribe(data5 => {
+      
+        let nestedItems = Object.keys(data5).map(key => {
+          return data5[key];
+        });
+        this.stockdetails.length = 0;
+        
+       this.stockdetails.push({text1:nestedItems[2]['SC_FULLNM'],text2:nestedItems[2]['pricechange'],text3:nestedItems[2]['pricepercentchange'],text4:nestedItems[2]['pricecurrent']})
+       
+       
+          
+    
+      })
+   
+      
+      }
  
 
  
@@ -1420,6 +1438,10 @@ mscore: mscoretile[] = [];
    trackByFuntion41(index41, item41) {
     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
     return item41.text3 ;
+   }
+   trackByFuntion42(index42, item42) {
+    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+    return item42.text3 ;
    }
    
   getshare1w(eqsymbol) {
