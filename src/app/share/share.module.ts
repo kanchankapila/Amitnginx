@@ -13,7 +13,7 @@ import { TabViewModule } from "primeng/tabview";
 import { ButtonModule } from 'primeng/button';
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import { NgxEchartsModule } from 'ngx-echarts';
-import {CookieService} from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 import stock from 'highcharts/modules/stock.src';
 import more from 'highcharts/highcharts-more.src';
 import 'chartjs-adapter-date-fns';

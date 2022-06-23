@@ -484,6 +484,7 @@ export interface stockdetailstile {text1: any;text2: any;text3: any;text4: any;}
 })
   
 export class ShareComponent implements OnInit {
+
   stockhighcharts: StockChart;
   visibleSidebar5;
   visibleSidebar6;
