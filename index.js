@@ -2483,7 +2483,7 @@ request(options2, (err, response, body) => {
   
 })
 //////////////////////////////////////////////////////ET Stock Data through Post Request///////////////////////////////////
-app.post('/etcompanydata', async function (req, res) {
+app.post('/api/etcompanydata', async function (req, res) {
 
   let companyid = req.body
 
@@ -3347,7 +3347,7 @@ const instancetrendlyne = axios.create({ withCredentials: true });
 instancetrendlyne.defaults.jar = new tough.CookieJar()
 
 
-app.post('/trendlynepostdvm', async function (req, res) {
+app.post('/api/trendlynepostdvm', async function (req, res) {
   //obj1 = [];
   let tlid = req.body
 
@@ -3570,7 +3570,7 @@ app.get('/api/nse22', function (req, res) {
 
 ////////////////////////////////////////////NSE POST DATA/////////////////////////////////////////////////////////////
 
-app.post('/nsepostdata1', async function (req, res) {
+app.post('/api/nsepostdata1', async function (req, res) {
   
   let eqsymbol1 = req.body
   var obj = [];
@@ -3611,7 +3611,7 @@ app.post('/nsepostdata1', async function (req, res) {
 })
 
 //To get via post request from NSE stocks PCR//working but getting duplicate id issue as well
-app.post('/nsepostdata2', async function (req, res) {
+app.post('/api/nsepostdata2', async function (req, res) {
   
   let eqsymbol1 = req.body
   //var obj = [];
