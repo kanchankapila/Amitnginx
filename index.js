@@ -3953,36 +3953,6 @@ request(options2, (err, response, body) => {
   
   
   
-///////////////////////////////////GOOGLE NEWS API ///////////////////////////////
-
-app.get('/api/gnewsapi', function (req, res) {
-  let stockname = (req.query.stockname).replace(/ /, "%20A")
-  let stockname1 = (req.query.stockname).replace(' Ltd.', "")
-  
-  var url11 = 'https://newsapi.org/v2/everything?q=%22'+stockname1+'%22&from='+gnewsyesterday+'&to='+gnewsdatetoday+'&sortBy=popularity&apiKey=28bda70739cc4024ba3f30223e8c25a8';
-  request(url11, function (error, response, html) {//console.log(response)
-    if (!error) {
-      //console.log(response)
-      res.json(JSON.parse(response.body))
-
-
-    }
-  })
-})
-app.get('/api/gnewsapiall', function (req, res) {
-  
-  
-  var url11 = 'https://newsapi.org/v2/everything?domains=moneycontrol.com,economictimes.indiatimes.com&from='+gnewsyesterday+'&to='+gnewsdatetoday+'&sortBy=popularity&apiKey=28bda70739cc4024ba3f30223e8c25a8';
-  request(url11, function (error, response, html) {//console.log(response)
-    if (!error) {
-      //console.log(response)
-      res.json(JSON.parse(response.body))
-
-
-    }
-  })
-})
-
 
 app.use(express.static(__dirname+"/"));
   
