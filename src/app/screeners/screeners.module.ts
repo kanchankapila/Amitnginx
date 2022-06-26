@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import {  FormsModule } from '@angular/forms';
 import { ScreenersRoutingModule } from './screeners-routing.module';
 import { ScreenersComponent } from './screeners.component';
 
@@ -11,6 +12,8 @@ import { ScreenersComponent } from './screeners.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+   
     ScreenersRoutingModule
   ]
 })

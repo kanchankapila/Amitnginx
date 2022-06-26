@@ -75,6 +75,14 @@ export class DataapiService {
   gettloid() {
     return this.http.get('http://localhost:8090/api/tloid') 
   }
+  getnteodscreeners(ntoptions) {
+    return this.http.post('http://localhost:8090/api/nteodscreeners',ntoptions)
+  console.log(ntoptions)
+  }
+  getnteodscreeners1() {
+    return this.http.get('http://localhost:8090/api/nteodscreeners1')
+  
+  }
   gettloipg() {
     return this.http.get('http://localhost:8090/api/tloipg') 
   }

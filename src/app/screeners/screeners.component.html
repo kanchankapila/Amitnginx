@@ -1,1 +1,231 @@
-<p>screeners works!</p>
+
+ 
+
+ <!-- Form starts -->
+<form #myForm="ngForm" (submit)="templateForm(myForm.value)" novalidate>
+   <div class="InsideContent">
+   <div class="InsideContent1">
+  <div class="custom-control custom-radio">
+     <input id="20_day_sma_below" type="radio" class="custom-control-input" value=true name="_20_day_sma_below" ngModel>
+     <label class="custom-control-label" for="20_day_sma_below">20_day_sma_below</label>
+  </div>
+  <div class="custom-control custom-radio">
+     <input id="20_day_sma_above" type="radio" class="custom-control-input" value=true name="_20_day_sma_above" ngModel>
+     <label class="custom-control-label" for="20_day_sma_above">20_day_sma_above</label>
+  </div>
+  <div class="custom-control custom-radio">
+   <input id="_50_day_sma_above" type="radio" class="custom-control-input" value=true name="_50_day_sma_above" ngModel>
+   <label class="custom-control-label" for="_50_day_sma_above">50_day_sma_above</label>
+</div>
+
+ <div class="custom-control custom-radio">
+   <input id="_50_day_sma_below" type="radio" class="custom-control-input" value=true name="_50_day_sma_below" ngModel>
+   <label class="custom-control-label" for="_50_day_sma_below">50_day_sma_below</label>
+</div>
+
+ <div class="custom-control custom-radio">
+   <input id="_100_day_sma_above" type="radio" class="custom-control-input" value=true name="_100_day_sma_above" ngModel>
+   <label class="custom-control-label" for="_100_day_sma_above">100_day_sma_above</label>
+</div>
+
+ <div class="custom-control custom-radio">
+   <input id="_100_day_sma_below" type="radio" class="custom-control-input" value=true name="_100_day_sma_below" ngModel>
+   <label class="custom-control-label" for="_100_day_sma_below">100_day_sma_below</label>
+</div>
+
+ <div class="custom-control custom-radio">
+   <input id="_200_day_sma_above" type="radio" class="custom-control-input" value=true name="_200_day_sma_above" ngModel>
+   <label class="custom-control-label" for="_200_day_sma_above">200_day_sma_above</label>
+</div>
+
+ <div class="custom-control custom-radio">
+   <input id="_200_day_sma_below" type="radio" class="custom-control-input" value=true name="_200_day_sma_below" ngModel>
+   <label class="custom-control-label" for="_200_day_sma_below">200_day_sma_below</label>
+</div>
+</div>
+<div class="InsideContent1">
+<div class="custom-control custom-radio">
+   <input id="_5_day_ema_above" type="radio" class="custom-control-input" value=true name="_5_day_ema_above" ngModel>
+   <label class="custom-control-label" for="_5_day_ema_above">5_day_ema_above</label>
+</div>
+
+ <div class="custom-control custom-radio">
+   <input id="_5_day_ema_below" type="radio" class="custom-control-input" value=true name="_5_day_ema_below" ngModel>
+   <label class="custom-control-label" for="_5_day_ema_below">5_day_ema_below</label>
+</div>
+
+ <div class="custom-control custom-radio">
+   <input id="_8_day_ema_above" type="radio" class="custom-control-input" value=true name="_8_day_ema_above" ngModel>
+   <label class="custom-control-label" for="_8_day_ema_above">8_day_ema_above</label>
+</div>
+
+ <div class="custom-control custom-radio">
+   <input id="_8_day_ema_below" type="radio" class="custom-control-input" value=true name="_8_day_ema_below" ngModel>
+   <label class="custom-control-label" for="_8_day_ema_below">8_day_ema_below</label>
+</div>
+
+<div class="custom-control custom-radio">
+   <input id="_20_day_ema_above" type="radio" class="custom-control-input" value=true name="_20_day_ema_above" ngModel>
+   <label class="custom-control-label" for="_20_day_ema_above">20_day_ema_above</label>
+</div>
+
+ <div class="custom-control custom-radio">
+   <input id="_20_day_ema_below" type="radio" class="custom-control-input" value=true name="_20_day_ema_below" ngModel>
+   <label class="custom-control-label" for="_20_day_ema_below">20_day_ema_below</label>
+</div>
+
+<div class="custom-control custom-radio">
+   <input id="_26_day_ema_above" type="radio" class="custom-control-input" value=true name="_26_day_ema_above" ngModel>
+   <label class="custom-control-label" for="_26_day_ema_above">26_day_ema_above</label>
+</div>
+
+ <div class="custom-control custom-radio">
+   <input id="_26_day_ema_below" type="radio" class="custom-control-input" value=true name="_26_day_ema_below" ngModel>
+   <label class="custom-control-label" for="_26_day_ema_below">26_day_ema_below</label>
+</div>
+
+<div class="custom-control custom-radio">
+   <input id="_50_day_ema_above" type="radio" class="custom-control-input" value=true name="_50_day_ema_above" ngModel>
+   <label class="custom-control-label" for="_50_day_ema_above">50_day_ema_above</label>
+</div>
+
+
+ <div class="custom-control custom-radio">
+   <input id="_50_day_ema_below" type="radio" class="custom-control-input" value=true name="_50_day_ema_below" ngModel>
+   <label class="custom-control-label" for="_50_day_ema_below">50_day_ema_below</label>
+</div>
+
+
+
+
+ <div class="custom-control custom-radio">
+   <input id="_200_day_ema_above" type="radio" class="custom-control-input" value=true name="_200_day_ema_above" ngModel>
+   <label class="custom-control-label" for="_200_day_ema_above">200_day_ema_above</label>
+</div>
+
+ <div class="custom-control custom-radio">
+   <input id="_200_day_ema_below" type="radio" class="custom-control-input" value=true name="_200_day_ema_below" ngModel>
+   <label class="custom-control-label" for="_200_day_ema_below">200_day_ema_below</label>
+</div>
+</div>
+
+<div class="InsideContent1">
+   <div class="custom-control custom-radio">
+      <input id="_5_20_sma_crossover_below" type="radio" class="custom-control-input" value=true name="_5_20_sma_crossover_below" ngModel>
+      <label class="custom-control-label" for="_5_20_sma_crossover_below">5_20_sma_crossover_below</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_5_20_sma_crossover_above" type="radio" class="custom-control-input" value=true name="_5_20_sma_crossover_above" ngModel>
+      <label class="custom-control-label" for="_5_20_sma_crossover_above">5_20_sma_crossover_above</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_20_50_sma_crossover_below" type="radio" class="custom-control-input" value=true name="_20_50_sma_crossover_below" ngModel>
+      <label class="custom-control-label" for="_20_50_sma_crossover_below">20_50_sma_crossover_below</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_20_50_sma_crossover_above" type="radio" class="custom-control-input" value=true name="_20_50_sma_crossover_above" ngModel>
+      <label class="custom-control-label" for="_20_50_sma_crossover_above">20_50_sma_crossover_above</label>
+   </div>
+   
+     <div class="custom-control custom-radio">
+      <input id="_20_100_sma_crossover_below" type="radio" class="custom-control-input" value=true name="_20_100_sma_crossover_below" ngModel>
+      <label class="custom-control-label" for="_20_100_sma_crossover_below">20_100_sma_crossover_below</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_20_100_sma_crossover_above" type="radio" class="custom-control-input" value=true name="_20_100_sma_crossover_above" ngModel>
+      <label class="custom-control-label" for="_20_100_sma_crossover_above">20_100_sma_crossover_above</label>
+   </div>
+    
+     <div class="custom-control custom-radio">
+      <input id="_50_100_sma_crossover_below" type="radio" class="custom-control-input" value=true name="_50_100_sma_crossover_below" ngModel>
+      <label class="custom-control-label" for="_50_100_sma_crossover_below">50_100_sma_crossover_below</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_50_100_sma_crossover_above" type="radio" class="custom-control-input" value=true name="_50_100_sma_crossover_above" ngModel>
+      <label class="custom-control-label" for="_50_100_sma_crossover_above">50_100_sma_crossover_above</label>
+   </div>
+    <div class="custom-control custom-radio">
+      <input id="_50_200_sma_crossover_below" type="radio" class="custom-control-input" value=true name="_50_200_sma_crossover_below" ngModel>
+      <label class="custom-control-label" for="_50_200_sma_crossover_below">50_200_sma_crossover_below</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_50_200_sma_crossover_above" type="radio" class="custom-control-input" value=true name="_50_200_sma_crossover_above" ngModel>
+      <label class="custom-control-label" for="_50_200_sma_crossover_above">50_200_sma_crossover_above</label>
+   </div>
+</div>
+<div class="InsideContent1">
+   <div class="custom-control custom-radio">
+      <input id="_5_20_ema_crossover_below" type="radio" class="custom-control-input" value=true name="_5_20_ema_crossover_below" ngModel>
+      <label class="custom-control-label" for="_5_20_ema_crossover_below">5_20_ema_crossover_below</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_5_20_ema_crossover_above" type="radio" class="custom-control-input" value=true name="_5_20_ema_crossover_above" ngModel>
+      <label class="custom-control-label" for="_5_20_ema_crossover_above">5_20_ema_crossover_above</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_8_20_ema_crossover_below" type="radio" class="custom-control-input" value=true name="_8_20_ema_crossover_below" ngModel>
+      <label class="custom-control-label" for="_8_20_ema_crossover_below">8_20_ema_crossover_below</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_8_20_ema_crossover_above" type="radio" class="custom-control-input" value=true name="_8_20_ema_crossover_above" ngModel>
+      <label class="custom-control-label" for="_8_20_ema_crossover_above">8_20_ema_crossover_above</label>
+   </div>
+   
+   <div class="custom-control custom-radio">
+      <input id="_12_26_ema_crossover_below" type="radio" class="custom-control-input" value=true name="_12_26_ema_crossover_below" ngModel>
+      <label class="custom-control-label" for="_12_26_ema_crossover_below">12_26_ema_crossover_below</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_12_26_ema_crossover_above" type="radio" class="custom-control-input" value=true name="_12_26_ema_crossover_above" ngModel>
+      <label class="custom-control-label" for="_12_26_ema_crossover_above">12_26_ema_crossover_above</label>
+   </div>
+   
+   <div class="custom-control custom-radio">
+      <input id="_9_30_ema_crossover_below" type="radio" class="custom-control-input" value=true name="_9_30_ema_crossover_below" ngModel>
+      <label class="custom-control-label" for="_9_30_ema_crossover_below">9_30_ema_crossover_below</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_9_30_ema_crossover_above" type="radio" class="custom-control-input" value=true name="_9_30_ema_crossover_above" ngModel>
+      <label class="custom-control-label" for="_9_30_ema_crossover_above">9_30_ema_crossover_above</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_20_50_ema_crossover_below" type="radio" class="custom-control-input" value=true name="_20_50_ema_crossover_below" ngModel>
+      <label class="custom-control-label" for="_20_50_ema_crossover_below">20_50_ema_crossover_below</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_20_50_ema_crossover_above" type="radio" class="custom-control-input" value=true name="_20_50_ema_crossover_above" ngModel>
+      <label class="custom-control-label" for="_20_50_ema_crossover_above">20_50_ema_crossover_above</label>
+   </div>
+   
+     
+    <div class="custom-control custom-radio">
+      <input id="_50_200_ema_crossover_below" type="radio" class="custom-control-input" value=true name="_50_200_ema_crossover_below" ngModel>
+      <label class="custom-control-label" for="_50_200_ema_crossover_below">50_200_ema_crossover_below</label>
+   </div>
+   
+    <div class="custom-control custom-radio">
+      <input id="_50_200_ema_crossover_above" type="radio" class="custom-control-input" value=true name="_50_200_ema_crossover_above" ngModel>
+      <label class="custom-control-label" for="_50_200_ema_crossover_above">50_200_ema_crossover_above</label>
+   </div>
+</div>
+</div>
+
+  <div class="custom-control custom-radio">
+   <input id="cci_200_below" type="radio" class="custom-control-input" value=true name="cci_200_below" ngModel>
+   <label class="custom-control-label" for="cci_200_below">cci_200_below</label>
+</div>
+  <button type="submit" class="btn btn-danger btn-lg btn-block">Screener</button>
+</form><!-- Form ends -->
