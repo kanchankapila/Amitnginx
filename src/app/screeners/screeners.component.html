@@ -1,231 +1,319 @@
+ 
+
+<section class="example-section" [formGroup]="SMA">
+   <h4>Moving Average Crossovers:</h4>
+   <div class="InsideContent">
+   <div class="InsideContent1">
+   <h6>Close Crossing SMA</h6>
+   <p><mat-checkbox formControlName="_20_day_sma_below">_20_day_sma_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_20_day_sma_above">_20_day_sma_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_50_day_sma_below">_50_day_sma_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_50_day_sma_above">_50_day_sma_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_100_day_sma_below">_100_day_sma_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_100_day_sma_above">_100_day_sma_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_200_day_sma_below">_200_day_sma_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_200_day_sma_above">_200_day_sma_above</mat-checkbox></p>
+</div>
+<div class="InsideContent1">
+   <h6>Close Crossing EMA:</h6>
+   <p><mat-checkbox formControlName="_5_day_ema_below">_5_day_ema_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_5_day_ema_above">_5_day_ema_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_8_day_ema_below">_8_day_ema_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_8_day_ema_above">_8_day_ema_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_20_day_ema_below">_20_day_ema_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_20_day_ema_above">_20_day_ema_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_26_day_ema_below">_26_day_ema_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_26_day_ema_above">_26_day_ema_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_50_day_ema_below">_50_day_ema_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_50_day_ema_above">_50_day_ema_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_200_day_ema_below">_200_day_ema_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_200_day_ema_above">_200_day_ema_above</mat-checkbox></p>
+   </div>
+
+   <div class="InsideContent1">
+   <h6>SMA Crossing SMA:</h6>
+   <p><mat-checkbox formControlName="_5_20_sma_crossover_below">_5_20_sma_crossover_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_5_20_sma_crossover_above">_5_20_sma_crossover_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_20_50_sma_crossover_below">_20_50_sma_crossover_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_20_50_sma_crossover_above">_20_50_sma_crossover_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_20_100_sma_crossover_below">_20_100_sma_crossover_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_20_100_sma_crossover_above">_20_100_sma_crossover_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_50_100_sma_crossover_below">_50_100_sma_crossover_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_50_100_sma_crossover_above">_50_100_sma_crossover_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_50_200_sma_crossover_below">_50_200_sma_crossover_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_50_200_sma_crossover_above">_50_200_sma_crossover_above</mat-checkbox></p>
+</div>
+<div class="InsideContent1">
+   <h6>EMA Crossing EMA:</h6>
+   <p><mat-checkbox formControlName="_5_20_ema_crossover_below">_5_20_ema_crossover_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_5_20_ema_crossover_above">_5_20_ema_crossover_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_8_20_ema_crossover_below">_8_20_ema_crossover_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_8_20_ema_crossover_above">_8_20_ema_crossover_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_12_26_ema_crossover_below">_12_26_ema_crossover_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_12_26_ema_crossover_above">_12_26_ema_crossover_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_9_30_ema_crossover_below">_9_30_ema_crossover_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_9_30_ema_crossover_above">_9_30_ema_crossover_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_20_50_ema_crossover_below">_20_50_ema_crossover_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_20_50_ema_crossover_above">_20_50_ema_crossover_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_50_200_ema_crossover_below">_50_200_ema_crossover_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_50_200_ema_crossover_above">_50_200_ema_crossover_above</mat-checkbox></p>
+</div>
+<div class="InsideContent1">
+   <h6>EMA Crossing SMA:</h6>
+   <p><mat-checkbox formControlName="ema5_sma20_cross_below">ema5_sma20_cross_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="ema5_sma20_cross_above">ema5_sma20_cross_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="ema20_sma50_cross_below">ema20_sma50_cross_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="ema20_sma50_cross_above">ema20_sma50_cross_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="ema50_sma100_cross_below">ema50_sma100_cross_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="ema50_sma100_cross_above">ema50_sma100_cross_above</mat-checkbox></p>
+</div>
+</div>
+<h4>Range Breakouts:</h4>
+<div class="InsideContent">
+  
+   <div class="InsideContent1">
+   
+   <h6>Narrow Range:</h6>
+   <p><mat-checkbox formControlName="nr4">nr4</mat-checkbox></p>
+   <p><mat-checkbox formControlName="nr7">nr7</mat-checkbox></p>
+</div>
+<div class="InsideContent1">
+   <h6>5 Day Range:</h6>
+   <p><mat-checkbox formControlName="_5_days_high_above">_5_days_high_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_5_days_high_below">_5_days_high_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_5_days_high_2_above">_5_days_high_2_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_5_days_high_2_below">_5_days_high_2_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="new_5_days_high_above">new_5_days_high_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="new_5_days_low_below">new_5_days_low_below</mat-checkbox></p>
+</div>
+<div class="InsideContent1">
+   <h6>20 Day Range:</h6>
+   <p><mat-checkbox formControlName="_20_days_high_above">_20_days_high_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_20_days_high_below">_20_days_high_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_20_days_high_2_above">_20_days_high_2_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_20_days_high_2_below">_20_days_high_2_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="new_20_days_high_above">new_20_days_high_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="new_20_days_low_below">new_20_days_low_below</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h6>50 Day Range:</h6>
+   <p><mat-checkbox formControlName="_50_days_high_above">_50_days_high_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_50_days_high_below">_50_days_high_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_50_days_high_2_above">_50_days_high_2_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_50_days_high_2_below">_50_days_high_2_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="new_50_days_high_above">new_50_days_high_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="new_50_days_low_below">new_50_days_low_below</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h6>100 Day Range:</h6>
+   <p><mat-checkbox formControlName="_100_days_high_above">_100_days_high_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_100_days_high_below">_100_days_high_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_100_days_high_2_above">_100_days_high_2_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_100_days_high_2_below">_100_days_high_2_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="new_100_days_high_above">new_100_days_high_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="new_100_days_low_below">new_100_days_low_below</mat-checkbox></p>
+</div>
+   
+<div class="InsideContent1">
+   <h6>200 Day Range:</h6>
+   <p><mat-checkbox formControlName="_200_days_high_above">_200_days_high_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_200_days_high_below">_200_days_high_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_200_days_high_2_above">_200_days_high_2_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="_200_days_high_2_below">_200_days_high_2_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="new_200_days_high_above">new_200_days_high_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="new_200_days_low_below">new_200_days_low_below</mat-checkbox></p>
+</div>
+</div>
+   <h3>Technical Indicators:</h3>
+   <div class="InsideContent">
+   <h4>Momentum Indicators:</h4>
+   <div class="InsideContent1">
+   <h5>Commodity Channel Index (CCI):</h5>
+   <p><mat-checkbox formControlName="cci_100_above">cci_100_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="cci_100_below">cci_100_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="cci_200_above">cci_200_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="cci_200_below">cci_200_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="cci_cross_100_above">cci_cross_100_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="cci_cross_100_below">cci_cross_100_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="cci_cross_neg_100_above">cci_cross_neg_100_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="cci_cross_neg_100_below">cci_cross_neg_100_below</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h5>Relative Strength Index (RSI):</h5>
+   <p><mat-checkbox formControlName="rsi_cross_30_below">rsi_cross_30_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="rsi_cross_70_above">rsi_cross_70_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="rsi_cross_20_below">rsi_cross_20_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="rsi_cross_80_above">rsi_cross_80_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="rsi_2_70_above">rsi_2_70_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="rsi_2_70_below">rsi_2_70_below</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h5>Moving Average Convergence Divergence (MACD):</h5>
+   <p><mat-checkbox formControlName="macd_cross_below">macd_cross_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="macd_cross_above">macd_cross_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="macd_cross_above_zero">macd_cross_above_zero</mat-checkbox></p>
+   <p><mat-checkbox formControlName="macd_cross_below_zero">macd_cross_below_zero</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h5>Money Flow Index (MFI):</h5>
+   <p><mat-checkbox formControlName="mfi_above_80">mfi_above_80</mat-checkbox></p>
+   <p><mat-checkbox formControlName="mfi_below_20">mfi_below_20</mat-checkbox></p>
+   <p><mat-checkbox formControlName="mfi_above_90">mfi_above_90</mat-checkbox></p>
+   <p><mat-checkbox formControlName="mfi_below_10">mfi_below_10</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h5>Average Directional Index (ADX):</h5>
+   <p><mat-checkbox formControlName="up_adx_between_25_50">up_adx_between_25_50</mat-checkbox></p>
+   <p><mat-checkbox formControlName="strong_up_adx_above_50">strong_up_adx_above_50</mat-checkbox></p>
+   <p><mat-checkbox formControlName="down_adx_between_25_50">down_adx_between_25_50</mat-checkbox></p>
+   <p><mat-checkbox formControlName="strong_down_adx_above_50">strong_down_adx_above_50</mat-checkbox></p>
+   <p><mat-checkbox formControlName="adx_below_50">adx_below_50</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h5>Super Trend:</h5>
+   <p><mat-checkbox formControlName="supr_buy">supr_buy</mat-checkbox></p>
+   <p><mat-checkbox formControlName="supr_sell">supr_sell</mat-checkbox></p>
+</div>
+</div>
+   <h4>Volatility Indicators:</h4>
+   <div class="InsideContent">
+      <div class="InsideContent1">
+   <h5>Bollinger Band (BB):</h5>
+   <p><mat-checkbox formControlName="upper_bb_below">upper_bb_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="upper_bb_above">upper_bb_above</mat-checkbox></p>
+   <p><mat-checkbox formControlName="lower_bb_below">lower_bb_below</mat-checkbox></p>
+   <p><mat-checkbox formControlName="lower_bb_above">lower_bb_above</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h5>Average True Range (ATR:</h5>
+   <p><mat-checkbox formControlName="atr_inc_3">atr_inc_3</mat-checkbox></p>
+   <p><mat-checkbox formControlName="atr_dec_3">atr_dec_3</mat-checkbox></p>
+   <p><mat-checkbox formControlName="atr_inc_5">atr_inc_5</mat-checkbox></p>
+   <p><mat-checkbox formControlName="atr_dec_5">atr_dec_5</mat-checkbox></p>
+</div>
+</div>
+   <h4>Price Action & Volume:</h4>
+   <div class="InsideContent">
+      <div class="InsideContent1">
+   <h5>Price Change:</h5>
+   <p><mat-checkbox formControlName="close_gainers">close_gainers</mat-checkbox></p>
+   <p><mat-checkbox formControlName="close_losers">close_losers</mat-checkbox></p>
+   <p><mat-checkbox formControlName="close_more_5_gain">close_more_5_gain</mat-checkbox></p>
+   <p><mat-checkbox formControlName="close_more_5_down">close_more_5_down</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h5>Opening & Closing Price Clues:</h5>
+   <p><mat-checkbox formControlName="same_open_high">same_open_high</mat-checkbox></p>
+   <p><mat-checkbox formControlName="same_open_low">same_open_low</mat-checkbox></p>
+   <p><mat-checkbox formControlName="same_approx_open_high">same_approx_open_high</mat-checkbox></p>
+   <p><mat-checkbox formControlName="same_approx_open_low">same_approx_open_low</mat-checkbox></p>
+   <p><mat-checkbox formControlName="close_nearday_high">close_nearday_high</mat-checkbox></p>
+   <p><mat-checkbox formControlName="close_nearday_low">close_nearday_low</mat-checkbox></p>
+   <p><mat-checkbox formControlName="close_near_open">close_near_open</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h5>Candlestick:</h5>
+   <p><mat-checkbox formControlName="higher_high">higher_high</mat-checkbox></p>
+   <p><mat-checkbox formControlName="higher_low">higher_low</mat-checkbox></p>
+   <p><mat-checkbox formControlName="higher_high_higher_low">higher_high_higher_low</mat-checkbox></p>
+   <p><mat-checkbox formControlName="lower_high">lower_high</mat-checkbox></p>
+   <p><mat-checkbox formControlName="lower_low">lower_low</mat-checkbox></p>
+   <p><mat-checkbox formControlName="lower_high_lower_low">lower_high_lower_low</mat-checkbox></p>
+   <p><mat-checkbox formControlName="inside_day">inside_day</mat-checkbox></p>
+   <p><mat-checkbox formControlName="outside_day">outside_day</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h5>Volume & Delivery :</h5>
+   <p><mat-checkbox formControlName="high_delivery_age">high_delivery_age</mat-checkbox></p>
+   <p><mat-checkbox formControlName="lower_high_delivery_qty">lower_high_delivery_qty</mat-checkbox></p>
+   <p><mat-checkbox formControlName="high_delivery_age_qty">high_delivery_age_qty</mat-checkbox></p>
+   <p><mat-checkbox formControlName="high_trade_qty">high_trade_qty</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h5>Pivots:</h5>
+   <p><mat-checkbox formControlName="above_r2">above_r2</mat-checkbox></p>
+   <p><mat-checkbox formControlName="between_r1_r2">between_r1_r2</mat-checkbox></p>
+   <p><mat-checkbox formControlName="above_pivot">above_pivot</mat-checkbox></p>
+   <p><mat-checkbox formControlName="below_pivot">below_pivot</mat-checkbox></p>
+   <p><mat-checkbox formControlName="between_s2_s1">between_s2_s1</mat-checkbox></p>
+   <p><mat-checkbox formControlName="s2_support">s2_support</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h5>Gaps :</h5>
+   <p><mat-checkbox formControlName="gap_up_opening">gap_up_opening</mat-checkbox></p>
+   <p><mat-checkbox formControlName="gap_up_opening_fill">gap_up_opening_fill</mat-checkbox></p>
+   <p><mat-checkbox formControlName="gap_up_opening_unfill">gap_up_opening_unfill</mat-checkbox></p>
+   <p><mat-checkbox formControlName="gap_down_opening">gap_down_opening</mat-checkbox></p>
+   <p><mat-checkbox formControlName="gap_down_opening_fill">gap_down_opening_fill</mat-checkbox></p>
+   <p><mat-checkbox formControlName="gap_down_opening_unfill">gap_down_opening_unfill</mat-checkbox></p>
+</div>
+</div>
+   <h4>Price Action & Volume:</h4>
+   <div class="InsideContent">
+      <div class="InsideContent1">
+   <h5>Bullish :</h5>
+   <p><mat-checkbox formControlName="doji_bullish">doji_bullish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="engul_fing_bullish">engul_fing_bullish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="doji_star_bullish">doji_star_bullish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="harami_bullish">harami_bullish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="harami_cross_bullish">harami_cross_bullish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="inverted_hammer_bullish">inverted_hammer_bullish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="hammer_bullish">hammer_bullish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="marubozu_bullish">marubozu_bullish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="dragon_fly_doji_bullish">dragon_fly_doji_bullish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="grave_stone_doji_bullish">grave_stone_doji_bullish</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h5>Bearish :</h5>
+   <p><mat-checkbox formControlName="doji_bearish">doji_bearish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="doji_star_bearish">doji_star_bearish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="engul_fing_bearish">engul_fing_bearish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="harami_bearish">harami_bearish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="harami_cross_bearish">harami_cross_bearish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="inverted_hammer_bearish">inverted_hammer_bearish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="hammer_bearish">hammer_bearish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="marubozu_bearish">marubozu_bearish></mat-checkbox></p>
+	<p><mat-checkbox formControlName="dragon_fly_doji_bearish">dragon_fly_doji_bearish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="grave_stone_doji_bearish">grave_stone_doji_bearish</mat-checkbox></p>
+</div>
+   <div class="InsideContent1">
+   <h5>Trend :</h5>
+   <p><mat-checkbox formControlName="tasuki_gap_bullish">tasuki_gap_bullish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="tasuki_gap_bearish">tasuki_gap_bearish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="piercing_line_bullish">piercing_line_bullish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="piercing_line_bearish">piercing_line_bearish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="morning_star_bullish">morning_star_bullish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="evening_star_bearish">evening_star_bearish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="three_black_crows_bearish">three_black_crows_bearish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="dark_cloud_cover_bearish">dark_cloud_cover_bearish</mat-checkbox></p>
+	<p><mat-checkbox formControlName="three_white_soldiers_bullish">three_white_soldiers_bullish</mat-checkbox></p>
+   <p><mat-checkbox formControlName="is_candle">is_candle</mat-checkbox></p>
+</div>
+</div>
+ </section>
+ 
+ <section class="example-section" [formGroup]="SMA">
+  
+  
+ 
+<button type="button" class="btn btn-danger btn-lg btn-block" (click)="getnteodscreeners(SMA.value)">Screener</button>
+ </section>
 
  
 
- <!-- Form starts -->
-<form #myForm="ngForm" (submit)="templateForm(myForm.value)" novalidate>
-   <div class="InsideContent">
-   <div class="InsideContent1">
-  <div class="custom-control custom-radio">
-     <input id="20_day_sma_below" type="radio" class="custom-control-input" value=true name="_20_day_sma_below" ngModel>
-     <label class="custom-control-label" for="20_day_sma_below">20_day_sma_below</label>
-  </div>
-  <div class="custom-control custom-radio">
-     <input id="20_day_sma_above" type="radio" class="custom-control-input" value=true name="_20_day_sma_above" ngModel>
-     <label class="custom-control-label" for="20_day_sma_above">20_day_sma_above</label>
-  </div>
-  <div class="custom-control custom-radio">
-   <input id="_50_day_sma_above" type="radio" class="custom-control-input" value=true name="_50_day_sma_above" ngModel>
-   <label class="custom-control-label" for="_50_day_sma_above">50_day_sma_above</label>
-</div>
-
- <div class="custom-control custom-radio">
-   <input id="_50_day_sma_below" type="radio" class="custom-control-input" value=true name="_50_day_sma_below" ngModel>
-   <label class="custom-control-label" for="_50_day_sma_below">50_day_sma_below</label>
-</div>
-
- <div class="custom-control custom-radio">
-   <input id="_100_day_sma_above" type="radio" class="custom-control-input" value=true name="_100_day_sma_above" ngModel>
-   <label class="custom-control-label" for="_100_day_sma_above">100_day_sma_above</label>
-</div>
-
- <div class="custom-control custom-radio">
-   <input id="_100_day_sma_below" type="radio" class="custom-control-input" value=true name="_100_day_sma_below" ngModel>
-   <label class="custom-control-label" for="_100_day_sma_below">100_day_sma_below</label>
-</div>
-
- <div class="custom-control custom-radio">
-   <input id="_200_day_sma_above" type="radio" class="custom-control-input" value=true name="_200_day_sma_above" ngModel>
-   <label class="custom-control-label" for="_200_day_sma_above">200_day_sma_above</label>
-</div>
-
- <div class="custom-control custom-radio">
-   <input id="_200_day_sma_below" type="radio" class="custom-control-input" value=true name="_200_day_sma_below" ngModel>
-   <label class="custom-control-label" for="_200_day_sma_below">200_day_sma_below</label>
-</div>
-</div>
-<div class="InsideContent1">
-<div class="custom-control custom-radio">
-   <input id="_5_day_ema_above" type="radio" class="custom-control-input" value=true name="_5_day_ema_above" ngModel>
-   <label class="custom-control-label" for="_5_day_ema_above">5_day_ema_above</label>
-</div>
-
- <div class="custom-control custom-radio">
-   <input id="_5_day_ema_below" type="radio" class="custom-control-input" value=true name="_5_day_ema_below" ngModel>
-   <label class="custom-control-label" for="_5_day_ema_below">5_day_ema_below</label>
-</div>
-
- <div class="custom-control custom-radio">
-   <input id="_8_day_ema_above" type="radio" class="custom-control-input" value=true name="_8_day_ema_above" ngModel>
-   <label class="custom-control-label" for="_8_day_ema_above">8_day_ema_above</label>
-</div>
-
- <div class="custom-control custom-radio">
-   <input id="_8_day_ema_below" type="radio" class="custom-control-input" value=true name="_8_day_ema_below" ngModel>
-   <label class="custom-control-label" for="_8_day_ema_below">8_day_ema_below</label>
-</div>
-
-<div class="custom-control custom-radio">
-   <input id="_20_day_ema_above" type="radio" class="custom-control-input" value=true name="_20_day_ema_above" ngModel>
-   <label class="custom-control-label" for="_20_day_ema_above">20_day_ema_above</label>
-</div>
-
- <div class="custom-control custom-radio">
-   <input id="_20_day_ema_below" type="radio" class="custom-control-input" value=true name="_20_day_ema_below" ngModel>
-   <label class="custom-control-label" for="_20_day_ema_below">20_day_ema_below</label>
-</div>
-
-<div class="custom-control custom-radio">
-   <input id="_26_day_ema_above" type="radio" class="custom-control-input" value=true name="_26_day_ema_above" ngModel>
-   <label class="custom-control-label" for="_26_day_ema_above">26_day_ema_above</label>
-</div>
-
- <div class="custom-control custom-radio">
-   <input id="_26_day_ema_below" type="radio" class="custom-control-input" value=true name="_26_day_ema_below" ngModel>
-   <label class="custom-control-label" for="_26_day_ema_below">26_day_ema_below</label>
-</div>
-
-<div class="custom-control custom-radio">
-   <input id="_50_day_ema_above" type="radio" class="custom-control-input" value=true name="_50_day_ema_above" ngModel>
-   <label class="custom-control-label" for="_50_day_ema_above">50_day_ema_above</label>
-</div>
-
-
- <div class="custom-control custom-radio">
-   <input id="_50_day_ema_below" type="radio" class="custom-control-input" value=true name="_50_day_ema_below" ngModel>
-   <label class="custom-control-label" for="_50_day_ema_below">50_day_ema_below</label>
-</div>
-
-
-
-
- <div class="custom-control custom-radio">
-   <input id="_200_day_ema_above" type="radio" class="custom-control-input" value=true name="_200_day_ema_above" ngModel>
-   <label class="custom-control-label" for="_200_day_ema_above">200_day_ema_above</label>
-</div>
-
- <div class="custom-control custom-radio">
-   <input id="_200_day_ema_below" type="radio" class="custom-control-input" value=true name="_200_day_ema_below" ngModel>
-   <label class="custom-control-label" for="_200_day_ema_below">200_day_ema_below</label>
-</div>
-</div>
-
-<div class="InsideContent1">
-   <div class="custom-control custom-radio">
-      <input id="_5_20_sma_crossover_below" type="radio" class="custom-control-input" value=true name="_5_20_sma_crossover_below" ngModel>
-      <label class="custom-control-label" for="_5_20_sma_crossover_below">5_20_sma_crossover_below</label>
-   </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_5_20_sma_crossover_above" type="radio" class="custom-control-input" value=true name="_5_20_sma_crossover_above" ngModel>
-      <label class="custom-control-label" for="_5_20_sma_crossover_above">5_20_sma_crossover_above</label>
-   </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_20_50_sma_crossover_below" type="radio" class="custom-control-input" value=true name="_20_50_sma_crossover_below" ngModel>
-      <label class="custom-control-label" for="_20_50_sma_crossover_below">20_50_sma_crossover_below</label>
-   </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_20_50_sma_crossover_above" type="radio" class="custom-control-input" value=true name="_20_50_sma_crossover_above" ngModel>
-      <label class="custom-control-label" for="_20_50_sma_crossover_above">20_50_sma_crossover_above</label>
-   </div>
-   
-     <div class="custom-control custom-radio">
-      <input id="_20_100_sma_crossover_below" type="radio" class="custom-control-input" value=true name="_20_100_sma_crossover_below" ngModel>
-      <label class="custom-control-label" for="_20_100_sma_crossover_below">20_100_sma_crossover_below</label>
-   </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_20_100_sma_crossover_above" type="radio" class="custom-control-input" value=true name="_20_100_sma_crossover_above" ngModel>
-      <label class="custom-control-label" for="_20_100_sma_crossover_above">20_100_sma_crossover_above</label>
-   </div>
-    
-     <div class="custom-control custom-radio">
-      <input id="_50_100_sma_crossover_below" type="radio" class="custom-control-input" value=true name="_50_100_sma_crossover_below" ngModel>
-      <label class="custom-control-label" for="_50_100_sma_crossover_below">50_100_sma_crossover_below</label>
-   </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_50_100_sma_crossover_above" type="radio" class="custom-control-input" value=true name="_50_100_sma_crossover_above" ngModel>
-      <label class="custom-control-label" for="_50_100_sma_crossover_above">50_100_sma_crossover_above</label>
-   </div>
-    <div class="custom-control custom-radio">
-      <input id="_50_200_sma_crossover_below" type="radio" class="custom-control-input" value=true name="_50_200_sma_crossover_below" ngModel>
-      <label class="custom-control-label" for="_50_200_sma_crossover_below">50_200_sma_crossover_below</label>
-   </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_50_200_sma_crossover_above" type="radio" class="custom-control-input" value=true name="_50_200_sma_crossover_above" ngModel>
-      <label class="custom-control-label" for="_50_200_sma_crossover_above">50_200_sma_crossover_above</label>
-   </div>
-</div>
-<div class="InsideContent1">
-   <div class="custom-control custom-radio">
-      <input id="_5_20_ema_crossover_below" type="radio" class="custom-control-input" value=true name="_5_20_ema_crossover_below" ngModel>
-      <label class="custom-control-label" for="_5_20_ema_crossover_below">5_20_ema_crossover_below</label>
-   </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_5_20_ema_crossover_above" type="radio" class="custom-control-input" value=true name="_5_20_ema_crossover_above" ngModel>
-      <label class="custom-control-label" for="_5_20_ema_crossover_above">5_20_ema_crossover_above</label>
-   </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_8_20_ema_crossover_below" type="radio" class="custom-control-input" value=true name="_8_20_ema_crossover_below" ngModel>
-      <label class="custom-control-label" for="_8_20_ema_crossover_below">8_20_ema_crossover_below</label>
-   </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_8_20_ema_crossover_above" type="radio" class="custom-control-input" value=true name="_8_20_ema_crossover_above" ngModel>
-      <label class="custom-control-label" for="_8_20_ema_crossover_above">8_20_ema_crossover_above</label>
-   </div>
-   
-   <div class="custom-control custom-radio">
-      <input id="_12_26_ema_crossover_below" type="radio" class="custom-control-input" value=true name="_12_26_ema_crossover_below" ngModel>
-      <label class="custom-control-label" for="_12_26_ema_crossover_below">12_26_ema_crossover_below</label>
-   </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_12_26_ema_crossover_above" type="radio" class="custom-control-input" value=true name="_12_26_ema_crossover_above" ngModel>
-      <label class="custom-control-label" for="_12_26_ema_crossover_above">12_26_ema_crossover_above</label>
-   </div>
-   
-   <div class="custom-control custom-radio">
-      <input id="_9_30_ema_crossover_below" type="radio" class="custom-control-input" value=true name="_9_30_ema_crossover_below" ngModel>
-      <label class="custom-control-label" for="_9_30_ema_crossover_below">9_30_ema_crossover_below</label>
-   </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_9_30_ema_crossover_above" type="radio" class="custom-control-input" value=true name="_9_30_ema_crossover_above" ngModel>
-      <label class="custom-control-label" for="_9_30_ema_crossover_above">9_30_ema_crossover_above</label>
-   </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_20_50_ema_crossover_below" type="radio" class="custom-control-input" value=true name="_20_50_ema_crossover_below" ngModel>
-      <label class="custom-control-label" for="_20_50_ema_crossover_below">20_50_ema_crossover_below</label>
-   </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_20_50_ema_crossover_above" type="radio" class="custom-control-input" value=true name="_20_50_ema_crossover_above" ngModel>
-      <label class="custom-control-label" for="_20_50_ema_crossover_above">20_50_ema_crossover_above</label>
-   </div>
-   
+<div class="grid-margin stretch-card">
+   <div class="content card  container">
      
-    <div class="custom-control custom-radio">
-      <input id="_50_200_ema_crossover_below" type="radio" class="custom-control-input" value=true name="_50_200_ema_crossover_below" ngModel>
-      <label class="custom-control-label" for="_50_200_ema_crossover_below">50_200_ema_crossover_below</label>
+     <div fxLayout="row wrap" fxLayoutGap="10px grid">
+       <div fxFlex="15" fxFlex.xs="100%" fxFlex.sm="100%"  *ngFor="let tile of screenerstocks trackBy: trackByFuntion42">
+         
+         <div class="text-blue type1-bold cardbear1 grid-margin stretch-card" [ngClass]="{ 
+                     'bg-gradient-bull': tile.text2 > 0,
+                     'bg-gradient-bear2': 0 > tile.text2 ,
+                     'bg-gradient-neutral': tile.text2 == 0 }">&nbsp;&nbsp;&nbsp;{{tile.text12}}<br>{{tile.text1}}<br>Price Change:{{tile.text2}}<br>Current Volume:{{tile.text4}}<br>20d Avg Vol:{{tile.text3}}
+       </div>
+        
+       </div>
+     </div>
+     </div>
    </div>
-   
-    <div class="custom-control custom-radio">
-      <input id="_50_200_ema_crossover_above" type="radio" class="custom-control-input" value=true name="_50_200_ema_crossover_above" ngModel>
-      <label class="custom-control-label" for="_50_200_ema_crossover_above">50_200_ema_crossover_above</label>
-   </div>
-</div>
-</div>
-
-  <div class="custom-control custom-radio">
-   <input id="cci_200_below" type="radio" class="custom-control-input" value=true name="cci_200_below" ngModel>
-   <label class="custom-control-label" for="cci_200_below">cci_200_below</label>
-</div>
-  <button type="submit" class="btn btn-danger btn-lg btn-block">Screener</button>
-</form><!-- Form ends -->

@@ -822,10 +822,6 @@ mscore: mscoretile[] = [];
       this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
       
     });
-    // this.getmcstock(this.mcsymbol, this.eqsymbol, this.stockid);
-    // this.getmcstockfrequent(this.mcsymbol, this.eqsymbol);
-    // setInterval(() => { this.getmcstockfrequent(this.mcsymbol, this.eqsymbol) }, 30000);
-    // setInterval(() => { this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol) }, 10000);
     this.gettrendlynestocks1(this.tlid,this.eqsymbol,this.tlname)
     this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol)
     this.gettrendlynestocks3(this.tlid)
@@ -838,7 +834,8 @@ mscore: mscoretile[] = [];
     this.getshare6m(this.eqsymbol)
     this.getshare1w(this.eqsymbol)
     this.getstock1yr(this.eqsymbol)
-    this.getntstockdetails()
+    this.getntstockdetails(this.eqsymbol)
+    this.getntstockpcrdetails(this.eqsymbol)
     this.getmcstockrealtime() 
     this.getstocktoday(this.mcsymbol)
     this.getstockmaema(this.eqsymbol)
@@ -875,8 +872,9 @@ mscore: mscoretile[] = [];
         let nestedItems = Object.keys(data).map(key => {
           return data[key];
         });
-        console.log(nestedItems[0])
+       
         this.sectorstocks.push({text1:nestedItems[0].companyshortname,text2:nestedItems[0].rankbysector,text3:nestedItems[0].overallmarketrank})
+      console.log(this.sectorstocks)
       });
      
       }, err => {
@@ -887,6 +885,7 @@ mscore: mscoretile[] = [];
   }
   getkotak() {
    
+
     this.http.get<any>('https://kayal.trendlyne.com/broker-webview/all-in-one-screener-get/kayal/?perPageCount=25&pageNumber=0&screenpk=82596&groupType=all&groupName=').subscribe(data5 => {
     
       let nestedItems = Object.keys(data5).map(key => {
@@ -1311,8 +1310,7 @@ mscore: mscoretile[] = [];
      return item9.text3 ;
    }
    trackByFuntion10(index10, item10) {
-     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-     return item10.text3 ;
+  return item10.text1 ;
    }
    trackByFuntion11(index11, item11) {
      //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
@@ -1716,14 +1714,14 @@ mscore: mscoretile[] = [];
       })
     }
 
-  getntstockdetails() {
+  getntstockdetails(eqsymbol) {
    
     
       this.dataApi.getntstockdetails(this.eqsymbol).subscribe(data5 => {
         let nestedItems = Object.keys(data5).map(key => {
               return data5[key];
         });
-        console.log(nestedItems)
+     
         this.nr7=(nestedItems[3].stocktrend['nr7_today'])
         this.delivperc.length = 0;
         this.delivperctime.length = 0;
@@ -1760,11 +1758,56 @@ mscore: mscoretile[] = [];
       )
     
   }
+  getntstockpcrdetails(eqsymbol) {
+   
+    
+    this.dataApi.getntstockpcrdetails(eqsymbol).subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+      });
+      console.log(nestedItems)
+   
+     
+    }, err => {
+      console.log(err)
+    }
+    )
+  
+}
     gettrendlynestocks1(tlid,eqsymbol,tlname) {
       this.dataApi.gettrendlynestocks1(tlid,eqsymbol,tlname).subscribe(data5 => {
         let nestedItems = Object.keys(data5).map(key => {
           return data5[key];
         });
+       
+        this.brokertarget.push({ text1: nestedItems[1]['broker_avg_target']['lt1'], text2: nestedItems[1]['broker_avg_target']['st1'], text3: nestedItems[1]['broker_avg_target']['color1'] })
+      
+        this.ema_26.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['color1'], text4: nestedItems[1]['ema_26']['value'] })
+        this.ema_50.push({text1:nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['color1'],text4: nestedItems[1]['ema_50']['value']  })
+        this.ema_100.push({text1:nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_100']['value']  })
+        this.ema_200.push({text1:nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_200']['value']  })
+        this.sma_30.push({text1:nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['color1'],text4: nestedItems[1]['sma_30']['value'] })
+        this.sma_50.push({text1:nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['color1'],text4: nestedItems[1]['sma_50']['value']  })
+        this.sma_100.push({text1:nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'],text4: nestedItems[1]['sma_100']['value']  })
+        this.sma_200.push({text1:nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'],text4: nestedItems[1]['sma_200']['value']  })
+        this.macd1.push({text1:nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['color1'],text4: nestedItems[1]['macd']['value']  })
+       
+        this.rsi1.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['color1'], text4: nestedItems[1]['rsi']['value'] })
+       
+        this.mfi1.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['color1'], text4: nestedItems[1]['mfi']['value'] })
+       
+        if (nestedItems[1]['broker_recodown_6M']['lt1']) {
+          this.brokerrecodowngrade.push({ text1: nestedItems[1]['broker_recodown_6M']['lt1'], text2: nestedItems[1]['broker_recodown_6M']['st1'], text3: nestedItems[1]['broker_recodown_6M']['color1'] })
+       }
+        if (nestedItems[1]['broker_recoup_6M']['lt1']) {
+         this.brokerrecoupgrade.push({ text1: nestedItems[1]['broker_recoup_6M']['lt1'], text2: nestedItems[1]['broker_recoup_6M']['st1'], text3: nestedItems[1]['broker_recoup_6M']['color1'] })
+       }
+        if(nestedItems[1]['broker_targetup_6M']['lt1']){
+         this.brokertargetupgrade.push({text1:nestedItems[1]['broker_targetup_6M']['lt1'], text2: nestedItems[1]['broker_targetup_6M']['st1'], text3: nestedItems[1]['broker_targetup_6M']['color1'] })
+       }
+        if (nestedItems[1]['broker_targetdown_6M']['lt1']) {
+         this.brokertargetdowngrade.push({ text1: nestedItems[1]['broker_targetdown_6M']['lt1'], text2: nestedItems[1]['broker_targetdown_6M']['st1'], text3: nestedItems[1]['broker_targetdown_6M']['color1'] })
+       }
      
         if (nestedItems[1]['MCAP_Q']['lt1']) {
           if (nestedItems[1]['MCAP_Q']['color1'] == 'positive') {
@@ -1981,33 +2024,6 @@ mscore: mscoretile[] = [];
           }
         }
     
-      
-        this.brokertarget.push({ text1: nestedItems[1]['broker_avg_target']['lt1'], text2: nestedItems[1]['broker_avg_target']['st1'], text3: nestedItems[1]['broker_avg_target']['color1'] })
-        console.log(this.brokertarget)
-        this.ema_26.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['color1'], text4: nestedItems[1]['ema_26']['value'] })
-        this.ema_50.push({text1:nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['color1'],text4: nestedItems[1]['ema_50']['value']  })
-        this.ema_100.push({text1:nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_100']['value']  })
-        this.ema_200.push({text1:nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'],text4: nestedItems[1]['ema_200']['value']  })
-        this.sma_30.push({text1:nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['color1'],text4: nestedItems[1]['sma_30']['value'] })
-        this.sma_50.push({text1:nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['color1'],text4: nestedItems[1]['sma_50']['value']  })
-        this.sma_100.push({text1:nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'],text4: nestedItems[1]['sma_100']['value']  })
-        this.sma_200.push({text1:nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'],text4: nestedItems[1]['sma_200']['value']  })
-        this.macd1.push({text1:nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['color1'],text4: nestedItems[1]['macd']['value']  })
-        this.macdsignal1.push({text1:nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['color1'],text4: nestedItems[1]['macdsignal']['value']  })
-        this.rsi1.push({text1:nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['color1'],text4: nestedItems[1]['rsi']['value']  })
-        this.mfi1.push({text1:nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['color1'],text4: nestedItems[1]['mfi']['value']  })
-        if (nestedItems[1]['broker_recodown_6M']['lt1']) {
-          this.brokerrecodowngrade.push({ text1: nestedItems[1]['broker_recodown_6M']['lt1'], text2: nestedItems[1]['broker_recodown_6M']['st1'], text3: nestedItems[1]['broker_recodown_6M']['color1'] })
-       }
-       else if (nestedItems[1]['broker_recoup_6M']['lt1']) {
-         this.brokerrecoupgrade.push({ text1: nestedItems[1]['broker_recoup_6M']['lt1'], text2: nestedItems[1]['broker_recoup_6M']['st1'], text3: nestedItems[1]['broker_recoup_6M']['color1'] })
-       }
-       else if(nestedItems[1]['broker_targetup_6M']['lt1']){
-         this.brokertargetupgrade.push({text1:nestedItems[1]['broker_targetup_6M']['lt1'], text2: nestedItems[1]['broker_targetup_6M']['st1'], text3: nestedItems[1]['broker_targetup_6M']['color1'] })
-       }
-       else if (nestedItems[1]['broker_targetdown_6M']['lt1']) {
-         this.brokertargetdowngrade.push({ text1: nestedItems[1]['broker_targetdown_6M']['lt1'], text2: nestedItems[1]['broker_targetdown_6M']['st1'], text3: nestedItems[1]['broker_targetdown_6M']['color1'] })
-       }
        }, err => {
         console.log(err)
       })
@@ -2050,7 +2066,7 @@ mscore: mscoretile[] = [];
             return data5[key];
           });
       
-      console.log("mmstockinfo"+nestedItems)
+     
       
           // for (let val in nestedItems[5]) {
           //   this.hmsg.push({ text: nestedItems[5][val].header, text1: nestedItems[5][val].msg, text2: nestedItems[5][val].dir })
