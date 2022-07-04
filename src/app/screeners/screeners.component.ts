@@ -2,7 +2,7 @@ import { Input,Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DataapiService } from '../../dataapi.service'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {FormBuilder} from '@angular/forms';
+import {UntypedFormBuilder} from '@angular/forms';
 export interface screenerstockstile {
   text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; text9: any;
   text10: any;text11: any;text12: any;}
@@ -206,7 +206,7 @@ export class ScreenersComponent implements OnInit {
    console.log('SMA Name: ',SMA1);
  }
   screenerstocks: screenerstockstile[] = [];
-  constructor(private dataApi: DataapiService,private http: HttpClient,private _formBuilder: FormBuilder) { }
+  constructor(private dataApi: DataapiService,private http: HttpClient,private _formBuilder: UntypedFormBuilder) { }
   templateForm(value: any) {
    
     
