@@ -476,7 +476,9 @@ export interface growthscoretile { text1: string; text2: string; }
 export interface healthscoretile {text1: string;text2: string;}
 export interface ppscoretile {text1: string;text2: string;}
 export interface sectorstockstile { text1: string; text2: string; text3: string; }
-export interface stockdetailstile {text1: any;text2: any;text3: any;text4: any;}
+export interface stockdetailstile { text1: any; text2: any; text3: any; text4: any; }
+export interface stockpcrtile { text1: any; text2: any; }
+export interface maxpaintile { text1: any; text2: any; }
 @Component({
   selector: 'app-share',
   templateUrl: './share.component.html',
@@ -625,7 +627,9 @@ mscore: mscoretile[] = [];
   growthscore: growthscoretile[] = [];
   healthscore: healthscoretile[] = [];
   omrscore: omrscoretile[] = [];
-  sectorstocks:sectorstockstile[] = [];
+  sectorstocks: sectorstockstile[] = [];
+  stockpcr: stockpcrtile[] = [];
+  maxpain:maxpaintile[] = [];
   
   
  
@@ -845,7 +849,7 @@ mscore: mscoretile[] = [];
     this.getetsharetoday(this.eqsymbol)
    
     setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 30000);
-    setInterval(() => { this. getmcstockrealtime() }, 3000);
+    setInterval(() => { this. getmcstockrealtime() }, 1000);
   }
   getkotakview(eqsymbol) {
     this.dataApi.getkotakview(eqsymbol).subscribe(data => {
@@ -1442,6 +1446,14 @@ mscore: mscoretile[] = [];
     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
     return item42.text3 ;
    }
+   trackByFuntion43(index43, item43) {
+    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+    return item43.text2 ;
+   }
+   trackByFuntion44(index44, item44) {
+    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+    return item44.text2 ;
+   }
    
   getshare1w(eqsymbol) {
          ////////////////Nifty 1 Week/////////////////////////////
@@ -1761,11 +1773,13 @@ mscore: mscoretile[] = [];
   getntstockpcrdetails(eqsymbol) {
    
     
-    this.dataApi.getntstockpcrdetails(eqsymbol).subscribe(data5 => {
+    this.dataApi.getntstockpcrdetails(this.eqsymbol).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
             return data5[key];
       });
       console.log(nestedItems)
+      this.maxpain.push({ text1: 'max pain', text2: nestedItems[3]['futureOption'].max_pain })
+      this.stockpcr.push({text1:'PCR',text2:nestedItems[3]['futureOption'].pcr})
    
      
     }, err => {
@@ -1988,17 +2002,17 @@ mscore: mscoretile[] = [];
           }
         }
     
-        if (nestedItems[1]['macdsignal']['lt1']) {
-          if (nestedItems[1]['macdsignal']['color1'] == 'positive') {
-            this.positive.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
-          }
-          else if (nestedItems[1]['macdsignal']['color1'] == 'negative') {
-            this.negative.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
-          }
-          else if (nestedItems[1]['macdsignal']['color1'] == 'neutral') {
-            this.neutral.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
-          }
-        }
+        // if (nestedItems[1]['macdsignal']['lt1']) {
+        //   if (nestedItems[1]['macdsignal']['color1'] == 'positive') {
+        //     this.positive.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
+        //   }
+        //   else if (nestedItems[1]['macdsignal']['color1'] == 'negative') {
+        //     this.negative.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
+        //   }
+        //   else if (nestedItems[1]['macdsignal']['color1'] == 'neutral') {
+        //     this.neutral.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
+        //   }
+        // }
     
         if (nestedItems[1]['mfi']['lt1']) {
           if (nestedItems[1]['mfi']['color1'] == 'positive') {

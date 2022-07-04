@@ -684,7 +684,7 @@ export class DataapiService {
     return this.http.get('http://localhost:8090/api/ntstockdetails?eqsymbol='+eqsymbol)
   }
   getntstockpcrdetails(eqsymbol) {
-    console.log(eqsymbol)
+ 
     return this.http.get('http://localhost:8090/api/ntstockpcrdetails?eqsymbol='+eqsymbol)
   }
 
