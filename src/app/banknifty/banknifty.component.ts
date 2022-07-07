@@ -5,7 +5,7 @@ import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { ViewportScroller } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import * as  stocks from '../lists/stocklist'
 import { StockChart } from 'angular-highcharts';
 import { ChartOptions } from 'chart.js';
 
@@ -15,6 +15,7 @@ export interface bankniftystockstiles {
   text2: string;
   text3: string;
   text4: string;
+  text5: string;
   
 }
 export interface stockhcdatatile{
@@ -148,7 +149,8 @@ export class BankniftyComponent implements OnInit {
   public lineChartvixData: Array<any> = [];
   public lineChartvixLabels: Array<number> = [];
   public lineChartvixOptions: any;
-  
+  stockisin: any;
+  stockList: any
   basicData: any;
   basicOptions: any;
   basicData1: any;
@@ -229,7 +231,9 @@ export class BankniftyComponent implements OnInit {
  
   ngOnInit(): void {
     this.primengConfig.ripple = true;
+    this.stockList = stocks.default.Data
     this.getmcbankniftystocks();
+    this.gettrendlynebanknifty();
     this.getbankniftysmaema();
     this.getbanknifty5d();
     this.getbanknifty1m();
@@ -250,6 +254,19 @@ export class BankniftyComponent implements OnInit {
 
   
   }
+  gettrendlynebanknifty() {
+    this.dataApi.gettrendlynebanknifty().subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+   
+      console.log(nestedItems);
+     })
+  
+       
+   
+  }
+ 
   getbankniftysentiments() {
     this.bankniftysentiments.length = 0;
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bnbx?field=RSI').subscribe(data5 => {
@@ -370,7 +387,7 @@ export class BankniftyComponent implements OnInit {
         //////////////////////////////Nifty 50 Stocks ////////////////////////
         this.bankniftystocks.length = 0;
         for (let val in nestedItems[0][0]['companies']) {
-          this.bankniftystocks.push({ text1: nestedItems[0][0]['companies'][val].companyShortName, text2: nestedItems[0][0]['companies'][val].change, text3: nestedItems[0][0]['companies'][val].percentChange, text4: nestedItems[0][0]['companies'][val].current })
+          this.bankniftystocks.push({ text1: nestedItems[0][0]['companies'][val].companyShortName, text2: nestedItems[0][0]['companies'][val].change, text3: nestedItems[0][0]['companies'][val].percentChange, text4: nestedItems[0][0]['companies'][val].current,text5: nestedItems[0][0]['companies'][val].symbol })
         }
   
      
@@ -837,6 +854,12 @@ export class BankniftyComponent implements OnInit {
     }, err => {
       console.log(err)
     })
+  }
+  changestockpage(symbol) {
+     console.log(symbol)
+
+    this.stockisin = this.stockList.filter(i => i.symbol == symbol)[0].isin
+    this.window.open("http://localhost:4200/Share?stock=" + this.stockisin, "_blank")
   }
 }
 

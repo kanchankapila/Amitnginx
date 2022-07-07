@@ -775,14 +775,22 @@ export class DataapiService {
   gettrendlynestocks2(tlid,tlname,eqsymbol){
     return this.http.get('http://localhost:8090/api/trendlynestocks2?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
   }
-  // gettrendlynestocks2(tlid){
-  //   return this.http.get('http://localhost:8090/api/trendlynestocks2?tlid='+tlid)
-  // }
+
+  
   gettrendlynestocks3(tlid){
     return this.http.get('http://localhost:8090/api/trendlynestocks3?tlid='+tlid)
   }
-  gettrendlynenifty(tlid) {
-    return this.http.get('http://localhost:8090/api/trendlynenifty?tlid='+tlid)
+  gettrendlynestocksti(tlid){
+    return this.http.get('http://localhost:8090/api/trendlynestocksti?tlid='+tlid)
+  }
+  gettrendlynenifty() {
+    return this.http.get('http://localhost:8090/api/trendlynenifty')
+  }
+  gettrendlynebanknifty() {
+    return this.http.get('http://localhost:8090/api/trendlynebanknifty')
+  }
+  gettrendlynepharmanifty() {
+    return this.http.get('http://localhost:8090/api/trendlynepharmanifty')
   }
 
   getniftytradersallstocks(){

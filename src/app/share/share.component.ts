@@ -518,7 +518,7 @@ export class ShareComponent implements OnInit {
       backgroundColor: 'rgba(255,0,0,0.3)',
     },
   ];
-
+ 
   public financialChartLegend = true;
   public financialChartType: ChartType = 'candlestick';
   public financialChartPlugins = [];
@@ -539,7 +539,7 @@ export class ShareComponent implements OnInit {
   public etstockohlctoday: etstockohlctodaytile[] =[] ;
   public stockhcvalue: Array<any> = [];
   public stockdata1: Array<number> = [];
-  public stockLabels: Array<any> = [];
+  //public stockLabels: Array<any> = [];
   
   public stockChartLabels: Array<number> = [];
   public stockpcrdata: Array<number> = [];
@@ -551,6 +551,10 @@ export class ShareComponent implements OnInit {
   public stock1wdata: Array<number> = [];
   public stock1wLabels: Array<any> = [];
   public stock1wData: Array<any> = [];
+  public stock1ddata: Array<number> = [];
+  public stock1dLabels: Array<any> = [];
+  public stockLabels: Array<any> = [];
+  public stockData: Array<any> = [];
   public stock1mdata: Array<number> = [];
   public stock1mLabels: Array<any> = [];
   public stock1mData: Array<any> = [];
@@ -667,7 +671,8 @@ mscore: mscoretile[] = [];
   stockindicators: stockindicatorstile[] = [];
   stockindicatorsw: stockindicatorswtile[] = [];
   stockindicatorsm: stockindicatorsmtile[] = [];
-  stockData: stockDatatiles[] = [];
+  //stockData: stockDatatiles[] = [];
+
   mcap: mcaptile[] = [];
   np: nptile[] = [];
   pbv: pbvtile[] = [];
@@ -695,7 +700,7 @@ mscore: mscoretile[] = [];
   stockema: stockematile[] = [];
   stocksma: stocksmatile[] = [];
   stockdetails: stockdetailstile[] = [];
-  public stockdata: Array<number> = [];
+ // public stockdata: Array<number> = [];
   public delivperc: Array<number> = [];
   public delivperctime: Array<number> = [];
   public volume: Array<number> = [];
@@ -759,6 +764,7 @@ mscore: mscoretile[] = [];
   public obvChartData: ChartConfiguration['data']
   public stockChartData1w: ChartConfiguration['data']
   public etstockChartData: ChartConfiguration['data']
+  
   public stockChartOptions:ChartOptions = {
     scales: {
       
@@ -772,6 +778,7 @@ mscore: mscoretile[] = [];
     }
    
   };
+  
   basicData3: any;
   basicOptions3: any;
   stockList: any
@@ -805,6 +812,7 @@ mscore: mscoretile[] = [];
   
 
   ngOnInit(): void {
+    
     this.primengConfig.ripple = true;
     this.stockList = stocks.default.Data
     this.stock = stocks.default.Data
@@ -832,6 +840,7 @@ mscore: mscoretile[] = [];
     this.getshare3m(this.eqsymbol)
     this.getzerodha()
     this.getkotak()
+    this.gettrendlynestocksti(this.tlid)
     this.getkotakview(this.eqsymbol)
     this.getshare1m(this.eqsymbol)
     this.getmmdata(this.stockid)
@@ -843,12 +852,12 @@ mscore: mscoretile[] = [];
     this.getmcstockrealtime() 
     this.getstocktoday(this.mcsymbol)
     this.getstockmaema(this.eqsymbol)
-    setInterval(() => { this.getstocktoday(this.mcsymbol) }, 30000);
+    setInterval(() => { this.getstocktoday(this.mcsymbol) }, 3000);
     this.getstocksentiments(this.mcsymbol);
     this.getmcstocktodayohlc(this.mcsymbol)
     this.getetsharetoday(this.eqsymbol)
    
-    setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 30000);
+    setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 3000);
     setInterval(() => { this. getmcstockrealtime() }, 1000);
   }
   getkotakview(eqsymbol) {
@@ -904,7 +913,21 @@ mscore: mscoretile[] = [];
     })
  
     
-    }
+  }
+  gettrendlynestocksti(tlid) {
+    this.dataApi.gettrendlynestocksti(this.tlid).subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+   
+      console.log(nestedItems);
+     })
+  
+       
+   
+  }
+ 
+  
     getmcstockrealtime() {
    
       this.http.get<any>('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+this.mcsymbol).subscribe(data5 => {
@@ -1581,7 +1604,11 @@ mscore: mscoretile[] = [];
         });
        
       });
-      }
+    }
+    
+  
+  
+  
       getstocktoday(mcsymbol) {
       ////////////To get Share Today Price///////////////////////
   
@@ -1589,15 +1616,18 @@ mscore: mscoretile[] = [];
     let nestedItems = Object.keys(data5).map(key => {
       return data5[key];
     });
-  
-    this.stockdata.length = 0;
-    this.stockLabels.length = 0;
-    for (let val in nestedItems[6]) {
-      this.stockdata.push(nestedItems[6][val]["value"])
-      this.stockLabels.push(new Date(nestedItems[6][val]["time"] * 1000).toLocaleTimeString("en-IN"))
-     // this.stockhcdate.push({x:(nestedItems[1].values[val]["_time"]),y:(nestedItems[1].values[val]["_value"])})     
+  console.log(nestedItems)
+    this.stock1ddata.length = 0;
+    this.stock1dLabels.length = 0;
+    for (let val in nestedItems[5]) {
+      
+      this.stock1ddata.push(nestedItems[5][val]["value"])
+      this.stock1dLabels.push(new Date(nestedItems[5][val]["time"] * 1000).toLocaleTimeString("en-IN"))
+     
     
     }
+   
+    
 
   }, err => {
     console.log(err)
@@ -1606,7 +1636,7 @@ mscore: mscoretile[] = [];
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-    
+    console.log(nestedItems)
       ////////////To get Nifty Today Resistances and Indicators/////////////
       this.stockDatasnrr1.length = 0;
       this.stockDatasnrr2.length = 0;
@@ -1649,14 +1679,24 @@ mscore: mscoretile[] = [];
       }
         
       
+      this.stockData = [{
+        label: 'Price',
+        data: this.stock1ddata,
+        borderWidth: 1,
+        fill: false
+      }];
+  
+       this.stockLabels = this.stock1dLabels;
     
     
    
   
     this.lineChartData = [{
       label: 'Price',
-      data: this.stockdata,
-      borderWidth: 1,
+      data: this.stock1ddata,
+      borderWidth: 3,
+      
+      //borderColor:  this.stock1ddata.map((v) => (v > 200 ? "red" : "blue")),
       fill: false
     }, 
     {
@@ -1700,12 +1740,12 @@ mscore: mscoretile[] = [];
     }];
  
     this.lineChartLabels = this.stockLabels;
- 
- 
+   
     
   }, err => {
     console.log(err)
-  })
+    })
+        
     }
     getstockmaema(eqsymbol) {
       this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=NSE%3A'+this.eqsymbol).subscribe(data5 => {
@@ -1733,7 +1773,7 @@ mscore: mscoretile[] = [];
         let nestedItems = Object.keys(data5).map(key => {
               return data5[key];
         });
-     
+        console.log(nestedItems)
         this.nr7=(nestedItems[3].stocktrend['nr7_today'])
         this.delivperc.length = 0;
         this.delivperctime.length = 0;

@@ -2,7 +2,9 @@ import { Input,Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DataapiService } from '../../dataapi.service'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {UntypedFormBuilder} from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
+
+import * as  stocks from '../lists/stocklist'
 export interface screenerstockstile {
   text1: any; text2: any; text3: any; text4: any; text5: any; text6: any; text7: any; text8: any; text9: any;
   text10: any;text11: any;text12: any;}
@@ -12,7 +14,8 @@ export interface screenerstockstile {
   styleUrls: ['./screeners.component.scss']
 })
 export class ScreenersComponent implements OnInit {
-  
+  stockList: any;
+  symbol: any;
 
   SMA = this._formBuilder.group({
     "_20_day_sma_below":false,
@@ -199,6 +202,7 @@ export class ScreenersComponent implements OnInit {
     "three_white_soldiers_bullish":false,
     "is_candle":false,
   });
+  stockisin: any;
   ntoptions: any;
  // postId: any;
  SMA1: string = '';
@@ -206,7 +210,7 @@ export class ScreenersComponent implements OnInit {
    console.log('SMA Name: ',SMA1);
  }
   screenerstocks: screenerstockstile[] = [];
-  constructor(private dataApi: DataapiService,private http: HttpClient,private _formBuilder: UntypedFormBuilder) { }
+  constructor(private dataApi: DataapiService,private http: HttpClient,private _formBuilder: UntypedFormBuilder, private window: Window) { }
   templateForm(value: any) {
    
     
@@ -228,7 +232,7 @@ export class ScreenersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.stockList = stocks.default.Data
   }
   getnteodscreeners(SMA1:string) {
     this.dataApi.getnteodscreeners(SMA1).subscribe(data5 => {
@@ -241,5 +245,10 @@ export class ScreenersComponent implements OnInit {
       for (let val in nestedItems[3]) {this.screenerstocks.push({ text1: nestedItems[3][val].symbol,text2: nestedItems[3][val].priceChange,text3: nestedItems[3][val].t0_20avgVolume,text4: nestedItems[3][val].t0_volume,text5: nestedItems[3][val].t0_close,text6: nestedItems[3][val].t0_date,text7: nestedItems[3][val].t0_deliveryPercentage,text8: nestedItems[3][val].t0_high,text9: nestedItems[3][val].t0_low,text10: nestedItems[3][val].t0_open,text11: nestedItems[3][val].t0_rsi,text12:nestedItems[3][val]._52week_range })}
       });
   }
-  
+  changestockpage(symbol) {
+     
+
+    this.stockisin = this.stockList.filter(i => i.symbol == symbol)[0].isin
+    this.window.open("http://localhost:4200/Share?stock=" + this.stockisin, "_blank")
+  }
 }

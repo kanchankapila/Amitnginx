@@ -10,7 +10,7 @@ import axios from 'axios';
 import {from} from 'rxjs';
 import { ViewportScroller } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import * as  stocks from '../lists/stocklist'
 import { StockChart } from 'angular-highcharts';
 import {ChartOptions } from 'chart.js';
 
@@ -20,6 +20,7 @@ export interface nifty50stockstiles {
   text2: string;
   text3: string;
   text4: string;
+  text5: string;
   
 }
 export interface stockhcdatatile{
@@ -164,6 +165,7 @@ export class NiftyComponent implements OnInit {
   basicOptions1: any;
   chart: any;
   date: any;
+  stockisin: any;
   //tlid:any
   tlid = '1887';
   tlname = 'NIFTY50';
@@ -219,6 +221,7 @@ export class NiftyComponent implements OnInit {
   public lineChartLabelsn50snrs3m: Array<any> = [];
   basicData3: any;
   basicOptions3: any;
+  stockList: any
   public  lineChartColors = [
     {
       borderColor: '#2d0365'
@@ -247,6 +250,7 @@ export class NiftyComponent implements OnInit {
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
+    this.stockList = stocks.default.Data
     this.getmcnifty50stocks();
     this.getnifty50smaema();
     this.getnifty5d();
@@ -257,7 +261,7 @@ export class NiftyComponent implements OnInit {
     this.getniftyvix()
     this.getniftypcr()
     this.getniftysentiments()
-    this.gettrendlynestocks1(this.tlid,this.eqsymbol,this.tlname)
+    this.gettrendlynenifty()
     this.getnifty1yr();
     setInterval(() => { this.getnifty50smaema() }, 30000);
     setInterval(() => { this.getmcnifty50stocks()}, 30000);
@@ -269,22 +273,17 @@ export class NiftyComponent implements OnInit {
   
   }
   
-  gettrendlynestocks1(tlid,eqsymbol,tlname) {
-    this.dataApi.gettrendlynestocks1(tlid,eqsymbol,tlname).subscribe(data5 => {
+  gettrendlynenifty() {
+    this.dataApi.gettrendlynenifty().subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
    
       console.log(nestedItems);
      })
-    // axios.get('https://trendlyne.com/equity/getStockMetricParameterList/1887/')
-    // .then((response) => {
-    //   console.log(response.data);
-    //   console.log(response.status);
-    //   console.log(response.statusText);
-    //   console.log(response.headers);
+  
        
-    // });
+   
   }
   
   getniftysentiments() {
@@ -405,9 +404,10 @@ export class NiftyComponent implements OnInit {
       
 
         //////////////////////////////Nifty 50 Stocks ////////////////////////
-        this.nifty50stocks.length = 0;
+      this.nifty50stocks.length = 0;
+      console.log(nestedItems)
         for (let val in nestedItems[0][0]['companies']) {
-          this.nifty50stocks.push({ text1: nestedItems[0][0]['companies'][val].companyShortName, text2: nestedItems[0][0]['companies'][val].change, text3: nestedItems[0][0]['companies'][val].percentChange, text4: nestedItems[0][0]['companies'][val].current })
+          this.nifty50stocks.push({ text1: nestedItems[0][0]['companies'][val].companyShortName, text2: nestedItems[0][0]['companies'][val].change, text3: nestedItems[0][0]['companies'][val].percentChange, text4: nestedItems[0][0]['companies'][val].current,text5:nestedItems[0][0]['companies'][val].symbol })
         }
   
      
@@ -874,6 +874,12 @@ export class NiftyComponent implements OnInit {
     }, err => {
       console.log(err)
     })
+  }
+  changestockpage(symbol) {
+     
+
+    this.stockisin = this.stockList.filter(i => i.symbol == symbol)[0].isin
+    this.window.open("http://localhost:4200/Share?stock=" + this.stockisin, "_blank")
   }
 }
 

@@ -3,7 +3,7 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import { BaseChartDirective } from 'ng2-charts';
-
+import * as  stocks from '../lists/stocklist'
 import { ViewportScroller } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -16,6 +16,7 @@ export interface pharmaniftystockstiles {
   text2: string;
   text3: string;
   text4: string;
+  text5: string;
   
 }
 export interface stockhcdatatile{
@@ -115,13 +116,10 @@ export class PharmaniftyComponent implements OnInit {
   public stockhcdate: Array<any> = [];
   public pharmaniftydata: Array<number> = [];
   public pharmaniftyLabels: Array<any> = [];
- 
   public niftyvixdata: Array<number> = [];
   public niftyvixtime: Array<any> = [];
   public lineChartData: Array<any> = [];
   public lineChartLabels: Array<number> = [];
-  
- 
   public pharmanifty5ddata: Array<number> = [];
   public pharmanifty5dLabels: Array<any> = [];
   public lineChart5dData: Array<any> = [];
@@ -147,6 +145,8 @@ export class PharmaniftyComponent implements OnInit {
   public lineChartvixLabels: Array<number> = [];
   public lineChartvixOptions: any;
   
+  stockisin: any;
+  stockList: any
   basicData: any;
   basicOptions: any;
   basicData1: any;
@@ -228,6 +228,8 @@ export class PharmaniftyComponent implements OnInit {
  
   ngOnInit(): void {
     this.primengConfig.ripple = true;
+    this.stockList = stocks.default.Data
+    this.gettrendlynepharmanifty()
     this.getmcpharmaniftystocks();
     this.getpharmaniftysmaema();
     this.getpharmanifty5d();
@@ -249,6 +251,19 @@ export class PharmaniftyComponent implements OnInit {
 
   
   }
+  gettrendlynepharmanifty() {
+    this.dataApi.gettrendlynepharmanifty().subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+   
+      console.log(nestedItems);
+     })
+  
+       
+   
+  }
+ 
   getpharmaniftysentiments() {
     this.pharmaniftysentiments.length = 0;
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bcpr?field=RSI').subscribe(data5 => {
@@ -341,7 +356,7 @@ export class PharmaniftyComponent implements OnInit {
         //////////////////////////////Nifty 50 Stocks ////////////////////////
         this.pharmaniftystocks.length = 0;
         for (let val in nestedItems[0][0]['companies']) {
-          this.pharmaniftystocks.push({ text1: nestedItems[0][0]['companies'][val].companyShortName, text2: nestedItems[0][0]['companies'][val].change, text3: nestedItems[0][0]['companies'][val].percentChange, text4: nestedItems[0][0]['companies'][val].current })
+          this.pharmaniftystocks.push({ text1: nestedItems[0][0]['companies'][val].companyShortName, text2: nestedItems[0][0]['companies'][val].change, text3: nestedItems[0][0]['companies'][val].percentChange, text4: nestedItems[0][0]['companies'][val].current,text5: nestedItems[0][0]['companies'][val].symbol })
         }
   
      
@@ -808,6 +823,12 @@ export class PharmaniftyComponent implements OnInit {
     }, err => {
       console.log(err)
     })
+  }
+  changestockpage(symbol) {
+     
+
+    this.stockisin = this.stockList.filter(i => i.symbol == symbol)[0].isin
+    this.window.open("http://localhost:4200/Share?stock=" + this.stockisin, "_blank")
   }
 }
 

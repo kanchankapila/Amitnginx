@@ -213,7 +213,7 @@ app.get('/api/kotakview', async function (req, res) {
 const { response } = require('express');
 const { json } = require('body-parser');
 
-var moment = require('moment');
+
 
 
   app.get('/api/test', async function (req, res) {
@@ -314,47 +314,6 @@ app.get('/api/mcsharefrequent', (req, res) => {
 
 
   
-
-///////////////////////////////For Getting Dates////////////////////////////////////////////////
-var yesterday1 = moment().subtract(1, 'days');
-var yesterday2 = moment().subtract(2, 'days');
-var yesterday3 = moment().subtract(3, 'days');
-var yesterday4 = moment().subtract(4, 'days');
-var yesterday5 = moment().subtract(5, 'days');
-var yesterday6 = moment().subtract(6, 'days');
-//console.log(yesterday1.format('Y-MMM-DD'));
-
-var today = new Date();
-
-
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = today.getFullYear();
-//console.log(today.getMonth())
-var d = new Date();
-var y = d.setDate(d.getDate() - 01);
-//console.log(y)
-var month = new Array();
-month[0] = "Jan";
-month[1] = "Feb";
-month[2] = "Mar";
-month[3] = "Apr";
-month[4] = "May";
-month[5] = "Jun";
-month[6] = "Jul";
-month[7] = "Aug";
-month[8] = "Sep";
-month[9] = "Oct";
-month[10] = "Nov";
-month[11] = "Dec";
-var n = month[d.getMonth()];
-//console.log(n)
-var datetoday = (dd + "-" + n + "-" + yyyy)
-yesterday = (dd - 01) + mm + yyyy
-var todaydate = (dd + "-" + mm + "-" + yyyy)
-
-var gnewsdatetoday = (yyyy + "-" + mm + "-" + dd)
-var gnewsyesterday= (yyyy + "-" + mm + "-" + (dd - 01))
 
 
 ///////////////////////////////////////////// Market Mojos Data ,used in ohlc///////////////////////////////////////////
@@ -2708,8 +2667,9 @@ request(options2, (err, response, body) => {
   
   app.get('/api/trendlynestocks2', (req, res) => {
     let eqsymbol = req.query.eqsymbol
+    let tlid = req.query.tlid
     //console.log(eqsymbol)
-    var url11 = 'https://trendlyne.com/mapp/v1/stock/chart-data/175/SMA/';
+    var url11 = 'https://trendlyne.com/mapp/v1/stock/chart-data/'+tlid+'/SMA/';
     request(url11, function (error, response, html) {
       if (!error) {
         
@@ -2719,9 +2679,134 @@ request(options2, (err, response, body) => {
     })
     
   })
+  /////////////////////////////////////Trendlyne Nifty///////////////////////////
+  app.get('/api/trendlynenifty', (req, res) => {
+   
+   var url11 = 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1887/TJLOGSVLZL4FLXDWFH6TIVYB6A======/';
+    request(url11, function (error, response, html) {
+      if (!error) {
+     
+  
+        var options2 = {
+          url: 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1887/TJLOGSVLZL4FLXDWFH6TIVYB6A======/',
+          method: 'GET', // Don't forget this line
+          "headers": {
+            "accept": "application/json, text/javascript, */*; q=0.01",
+            "accept-language": "en-US,en;q=0.9",
+            "sec-ch-ua": "\".Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\"103\", \"Chromium\";v=\"103\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "same-origin",
+            "x-requested-with": "XMLHttpRequest",
+            "cookie":  process.env.trendlynecookie,
+            "Referer": "https://trendlyne.com/equity/1887/NIFTY50/nifty-50/",
+            "Referrer-Policy": "strict-origin-when-cross-origin"
+          },
+          "body": null,
+          "method": "GET"
+        };
   
   
-
+  request(options2, (err, response, body) => {
+    if (err) {
+        //console.log(err);
+    } else {
+      (res.json(JSON.parse(body)));
+      //console.log((response))
+      }
+  });
+  }
+    })
+    
+  })
+  /////////////////////////////////////Trendlyne Nifty///////////////////////////
+  app.get('/api/trendlynepharmanifty', (req, res) => {
+   
+    var url11 = 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1905/URFM5UKYBSJM3HDF7EH5ZBSEP4======/';
+     request(url11, function (error, response, html) {
+       if (!error) {
+      
+   
+         var options2 = {
+           url: 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1905/URFM5UKYBSJM3HDF7EH5ZBSEP4======/',
+           method: 'GET', // Don't forget this line
+           "headers": {
+             "accept": "application/json, text/javascript, */*; q=0.01",
+             "accept-language": "en-US,en;q=0.9",
+             "sec-ch-ua": "\".Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\"103\", \"Chromium\";v=\"103\"",
+             "sec-ch-ua-mobile": "?0",
+             "sec-ch-ua-platform": "\"Windows\"",
+             "sec-fetch-dest": "empty",
+             "sec-fetch-mode": "cors",
+             "sec-fetch-site": "same-origin",
+             "x-requested-with": "XMLHttpRequest",
+             "cookie":  process.env.trendlynecookie,
+             "Referer": "https://trendlyne.com/equity/1887/NIFTY50/nifty-50/",
+             "Referrer-Policy": "strict-origin-when-cross-origin"
+           },
+           "body": null,
+           "method": "GET"
+         };
+   
+   
+   request(options2, (err, response, body) => {
+     if (err) {
+         //console.log(err);
+     } else {
+       (res.json(JSON.parse(body)));
+       //console.log((response))
+       }
+   });
+   }
+     })
+     
+   })
+  /////////////////////////////////////Trendlyne Nifty///////////////////////////
+  app.get('/api/trendlynebanknifty', (req, res) => {
+   
+    var url11 = 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1898/NAUN63XDUGR6O4FV2UAQPDQWSA======/';
+     request(url11, function (error, response, html) {
+       if (!error) {
+      
+   
+         var options2 = {
+           url: 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1898/NAUN63XDUGR6O4FV2UAQPDQWSA======/',
+           method: 'GET', // Don't forget this line
+           "headers": {
+             "accept": "application/json, text/javascript, */*; q=0.01",
+             "accept-language": "en-US,en;q=0.9",
+             "sec-ch-ua": "\".Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\"103\", \"Chromium\";v=\"103\"",
+             "sec-ch-ua-mobile": "?0",
+             "sec-ch-ua-platform": "\"Windows\"",
+             "sec-fetch-dest": "empty",
+             "sec-fetch-mode": "cors",
+             "sec-fetch-site": "same-origin",
+             "x-requested-with": "XMLHttpRequest",
+             "cookie":  process.env.trendlynecookie,
+             "Referer": "https://trendlyne.com/equity/1887/NIFTY50/nifty-50/",
+             "Referrer-Policy": "strict-origin-when-cross-origin"
+           },
+           "body": null,
+           "method": "GET"
+         };
+   
+   
+   request(options2, (err, response, body) => {
+     if (err) {
+         //console.log(err);
+     } else {
+       (res.json(JSON.parse(body)));
+       //console.log((response))
+       }
+   });
+   }
+     })
+     
+   })
+    
+  
 	////////////////////////////////////////////TrendLyne Stocks///////////////////////////////////////////
     app.get('/api/trendlynestocks3', function (req, res) {
       let tlid = req.query.tlid
@@ -2738,7 +2823,25 @@ request(options2, (err, response, body) => {
         })
       
       
-      })
+    })
+  
+    app.get('/api/trendlynestocksti', function (req, res) {
+      let tlid = req.query.tlid
+      var url6 = '  https://trendlyne.com/mapp/v1/stock/adv-technical-analysis/'+tlid+'/24/'
+        request(url6, function (error, response, html) {
+          if (!error) {
+      
+            console.log("This is tendlynestocksti")
+            res.json((JSON.parse(response.body)))
+           
+          } else {
+          //  console.log(error)
+          }
+        })
+      
+      
+    })
+  
 	  
 	/////////////////////////////////////Trendlyne Top Gainers////////////////////////////////////////////////
 	app.get('/api/tltg', function (req, res) {
