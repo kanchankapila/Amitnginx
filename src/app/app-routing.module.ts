@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) }, 
+ // { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) }, 
   { path: 'main', loadChildren: () => import('./main/main.module').then(m => m.MainModule) }, 
   //{ path: 'SnR', loadChildren: () => import('./sn-r/sn-r.module').then(m => m.SnRModule) }, 
   //{ path: 'Indicator', loadChildren: () => import('./indicator/indicator.module').then(m => m.IndicatorModule) }, 
@@ -23,8 +23,8 @@ const routes: Routes = [
   //{ path: 'Treemaps', loadChildren: () => import('./treemaps/treemaps.module').then(m => m.TreemapsModule) }, 
   //{ path: 'Analytics', loadChildren: () => import('./analytics/analytics.module').then(m => m.AnalyticsModule) }, 
   
-  { path: 'Dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }, 
-  { path: 'Ohlc', loadChildren: () => import('./ohlc/ohlc.module').then(m => m.OhlcModule) },
+  //{ path: 'Dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }, 
+  //{ path: 'Ohlc', loadChildren: () => import('./ohlc/ohlc.module').then(m => m.OhlcModule) },
   //{ path: 'Stock',loadChildren: () => import('./stock/stock.module').then(m => m.StockModule) },
   //{ path: 'basic-ui', loadChildren: () => import('./basic-ui/basic-ui.module').then(m => m.BasicUiModule) },
   //{ path: 'charts', loadChildren: () => import('./charts/charts.module').then(m => m.ChartsDemoModule) },

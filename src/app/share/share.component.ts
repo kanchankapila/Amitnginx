@@ -2,12 +2,10 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
-
 import axios from "axios";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { StockChart } from 'angular-highcharts';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
@@ -21,8 +19,6 @@ import { Chart,ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
 import { enUS } from 'date-fns/locale';
 import { add, parseISO } from 'date-fns';
 import { CandlestickController, CandlestickElement, OhlcController, OhlcElement } from 'chartjs-chart-financial';
-
-//import { seriesData, seriesDataLinear } from "./ohlc";
 import {from,Observable} from 'rxjs';
 
 
@@ -491,6 +487,7 @@ export class ShareComponent implements OnInit {
   visibleSidebar5;
   visibleSidebar6;
   cookieValue = '';
+  
 
 
   public financialChartOptions: ChartConfiguration['options'] = {
@@ -523,7 +520,7 @@ export class ShareComponent implements OnInit {
   public financialChartType: ChartType = 'candlestick';
   public financialChartPlugins = [];
 
-  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+'' 
 
   
   constructor(private cookieService:CookieService,private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
@@ -618,6 +615,7 @@ export class ShareComponent implements OnInit {
   fscore: fscoretile[] = [];
   qscore: qscoretile[] = [];
   dscore: dscoretile[] = [];
+  pclose: any;
 volscore: volscoretile[] = [];
 mscore: mscoretile[] = [];
   techscore: techscoretile[] = [];
@@ -754,7 +752,7 @@ mscore: mscoretile[] = [];
   public apexvolume: Array<any> = [];
   public stockChartType: ChartType = 'line';
   public DelivChartType: ChartType = 'bar';
-  public stockChartData: ChartConfiguration['data']
+  public stockChartData1y: ChartConfiguration['data']
   public macdChartData: ChartConfiguration['data']
   public rsiChartData: ChartConfiguration['data']
   public maChartData: ChartConfiguration['data']
@@ -806,7 +804,20 @@ mscore: mscoretile[] = [];
   bqnames: any
   companyid: any
   periods: any
-  
+  public lineChartType: ChartType = 'line';
+  public lineChartOptions:ChartOptions = {
+    scales: {
+      
+    },
+   
+    
+    elements: {
+      point: {
+        radius: 0
+      }
+    }
+   
+  };
 
   
   
@@ -846,20 +857,48 @@ mscore: mscoretile[] = [];
     this.getmmdata(this.stockid)
     this.getshare6m(this.eqsymbol)
     this.getshare1w(this.eqsymbol)
-    this.getstock1yr(this.eqsymbol)
-    this.getntstockdetails(this.eqsymbol)
+   // this.getstock1yr(this.eqsymbol)
+    
     this.getntstockpcrdetails(this.eqsymbol)
     this.getmcstockrealtime() 
     this.getstocktoday(this.mcsymbol)
     this.getstockmaema(this.eqsymbol)
-    setInterval(() => { this.getstocktoday(this.mcsymbol) }, 3000);
+    
     this.getstocksentiments(this.mcsymbol);
-    this.getmcstocktodayohlc(this.mcsymbol)
-    this.getetsharetoday(this.eqsymbol)
-   
-    setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 3000);
-    setInterval(() => { this. getmcstockrealtime() }, 1000);
+  //  this.getmcstocktodayohlc(this.mcsymbol)
+   // this.getetsharetoday(this.eqsymbol)
+    setInterval(() => { this.getstocktoday(this.mcsymbol) }, 30000);
+    //setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 60000);
+    setInterval(() => { this.getmcstockrealtime() }, 1000);
+    this.getntstockdetails(this.eqsymbol)
   }
+  // getetsharetoday(eqsymbol) {
+   
+  //   this.http.get<any>('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company').subscribe(data5 => {
+    
+  //     let nestedItems = Object.keys(data5).map(key => {
+  //       return data5[key];
+  //     });
+      
+  //     this.etstockohlctoday.length=0;
+     
+  //     for (let val in (nestedItems[0]['results']['quote'])){
+  //       this.etstockohlctoday.push({x:new Date(nestedItems[0]['results']['quote'][val].Date).getTime(),o:nestedItems[0]['results']['quote'][val].Open,h:nestedItems[0]['results']['quote'][val].High,l:nestedItems[0]['results']['quote'][val].Low,c:nestedItems[0]['results']['quote'][val].Close})
+  //     }
+
+  //   this.etstockChartData  = {
+  //     datasets: [ {
+  //      label: this.stockname,
+  //    data: this.etstockohlctoday
+  //     } ]
+  //    };
+     
+        
+  
+  //   })
+ 
+    
+  //   }
   getkotakview(eqsymbol) {
     this.dataApi.getkotakview(eqsymbol).subscribe(data => {
      
@@ -949,34 +988,6 @@ mscore: mscoretile[] = [];
  
 
  
-  getetsharetoday(eqsymbol) {
-   
-    this.http.get<any>('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company').subscribe(data5 => {
-    
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      
-      this.etstockohlctoday.length=0;
-     
-      for (let val in (nestedItems[0]['results']['quote'])){
-        this.etstockohlctoday.push({x:new Date(nestedItems[0]['results']['quote'][val].Date).getTime(),o:nestedItems[0]['results']['quote'][val].Open,h:nestedItems[0]['results']['quote'][val].High,l:nestedItems[0]['results']['quote'][val].Low,c:nestedItems[0]['results']['quote'][val].Close})
-      }
-
-    this.etstockChartData  = {
-      datasets: [ {
-       label: this.stockname,
-     data: this.etstockohlctoday
-      } ]
-     };
-     
-        
-  
-    })
- 
-    
-    }
- 
    
   
   getstock1yr(eqsymbol) {
@@ -992,9 +1003,9 @@ mscore: mscoretile[] = [];
       for (let val in nestedItems[3]) {
         this.stockohlc.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(),o: nestedItems[3][val].open,h: nestedItems[3][val].high, l: nestedItems[3][val].low,c: nestedItems[3][val].close })
       }
-      
+      console.log(this.stockohlc)
         
-        this.stockChartData  = {
+        this.stockChartData1y  = {
      datasets: [ {
       label: this.stockname,
     data: this.stockohlc
@@ -1040,7 +1051,7 @@ mscore: mscoretile[] = [];
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+      //console.log(nestedItems) explore
     });
   }
   getmmdata(stockid) {
@@ -1596,17 +1607,7 @@ mscore: mscoretile[] = [];
         console.log(err)
       })
     }
-    getmcstocktodayohlc(mcsymbol) {
-    
-      this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
-        let nestedItems = Object.keys(data5).map(key => {
-          return data5[key];
-        });
-       
-      });
-    }
-    
-  
+   
   
   
       getstocktoday(mcsymbol) {
@@ -1636,7 +1637,8 @@ mscore: mscoretile[] = [];
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-    console.log(nestedItems)
+      console.log(nestedItems)
+      this.pclose=nestedItems[2].pclose
       ////////////To get Nifty Today Resistances and Indicators/////////////
       this.stockDatasnrr1.length = 0;
       this.stockDatasnrr2.length = 0;
@@ -1683,6 +1685,7 @@ mscore: mscoretile[] = [];
         label: 'Price',
         data: this.stock1ddata,
         borderWidth: 1,
+        borderColor:  this.stock1ddata.map((v) => (v > this.pclose ? "red" : "green")),
         fill: false
       }];
   
@@ -1695,8 +1698,7 @@ mscore: mscoretile[] = [];
       label: 'Price',
       data: this.stock1ddata,
       borderWidth: 3,
-      
-      //borderColor:  this.stock1ddata.map((v) => (v > 200 ? "red" : "blue")),
+      borderColor:  this.stock1ddata.map((v) => (v > this.pclose ? "red" : "green")),
       fill: false
     }, 
     {
@@ -1773,7 +1775,7 @@ mscore: mscoretile[] = [];
         let nestedItems = Object.keys(data5).map(key => {
               return data5[key];
         });
-        console.log(nestedItems)
+       // console.log(nestedItems)
         this.nr7=(nestedItems[3].stocktrend['nr7_today'])
         this.delivperc.length = 0;
         this.delivperctime.length = 0;
@@ -1817,7 +1819,7 @@ mscore: mscoretile[] = [];
       let nestedItems = Object.keys(data5).map(key => {
             return data5[key];
       });
-      console.log(nestedItems)
+    //  console.log(nestedItems)
       this.maxpain.push({ text1: 'max pain', text2: nestedItems[3]['futureOption'].max_pain })
       this.stockpcr.push({text1:'PCR',text2:nestedItems[3]['futureOption'].pcr})
    

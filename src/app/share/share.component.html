@@ -1,3 +1,4 @@
+<script>src="https://cdnjs.cloudflare.com/ajax/libs/primeng/13.4.1/resources/components/sidebar/sidebar.min.css"</script>
 <br>
 <br>
 <div class="InsideContent">
@@ -452,13 +453,10 @@ NR7:{{nr7}}
             <div class="card">
               
                 <h4 class="mb-2">Stock Today </h4>
-                <canvas baseChart  [datasets]="stockData" [labels]="stockLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
                
-                <canvas baseChart height="100" [type]="stockChartType" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="stockChartOptions" ></canvas>
-                <canvas baseChart height="150" [data]="etstockChartData" [options]="financialChartOptions"
-              [type]="financialChartType"
-              [plugins]="financialChartPlugins">
-      </canvas>
+               
+                <canvas baseChart height="100" [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" ></canvas>
+               
              
             </div>
           </div>
@@ -556,7 +554,7 @@ NR7:{{nr7}}
           <div class="card">
             <h1 class="mb-5" [innerHtml]="dowmsg"></h1>
              
-            <canvas baseChart height="75" [data]="dowChartData" [options]="stockChartOptions" [type]="stockChartType" [options]="stockChartOptions"></canvas>
+          
           
           </div>
         </div>
@@ -625,7 +623,7 @@ NR7:{{nr7}}
         <div class="card">
           
             <h4 class="mb-2">Stock - 1 Year </h4>
-            <canvas baseChart height="150" [data]="stockChartData" [options]="financialChartOptions"
+            <canvas baseChart height="150" [data]="stockChartData1y" [options]="financialChartOptions"
           [type]="financialChartType"
           [plugins]="financialChartPlugins">
   </canvas>
@@ -635,8 +633,10 @@ NR7:{{nr7}}
     
     </p-tabPanel>
     </p-tabView>
-    
-   
+    <canvas baseChart  [datasets]="stockData" [labels]="stockLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
+               
+                
+               
     
     
      

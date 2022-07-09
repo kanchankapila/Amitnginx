@@ -131,6 +131,7 @@ export class NavbarComponent implements OnInit {
     this.nsedataniftyoi()
     this.nsedatabniftyoi()
     { setInterval(() => { this.nsedataniftyoi() }, 30000); }
+    { setInterval(() => { this.nsedatabniftyoi() }, 30000); }
     {
       setInterval(() => { this.getmcniftyrealtime() }, 5000);
       setInterval(() => { this.getmcbankniftyrealtime() }, 5000);
@@ -268,6 +269,11 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      this.pcrnsebnifty.length = 0;
+      this.optionbwc.length = 0;
+      this.bnoptionsresistance.length = 0;
+      this.optionbwp.length = 0;
+      this.bnoptionssupport.length = 0;
       this.pcrnsebnifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].totOI)})
     
      
@@ -324,23 +330,23 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     })
   }
   
-  ///Moneycontrol Post request for moving averages
-  getmcmovingaverages() {
-    console.log("mc moving averages start")
-    for (let val in this.stock) {
-      this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-      this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday })
+  // ///Moneycontrol Post request for moving averages
+  // getmcmovingaverages() {
+  //   console.log("mc moving averages start")
+  //   for (let val in this.stock) {
+  //     this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
+  //     this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday })
       
-    }
+  //   }
    
-    this.dataApi.getmcmovingaverages(this.mcsymbol).subscribe(data5 => {
+  //   this.dataApi.getmcmovingaverages(this.mcsymbol).subscribe(data5 => {
 
 
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
+  //   }, err => {
+  //     console.log(err)
+  //   }
+  //   )
+  // }
   getnr7() {
     console.log("NR7 start")
     this.mcsymbol.length = 0;
@@ -453,102 +459,102 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     )
   }
  
-  getmmstockinforeco() {
-    console.log("mmstock reco start")
-    for (let val in this.stock1) {
-      this.stockid.push({ stockid: this.stock[val].stockid, isin: this.stock[val].isin, name: this.stock[val].name })
-      //console.log(this.stock[val].stockid)
-    }
-  //  console.log(this.stockid)
+  // getmmstockinforeco() {
+  //   console.log("mmstock reco start")
+  //   for (let val in this.stock1) {
+  //     this.stockid.push({ stockid: this.stock[val].stockid, isin: this.stock[val].isin, name: this.stock[val].name })
+  //     //console.log(this.stock[val].stockid)
+  //   }
+  // //  console.log(this.stockid)
     
-    this.dataApi.getmmstockinforeco(this.stockid).subscribe(data5 => {
+  //   this.dataApi.getmmstockinforeco(this.stockid).subscribe(data5 => {
 
 
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
+  //   }, err => {
+  //     console.log(err)
+  //   }
+  //   )
+  // }
   
-  getmccombine() {
-    console.log("mc combine start")
-    this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-    //console.log('Date is' + this.datetoday)
-    var d = new Date();
-   // console.log(d.getHours()+":"+d.getMinutes())
-    for (let val in this.stock1) {
-      this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
+  // getmccombine() {
+  //   console.log("mc combine start")
+  //   this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
+  //   //console.log('Date is' + this.datetoday)
+  //   var d = new Date();
+  //  // console.log(d.getHours()+":"+d.getMinutes())
+  //   for (let val in this.stock1) {
+  //     this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
       
-    }
+  //   }
    
-    this.dataApi.getmccombine(this.mcsymbol).subscribe(data5 => {
+  //   this.dataApi.getmccombine(this.mcsymbol).subscribe(data5 => {
 
 
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-  gettrendlynepostdvm() {
-    console.log("trendlyne post durability/Volatility/Momentum score start")
-    this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-    console.log('Date is' + this.datetoday)
-    var d = new Date();
-    console.log(d.getHours()+":"+d.getMinutes())
-    for (let val in this.stock) {
-      this.tlid.push({ tlid: this.stock[val].tlid, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
+  //   }, err => {
+  //     console.log(err)
+  //   }
+  //   )
+  // }
+  // gettrendlynepostdvm() {
+  //   console.log("trendlyne post durability/Volatility/Momentum score start")
+  //   this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
+  //   console.log('Date is' + this.datetoday)
+  //   var d = new Date();
+  //   console.log(d.getHours()+":"+d.getMinutes())
+  //   for (let val in this.stock) {
+  //     this.tlid.push({ tlid: this.stock[val].tlid, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
       
-    }
+  //   }
    
-    this.dataApi.gettrendlynepostdvm(this.tlid).subscribe(data5 => {
+  //   this.dataApi.gettrendlynepostdvm(this.tlid).subscribe(data5 => {
 
 
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
+  //   }, err => {
+  //     console.log(err)
+  //   }
+  //   )
+  // }
   navigatenifty() {
     this.window.open("http://localhost:4200/nifty", "_blank") 
   }
   navigatebanknifty() {
     this.window.open("http://localhost:4200/banknifty", "_blank") 
   }
-  chartink() {
-    console.log("chartink start")
-    this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-   // console.log('Date is'+ this.datetoday)
+  // chartink() {
+  //   console.log("chartink start")
+  //   this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
+  //  // console.log('Date is'+ this.datetoday)
     
-      this.abc.push({ name:'copy-buy-100-accuracy-morning-scanner-scan-at-9-30-4002',Date:this.datetoday })
+  //     this.abc.push({ name:'copy-buy-100-accuracy-morning-scanner-scan-at-9-30-4002',Date:this.datetoday })
       
     
    
-    this.dataApi.chartink(this.abc).subscribe(data5 => {
+  //   this.dataApi.chartink(this.abc).subscribe(data5 => {
 
 
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
+  //   }, err => {
+  //     console.log(err)
+  //   }
+  //   )
+  // }
  
-  getmcsectorcombine() {
-    console.log("mc sector combine start")
-    for (let val in this.sectorList) {
-      this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-    //  console.log('Date is'+ this.datetoday)
-      this.mcsectorsymbol.push({ mcsectorsymbol: this.sectorList[val].mcsectorsymbol, sectorid: this.sectorList[val].mcsectorid, name: this.sectorList[val].name,Date:this.datetoday })
-    //  console.log(this.sectorList[val].mcsectorsymbol)
-    }
+  // getmcsectorcombine() {
+  //   console.log("mc sector combine start")
+  //   for (let val in this.sectorList) {
+  //     this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
+  //   //  console.log('Date is'+ this.datetoday)
+  //     this.mcsectorsymbol.push({ mcsectorsymbol: this.sectorList[val].mcsectorsymbol, sectorid: this.sectorList[val].mcsectorid, name: this.sectorList[val].name,Date:this.datetoday })
+  //   //  console.log(this.sectorList[val].mcsectorsymbol)
+  //   }
    
-    this.dataApi.getmcsectorcombine(this.mcsectorsymbol).subscribe(data5 => {
+  //   this.dataApi.getmcsectorcombine(this.mcsectorsymbol).subscribe(data5 => {
 
 
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
+  //   }, err => {
+  //     console.log(err)
+  //   }
+  //   )
+  // }
  
   nsepostdata1() {
     console.log("eq sector combine start")
@@ -585,138 +591,5 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     )
   }
  
-  getmoneycontroloveralldaily() {
-    console.log("start")
-    for (let val in this.stock) {
-      this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name })
-      //
-      //this.getmoneycontroloverall(this.mcsymbol)
-    }
-  
-    this.dataApi.getmoneycontroloveralldaily(this.mcsymbol).subscribe(data5 => {
-
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-
-  
-  getmoneycontrolti() {
-    console.log("TI start")
-    for (let val in this.stock) {
-      this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name })
-      //
-      //this.getmoneycontroloverall(this.mcsymbol)
-    }
-    //console.log(this.mcsymbol)
-    this.dataApi.getmoneycontrolti(this.mcsymbol).subscribe(data5 => {
-
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-  getbqbasicdetails() {
-    console.log("BQ start")
-    for (let val in this.bqstocks) {
-      this.bqsymbol.push({bqsymbol:this.bqstocks[val].stockid,name:this.bqstocks[val].name})
-      //
-      //this.getmoneycontroloverall(this.mcsymbol)
-    }
-    //console.log(this.mcsymbol)
-    this.dataApi.getbqbasicdetails(this.bqsymbol).subscribe(data5 => {
-
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-  
-  getbqnews() {
-    console.log("BQ news start")
-    for (let val in this.bqstocks) {
-      this.bqsymbol.push({bqsymbol:this.bqstocks[val].stockid,name:this.bqstocks[val].name})
-     
-    }
-    
-    this.dataApi.getbqnews(this.bqsymbol).subscribe(data5 => {
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-  
-  
-  getmoneycontroloverallweekly() {
-    console.log("start")
-    for (let val in this.stock) {
-      this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name })
-      //
-      //this.getmoneycontroloverall(this.mcsymbol)
-    }
-    //console.log(this.mcsymbol)
-    this.dataApi.getmoneycontroloverallweekly(this.mcsymbol).subscribe(data5 => {
-
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-  getetcompanydata() {
-    console.log("ET Company data start")
-    for (let val in this.etstocks) {
-      this.companyid.push({ companyid:this.etstocks[val].companyid,name1:this.etstocks[val].name })
-      //
-      //this.getmoneycontroloverall(this.mcsymbol)
-    
-      
-    }
-      this.dataApi.getetcompanydata(this.companyid).subscribe(data5 => {
-
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-  
-  getmoneycontroloverall() {
-    console.log("start")
-    for (let val in this.stock) {
-      this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name })
-     
-    }
-   this.dataApi.getmoneycontroloverall(this.mcsymbol).subscribe(data5 => {
-  }, err => {
-      console.log(err)
-    }
-    )
-  }
-  getpscore() {
-    console.log("PScore start")
-    this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-    for (let val in this.stock) {
-      this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday })
-      
-    }
-    
-    this.dataApi.getpscore(this.mcsymbol).subscribe(data5 => {
-
-
-    }, err => {
-      console.log(err)
-    }
-    )
-  }
-
-  // toggle right sidebar
-  // toggleRightSidebar() {
-  //   document.querySelector('#right-sidebar').classList.toggle('open');
-  // }
-
+ 
 }
