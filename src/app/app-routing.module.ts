@@ -41,7 +41,7 @@ const routes: Routes = [
   { path: 'banknifty', loadChildren: () => import('./banknifty/banknifty.module').then(m => m.BankniftyModule) },
   { path: 'pharmanifty', loadChildren: () => import('./pharmanifty/pharmanifty.module').then(m => m.PharmaniftyModule) },
   { path: 'Share', loadChildren: () => import('./share/share.module').then(m => m.ShareModule) },
-  { path: 'testing', loadChildren: () => import('./testing/testing.module').then(m => m.TestingModule) },
+ 
   { path: 'homepage', loadChildren: () => import('./homepage/homepage.module').then(m => m.HomepageModule) },
   { path: 'screeners', loadChildren: () => import('./screeners/screeners.module').then(m => m.ScreenersModule) },
 

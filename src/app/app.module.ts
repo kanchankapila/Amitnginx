@@ -30,7 +30,7 @@ import { ContentAnimateDirective } from './shared/directives/content-animate.dir
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavbarModule, ButtonsModule } from 'angular-bootstrap-md'
-import { NgApexchartsModule } from "ng-apexcharts";
+//import { NgApexchartsModule } from "ng-apexcharts";
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
@@ -65,7 +65,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ReactiveFormsModule,
     NgxEchartsModule.forRoot({echarts: () => import('echarts')}),
     MDBBootstrapModule.forRoot(),
-    NgApexchartsModule,
+    //NgApexchartsModule,
     BrowserModule,
     HttpClientModule,
     NavbarModule,

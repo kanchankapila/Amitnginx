@@ -7,7 +7,7 @@ import * as  stocks from '../lists/stocklist'
 import { ViewportScroller } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { StockChart } from 'angular-highcharts';
+//import { StockChart } from 'angular-highcharts';
 import { ChartType, ChartOptions } from 'chart.js';
 
 export interface pharmaniftystockstiles {
@@ -112,7 +112,7 @@ export class PharmaniftyComponent implements OnInit {
   constructor(private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig, private vps: ViewportScroller) {
     
   }
-  stockhighcharts: StockChart;
+  //stockhighcharts: StockChart;
   public stockhcdate: Array<any> = [];
   public pharmaniftydata: Array<number> = [];
   public pharmaniftyLabels: Array<any> = [];

@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import axios from "axios";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-import { StockChart } from 'angular-highcharts';
+//import { StockChart } from 'angular-highcharts';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
@@ -483,7 +483,7 @@ export interface maxpaintile { text1: any; text2: any; }
   
 export class ShareComponent implements OnInit {
 
-  stockhighcharts: StockChart;
+  //stockhighcharts: StockChart;
   visibleSidebar5;
   visibleSidebar6;
   cookieValue = '';

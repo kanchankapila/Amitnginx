@@ -11,7 +11,7 @@ import {from} from 'rxjs';
 import { ViewportScroller } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
-import { StockChart } from 'angular-highcharts';
+//import { StockChart } from 'angular-highcharts';
 import {ChartOptions } from 'chart.js';
 
 export interface nifty50stockstiles {
@@ -120,7 +120,7 @@ export class NiftyComponent implements OnInit {
      headers: {'Access-Control-Allow-Origin': '*'}
     });
   }
-  stockhighcharts: StockChart;
+  //stockhighcharts: StockChart;
   public stockhcdate: Array<any> = [];
   public nifty50data: Array<number> = [];
   public nifty50Labels: Array<any> = [];

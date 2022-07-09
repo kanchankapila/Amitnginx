@@ -66,7 +66,7 @@
             "vendorChunk": false,
             "extractLicenses": false,
             "buildOptimizer": false,
-            "sourceMap": true,
+            "sourceMap": false,
             "optimization": false,
             "namedChunks": true,
             "commonChunk": true,
@@ -86,15 +86,15 @@
               "sourceMap": false,
               
               "namedChunks": true,
-              "aot": false,
+              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "50mb",
-                  "maximumError": "70mb"
+                  "maximumWarning": "20mb",
+                  "maximumError": "20mb"
                 }
               ],
               "serviceWorker": true,
@@ -176,6 +176,6 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": true
   }
 }

@@ -6,7 +6,7 @@ import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { ViewportScroller } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
-import { StockChart } from 'angular-highcharts';
+
 import { ChartOptions } from 'chart.js';
 
 export interface bankniftystockstiles {
@@ -111,7 +111,7 @@ export class BankniftyComponent implements OnInit {
   constructor(private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig, private vps: ViewportScroller) {
     
   }
-  stockhighcharts: StockChart;
+ 
   public stockhcdate: Array<any> = [];
   public bankniftydata: Array<number> = [];
   public bankniftyLabels: Array<any> = [];
