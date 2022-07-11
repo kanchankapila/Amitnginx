@@ -21,6 +21,55 @@
     border-top-color: #51f551;
     animation: 1.5s spin infinite linear;
   }
+  .lds-dual-ring {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .donut2 {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 30%;
+    border: 0.3rem solid rgba(#f30c87, 0.3);
+    border-top-color: #79ff87;
+    animation: 1.5s spin  infinite linear;
+  }
+  .donut3 {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    border: 0.3rem solid rgba(#c9f30c, 0.3);
+    border-top-color: #ff7979;
+    animation:forwards;
+  }
+  .donut4 {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    border: 0.7rem solid rgba(#320cf3, 0.3);
+    border-top-color: #ffd579;
+    animation: 1.0s spin alternate-reverse;
+  }
 }
 
 @keyframes spin {

@@ -11,21 +11,45 @@
   @media (max-width: 991px) {
     width: 100%;
   }
-  .donut {
-    width: 4rem;
-    height: 4rem;
+  donut {
+    width: 8rem;
+    height: 8rem;
     border-radius: 90%;
-    border: 0.3rem solid rgba(#0c2bf3, 0.3);
-    border-top-color: #11fc57;
+    border: 0.5rem solid rgba(#f645ca, 0.3);
+    border-top-color: #ddfc11;
     animation: 1.5s spin infinite linear;
   }
-  .donut1 {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 90%;
-    border: 0.3rem solid rgba(#0c2bf3, 0.3);
+  donut1 {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 60%;
+    border: 1.0rem solid rgba(#0c2bf3, 0.3);
     border-top-color: #11fc57;
-    animation: 1.5s spin infinite linear;
+    animation: 1.2s spin infinite linear;
+  }
+  donut2 {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    border: 0.7rem solid rgba(#f30c87, 0.3);
+    border-top-color: #79ff87;
+    animation: 1.0s spin alternate-reverse;
+  }
+  donut3 {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    border: 0.7rem solid rgba(#c9f30c, 0.3);
+    border-top-color: #ff7979;
+    animation: 1.0s spin alternate-reverse;
+  }
+  donut4 {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    border: 0.7rem solid rgba(#320cf3, 0.3);
+    border-top-color: #ffd579;
+    animation: 1.0s spin alternate-reverse;
   }
 }
 

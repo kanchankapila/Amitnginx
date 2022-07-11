@@ -86,26 +86,20 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatTabsModule,
     HttpClientModule,
     
-    ServiceWorkerModule.register('ngsw-worker.js')
-    //, {
-      //enabled: environment.production,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      //registrationStrategy: 'registerWhenStable:30000'
-    //})
-  // , {
-  //     enabled: environment.production,
-  //     // Register the ServiceWorker as soon as the application is stable
-  //     // or after 30 seconds (whichever comes first).
-  //     registrationStrategy: 'registerWhenStable:30000'
-  //   }),
-   
-   
+      registrationStrategy: 'registerWhenStable:30000'
+    })
+  
   ],
-  providers: [ { provide: Window, useValue: window }, {
-    provide: SwRegistrationOptions,
-    useFactory: () => ({enabled: location.search.includes('sw=true')}),
-  }],
+  providers: [{ provide: Window, useValue: window }
+    //  , {
+    //  provide: SwRegistrationOptions,
+    //  useFactory: () => ({enabled: location.search.includes('sw=true')}),
+    //  }
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })

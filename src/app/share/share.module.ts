@@ -5,6 +5,7 @@ import { ShareComponent } from './share.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NgChartsModule } from 'ng2-charts';
 import {HttpClientModule, HttpErrorResponse} from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -37,6 +38,7 @@ export function highchartsModules() {
     MatCardModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatSnackBarModule,
     ButtonModule,
     HttpClientModule,
     SidebarModule,

@@ -26,44 +26,22 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              
-              "src/manifest.webmanifest"
-              
-              
+              "src/manifest.json",
+              "src/ngsw-worker.js"
             ],
             "styles": [
               "src/styles.scss",
-            
-              
-              "node_modules/primeng/resources/themes/saga-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeflex/primeflex.css",
-              "node_modules/primeicons/primeicons.css",
-              
-            "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
-            "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
-            "node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
-            "node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
-            "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
-            "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
-            "node_modules/animate.css/animate.css",
-           
-            "node_modules/mdb-ui-kit/css/mdb.min.css"
-            
-           
-          
+              "node_modules/animate.css/animate.css"
             ],"allowedCommonJsDependencies": [
               "chart.js"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/jquery/dist/jquery.js",
-              "node_modules/bootstrap/dist/js/bootstrap.js",
-              "node_modules/echarts/dist/echarts.min.js"
+              
              
             
             ],
             "vendorChunk": false,
+            
             "extractLicenses": false,
             "buildOptimizer": false,
             "sourceMap": false,
@@ -86,10 +64,10 @@
               "sourceMap": false,
               
               "namedChunks": true,
-              "aot": true,
+              "aot": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",
@@ -132,31 +110,17 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              
-              "src/manifest.webmanifest"
+              "src/manifest.json",
+              "src/ngsw-worker.js"
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/primeng/resources/themes/saga-blue/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeflex/primeflex.css",
-              "node_modules/primeicons/primeicons.css",
-              "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
-              "node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
-              "node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
-              "node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
-              "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
-              "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
-              "node_modules/animate.css/animate.css",
+              "node_modules/animate.css/animate.css"
               
-              "node_modules/mdb-ui-kit/css/mdb.min.css"
-            
+              
               
             ],
-            "scripts": [ "./node_modules/jquery/dist/jquery.js",
-                  "node_modules/bootstrap/dist/js/bootstrap.js",
-                  "node_modules/echarts/dist/echarts.min.js"
-              
+            "scripts": [
           ]
           }
         },

@@ -2,6 +2,9 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
+import { Injectable } from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { SwUpdate } from '@angular/service-worker';
 import axios from "axios";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
@@ -480,7 +483,7 @@ export interface maxpaintile { text1: any; text2: any; }
   templateUrl: './share.component.html',
   styleUrls: ['./share.component.scss']
 })
-  
+@Injectable()
 export class ShareComponent implements OnInit {
 
   //stockhighcharts: StockChart;
@@ -523,11 +526,20 @@ export class ShareComponent implements OnInit {
 '' 
 
   
-  constructor(private cookieService:CookieService,private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
+  constructor(private swUpdate: SwUpdate, private snackbar: MatSnackBar, private cookieService: CookieService, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
     Chart.register(CandlestickController, OhlcController, CandlestickElement, OhlcElement);
+    this.swUpdate.available.subscribe(evt => {
+      const snack = this.snackbar.open('Update Available', 'Reload');
+      snack
+        .onAction()
+        .subscribe(() => {
+          window.location.reload();
+        });
+
+      
   
   
-  
+    })
   }
   
   public stockhcdate: Array<any> = [];
@@ -899,6 +911,7 @@ mscore: mscoretile[] = [];
  
     
   //   }
+  
   getkotakview(eqsymbol) {
     this.dataApi.getkotakview(eqsymbol).subscribe(data => {
      
