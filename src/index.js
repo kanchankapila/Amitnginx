@@ -1283,7 +1283,7 @@ if (err) {
 
 app.use(express.static(__dirname+"/"));
 
-app.get("/*", function (req, res) {
+app.get("/", function (req, res) {
 
   res.sendFile(path.join(__dirname +'/dist/amitnginx1/index.html'));
 });
@@ -1291,9 +1291,13 @@ app.get("/ngsw-worker.js", function (req, res) {
 
   res.sendFile(path.join(__dirname +'/dist/amitnginx/ngsw-worker.js'));
 });
-app.get("/manifest.webmanifest", function (req, res) {
+app.get("/manifest.json", function (req, res) {
 
-  res.sendFile(path.join(__dirname +'/dist/amitnginx/manifest.webmanifest'));
+  res.sendFile(path.join(__dirname +'/dist/amitnginx/manifest.json'));
+});
+app.get("/ngsw.json", function (req, res) {
+
+  res.sendFile(path.join(__dirname +'/dist/amitnginx/ngsw.json'));
 });
 
 

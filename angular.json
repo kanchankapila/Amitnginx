@@ -28,7 +28,7 @@
               "src/assets",
               
               "src/ngsw-worker.js",
-              "src/manifest.webmanifest"
+              "src/manifest.json"
             ],
             "styles": [
               "src/styles.scss",
@@ -113,7 +113,7 @@
               "src/assets",
               
               "src/ngsw-worker.js",
-              "src/manifest.webmanifest"
+              "src/manifest.json"
             ],
             "styles": [
               "src/styles.scss",
