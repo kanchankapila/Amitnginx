@@ -1281,24 +1281,24 @@ if (err) {
   
   
 
-app.use(express.static(__dirname+"/"));
-
+//app.use(express.static(__dirname+"/"));
+app.use(express.static(path.join(__dirname, 'dist/amitnginx1')))
 app.get("/", function (req, res) {
 
-  res.sendFile(path.join(__dirname +'/dist/amitnginx1/index.html'));
+  res.sendFile(path.join(__dirname,'/dist/amitnginx1/'));
 });
-app.get("/ngsw-worker.js", function (req, res) {
+// app.get("/ngsw-worker.js", function (req, res) {
 
-  res.sendFile(path.join(__dirname +'/dist/amitnginx/ngsw-worker.js'));
-});
-app.get("/manifest.json", function (req, res) {
+//   res.sendFile(path.join(__dirname +'/dist/amitnginx/ngsw-worker.js'));
+// });
+// app.get("/manifest.json", function (req, res) {
 
-  res.sendFile(path.join(__dirname +'/dist/amitnginx/manifest.json'));
-});
-app.get("/ngsw.json", function (req, res) {
+//   res.sendFile(path.join(__dirname +'/dist/amitnginx/manifest.json'));
+// });
+// app.get("/ngsw.json", function (req, res) {
 
-  res.sendFile(path.join(__dirname +'/dist/amitnginx/ngsw.json'));
-});
+//   res.sendFile(path.join(__dirname +'/dist/amitnginx/ngsw.json'));
+// });
 
 
 // app.listen(8090, function() {
