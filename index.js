@@ -1287,10 +1287,14 @@ app.get("/*", function (req, res) {
 
   res.sendFile(path.join(__dirname +'/dist/index.html'));
 });
-app.get("/ngsw-worker.js", function (req, res) {
+// app.get("/ngsw-worker.js", function (req, res) {
 
-  res.sendFile(path.join(__dirname +'/dist/ngsw-worker.js'));
-});
+//   res.sendFile(path.join(__dirname +'/dist/ngsw-worker.js'));
+// });
+// app.get("/manifest.json", function (req, res) {
+
+//   res.sendFile(path.join(__dirname +'/dist/manifest.json'));
+// });
 
 
 // app.listen(8090, function() {

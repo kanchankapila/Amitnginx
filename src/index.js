@@ -1285,11 +1285,15 @@ app.use(express.static(__dirname+"/"));
 
 app.get("/*", function (req, res) {
 
-  res.sendFile(path.join(__dirname +'/dist/index.html'));
+  res.sendFile(path.join(__dirname +'/dist/amitnginx1/index.html'));
 });
 app.get("/ngsw-worker.js", function (req, res) {
 
-  res.sendFile(path.join(__dirname +'/dist/ngsw-worker.js'));
+  res.sendFile(path.join(__dirname +'/dist/amitnginx/ngsw-worker.js'));
+});
+app.get("/manifest.webmanifest", function (req, res) {
+
+  res.sendFile(path.join(__dirname +'/dist/amitnginx/manifest.webmanifest'));
 });
 
 
