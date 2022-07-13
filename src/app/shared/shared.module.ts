@@ -1,38 +1,33 @@
 import { NgModule } from '@angular/core';
-//import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { Sidebar1Component } from './sidebar1/sidebar1.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { NavbarComponent } from './navbar.component';
 import { NgChartsModule } from 'ng2-charts';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatButtonModule } from '@angular/material/button';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ChartModule } from 'primeng/chart';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
-import { CardModule, } from 'primeng/card';
+import { CardModule } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
-//import { GestureConfig } from 'owl-ng';
-//import { OwlClockModule } from 'owl-ng';
-import { HttpClientModule } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
-
-const routes: Routes = [
-  { path: '', component: NavbarComponent },
-  
-];
-
-
-
-
-
+const routes : Routes = [
+  { path: '', component: Sidebar1Component },
+  { path: '', component: NavbarComponent }
+]
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [Sidebar1Component,NavbarComponent],
   imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    SidebarModule,
     CommonModule,
     NgbModule,
     TabViewModule,
@@ -42,14 +37,15 @@ const routes: Routes = [
     ChartModule,
     ButtonModule,
     CardModule,
-    SidebarModule,
+    //Sidebar1Module,
     MatButtonModule,
-   //OwlClockModule,
+   // OwlClockModule,
     RouterModule.forChild(routes),
     NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
   ],
+  exports:[Sidebar1Component,NavbarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers:[]
+  
 })
-
-export class NavbarModule { }
+export class SharedModule { }

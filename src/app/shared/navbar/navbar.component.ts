@@ -17,7 +17,7 @@ export interface pcrniftytile {
   text1: string;
 }
 export interface pcrnseniftytile {
-text1: number;
+text1: any;
 }
 export interface mcniftyrttiles {
 
@@ -64,7 +64,7 @@ export interface bnoptionsresistancetile {
   text1: string;
 }
 export interface pcrnsebniftytile {
-  text1: number;
+  text1: any;
 }
 
 

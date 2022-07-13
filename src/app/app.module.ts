@@ -19,8 +19,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
+
 import { FooterComponent } from './shared/footer/footer.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +29,7 @@ import { ContentAnimateDirective } from './shared/directives/content-animate.dir
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavbarModule, ButtonsModule } from 'angular-bootstrap-md'
-//import { NgApexchartsModule } from "ng-apexcharts";
+import { SharedModule } from "./shared/shared.module";
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
@@ -42,10 +41,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    SidebarComponent,
     FooterComponent,
-   
     SpinnerComponent,
     ContentAnimateDirective,
    
@@ -58,47 +54,35 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     SidebarModule,
     ButtonModule,
-    
+    SharedModule,
     ChartModule,
-    //OwlClockModule,
-    //OwlGalleriaModule,
     ReactiveFormsModule,
     NgxEchartsModule.forRoot({echarts: () => import('echarts')}),
     MDBBootstrapModule.forRoot(),
-    //NgApexchartsModule,
     BrowserModule,
     HttpClientModule,
     NavbarModule,
     CardModule,
-    SidebarModule,
     AppRoutingModule,
     MatSidenavModule,
     ButtonsModule,
     NgbModule,
-    //NgxEchartsModule.forRoot({  echarts: () => import('echarts')}),
     FormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
-    //ChartsModule,
     AutocompleteLibModule,
     MatButtonToggleModule,
     MatTabsModule,
     HttpClientModule,
-    
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }) 
   
   ],
   providers: [{ provide: Window, useValue: window }
-    //  , {
-    //  provide: SwRegistrationOptions,
-    //  useFactory: () => ({enabled: location.search.includes('sw=true')}),
-    //  }
+    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

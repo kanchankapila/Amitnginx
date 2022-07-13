@@ -5,9 +5,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/main', pathMatch: 'full' },
+ // { path: '', redirectTo: '/main', pathMatch: 'full' },
  // { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) }, 
-  { path: 'main', loadChildren: () => import('./main/main.module').then(m => m.MainModule) }, 
+ // { path: 'main', loadChildren: () => import('./main/main.module').then(m => m.MainModule) }, 
   //{ path: 'SnR', loadChildren: () => import('./sn-r/sn-r.module').then(m => m.SnRModule) }, 
   //{ path: 'Indicator', loadChildren: () => import('./indicator/indicator.module').then(m => m.IndicatorModule) }, 
   //{ path: 'Screeners', loadChildren: () => import('./screeners/screeners.module').then(m => m.ScreenersModule) }, 
@@ -35,8 +35,8 @@ const routes: Routes = [
  // { path: 'apps', loadChildren: () => import('./apps/apps.module').then(m => m.AppsModule) },
   //{ path: 'user-pages', loadChildren: () => import('./user-pages/user-pages.module').then(m => m.UserPagesModule) },
   //{ path: 'error-pages', loadChildren: () => import('./error-pages/error-pages.module').then(m => m.ErrorPagesModule) },
-  { path: 'sidebar', loadChildren: () => import('./shared/sidebar/sidebar.module').then(m => m.SidebarModule) },
-  { path: 'navbar', loadChildren: () => import('./shared/navbar/navbar.module').then(m => m.NavbarModule) },
+   { path: 'shared', loadChildren: () => import('./shared/shared.module').then(m => m.SharedModule) },
+  // { path: 'navbar', loadChildren: () => import('./shared/navbar/navbar.module').then(m => m.NavbarModule) },
   { path: 'nifty', loadChildren: () => import('./nifty/nifty.module').then(m => m.NiftyModule) },
   { path: 'banknifty', loadChildren: () => import('./banknifty/banknifty.module').then(m => m.BankniftyModule) },
   { path: 'pharmanifty', loadChildren: () => import('./pharmanifty/pharmanifty.module').then(m => m.PharmaniftyModule) },

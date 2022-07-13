@@ -3,7 +3,7 @@ const async = require("async")
 const express = require('express');
 const cluster = require('cluster');
 const { Pool, Client } = require('pg')
-//var compression = require('compression');
+var compression = require('compression');
 const numCPUs = require('os').cpus().length;
 var http = require('http')
 const app = express();
@@ -16,7 +16,7 @@ const client = redis.createClient();
 const cors = require('cors');
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
-//app.use(compression());
+app.use(compression());
 const bodyParser = require("body-parser");
 const request = require('request')
 //app.use(cors());

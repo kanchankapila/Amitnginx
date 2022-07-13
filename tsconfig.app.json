@@ -19,7 +19,7 @@
   "exclude": [
     "src/test.ts",
     "src/**/*.spec.ts",
-    "app/ohlc/*.ts",
+    
     "src/**/*.ts"
   ]
 }
