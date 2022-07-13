@@ -2,7 +2,7 @@ import { BrowserModule,HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
+import { NgChartsModule, ThemeService } from 'ng2-charts';
 import { ChartModule } from 'primeng/chart';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
@@ -51,6 +51,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     
     AppRoutingModule,
     NgbModule,
+    NgChartsModule,
     FlexLayoutModule,
     SidebarModule,
     ButtonModule,
@@ -77,11 +78,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:registerWhenStable:30000'
     }) 
   
   ],
-  providers: [{ provide: Window, useValue: window }
+  providers: [{ provide: Window, useValue: window },ThemeService
     
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-sidebar1',
-  templateUrl: './sidebar1.component.html',
-  styleUrls: ['./sidebar1.component.scss']
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss']
 })
-export class Sidebar1Component implements OnInit {
+export class SidebarComponent implements OnInit {
   public uiBasicCollapsed = true;
   public samplePagesCollapsed = true;
   visibleSidebar1;

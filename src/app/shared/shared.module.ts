@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { Sidebar1Component } from './sidebar1/sidebar1.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarModule, ButtonsModule } from 'angular-bootstrap-md'
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgChartsModule } from 'ng2-charts';
@@ -13,22 +14,26 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ChartModule } from 'primeng/chart';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { CardModule } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
-
+import {MatCardModule} from '@angular/material/card';
 
 const routes : Routes = [
-  { path: '', component: Sidebar1Component },
+  { path: '', component: SidebarComponent },
   { path: '', component: NavbarComponent }
 ]
 
 @NgModule({
-  declarations: [Sidebar1Component,NavbarComponent],
+  declarations: [SidebarComponent,NavbarComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     SidebarModule,
+    MatSidenavModule,
     CommonModule,
+    NavbarModule,
+    ButtonsModule,
     NgbModule,
     TabViewModule,
     MDBBootstrapModule,
@@ -36,6 +41,7 @@ const routes : Routes = [
     HttpClientModule,
     ChartModule,
     ButtonModule,
+    MatCardModule,
     CardModule,
     //Sidebar1Module,
     MatButtonModule,
@@ -43,7 +49,7 @@ const routes : Routes = [
     RouterModule.forChild(routes),
     NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
   ],
-  exports:[Sidebar1Component,NavbarComponent],
+  exports:[SidebarComponent,NavbarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers:[]
   
