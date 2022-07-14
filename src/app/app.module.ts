@@ -58,7 +58,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     SharedModule,
     ChartModule,
     ReactiveFormsModule,
-    NgxEchartsModule.forRoot({echarts: () => import('echarts')}),
+    NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
     MDBBootstrapModule.forRoot(),
     BrowserModule,
     HttpClientModule,
@@ -79,7 +79,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:registerWhenStable:30000'
-    }) 
+     
+    })
+
   
   ],
   providers: [{ provide: Window, useValue: window },ThemeService

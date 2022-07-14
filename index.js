@@ -3,9 +3,9 @@ const async = require("async")
 const express = require('express');
 const cluster = require('cluster');
 const { Pool, Client } = require('pg')
-//var compression = require('compression');
+var compression = require('compression');
 const numCPUs = require('os').cpus().length;
-var http = require('https')
+var http = require('http')
 const app = express();
 const port = 8090
 const { JSDOM } = require( "jsdom" );
@@ -16,7 +16,7 @@ const client = redis.createClient();
 const cors = require('cors');
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
-//app.use(compression());
+app.use(compression());
 const bodyParser = require("body-parser");
 const request = require('request')
 //app.use(cors());
@@ -1281,19 +1281,23 @@ if (err) {
   
   
 
-app.use(express.static(__dirname+"/"));
+//app.use(express.static(__dirname+"/"));
+// app.use(express.static(path.join(__dirname, '/dist/amitnginx1')))
+// app.get("/", function (req, res) {
 
-app.get("/*", function (req, res) {
-
-  res.sendFile(path.join(__dirname +'/dist/index.html'));
-});
+//   res.sendFile(path.join(__dirname,'/dist/amitnginx1/index.html'));
+// });
 // app.get("/ngsw-worker.js", function (req, res) {
 
-//   res.sendFile(path.join(__dirname +'/dist/ngsw-worker.js'));
+//   res.sendFile(path.join(__dirname +'/dist/amitnginx/ngsw-worker.js'));
 // });
 // app.get("/manifest.json", function (req, res) {
 
-//   res.sendFile(path.join(__dirname +'/dist/manifest.json'));
+//   res.sendFile(path.join(__dirname +'/dist/amitnginx/manifest.json'));
+// });
+// app.get("/ngsw.json", function (req, res) {
+
+//   res.sendFile(path.join(__dirname +'/dist/amitnginx/ngsw.json'));
 // });
 
 
@@ -1305,6 +1309,20 @@ app.get("/*", function (req, res) {
 //   res.end(index);
 //   console.log('Your node is running on port 8090');
 // }).listen(8090);
-http.createServer(app).listen(8090)
-console.log('Your node is running on port 8090');
+// http.createServer(app).listen(8090)
+//   console.log('Your node is running on port 8090');
+//   var privateKey  = fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/key.pem', 'utf8');
+// var certificate = fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/server.crt', 'utf8');
+
+// var credentials = {key: privateKey, cert: certificate};
+// var httpServer = http.createServer(app);
+// var httpsServer = https.createServer(credentials, app);
+
+http.createServer({
+  // key: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/key.pem'),
+  // cert: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/server.crt')
+}, app)
+.listen(3000, function () {
+  console.log('Example app listening on port 3000! Go to https://localhost:3000/')
+})
 }

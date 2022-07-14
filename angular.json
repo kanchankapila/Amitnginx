@@ -26,6 +26,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/ngsw-worker.js",
               "src/manifest.json"
             ],
             "styles": [
@@ -113,6 +114,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/ngsw-worker.js",
               "src/manifest.json"
             ],
             "styles": [
