@@ -1322,7 +1322,7 @@ http.createServer({
   key: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/key.pem'),
   cert: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/server.crt')
 }, app)
-.listen(8090, function () {
+.listen(3000, function () {
   console.log('Example app listening on port 3000! Go to https://localhost:3000/')
 })
 }

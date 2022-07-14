@@ -20,6 +20,23 @@
   
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1976d2">
+  <script>
+    // ServiceWorker Registration
+    if('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('ngsw-worker.js').then(function(registration) {
+                // Registration was successful
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                
+                
+            }, function(err) {
+                // registration failed :(
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+    
+  </script>
 </head>
 <body>
   <app-root>
