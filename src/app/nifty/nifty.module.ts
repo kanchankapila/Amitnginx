@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NiftyRoutingModule } from './nifty-routing.module';
 import { NiftyComponent } from './nifty.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -27,6 +27,7 @@ import {from} from 'rxjs';
     FlexLayoutModule,
     NgbModule,
     MatCardModule,
+    MatSnackBarModule,
     MatButtonModule,
     NgChartsModule,
     TabViewModule,

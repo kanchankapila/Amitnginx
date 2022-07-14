@@ -5,7 +5,7 @@ const cluster = require('cluster');
 const { Pool, Client } = require('pg')
 var compression = require('compression');
 const numCPUs = require('os').cpus().length;
-var http = require('http')
+var http = require('https')
 const app = express();
 const port = 8090
 const { JSDOM } = require( "jsdom" );
@@ -1309,6 +1309,20 @@ app.get("/", function (req, res) {
 //   res.end(index);
 //   console.log('Your node is running on port 8090');
 // }).listen(8090);
-http.createServer(app).listen(8090)
-console.log('Your node is running on port 8090');
+// http.createServer(app).listen(8090)
+//   console.log('Your node is running on port 8090');
+//   var privateKey  = fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/key.pem', 'utf8');
+// var certificate = fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/server.crt', 'utf8');
+
+// var credentials = {key: privateKey, cert: certificate};
+// var httpServer = http.createServer(app);
+// var httpsServer = https.createServer(credentials, app);
+
+http.createServer({
+  key: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/key.pem'),
+  cert: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/server.crt')
+}, app)
+.listen(8090, function () {
+  console.log('Example app listening on port 3000! Go to https://localhost:3000/')
+})
 }

@@ -535,7 +535,12 @@ export class ShareComponent implements OnInit {
         .subscribe(() => {
           window.location.reload();
         });
-
+        this.swUpdate
+        .checkForUpdate()
+        .then(() => {})
+        .catch((err) => {
+          console.error('error when checking for update', err);
+        });
       
   
   
