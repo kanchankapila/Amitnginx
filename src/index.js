@@ -1282,10 +1282,10 @@ if (err) {
   
 
 //app.use(express.static(__dirname+"/"));
-app.use(express.static(path.join(__dirname, '/dist/amitnginx1')))
+app.use(express.static(path.join(__dirname, '/dist/amitnginx')))
 app.get("/", function (req, res) {
 
-  res.sendFile(path.join(__dirname,'/dist/amitnginx1/index.html'));
+  res.sendFile(path.join(__dirname,'/dist/amitnginx/index.html'));
 });
 // app.get("/ngsw-worker.js", function (req, res) {
 
@@ -1319,8 +1319,8 @@ app.get("/", function (req, res) {
 // var httpsServer = https.createServer(credentials, app);
 
 http.createServer({
-  // key: fs.readFileSync('E:/Stock Website/Amitnginx1.0/src/key.pem'),
-  // cert: fs.readFileSync('E:/Stock Website/Amitnginx1.0/src/server.crt')
+  // key: fs.readFileSync('E:/Stock Website/amitnginx/src/key.pem'),
+  // cert: fs.readFileSync('E:/Stock Website/amitnginx/src/server.crt')
 }, app)
 .listen(4200, function () {
   console.log('Example app listening on port 3000! Go to https://localhost:3000/')

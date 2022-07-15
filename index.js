@@ -1281,12 +1281,12 @@ if (err) {
   
   
 
-//app.use(express.static(__dirname+"/"));
-// app.use(express.static(path.join(__dirname, '/dist/amitnginx1')))
-// app.get("/", function (req, res) {
+app.use(express.static(__dirname+"/"));
+ app.use(express.static(path.join(__dirname, '/dist/amitnginx')))
+ app.get("/*", function (req, res) {
 
-//   res.sendFile(path.join(__dirname,'/dist/amitnginx1/index.html'));
-// });
+   res.sendFile(path.join(__dirname,'/dist/amitnginx/index.html'));
+ });
 // app.get("/ngsw-worker.js", function (req, res) {
 
 //   res.sendFile(path.join(__dirname +'/dist/amitnginx/ngsw-worker.js'));
