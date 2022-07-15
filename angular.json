@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "amitnginx1": {
+    "amitnginx": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/amitnginx1",
+            "outputPath": "dist/amitnginx",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -88,12 +88,12 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "amitnginx1:build"
+            "browserTarget": "amitnginx:build"
             
           },
           "configurations": {
             "production": {
-              "browserTarget": "amitnginx1:build:production"
+              "browserTarget": "amitnginx:build:production"
               
             }
           }
@@ -101,7 +101,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "amitnginx1:build"
+            "browserTarget": "amitnginx:build"
           }
         },
         "test": {
@@ -132,11 +132,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "amitnginx1:serve"
+            "devServerTarget": "amitnginx:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "amitnginx1:serve:production"
+              "devServerTarget": "amitnginx:serve:production"
             }
           }
         }
@@ -146,5 +146,5 @@
   "cli": {
     "analytics": true
   },
-  "defaultProject": "amitnginx1"
+  "defaultProject": "amitnginx"
 }

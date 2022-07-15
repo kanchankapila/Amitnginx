@@ -2008,7 +2008,7 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ 'Content-Type': 'text/plain' }
              * (See `.onFetch()` for details.)
              */
             this.loggedInvalidOnlyIfCachedRequest = false;
-            this.ngswStatePath = this.adapter.parseUrl('/ngsw/state', this.scope.registration.scope).path;
+            this.ngswStatePath = this.adapter.parseUrl('ngsw/state', this.scope.registration.scope).path;
             // A promise resolving to the control DB table.
             this.controlTable = this.db.open('control');
             // The install event is triggered when the service worker is first installed.
@@ -2575,7 +2575,7 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ 'Content-Type': 'text/plain' }
         }
         fetchLatestManifest(ignoreOfflineError = false) {
             return __awaiter(this, void 0, void 0, function* () {
-                const res = yield this.safeFetch(this.adapter.newRequest('/ngsw.json?ngsw-cache-bust=' + Math.random()));
+                const res = yield this.safeFetch(this.adapter.newRequest('ngsw.json?ngsw-cache-bust=' + Math.random()));
                 if (!res.ok) {
                     if (res.status === 404) {
                         yield this.deleteAllCaches();
