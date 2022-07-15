@@ -1319,10 +1319,10 @@ app.get("/", function (req, res) {
 // var httpsServer = https.createServer(credentials, app);
 
 http.createServer({
-  key: fs.readFileSync('E:/Stock Website/Amitnginx1.0/src/key.pem'),
-  cert: fs.readFileSync('E:/Stock Website/Amitnginx1.0/src/server.crt')
+  // key: fs.readFileSync('E:/Stock Website/Amitnginx1.0/src/key.pem'),
+  // cert: fs.readFileSync('E:/Stock Website/Amitnginx1.0/src/server.crt')
 }, app)
-.listen(3000, function () {
+.listen(4200, function () {
   console.log('Example app listening on port 3000! Go to https://localhost:3000/')
 })
 }
