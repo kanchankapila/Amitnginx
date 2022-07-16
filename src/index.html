@@ -32,6 +32,100 @@
             });
         });
     }
+      // ServiceWorker Registration
+      if('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('sw.js').then(function(registration) {
+                // Registration was successful
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                
+                // Push API read subscription
+                registration.pushManager.getSubscription().then(function(sub) {
+                    if (sub === null) {
+                        // Update UI to ask user to register for Push
+                        console.log('Not subscribed to push service!');
+                    } else {
+                        // We have a subscription, update the database
+                        console.log('Subscription object: ', sub);
+                        storeSubscription(sub);
+                    }
+                });
+                
+            }, function(err) {
+                // registration failed :(
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+    
+// PUSH API Subscription
+
+    const publicVapidKey = 'BKfP7hBO5h12k8gi-Bc-AL8UgR24G06TSxn7E6jRToQ7280Lhzca-vqCve5VKr-7sXjUd30c9uENJrR5KKW-Ecw';  // Checkout my github repository https://github.com/saurabhdaware/pwainit-node-pushapi for the backend setup code and generation of the vapid id.
+
+    function storeSubscription(sub){
+        // Call your subscription API here. If you are using https://github.com/saurabhdaware/pwainit-node-pushapi then you can keep the code same here.
+        fetch('http://localhost:3000/subscribe',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(sub)
+        })
+        .then(res => res.json())
+        .then(res => console.log(res))
+        .catch(err => console.warn("Make sure you are running the pushapi-backend code... cd pushapi-backend and run node index.js"));
+    }
+
+    // Helper function to convert Base 64
+    function urlB64ToUint8Array(base64String) {
+        try{
+            const padding = '='.repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding)
+                .replace(/-/g, '+')
+                .replace(/_/g, '/');
+                    const rawData = window.atob(base64);
+                    return Uint8Array.from([...rawData].map((char) => char.charCodeAt(0)));
+        }catch(err){
+            alert("Please add Vapid to publicVapidKey variable. Open console for more information");
+            console.error("You have not set publicVapidKey. Open index.html and look for the line which defines publicVapidKey variable and paste your public vapid key in the value");
+            console.log("If you dont have public vapid key yet checkout https://github.com/saurabhdaware/pwainit-node-pushapi for backend setup and generation of vapid keys");
+            return err;
+        }
+    }
+
+    // Subscribe user for push service, This returns us subscription object which can be used to send notifications from backend
+
+    const applicationServerKey = urlB64ToUint8Array(publicVapidKey);
+
+    function subscribeUser() {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.ready.then(function(reg) {
+                reg.pushManager.subscribe({userVisibleOnly: true,applicationServerKey:applicationServerKey})
+                    .then(function(sub) {
+                        console.log(sub);
+                        console.log('Endpoint URL: ', sub.endpoint);
+                        console.log("post this data to your server and store in database, then use the endpoint to push notifications from server")
+                        
+                        // Pass sub to Server and store it. You will be using it to push notifications from your server
+                        storeSubscription(sub);
+
+                    }).catch(function(e) {
+                        if (Notification.permission === 'denied') {
+                            alert("Notification permission was denied. Please click lock icon beside url bar and allow notifications");
+                            console.warn('Permission for notifications was denied');
+                        } else {
+                            console.warn("Please make sure you change publicVapidKey variable with your public vapid key generated from your backend");
+                            console.log("Checkout https://github.com/saurabhdaware/pwainit-node-pushapi for example code and generation of the public vapid key");
+                            console.error('Unable to subscribe to push', e);
+                        }
+                    });
+            }).catch(e => {
+                console.warn("Please make sure you change publicVapidKey variable with your public vapid key generated from your backend");
+                console.log("Checkout https://github.com/saurabhdaware/pwainit-node-pushapi for example code and generation of the public vapid key");
+                console.error('Unable to subscribe to push', e);
+            })
+        }
+    }
     
   </script>
     
@@ -39,8 +133,18 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1976d2">
   
-</head>
-<body>
+    
+    
+        
+    
+    </head>
+    <body>
+       <!-- Notification Permission Ask // Its better to have a banner with buttons -->
+        <br><button onclick="subscribeUser();" style="background-color:#f30;cursor:pointer;color:#fff;border:none;padding:10px 20px;position:fixed;top:10px;left:10px;z-index:100000">Allow Push Notifications</button>
+
+       <!-- Notification Permission Ask // Its better to have a banner with buttons -->
+        <br><button onclick="subscribeUser();" style="background-color:#f30;cursor:pointer;color:#fff;border:none;padding:10px 20px;position:fixed;top:10px;left:10px;z-index:100000">Allow Push Notifications</button>
+
   <app-root>
       <div class="main-spinner-wrapper">
         <div class="donut ">
@@ -54,5 +158,8 @@
       </div>
   </app-root>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
+
+
+   
 </body>
 </html>
