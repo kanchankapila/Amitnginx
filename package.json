@@ -55,7 +55,6 @@
     "csurf": "^1.11.0",
     "date-fns": "^2.28.0",
     "debug": "^4.3.1",
-    "dotenv": "^16.0.1",
     "echarts": "^5.3.3",
     "es-module-loader": "^2.3.0",
     "events": "^3.3.0",
@@ -102,7 +101,6 @@
     "timers": "^0.1.1",
     "tough-cookie": "^4.0.0",
     "uuid": "^8.3.2",
-    "web-push": "^3.5.0",
     "xml2js": "^0.4.23",
     "zone.js": "~0.11.6"
   },
