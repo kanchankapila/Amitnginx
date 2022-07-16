@@ -2965,9 +2965,7 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ 'Content-Type': 'text/plain' }
     const scope = self;
     const adapter = new Adapter(scope.registration.scope, self.caches);
     new Driver(scope, adapter, new CacheDatabase(adapter));
-
-}());
-var CACHE_NAME = 'version-1'; // bump this version when you make changes.
+    var CACHE_NAME = 'version-1'; // bump this version when you make changes.
 // Put all your urls that you want to cache in this array
 var urlsToCache = [
     'index.html',
@@ -3055,5 +3053,8 @@ self.addEventListener('notificationclick', function(e) {
         notification.close();
     }
 });
+
+}());
+
 
 

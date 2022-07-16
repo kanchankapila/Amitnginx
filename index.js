@@ -49,20 +49,24 @@ var parseForm = bodyParser.urlencoded({ extended: false });
 const fs =require('fs')
 const axios = require('axios');
 var html2json = require('html2json').html2json;
-var allowCrossDomain=function(req, res,next){
 
+  app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
-  res.header("Access-Control-Allow-Headers", "Origin,Content-Type, X-Requested-With,Accept, Cache-Control");
-   res.header("Access-Control-Allow-Headers", "Origin,Content-Type, X-Requested-With,Accept, Cache-Control");
+   
   if ('OPTIONS' == req.method) {
     res.sendStatus(200);
   }
   else {
     next();
-  }
-}; // Important
-app.use(allowCrossDomain);
+  
+    }
+    
+});
+   
+    
+
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
@@ -121,6 +125,20 @@ const sessionConfig = {
 
  // app.get('*.js', (req, res, next) => {req.url = req.url + '.gz';res.set('Content-Encoding', 'gzip');next();});
 
+ app.post('/api/subscribe', (req, res) => {
+  const subscription = req.body; // You should be storing this in database so that you can send notifications later
+
+  const payload = JSON.stringify({
+      title: 'Title Comming from backend!', 
+      body: "Body coming from backend!!"
+  });
+
+  webpush.sendNotification(subscription, payload)
+      .then(()=> res.status(201).json({success:true}))
+      .catch(error => {
+          console.error(error.stack);
+      });
+});
 //////////////////////////////////Moneycontrol Post request for MCvolume////////
 app.post('/api/mcvolume', async function (req, res) {
 
