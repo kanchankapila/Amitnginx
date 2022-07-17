@@ -31,11 +31,12 @@
             });
         });
     }
-    if('serviceWorker' in navigator) {
+      // ServiceWorker Registration
+      if('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/sw.js').then(function(registration) {
+            navigator.serviceWorker.register('sw.js').then(function(registration) {
                 // Registration was successful
-                console.log('ServiceWorker sw registration successful with scope: ', registration.scope);
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
                 
                 // Push API read subscription
                 registration.pushManager.getSubscription().then(function(sub) {
@@ -51,19 +52,14 @@
                 
             }, function(err) {
                 // registration failed :(
-                console.log('ServiceWorker sw registration failed: ', err);
+                console.log('ServiceWorker registration failed: ', err);
             });
         });
     }
     
-      
-    
 // PUSH API Subscription
-
-    publicVapidKey : 'BFBmsKBimlVFV5uDwQYRJ1wJmrKQt5UVn4OS14DmfqyvIKLStdsD2CpHChq7alc0LL4XGucqt0yHANUp8cwhSRU';  // Checkout my github repository https://github.com/saurabhdaware/pwainit-node-pushapi for the backend setup code and generation of the vapid id.
-
-    function storeSubscription(sub){
-        // Call your subscription API here. If you are using https://github.com/saurabhdaware/pwainit-node-pushapi then you can keep the code same here.
+    const publicVapidKey = process.env.PUBLIC_VAPID_KEY;  // Checkout my github repository https://github.com/saurabhdaware/pwainit-node-pushapi for the backend setup code and generation of the vapid id.
+    function storeSubscription(sub){    // Call your subscription API here. If you are using https://github.com/saurabhdaware/pwainit-node-pushapi then you can keep the code same here.
         fetch('http://localhost:3000/subscribe',{
             method:'POST',
             headers:{
@@ -75,7 +71,6 @@
         .then(res => console.log(res))
         .catch(err => console.warn("Make sure you are running the pushapi-backend code... cd pushapi-backend and run node index.js"));
     }
-
     // Helper function to convert Base 64
     function urlB64ToUint8Array(base64String) {
         try{
@@ -91,12 +86,8 @@
             console.log("If you dont have public vapid key yet checkout https://github.com/saurabhdaware/pwainit-node-pushapi for backend setup and generation of vapid keys");
             return err;
         }
-    }
-
-    // Subscribe user for push service, This returns us subscription object which can be used to send notifications from backend
-
+    }   // Subscribe user for push service, This returns us subscription object which can be used to send notifications from backend
     const applicationServerKey = urlB64ToUint8Array(publicVapidKey);
-    console.log(applicationServerKey)
     function subscribeUser() {
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.ready.then(function(reg) {
@@ -105,10 +96,8 @@
                         console.log(sub);
                         console.log('Endpoint URL: ', sub.endpoint);
                         console.log("post this data to your server and store in database, then use the endpoint to push notifications from server")
-                        
-                        // Pass sub to Server and store it. You will be using it to push notifications from your server
-                        storeSubscription(sub);
-
+                          // Pass sub to Server and store it. You will be using it to push notifications from your server
+                          storeSubscription(sub);
                     }).catch(function(e) {
                         if (Notification.permission === 'denied') {
                             alert("Notification permission was denied. Please click lock icon beside url bar and allow notifications");
@@ -126,7 +115,6 @@
             })
         }
     }
-    
   </script>
     
    
