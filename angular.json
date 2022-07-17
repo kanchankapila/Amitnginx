@@ -147,6 +147,6 @@
   },
   "cli": {
     "analytics": true
-  },
-  "defaultProject": "amitnginx"
+  }
+  
 }
