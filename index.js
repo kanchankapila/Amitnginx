@@ -111,9 +111,10 @@ const sessionConfig = {
 
  // app.get('*.js', (req, res, next) => {req.url = req.url + '.gz';res.set('Content-Encoding', 'gzip');next();});
 // TO generate vapid keys type './node_modules/.bin/web-push generate-vapid-keys' after 'npm install'
-const publicVapidKey = process.env.PUBLIC_VAPID_KEY
+  const publicVapidKey = process.env.PUBLIC_VAPID_KEY
+  console.log(publicVapidKey)
 const privateVapidKey = process.env.PRIVATE_VAPID_KEY
-EMAIL="amit.kapila.2009@gmail.com"
+
 // Replace with your email
 webpush.setVapidDetails('mailto:'+process.env.EMAIL, publicVapidKey, privateVapidKey);
 
