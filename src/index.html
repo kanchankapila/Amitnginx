@@ -24,6 +24,19 @@
             navigator.serviceWorker.register('/ngsw-worker.js').then(function(registration) {
                 // Registration was successful
                 console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                
+            }, function(err) {
+                // registration failed :(
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+    if('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                // Registration was successful
+                console.log('ServiceWorker sw registration successful with scope: ', registration.scope);
+                
                 // Push API read subscription
                 registration.pushManager.getSubscription().then(function(sub) {
                     if (sub === null) {
@@ -38,15 +51,16 @@
                 
             }, function(err) {
                 // registration failed :(
-                console.log('ServiceWorker registration failed: ', err);
+                console.log('ServiceWorker sw registration failed: ', err);
             });
         });
     }
+    
       
     
 // PUSH API Subscription
 
-    const publicVapidKey = 'BKfP7hBO5h12k8gi-Bc-AL8UgR24G06TSxn7E6jRToQ7280Lhzca-vqCve5VKr-7sXjUd30c9uENJrR5KKW-Ecw';  // Checkout my github repository https://github.com/saurabhdaware/pwainit-node-pushapi for the backend setup code and generation of the vapid id.
+    publicVapidKey : 'BFBmsKBimlVFV5uDwQYRJ1wJmrKQt5UVn4OS14DmfqyvIKLStdsD2CpHChq7alc0LL4XGucqt0yHANUp8cwhSRU';  // Checkout my github repository https://github.com/saurabhdaware/pwainit-node-pushapi for the backend setup code and generation of the vapid id.
 
     function storeSubscription(sub){
         // Call your subscription API here. If you are using https://github.com/saurabhdaware/pwainit-node-pushapi then you can keep the code same here.
@@ -82,7 +96,7 @@
     // Subscribe user for push service, This returns us subscription object which can be used to send notifications from backend
 
     const applicationServerKey = urlB64ToUint8Array(publicVapidKey);
-
+    console.log(applicationServerKey)
     function subscribeUser() {
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.ready.then(function(reg) {

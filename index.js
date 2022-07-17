@@ -1,4 +1,5 @@
-
+require('dotenv').config()
+const webpush = require('web-push');
 const async = require("async")
 const express = require('express');
 const cluster = require('cluster');
@@ -49,21 +50,6 @@ var parseForm = bodyParser.urlencoded({ extended: false });
 const fs =require('fs')
 const axios = require('axios');
 var html2json = require('html2json').html2json;
-
-  app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
-   
-  if ('OPTIONS' == req.method) {
-    res.sendStatus(200);
-  }
-  else {
-    next();
-  
-    }
-    
-});
    
     
 
@@ -124,6 +110,23 @@ const sessionConfig = {
   sessionConfig.cookie.secure = true; // serve secure cookies
 
  // app.get('*.js', (req, res, next) => {req.url = req.url + '.gz';res.set('Content-Encoding', 'gzip');next();});
+// TO generate vapid keys type './node_modules/.bin/web-push generate-vapid-keys' after 'npm install'
+const publicVapidKey = process.env.PUBLIC_VAPID_KEY
+const privateVapidKey = process.env.PRIVATE_VAPID_KEY
+EMAIL="amit.kapila.2009@gmail.com"
+// Replace with your email
+webpush.setVapidDetails('mailto:'+process.env.EMAIL, publicVapidKey, privateVapidKey);
+
+
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
+   next();
+  
+    
+    
+});
 
  app.post('/api/subscribe', (req, res) => {
   const subscription = req.body; // You should be storing this in database so that you can send notifications later
