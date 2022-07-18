@@ -130,7 +130,7 @@ webpush.setVapidDetails('mailto:'+process.env.EMAIL, publicVapidKey, privateVapi
 
  app.post('/subscribe', (req, res) => {
   const subscription = req.body; // You should be storing this in database so that you can send notifications later
-
+console.log(req.body)
   const payload = JSON.stringify({
       title: 'Title Comming from backend!', 
       body: "Body coming from backend!!"
