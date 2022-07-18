@@ -128,7 +128,7 @@ webpush.setVapidDetails('mailto:'+process.env.EMAIL, publicVapidKey, privateVapi
     
 });
 
- app.post('/api/subscribe', (req, res) => {
+ app.post('/subscribe', (req, res) => {
   const subscription = req.body; // You should be storing this in database so that you can send notifications later
 
   const payload = JSON.stringify({
