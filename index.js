@@ -109,14 +109,6 @@ const sessionConfig = {
   app.set('trust proxy', 1); // trust first proxy
   sessionConfig.cookie.secure = true; // serve secure cookies
 
- // app.get('*.js', (req, res, next) => {req.url = req.url + '.gz';res.set('Content-Encoding', 'gzip');next();});
-// TO generate vapid keys type './node_modules/.bin/web-push generate-vapid-keys' after 'npm install'
-const publicVapidKey = process.env.PUBLIC_VAPID_KEY
-const privateVapidKey = process.env.PRIVATE_VAPID_KEY
-
-// Replace with your email
-webpush.setVapidDetails('mailto:'+process.env.EMAIL, publicVapidKey, privateVapidKey);
-
 
   app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -128,20 +120,6 @@ webpush.setVapidDetails('mailto:'+process.env.EMAIL, publicVapidKey, privateVapi
     
 });
 
- app.post('/subscribe', (req, res) => {
-  const subscription = req.body; // You should be storing this in database so that you can send notifications later
-
-  const payload = JSON.stringify({
-      title: 'Title Comming from backend!', 
-      body: "Body coming from backend!!"
-  });
-
-  webpush.sendNotification(subscription, payload)
-      .then(()=> res.status(201).json({success:true}))
-      .catch(error => {
-          console.error(error.stack);
-      });
-});
 //////////////////////////////////Moneycontrol Post request for MCvolume////////
 app.post('/api/mcvolume', async function (req, res) {
 
