@@ -1,7 +1,6 @@
 import { BrowserModule,HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
+
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgChartsModule, ThemeService } from 'ng2-charts';
 import { ChartModule } from 'primeng/chart';
@@ -68,8 +67,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AppRoutingModule,
     MatSidenavModule,
     ButtonsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireMessagingModule,
     NgbModule,
     FormsModule,
     BrowserAnimationsModule,
