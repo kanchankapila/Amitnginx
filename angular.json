@@ -28,7 +28,6 @@
               "src/assets",
               "src/ngsw-worker.js",
               "src/sw.js",
-              "src/combined-sw.js",
               "src/manifest.json"
             ],
             "styles": [
@@ -118,7 +117,6 @@
               "src/assets",
               "src/ngsw-worker.js",
               "src/sw.js",
-              "src/combined-sw.js",
               "src/manifest.json"
             ],
             "styles": [

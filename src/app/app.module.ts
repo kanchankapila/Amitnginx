@@ -76,7 +76,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatButtonToggleModule,
     MatTabsModule,
     HttpClientModule,
-    ServiceWorkerModule.register('combined-sw.js', {
+    ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:registerWhenStable:30000'
      
