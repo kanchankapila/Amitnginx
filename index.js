@@ -27,7 +27,8 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.raw());
 const fetch = require("node-fetch");
- const csrf = require('csurf');
+const csrf = require('csurf');
+
 // const { Compress } = require('gzipper');
 
 //   const gzip = new Compress('./src', './dist', {
@@ -76,7 +77,7 @@ if (cluster.isMaster) {
     let worker = cluster.worker.id;
     res.send(`Running on worker with id ==> ${worker}`);
   });
-
+ 
 const axiosCookieJarSupport = require('axios-cookiejar-support').default;
   const tough = require('tough-cookie');
  
@@ -104,7 +105,6 @@ const sessionConfig = {
     sameSite: 'Lax', // THIS is the config you are looing for.
   }
 };
-
 
   app.set('trust proxy', 1); // trust first proxy
   sessionConfig.cookie.secure = true; // serve secure cookies
