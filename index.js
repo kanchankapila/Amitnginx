@@ -1,5 +1,4 @@
-require('dotenv').config()
-const webpush = require('web-push');
+
 const async = require("async")
 const express = require('express');
 const cluster = require('cluster');

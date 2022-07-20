@@ -15,7 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //import { ChartsModule } from 'ng-charts';
-import { NgxEchartsModule } from 'ngx-echarts';
+import { NgxEchartsModule} from 'ngx-echarts';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -30,7 +30,7 @@ import { ContentAnimateDirective } from './shared/directives/content-animate.dir
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavbarModule, ButtonsModule } from 'angular-bootstrap-md'
 import { SharedModule } from "./shared/shared.module";
-import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCardModule} from '@angular/material/card';
