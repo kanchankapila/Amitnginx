@@ -22,9 +22,9 @@
     "@angular/material": "^14.0.5",
     "@angular/platform-browser": "^14.0.5",
     "@angular/platform-browser-dynamic": "^14.0.5",
-    "@angular/pwa": "^14.0.5",
+    
     "@angular/router": "^14.0.5",
-    "@angular/service-worker": "^14.0.5",
+    
     "@fortawesome/fontawesome-free": "^6.1.1",
     "@mapbox/node-pre-gyp": "^1.0.9",
     "@mdi/font": "^6.9.96",
