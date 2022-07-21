@@ -1299,9 +1299,9 @@ app.use(express.static(__dirname+"/"));
 // });
 
 
-// app.listen(8090, function() {
-//   console.log('Your node is running on port 8090');
-// });
+app.listen(3000, function() {
+  console.log('Your node is running on port 3000');
+});
 // http.createServer(app,function (req, res) {
 //   res.writeHead(200, {'Content-Type': 'text/plain'});
 //   res.end(index);
@@ -1316,11 +1316,11 @@ app.use(express.static(__dirname+"/"));
 // var httpServer = http.createServer(app);
 // var httpsServer = https.createServer(credentials, app);
 
-http.createServer({
-  // key: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/key.pem'),
-  // cert: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/server.crt')
-}, app)
-.listen(3000, function () {
-  console.log('Example app listening on port 3000! Go to https://localhost:3000/')
-})
-}
+// http.createServer({
+//   // key: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/key.pem'),
+//   // cert: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/server.crt')
+// }, app)
+// .listen(3000, function () {
+//   console.log('Example app listening on port 3000! Go to https://localhost:3000/')
+// })
+ }
