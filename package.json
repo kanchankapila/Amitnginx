@@ -10,7 +10,6 @@
     "e2e": "ng e2e",
     "stats": "webpack-bundle-analyzer dist/stats.json"
   },
-  "sideEffects": false,
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.0.5",

@@ -42,7 +42,7 @@ const fetch = require("node-fetch");
 //     console.error(err);
 //   }
 
-process.env.trendlynecookie='__utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.775644955.1603113261; _gid=GA1.2.1847674667.1658334429; csrftoken=T2UOO9Ctk4IV1kHeOJtHAxy6gCnvF56GnP5xxtRO3RTzGGNrRSWqNON5PjgveTrg; .trendlyne=wd57cl51iuhsqelpnzzp4gj61efk6kc1; _gat=1'
+process.env.trendlynecookie='__utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.775644955.1603113261; _gid=GA1.2.39707591.1656426055; _gat=1; csrftoken=lGfU7cAnlhGstuIficsDap3KoBq3ut0Zz9DGLnPd1qnKoD2KU03nvvqmIj6dL2HJ; .trendlyne=2r8aijrkip6d34942mkc2e9rpd729ur9'
 
 var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
