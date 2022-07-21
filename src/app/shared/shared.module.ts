@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarModule, ButtonsModule } from 'angular-bootstrap-md'
-import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgChartsModule } from 'ng2-charts';
@@ -36,7 +35,6 @@ const routes : Routes = [
     NavbarModule,
     ButtonsModule,
     NgbModule,
-    AutocompleteLibModule,
     TabViewModule,
     MDBBootstrapModule,
     NgChartsModule,

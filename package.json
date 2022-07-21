@@ -34,7 +34,7 @@
     "@swimlane/ngx-charts": "^20.1.0",
     "@types/chart.js": "^2.9.37",
     "angular-bootstrap-md": "^13.0.0",
-    "angular-ng-autocomplete": "^2.0.9",
+    "angular-ng-autocomplete": "^2.0.8",
     "animate.css": "^4.1.1",
     "async": "^3.2.4",
     "async-es": "^3.2.4",

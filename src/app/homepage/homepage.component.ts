@@ -1,8 +1,6 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { SwUpdate } from '@angular/service-worker';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { HttpClient,HttpHeaders} from "@angular/common/http";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Chart, ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
@@ -23,23 +21,7 @@ export interface globalmarkettiles {
 })
 export class HomepageComponent implements OnInit {
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
-  constructor(private swUpdate: SwUpdate, private snackbar: MatSnackBar, public cookieService: CookieService, private http: HttpClient, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) { 
-    this.swUpdate.available.subscribe(evt => {
-      const snack = this.snackbar.open('Update Available', 'Reload');
-      snack
-        .onAction()
-        .subscribe(() => {
-          window.location.reload();
-        });
-      this.swUpdate
-        .checkForUpdate()
-        .then(() => { })
-        .catch((err) => {
-          console.error('error when checking for update', err);
-        });
-      
-    })
-  }
+  constructor(public cookieService: CookieService,private http: HttpClient,private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) { }
   globalmarket: globalmarkettiles[] = [];
   mcadvvalue: any
   mcdecvalue: any

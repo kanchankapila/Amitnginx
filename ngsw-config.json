@@ -27,33 +27,6 @@
       }
     }
   ],"navigationUrls": [
-    "/**",
-    "/nifty",
-    "/homepage"
-    ],
-    "dataGroups": [
-      {
-        "name": "api-performance",
-        "urls": [
-         "/"
-        ],
-        "cacheConfig": {
-          "strategy": "freshness",
-          "maxSize": 100,
-          "maxAge": "1d"
-        }
-      },
-      {
-        "name": "api-freshness",
-        "urls": [
-          "/api/"
-        ],
-        "cacheConfig": {
-          "maxSize": 100,
-          "maxAge": "1h",
-          "timeout": "10s",
-          "strategy": "freshness"
-        }
-      }
+    "/**"
     ]
 }

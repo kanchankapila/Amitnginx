@@ -1,4 +1,4 @@
-<link rel="manifest" href="/manifest.json">
+
 <div class="InsideContent">
   <div class="col-lg-7 grid-margin stretch-card">
     <div class="content card">
@@ -394,8 +394,6 @@
       <h4 class="card-title">NIFTY50 Stocks</h4>
       <div fxLayout="row wrap" fxLayoutGap="16px grid">
         <div fxFlex="15%" fxFlex.xs="100%" fxFlex.sm="33%" class="text-white"  *ngFor="let tile of nifty50stocks trackBy: trackByFuntion11">
-         
-         
           <mat-card [ngClass]="{'bg-gradient-bull text-white mat-elevation-z4' : tile.text3 > 0 , 'bg-gradient-bear text-white mat-elevation-z4': 0 > tile.text3}"  >
           
               <h5>{{tile.text1}}</h5>
