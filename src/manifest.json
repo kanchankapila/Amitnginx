@@ -54,5 +54,34 @@
         "sizes": "512x512",
         "type": "image/png"
       }
-   ]
+   ],
+   "shortcuts":[{
+    "name":"Nifty",
+    "short_name":"Nifty",
+    "url":"/nifty?source=pwa",
+    "icons":[{
+      "src": "assets/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }]
+   },{
+    "name":"Share",
+    "short_name":"Share",
+    "url":"/Share?source=pwa",
+    "icons":[{
+      "src": "assets/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }]
+   },
+   {
+    "name":"Bank Nifty",
+    "short_name":"Bank Nifty",
+    "url":"/bnifty?source=pwa",
+    "icons":[{
+      "src": "assets/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }]
+   }]
   }

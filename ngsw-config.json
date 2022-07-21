@@ -27,15 +27,13 @@
       }
     }
   ],"navigationUrls": [
-    "/**",
-    "/nifty",
-    "/homepage"
+    
     ],
     "dataGroups": [
       {
         "name": "api-performance",
         "urls": [
-         "/"
+        
         ],
         "cacheConfig": {
           "strategy": "freshness",
@@ -46,7 +44,7 @@
       {
         "name": "api-freshness",
         "urls": [
-          "/api/"
+          "/api/**"
         ],
         "cacheConfig": {
           "maxSize": 100,

@@ -149,7 +149,7 @@ export class NavbarComponent implements OnInit {
   keyword = 'name';
   selectEvent(stock_isin) {
     
-    this.window.open("http://localhost:4200/Share?stock="+stock_isin, "_blank")
+    this.window.open("/Share?stock="+stock_isin, "_blank")
     
   }
 
@@ -515,10 +515,10 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
   //   )
   // }
   navigatenifty() {
-    this.window.open("http://localhost:4200/nifty", "_blank") 
+    this.window.open("/nifty", "_blank") 
   }
   navigatebanknifty() {
-    this.window.open("http://localhost:4200/banknifty", "_blank") 
+    this.window.open("/banknifty", "_blank") 
   }
   // chartink() {
   //   console.log("chartink start")
