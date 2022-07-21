@@ -1,16 +1,14 @@
-
 const async = require("async")
 const express = require('express');
 const cluster = require('cluster');
 const { Pool, Client } = require('pg')
 var compression = require('compression');
 const numCPUs = require('os').cpus().length;
-var http = require('http')
+
 const app = express();
-const port = 8090
-const { JSDOM } = require( "jsdom" );
-const { window } = new JSDOM( "" );
-const $ = require("jquery")(window);
+
+
+
 const redis = require('redis');
 const client = redis.createClient();
 const cors = require('cors');
@@ -19,7 +17,7 @@ app.use(cookieParser());
 app.use(compression());
 const bodyParser = require("body-parser");
 const request = require('request')
-//app.use(cors());
+app.use(cors());
 const path=require('path')
 const session = require('express-session');
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -46,7 +44,7 @@ process.env.trendlynecookie='__utma=185246956.775644955.1603113261.1614010114.16
 
 var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
-const fs =require('fs')
+
 const axios = require('axios');
 var html2json = require('html2json').html2json;
    
