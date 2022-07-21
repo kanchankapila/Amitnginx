@@ -1,6 +1,7 @@
 import { Component, OnInit,isDevMode } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -52,6 +53,7 @@ export class AppComponent implements OnInit{
     });
   }
 
+ 
 
 
   ngOnInit() {
@@ -69,3 +71,7 @@ export class AppComponent implements OnInit{
     });
   }
 }
+function current(arg0: string, current: any) {
+  throw new Error('Function not implemented.');
+}
+
