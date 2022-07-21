@@ -7,10 +7,6 @@
     "esModuleInterop": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-   
-    // "paths": {
-     //   "tslib" : ["./node_modules/tslib/tslib.d.ts"]
-     // },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -23,7 +19,7 @@
       "node"
     ],
     "lib": [
-      "es2018",
+      "es2020",
       "dom"
     ]
   },
