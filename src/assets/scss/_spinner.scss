@@ -5,75 +5,63 @@
   align-items: center;
   height: 100vh;
   background: #eee;
-  .donut {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 50%;
-    border: 0.3rem solid rgba(#1330ee, 0.3);
-    border-top-color: #51cff5;
-    animation: 1.5s spin infinite linear;
-  }
-  .donut1 {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 80%;
-    border: 0.3rem solid rgba(#f7a271, 0.3);
-    border-top-color: #51f551;
-    animation: 1.5s spin infinite linear;
-  }
-  .lds-dual-ring {
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-  }
-  .lds-dual-ring:after {
-    content: " ";
-    display: block;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-    border-radius: 50%;
-    border: 6px solid #fff;
-    border-color: #fff transparent #fff transparent;
-    animation: lds-dual-ring 1.2s linear infinite;
-  }
-  @keyframes lds-dual-ring {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
-  .donut2 {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 30%;
-    border: 0.3rem solid rgba(#f30c87, 0.3);
-    border-top-color: #79ff87;
-    animation: 1.5s spin  infinite linear;
-  }
-  .donut3 {
-    width: 20rem;
-    height: 20rem;
-    border-radius: 50%;
-    border: 0.3rem solid rgba(#c9f30c, 0.3);
-    border-top-color: #ff7979;
-    animation:forwards;
-  }
-  .donut4 {
-    width: 20rem;
-    height: 20rem;
-    border-radius: 50%;
-    border: 0.7rem solid rgba(#320cf3, 0.3);
-    border-top-color: #ffd579;
-    animation: 1.0s spin alternate-reverse;
-  }
-}
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+ 
+}
+ 
+
+  
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 3px solid;
+  border-color: rgb(247, 88, 154) rgb(247, 88, 154) transparent transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loader::after,
+.loader::before {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+border: 3px solid;
+border-color: transparent transparent #00ff51 #00ff51;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+box-sizing: border-box;
+animation: rotationBack 0.5s linear infinite;
+transform-origin: center center;
+}
+.loader::before {
+width: 32px;
+height: 32px;
+border-color: rgb(153, 250, 248) rgb(153, 250, 248) transparent transparent;
+animation: rotation 1.5s linear infinite;
+}
+  
+@keyframes rotation {
+0% {
+  transform: rotate(0deg);
+}
+100% {
+  transform: rotate(360deg);
+}
+} 
+@keyframes rotationBack {
+0% {
+  transform: rotate(0deg);
+}
+100% {
+  transform: rotate(-360deg);
+}
 }

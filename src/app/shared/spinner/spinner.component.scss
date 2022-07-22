@@ -11,72 +11,52 @@
   @media (max-width: 991px) {
     width: 100%;
   }
-  .donut {
-    width: 8rem;
-    height: 8rem;
-    border-radius: 90%;
-    border: 0.5rem solid rgba(#f645ca, 0.3);
-    border-top-color: #ddfc11;
-    animation: 1.5s spin infinite linear;
+  .loader {
+    position: relative;
+    width: 100px;
+    height: 100px;
   }
-  .donut1 {
-    width: 15rem;
-    height: 15rem;
-    border-radius: 60%;
-    border: 1.0rem solid rgba(#0c2bf3, 0.3);
-    border-top-color: #11fc57;
-    animation: 1.5s spin infinite linear;
-  }
-  .donut2 {
-    width: 20rem;
-    height: 20rem;
+  .loader:before{
+    content: '';
+    position: absolute;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    border: 0.7rem solid rgba(#f30c87, 0.3);
-    border-top-color: #79ff87;
-    animation: 1.5s spin alternate-reverse;
+    top: 50%;
+    left: 0;
+    transform: translate(-5px, -50%);
+    background: linear-gradient(to right, rgb(107, 247, 105) 50%, #fb62df 50%) no-repeat;
+    background-size: 200% auto;
+    background-position: 100% 0;
+    animation: colorBallMoveX 1.5s linear infinite alternate;
   }
- 
-  .donut3 {
-    width: 8rem;
-    height: 8rem;
-    border-radius: 90%;
-    border: 0.5rem solid rgba(#f645ca, 0.3);
-    border-top-color: #ddfc11;
-    animation: 1.0s spin infinite linear;
+ .loader:after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: #88fcf8;
+ }
+@keyframes colorBallMoveX {
+  0%  {
+    background-position: 0% 0;
+    transform: translate(-15px, -50%);
   }
-  .donut4 {
-    width: 15rem;
-    height: 15rem;
-    border-radius: 60%;
-    border: 1.0rem solid rgba(#0c2bf3, 0.3);
-    border-top-color: #11fc57;
-    animation: 1.0s spin infinite linear;
+  15%  , 25% {
+    background-position: 0% 0;
+    transform: translate(0px, -50%);
   }
-  .donut5 {
-    width: 20rem;
-    height: 20rem;
-    border-radius: 50%;
-    border: 0.7rem solid rgba(#f30c87, 0.3);
-    border-top-color: #79ff87;
-    animation: 1.0s spin alternate-reverse;
+  75% , 85% {
+    background-position: 100% 0;
+    transform: translate(50px, -50%);
   }
-  
-}
-
-:host-context(.sidebar-icon-only) {
-  .spinner-wrapper {
-    width: calc(100% - #{$sidebar-width-icon} - 4rem);    
-  }
-}
-
-:host-context(.sidebar-mini) {
-  .spinner-wrapper {
-    width: calc(100% - #{$sidebar-width-mini} - 4rem);    
+  100% {
+    background-position: 100% 0;
+    transform: translate(65px, -50%);
   }
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
 }

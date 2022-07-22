@@ -17,7 +17,8 @@ import { SidebarModule } from 'primeng/sidebar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CardModule } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 const routes : Routes = [
   { path: '', component: SidebarComponent },
@@ -45,6 +46,7 @@ const routes : Routes = [
     CardModule,
     //Sidebar1Module,
     MatButtonModule,
+    AutocompleteLibModule,
    // OwlClockModule,
     RouterModule.forChild(routes),
     NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),

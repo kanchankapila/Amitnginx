@@ -1,11 +1,11 @@
 
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule,PreloadAllModules } from '@angular/router';
 
 
 
 const routes: Routes = [
- // { path: '', redirectTo: '/main', pathMatch: 'full' },
+  { path: '', redirectTo: '/homepage', pathMatch: 'full' },
  // { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) }, 
  // { path: 'main', loadChildren: () => import('./main/main.module').then(m => m.MainModule) }, 
   //{ path: 'SnR', loadChildren: () => import('./sn-r/sn-r.module').then(m => m.SnRModule) }, 
@@ -48,7 +48,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy',preloadingStrategy:PreloadAllModules })],
   exports: [RouterModule],
   
 })
