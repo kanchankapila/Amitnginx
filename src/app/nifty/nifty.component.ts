@@ -4,7 +4,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-import { SwUpdate } from '@angular/service-worker';
+
 import { of } from 'rxjs'; 
 import { map } from 'rxjs/operators';
 import {Observable} from 'rxjs'
@@ -115,7 +115,7 @@ export interface niftysmatile{
 })
 export class NiftyComponent implements OnInit {
  
-  constructor(private swUpdate: SwUpdate,private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig, private vps: ViewportScroller) {
+  constructor(private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig, private vps: ViewportScroller) {
     
     const instance = axios.create({
       //baseURL: 'https://www.nseindia.com/',
@@ -253,16 +253,7 @@ export class NiftyComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if (this.swUpdate.isEnabled) {
-
-      this.swUpdate.available.subscribe(() => {
-
-          if(confirm("New version available. Load New Version?")) {
-
-              window.location.reload();
-          }
-      });
-  }        
+           
 
 
      

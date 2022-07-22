@@ -3,8 +3,8 @@ import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import { SwUpdate } from '@angular/service-worker';
+
+
 import axios from "axios";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
@@ -526,25 +526,12 @@ export class ShareComponent implements OnInit {
 '' 
 
   
-  constructor(private swUpdate: SwUpdate, private snackbar: MatSnackBar, private cookieService: CookieService, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
+  constructor( private cookieService: CookieService, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
     Chart.register(CandlestickController, OhlcController, CandlestickElement, OhlcElement);
-    this.swUpdate.available.subscribe(evt => {
-      const snack = this.snackbar.open('Update Available', 'Reload');
-      snack
-        .onAction()
-        .subscribe(() => {
-          window.location.reload();
-        });
-        this.swUpdate
-        .checkForUpdate()
-        .then(() => {})
-        .catch((err) => {
-          console.error('error when checking for update', err);
-        });
       
   
   
-    })
+    
   }
   
   public stockhcdate: Array<any> = [];

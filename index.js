@@ -1,16 +1,14 @@
-
 const async = require("async")
 const express = require('express');
 const cluster = require('cluster');
 const { Pool, Client } = require('pg')
 var compression = require('compression');
 const numCPUs = require('os').cpus().length;
-var http = require('http')
+
 const app = express();
-const port = 8090
-const { JSDOM } = require( "jsdom" );
-const { window } = new JSDOM( "" );
-const $ = require("jquery")(window);
+
+
+
 const redis = require('redis');
 const client = redis.createClient();
 const cors = require('cors');
@@ -19,7 +17,7 @@ app.use(cookieParser());
 app.use(compression());
 const bodyParser = require("body-parser");
 const request = require('request')
-//app.use(cors());
+app.use(cors());
 const path=require('path')
 const session = require('express-session');
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -46,23 +44,12 @@ process.env.trendlynecookie='__utma=185246956.775644955.1603113261.1614010114.16
 
 var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
-const fs =require('fs')
+
 const axios = require('axios');
 var html2json = require('html2json').html2json;
-var allowCrossDomain=function(req, res,next){
+   
+    
 
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
-  res.header("Access-Control-Allow-Headers", "Origin,Content-Type, X-Requested-With,Accept, Cache-Control");
-   res.header("Access-Control-Allow-Headers", "Origin,Content-Type, X-Requested-With,Accept, Cache-Control");
-  if ('OPTIONS' == req.method) {
-    res.sendStatus(200);
-  }
-  else {
-    next();
-  }
-}; // Important
-app.use(allowCrossDomain);
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
@@ -119,7 +106,16 @@ const sessionConfig = {
   app.set('trust proxy', 1); // trust first proxy
   sessionConfig.cookie.secure = true; // serve secure cookies
 
- // app.get('*.js', (req, res, next) => {req.url = req.url + '.gz';res.set('Content-Encoding', 'gzip');next();});
+
+  app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
+   next();
+  
+    
+    
+});
 
 //////////////////////////////////Moneycontrol Post request for MCvolume////////
 app.post('/api/mcvolume', async function (req, res) {
@@ -1301,9 +1297,9 @@ app.use(express.static(__dirname+"/"));
 // });
 
 
-// app.listen(8090, function() {
-//   console.log('Your node is running on port 8090');
-// });
+app.listen(3000, function() {
+  console.log('Your node is running on port 3000');
+});
 // http.createServer(app,function (req, res) {
 //   res.writeHead(200, {'Content-Type': 'text/plain'});
 //   res.end(index);
@@ -1318,11 +1314,11 @@ app.use(express.static(__dirname+"/"));
 // var httpServer = http.createServer(app);
 // var httpsServer = https.createServer(credentials, app);
 
-http.createServer({
-  // key: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/key.pem'),
-  // cert: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/server.crt')
-}, app)
-.listen(3000, function () {
-  console.log('Example app listening on port 3000! Go to https://localhost:3000/')
-})
-}
+// http.createServer({
+//   // key: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/key.pem'),
+//   // cert: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/server.crt')
+// }, app)
+// .listen(3000, function () {
+//   console.log('Example app listening on port 3000! Go to https://localhost:3000/')
+// })
+ }

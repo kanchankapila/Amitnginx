@@ -2,5 +2,6 @@
     "workbench.editor.restoreViewState": false,
     "editor.minimap.enabled": false,
     "editor.codeLens": false,
-    "zenMode.restore": false
+    "zenMode.restore": false,
+    "typescript.tsdk": "node_modules\\typescript\\lib"
 }

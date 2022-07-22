@@ -18,30 +18,16 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   
   <script>
-    // ServiceWorker Registration
-    if('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/ngsw-worker.js').then(function(registration) {
-                // Registration was successful
-                console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                
-                
-            }, function(err) {
-                // registration failed :(
-                console.log('ServiceWorker registration failed: ', err);
-            });
-        });
-    }
     
   </script>
     
-   
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1976d2">
   
+  
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#1976d2">
 </head>
 <body>
-  <app-root>
+   <app-root>
       <div class="main-spinner-wrapper">
         <div class="donut ">
         <div class="donut1">
@@ -50,6 +36,14 @@
         
         
         <div class="donut2"></div></div>
+      </div>
+      <div class="donut3 ">
+        <div class="donut4">
+          <div class="lds-dual-ring"></div>
+          
+        
+        
+        <div class="donut5"></div></div>
       </div>
       </div>
   </app-root>
