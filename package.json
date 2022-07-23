@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng build --configuration=production && ng serve --configuration=production && node index.js",
+    "deploy-hosting": "ng build --configuration=production && ng serve --configuration=production && node index.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "eslint src",

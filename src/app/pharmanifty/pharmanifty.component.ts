@@ -828,7 +828,7 @@ export class PharmaniftyComponent implements OnInit {
      
 
     this.stockisin = this.stockList.filter(i => i.symbol == symbol)[0].isin
-    this.window.open("http://localhost:4200/Share?stock=" + this.stockisin, "_blank")
+    this.window.open("/Share?stock=" + this.stockisin, "_blank")
   }
 }
 

@@ -3,9 +3,13 @@ import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
-
-
 import axios from "axios";
+import wrapper  from "axios-cookiejar-support";
+import { CookieJar } from 'tough-cookie';
+
+
+
+
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 //import { StockChart } from 'angular-highcharts';
@@ -512,6 +516,7 @@ export class ShareComponent implements OnInit {
       }
     }
   };
+
   public financialChartColors = [
     {
       borderColor: 'black',
@@ -528,12 +533,8 @@ export class ShareComponent implements OnInit {
   
   constructor( private cookieService: CookieService, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
     Chart.register(CandlestickController, OhlcController, CandlestickElement, OhlcElement);
-      
-  
-  
-    
-  }
-  
+      }
+   
   public stockhcdate: Array<any> = [];
   public stockohlc: stockohlctile[] = [];
   public stockohlc1w: stockohlc1wtile[] = [];
@@ -955,7 +956,18 @@ mscore: mscoretile[] = [];
         
   
     })
- 
+    axios.get('https://trendlyne.com/mapp/v1/stock/chart-data/237/SMA/')
+    .then((response) => {
+      
+        let nestedItems = Object.keys((response.data)).map(key => {
+          return (response.data)[key];
+        });;
+        console.log(nestedItems)
+      });
+
+  
+   
+
     
   }
   gettrendlynestocksti(tlid) {
