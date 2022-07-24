@@ -27,7 +27,6 @@ import { ChartModule } from 'primeng/chart';
     TabViewModule,
     ChartModule
 
-  ],
-   providers:[{ provide: Window, useValue: window }]
+  ]
 })
 export class PharmaniftyModule { }

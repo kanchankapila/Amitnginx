@@ -589,7 +589,7 @@ request(options2, (err, response, body) => {
   
     app.get('/api/trendlynestocksti', function (req, res) {
       let tlid = req.query.tlid
-      var url6 = 'https://trendlyne.com/mapp/v1/stock/adv-technical-analysis/'+tlid+'/24/'
+      var url6 = '  https://trendlyne.com/mapp/v1/stock/adv-technical-analysis/'+tlid+'/24/'
         request(url6, function (error, response, html) {
           if (!error) {
       
@@ -682,7 +682,7 @@ app.get('/api/trendlynepost', function (req, res) {
 app.get('/api/nsestockhistdata', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
-    .then(data => instance.get('https://www.nseindia.com/api/historical/cm/equity?symbol='+stock+'&series=[%22EQ%22]&from=09-03-2021&to=09-02-2022'))
+    .then(data => instance.get('https://www.nseindia.com/api/historical/cm/equity?symbol='+stock+'&series=[%22EQ%22]&from=09-03-2021&to='+todaydate))
     .then(data => res.json(data.data))
     .catch(data => console.error(res.response))
 })

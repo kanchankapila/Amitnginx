@@ -53,7 +53,7 @@ const routes : Routes = [
   ],
   exports:[SidebarComponent,NavbarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers:[{ provide: Window, useValue: window }]
+  providers:[]
   
 })
 export class SharedModule { }

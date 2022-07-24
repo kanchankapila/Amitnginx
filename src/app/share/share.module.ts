@@ -48,6 +48,6 @@ export function highchartsModules() {
    
   ],
   schemas: [],
-  providers: [{ provide: Window, useValue: window }, {provide: CookieService }]
+  providers: [CookieService]
 })
 export class ShareModule { }
