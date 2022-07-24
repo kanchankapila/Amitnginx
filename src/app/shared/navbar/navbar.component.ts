@@ -149,7 +149,7 @@ export class NavbarComponent implements OnInit {
   keyword = 'name';
   selectEvent(stock_isin) {
     
-    this.window.open("/Share?stock="+stock_isin, "_blank")
+    this.window.open("http://localhost:4200/Share?stock="+stock_isin, "_blank")
     
   }
 

@@ -23,6 +23,7 @@
     "@angular/material": "^14.1.0",
     "@angular/platform-browser": "^14.1.0",
     "@angular/platform-browser-dynamic": "^14.1.0",
+    "@angular/platform-server": "^14.1.0",
     "@angular/router": "^14.1.0",
     "@angular/service-worker": "^14.1.0",
     "@mdi/font": "^7.0.96",

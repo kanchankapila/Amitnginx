@@ -17,12 +17,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/amitnginx",
+            "outputPath": "dist/amitnginx/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -44,9 +44,9 @@
             "vendorChunk": false,
             
             "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": false,
-            "optimization": false,
+            "buildOptimizer": true,
+            "sourceMap": true,
+            "optimization": true,
             "namedChunks": true,
             "commonChunk": true,
             "serviceWorker": true,
@@ -141,6 +141,45 @@
               "devServerTarget": "amitnginx:serve:production"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/amitnginx/server",
+            "main": "src/main.server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "optimization": true,
+            "sourceMap": true,
+            "extractLicenses": false
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "app-shell": {
+          "builder": "@angular-devkit/build-angular:app-shell",
+          "options": {
+            "route": "shell"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "amitnginx:build:production",
+              "serverTarget": "amitnginx:server:production"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

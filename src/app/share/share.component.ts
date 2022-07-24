@@ -4,12 +4,6 @@ import { PrimeNGConfig } from 'primeng/api';
 import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
 import axios from "axios";
-import wrapper  from "axios-cookiejar-support";
-import { CookieJar } from 'tough-cookie';
-
-
-
-
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 //import { StockChart } from 'angular-highcharts';
@@ -855,7 +849,8 @@ mscore: mscoretile[] = [];
     this.gettrendlynestocks3(this.tlid)
     this.getshare3m(this.eqsymbol)
     this.getzerodha()
-    this.getkotak()
+    this.getkotak(this.tlid)
+    this.getnsehistoric(this.eqsymbol)
     this.gettrendlynestocksti(this.tlid)
     this.getkotakview(this.eqsymbol)
     this.getshare1m(this.eqsymbol)
@@ -941,7 +936,7 @@ mscore: mscoretile[] = [];
    
    
   }
-  getkotak() {
+  getkotak(tlid) {
    
 
     this.http.get<any>('https://kayal.trendlyne.com/broker-webview/all-in-one-screener-get/kayal/?perPageCount=25&pageNumber=0&screenpk=82596&groupType=all&groupName=').subscribe(data5 => {
@@ -956,15 +951,32 @@ mscore: mscoretile[] = [];
         
   
     })
+   
+
+    
     axios.get('https://trendlyne.com/mapp/v1/stock/chart-data/237/SMA/')
-    .then((response) => {
+      .then((response) => {
+      console.log(response)
       
         let nestedItems = Object.keys((response.data)).map(key => {
           return (response.data)[key];
         });;
         console.log(nestedItems)
-      });
+    });
+    
+     
+    
+    axios.get('https://trendlyne.com/equity/getStockMetricParameterList/'+this.tlid).then((response) => {
+      this.cookieService.set('cookie', '__utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.775644955.1603113261; _gid=GA1.2.1847674667.1658334429; .trendlyne=wd57cl51iuhsqelpnzzp4gj61efk6kc1; csrftoken=T2UOO9Ctk4IV1kHeOJtHAxy6gCnvF56GnP5xxtRO3RTzGGNrRSWqNON5PjgveTrg; _gat=1');  
+    console.log(response)
 
+        let nestedItems = Object.keys((response.data)).map(key => {
+          return (response.data)[key];
+        });;
+        console.log(nestedItems)
+    });
+    
+   
   
    
 
@@ -1001,9 +1013,18 @@ mscore: mscoretile[] = [];
       })
    
       
-      }
+  }
+  getnsehistoric(eqsymbol) {
+    this.http.get<any>('https://www.nseindia.com/api/historical/cm/equity?symbol='+this.eqsymbol).subscribe(data5 => {
+    
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
+   
+    });
  
-
+  }
  
    
   

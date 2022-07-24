@@ -19,6 +19,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatCheckboxModule,
     ReactiveFormsModule,
     ScreenersRoutingModule
-  ]
+  ],
+  providers:[{ provide: Window, useValue: window }]
 })
 export class ScreenersModule { }

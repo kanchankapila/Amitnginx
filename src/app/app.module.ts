@@ -1,4 +1,4 @@
-import { BrowserModule,HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 //import { GestureConfig } from 'owl-ng';
@@ -13,6 +13,7 @@ import { ContentAnimateDirective } from './shared/directives/content-animate.dir
 import { SharedModule } from "./shared/shared.module";
 import { ServiceWorkerModule,SwRegistrationOptions } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -37,7 +38,8 @@ import { environment } from '../environments/environment';
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    RouterModule
 
   
   ],

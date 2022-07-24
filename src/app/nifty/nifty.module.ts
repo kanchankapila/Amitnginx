@@ -33,6 +33,7 @@ import {from} from 'rxjs';
     TabViewModule,
     ChartModule
 
-  ]
+  ],
+   providers:[{ provide: Window, useValue: window }]
 })
 export class NiftyModule { }

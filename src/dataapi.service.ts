@@ -56,12 +56,6 @@ export class DataapiService {
   nsedatapioii(){
     return this.http.get('http://localhost:3000/api/nsedatapioii')
   }
-  nsedataniftyoi(){
-    return this.http.get('http://localhost:3000/api/nsedataniftyoi')
-  }
-  nsedatabniftyoi(){
-    return this.http.get('http://localhost:3000/api/nsedatabniftyoi')
-  }
  
   nsedataadvdec(){
     return this.http.get('http://localhost:3000/api/nsedataadvdec')
