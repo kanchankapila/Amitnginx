@@ -1,3 +1,4 @@
+<!--The content below is only a placeholder and can be replaced.-->
 
     <div class="col-lg-13 grid-margin stretch-card">
         <div class="content card">
@@ -19,6 +20,16 @@
         <div class="card">
           <canvas baseChart height="350" [data]="advdecChartData" [options]="advdecChartOptions" [type]="advdecChartType" [options]="advdecChartOptions"></canvas>
         </div>
+      </div>
+      <div id="chart">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [dataLabels]="chartOptions.dataLabels"
+          [plotOptions]="chartOptions.plotOptions"
+          [title]="chartOptions.title"
+          [legend]="chartOptions.legend"
+        ></apx-chart>
       </div>
     
    

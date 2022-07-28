@@ -452,7 +452,7 @@ NR7:{{nr7}}
           <div class="col-lg-18 grid-margin  stretch-card">
             <div class="card">
               
-                <h4 class="mb-2">Stock Today </h4>
+                <h4 class="mb-2">Stock Today with S/R</h4>
                
                
                 <canvas baseChart height="100" [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" ></canvas>
@@ -460,9 +460,15 @@ NR7:{{nr7}}
              
             </div>
           </div>
-    
-        
-        
+          <div class="col-lg-18 grid-margin  stretch-card">
+            <div class="card">
+              
+                <h4 class="mb-2">Stock Today </h4>
+               
+               
+          <canvas baseChart  [datasets]="stockData" [labels]="stockLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
+        </div>
+      </div>
         
     
       </p-tabPanel>
@@ -623,18 +629,33 @@ NR7:{{nr7}}
         <div class="card">
           
             <h4 class="mb-2">Stock - 1 Year </h4>
-            <canvas baseChart height="150" [data]="stockChartData1y" [options]="financialChartOptions"
-          [type]="financialChartType"
-          [plugins]="financialChartPlugins">
-  </canvas>
+                
+            
+  
          
         </div>
       </div>
     
     </p-tabPanel>
     </p-tabView>
-    <canvas baseChart  [datasets]="stockData" [labels]="stockLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
-               
+   
+    <apx-chart
+    #chartCandle
+    [series]="chartCandleOptions.series"
+    [chart]="chartCandleOptions.chart"
+    [xaxis]="chartCandleOptions.xaxis"
+    [plotOptions]="chartCandleOptions.plotOptions"
+  ></apx-chart>
+  <apx-chart
+    #chartBar
+    [series]="chartBarOptions.series"
+    [chart]="chartBarOptions.chart"
+    [xaxis]="chartBarOptions.xaxis"
+    [yaxis]="chartBarOptions.yaxis"
+    [dataLabels]="chartBarOptions.dataLabels"
+    [stroke]="chartBarOptions.stroke"
+    [plotOptions]="chartBarOptions.plotOptions"
+  ></apx-chart>      
                 
                
     

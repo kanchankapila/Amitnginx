@@ -31,6 +31,18 @@ export interface mcniftyrttiles {
  
   
 }
+export interface mcpniftyrttiles {
+
+  text1: string;
+  text2: string;
+  text3: string;
+  text4: string;
+  text5: string;
+  text6: string;
+  
+ 
+  
+}
 
 export interface mcbniftyrttiles {
 
@@ -104,8 +116,11 @@ export class NavbarComponent implements OnInit {
   mcadvvalue: any
   mcdecvalue: any
   mcadvvalue1: any
-  mcdecvalue1:any
+  mcdecvalue1: any
+  mcpadvvalue: any
+  mcpdecvalue: any
   mcniftyrt: mcniftyrttiles[] = [];
+  mcpniftyrt: mcpniftyrttiles[] = [];
   mcbniftyrt: mcbniftyrttiles[] = [];
   bqstocks: any;
   sectorList: any;
@@ -135,10 +150,12 @@ export class NavbarComponent implements OnInit {
     {
       setInterval(() => { this.getmcniftyrealtime() }, 5000);
       setInterval(() => { this.getmcbankniftyrealtime() }, 5000);
+      setInterval(() => { this.getmcpharmaniftyrealtime() }, 5000);
     }
     this.sectorList = sectors.default.Data
     this.getmcniftyrealtime()
     this.getmcbankniftyrealtime()
+    this.getmcpharmaniftyrealtime()
     this.fnostock = fnostocks.default.Data
     this.etstocks = etstock.default.Data
     this.bqstocks=bqstock.default.Data
@@ -384,6 +401,25 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       console.log(err)
     })
   }
+  getmcpharmaniftyrealtime() {
+   
+    this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3Bcpr').subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      
+  
+    this.mcpniftyrt.length = 0;
+    
+    this.mcpniftyrt.push({ text1: nestedItems[2]['pricecurrent'], text2: nestedItems[2]['pricecurrent'], text3: nestedItems[2]['pricechange'], text4: nestedItems[2]['pricepercentchange'], text5: nestedItems[2]['adv'], text6: nestedItems[2]['decl'] })
+    this.mcpadvvalue = nestedItems[2]['adv'];
+    this.mcpdecvalue = nestedItems[2]['decl'];
+    
+   
+  }, err => {
+    console.log(err)
+  })
+}
   getmcbankniftyrealtime() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3Bnbx').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
@@ -519,6 +555,9 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
   }
   navigatebanknifty() {
     this.window.open("/banknifty", "_blank") 
+  }
+  navigatepnifty() {
+    this.window.open("/pharmanifty", "_blank") 
   }
   // chartink() {
   //   console.log("chartink start")

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserModule } from "@angular/platform-browser";
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarModule, ButtonsModule } from 'angular-bootstrap-md'
@@ -44,6 +45,7 @@ const routes : Routes = [
     ButtonModule,
     MatCardModule,
     CardModule,
+    BrowserModule,
     //Sidebar1Module,
     MatButtonModule,
     AutocompleteLibModule,

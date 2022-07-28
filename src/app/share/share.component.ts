@@ -7,6 +7,28 @@ import axios from "axios";
 import wrapper  from "axios-cookiejar-support";
 import { CookieJar } from 'tough-cookie';
 
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexYAxis,
+  ApexXAxis,
+  ApexPlotOptions,
+  ApexDataLabels,
+  ApexStroke
+} from "ng-apexcharts";
+
+
+
+export type ChartOptions1 = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
+  plotOptions: ApexPlotOptions;
+  dataLabels: ApexDataLabels;
+  stroke: ApexStroke;
+};
 
 
 
@@ -23,9 +45,7 @@ import 'chartjs-adapter-date-fns';
 import 'chartjs-chart-financial';
 import { BaseChartDirective } from 'ng2-charts';
 import { Chart,ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
-import { enUS } from 'date-fns/locale';
-import { add, parseISO } from 'date-fns';
-import { CandlestickController, CandlestickElement, OhlcController, OhlcElement } from 'chartjs-chart-financial';
+
 import {from,Observable} from 'rxjs';
 
 
@@ -304,11 +324,19 @@ export interface stockcrossovermtile {
 }
 export interface stockohlctile
 {
-  c: number;
-  o: number;
-  h: number;
-  l: number;
+ 
   x: number;
+  y: [any];
+  
+  
+  
+}
+export interface stockohlcvolumetile
+{
+ 
+  x: any;
+  y: number;
+  
   
   
 }
@@ -489,6 +517,9 @@ export interface maxpaintile { text1: any; text2: any; }
 })
 @Injectable()
 export class ShareComponent implements OnInit {
+  @ViewChild("chart") chart: ChartComponent;
+  public chartCandleOptions: Partial<ChartOptions1>;
+  public chartBarOptions: Partial<ChartOptions1>;
 
   //stockhighcharts: StockChart;
   visibleSidebar5;
@@ -497,46 +528,15 @@ export class ShareComponent implements OnInit {
   
 
 
-  public financialChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    maintainAspectRatio: true,
-    scales: {
-      x: {
-        time: {
-          unit: 'day'
-        },
-        adapters: {
-          date: {
-            locale: enUS
-          }
-        },
-        ticks: {
-          source: 'auto'
-        }
-      }
-    }
-  };
-
-  public financialChartColors = [
-    {
-      borderColor: 'black',
-      backgroundColor: 'rgba(255,0,0,0.3)',
-    },
-  ];
  
-  public financialChartLegend = true;
-  public financialChartType: ChartType = 'candlestick';
-  public financialChartPlugins = [];
-
-'' 
-
   
   constructor( private cookieService: CookieService, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
-    Chart.register(CandlestickController, OhlcController, CandlestickElement, OhlcElement);
+    
       }
    
   public stockhcdate: Array<any> = [];
-  public stockohlc: stockohlctile[] = [];
+  public stockohlc: Array<any> = [];
+  public stockohlcvolume: stockohlcvolumetile[] = [];
   public stockohlc1w: stockohlc1wtile[] = [];
   public etstockohlctoday: etstockohlctodaytile[] =[] ;
   public stockhcvalue: Array<any> = [];
@@ -850,9 +850,10 @@ mscore: mscoretile[] = [];
       this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
       
     });
-    this.gettrendlynestocks1(this.tlid,this.eqsymbol,this.tlname)
-    this. gettrendlynestocks2(this.tlid,this.tlname,this.eqsymbol)
-    this.gettrendlynestocks3(this.tlid)
+    this.gettrendlynestocks1(this.tlid, this.eqsymbol, this.tlname)
+    
+    this.gettrendlynestocks2(this.tlid)
+    //this.gettrendlynestocks3(this.tlid)
     this.getshare3m(this.eqsymbol)
     this.getzerodha()
     this.getkotak()
@@ -862,7 +863,7 @@ mscore: mscoretile[] = [];
     this.getmmdata(this.stockid)
     this.getshare6m(this.eqsymbol)
     this.getshare1w(this.eqsymbol)
-   // this.getstock1yr(this.eqsymbol)
+    this.getstock1yr(this.eqsymbol)
     
     this.getntstockpcrdetails(this.eqsymbol)
     this.getmcstockrealtime() 
@@ -956,14 +957,7 @@ mscore: mscoretile[] = [];
         
   
     })
-    axios.get('https://trendlyne.com/mapp/v1/stock/chart-data/237/SMA/')
-    .then((response) => {
-      
-        let nestedItems = Object.keys((response.data)).map(key => {
-          return (response.data)[key];
-        });;
-        console.log(nestedItems)
-      });
+   
 
   
    
@@ -971,13 +965,14 @@ mscore: mscoretile[] = [];
     
   }
   gettrendlynestocksti(tlid) {
-    this.dataApi.gettrendlynestocksti(this.tlid).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
+    axios.get('https://trendlyne.com/mapp/v1/stock/adv-technical-analysis/'+this.tlid+'/24/')
+    .then((response) => {
+     console.log(response)
+        let nestedItems = Object.keys((response.data)).map(key => {
+          return (response.data)[key];
+        });;
+        console.log(nestedItems)
       });
-   
-      console.log(nestedItems);
-     })
   
        
    
@@ -1016,18 +1011,115 @@ mscore: mscoretile[] = [];
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      
+      console.log(nestedItems)
+      this.stockohlc.length = 0;
+      this.stockohlcvolume.length = 0;
       for (let val in nestedItems[3]) {
-        this.stockohlc.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(),o: nestedItems[3][val].open,h: nestedItems[3][val].high, l: nestedItems[3][val].low,c: nestedItems[3][val].close })
+        this.stockohlc.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(), y: [nestedItems[3][val].open,nestedItems[3][val].high,nestedItems[3][val].low,nestedItems[3][val].close] })
+        this.stockohlcvolume.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(),y:nestedItems[3][val].volume })
       }
       console.log(this.stockohlc)
+      console.log(this.stockohlcvolume)
         
-        this.stockChartData1y  = {
-     datasets: [ {
-      label: this.stockname,
-    data: this.stockohlc
-     } ]
-        };
+    this.chartCandleOptions = {
+      series: [
+        {
+          name: "candle",
+          data: this.stockohlc
+        }
+      ],
+      chart: {
+        type: "candlestick",
+        height: 290,
+        id: "candles",
+        toolbar: {
+          autoSelected: "pan",
+          show: false
+        },
+        zoom: {
+          enabled: false
+        }
+      },
+      plotOptions: {
+        candlestick: {
+          colors: {
+            upward: "#3C90EB",
+            downward: "#DF7D46"
+          }
+        }
+      },
+      xaxis: {
+        type: "datetime"
+      }
+    };
+
+    this.chartBarOptions = {
+      series: [
+        {
+          name: "volume",
+          data: this.stockohlcvolume
+        }
+      ],
+      chart: {
+        height: 160,
+        type: "bar",
+        brush: {
+          enabled: true,
+          target: "candles"
+        },
+        selection: {
+          enabled: true,
+          xaxis: {
+            min: new Date("20 Jan 2017").getTime(),
+            max: new Date("10 Dec 2017").getTime()
+          },
+          fill: {
+            color: "#ccc",
+            opacity: 0.4
+          },
+          stroke: {
+            color: "#0D47A1"
+          }
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: "80%",
+          colors: {
+            ranges: [
+              {
+                from: -1000,
+                to: 0,
+                color: "#F15B46"
+              },
+              {
+                from: 1,
+                to: 10000,
+                color: "#FEB019"
+              }
+            ]
+          }
+        }
+      },
+      stroke: {
+        width: 0
+      },
+      xaxis: {
+        type: "datetime",
+        axisBorder: {
+          offsetX: 13
+        }
+      },
+      yaxis: {
+        labels: {
+          show: false
+        }
+      }
+    };
+  
       
        
           
@@ -1846,7 +1938,8 @@ mscore: mscoretile[] = [];
     }
     )
   
-}
+  }
+  
     gettrendlynestocks1(tlid,eqsymbol,tlname) {
       this.dataApi.gettrendlynestocks1(tlid,eqsymbol,tlname).subscribe(data5 => {
         let nestedItems = Object.keys(data5).map(key => {
@@ -2103,11 +2196,16 @@ mscore: mscoretile[] = [];
       }
      
     
-    gettrendlynestocks2(tlid,tlname,eqsymbol) {
-      this.dataApi.gettrendlynestocks2(tlid,tlname,eqsymbol).subscribe(data5 => {
-        let nestedItems = Object.keys(data5).map(key => {
-          return data5[key];
-        });
+    gettrendlynestocks2(tlid) {
+      axios.get('https://trendlyne.com/mapp/v1/stock/chart-data/'+this.tlid+'/SMA/')
+    .then((response) => {
+     
+        let nestedItems = Object.keys((response.data)).map(key => {
+          return (response.data)[key];
+        });;
+        console.log(nestedItems)
+     
+  
         
          
          this.dscore.push({ text1:nestedItems[1]['stockData'][6],text2:nestedItems[1]['stockData'][9] })
@@ -2120,18 +2218,6 @@ mscore: mscoretile[] = [];
       })
     }
     
-    gettrendlynestocks3(tlid) {
-      this.dataApi.gettrendlynestocks3(tlid).subscribe(data5 => {
-        let nestedItems = Object.keys(data5).map(key => {
-          return data5[key];
-        });
-        //console.log(nestedItems)
-            
-          
-      }, err => {
-        console.log(err)
-      })
-      }
       ////////////////////////////////Market Mojo///////////////////////////////
       getmmstockinfo(stockid) {
         this.http.get('https://frapi.marketsmojo.com/stocks_stocksid/header_info?sid='+this.stockid+'&exchange=1').subscribe(data5 => {

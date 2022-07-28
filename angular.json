@@ -22,7 +22,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -34,7 +34,10 @@
               "src/styles.scss",
               "node_modules/animate.css/animate.css"
             ],"allowedCommonJsDependencies": [
-              "chart.js"
+              "chart.js",
+              "apexcharts",
+              "ng-apexcharts.mjs"
+
             ],
             "scripts": [
               
@@ -44,9 +47,9 @@
             "vendorChunk": false,
             
             "extractLicenses": false,
-            "buildOptimizer": false,
-            "sourceMap": false,
-            "optimization": false,
+            "buildOptimizer": true,
+            "sourceMap": true,
+            "optimization": true,
             "namedChunks": true,
             "commonChunk": true,
             "serviceWorker": true,

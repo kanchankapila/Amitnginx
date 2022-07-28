@@ -40,7 +40,7 @@ const fetch = require("node-fetch");
 //     console.error(err);
 //   }
 
-process.env.trendlynecookie='__utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.775644955.1603113261; _gid=GA1.2.1847674667.1658334429; .trendlyne=wd57cl51iuhsqelpnzzp4gj61efk6kc1; csrftoken=T2UOO9Ctk4IV1kHeOJtHAxy6gCnvF56GnP5xxtRO3RTzGGNrRSWqNON5PjgveTrg; _gat=1'
+process.env.trendlynecookie='__utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.775644955.1603113261; .trendlyne=wd57cl51iuhsqelpnzzp4gj61efk6kc1; csrftoken=T2UOO9Ctk4IV1kHeOJtHAxy6gCnvF56GnP5xxtRO3RTzGGNrRSWqNON5PjgveTrg; _gid=GA1.2.1560088878.1658734228; _gat=1'
 
 var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
@@ -108,7 +108,7 @@ const sessionConfig = {
 
 
   app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
+   res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
    next();
@@ -377,8 +377,7 @@ request(options2, (err, response, body) => {
   let tlname = req.query.tlname
   let eqsymbol = req.query.eqsymbol
     console.log("This is tendlynestocks1")
-   // global.document = new JSDOM('https://trendlyne.com/getUserNavBar/').window.document;
-   // console.log(global.document.cookie.cookie)
+  
 
  
  
@@ -587,23 +586,7 @@ request(options2, (err, response, body) => {
       
     })
   
-    app.get('/api/trendlynestocksti', function (req, res) {
-      let tlid = req.query.tlid
-      var url6 = '  https://trendlyne.com/mapp/v1/stock/adv-technical-analysis/'+tlid+'/24/'
-        request(url6, function (error, response, html) {
-          if (!error) {
-      
-            console.log("This is tendlynestocksti")
-            res.json((JSON.parse(response.body)))
-           
-          } else {
-          //  console.log(error)
-          }
-        })
-      
-      
-    })
-  
+   
 	  
 
 ///************************trendlyne post durability/Volatility/Momentum score start */

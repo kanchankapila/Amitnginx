@@ -173,17 +173,11 @@ export class DataapiService {
   gettrendlynestocks1(tlid,tlname,eqsymbol){
     return this.http.get('http://localhost:3000/api/trendlynestocks1?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
   }
-  gettrendlynestocks2(tlid,tlname,eqsymbol){
-    return this.http.get('http://localhost:3000/api/trendlynestocks2?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
-  }
+  
 
   
-  gettrendlynestocks3(tlid){
-    return this.http.get('http://localhost:3000/api/trendlynestocks3?tlid='+tlid)
-  }
-  gettrendlynestocksti(tlid){
-    return this.http.get('http://localhost:3000/api/trendlynestocksti?tlid='+tlid)
-  }
+  
+  
   gettrendlynenifty() {
     return this.http.get('http://localhost:3000/api/trendlynenifty')
   }
