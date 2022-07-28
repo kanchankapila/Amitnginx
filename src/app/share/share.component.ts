@@ -1,11 +1,19 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
-import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
 import axios from "axios";
-import wrapper  from "axios-cookiejar-support";
-import { CookieJar } from 'tough-cookie';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import * as  stocks from '../lists/stocklist'
+import * as bqstock from '../lists/bqlist'
+import * as etsector from '../lists/etsectorlist'
+import * as etindex from '../lists/etindexlist'
+import * as mcindex from '../lists/mcsectorlist'
+import { Chart,ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
+import {from,Observable} from 'rxjs';
 
 import {
   ChartComponent,
@@ -32,21 +40,6 @@ export type ChartOptions1 = {
 
 
 
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
-//import { StockChart } from 'angular-highcharts';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import * as  stocks from '../lists/stocklist'
-import * as bqstock from '../lists/bqlist'
-import * as etsector from '../lists/etsectorlist'
-import * as etindex from '../lists/etindexlist'
-import * as mcindex from '../lists/mcsectorlist'
-import 'chartjs-adapter-date-fns';
-import 'chartjs-chart-financial';
-import { BaseChartDirective } from 'ng2-charts';
-import { Chart,ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
-
-import {from,Observable} from 'rxjs';
 
 
 
@@ -524,13 +517,13 @@ export class ShareComponent implements OnInit {
   //stockhighcharts: StockChart;
   visibleSidebar5;
   visibleSidebar6;
-  cookieValue = '';
+  
   
 
 
  
   
-  constructor( private cookieService: CookieService, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
+  constructor( private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) {
     
       }
    
