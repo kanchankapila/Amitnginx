@@ -4,11 +4,7 @@ const cluster = require('cluster');
 const { Pool, Client } = require('pg')
 var compression = require('compression');
 const numCPUs = require('os').cpus().length;
-
 const app = express();
-
-
-
 const redis = require('redis');
 const client = redis.createClient();
 const cors = require('cors');
@@ -26,57 +22,42 @@ app.use(bodyParser.raw());
 const fetch = require("node-fetch");
  const csrf = require('csurf');
 // const { Compress } = require('gzipper');
-
 //   const gzip = new Compress('./src', './dist', {
 //     verbose: true,
 //     brotli: true,
 //     deflate: true,
 //   });
-
 //   try {
 //     const files =  gzip.run();
 //     console.info('Compressed files: ', files);
 //   } catch (err) {
 //     console.error(err);
 //   }
-
 process.env.trendlynecookie='__utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.775644955.1603113261; .trendlyne=wd57cl51iuhsqelpnzzp4gj61efk6kc1; csrftoken=T2UOO9Ctk4IV1kHeOJtHAxy6gCnvF56GnP5xxtRO3RTzGGNrRSWqNON5PjgveTrg; _gid=GA1.2.1560088878.1658734228; _gat=1'
-
 var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
-
 const axios = require('axios');
 var html2json = require('html2json').html2json;
-   
-    
-
-
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
-
   // Fork workers.
   for (let i = 0; i < numCPUs; i++) {
     cluster.fork();
   }
-
   //Check if work id is died
   cluster.on('exit', (worker, code, signal) => {
     console.log(`worker ${worker.process.pid} died`);
   });
-
 } else {
   // This is Workers can share any TCP connection
   // It will be initialized using express
   console.log(`Worker ${process.pid} started`);
-
   app.get('/api/cluster', (req, res) => {
     let worker = cluster.worker.id;
     res.send(`Running on worker with id ==> ${worker}`);
   });
-
 const axiosCookieJarSupport = require('axios-cookiejar-support').default;
   const tough = require('tough-cookie');
- 
 const pool = new Pool({
   user: "postgres",
   host: "localhost",
@@ -90,7 +71,6 @@ const client = new Client({
   database: "amit",
   password: "amit0605",
   port: "5432"
-  
 })
 const sessionConfig = {
   secret: 'amit0605',
@@ -101,85 +81,51 @@ const sessionConfig = {
     sameSite: 'Lax', // THIS is the config you are looing for.
   }
 };
-
-
   app.set('trust proxy', 1); // trust first proxy
   sessionConfig.cookie.secure = true; // serve secure cookies
-
-
   app.use(function(req, res, next) {
    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET , PUT , POST , DELETE");
    next();
-  
-    
-    
 });
-
 //////////////////////////////////Moneycontrol Post request for MCvolume////////
 app.post('/api/mcvolume', async function (req, res) {
-
   let mcsymbol = req.body
-
   //console.log(req.body)
   const promises = mcsymbol.map(symbol => {
-  
-      
     axios.get('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/' + symbol.mcsymbol).then((response) => {
       var obj1 = ({ Date: symbol.Date,Time:symbol.time, Name: symbol.name,Symbol:symbol.mcsymbol, "CurrentVol": response.data.data.VOL, "FiveDVol": response.data.data.DVolAvg5, "TenDVol": response.data.data.DVolAvg10, "TwentyDVol": response.data.data.DVolAvg20, "ThirtyDVol": response.data.data.DVolAvg30,"CPrice":response.data.data.pricecurrent,"PChangeper":response.data.data.pricepercentchange,"StockName":response.data.data.SC_FULLNM })
-      
       console.log("executing mcvolume")
       pool.query('INSERT INTO mcvolume (info)  VALUES ($1)', [obj1], (err, res) => {
         console.log(err, res)
-        
       })
      // pool.end()
-     
-      
-
-     
-
     }).catch((error) => {
       console.log(error)
     })
   })
-
   try {
     await Promise.all(promises)
   } catch (e) {
     console.log(e)
   }
 })
-
-  
 app.post('/api/mcvolume1', async function (req, res) {
-
   let mcsymbol1 = req.body
-
   //console.log(req.body)
   const promises = mcsymbol1.map(symbol => {
-  
-      
     axios.get('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/' + symbol.mcsymbol1).then((response) => {
       var obj1 = ({ Date: symbol.Date,Time:symbol.time, Name: symbol.name,Symbol:symbol.mcsymbol, "CurrentVol": response.data.data.VOL, "FiveDVol": response.data.data.DVolAvg5, "TenDVol": response.data.data.DVolAvg10, "TwentyDVol": response.data.data.DVolAvg20, "ThirtyDVol": response.data.data.DVolAvg30,"CPrice":response.data.data.pricecurrent,"PChangeper":response.data.data.pricepercentchange,"StockName":response.data.data.SC_FULLNM })
-      
       console.log("executing mcvolume1")
       pool.query('INSERT INTO mcvolume (info)  VALUES ($1)', [obj1], (err, res) => {
         console.log(err, res)
-        
       })
      // pool.end()
-     
-      
-
-     
-
     }).catch((error) => {
       console.log(error)
     })
   })
-
   try {
     await Promise.all(promises)
   } catch (e) {
@@ -187,129 +133,65 @@ app.post('/api/mcvolume1', async function (req, res) {
   }
 })
 app.get('/api/kotakview', async function (req, res) {
-
   let eqsymbol = req.query.eqsymbol
-
-      
-     
       const result = await pool.query
-        
         ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'CompanyShortName' = $1", [eqsymbol]);
     // console.log(result.fields) 
      res.json(result.rows)
   //pool.end();
-
-     
-
     })
     app.get('/api/kotaksectorview', async function (req, res) {
-
       let sectorid = req.query.sectorid
     console.log(sectorid)
-          
-         
           const result = await pool.query
-            
             ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'SectorId' = $1", [sectorid]);
         // console.log(result.fields) 
          res.json(result.rows)
       //pool.end();
-    
-         
-    
         })
-      
-
 const { response } = require('express');
 const { json } = require('body-parser');
-
-
-
-
- 
 //This is MC Stock Data Details used in OHLC component using parallel api run
-
-
 ///////////////////////////////////////////// Market Mojos Data ,used in ohlc///////////////////////////////////////////
-
-
 /////////////////////////////////////////////////1.MarketMojos MACD,used in OHLC component/////////////////////////////////////////////////////
-
 ///////////////////////////////////////////////////////////7.MarketMojos Markets,used in OHLC component/////////////////////////////////////////////
-
 app.get('/api/mmmarkets', function (req, res) {
-
   //let mcsymbol = req.query.mcsymbol
-
   var url6 = 'https://frapi.marketsmojo.com/market_marketoverview/getData?';
   //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
   request(url6, function (error, response, html) {
     if (!error) {
-
       res.json(JSON.parse(response.body))
-
-
-
-
-
     }
   })
-
 })
 ///////////////////////////////////////////////////////////7.MarketMojos StockInfo,used in OHLC component/////////////////////////////////////////////
-
-
-
-
-
   app.get('/api/etsharetoday', function (req, res) {
-
     let eqsymbol = req.query.eqsymbol
-  
     var url6 = 'https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company'
     request(url6, function (error, response, html) {
       if (!error) {
-  
-  
         res.json(JSON.parse(response.body))
-  
-  
       }
     })
   })
   app.get('/api/etimesnews', function (req, res) {
-
   let mcsymbol = req.query.mcsymbol
-
   var url6 = 'https://economictimes.indiatimes.com/feed_marketslisting.cms?feedtype=json&msid=1977021501&curpg=1&callback=breakingnews'
   request(url6, function (error, response, html) {
     if (!error) {
-
-
       res.json((response.body))
-
-
     }
   })
-
-
 })
-
-
 ////********************************************Kotak Securities*****************/
 app.get('/api/kotakhealthscore', (req, res) => {
-  
     console.log("This is Kotak Health Score")
    // global.document = new JSDOM('https://trendlyne.com/getUserNavBar/').window.document;
    // console.log(global.document.cookie.cookie)
-
- 
- 
   var url11 = 'https://www.kotaksecurities.com/TSTerminal/Fundamentals/MasterData/GetHealthScoreScreenerData?sectorId=-1&marketCap=LC&healthScoreValue=A&defaultView=false';
   request(url11, function (error, response, html) {
     if (!error) {
-   
-
       var options2 = {
         url: 'https://mtrade.kotaksecurities.com/TSTerminal/Fundamentals/MasterData/GetHealthScoreScreenerData?sectorId=-1&marketCap=ALL&healthScoreValue=A&defaultView=true',
         method: 'GET', // Don't forget this line
@@ -330,46 +212,28 @@ app.get('/api/kotakhealthscore', (req, res) => {
         "body": null,
         "method": "GET"
       };
-
-
 request(options2, (err, response, body) => {
   if (err) {
       //console.log(err);
   } else {
     res.json(JSON.parse(response.body));
-   
-
-
-    
     const obj1 = ((JSON.parse(response.body)));
     console.log(obj1.length)
     console.log("executing kotaksecurities")
-
     for (let i = 0; i < obj1.length; i += 1){
       const obj2 = obj1[i];
       console.log(obj2)
       pool.query('INSERT INTO kotaksec (info) VALUES ($1)',[obj2], (err, res) => {
         console.log(err, res)
-        
       })
-      
     }
-      
-     
-       
- 
     }
 });
 }
   })
-  
 })
-
-
 ///*************************************Trendlyne********************************///
-
 ////////////////////////////////////////////////**************Trendlyne GET stock******************************/
-
 ////////////////////////////////To get Brokerage Upgrades and other details///////////////////////////////////
 //app.use(session(sessionConfig));
   app.get('/api/trendlynestocks1', (req, res) => {
@@ -377,15 +241,9 @@ request(options2, (err, response, body) => {
   let tlname = req.query.tlname
   let eqsymbol = req.query.eqsymbol
     console.log("This is tendlynestocks1")
-  
-
- 
- 
   var url11 = 'https://trendlyne.com/equity/getStockMetricParameterList/'+tlid;
   request(url11, function (error, response, html) {
     if (!error) {
-   
-
 var options2 = {
   url: 'https://trendlyne.com/equity/getStockMetricParameterList/'+tlid,
   method: 'GET', // Don't forget this line
@@ -408,8 +266,6 @@ var options2 = {
   "mode": "cors",
   "credentials": "include"
 };
-
-
 request(options2, (err, response, body) => {
   if (err) {
       //console.log(err);
@@ -420,12 +276,8 @@ request(options2, (err, response, body) => {
 });
 }
   })
-  
 })
-
-
   //////////////////////////To get Durability/Momentum/Volatility SCORE/////////////////////////////////////////////
-  
   app.get('/api/trendlynestocks2', (req, res) => {
     let eqsymbol = req.query.eqsymbol
     let tlid = req.query.tlid
@@ -433,23 +285,17 @@ request(options2, (err, response, body) => {
     var url11 = 'https://trendlyne.com/mapp/v1/stock/chart-data/'+tlid+'/SMA/';
     request(url11, function (error, response, html) {
       if (!error) {
-        
         res.json(JSON.parse(response.body))
-        
     }
     })
-    
   })
   /////////////////////////////////////Trendlyne Nifty///////////////////////////
   app.get('/api/trendlynenifty', (req, res) => {
-   
-   var url11 = 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1887/TJLOGSVLZL4FLXDWFH6TIVYB6A======/';
+   var url11 = 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1904/SMA';
     request(url11, function (error, response, html) {
       if (!error) {
-     
-  
         var options2 = {
-          url: 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1887/TJLOGSVLZL4FLXDWFH6TIVYB6A======/',
+          url: 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1904/SMA',
           method: 'GET', // Don't forget this line
           "headers": {
             "accept": "application/json, text/javascript, */*; q=0.01",
@@ -462,14 +308,12 @@ request(options2, (err, response, body) => {
             "sec-fetch-site": "same-origin",
             "x-requested-with": "XMLHttpRequest",
             "cookie":  process.env.trendlynecookie,
-            "Referer": "https://trendlyne.com/equity/1887/NIFTY50/nifty-50/",
+            "Referer": "https://trendlyne.com/equity/1904/NIFTYMETAL/nifty-metal/",
             "Referrer-Policy": "strict-origin-when-cross-origin"
           },
           "body": null,
           "method": "GET"
         };
-  
-  
   request(options2, (err, response, body) => {
     if (err) {
         //console.log(err);
@@ -480,16 +324,12 @@ request(options2, (err, response, body) => {
   });
   }
     })
-    
   })
   /////////////////////////////////////Trendlyne Nifty///////////////////////////
   app.get('/api/trendlynepharmanifty', (req, res) => {
-   
     var url11 = 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1905/URFM5UKYBSJM3HDF7EH5ZBSEP4======/';
      request(url11, function (error, response, html) {
        if (!error) {
-      
-   
          var options2 = {
            url: 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1905/URFM5UKYBSJM3HDF7EH5ZBSEP4======/',
            method: 'GET', // Don't forget this line
@@ -510,8 +350,6 @@ request(options2, (err, response, body) => {
            "body": null,
            "method": "GET"
          };
-   
-   
    request(options2, (err, response, body) => {
      if (err) {
          //console.log(err);
@@ -522,16 +360,12 @@ request(options2, (err, response, body) => {
    });
    }
      })
-     
    })
   /////////////////////////////////////Trendlyne Nifty///////////////////////////
   app.get('/api/trendlynebanknifty', (req, res) => {
-   
     var url11 = 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1898/NAUN63XDUGR6O4FV2UAQPDQWSA======/';
      request(url11, function (error, response, html) {
        if (!error) {
-      
-   
          var options2 = {
            url: 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1898/NAUN63XDUGR6O4FV2UAQPDQWSA======/',
            method: 'GET', // Don't forget this line
@@ -552,8 +386,6 @@ request(options2, (err, response, body) => {
            "body": null,
            "method": "GET"
          };
-   
-   
    request(options2, (err, response, body) => {
      if (err) {
          //console.log(err);
@@ -564,78 +396,51 @@ request(options2, (err, response, body) => {
    });
    }
      })
-     
    })
-    
-  
 	////////////////////////////////////////////TrendLyne Stocks///////////////////////////////////////////
     app.get('/api/trendlynestocks3', function (req, res) {
       let tlid = req.query.tlid
       var url6 = 'https://trendlyne.com/fundamentals/get-fundamental_results/'+tlid+'/'
         request(url6, function (error, response, html) {
           if (!error) {
-      
             console.log("This is tendlynestocks3")
            // res.json(((response.body)))
-           
           } else {
           //  console.log(error)
           }
         })
-      
-      
     })
-  
-   
-	  
-
 ///************************trendlyne post durability/Volatility/Momentum score start */
 //const axiosCookieJarSupport = require('axios-cookiejar-support').default;
   //const tough = require('tough-cookie');
 const instancetrendlyne = axios.create({ withCredentials: true });
   axiosCookieJarSupport(instancetrendlyne);
 instancetrendlyne.defaults.jar = new tough.CookieJar()
-
-
 app.post('/api/trendlynepostdvm', async function (req, res) {
   //obj1 = [];
   let tlid = req.body
-
   //console.log(req.body)
   const promises = tlid.map(symbol => {
-  
-      
     axios.get('https://trendlyne.com/mapp/v1/stock/web/ohlc/' + symbol.tlid).then((response) => {
       obj1=({ Date: symbol.Date,Time:symbol.time, Name: symbol.name,DurabilityScore: response.data.body.stockData[6], VolatilityScore: response.data.body.stockData[7], MomentumScore: response.data.body.stockData[8]  })
-      
     }).catch((error) => {
       console.log(error)
     })
   })
-
   try {
     await Promise.all(promises)
   } catch (e) {
     console.log(e)
   }
 })
-
-
 //###########################################################################################################################
 ///////////////////////////////////////////////////Rediff///////////////////////////////////////////////////////////////
-
 /////////////////////////////////////////////////////NSE INDIA/////////////////////////////////////////////////////////
 //// Data from NSE India////
-
-  
 const instance = axios.create({ withCredentials: true });
   axiosCookieJarSupport(instance);
 instance.defaults.jar = new tough.CookieJar()
-
 //////////////////////////////////////////////////////Upcoming Results Data from NSE///////////////////////////////////////
-
-
-
 //app.use(session(sessionConfig));
 app.get('/api/trendlynepost', function (req, res) {
   req=fetch("https://trendlyne.com/equity/api/getLivePriceList/", {
@@ -660,7 +465,6 @@ app.get('/api/trendlynepost', function (req, res) {
   });
   //console.log(res)
 })
-
 // To get Stock Historical Data from NSE India
 app.get('/api/nsestockhistdata', function (req, res) {
   let stock = req.query.stock
@@ -669,12 +473,7 @@ app.get('/api/nsestockhistdata', function (req, res) {
     .then(data => res.json(data.data))
     .catch(data => console.error(res.response))
 })
-
-
-
-
 //NSE Insider Trading
-
 app.get('/api/nseinstrading', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
@@ -682,9 +481,6 @@ app.get('/api/nseinstrading', function (req, res) {
     .then(data => res.json(data.data))
     .catch(data => console.error(res.response))
 })
-
-
-
 app.get('/api/nsedatastockohlc2', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
@@ -692,15 +488,12 @@ app.get('/api/nsedatastockohlc2', function (req, res) {
     .then(data => res.json(data.data))
     .catch(data => console.error(res.response))
 })
-
-
 app.get('/api/nseresults', function (req, res) {
   //let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/event-calendar?index=equities&subject=Financial%20Results'), {
        headers: {
          //cookie: res.headers['bm_sv=9C569B42FD024DAAE1EA21E9C6625106~sAy0A2tWyRGfKiKgjYablYBwApJeI7lHR2L4QM6VUe6RLHSCnWqb+/8xIleZ/RXz5qq466jHokK0jwchB7mcm9dPG3TyfavX2KkiUtjSJYGPB2wCUwDl9rsDviygHC9qzGdl/s3XEqmEPsjYtDJEOJZxlYsd2wMfd2wBqe8hDNk=; Domain=.nseindia.com; Path=/; Max-Age=7191; HttpOnly'],
-        
            "User-Agent": "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)",
          "Referer": "http://www.nseindia.com/",
            "Host": "http://www.nseindia.com/",
@@ -711,39 +504,29 @@ app.get('/api/nseresults', function (req, res) {
     .then(data => res.json(data.data))
     .catch(data => console.error(res.response))
 })
-
 app.get('/api/nsedatastockohlc1', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/quote-equity?symbol='+stock))
     .then(data => res.json(data.data))
     .catch(data => console.error(res.response))
-    
-  
 })
-    
   /// Indices related Data from nseindia// To be used in ////  
 app.get('/api/nsedata2', function (req, res) {
-    
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/equity-stockIndices?index=NIFTY%2050'))
     .then(data => res.json(data.data))
     .catch(data => console.error(res.response))
 })
  /// F&O related Data from nseindia// To be used in Future and Options ////  
-
-
 app.get('/api/nsedata4', function (req, res) {
-    
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/liveEquity-derivatives?index=top20_contracts'))
     .then(data => res.json(data.data))
     .catch(data => console.error(res.response))
 })  
-
 //Nifty Indices Advance Decline Data
 app.get('/api/nsedataadvdec', function (req, res) {
-    
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www1.nseindia.com/common/json/indicesAdvanceDeclines.json'))
     .then(data => res.json(data.data))
@@ -751,7 +534,6 @@ app.get('/api/nsedataadvdec', function (req, res) {
 })
 //Nifty Indices Change in indices prices
 app.get('/api/nsedataindices', function (req, res) {
-    
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www1.nseindia.com/homepage/Indices1.json'))
     .then(data => res.json(data.data))
@@ -764,8 +546,6 @@ app.get('/api/nsedatasioi', function (req, res) {
     .then(data => instance.get('https://www1.nseindia.com/live_market/dynaContent/live_analysis/oi_spurts/topPositiveOIChangeData.json'))
     .then(data => res.json(data.data))
     .catch(data => console.error(res.response))
-    
-  
 })
 //Nifty Indices and stocks showing price increase  OI increase
 app.get('/api/nsedatapioii', function (req, res) {
@@ -774,10 +554,7 @@ app.get('/api/nsedatapioii', function (req, res) {
     .then(data => instance.get('https://www1.nseindia.com/live_market/dynaContent/live_analysis/oi_spurts/riseInPriceRiseInOI.json'))
     .then(data => res.json(data.data))
     .catch(data => console.error(res.response))
-    
-  
 })
-
 //NSE nifty Pharma OI Data
 app.get('/api/nsedatapniftyoi', function (req, res) {
   let stock = req.query.stock
@@ -785,54 +562,36 @@ app.get('/api/nsedatapniftyoi', function (req, res) {
     .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY'))
     .then(data => res.json(data.data))
     .catch(data => console.error(res.response))
-    
-  
 })
-
-
 app.get('/api/nsedatastockoi', function (req, res) {
   let stock = req.query.stock
   instance.get('https://www.nseindia.com/')
     .then(data => instance.get('https://www.nseindia.com/api/option-chain-equities?symbol='+stock))
     .then(data => res.json(data.data))
     .catch(data => console.error(res.response))
-    
-  
 })
-
 app.get('/api/nse22', function (req, res) {
   let mcsymbol = req.query.mcsymbol
-
   // url11=('https://www1.nseindia.com/corporates/corpInfo/equities/getResultCalendar.jsp?Symbol=&Industry=&Period=All%20Forthcoming&Purpose=&period=All%20Forthcoming&symbol=&industry=&purpose=');
   // request(axios.get(url11), function (error, response, html) {
   //   if (!error) {
-
   //     // res.json(JSON.parse(response.body))
   //     console.log(response.data)
-
-
    // }
  // })
   return axios.get('https://www1.nseindia.com/corporates/corpInfo/equities/getResultCalendar.jsp?Symbol=&Industry=&Period=All%20Forthcoming&Purpose=&period=All%20Forthcoming&symbol=&industry=&purpose=')
  // console.log(axios.get('https://www1.nseindia.com/corporates/corpInfo/equities/getResultCalendar.jsp?Symbol=&Industry=&Period=All%20Forthcoming&Purpose=&period=All%20Forthcoming&symbol=&industry=&purpose='))
 })
-
-
 ////////////////////////////////////////////NSE POST DATA/////////////////////////////////////////////////////////////
-
 app.post('/api/nsepostdata1', async function (req, res) {
-  
   let eqsymbol1 = req.body
   var obj = [];
   const promises = eqsymbol1.map(symbol => {
-   
-      
     instance.get('https://www.nseindia.com/')
       .then(data => instance.get('https://www.nseindia.com/api/quote-equity?symbol=' + symbol.eqsymbol1 + '&section=trade_info'))
       .then(data => {
         if (data.data['securityWiseDP']['deliveryToTradedQuantity']) {
           obj=({ symbol: symbol.eqsymbol1, percentage: data.data['securityWiseDP']['deliveryToTradedQuantity'] })
-        
         } else { console.log("No deliveryToTradedQuantity present ") }
       }
     )
@@ -842,39 +601,24 @@ app.post('/api/nsepostdata1', async function (req, res) {
   }).catch((error) => {
             console.log(error)
           })
-
- 
-      
-      
-      
-    
     .catch(data => console.error("There is error"))   
-
-  
-  
-  
   try {
     await Promise.all(promises)
   } catch (e) {
     console.log(e)
   }
 })
-
 //To get via post request from NSE stocks PCR//working but getting duplicate id issue as well
 app.post('/api/nsepostdata2', async function (req, res) {
-  
   let eqsymbol1 = req.body
   //var obj = [];
   const promises = eqsymbol1.map(symbol => {
-   
-      
     instance.get('https://www.nseindia.com/')
       .then(data => instance.get('https://www.nseindia.com/api/option-chain-equities?symbol='+symbol.eqsymbol1))
       .then(data => {
         //console.log(data.data['filtered'])
           if (data.data['filtered']['CE']['totOI'] && data.data['filtered']['PE']['totOI']) {
             var obj=({ symbol: symbol.eqsymbol1, pcr: data.data['filtered']['PE']['totOI']/data.data['filtered']['CE']['totOI'] })
-        
           } else { console.log("No Put/Call present ") }
         }
       )
@@ -884,140 +628,82 @@ app.post('/api/nsepostdata2', async function (req, res) {
     }).catch((error) => {
               console.log(error)
             })
-  
-   
-        
-        
-        
-      
       .catch(data => console.error("There is error"))   
-  
     //})
-  
-    
     try {
       await Promise.all(promises)
     } catch (e) {
       console.log(e)
     }
   })
-
 // To get Nifty PCR Data from Opstra
 app.get('/api/opstradatanifty', function (req, res) {
   let nextexpiry = req.query.nextexpiry
-  
-
   var url11 = 'https://opstra.definedge.com/api/openinterest/free/NIFTY&'+nextexpiry
   request(url11, function (error, response, html) {
     if (!error) {
-
       res.json(JSON.parse(response.body))
-
-
     }
   })
-
-
 })
 //To get BANK NIFTY Data from Opstra
 app.get('/api/opstradatabanknifty', function (req, res) {
   let nextexpiry = req.query.nextexpiry
-  
-
   var url11 = 'https://opstra.definedge.com/api/openinterest/free/NIFTY&'+nextexpiry
   request(url11, function (error, response, html) {
     if (!error) {
-
       res.json(JSON.parse(response.body))
-
-
     }
   })
-
-
 })
 //To get stock data from Opstra
 app.get('/api/opstrastockdata', function (req, res) {
   let nextexpirymonthly = req.query.nextexpirymonthly
   let eqsymbol = req.query.eqsymbol
- 
   //console.log("nextexpirymonthly="+nextexpirymonthly,"symbol="+eqsymbol)
   var url11 = 'https://opstra.definedge.com/api/openinterest/free/'+eqsymbol+'&'+nextexpirymonthly
   request(url11, function (error, response, html) {
     if (!error) {
-
       res.json(JSON.parse(response.body))
-
-
     }
   })
-
-
 })
-
-
 /////////////////////////////////////////////Kite/Zerodha/Stock Reports///////////////////////////////////////////////////
 //Getting Technicals from Zerodha
 app.get('/api/kite1', function (req, res) {
   let timeframe = req.query.timeframe
   let eqsymbol = req.query.eqsymbol
-  
   var url11 = 'https://mo.streak.tech/api/tech_analysis/?timeFrame='+timeframe+'&stock=NSE%3A'+eqsymbol+'&user_id=';
   request(url11, function (error, response, html) {//console.log(response)
     if (!error) {
-      
       res.json(JSON.parse(response.body))
-
-
     }
   })
 })
-
-
-
-  
-
-
 /////////////////////////////////////*****************************NIFTY TRADERS******************///////////////////////////
-
 app.get('/api/niftytradersallstocks', async function (req, res) {
-
   var url11 = 'https://api.niftytrader.in/api/NIndex/stocks_list_api';
   request(url11, function (error, response, html) {//console.log(response)
     if (!error) {
-      
       res.json(JSON.parse(response.body))
-
-
     }
   })
 })
-
-
-    
-  
 app.get('/api/ntniftypcr', function (req, res) {
-
   var url11 = 'https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr';
   request(url11, function (error, response, html) {//console.log(response)
     if (!error) {
-      
       res.json(JSON.parse(response.body))
-
-
     }
   })
 })
-
   /////////////Nifty trader POST request////////////////
-  
   app.get('/api/ntstockdetails', (req, res) => {
     let eqsymbol = req.query.eqsymbol
     //console.log(eqsymbol)
     var url11 = 'https://api.niftytrader.in/webapi/Live/stockAnalysis';
     request(url11, function (error, response, html) {
       if (!error) {
-        
       var options2 = {
     url: 'https://api.niftytrader.in/webapi/Live/stockAnalysis',
     method: 'POST', // Don't forget this line
@@ -1039,29 +725,22 @@ app.get('/api/ntniftypcr', function (req, res) {
     "mode": "cors",
     "credentials": "omit"
   }
-  
   request(options2, (err, response, body) => {
     if (err) {
         //console.log(err);
     } else {
       ( res.json(JSON.parse(body)));
-    
     }
   });
   }
     })
-    
   })
-
   /////////////Nifty trader stock POST request to get pcr////////////////
-  
   app.get('/api/ntstockpcrdetails', (req, res) => {
     let eqsymbol = req.query.eqsymbol
-    
     var url11 = 'https://api.niftytrader.in/webapi/Live/kiteInstrumentNfoListNew';
     request(url11, function (error, response, html) {
       if (!error) {
-        
       var options2 = {
     url: 'https://api.niftytrader.in/webapi/Live/kiteInstrumentNfoListNew',
     method: 'POST', // Don't forget this line
@@ -1082,23 +761,17 @@ app.get('/api/ntniftypcr', function (req, res) {
     "body": '{\"symbol\":\"'+eqsymbol+'\"}',
   "method": "POST"
   }
-  
   request(options2, (err, response, body) => {
     if (err) {
         //console.log(err);
     } else {
-     
       ( res.json(JSON.parse(body)));
-    
     }
   });
   }
     })
-    
   })
- 
   //////////////Nifty Trader Post Request to get nr7 for Stocks in nr7 database on postgres,dropdown in Actions submits request///////
-  
   app.post('/api/nr7', async function (req, res) {
     let eqsymbol = req.body
    const promises = eqsymbol.map(symbol => {
@@ -1107,7 +780,6 @@ app.get('/api/ntniftypcr', function (req, res) {
       request(url11, function (error, response, html) {
         if (error) {
           console.log(error)
-        
       }
      else if (!error) {
     var options2 = {
@@ -1131,10 +803,8 @@ app.get('/api/ntniftypcr', function (req, res) {
     "mode": "cors",
     "credentials": "omit"
    }
-   
    request(options2, (err, response, body,res) => {
     if (err) {
-      
     } else {
       data = JSON.parse(response.body)
       data2 = data["resultData"]["stocktrend"]
@@ -1149,12 +819,7 @@ app.get('/api/ntniftypcr', function (req, res) {
       console.log("executing nr7")
       pool.query('INSERT INTO nr7 (info)  VALUES ($1)', obj1, (err, res) => {
         console.log(err, res)
-        
       })
-  
-   
-    
-    
     }
    });
    }
@@ -1169,16 +834,13 @@ app.get('/api/ntniftypcr', function (req, res) {
 //////////////////////////////////////Nifty Trader EOD Screeners Post/////////////////////////////////
   app.post('/api/nteodscreeners', (req, res) => {
     let ntoptions = req.body
-    
     console.log(JSON.stringify(ntoptions))
   var url11 = 'https://api.niftytrader.in/webapi/Screener/getAdvanceEodScreenerFilter';
   request(url11, function (error, response, html) {
     if (!error) {
-      
     var options2 = {
   url: 'https://api.niftytrader.in/webapi/Screener/getAdvanceEodScreenerFilter',
   method: 'POST', // Don't forget this line
-  
     "headers": {
       "accept": "application/json, text/plain, */*",
       "accept-language": "en-US,en;q=0.9",
@@ -1199,31 +861,24 @@ app.get('/api/ntniftypcr', function (req, res) {
     "mode": "cors",
     "credentials": "include"
 }
-
 request(options2, (err, response, body) => {
   if (err) {
       //console.log(err);
   } else {
     ( res.json(JSON.parse(body)));
-  
   }
 });
 }
   })
-  
 })
-
 /////////////////////////////////NT EOD Screener Get////////////////////
 app.get('/api/nteodscreeners1', (req, res) => {
- 
 var url11 = 'https://api.niftytrader.in/webapi/Screener/getAdvanceEodScreenerFilter';
 request(url11, function (error, response, html) {
   if (!error) {
-    
   var options2 = {
 url: 'https://api.niftytrader.in/webapi/Screener/getAdvanceEodScreenerFilter',
 method: 'POST', // Don't forget this line
-
   "headers": {
     "accept": "application/json, text/plain, */*",
     "accept-language": "en-US,en;q=0.9",
@@ -1244,42 +899,30 @@ method: 'POST', // Don't forget this line
   "mode": "cors",
   "credentials": "include"
 }
-
 request(options2, (err, response, body) => {
 if (err) {
     //console.log(err);
 } else {
   ( res.json(JSON.parse(body)));
-
 }
 });
 }
 })
-
 })
-  
-  
-
 app.use(express.static(__dirname+"/"));
  app.use(express.static(path.join(__dirname, '/dist/amitnginx')))
  app.get("/*", function (req, res) {
-
    res.sendFile(path.join(__dirname,'/dist/amitnginx/index.html'));
  });
 // app.get("/ngsw-worker.js", function (req, res) {
-
 //   res.sendFile(path.join(__dirname +'/dist/amitnginx/ngsw-worker.js'));
 // });
 // app.get("/manifest.json", function (req, res) {
-
 //   res.sendFile(path.join(__dirname +'/dist/amitnginx/manifest.json'));
 // });
 // app.get("/ngsw.json", function (req, res) {
-
 //   res.sendFile(path.join(__dirname +'/dist/amitnginx/ngsw.json'));
 // });
-
-
 app.listen(3000, function() {
   console.log('Your node is running on port 3000');
 });
@@ -1292,11 +935,9 @@ app.listen(3000, function() {
 //   console.log('Your node is running on port 8090');
 //   var privateKey  = fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/key.pem', 'utf8');
 // var certificate = fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/server.crt', 'utf8');
-
 // var credentials = {key: privateKey, cert: certificate};
 // var httpServer = http.createServer(app);
 // var httpsServer = https.createServer(credentials, app);
-
 // http.createServer({
 //   // key: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/key.pem'),
 //   // cert: fs.readFileSync('C:/Users/Amit/stockapp/stockjava/stockjavaoriginal/server.crt')

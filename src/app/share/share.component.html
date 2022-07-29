@@ -1,163 +1,138 @@
-<script>src="https://cdnjs.cloudflare.com/ajax/libs/primeng/13.4.1/resources/components/sidebar/sidebar.min.css"</script>
+<script>src = "https://cdnjs.cloudflare.com/ajax/libs/primeng/13.4.1/resources/components/sidebar/sidebar.min.css"</script>
 <br>
 <br>
 <div class="InsideContent">
-<div  *ngFor="let tile of omrscore trackBy: trackByFuntion37" [ngClass]="{
+  <div *ngFor="let tile of omrscore trackBy: trackByFuntion37" [ngClass]="{
   'card12 bg-gradient-bear text-black':5 > tile.text1,
   'card13 bg-gradient-bull text-black':tile.text1 > 5,
   'card14 bg-gradient-warning text-black':tile.text1 == 5}">{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
-</div>
-<div  *ngFor="let tile of rbsscore trackBy: trackByFuntion41" [ngClass]="{
+  </div>
+  <div *ngFor="let tile of rbsscore trackBy: trackByFuntion41" [ngClass]="{
   'card12 bg-gradient-bull text-black':20 > tile.text1,
   'card13 bg-gradient-bear text-black':tile.text1 > 20,
   'card14 bg-gradient-warning text-black':tile.text1 == 20}">{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
-</div>
-<div  *ngFor="let tile of stockpcr trackBy: trackByFuntion43" [ngClass]="{
-  'card12 bg-gradient-bear text-black':0.80 > tile.text2,
-  'card13 bg-gradient-bull text-black':tile.text1 > 0.80,
-  'card14 bg-gradient-warning text-black':tile.text1 == 0.80}">{{tile.text1}}<br>&nbsp;&nbsp;{{tile.text2}}
-</div>
-
-<div  *ngFor="let tile of maxpain trackBy: trackByFuntion44" class='card12 bg-gradient-bear text-black'>{{tile.text1}}<br>&nbsp;&nbsp;{{tile.text2}}
-</div>
-<div *ngFor="let tile of brokertarget trackBy: trackByFuntion10" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}"><h4>{{tile.text1}}&nbsp;[{{tile.text2}}]</h4></div>
+  </div>
+  <div *ngFor="let tile of stockpcr trackBy: trackByFuntion43" [ngClass]="{
+  'card12 bg-gradient-bear text-black': 0.80 > tile.text2,
+  'card13 bg-gradient-bull text-black': tile.text1 > 0.80,
+  'card14 bg-gradient-warning text-black': tile.text1 == 0.80}">{{tile.text1}}<br>&nbsp;&nbsp;{{tile.text2}}
+  </div>
+  <div *ngFor="let tile of maxpain trackBy: trackByFuntion44" class='card12 bg-gradient-bear text-black'>
+    {{tile.text1}}<br>&nbsp;&nbsp;{{tile.text2}}
+  </div>
+  <div *ngFor="let tile of brokertarget trackBy: trackByFuntion10"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    <h4>{{tile.text1}}&nbsp;[{{tile.text2}}]</h4>
+  </div>
 </div>
 <div class=" grid-margin stretch-card">
   <div class="content  container">
-    
     <div fxLayout="row wrap" fxLayoutGap="10px grid">
-      <div fxFlex="33" fxFlex.xs="100%" fxFlex.sm="100%"  *ngFor="let tile of stockdetails trackBy: trackByFuntion42">
-        
+      <div fxFlex="33" fxFlex.xs="100%" fxFlex.sm="100%" *ngFor="let tile of stockdetails trackBy: trackByFuntion42">
         <div class="text-white type1-bold cardbear1 grid-margin stretch-card" [ngClass]="{ 
                     'bg-gradient-bull': tile.text3 > 0,
                     'bg-gradient-bear2': 0 > tile.text3 ,
-                    'bg-gradient-neutral': tile.text3 == 0 }"><h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text1}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text4}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text3}}%</h1>
+                    'bg-gradient-neutral': tile.text3 == 0 }">
+          <h1>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text1}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text4}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text3}}%
+          </h1>
+        </div>
       </div>
-       
-      </div>
-    </div>
     </div>
   </div>
+</div>
 NR7:{{nr7}}
 <div class="InsideContent1">
-  <button pButton type="button" (click)="visibleSidebar6 = true" icon="pi pi-arrow-right" label="Good/Bad/Neutral" class="p-button-raised p-button-success p-button-outlined"></button>
-<button pButton type="button" (click)="visibleSidebar5 = true" icon="pi pi-arrow-right" label="Insights" style=float:right class="p-button-raised p-button-success p-button-outlined"></button>
+  <button pButton type="button" (click)="visibleSidebar6 = true" icon="pi pi-arrow-right" label="Good/Bad/Neutral"
+    class="p-button-raised p-button-success p-button-outlined"></button>
+  <button pButton type="button" (click)="visibleSidebar5 = true" icon="pi pi-arrow-right" label="Insights"
+    style=float:right class="p-button-raised p-button-success p-button-outlined"></button>
 </div>
 <div [innerHtml]="hmsg"></div>
 <div class="InsideContent">
-<div class="col-lg-5 card content container">
-  <h4 class="mb-5">Scores</h4>
-<div class="grid-margin stretch-card" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex="25">
- 
-    
-    <div  fxLayout="row wrap" fxLayoutGap="16px grid">
-      <div  *ngFor="let tile of fscore  trackBy: trackByFuntion1" [ngClass]="{
+  <div class="col-lg-5 card content container">
+    <h4 class="mb-5">Scores</h4>
+    <div class="grid-margin stretch-card" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex="25">
+      <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div *ngFor="let tile of fscore  trackBy: trackByFuntion1" [ngClass]="{
         'card2 bg-gradient-bull text-black':tile.text === 'green'||'Green',
         'card3 bg-gradient-bear text-black':tile.text === 'red',
-        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}"><br>Financial<br>&nbsp;&nbsp;{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
-      </div>
-      <div *ngFor="let tile of qscore  trackBy: trackByFuntion2" [ngClass]="{
+        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}">
+          <br>Financial<br>&nbsp;&nbsp;{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
+        </div>
+        <div *ngFor="let tile of qscore  trackBy: trackByFuntion2" [ngClass]="{
         'card2 bg-gradient-bull text-black':tile.text === 'green'||'Green',
         'card3 bg-gradient-bear text-black':tile.text === 'red',
-        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}"><br>Quality<br>&nbsp;&nbsp;{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
-      </div>
-      
-      <div  *ngFor="let tile of techscore trackBy: trackByFuntion3" [ngClass]="{
+        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}">
+          <br>Quality<br>&nbsp;&nbsp;{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
+        </div>
+        <div *ngFor="let tile of techscore trackBy: trackByFuntion3" [ngClass]="{
         'card2 bg-gradient-bull text-black':tile.text === 'green'||'Green',
         'card3 bg-gradient-bear text-black':tile.text === 'red',
-        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}"><br>Technicals<br>{{tile.text2}}<br>{{tile.text1}}
-      
-      
-      
-      </div>
-      <div  *ngFor="let tile of vscore trackBy: trackByFuntion4" [ngClass]="{
+        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}">
+          <br>Technicals<br>{{tile.text2}}<br>{{tile.text1}}
+        </div>
+        <div *ngFor="let tile of vscore trackBy: trackByFuntion4" [ngClass]="{
         'card2 bg-gradient-bull text-black':tile.text === 'green'||'Green',
         'card3 bg-gradient-bear text-black':tile.text === 'red',
-        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}"><br>Valuation<br>{{tile.text2}}<br>&nbsp;{{tile.text1}}
-     
-     
-     </div>
-     <div  *ngFor="let tile of volscore trackBy: trackByFuntion6" [ngClass]="{
+        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}">
+          <br>Valuation<br>{{tile.text2}}<br>&nbsp;{{tile.text1}}
+        </div>
+        <div *ngFor="let tile of volscore trackBy: trackByFuntion6" [ngClass]="{
       'card2 bg-gradient-bull text-black':tile.text2 === 'positive',
       'card3 bg-gradient-bear text-black':tile.text2 === 'negative',
       'card4 bg-gradient-warning text-black':tile.text2 === 'neutral'}"><br>Volatility<br>&nbsp;&nbsp;{{tile.text1}}
-   
-   
-   </div>
-   <div  *ngFor="let tile of dscore trackBy: trackByFuntion7" [ngClass]="{
+        </div>
+        <div *ngFor="let tile of dscore trackBy: trackByFuntion7" [ngClass]="{
     'card2 bg-gradient-bull text-black':tile.text2 === 'positive',
     'card3 bg-gradient-bear text-black':tile.text2 === 'negative',
     'card4 bg-gradient-warning text-black':tile.text2 === 'neutral'}"><br>Durability<br>&nbsp;&nbsp;{{tile.text1}}
- </div>
- <div  *ngFor="let tile of mscore trackBy: trackByFuntion5" [ngClass]="{
+        </div>
+        <div *ngFor="let tile of mscore trackBy: trackByFuntion5" [ngClass]="{
   'card2 bg-gradient-bull text-black':tile.text2 === 'positive',
   'card3 bg-gradient-bear text-black':tile.text2 === 'negative',
   'card4 bg-gradient-warning text-black':tile.text2 === 'neutral'}"><br>Momentum<br>&nbsp;&nbsp;{{tile.text1}}
-
-
-</div>
-<div  *ngFor="let tile of divscore trackBy: trackByFuntion34" [ngClass]="{
+        </div>
+        <div *ngFor="let tile of divscore trackBy: trackByFuntion34" [ngClass]="{
   'card2 bg-gradient-bear text-black':5 > tile.text1,
   'card3 bg-gradient-bull text-black':tile.text1 > 5,
   'card4 bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
-
-
-</div>
-<div  *ngFor="let tile of growthscore trackBy: trackByFuntion35" [ngClass]="{
+        </div>
+        <div *ngFor="let tile of growthscore trackBy: trackByFuntion35" [ngClass]="{
   'card2 bg-gradient-bear text-black':5 > tile.text1,
   'card3 bg-gradient-bull text-black':tile.text1 > 5,
   'card4 bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
-
-
-</div>
-<div  *ngFor="let tile of healthscore trackBy: trackByFuntion36" [ngClass]="{
+        </div>
+        <div *ngFor="let tile of healthscore trackBy: trackByFuntion36" [ngClass]="{
   'card2 bg-gradient-bear text-black':5 > tile.text1,
   'card3 bg-gradient-bull text-black':tile.text1 > 5,
   'card4 bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
-
-
-</div>
-<div  *ngFor="let tile of kvscore trackBy: trackByFuntion38" [ngClass]="{
+        </div>
+        <div *ngFor="let tile of kvscore trackBy: trackByFuntion38" [ngClass]="{
   'card2 bg-gradient-bear text-black':5 > tile.text1,
   'card3 bg-gradient-bull text-black':tile.text1 > 5,
   'card4 bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
-
-
-</div>
-<div  *ngFor="let tile of kqscore trackBy: trackByFuntion39" [ngClass]="{
+        </div>
+        <div *ngFor="let tile of kqscore trackBy: trackByFuntion39" [ngClass]="{
   'card2 bg-gradient-bear text-black':5 > tile.text1,
   'card3 bg-gradient-bull text-black':tile.text1 > 5,
   'card4 bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
-
-
-</div>
-<div  *ngFor="let tile of ppscore trackBy: trackByFuntion40" [ngClass]="{
+        </div>
+        <div *ngFor="let tile of ppscore trackBy: trackByFuntion40" [ngClass]="{
   'card2 bg-gradient-bear text-black':5 > tile.text1,
   'card3 bg-gradient-bull text-black':tile.text1 > 5,
   'card4 bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
-
-
-</div>
-
+        </div>
+      </div>
     </div>
-    
-  
-</div>
-</div>
-
-
-
-
-
-
-
+  </div>
   <div class="col-lg-4 grid-margin stretch-card">
     <div class="content card container">
       <h4 class="mb-5">Daily Technical Indicators</h4>
       <div fxLayout="row wrap" fxLayoutGap="10px grid">
-        <div fxFlex="33" fxFlex.xs="100%" fxFlex.sm="100%"  *ngFor="let tile of stockindicators trackBy: trackByFuntion7">
-          <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
-          [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
+        <div fxFlex="33" fxFlex.xs="100%" fxFlex.sm="100%"
+          *ngFor="let tile of stockindicators trackBy: trackByFuntion7">
+          <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card" [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
                       'bg-gradient-bull1':tile.text3 === 'Oversold',
                       'bg-gradient-bull2':tile.text3 === 'Strong Trend',
                       'bg-gradient-bull3':tile.text3 === 'High Volatility',
@@ -171,20 +146,18 @@ NR7:{{nr7}}
                       'bg-gradient-bull5':tile.text3 > 1,
                       'bg-gradient-bear5':1 > tile.text3}">{{tile.text2}}<br>{{tile.text3}}
           </mat-card>
-         
         </div>
       </div>
-      </div>
     </div>
-    <div class="InsideContent1">
-      <div class="col-lg-13 grid-margin stretch-card">
-        <div class="content card container">
-          
-          <h4 class="mb-4">Crossover</h4>
-          <div fxLayout="row wrap" fxLayoutGap="16px grid">
-            <div fxFlex="30" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of stockcrossover trackBy: trackByFuntion8">
-              <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
-              [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
+  </div>
+  <div class="InsideContent1">
+    <div class="col-lg-13 grid-margin stretch-card">
+      <div class="content card container">
+        <h4 class="mb-4">Crossover</h4>
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+          <div fxFlex="30" fxFlex.xs="100%" fxFlex.sm="33%"
+            *ngFor="let tile of stockcrossover trackBy: trackByFuntion8">
+            <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card" [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
                           'bg-gradient-bull1':tile.text3 === 'Oversold',
                           'bg-gradient-bull2':tile.text3 === 'Strong Trend',
                           'bg-gradient-bull3':tile.text3 === 'High Volatility',
@@ -193,293 +166,273 @@ NR7:{{nr7}}
                           'bg-gradient-bear2':tile.text3 === 'Weak Trend',
                           'bg-gradient-bear3':tile.text3 === 'Low Volatility',
                           'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
-              </mat-card>
-             
-            </div>
-          </div>
+            </mat-card>
           </div>
         </div>
-       
-       
-        
-      <div class="col-lg-13 grid-margin stretch-card">
-        <div class="content card container">
-          
-          <h4 class="mb-4">Sentiment</h4>
-          <div fxLayout="row wrap" fxLayoutGap="16px grid">
-            <div fxFlex="30" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of stocksentiments trackBy: trackByFuntion9">
-              <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
-              [ngClass]="{'bg-gradient-bull':tile.text1 === 'Bullish',
+      </div>
+    </div>
+    <div class="col-lg-13 grid-margin stretch-card">
+      <div class="content card container">
+        <h4 class="mb-4">Sentiment</h4>
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+          <div fxFlex="30" fxFlex.xs="100%" fxFlex.sm="33%"
+            *ngFor="let tile of stocksentiments trackBy: trackByFuntion9">
+            <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card" [ngClass]="{'bg-gradient-bull':tile.text1 === 'Bullish',
                           'bg-gradient-bull1':tile.text1 === 'Very Bullish',
                           'bg-gradient-bear':tile.text1 === 'Bearish',
                           'bg-gradient-bear1':tile.text1 === 'Very Bearish',
                           'bg-gradient-warning':tile.text1 === 'Neutral'}">{{tile.text2}}<br>{{tile.text1}}
-              </mat-card>
-             
-            </div>
-          </div>
+            </mat-card>
           </div>
         </div>
       </div>
-    
+    </div>
   </div>
-   
-
-  <p-sidebar [(visible)]="visibleSidebar5" [fullScreen]="true" [baseZIndex]="10000">
-    <h6 style="font-weight:normal">Broker's Insight</h6>
-    
-    <p *ngFor="let tile of brokertarget trackBy: trackByFuntion10" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">{{tile.text1}}&nbsp;[{{tile.text2}}]</p>
-    
-    <p *ngFor="let tile of brokertargetupgrade trackBy: trackByFuntion11" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
-    <p *ngFor="let tile of brokertargetdowngrade trackBy: trackByFuntion12" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
-    <p *ngFor="let tile of brokerrecoupgrade trackBy: trackByFuntion13" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
-    <p *ngFor="let tile of brokerrecodowngrade trackBy: trackByFuntion14" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">{{tile.text1}}</p>
-    <h6 style="font-weight:normal">Technicals</h6>
-    <h6 style="font-weight:normal">EMA</h6>
-    <p *ngFor="let tile of ema_26 trackBy: trackByFuntion15" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
-    <p *ngFor="let tile of ema_50 trackBy: trackByFuntion16" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
-    <p *ngFor="let tile of ema_100 trackBy: trackByFuntion17" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
-    <p *ngFor="let tile of ema_200 trackBy: trackByFuntion18" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
-    <h6 style="font-weight:normal">SMA</h6>
-    <p *ngFor="let tile of sma_30 trackBy: trackByFuntion19" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
-    <p *ngFor="let tile of sma_50 trackBy: trackByFuntion20" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
-    <p *ngFor="let tile of sma_100 trackBy: trackByFuntion21" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
-    <p *ngFor="let tile of sma_200 trackBy: trackByFuntion22" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
-    <h6 style="font-weight:normal">MACD</h6>
-    <p *ngFor="let tile of macd1 trackBy: trackByFuntion23" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
-   
-   
-    <h6 style="font-weight:normal">RSI</h6>
-    <p *ngFor="let tile of rsi1 trackBy: trackByFuntion25" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
-    <h6 style="font-weight:normal">MFI</h6>
-    <p *ngFor="let tile of mfi1 trackBy: trackByFuntion26" [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">&rarr;{{tile.text1}}</p>
-  </p-sidebar>
-  <p-sidebar [(visible)]="visibleSidebar6" [fullScreen]="true" [baseZIndex]="10000">
-    <h6 style="font-weight:normal">Good/Bad/Neutral</h6>
- 
-<div class="InsideContent">
+</div>
+<p-sidebar [(visible)]="visibleSidebar5" [fullScreen]="true" [baseZIndex]="10000">
+  <h6 style="font-weight:normal">Broker's Insight</h6>
+  <p *ngFor="let tile of brokertarget trackBy: trackByFuntion10"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    {{tile.text1}}&nbsp;[{{tile.text2}}]</p>
+  <p *ngFor="let tile of brokertargetupgrade trackBy: trackByFuntion11"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    {{tile.text1}}</p>
+  <p *ngFor="let tile of brokertargetdowngrade trackBy: trackByFuntion12"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    {{tile.text1}}</p>
+  <p *ngFor="let tile of brokerrecoupgrade trackBy: trackByFuntion13"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    {{tile.text1}}</p>
+  <p *ngFor="let tile of brokerrecodowngrade trackBy: trackByFuntion14"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    {{tile.text1}}</p>
+  <h6 style="font-weight:normal">Technicals</h6>
+  <h6 style="font-weight:normal">EMA</h6>
+  <p *ngFor="let tile of ema_26 trackBy: trackByFuntion15"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of ema_50 trackBy: trackByFuntion16"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of ema_100 trackBy: trackByFuntion17"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of ema_200 trackBy: trackByFuntion18"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <h6 style="font-weight:normal">SMA</h6>
+  <p *ngFor="let tile of sma_30 trackBy: trackByFuntion19"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of sma_50 trackBy: trackByFuntion20"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of sma_100 trackBy: trackByFuntion21"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of sma_200 trackBy: trackByFuntion22"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <h6 style="font-weight:normal">MACD</h6>
+  <p *ngFor="let tile of macd1 trackBy: trackByFuntion23"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <h6 style="font-weight:normal">RSI</h6>
+  <p *ngFor="let tile of rsi1 trackBy: trackByFuntion25"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <h6 style="font-weight:normal">MFI</h6>
+  <p *ngFor="let tile of mfi1 trackBy: trackByFuntion26"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+</p-sidebar>
+<p-sidebar [(visible)]="visibleSidebar6" [fullScreen]="true" [baseZIndex]="10000">
+  <h6 style="font-weight:normal">Good/Bad/Neutral</h6>
+  <div class="InsideContent">
     <div class="col-lg-4 grid-margin stretch-card">
       <div class="content bg-gradient-success card">
         <h4 class="mb-5">Positives</h4>
-       
-          <div *ngFor="let tile of positive trackBy: trackByFuntion27">
-            <p class="text-green  grid-margin stretch-card">{{tile.text1}}&nbsp;:{{tile.text3}}Cr.</p>
-           </div>
-       </div>
-      </div>
-    
-      <div class="col-lg-4 grid-margin stretch-card">
-        <div class="content bg-gradient-danger card">
-          <h4 class="mb-5">Negatives</h4>
-         
-            <div *ngFor="let tile of negative trackBy: trackByFuntion28">
-              <p class="text-red grid-margin stretch-card"
-              >{{tile.text2}}<br>{{tile.text3}}&nbsp;{{tile.text1}}
-            </p>
-             
-           
-          </div>
-          </div>
-        </div>
-    
-        <div class="col-lg-4 grid-margin stretch-card">
-          <div class="content bg-gradient-warning card">
-            <h4 class="mb-5">Neutrals</h4>
-          
-              <div *ngFor="let tile of neutral trackBy: trackByFuntion29">
-                <p class="text-yellow grid-margin stretch-card"
-               >{{tile.text2}}<br>{{tile.text3}}&nbsp;{{tile.text1}}
-              </p>
-               
-              </div>
-            
-            </div>
-          </div>
-        </div>
-      </p-sidebar>
-        <div class="InsideContent">
-        <div class="col-lg-6 grid-margin  stretch-card">
-          <div class="card">
-           
-              <h4 class="mb-5">Delivery Percentage</h4>
-              <canvas baseChart height="250" [datasets]="DelivData" [labels]="DelivLabels" [type]="DelivChartType" [options]="stockChartOptions" ></canvas>
-           
-          </div>
-        </div>
-        <div class="col-lg-6 grid-margin  stretch-card">
-          <div class="card">
-           
-              <h4 class="mb-5">Volume</h4>
-              <canvas baseChart height="250" [datasets]="VolumeData" [labels]="VolumeLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
-           
-          </div>
+        <div *ngFor="let tile of positive trackBy: trackByFuntion27">
+          <p class="text-green  grid-margin stretch-card">{{tile.text1}}&nbsp;:{{tile.text3}}Cr.</p>
         </div>
       </div>
-    <p-tabView>
-      <p-tabPanel header="Today">
-        
-    
-    
-          <div class="col-lg-12 stretch-card">
-            <div class="card">
-              <div class="card-body">
-               
-                <div class="table-responsive pt-3">
-                  <table class="table table-bordered" *ngFor="let tile of stockema trackBy: trackByFuntion30" >
-                    <thead>
-                      <tr>
-                       
-                       <th>
-                          EMA5
-                        </th>
-                        <th>
-                          EMA10
-                        </th>
-                        <th>
-                          EMA20
-                        </th>
-                        <th>
-                          EMA30
-                        </th>
-                        <th>
-                          EMA50
-                        </th>
-                        <th>
-                          EMA100
-                        </th>
-                        <th>
-                          EMA200
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="table-success">
-                        <td>
-                         {{tile.text1| number : '1.2-2'}} 
-                        </td>
-                        <td>
-                          {{tile.text2| number : '1.2-2'}} 
-                         </td>
-                         <td>
-                          {{tile.text3| number : '1.2-2'}} 
-                         </td>
-                         <td>
-                          {{tile.text4| number : '1.2-2'}} 
-                         </td>
-                         <td>
-                          {{tile.text5| number : '1.2-2'}} 
-                         </td>
-                         <td>
-                          {{tile.text6| number : '1.2-2'}} 
-                         </td>
-                         <td>
-                          {{tile.text7| number : '1.2-2'}} 
-                         </td>
-                      </tr>
-                      
-                    </tbody>
-                  </table>
-                  <div class="col-lg-12 stretch-card">
-            
-                    <div class="table-responsive pt-3">
-                      <table class="table table-bordered" *ngFor="let tile of stocksma trackBy: trackByFuntion31" >
-                        <thead>
-                          <tr>
-                           
-                           <th>
-                              SMA5
-                            </th>
-                            <th>
-                              SMA10
-                            </th>
-                            <th>
-                              SMA20
-                            </th>
-                            <th>
-                              SMA30
-                            </th>
-                            <th>
-                              SMA50
-                            </th>
-                            <th>
-                              SMA100
-                            </th>
-                            <th>
-                              SMA200
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr class="table-danger">
-                            <td>
-                             {{tile.text1| number : '1.2-2'}} 
-                            </td>
-                            <td>
-                              {{tile.text2| number : '1.2-2'}} 
-                             </td>
-                             <td>
-                              {{tile.text3| number : '1.2-2'}} 
-                             </td>
-                             <td>
-                              {{tile.text4| number : '1.2-2'}} 
-                             </td>
-                             <td>
-                              {{tile.text5| number : '1.2-2'}} 
-                             </td>
-                             <td>
-                              {{tile.text6| number : '1.2-2'}} 
-                             </td>
-                             <td>
-                              {{tile.text7| number : '1.2-2'}} 
-                             </td>
-                          </tr>
-                          
-                        </tbody>
-                      </table>
-                    </div>
-                 
-              </div>
-                </div>
+    </div>
+    <div class="col-lg-4 grid-margin stretch-card">
+      <div class="content bg-gradient-danger card">
+        <h4 class="mb-5">Negatives</h4>
+        <div *ngFor="let tile of negative trackBy: trackByFuntion28">
+          <p class="text-red grid-margin stretch-card">{{tile.text2}}<br>{{tile.text3}}&nbsp;{{tile.text1}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 grid-margin stretch-card">
+      <div class="content bg-gradient-warning card">
+        <h4 class="mb-5">Neutrals</h4>
+        <div *ngFor="let tile of neutral trackBy: trackByFuntion29">
+          <p class="text-yellow grid-margin stretch-card">{{tile.text2}}<br>{{tile.text3}}&nbsp;{{tile.text1}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-sidebar>
+<div class="InsideContent">
+  <div class="col-lg-6 grid-margin  stretch-card">
+    <div class="card">
+      <h4 class="mb-5">Delivery Percentage</h4>
+      <canvas baseChart height="250" [datasets]="DelivData" [labels]="DelivLabels" [type]="DelivChartType"
+        [options]="stockChartOptions"></canvas>
+    </div>
+  </div>
+  <div class="col-lg-6 grid-margin  stretch-card">
+    <div class="card">
+      <h4 class="mb-5">Volume</h4>
+      <canvas baseChart height="250" [datasets]="VolumeData" [labels]="VolumeLabels" [type]="stockChartType"
+        [options]="stockChartOptions"></canvas>
+    </div>
+  </div>
+</div>
+<p-tabView>
+  <p-tabPanel header="Today">
+    <div class="col-lg-12 stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive pt-3">
+            <table class="table table-bordered" *ngFor="let tile of stockema trackBy: trackByFuntion30">
+              <thead>
+                <tr>
+                  <th>
+                    EMA5
+                  </th>
+                  <th>
+                    EMA10
+                  </th>
+                  <th>
+                    EMA20
+                  </th>
+                  <th>
+                    EMA30
+                  </th>
+                  <th>
+                    EMA50
+                  </th>
+                  <th>
+                    EMA100
+                  </th>
+                  <th>
+                    EMA200
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-success">
+                  <td>
+                    {{tile.text1| number : '1.2-2'}}
+                  </td>
+                  <td>
+                    {{tile.text2| number : '1.2-2'}}
+                  </td>
+                  <td>
+                    {{tile.text3| number : '1.2-2'}}
+                  </td>
+                  <td>
+                    {{tile.text4| number : '1.2-2'}}
+                  </td>
+                  <td>
+                    {{tile.text5| number : '1.2-2'}}
+                  </td>
+                  <td>
+                    {{tile.text6| number : '1.2-2'}}
+                  </td>
+                  <td>
+                    {{tile.text7| number : '1.2-2'}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="col-lg-12 stretch-card">
+              <div class="table-responsive pt-3">
+                <table class="table table-bordered" *ngFor="let tile of stocksma trackBy: trackByFuntion31">
+                  <thead>
+                    <tr>
+                      <th>
+                        SMA5
+                      </th>
+                      <th>
+                        SMA10
+                      </th>
+                      <th>
+                        SMA20
+                      </th>
+                      <th>
+                        SMA30
+                      </th>
+                      <th>
+                        SMA50
+                      </th>
+                      <th>
+                        SMA100
+                      </th>
+                      <th>
+                        SMA200
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="table-danger">
+                      <td>
+                        {{tile.text1| number : '1.2-2'}}
+                      </td>
+                      <td>
+                        {{tile.text2| number : '1.2-2'}}
+                      </td>
+                      <td>
+                        {{tile.text3| number : '1.2-2'}}
+                      </td>
+                      <td>
+                        {{tile.text4| number : '1.2-2'}}
+                      </td>
+                      <td>
+                        {{tile.text5| number : '1.2-2'}}
+                      </td>
+                      <td>
+                        {{tile.text6| number : '1.2-2'}}
+                      </td>
+                      <td>
+                        {{tile.text7| number : '1.2-2'}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
-    
-          
-          
-        
-    
-          
-          <div class="col-lg-18 grid-margin  stretch-card">
-            <div class="card">
-              
-                <h4 class="mb-2">Stock Today with S/R</h4>
-               
-               
-                <canvas baseChart height="100" [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" ></canvas>
-               
-             
-            </div>
-          </div>
-          <div class="col-lg-18 grid-margin  stretch-card">
-            <div class="card">
-              
-                <h4 class="mb-2">Stock Today </h4>
-               
-               
-          <canvas baseChart  [datasets]="stockData" [labels]="stockLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
         </div>
       </div>
-        
-    
-      </p-tabPanel>
-    <p-tabPanel header="1 Week">
-      <div class="col-lg-18 grid-margin stretch-card">
-        
-          <h4 class="mb-5">Weekly</h4>
-          <div fxLayout="row wrap" fxLayoutGap="16px grid">
-            <div fxFlex="9" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of stockindicatorsw trackBy: trackByFuntion32">
-              <mat-card class="text-black cardbear grid-margin stretch-card"
-              [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
+    </div>
+    <div class="col-lg-18 grid-margin  stretch-card">
+      <div class="card">
+        <h4 class="mb-2">Stock Today with S/R</h4>
+        <canvas baseChart height="100" [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels"
+          [options]="lineChartOptions"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-18 grid-margin  stretch-card">
+      <div class="card">
+        <h4 class="mb-2">Stock Today </h4>
+        <canvas baseChart [datasets]="stockData" [labels]="stockLabels" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="1 Week">
+    <div class="col-lg-18 grid-margin stretch-card">
+      <h4 class="mb-5">Weekly</h4>
+      <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex="9" fxFlex.xs="100%" fxFlex.sm="33%"
+          *ngFor="let tile of stockindicatorsw trackBy: trackByFuntion32">
+          <mat-card class="text-black cardbear grid-margin stretch-card" [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
                           'bg-gradient-bull1':tile.text3 === 'Oversold',
                           'bg-gradient-bull2':tile.text3 === 'Strong Trend',
                           'bg-gradient-bull3':tile.text3 === 'High Volatility',
@@ -488,96 +441,72 @@ NR7:{{nr7}}
                           'bg-gradient-bear2':tile.text3 === 'Weak Trend',
                           'bg-gradient-bear3':tile.text3 === 'Low Volatility',
                           'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
-              </mat-card>
-             
-            
-          </div>
-          </div>
+          </mat-card>
         </div>
-        <div class="col-lg-15 grid-margin  stretch-card">
-          <div class="card">
-           
-              <h4 class="mb-5">stock - 1 Week</h4>
-              <canvas baseChart  [datasets]="stock1wData" [labels]="stock1wLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
-           
-          </div>
-        </div>
-        
-        <div class="col-lg-15 grid-margin stretch-card ">
-          <div class="card">
-            <h1 class="mb-5" [innerHtml]="mamsg"></h1>
-              
-            <canvas baseChart height="75" [data]="maChartData" [options]="stockChartOptions" [type]="stockChartType" [options]="stockChartOptions"></canvas>
-           
-          </div>
-        </div>
-        
-        <div class="col-lg-15 grid-margin stretch-card ">
-          <div class="card">
-           <h1 class="mb-5" [innerHtml]="bbmsg">&nbsp;</h1>
-             
-              
-           <canvas baseChart height="75" [data]="bbChartData" [options]="stockChartOptions" [type]="stockChartType" [options]="stockChartOptions"></canvas>
-           
-          </div>
-        </div>
-        
-        <div class="col-lg-15 grid-margin stretch-card ">
-          <div class="card">
-            <h1 class="mb-5" [innerHtml]="macdmsg"></h1>
-            
-              
-              <canvas baseChart height="75" [data]="macdChartData" [options]="stockChartOptions" [type]="stockChartType" [options]="stockChartOptions"></canvas>
-          </div>
-        </div>
-        <div class="col-lg-15 grid-margin stretch-card ">
-          <div class="card">
-            <h1 class="mb-5" [innerHtml]="rsimsg"></h1>
-          
-            <canvas baseChart height="75" [data]="rsiChartData" [options]="stockChartOptions" [type]="stockChartType" [options]="stockChartOptions"></canvas>
-            
-          </div>
-        </div>
-        <div class="col-lg-15 grid-margin stretch-card ">
-          <div class="card">
-            <h1 class="mb-5" [innerHtml]="kstmsg"></h1>
-             
-            <canvas baseChart height="75" [data]="kstChartData" [options]="stockChartOptions" [type]="stockChartType" [options]="stockChartOptions"></canvas>
-           
-          </div>
-        </div>
-        
-        <div class="col-lg-15 grid-margin stretch-card ">
-          <div class="card">
-            <h1 class="mb-5" [innerHtml]="obvmsg"></h1>
-              
-            <canvas baseChart height="75" [data]="obvChartData" [options]="stockChartOptions" [type]="stockChartType" [options]="stockChartOptions"></canvas>
-            
-          </div>
-        </div>
-        
-        <div class="col-lg-15 grid-margin stretch-card ">
-          <div class="card">
-            <h1 class="mb-5" [innerHtml]="dowmsg"></h1>
-             
-          
-          
-          </div>
-        </div>
-        
-      
-      
-    </p-tabPanel>
-    <p-tabPanel header="1 month">
-      
-    
-        <div class="col-lg-18 grid-margin stretch-card">
-          
-            <h4 class="mb-5">Monthly</h4>
-            <div fxLayout="row wrap" fxLayoutGap="16px grid">
-              <div fxFlex="9" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of stockindicatorsm trackBy: trackByFuntion33">
-                <mat-card class="text-black cardbear grid-margin stretch-card"
-                [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
+      </div>
+    </div>
+    <div class="col-lg-15 grid-margin  stretch-card">
+      <div class="card">
+        <h4 class="mb-5">stock - 1 Week</h4>
+        <canvas baseChart [datasets]="stock1wData" [labels]="stock1wLabels" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-15 grid-margin stretch-card ">
+      <div class="card">
+        <h1 class="mb-5" [innerHtml]="mamsg"></h1>
+        <canvas baseChart height="75" [data]="maChartData" [options]="stockChartOptions" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-15 grid-margin stretch-card ">
+      <div class="card">
+        <h1 class="mb-5" [innerHtml]="bbmsg">&nbsp;</h1>
+        <canvas baseChart height="75" [data]="bbChartData" [options]="stockChartOptions" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-15 grid-margin stretch-card ">
+      <div class="card">
+        <h1 class="mb-5" [innerHtml]="macdmsg"></h1>
+        <canvas baseChart height="75" [data]="macdChartData" [options]="stockChartOptions" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-15 grid-margin stretch-card ">
+      <div class="card">
+        <h1 class="mb-5" [innerHtml]="rsimsg"></h1>
+        <canvas baseChart height="75" [data]="rsiChartData" [options]="stockChartOptions" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-15 grid-margin stretch-card ">
+      <div class="card">
+        <h1 class="mb-5" [innerHtml]="kstmsg"></h1>
+        <canvas baseChart height="75" [data]="kstChartData" [options]="stockChartOptions" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-15 grid-margin stretch-card ">
+      <div class="card">
+        <h1 class="mb-5" [innerHtml]="obvmsg"></h1>
+        <canvas baseChart height="75" [data]="obvChartData" [options]="stockChartOptions" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-15 grid-margin stretch-card ">
+      <div class="card">
+        <h1 class="mb-5" [innerHtml]="dowmsg"></h1>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="1 month">
+    <div class="col-lg-18 grid-margin stretch-card">
+      <h4 class="mb-5">Monthly</h4>
+      <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div fxFlex="9" fxFlex.xs="100%" fxFlex.sm="33%"
+          *ngFor="let tile of stockindicatorsm trackBy: trackByFuntion33">
+          <mat-card class="text-black cardbear grid-margin stretch-card" [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
                             'bg-gradient-bull1':tile.text3 === 'Oversold',
                             'bg-gradient-bull2':tile.text3 === 'Strong Trend',
                             'bg-gradient-bull3':tile.text3 === 'High Volatility',
@@ -586,85 +515,48 @@ NR7:{{nr7}}
                             'bg-gradient-bear2':tile.text3 === 'Weak Trend',
                             'bg-gradient-bear3':tile.text3 === 'Low Volatility',
                             'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
-                </mat-card>
-               
-            
-            </div>
-            </div>
-          </div>
-      <div class="col-lg-15 grid-margin  stretch-card">
-        <div class="card">
-          
-            <h4 class="mb-5">stock - 1 Month</h4>
-            <canvas baseChart  [datasets]="stock1mData" [labels]="stock1mLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
-         
+          </mat-card>
         </div>
       </div>
-    
-    </p-tabPanel>
-    
-    <p-tabPanel header="3months">
-      <div class="col-lg-15 grid-margin  stretch-card">
-        <div class="card">
-          <div class="card-body" *ngIf="stock3mData">
-            <h4 class="mb-5">NIFTY - 3 months</h4>
-            <canvas baseChart  [datasets]="stock3mData" [labels]="stock3mLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
-          </div>
+    </div>
+    <div class="col-lg-15 grid-margin  stretch-card">
+      <div class="card">
+        <h4 class="mb-5">stock - 1 Month</h4>
+        <canvas baseChart [datasets]="stock1mData" [labels]="stock1mLabels" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="3months">
+    <div class="col-lg-15 grid-margin  stretch-card">
+      <div class="card">
+        <div class="card-body" *ngIf="stock3mData">
+          <h4 class="mb-5">NIFTY - 3 months</h4>
+          <canvas baseChart [datasets]="stock3mData" [labels]="stock3mLabels" [type]="stockChartType"
+            [options]="stockChartOptions"></canvas>
         </div>
       </div>
-    
-    </p-tabPanel>
-    <p-tabPanel header="6 months">
-      <div class="col-lg-15 grid-margin  stretch-card">
-        <div class="card">
-         
-            <h4 class="mb-5">stock - 6 Months</h4>
-            <canvas baseChart  [datasets]="stock6mData" [labels]="stock6mLabels" [type]="stockChartType" [options]="stockChartOptions" ></canvas>
-         
-        </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="6 months">
+    <div class="col-lg-15 grid-margin  stretch-card">
+      <div class="card">
+        <h4 class="mb-5">stock - 6 Months</h4>
+        <canvas baseChart [datasets]="stock6mData" [labels]="stock6mLabels" [type]="stockChartType"
+          [options]="stockChartOptions"></canvas>
       </div>
-    </p-tabPanel>
-    <p-tabPanel header="1 Year">
-      <div class="col-lg-18 grid-margin  stretch-card">
-        <div class="card">
-          
-            <h4 class="mb-2">Stock - 1 Year </h4>
-                
-            
-  
-         
-        </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="1 Year">
+    <div class="col-lg-18 grid-margin  stretch-card">
+      <div class="card">
+        <h4 class="mb-2">Stock - 1 Year </h4>
+        <apx-chart [series]="chartCandleOptions.series" [chart]="chartCandleOptions.chart"
+          [xaxis]="chartCandleOptions.xaxis" [plotOptions]="chartCandleOptions.plotOptions"></apx-chart>
+        <apx-chart [series]="chartBarOptions.series" [chart]="chartBarOptions.chart" [xaxis]="chartBarOptions.xaxis"
+          [yaxis]="chartBarOptions.yaxis" [dataLabels]="chartBarOptions.dataLabels" [stroke]="chartBarOptions.stroke"
+          [plotOptions]="chartBarOptions.plotOptions"></apx-chart>
       </div>
-    
-    </p-tabPanel>
-    </p-tabView>
-   
-    <apx-chart
-    #chartCandle
-    [series]="chartCandleOptions.series"
-    [chart]="chartCandleOptions.chart"
-    [xaxis]="chartCandleOptions.xaxis"
-    [plotOptions]="chartCandleOptions.plotOptions"
-  ></apx-chart>
-  <apx-chart
-    #chartBar
-    [series]="chartBarOptions.series"
-    [chart]="chartBarOptions.chart"
-    [xaxis]="chartBarOptions.xaxis"
-    [yaxis]="chartBarOptions.yaxis"
-    [dataLabels]="chartBarOptions.dataLabels"
-    [stroke]="chartBarOptions.stroke"
-    [plotOptions]="chartBarOptions.plotOptions"
-  ></apx-chart>      
-                
-               
-    
-    
-     
-     
-     
-    
-    
-    
-      
-    
+    </div>
+  </p-tabPanel>
+</p-tabView>

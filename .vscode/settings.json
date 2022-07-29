@@ -3,5 +3,17 @@
     "editor.minimap.enabled": false,
     "editor.codeLens": false,
     "zenMode.restore": false,
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+    "java.jdt.ls.java.home": "C:\\Program Files\\Java\\jdk-18.0.2",
+    "JAVA_HOME": "C:\\Program Files\\Java\\jdk-18.0.2",
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "beautify.onSave": true,
+    "editor.formatOnSave": true,
+    // You can auto format any files based on the file extensions type.
+    "beautify.JSfiles": [
+        "js",
+        "json",
+        "jsbeautifyrc",
+        "jshintrc",
+        "ts"
+    ]
 }
