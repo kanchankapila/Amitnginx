@@ -397,7 +397,7 @@ export class ShareComponent implements OnInit {
   //stockhighcharts: StockChart;
   visibleSidebar5;
   visibleSidebar6;
-  constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private window: Window, private route: ActivatedRoute, private router: Router) { }
+  constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private route: ActivatedRoute, private router: Router) { }
   public stockhcdate: Array<any> = [];
   public stockohlc: Array<any> = [];
   public stockohlcvolume: stockohlcvolumetile[] = [];

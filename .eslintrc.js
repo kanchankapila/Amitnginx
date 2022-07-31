@@ -45,7 +45,7 @@ module.exports = {
                 "prefix": "app",
                 "style": "kebab-case",
                 "prettier/prettier": "error"
-            
+
             }
         ],
         "@angular-eslint/contextual-lifecycle": "error",

@@ -4,7 +4,7 @@
     "baseUrl": "./",
     "module": "es2020",
     "target": "es2020",
-    "esModuleInterop": true,
+    //"esModuleInterop": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "outDir": "./dist/out-tsc",
@@ -27,6 +27,5 @@
     "enableIvy": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": false
-    
   }
 }

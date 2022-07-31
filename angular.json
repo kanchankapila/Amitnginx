@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/amitnginx",
+            "outputPath": "dist/amitnginx/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -27,25 +27,19 @@
               "src/favicon.ico",
               "src/assets",
               "src/ngsw-worker.js",
-              
               "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss",
               "node_modules/animate.css/animate.css"
-            ],"allowedCommonJsDependencies": [
+            ],
+            "allowedCommonJsDependencies": [
               "chart.js",
               "apexcharts",
               "ng-apexcharts.mjs"
-
             ],
-            "scripts": [
-              
-             
-            
-            ],
+            "scripts": [],
             "vendorChunk": false,
-            
             "extractLicenses": false,
             "buildOptimizer": true,
             "sourceMap": true,
@@ -92,13 +86,12 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "amitnginx:build"
-            
+            "browserTarget": "amitnginx:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
               "browserTarget": "amitnginx:build:production"
-              
             }
           }
         },
@@ -119,18 +112,13 @@
               "src/favicon.ico",
               "src/assets",
               "src/ngsw-worker.js",
-              
               "src/manifest.webmanifest"
             ],
             "styles": [
               "src/styles.scss",
               "node_modules/animate.css/animate.css"
-              
-              
-              
             ],
-            "scripts": [
-          ]
+            "scripts": []
           }
         },
         "e2e": {
@@ -144,6 +132,78 @@
               "devServerTarget": "amitnginx:serve:production"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/amitnginx/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "optimization": true,
+            "sourceMap": true,
+            "extractLicenses": false
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "app-shell": {
+          "builder": "@angular-devkit/build-angular:app-shell",
+          "options": {
+            "route": "shell"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "amitnginx:build:production",
+              "serverTarget": "amitnginx:server:production"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "amitnginx:build:development",
+              "serverTarget": "amitnginx:server:development"
+            },
+            "production": {
+              "browserTarget": "amitnginx:build:production",
+              "serverTarget": "amitnginx:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "amitnginx:build:production",
+              "serverTarget": "amitnginx:server:production"
+            },
+            "development": {
+              "browserTarget": "amitnginx:build:development",
+              "serverTarget": "amitnginx:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
@@ -151,5 +211,4 @@
   "cli": {
     "analytics": true
   }
-  
 }

@@ -39,6 +39,9 @@
     },
     "ui": {
       "enabled": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2017
     }
   }
 }
