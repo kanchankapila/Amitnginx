@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from "@angular/platform-browser";
-import { DatePipe } from '@angular/common';
+
 import { ShareRoutingModule } from './share-routing.module';
 import { ShareComponent } from './share.component';
 import { SidebarModule } from 'primeng/sidebar';
@@ -43,6 +43,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
    
   ],
   schemas: [],
-  providers: [DatePipe]
+  providers: []
 })
 export class ShareModule { }
