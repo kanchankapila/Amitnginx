@@ -1,5 +1,4 @@
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as stocks from '../../lists/stocklist';
 import * as stocks1 from '../../lists/list1';
@@ -7,7 +6,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { DataapiService } from '../../../dataapi.service';
 import { formatDate } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import * as sectors from '../../lists/mcsectorlist';
 import * as fnostocks from '../../lists/fnostocks';
 import * as bqstock from '../../lists/bqlist'
@@ -18,7 +17,7 @@ export interface pcrniftytile {
   text1: string;
 }
 export interface pcrnseniftytile {
-  text1: any;
+text1: any;
 }
 export interface mcniftyrttiles {
 
@@ -28,9 +27,9 @@ export interface mcniftyrttiles {
   text4: string;
   text5: string;
   text6: string;
-
-
-
+  
+ 
+  
 }
 export interface mcpniftyrttiles {
 
@@ -40,9 +39,9 @@ export interface mcpniftyrttiles {
   text4: string;
   text5: string;
   text6: string;
-
-
-
+  
+ 
+  
 }
 
 export interface mcbniftyrttiles {
@@ -53,10 +52,10 @@ export interface mcbniftyrttiles {
   text4: string;
   text5: string;
   text6: string;
-
+  
 }
 export interface newscardtile {
-
+  
   text1: string;
   text2: string;
   text3: string;
@@ -66,13 +65,13 @@ export interface newscardtile {
 
 export interface n50optionssupporttile {
   text1: string;
-}
+ }
 export interface n50optionsresistancetile {
   text1: string;
-}
+ }
 export interface bnoptionssupporttile {
   text1: string;
-}
+ }
 export interface bnoptionsresistancetile {
   text1: string;
 }
@@ -92,7 +91,7 @@ export class NavbarComponent implements OnInit {
   data: any
   pcrnifty: pcrniftytile[] = [];
   pcrnsenifty: pcrnseniftytile[] = [];
-  datetoday: any
+  datetoday:any
   stock_isin: any
   newscard: newscardtile[] = [];
   stock1: any;
@@ -134,14 +133,14 @@ export class NavbarComponent implements OnInit {
   visibleSidebar3;
   visibleSidebar4;
   visibleSidebar5;
-
-  constructor(@Inject(DOCUMENT) private _doc: Document, private http: HttpClient, private primengConfig: PrimeNGConfig, config: NgbDropdownConfig, private route: ActivatedRoute, private router: Router, private dataApi: DataapiService) {
+  
+  constructor(private http: HttpClient,private primengConfig: PrimeNGConfig,config: NgbDropdownConfig, private window: Window, private route: ActivatedRoute, private router: Router,private dataApi: DataapiService) {
     config.placement = 'bottom-right';
   }
 
   ngOnInit() {
 
-
+    
     this.stock = stocks.default.Data
     this.stock1 = stocks1.default.Data
     this.nsedataniftyoi()
@@ -159,24 +158,21 @@ export class NavbarComponent implements OnInit {
     this.getmcpharmaniftyrealtime()
     this.fnostock = fnostocks.default.Data
     this.etstocks = etstock.default.Data
-    this.bqstocks = bqstock.default.Data
+    this.bqstocks=bqstock.default.Data
     this.toggleSidebar()
     this.data = this.stock
     this.primengConfig.ripple = true;
   }
-  getWindow(): Window | null {
-    return this._doc.defaultView;
-  }
   keyword = 'name';
   selectEvent(stock_isin) {
-
-    window.open("/Share?stock=" + stock_isin, "_blank")
-
+    
+    this.window.open("/Share?stock="+stock_isin, "_blank")
+    
   }
 
   onChangeSearch(val: string) {
 
-
+  
   }
 
   onFocused(abc) {
@@ -190,22 +186,22 @@ export class NavbarComponent implements OnInit {
 
   // toggle sidebar in small devices
   toggleOffcanvas() {
-    this._doc.querySelector('.sidebar-offcanvas').classList.toggle('active');
+    document.querySelector('.sidebar-offcanvas').classList.toggle('active');
   }
 
   // toggle sidebar
   toggleSidebar() {
-    let body = this._doc.querySelector('body');
-    if ((!body.classList.contains('sidebar-toggle-display')) && (!body.classList.contains('sidebar-absolute'))) {
+    let body = document.querySelector('body');
+    if((!body.classList.contains('sidebar-toggle-display')) && (!body.classList.contains('sidebar-absolute'))) {
       this.iconOnlyToggled = !this.iconOnlyToggled;
-      if (this.iconOnlyToggled) {
+      if(this.iconOnlyToggled) {
         body.classList.add('sidebar-icon-only');
       } else {
         body.classList.remove('sidebar-icon-only');
       }
     } else {
       this.sidebarToggled = !this.sidebarToggled;
-      if (this.sidebarToggled) {
+      if(this.sidebarToggled) {
         body.classList.add('sidebar-hidden');
       } else {
         body.classList.remove('sidebar-hidden');
@@ -215,13 +211,13 @@ export class NavbarComponent implements OnInit {
 
 
   nsedataniftyoi() {
-
+    
     this.http.get<any>('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY').subscribe(data5 => {
       (response: Response) => { console.log(response) }
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-
+      
 
       this.pcrnsenifty.length = 0;
       this.optionwc.length = 0;
@@ -231,12 +227,12 @@ export class NavbarComponent implements OnInit {
 
       //console.log(nestedItems[1]['CE'].totOI)
       //console.log(nestedItems[1]['PE'].totOI)
-      this.pcrnsenifty.push({ text1: (nestedItems[1]['PE'].totOI / nestedItems[1]['CE'].totOI) })
+this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].totOI)})
       for (let val in nestedItems[1]['data']) {
         if (nestedItems[1]['data'][val]['CE']) {
           if ((nestedItems[1]['data'][val]['CE']).length !== 0) {
-
-            this.optionwc.push(nestedItems[1]['data'][val]['CE'].openInterest);
+        
+        this.optionwc.push(nestedItems[1]['data'][val]['CE'].openInterest);
           }
         }
       }
@@ -245,41 +241,41 @@ export class NavbarComponent implements OnInit {
           var maxc = this.optionwc.reduce((a, b) => Math.max(a, b));  // 5
         }
       }
-
-      for (let val in nestedItems[1]['data']) {
-        if (nestedItems[1]['data'][val]['CE']) {
-          if (nestedItems[1]['data'][val]['CE'].openInterest == maxc) {
-            this.n50optionsresistance.push({ text1: nestedItems[1]['data'][val]['CE'].strikePrice })
-          }
-        }
-
-
+     
+            for (let val in nestedItems[1]['data']) {
+              if (nestedItems[1]['data'][val]['CE']) {
+              if (nestedItems[1]['data'][val]['CE'].openInterest == maxc) {
+                this.n50optionsresistance.push({ text1: nestedItems[1]['data'][val]['CE'].strikePrice })
+             }
+              }
+            
+          
         if (nestedItems[1]['data'][val]['PE']) {
           if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
             // console.log("Put")
             // console.log(nestedItems[1]['data'][val]['PE'].changeinOpenInterest, nestedItems[1]['data'][val]['PE'].strikePrice)
-
+        
             this.optionwp.push(nestedItems[1]['data'][val]['PE'].openInterest);
           }
         }
       }
-
-      const maxp = this.optionwp.reduce((a, b) => Math.max(a, b));  // 5
-      // console.log("maximum"+maxp)
-      for (let val in nestedItems[1]['data']) {
-        if (nestedItems[1]['data'][val]['PE']) {
-          if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
-
-            if (nestedItems[1]['data'][val]['PE'].openInterest == maxp) {
-              this.n50optionssupport.push({ text1: nestedItems[1]['data'][val]['PE'].strikePrice })
-
-            }
-          }
-        }
-      }
-
-
-
+      
+        const maxp = this.optionwp.reduce((a, b) => Math.max(a, b));  // 5
+       // console.log("maximum"+maxp)
+     for (let val in nestedItems[1]['data']) {
+       if (nestedItems[1]['data'][val]['PE']) {
+         if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
+     
+           if (nestedItems[1]['data'][val]['PE'].openInterest == maxp) {
+             this.n50optionssupport.push({ text1: nestedItems[1]['data'][val]['PE'].strikePrice })
+            
+           }
+         }
+       }
+     }
+        
+      
+      
     }, err => {
       console.log(err)
     })
@@ -295,14 +291,14 @@ export class NavbarComponent implements OnInit {
       this.bnoptionsresistance.length = 0;
       this.optionbwp.length = 0;
       this.bnoptionssupport.length = 0;
-      this.pcrnsebnifty.push({ text1: (nestedItems[1]['PE'].totOI / nestedItems[1]['CE'].totOI) })
-
-
+      this.pcrnsebnifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].totOI)})
+    
+     
       for (let val in nestedItems[1]['data']) {
         if (nestedItems[1]['data'][val]['CE']) {
           if ((nestedItems[1]['data'][val]['CE']).length !== 0) {
-
-            this.optionbwc.push(nestedItems[1]['data'][val]['CE'].openInterest);
+        
+        this.optionbwc.push(nestedItems[1]['data'][val]['CE'].openInterest);
           }
         }
       }
@@ -312,54 +308,54 @@ export class NavbarComponent implements OnInit {
         }
       }
       //console.log("maximum"+maxbc)
-      for (let val in nestedItems[1]['data']) {
-        if (nestedItems[1]['data'][val]['CE']) {
-          if (nestedItems[1]['data'][val]['CE'].openInterest == maxbc) {
-            this.bnoptionsresistance.push({ text1: nestedItems[1]['data'][val]['CE'].strikePrice })
-          }
-        }
-
-
+            for (let val in nestedItems[1]['data']) {
+              if (nestedItems[1]['data'][val]['CE']) {
+              if (nestedItems[1]['data'][val]['CE'].openInterest == maxbc) {
+                this.bnoptionsresistance.push({ text1: nestedItems[1]['data'][val]['CE'].strikePrice })
+             }
+              }
+            
+          
         if (nestedItems[1]['data'][val]['PE']) {
           if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
             // console.log("Put")
             // console.log(nestedItems[1]['data'][val]['PE'].changeinOpenInterest, nestedItems[1]['data'][val]['PE'].strikePrice)
-
+        
             this.optionbwp.push(nestedItems[1]['data'][val]['PE'].openInterest);
           }
         }
       }
-
-      const maxbp = this.optionbwp.reduce((a, b) => Math.max(a, b));  // 5
-      //console.log("maximum"+maxbp)
-      for (let val in nestedItems[1]['data']) {
-        if (nestedItems[1]['data'][val]['PE']) {
-          if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
-
-            if (nestedItems[1]['data'][val]['PE'].openInterest == maxbp) {
-              this.bnoptionssupport.push({ text1: nestedItems[1]['data'][val]['PE'].strikePrice })
-
-            }
-          }
-        }
-      }
-
-
-
+      
+        const maxbp = this.optionbwp.reduce((a, b) => Math.max(a, b));  // 5
+        //console.log("maximum"+maxbp)
+     for (let val in nestedItems[1]['data']) {
+       if (nestedItems[1]['data'][val]['PE']) {
+         if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
+     
+           if (nestedItems[1]['data'][val]['PE'].openInterest == maxbp) {
+             this.bnoptionssupport.push({ text1: nestedItems[1]['data'][val]['PE'].strikePrice })
+            
+           }
+         }
+       }
+     }
+        
+      
+      
     }, err => {
       console.log(err)
     })
   }
-
+  
   // ///Moneycontrol Post request for moving averages
   // getmcmovingaverages() {
   //   console.log("mc moving averages start")
   //   for (let val in this.stock) {
   //     this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
   //     this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday })
-
+      
   //   }
-
+   
   //   this.dataApi.getmcmovingaverages(this.mcsymbol).subscribe(data5 => {
 
 
@@ -372,10 +368,10 @@ export class NavbarComponent implements OnInit {
     console.log("NR7 start")
     this.mcsymbol.length = 0;
     for (let val in this.stock) {
-
+      
       this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-      this.mcsymbol.push({ eqsymbol: this.stock[val].symbol, isin: this.stock[val].isin, name: this.stock[val].name, Date: this.datetoday })
-
+      this.mcsymbol.push({ eqsymbol: this.stock[val].symbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday })
+      
     }
     console.log(this.mcsymbol)
     this.dataApi.getnr7(this.mcsymbol).subscribe(data5 => {
@@ -387,59 +383,59 @@ export class NavbarComponent implements OnInit {
     )
   }
   getmcniftyrealtime() {
-
-    this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3BNSX').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-
-
+   
+      this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3BNSX').subscribe(data5 => {
+        let nestedItems = Object.keys(data5).map(key => {
+          return data5[key];
+        });
+        
+    
       this.mcniftyrt.length = 0;
-
+      
       this.mcniftyrt.push({ text1: nestedItems[2]['pricecurrent'], text2: nestedItems[2]['pricecurrent'], text3: nestedItems[2]['pricechange'], text4: nestedItems[2]['pricepercentchange'], text5: nestedItems[2]['adv'], text6: nestedItems[2]['decl'] })
       this.mcadvvalue1 = nestedItems[2]['adv'];
       this.mcdecvalue1 = nestedItems[2]['decl'];
-
-
+      
+     
     }, err => {
       console.log(err)
     })
   }
   getmcpharmaniftyrealtime() {
-
+   
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3Bcpr').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-
-
-      this.mcpniftyrt.length = 0;
-
-      this.mcpniftyrt.push({ text1: nestedItems[2]['pricecurrent'], text2: nestedItems[2]['pricecurrent'], text3: nestedItems[2]['pricechange'], text4: nestedItems[2]['pricepercentchange'], text5: nestedItems[2]['adv'], text6: nestedItems[2]['decl'] })
-      this.mcpadvvalue = nestedItems[2]['adv'];
-      this.mcpdecvalue = nestedItems[2]['decl'];
-
-
-    }, err => {
-      console.log(err)
-    })
-  }
+      
+  
+    this.mcpniftyrt.length = 0;
+    
+    this.mcpniftyrt.push({ text1: nestedItems[2]['pricecurrent'], text2: nestedItems[2]['pricecurrent'], text3: nestedItems[2]['pricechange'], text4: nestedItems[2]['pricepercentchange'], text5: nestedItems[2]['adv'], text6: nestedItems[2]['decl'] })
+    this.mcpadvvalue = nestedItems[2]['adv'];
+    this.mcpdecvalue = nestedItems[2]['decl'];
+    
+   
+  }, err => {
+    console.log(err)
+  })
+}
   getmcbankniftyrealtime() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/notapplicable/inidicesindia/in%3Bnbx').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-
-
-      this.mcbniftyrt.length = 0;
-
-      this.mcbniftyrt.push({ text1: nestedItems[2]['pricecurrent'], text2: nestedItems[2]['pricecurrent'], text3: nestedItems[2]['pricechange'], text4: nestedItems[2]['pricepercentchange'], text5: nestedItems[2]['adv'], text6: nestedItems[2]['decl'] })
+    
+  
+    this.mcbniftyrt.length = 0;
+      
+      this.mcbniftyrt.push({text1: nestedItems[2]['pricecurrent'], text2: nestedItems[2]['pricecurrent'], text3: nestedItems[2]['pricechange'], text4: nestedItems[2]['pricepercentchange'], text5: nestedItems[2]['adv'], text6: nestedItems[2]['decl'] })
     }, err => {
       console.log(err)
     })
   }
-
-
+      
+   
   getmcvolume() {
     this.getmcvolume1()
     console.log("mc volume")
@@ -448,8 +444,8 @@ export class NavbarComponent implements OnInit {
     this.mcsymbol.length = 0;
     for (let val in this.stock) {
       this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-      this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name, Date: this.datetoday, time: d.getHours() + ":" + d.getMinutes() })
-
+      this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
+      
     }
     console.log(this.mcsymbol)
     this.dataApi.getmcvolume(this.mcsymbol).subscribe(data5 => {
@@ -467,8 +463,8 @@ export class NavbarComponent implements OnInit {
     this.mcsymbol1.length = 0;
     for (let val in this.stock1) {
       this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-      this.mcsymbol1.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name, Date: this.datetoday, time: d.getHours() + ":" + d.getMinutes() })
-
+      this.mcsymbol1.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
+      
     }
     console.log(this.mcsymbol1)
     this.dataApi.getmcvolume1(this.mcsymbol1).subscribe(data5 => {
@@ -486,10 +482,10 @@ export class NavbarComponent implements OnInit {
     this.mcsymbol.length = 0;
     for (let val in this.stock) {
       this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-      this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name, Date: this.datetoday, time: d.getHours() + ":" + d.getMinutes() })
-
+      this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
+      
     }
-    // console.log(this.mcsymbol)
+   // console.log(this.mcsymbol)
     this.dataApi.getmcinsight(this.mcsymbol).subscribe(data5 => {
 
 
@@ -498,7 +494,7 @@ export class NavbarComponent implements OnInit {
     }
     )
   }
-
+ 
   // getmmstockinforeco() {
   //   console.log("mmstock reco start")
   //   for (let val in this.stock1) {
@@ -506,7 +502,7 @@ export class NavbarComponent implements OnInit {
   //     //console.log(this.stock[val].stockid)
   //   }
   // //  console.log(this.stockid)
-
+    
   //   this.dataApi.getmmstockinforeco(this.stockid).subscribe(data5 => {
 
 
@@ -515,7 +511,7 @@ export class NavbarComponent implements OnInit {
   //   }
   //   )
   // }
-
+  
   // getmccombine() {
   //   console.log("mc combine start")
   //   this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
@@ -524,9 +520,9 @@ export class NavbarComponent implements OnInit {
   //  // console.log(d.getHours()+":"+d.getMinutes())
   //   for (let val in this.stock1) {
   //     this.mcsymbol.push({ mcsymbol: this.stock[val].mcsymbol, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
-
+      
   //   }
-
+   
   //   this.dataApi.getmccombine(this.mcsymbol).subscribe(data5 => {
 
 
@@ -543,9 +539,9 @@ export class NavbarComponent implements OnInit {
   //   console.log(d.getHours()+":"+d.getMinutes())
   //   for (let val in this.stock) {
   //     this.tlid.push({ tlid: this.stock[val].tlid, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
-
+      
   //   }
-
+   
   //   this.dataApi.gettrendlynepostdvm(this.tlid).subscribe(data5 => {
 
 
@@ -555,23 +551,23 @@ export class NavbarComponent implements OnInit {
   //   )
   // }
   navigatenifty() {
-    window.open("/nifty", "_blank")
+    this.window.open("/nifty", "_blank") 
   }
   navigatebanknifty() {
-    window.open("/banknifty", "_blank")
+    this.window.open("/banknifty", "_blank") 
   }
   navigatepnifty() {
-    window.open("/pharmanifty", "_blank")
+    this.window.open("/pharmanifty", "_blank") 
   }
   // chartink() {
   //   console.log("chartink start")
   //   this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
   //  // console.log('Date is'+ this.datetoday)
-
+    
   //     this.abc.push({ name:'copy-buy-100-accuracy-morning-scanner-scan-at-9-30-4002',Date:this.datetoday })
-
-
-
+      
+    
+   
   //   this.dataApi.chartink(this.abc).subscribe(data5 => {
 
 
@@ -580,7 +576,7 @@ export class NavbarComponent implements OnInit {
   //   }
   //   )
   // }
-
+ 
   // getmcsectorcombine() {
   //   console.log("mc sector combine start")
   //   for (let val in this.sectorList) {
@@ -589,7 +585,7 @@ export class NavbarComponent implements OnInit {
   //     this.mcsectorsymbol.push({ mcsectorsymbol: this.sectorList[val].mcsectorsymbol, sectorid: this.sectorList[val].mcsectorid, name: this.sectorList[val].name,Date:this.datetoday })
   //   //  console.log(this.sectorList[val].mcsectorsymbol)
   //   }
-
+   
   //   this.dataApi.getmcsectorcombine(this.mcsectorsymbol).subscribe(data5 => {
 
 
@@ -598,16 +594,16 @@ export class NavbarComponent implements OnInit {
   //   }
   //   )
   // }
-
+ 
   nsepostdata1() {
     console.log("eq sector combine start")
     for (let val in this.stock) {
       this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-
-      this.eqsymbol1.push({ eqsymbol1: this.stock[val].symbol, name: this.stock[val].name, Date: this.datetoday })
-
+    
+      this.eqsymbol1.push({ eqsymbol1: this.stock[val].symbol,name: this.stock[val].name,Date:this.datetoday })
+      
     }
-
+   
     this.dataApi.nsepostdata1(this.eqsymbol1).subscribe(data5 => {
 
 
@@ -620,11 +616,11 @@ export class NavbarComponent implements OnInit {
     console.log("eq sector combine start")
     for (let val in this.fnostock) {
       this.datetoday = formatDate(new Date(), 'ddMMyyyy', 'en');
-
-      this.eqsymbol1.push({ eqsymbol1: this.fnostock[val].symbol, Date: this.datetoday })
-
+    
+      this.eqsymbol1.push({ eqsymbol1: this.fnostock[val].symbol,Date:this.datetoday })
+      
     }
-
+   
     this.dataApi.nsepostdata2(this.eqsymbol1).subscribe(data5 => {
 
 
@@ -633,6 +629,6 @@ export class NavbarComponent implements OnInit {
     }
     )
   }
-
-
+ 
+ 
 }

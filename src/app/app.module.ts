@@ -8,9 +8,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { ContentAnimateDirective } from './shared/directives/content-animate.directive';
 import { SharedModule } from "./shared/shared.module";
-import { ServiceWorkerModule, SwRegistrationOptions } from '@angular/service-worker';
+import { ServiceWorkerModule,SwRegistrationOptions } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,26 +17,25 @@ import { RouterModule } from '@angular/router';
     FooterComponent,
     SpinnerComponent,
     ContentAnimateDirective,
-
-
+   
+    
   ],
   imports: [
     AppRoutingModule,
     SharedModule,
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
-
+     
       registrationStrategy: 'registerWhenStable:30000'
-    }),
-    RouterModule
+    })
 
-
+  
   ],
-  providers: [
-
+  providers: [{ provide: Window, useValue: window }
+    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

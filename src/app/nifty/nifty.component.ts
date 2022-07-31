@@ -1,21 +1,20 @@
-import { Component, OnInit, Inject, ViewChild, Injectable } from '@angular/core';
+import { Component, OnInit,ViewChild, Injectable } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
-import { DOCUMENT } from '@angular/common';
 import { PrimeNGConfig } from 'primeng/api';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
-import { of } from 'rxjs';
+import { of } from 'rxjs'; 
 import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs'
+import {Observable} from 'rxjs'
 import axios from 'axios';
-import { from } from 'rxjs';
+import {from} from 'rxjs';
 import { ViewportScroller } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
 //import { StockChart } from 'angular-highcharts';
-import { ChartOptions } from 'chart.js';
+import {ChartOptions } from 'chart.js';
 
 export interface nifty50stockstiles {
 
@@ -24,9 +23,9 @@ export interface nifty50stockstiles {
   text3: string;
   text4: string;
   text5: string;
-
+  
 }
-export interface stockhcdatatile {
+export interface stockhcdatatile{
   x: number;
   y: number;
 }
@@ -36,7 +35,7 @@ export interface nifty50crossovertile {
   text2: any;
   text3: any;
   text4: any;
-
+  
 }
 export interface nifty50crossoverwtile {
 
@@ -44,7 +43,7 @@ export interface nifty50crossoverwtile {
   text2: any;
   text3: any;
   text4: any;
-
+  
 }
 export interface nifty50crossovermtile {
 
@@ -52,50 +51,42 @@ export interface nifty50crossovermtile {
   text2: any;
   text3: any;
   text4: any;
-
+  
 }
-export interface nifty50indicatorstile {
+export interface nifty50indicatorstile{
   text1: string;
   text2: string;
   text3: string;
   text4: string;
-
+ 
 }
-export interface nifty50indicatorswtile {
+export interface nifty50indicatorswtile{
   text1: string;
   text2: string;
   text3: string;
   text4: string;
-
+ 
 }
-export interface nifty50indicatorsmtile {
+export interface nifty50indicatorsmtile{
   text1: string;
   text2: string;
   text3: string;
   text4: string;
-
+ 
 }
-export interface nifty50sentimentstiles {
-  text1: string;
+export interface nifty50sentimentstiles
+{
+    text1: string;
   text2: string;
 }
 
-export interface nifty50bbtile {
+export interface nifty50bbtile{
   text1: string;
   text2: string;
-
-
+  
+ 
 }
-export interface niftyematile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-  text6: string;
-  text7: string;
-}
-export interface niftysmatile {
+export interface niftyematile{
   text1: string;
   text2: string;
   text3: string;
@@ -103,8 +94,17 @@ export interface niftysmatile {
   text5: string;
   text6: string;
   text7: string;
-
-
+}
+export interface niftysmatile{
+  text1: string;
+  text2: string;
+  text3: string;
+  text4: string;
+  text5: string;
+  text6: string;
+  text7: string;
+  
+ 
 }
 
 
@@ -114,16 +114,16 @@ export interface niftysmatile {
   styleUrls: ['./nifty.component.scss']
 })
 export class NiftyComponent implements OnInit {
-
-  constructor(@Inject(DOCUMENT) private _doc: Document, private http: HttpClient, private dataApi: DataapiService, private primengConfig: PrimeNGConfig, private vps: ViewportScroller) {
-
+ 
+  constructor(private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig, private vps: ViewportScroller) {
+    
     const instance = axios.create({
       //baseURL: 'https://www.nseindia.com/',
-      // timeout: 1000,
-      headers: { 'Access-Control-Allow-Origin': '*' }
+     // timeout: 1000,
+     headers: {'Access-Control-Allow-Origin': '*'}
     });
   }
-
+  
   //stockhighcharts: StockChart;
   public stockhcdate: Array<any> = [];
   public nifty50data: Array<number> = [];
@@ -134,8 +134,8 @@ export class NiftyComponent implements OnInit {
   public niftyvixtime: Array<any> = [];
   public lineChartData: Array<any> = [];
   public lineChartLabels: Array<number> = [];
-
-
+  
+ 
   public nifty505ddata: Array<number> = [];
   public nifty505dLabels: Array<any> = [];
   public lineChart5dData: Array<any> = [];
@@ -162,7 +162,7 @@ export class NiftyComponent implements OnInit {
   public lineChartvixData: Array<any> = [];
   public lineChartvixLabels: Array<number> = [];
   public lineChartvixOptions: any;
-
+  
   basicData: any;
   basicOptions: any;
   basicData1: any;
@@ -173,9 +173,9 @@ export class NiftyComponent implements OnInit {
   //tlid:any
   tlid = '1887';
   tlname = 'NIFTY50';
-  eqsymbol = 'nifty-50'
+  eqsymbol='nifty-50'
   nifty50sentiments: nifty50sentimentstiles[] = [];
-
+  
   nifty50stocks: nifty50stockstiles[] = [];
   nifty50crossover: nifty50crossovertile[] = [];
   nifty50crossoverw: nifty50crossoverwtile[] = [];
@@ -186,7 +186,7 @@ export class NiftyComponent implements OnInit {
   nifty50bb: nifty50bbtile[] = [];
   niftyema: niftyematile[] = [];
   niftysma: niftysmatile[] = [];
-
+ 
   public lineChartDatan50snrr1: Array<number> = [];
   public lineChartDatan50snrr2: Array<number> = [];
   public lineChartDatan50snrr3: Array<number> = [];
@@ -226,37 +226,37 @@ export class NiftyComponent implements OnInit {
   basicData3: any;
   basicOptions3: any;
   stockList: any
-  public lineChartColors = [
+  public  lineChartColors = [
     {
       borderColor: '#2d0365'
     }
   ];
-
+  
   public lineChartType: ChartType = 'line';
-  public lineChartOptions: ChartOptions = {
+  public lineChartOptions:ChartOptions = {
     scales: {
-
+      
     },
-
-
+   
+    
     elements: {
       point: {
         radius: 0
       }
     }
-
+   
   };
-
-
+ 
+ 
 
 
 
 
   ngOnInit(): void {
+           
 
 
-
-
+     
     this.primengConfig.ripple = true;
     this.stockList = stocks.default.Data
     this.getmcnifty50stocks();
@@ -272,115 +272,113 @@ export class NiftyComponent implements OnInit {
     this.gettrendlynenifty()
     this.getnifty1yr();
     setInterval(() => { this.getnifty50smaema() }, 30000);
-    setInterval(() => { this.getmcnifty50stocks() }, 30000);
+    setInterval(() => { this.getmcnifty50stocks()}, 30000);
     setInterval(() => { this.getniftyvix() }, 30000);
-    setInterval(() => { this.getniftypcr() }, 30000);
-
+     setInterval(() => { this.getniftypcr()}, 30000);
+    
     setInterval(() => { this.getniftytoday() }, 30000);
 
-
+  
   }
-  getWindow(): Window | null {
-    return this._doc.defaultView;
-  }
+  
   gettrendlynenifty() {
     this.dataApi.gettrendlynenifty().subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-
+   
       console.log(nestedItems);
-    })
-
-
-
+     })
+  
+       
+   
   }
-
+  
   getniftysentiments() {
     this.nifty50sentiments.length = 0;
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?field=RSI').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-
-      this.nifty50sentiments.push({ text1: nestedItems[2]['sentiments']['indication'], text2: "Daily" })
+      
+      this.nifty50sentiments.push({ text1: nestedItems[2]['sentiments']['indication'],text2:"Daily"})
     }, err => {
       console.log(err)
     })
 
-    this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3BNSX?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-
-      this.nifty50sentiments.push({ text1: nestedItems[2]['sentiments']['indication'], text2: "Weekly" })
-
-    }, err => {
-      console.log(err)
-    })
+      this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3BNSX?field=RSI').subscribe(data5 => {
+        let nestedItems = Object.keys(data5).map(key => {
+          return data5[key];
+        });
+        
+    this.nifty50sentiments.push({ text1: nestedItems[2]['sentiments']['indication'],text2:"Weekly"}) 
+     
+  }, err => {
+    console.log(err)
+  })
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3BNSX?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-
-
-      this.nifty50sentiments.push({ text1: nestedItems[2]['sentiments']['indication'], text2: "Monthly" })
+    let nestedItems = Object.keys(data5).map(key => {
+    return data5[key];
+    });
+    
+      
+      this.nifty50sentiments.push({ text1: nestedItems[2]['sentiments']['indication'],text2:"Monthly"})
     }, err => {
       console.log(err)
     })
   }
-
+  
   getniftyvix() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=36&range=1d&type=area').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-
-      /////////////////////Nifty Vix/////////////////////////////////
-      this.niftyvixdata.length = 0;
-      this.niftyvixtime.length = 0;
-      for (let val in nestedItems[1]['values']) {
-        this.niftyvixdata.push(nestedItems[1]['values'][val]['_value'])
-        this.niftyvixtime.push(nestedItems[1]['values'][val]['_time'])
-      }
-
-      this.lineChartvixData = [{
-        label: 'VIX',
-        data: this.niftyvixdata,
-        borderWidth: 1,
-        fill: false
-      }];
-
-      this.lineChartvixLabels = this.niftyvixtime;
-
-    }, err => {
-      console.log(err)
-    })
-  }
+      
+        /////////////////////Nifty Vix/////////////////////////////////
+        this.niftyvixdata.length = 0;
+        this.niftyvixtime.length = 0;
+        for (let val in nestedItems[1]['values']) {
+          this.niftyvixdata.push(nestedItems[1]['values'][val]['_value'])
+          this.niftyvixtime.push(nestedItems[1]['values'][val]['_time'])
+        }
+        
+        this.lineChartvixData = [{
+          label: 'VIX',
+          data: this.niftyvixdata,
+          borderWidth: 1,
+          fill: false
+        }];
+  
+        this.lineChartvixLabels = this.niftyvixtime;
+      
+      }, err => {
+        console.log(err)
+      })
+  }  
   getniftypcr() {
     this.http.get('https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-
-      /////////////////////NIfty PCR from niftytraders////////////////////
-      this.niftypcrdata.length = 0;
-      this.niftypcrtime.length = 0;
-      for (let val in nestedItems[3]['data']) {
-        this.niftypcrdata.push(nestedItems[3]['data'][val]['pcr'])
-        this.niftypcrtime.push(new Date(nestedItems[3]['data'][val]['time']).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }))
-      }
-
-      this.lineChartpcrData = [{
+      
+       /////////////////////NIfty PCR from niftytraders////////////////////
+       this.niftypcrdata.length = 0;
+       this.niftypcrtime.length = 0;
+       for (let val in nestedItems[3]['data']) {
+         this.niftypcrdata.push(nestedItems[3]['data'][val]['pcr'])
+         this.niftypcrtime.push(new Date(nestedItems[3]['data'][val]['time']).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }))
+       }
+      
+       this.lineChartpcrData = [{
         label: 'PCR',
         data: this.niftypcrdata,
         borderWidth: 1,
-        fill: false,
-        maintainAspectRatio: false
+         fill: false,
+         maintainAspectRatio: false
       }];
 
       this.lineChartpcrLabels = this.niftypcrtime;
-
+    
     }, err => {
       console.log(err)
     })
@@ -391,42 +389,42 @@ export class NiftyComponent implements OnInit {
         return data5[key];
       });
       /////////////////////////////EMA/SMA from Kite //////////////////////
-
+    
       this.niftyema.length = 0;
       this.niftysma.length = 0;
 
       this.niftyema.push({ text1: nestedItems[10], text2: nestedItems[5], text3: nestedItems[7], text4: nestedItems[9], text5: nestedItems[11], text6: nestedItems[6], text7: nestedItems[8] })
       this.niftysma.push({ text1: nestedItems[37], text2: nestedItems[32], text3: nestedItems[34], text4: nestedItems[36], text5: nestedItems[38], text6: nestedItems[33], text7: nestedItems[35] })
 
-
+     
     }, err => {
       console.log(err)
     })
   }
-
-
-
+ 
+ 
+ 
   getmcnifty50stocks() {
     this.http.get('https://etmarketsapis.indiatimes.com/ET_Stats/getIndexByIds?pagesize=50&exchange=50&sortby=percentChange&sortorder=desc&indexid=2369&company=true&indexname=Nifty%2050&marketcap=&pageno=1').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      
 
-
-      //////////////////////////////Nifty 50 Stocks ////////////////////////
+        //////////////////////////////Nifty 50 Stocks ////////////////////////
       this.nifty50stocks.length = 0;
       console.log(nestedItems)
-      for (let val in nestedItems[0][0]['companies']) {
-        this.nifty50stocks.push({ text1: nestedItems[0][0]['companies'][val].companyShortName, text2: nestedItems[0][0]['companies'][val].change, text3: nestedItems[0][0]['companies'][val].percentChange, text4: nestedItems[0][0]['companies'][val].current, text5: nestedItems[0][0]['companies'][val].symbol })
-      }
-
-
+        for (let val in nestedItems[0][0]['companies']) {
+          this.nifty50stocks.push({ text1: nestedItems[0][0]['companies'][val].companyShortName, text2: nestedItems[0][0]['companies'][val].change, text3: nestedItems[0][0]['companies'][val].percentChange, text4: nestedItems[0][0]['companies'][val].current,text5:nestedItems[0][0]['companies'][val].symbol })
+        }
+  
+     
     }, err => {
       console.log(err)
     })
   }
-  getnifty1yr() {
-
+   getnifty1yr() {
+    
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1yr&type=area').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
@@ -434,9 +432,9 @@ export class NiftyComponent implements OnInit {
       for (let val in nestedItems[1].values) {
         this.nifty501yrdata.push(nestedItems[1].values[val]["_value"])
         this.nifty501yrLabels.push(nestedItems[1].values[val]["_time"])
-
+   
       }
-
+  
       this.lineChart1yrData = [{
         label: 'Price',
         data: this.nifty501yrdata,
@@ -445,63 +443,63 @@ export class NiftyComponent implements OnInit {
       }];
 
       this.lineChart1yrLabels = this.nifty501yrLabels;
-
-
+    
+      
     }, err => {
       console.log(err)
     })
-
-
+   
+   
   }
   trackByFuntion(index, item) {
-    // console.log( 'TrackBy:', item.text2, 'at index', index );
+   // console.log( 'TrackBy:', item.text2, 'at index', index );
     return item.text2
   }
   trackByFuntion1(index1, item1) {
     //console.log( 'TrackBy:', item1.text1, 'at index', index1);
     return item1.text1
-  }
+   }
   trackByFuntion2(index2, item2) {
     //console.log( 'TrackBy:', item2.text1, 'at index', index2 );
     return item2.text1
-  }
+   }
   trackByFuntion3(index3, item3) {
     //console.log( 'TrackBy:', item3.text1, 'at index', index3 );
     return item3.text1;
-  }
+   }
   trackByFuntion4(index4, item4) {
     //console.log( 'TrackBy:', item4.text2, 'at index', index4 );
     item4.text2;
-  }
+   }
   trackByFuntion5(index5, item5) {
     //console.log( 'TrackBy:', item5.text1, 'at index', index5 );
     return item5.text1;
-  }
+   }
   trackByFuntion6(index6, item6) {
     //console.log( 'TrackBy:', item6.text1, 'at index', index6 );
-    return item6.text1;
-  }
+     return item6.text1;
+   }
   trackByFuntion7(index7, item7) {
     //console.log( 'TrackBy:', item7.text1, 'at index', index7 );
     return item7.text1;
-  }
+   }
   trackByFuntion8(index8, item8) {
     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item8.text3;
+    return item8.text3 ;
   }
   trackByFuntion9(index9, item9) {
     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item9.text3;
+    return item9.text3 ;
   }
   trackByFuntion10(index10, item10) {
     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item10.text3;
+    return item10.text3 ;
   }
   trackByFuntion11(index11, item11) {
     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item11.text3;
-  }
-
+    return item11.text3 ;
+   }
+  
 
   getnifty6m() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=6m&type=area').subscribe(data5 => {
@@ -511,9 +509,9 @@ export class NiftyComponent implements OnInit {
       for (let val in nestedItems[1].values) {
         this.nifty506mdata.push(nestedItems[1].values[val]["_value"])
         this.nifty506mLabels.push(nestedItems[1].values[val]["_time"])
-
+   
       }
-
+  
 
       this.lineChart6mData = [{
         label: 'Price',
@@ -523,12 +521,12 @@ export class NiftyComponent implements OnInit {
       }];
 
       this.lineChart6mLabels = this.nifty506mLabels;
-
-
+    
+      
     }, err => {
       console.log(err)
     })
-
+  
   }
   getnifty3m() {
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=3m&type=area').subscribe(data5 => {
@@ -538,9 +536,9 @@ export class NiftyComponent implements OnInit {
       for (let val in nestedItems[1].values) {
         this.nifty503mdata.push(nestedItems[1].values[val]["_value"])
         this.nifty503mLabels.push(nestedItems[1].values[val]["_time"])
-
+   
       }
-
+  
 
       this.lineChart3mData = [{
         label: 'Price',
@@ -550,21 +548,21 @@ export class NiftyComponent implements OnInit {
       }];
 
       this.lineChart3mLabels = this.nifty503mLabels;
-
-
+    
+     
     }, err => {
       console.log(err)
     })
-
+  
   }
   getnifty5d() {
     this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/W/in%3BNSX?field=RSI').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-
+      
       ////////////To get Nifty 5day Resistances and Indicators/////////////
-
+      
       let val5 = 0;
       while (val5 != 2400) {
         val5 = val5 + 1
@@ -575,7 +573,7 @@ export class NiftyComponent implements OnInit {
           this.lineChartDatan50snrs2w.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s2),
           this.lineChartDatan50snrs1w.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s1)
       }
-
+   
       this.nifty50crossoverw.length = 0;
       for (let val in nestedItems[2]['crossover']) {
         this.nifty50crossoverw.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
@@ -586,140 +584,140 @@ export class NiftyComponent implements OnInit {
           this.nifty50indicatorsw.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
         }
       }
-
-
+      
+      
     }, err => {
       console.log(err)
     })
-    ////////////To get Nifty 1 week Price///////////////////////
-
-    this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=5d&type=area').subscribe(data5 => {
+     ////////////To get Nifty 1 week Price///////////////////////
+      
+     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=5d&type=area').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-
-      this.nifty505ddata.length = 0;
-      this.nifty505dLabels.length = 0;
-      for (let val in nestedItems[1].values) {
-        this.nifty505ddata.push(nestedItems[1].values[val]["_value"])
-        this.nifty505dLabels.push(nestedItems[1].values[val]["_time"])
-
-      }
-
-
-      this.lineChart5dData = [{
-        label: 'Price',
-        data: this.nifty505ddata,
-        borderWidth: 1,
-        fill: false
-      }, {
-        label: 'R1',
-        data: this.lineChartDatan50snrr1w,
-        borderWidth: 1,
-        bordercolor: '#d3766c',
-        fill: false
-      },
-      {
-        label: 'R2',
-        data: this.lineChartDatan50snrr2w,
-        borderWidth: 1,
-        borderColor: '#e3256b',
-        fill: false
-      }
-        , {
-        label: 'R3',
-        data: this.lineChartDatan50snrr3w,
-        borderWidth: 1,
-        borderColor: '#c84343',
-        fill: false
-      }, {
-        label: 'S1',
-        data: this.lineChartDatan50snrs1w,
-        borderWidth: 1,
-        borderColor: '#90b590',
-        fill: false
-      }, {
-        label: 'S2',
-        data: this.lineChartDatan50snrs2w,
-        borderWidth: 1,
-        borderColor: '#09c51b',
-        fill: false
-      }, {
-        label: 'S3',
-        data: this.lineChartDatan50snrs3w,
-        borderWidth: 1,
-        borderColor: '#375f00',
-        fill: false
-      }];
-
-      this.lineChart5dLabels = this.nifty505dLabels;
-
-
-    }, err => {
-      console.log(err)
-    })
-
+      
+  this.nifty505ddata.length = 0;
+  this.nifty505dLabels.length = 0;
+  for (let val in nestedItems[1].values) {
+    this.nifty505ddata.push(nestedItems[1].values[val]["_value"])
+    this.nifty505dLabels.push(nestedItems[1].values[val]["_time"])
+  
   }
+ 
 
-  getnifty1m() {
-    this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3BNSX?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
+  this.lineChart5dData = [{
+    label: 'Price',
+    data: this.nifty505ddata,
+    borderWidth: 1,
+    fill: false
+  }, {
+    label: 'R1',
+    data: this.lineChartDatan50snrr1w,
+    borderWidth: 1,
+    bordercolor: '#d3766c',
+    fill: false
+  },
+  {
+    label: 'R2',
+    data: this.lineChartDatan50snrr2w,
+    borderWidth: 1,
+    borderColor: '#e3256b',
+    fill: false
+  }
+    , {
+    label: 'R3',
+    data: this.lineChartDatan50snrr3w,
+    borderWidth: 1,
+    borderColor: '#c84343',
+    fill: false
+  }, {
+    label: 'S1',
+    data: this.lineChartDatan50snrs1w,
+    borderWidth: 1,
+    borderColor: '#90b590',
+    fill: false
+  }, {
+    label: 'S2',
+    data: this.lineChartDatan50snrs2w,
+    borderWidth: 1,
+    borderColor: '#09c51b',
+    fill: false
+  }, {
+    label: 'S3',
+    data: this.lineChartDatan50snrs3w,
+    borderWidth: 1,
+    borderColor: '#375f00',
+    fill: false
+  }];
 
-      ////////////To get Nifty 1 month Resistances and Indicators/////////////
-      this.lineChartDatan50snrr1m.length = 0;
-      this.lineChartDatan50snrr2m.length = 0;
-      this.lineChartDatan50snrr3m.length = 0;
-      this.lineChartDatan50snrs1m.length = 0;
-      this.lineChartDatan50snrs2m.length = 0;
-      this.lineChartDatan50snrs3m.length = 0;
-      let val5 = 0;
-      while (val5 != 2000) {
-        val5 = val5 + 1
-        this.lineChartDatan50snrr1m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r1),
-          this.lineChartDatan50snrr2m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r2),
-          this.lineChartDatan50snrr3m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r3),
-          this.lineChartDatan50snrs3m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s3),
-          this.lineChartDatan50snrs2m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s2),
-          this.lineChartDatan50snrs1m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s1)
-      }
+  this.lineChart5dLabels = this.nifty505dLabels;
+ 
 
-      this.nifty50crossoverm.length = 0;
-      for (let val in nestedItems[2]['crossover']) {
-        this.nifty50crossoverm.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
-      }
-      this.nifty50indicatorsm.length = 0;
-      for (let val1 in nestedItems[2]['indicators']) {
-        if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
-          this.nifty50indicatorsm.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
+}, err => {
+  console.log(err)
+})
+ 
+  }  
+   
+    getnifty1m() {
+      this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/M/in%3BNSX?field=RSI').subscribe(data5 => {
+        let nestedItems = Object.keys(data5).map(key => {
+          return data5[key];
+        });
+       
+        ////////////To get Nifty 1 month Resistances and Indicators/////////////
+        this.lineChartDatan50snrr1m.length = 0;
+        this.lineChartDatan50snrr2m.length = 0;
+        this.lineChartDatan50snrr3m.length = 0;
+        this.lineChartDatan50snrs1m.length = 0;
+        this.lineChartDatan50snrs2m.length = 0;
+        this.lineChartDatan50snrs3m.length = 0;
+        let val5 = 0;
+        while (val5 != 2000) {
+          val5 = val5 + 1
+          this.lineChartDatan50snrr1m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r1),
+            this.lineChartDatan50snrr2m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r2),
+            this.lineChartDatan50snrr3m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r3),
+            this.lineChartDatan50snrs3m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s3),
+            this.lineChartDatan50snrs2m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s2),
+            this.lineChartDatan50snrs1m.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s1)
         }
-      }
+   
+        this.nifty50crossoverm.length = 0;
+        for (let val in nestedItems[2]['crossover']) {
+          this.nifty50crossoverm.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
+        }
+        this.nifty50indicatorsm.length = 0;
+        for (let val1 in nestedItems[2]['indicators']) {
+          if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
+            this.nifty50indicatorsm.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
+          }
+        }
+       
+      }, err => {
+        console.log(err)
+      })
+       
+      
+     
+  
 
-    }, err => {
-      console.log(err)
-    })
-
-
-
-
-
-    ////////////To get Nifty 1 month Price///////////////////////
-
-    this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1m&type=area').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-
+      ////////////To get Nifty 1 month Price///////////////////////
+      
+        this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1m&type=area').subscribe(data5 => {
+          let nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+         
       this.nifty501mdata.length = 0;
       this.nifty501mLabels.length = 0;
       for (let val in nestedItems[1].values) {
         this.nifty501mdata.push(nestedItems[1].values[val]["_value"])
         this.nifty501mLabels.push(nestedItems[1].values[val]["_time"])
-
+      
       }
-
-
+     
+    
       this.lineChart1mData = [{
         label: 'Price',
         data: this.nifty501mdata,
@@ -764,79 +762,79 @@ export class NiftyComponent implements OnInit {
         borderColor: '#375f00',
         fill: false
       }];
-
+   
       this.lineChart1mLabels = this.nifty501mLabels;
-
+    
     }, err => {
       console.log(err)
     })
   }
-
+ 
   getniftytoday() {
-    ////////////To get Nifty Today Price///////////////////////
-
+        ////////////To get Nifty Today Price///////////////////////
+    
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=9&range=1d&type=area').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-
+    
       this.nifty50data.length = 0;
       this.nifty50Labels.length = 0;
       for (let val in nestedItems[1].values) {
         this.nifty50data.push(nestedItems[1].values[val]["_value"])
         this.nifty50Labels.push((nestedItems[1].values[val]["_time"]))
-        this.stockhcdate.push({ x: (nestedItems[1].values[val]["_time"]), y: (nestedItems[1].values[val]["_value"]) })
+        this.stockhcdate.push({x:(nestedItems[1].values[val]["_time"]),y:(nestedItems[1].values[val]["_value"])})     
       }
     }, err => {
       console.log(err)
     })
-    this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?field=RSI').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-
-      ////////////To get Nifty Today Resistances and Indicators/////////////
-      this.lineChartDatan50snrr1.length = 0;
-      this.lineChartDatan50snrr2.length = 0;
-      this.lineChartDatan50snrr3.length = 0;
-      this.lineChartDatan50snrs1.length = 0;
-      this.lineChartDatan50snrs2.length = 0;
-      this.lineChartDatan50snrs3.length = 0;
-
-      let val = 0;
-      while (val != 400) {
-        val = val + 1
-        this.lineChartDatan50snrr1.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r1),
-          this.lineChartDatan50snrr2.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r2),
-          this.lineChartDatan50snrr3.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r3),
-          this.lineChartDatan50snrs3.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s3),
-          this.lineChartDatan50snrs2.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s2),
-          this.lineChartDatan50snrs1.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s1)
-      }
-
-      this.nifty50indicators.length = 0;
-      this.nifty50crossover.length = 0;
-      for (let val in nestedItems[2]['crossover']) {
-        this.nifty50crossover.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
-      }
-
-      for (let val1 in nestedItems[2]['indicators']) {
-        if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
-          this.nifty50indicators.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
+      this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3BNSX?field=RSI').subscribe(data5 => {
+        let nestedItems = Object.keys(data5).map(key => {
+          return data5[key];
+        });
+      
+        ////////////To get Nifty Today Resistances and Indicators/////////////
+        this.lineChartDatan50snrr1.length = 0;
+        this.lineChartDatan50snrr2.length = 0;
+        this.lineChartDatan50snrr3.length = 0;
+        this.lineChartDatan50snrs1.length = 0;
+        this.lineChartDatan50snrs2.length = 0;
+        this.lineChartDatan50snrs3.length = 0;
+   
+        let val = 0;
+        while (val != 400) {
+          val = val + 1
+          this.lineChartDatan50snrr1.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r1),
+            this.lineChartDatan50snrr2.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r2),
+            this.lineChartDatan50snrr3.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r3),
+            this.lineChartDatan50snrs3.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s3),
+            this.lineChartDatan50snrs2.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s2),
+            this.lineChartDatan50snrs1.push(nestedItems[2]['pivotLevels'][0].pivotLevel.s1)
         }
-      }
-
-
-
-
-
-
+         
+        this.nifty50indicators.length = 0;
+        this.nifty50crossover.length = 0;
+        for (let val in nestedItems[2]['crossover']) {
+          this.nifty50crossover.push({ text1: nestedItems[2]['crossover'][val]['displayValue'], text3: nestedItems[2]['crossover'][val]['indication'], text2: nestedItems[2]['crossover'][val]['period'], text4: nestedItems[2]['crossover'][val]['period'] })
+        }
+         
+        for (let val1 in nestedItems[2]['indicators']) {
+          if (nestedItems[2]['indicators'][val1]['id'] != 'bollinger') {
+            this.nifty50indicators.push({ text1: nestedItems[2]['indicators'][val1].displayName, text2: nestedItems[2]['indicators'][val1].id, text3: nestedItems[2]['indicators'][val1].indication, text4: nestedItems[2]['indicators'][val1].value })
+          }
+        }
+          
+        
+      
+      
+     
+    
       this.lineChartData = [{
         label: 'Price',
         data: this.nifty50data,
         borderWidth: 1,
         fill: false
-      },
+      }, 
       {
         label: 'R2',
         data: this.lineChartDatan50snrr2,
@@ -876,26 +874,27 @@ export class NiftyComponent implements OnInit {
         borderColor: '#375f00',
         fill: false
       }];
-
+   
       this.lineChartLabels = this.nifty50Labels;
-
-
-
+   
+   
+      
     }, err => {
       console.log(err)
     })
   }
   changestockpage(symbol) {
-
+     
 
     this.stockisin = this.stockList.filter(i => i.symbol == symbol)[0].isin
-    window.open("/Share?stock=" + this.stockisin, "_blank")
+    this.window.open("/Share?stock=" + this.stockisin, "_blank")
   }
 }
 
 
 
+ 
 
 
 
-
+ 
