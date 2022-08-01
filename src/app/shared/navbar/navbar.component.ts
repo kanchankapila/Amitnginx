@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as stocks from '../../lists/stocklist';
 import * as stocks1 from '../../lists/list1';
+import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { DataapiService } from '../../../dataapi.service';
@@ -11,10 +12,18 @@ import * as sectors from '../../lists/mcsectorlist';
 import * as fnostocks from '../../lists/fnostocks';
 import * as bqstock from '../../lists/bqlist'
 import * as etstock from '../../lists/etlist'
-
+import axios from "axios";
 
 export interface pcrniftytile {
   text1: string;
+}
+export interface newscardtile {
+  
+  text1: string;
+  text2: string;
+  text3: string;
+  text4: string;
+  text5: string;
 }
 export interface pcrnseniftytile {
 text1: any;
@@ -133,12 +142,21 @@ export class NavbarComponent implements OnInit {
   visibleSidebar3;
   visibleSidebar4;
   visibleSidebar5;
-  
-  constructor(private http: HttpClient,private primengConfig: PrimeNGConfig,config: NgbDropdownConfig, private window: Window, private route: ActivatedRoute, private router: Router,private dataApi: DataapiService) {
+  today: any;
+  dateyesterday: any;
+  dateday5: any;
+  date5: any;
+
+  constructor(private datePipe: DatePipe,private http: HttpClient,private primengConfig: PrimeNGConfig,config: NgbDropdownConfig, private window: Window, private route: ActivatedRoute, private router: Router,private dataApi: DataapiService) {
     config.placement = 'bottom-right';
   }
 
   ngOnInit() {
+    this.today = new Date();
+    this.datetoday = this.datePipe.transform(this.today, 'yyyy-MM-dd')
+    this.dateyesterday = this.datePipe.transform(this.today.setDate(this.today.getDate() - 1), 'yyyy-MM-dd')
+    this.dateday5 = this.datePipe.transform(this.today.setDate(this.today.getDate() - 5), 'yyyy-MM-dd')
+    this.date5 = this.today.setDate(this.today.getDate() - 5)
 
     
     this.stock = stocks.default.Data
@@ -154,6 +172,7 @@ export class NavbarComponent implements OnInit {
     }
     this.sectorList = sectors.default.Data
     this.getmcniftyrealtime()
+    this.getgnewsapi()
     this.getmcbankniftyrealtime()
     this.getmcpharmaniftyrealtime()
     this.fnostock = fnostocks.default.Data
@@ -611,6 +630,21 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       console.log(err)
     }
     )
+  }
+  getgnewsapi() {
+    axios.get('https://newsapi.org/v2/everything?q=nifty&from=' + this.dateday5 + '&to=' + this.datetoday + '&sortBy=popularity&apiKey=28bda70739cc4024ba3f30223e8c25a8')
+      .then((response) => {
+        let nestedItems = Object.keys((response.data)).map(key => {
+          return (response.data)[key];
+        });;
+        console.log(nestedItems)
+        this.newscard.length = 0;
+        for (let val in nestedItems[2]) {
+          this.newscard.push({ text1: nestedItems[2][val].title, text2: nestedItems[2][val].url, text3: nestedItems[2][val].urlToImage, text4: nestedItems[2][val].description, text5: nestedItems[2][val].content })
+        
+        }
+
+      });
   }
   nsepostdata2() {
     console.log("eq sector combine start")

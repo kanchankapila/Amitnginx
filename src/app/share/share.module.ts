@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from "@angular/platform-browser";
-
+import { DatePipe } from '@angular/common';
 import { ShareRoutingModule } from './share-routing.module';
 import { ShareComponent } from './share.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatCardModule } from '@angular/material/card';
+import { CardModule } from 'primeng/card';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { NgChartsModule } from 'ng2-charts';
 import {HttpClientModule, HttpErrorResponse} from '@angular/common/http';
@@ -30,6 +31,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     NgbModule,
     //ChartModule,
     MatCardModule,
+    CardModule,
     FlexLayoutModule,
     MatButtonModule,
     BrowserModule,
@@ -43,6 +45,6 @@ import { NgxEchartsModule } from 'ngx-echarts';
    
   ],
   schemas: [],
-  providers: []
+  providers: [DatePipe]
 })
 export class ShareModule { }
