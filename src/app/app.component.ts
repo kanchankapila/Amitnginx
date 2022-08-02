@@ -114,15 +114,15 @@ export class AppComponent implements OnInit {
         window.location.reload();
       }
     });
-    // const interval = setInterval(async () => {
-    //   const shouldUpdate = await this.updateService.checkForUpdate();
-    //   alert('Checked for update with result: ' + shouldUpdate);
-    //   if (shouldUpdate) {
-    //     const result = await this.updateService.activateUpdate();
-    //     alert('Activate Update completed with result: ' + result);
-    //     clearInterval(interval);
-    //   }
-    // }, 1000);
+    const interval = setInterval(async () => {
+      const shouldUpdate = await this.updateService.checkForUpdate();
+      alert('Checked for update with result: ' + shouldUpdate);
+      if (shouldUpdate) {
+        const result = await this.updateService.activateUpdate();
+        alert('Activate Update completed with result: ' + result);
+        clearInterval(interval);
+      }
+    }, 1000);
 
     this.updateService.unrecoverable.subscribe(
       (event: UnrecoverableStateEvent) => {

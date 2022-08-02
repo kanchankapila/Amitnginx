@@ -56,6 +56,20 @@
             "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
+            "development":{
+              "optimization": false,
+              "outputHashing": "none",
+              "sourceMap": true,
+              "namedChunks": false,
+              "aot": true,
+              "statsJson":false,
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+             
+            },
             "production": {
               "fileReplacements": [
                 {

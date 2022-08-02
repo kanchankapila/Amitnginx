@@ -1,23 +1,7 @@
 <script>src = "https://cdnjs.cloudflare.com/ajax/libs/primeng/13.4.1/resources/components/sidebar/sidebar.min.css"</script>
 <br>
 <br>
-<p-sidebar [(visible)]="visibleSidebar7" [fullScreen]="true" [baseZIndex]="10000" [showCloseIcon]="true">
-  
-  <div class="p-grid" *ngIf="newscard.length > 0">
-    <div class="p-col" *ngFor="let news of newscard" >
-        <p-card >
-            <p-header>
-                <img src="{{news.text3}}">
-            </p-header>
-            <h4>{{news.text1}}</h4>
-            <h5>{{news.text2}}</h5>
-            <h6>{{news.text5}}</h6>
-            
-            <a href={{news.text2}} target="_blank" rel="noopener noreferer">{{news.text2}}</a>
-        </p-card>
-    </div>
- </div> 
-    </p-sidebar>
+
 <div class="InsideContent">
   <div *ngFor="let tile of omrscore trackBy: trackByFuntion37" [ngClass]="{
   'card12 bg-gradient-bear text-black':5 > tile.text1,
@@ -64,7 +48,7 @@ NR7:{{nr7}}
     class="p-button-raised p-button-success p-button-outlined"></button>
   <button pButton type="button" (click)="visibleSidebar5 = true" icon="pi pi-arrow-right" label="Insights"
     style=float:right class="p-button-raised p-button-success p-button-outlined"></button>
-    <button pButton type="button" (click)="visibleSidebar7 = true" icon="pi pi-arrow-right" label="Stock News"
+    <button pButton type="button" class="mr-2" (click)="visibleSidebar7 = true" icon="pi pi-arrow-right" label="Stock News"
     style=float:right class="p-button-raised p-button-success p-button-outlined"></button>
     
   </div>
@@ -297,6 +281,29 @@ NR7:{{nr7}}
     </div>
   </div>
 </p-sidebar>
+<p-sidebar [(visible)]="visibleSidebar7" [fullScreen]="true">
+  
+  <div class=" grid-margin stretch-card">
+    <div class="content  container">
+    <div fxLayout="row wrap" fxLayoutGap="10px grid">
+      <div fxFlex="20" fxFlex.xs="100%" fxFlex.sm="100%" *ngFor="let news of newscard" >
+        <p-card >
+            <p-header>
+                <img src="{{news.text3}}">
+            </p-header>
+            <h4>{{news.text1}}</h4>
+            <h5>{{news.text2}}</h5>
+            <h6>{{news.text5}}</h6>
+            
+            <a href={{news.text2}} target="_blank" rel="noopener noreferer">{{news.text2}}</a>
+        </p-card>
+      </div>
+    </div>
+ </div> 
+</div>
+<p-button type="button" (click)="visibleSidebar7 = false" label="Save" styleClass="p-button-success"></p-button>
+<p-button type="button" (click)="visibleSidebar7 = false" label="Cancel" styleClass="p-button-secondary"></p-button>
+    </p-sidebar>
 <div class="InsideContent">
   <div class="col-lg-6 grid-margin  stretch-card">
     <div class="card">
