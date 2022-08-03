@@ -3,7 +3,10 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as stocks from '../../lists/stocklist';
 import * as stocks1 from '../../lists/list1';
 import { DatePipe } from '@angular/common';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import {MenuItem} from 'primeng/api';
+import {SelectItem} from 'primeng/api';
+import {SelectItemGroup} from 'primeng/api';
+import { Router, ActivatedRoute, ParamMap ,RouterLink} from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { DataapiService } from '../../../dataapi.service';
 import { formatDate } from '@angular/common';
@@ -13,6 +16,7 @@ import * as fnostocks from '../../lists/fnostocks';
 import * as bqstock from '../../lists/bqlist'
 import * as etstock from '../../lists/etlist'
 import axios from "axios";
+
 
 export interface pcrniftytile {
   text1: string;
@@ -107,6 +111,9 @@ export class NavbarComponent implements OnInit {
   fnostock: any;
   stockid = [];
   mcsectorsymbol = [];
+  items: SelectItem[];
+
+  item: string;
   eqsymbol1 = [];
   tlid = [];
   abc = [];
@@ -146,9 +153,18 @@ export class NavbarComponent implements OnInit {
   dateyesterday: any;
   dateday5: any;
   date5: any;
+  res;
 
   constructor(private datePipe: DatePipe,private http: HttpClient,private primengConfig: PrimeNGConfig,config: NgbDropdownConfig, private window: Window, private route: ActivatedRoute, private router: Router,private dataApi: DataapiService) {
-    config.placement = 'bottom-right';
+    config.placement = 'bottom-right'; this.items = [];
+    this.stock = stocks.default.Data;
+    
+
+    
+
+     for (let val in this.stock) {
+     this.items.push({label: this.stock[val].name , value:this.stock[val].isin });
+   }
   }
 
   ngOnInit() {
@@ -160,6 +176,7 @@ export class NavbarComponent implements OnInit {
 
     
     this.stock = stocks.default.Data
+    this.item=stocks.default.Data['name']
     this.stock1 = stocks1.default.Data
     this.nsedataniftyoi()
     this.nsedatabniftyoi()
@@ -180,14 +197,16 @@ export class NavbarComponent implements OnInit {
     this.bqstocks=bqstock.default.Data
     this.toggleSidebar()
     this.data = this.stock
+    
     this.primengConfig.ripple = true;
+    
   }
+ 
   keyword = 'name';
-  selectEvent(stock_isin) {
+   selectEvent(stock_isin) {
+       this.router.navigate(['/Share'],{queryParams: {stock:stock_isin}})
     
-    this.window.open("/Share?stock="+stock_isin, "_blank")
-    
-  }
+   }
 
   onChangeSearch(val: string) {
 
@@ -232,11 +251,12 @@ export class NavbarComponent implements OnInit {
   nsedataniftyoi() {
     
     this.http.get<any>('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY').subscribe(data5 => {
-      (response: Response) => { console.log(response) }
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      
+       (response: Response) => 
+       { }
+       let nestedItems = Object.keys(data5).map(key => {
+         return data5[key];
+       });
+      console.log(nestedItems)
 
       this.pcrnsenifty.length = 0;
       this.optionwc.length = 0;

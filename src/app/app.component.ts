@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   showSidebar: boolean = true;
   showNavbar: boolean = true;
-  showFooter: boolean = true;
+  
   isLoading: boolean;
 
   constructor(private router: Router, private updateService: SwUpdate,
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
         if ((event['url'] == '/user-pages/login') || (event['url'] == '/user-pages/register') || (event['url'] == '/error-pages/404') || (event['url'] == '/error-pages/500')) {
           this.showSidebar = false;
           this.showNavbar = false;
-          this.showFooter = false;
+        
           document.querySelector('.main-panel').classList.add('w-100');
           document.querySelector('.page-body-wrapper').classList.add('full-page-wrapper');
           document.querySelector('.content-wrapper').classList.remove('auth', 'auth-img-bg',);
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
         } else {
           this.showSidebar = true;
           this.showNavbar = true;
-          this.showFooter = true;
+          
           document.querySelector('.main-panel').classList.remove('w-100');
           document.querySelector('.page-body-wrapper').classList.remove('full-page-wrapper');
           document.querySelector('.content-wrapper').classList.remove('auth', 'auth-img-bg');
@@ -114,15 +114,15 @@ export class AppComponent implements OnInit {
         window.location.reload();
       }
     });
-    const interval = setInterval(async () => {
-      const shouldUpdate = await this.updateService.checkForUpdate();
-      alert('Checked for update with result: ' + shouldUpdate);
-      if (shouldUpdate) {
-        const result = await this.updateService.activateUpdate();
-        alert('Activate Update completed with result: ' + result);
-        clearInterval(interval);
-      }
-    }, 1000);
+    // const interval = setInterval(async () => {
+    //   const shouldUpdate = await this.updateService.checkForUpdate();
+    //   alert('Checked for update with result: ' + shouldUpdate);
+    //   if (shouldUpdate) {
+    //     const result = await this.updateService.activateUpdate();
+    //     alert('Activate Update completed with result: ' + result);
+    //     clearInterval(interval);
+    //   }
+    // }, 1000);
 
     this.updateService.unrecoverable.subscribe(
       (event: UnrecoverableStateEvent) => {

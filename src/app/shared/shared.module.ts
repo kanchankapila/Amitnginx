@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from "@angular/platform-browser";
 import { DatePipe } from '@angular/common';
+import {FormsModule} from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarModule, ButtonsModule } from 'angular-bootstrap-md'
 import { NgxEchartsModule } from 'ngx-echarts';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { DropdownModule } from 'primeng/dropdown';
 import { NgChartsModule } from 'ng2-charts';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule ,HttpClientJsonpModule} from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatButtonModule } from '@angular/material/button';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -20,7 +23,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { CardModule } from 'primeng/card';
 import { TabViewModule } from 'primeng/tabview';
 import { MatCardModule } from '@angular/material/card';
-import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
 
 const routes : Routes = [
   { path: '', component: SidebarComponent },
@@ -33,9 +36,13 @@ const routes : Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     SidebarModule,
+    HttpClientJsonpModule,
+    BrowserAnimationsModule,
     MatSidenavModule,
+    DropdownModule,
     CommonModule,
     NavbarModule,
+    FormsModule,
     ButtonsModule,
     NgbModule,
     TabViewModule,
@@ -49,7 +56,7 @@ const routes : Routes = [
     BrowserModule,
     //Sidebar1Module,
     MatButtonModule,
-    AutocompleteLibModule,
+ 
    // OwlClockModule,
     RouterModule.forChild(routes),
     NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),

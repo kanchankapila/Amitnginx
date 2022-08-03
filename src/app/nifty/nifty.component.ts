@@ -355,18 +355,23 @@ export class NiftyComponent implements OnInit {
         console.log(err)
       })
   }  
-  getniftypcr() {
-    this.http.get('https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr').subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
+  async getniftypcr() {
+    try {
+      const response = await fetch("https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr", {
+        "method": "GET",
+        "headers": {}
       });
-      
+    
+      if (response.ok) {
+         const result = await response.json();
+        console.log(result);
+       
        /////////////////////NIfty PCR from niftytraders////////////////////
        this.niftypcrdata.length = 0;
        this.niftypcrtime.length = 0;
-       for (let val in nestedItems[3]['data']) {
-         this.niftypcrdata.push(nestedItems[3]['data'][val]['pcr'])
-         this.niftypcrtime.push(new Date(nestedItems[3]['data'][val]['time']).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }))
+       for (let val in result['resultData']['data']) {
+         this.niftypcrdata.push(result['resultData']['data'][val]['pcr'])
+         this.niftypcrtime.push(new Date(result['resultData']['data'][val]['time']).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }))
        }
       
        this.lineChartpcrData = [{
@@ -378,10 +383,11 @@ export class NiftyComponent implements OnInit {
       }];
 
       this.lineChartpcrLabels = this.niftypcrtime;
-    
-    }, err => {
-      console.log(err)
-    })
+    }
+  } catch (err) {
+    console.error(err);
+  }
+   
   }
   getnifty50smaema() {
     this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%2050').subscribe(data5 => {

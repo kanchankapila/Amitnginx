@@ -1,18 +1,16 @@
 /* Navbar */
 
 @import '../../../styles.scss';
-
+:host ::ng-deep .p-dropdown {
+  width: 14rem;
+}
 /* Navbar */
 .owl-clock {
   display: inline-block;
   font-size: 0.4em;
 }
 
-.ng-autocomplete{
- 
-  max-width:220px;
-  border-radius: 5px;
-}
+
   .InsideContent2{
     display:block;
   }

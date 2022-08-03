@@ -703,6 +703,7 @@ export class ShareComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.eqsymbol = this.stockList.filter(i => i.isin == params.stock)[0].symbol
       this.tlid = this.stockList.filter(i => i.isin == params.stock)[0].tlid
+      console.log(this.tlid)
       this.tlname = this.stockList.filter(i => i.isin == params.stock)[0].tlname
       this.stockname = this.stockList.filter(i => i.isin == params.stock)[0].name
       this.stockisin = this.stockList.filter(i => i.isin == params.stock)[0].isin
@@ -1568,19 +1569,46 @@ export class ShareComponent implements OnInit {
       console.log(err)
     })
   }
-  getntstockdetails(eqsymbol) {
-    this.dataApi.getntstockdetails(this.eqsymbol).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      console.log(nestedItems)
-      this.nr7 = (nestedItems[3].stocktrend['nr7_today'])
+  async getntstockdetails(eqsymbol) {
+    try {
+      const response = await fetch("https://api.niftytrader.in/webapi/Live/stockAnalysis", {
+        "method": "POST",
+        "headers": {
+          "accept": "application/json, text/plain, */*",
+        "accept-language": "en-US,en;q=0.9",
+        "content-type": "application/json",
+        "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"Windows\"",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site"},
+        "referrer": "https://www.niftytrader.in/",
+        "referrerPolicy": "strict-origin-when-cross-origin",
+        "body": '{\"symbol\":\"'+this.eqsymbol+'\"}',
+        //"method": "POST",
+        "mode": "cors",
+        "credentials": "omit"
+      })
+      
+    
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result)
+     
+    
+    // this.dataApi.getntstockdetails(this.eqsymbol).subscribe(data5 => {
+    //   let nestedItems = Object.keys(data5).map(key => {
+    //     return data5[key];
+    //   });
+    //   console.log(nestedItems)
+      this.nr7 = (result['resultData'].stocktrend['nr7_today'])
       this.delivperc.length = 0;
       this.delivperctime.length = 0;
-      for (let val in nestedItems[3].priceTable) {
-        console.log(nestedItems[3].priceTable[val].delivery_percentage)
-        this.delivperc.unshift(nestedItems[3].priceTable[val].delivery_percentage)
-        this.delivperctime.unshift(nestedItems[3].priceTable[val].created_at)
+      for (let val in result['resultData'].priceTable) {
+        console.log(result['resultData'].priceTable[val].delivery_percentage)
+        this.delivperc.unshift(result['resultData'].priceTable[val].delivery_percentage)
+        this.delivperctime.unshift(result['resultData'].priceTable[val].created_at)
       }
       this.DelivData = [{
         label: 'Delivery Percentage',
@@ -1589,9 +1617,9 @@ export class ShareComponent implements OnInit {
         fill: false
       }];
       this.DelivLabels = this.delivperctime;
-      for (let val in nestedItems[3].priceTable) {
-        this.volume.unshift(nestedItems[3].priceTable[val].volume)
-        this.volumetime.unshift(nestedItems[3].priceTable[val].created_at)
+      for (let val in result['resultData'].priceTable) {
+        this.volume.unshift(result['resultData'].priceTable[val].volume)
+        this.volumetime.unshift(result['resultData'].priceTable[val].created_at)
       }
       this.VolumeData = [{
         label: 'Volume',
@@ -1599,256 +1627,291 @@ export class ShareComponent implements OnInit {
         borderWidth: 1,
         fill: false
       }];
-      this.VolumeLabels = this.volumetime;
-    }, err => {
-      console.log(err)
-    }
-    )
+        this.VolumeLabels = this.volumetime;
+      }
+  } catch (err) {
+    console.error(err);
   }
-  getntstockpcrdetails(eqsymbol) {
-    this.dataApi.getntstockpcrdetails(this.eqsymbol).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      //  console.log(nestedItems)
-      this.maxpain.push({ text1: 'max pain', text2: nestedItems[3]['futureOption'].max_pain })
-      this.stockpcr.push({ text1: 'PCR', text2: nestedItems[3]['futureOption'].pcr })
-    }, err => {
-      console.log(err)
-    }
-    )
   }
-  gettrendlynestocks1(tlid, eqsymbol, tlname) {
-    this.dataApi.gettrendlynestocks1(tlid, eqsymbol, tlname).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      this.brokertarget.push({ text1: nestedItems[1]['broker_avg_target']['lt1'], text2: nestedItems[1]['broker_avg_target']['st1'], text3: nestedItems[1]['broker_avg_target']['color1'] })
-      this.ema_26.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['color1'], text4: nestedItems[1]['ema_26']['value'] })
-      this.ema_50.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['color1'], text4: nestedItems[1]['ema_50']['value'] })
-      this.ema_100.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'], text4: nestedItems[1]['ema_100']['value'] })
-      this.ema_200.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'], text4: nestedItems[1]['ema_200']['value'] })
-      this.sma_30.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['color1'], text4: nestedItems[1]['sma_30']['value'] })
-      this.sma_50.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['color1'], text4: nestedItems[1]['sma_50']['value'] })
-      this.sma_100.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'], text4: nestedItems[1]['sma_100']['value'] })
-      this.sma_200.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'], text4: nestedItems[1]['sma_200']['value'] })
-      this.macd1.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['color1'], text4: nestedItems[1]['macd']['value'] })
-      this.rsi1.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['color1'], text4: nestedItems[1]['rsi']['value'] })
-      this.mfi1.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['color1'], text4: nestedItems[1]['mfi']['value'] })
-      if (nestedItems[1]['broker_recodown_6M']['lt1']) {
-        this.brokerrecodowngrade.push({ text1: nestedItems[1]['broker_recodown_6M']['lt1'], text2: nestedItems[1]['broker_recodown_6M']['st1'], text3: nestedItems[1]['broker_recodown_6M']['color1'] })
+  
+  async getntstockpcrdetails(eqsymbol) {
+    // this.dataApi.getntstockpcrdetails(this.eqsymbol).subscribe(data5 => {
+    //   let nestedItems = Object.keys(data5).map(key => {
+    //     return data5[key];
+    //   });
+    //  console.log(nestedItems)
+    try {
+      const response = await fetch("https://api.niftytrader.in/webapi/Live/stockAnalysis", {
+        "method": "POST",
+        "headers": {
+          "accept": "application/json, text/plain, */*",
+          "accept-language": "en-US,en;q=0.9",
+          "content-type": "application/json",
+          "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Windows\"",
+          "sec-fetch-dest": "empty",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-site": "same-site"
+        },
+        "referrer": "https://www.niftytrader.in/",
+        "referrerPolicy": "strict-origin-when-cross-origin",
+        "body": '{\"symbol\":\"' + this.eqsymbol + '\"}',
+        //"method": "POST",
+        "mode": "cors",
+        "credentials": "omit"
+      })
+        
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result)
+     
+        this.maxpain.push({ text1: 'max pain', text2: result['resultData']['futureOption'].max_pain })
+        this.stockpcr.push({ text1: 'PCR', text2: result['resultData']['futureOption'].pcr })
       }
-      if (nestedItems[1]['broker_recoup_6M']['lt1']) {
-        this.brokerrecoupgrade.push({ text1: nestedItems[1]['broker_recoup_6M']['lt1'], text2: nestedItems[1]['broker_recoup_6M']['st1'], text3: nestedItems[1]['broker_recoup_6M']['color1'] })
-      }
-      if (nestedItems[1]['broker_targetup_6M']['lt1']) {
-        this.brokertargetupgrade.push({ text1: nestedItems[1]['broker_targetup_6M']['lt1'], text2: nestedItems[1]['broker_targetup_6M']['st1'], text3: nestedItems[1]['broker_targetup_6M']['color1'] })
-      }
-      if (nestedItems[1]['broker_targetdown_6M']['lt1']) {
-        this.brokertargetdowngrade.push({ text1: nestedItems[1]['broker_targetdown_6M']['lt1'], text2: nestedItems[1]['broker_targetdown_6M']['st1'], text3: nestedItems[1]['broker_targetdown_6M']['color1'] })
-      }
-      if (nestedItems[1]['MCAP_Q']['lt1']) {
-        if (nestedItems[1]['MCAP_Q']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
-        }
-        else if (nestedItems[1]['MCAP_Q']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
-        }
-        else if (nestedItems[1]['MCAP_Q']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
-        }
-      }
-      if (nestedItems[1]['NP_Q']['lt2']) {
-        if (nestedItems[1]['NP_Q']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['NP_Q']['value'], text2: nestedItems[1]['NP_Q']['lt2'], text3: nestedItems[1]['NP_Q']['st2'] })
-        }
-        else if (nestedItems[1]['NP_Q']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['NP_Q']['value'], text2: nestedItems[1]['NP_Q']['lt2'], text3: nestedItems[1]['NP_Q']['st2'] })
-        }
-        else if (nestedItems[1]['NP_Q']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['NP_Q']['value'], text2: nestedItems[1]['NP_Q']['lt2'], text3: nestedItems[1]['NP_Q']['st2'] })
-        }
-      }
-      if (nestedItems[1]['PBV_A']['st1']) {
-        if (nestedItems[1]['PBV_A']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['PBV_A']['lt1'], text2: nestedItems[1]['PBV_A']['st1'], text3: nestedItems[1]['PBV_A']['value'] })
-        }
-        else if (nestedItems[1]['PBV_A']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['PBV_A']['lt1'], text2: nestedItems[1]['PBV_A']['st1'], text3: nestedItems[1]['PBV_A']['value'] })
-        }
-        else if (nestedItems[1]['PBV_A']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['PBV_A']['lt1'], text2: nestedItems[1]['PBV_A']['st1'], text3: nestedItems[1]['PBV_A']['value'] })
-        }
-      }
-      if (nestedItems[1]['PE_TTM']['lt1']) {
-        if (nestedItems[1]['PE_TTM']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['PE_TTM']['lt1'], text2: nestedItems[1]['PE_TTM']['title'], text3: nestedItems[1]['PE_TTM']['value'] })
-        }
-        else if (nestedItems[1]['PE_TTM']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['PE_TTM']['lt1'], text2: nestedItems[1]['PE_TTM']['title'], text3: nestedItems[1]['PE_TTM']['value'] })
-        }
-        else if (nestedItems[1]['PE_TTM']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['PE_TTM']['lt1'], text2: nestedItems[1]['PE_TTM']['title'], text3: nestedItems[1]['PE_TTM']['value'] })
-        }
-      }
-      if (nestedItems[1]['SR_Q']['lt1']) {
-        if (nestedItems[1]['SR_Q']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['SR_Q']['lt2'], text2: nestedItems[1]['SR_Q']['st2'], text3: nestedItems[1]['SR_Q']['value'] })
-        }
-        else if (nestedItems[1]['SR_Q']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['SR_Q']['lt2'], text2: nestedItems[1]['SR_Q']['st2'], text3: nestedItems[1]['SR_Q']['value'] })
-        }
-        else if (nestedItems[1]['SR_Q']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['SR_Q']['lt2'], text2: nestedItems[1]['SR_Q']['st2'], text3: nestedItems[1]['SR_Q']['value'] })
-        }
-      }
-      if (nestedItems[1]['beta_1Y']['lt1']) {
-        if (nestedItems[1]['beta_1Y']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['beta_1Y']['lt1'], text2: nestedItems[1]['beta_1Y']['st1'], text3: nestedItems[1]['beta_1Y']['value'] })
-        }
-        else if (nestedItems[1]['beta_1Y']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['beta_1Y']['lt1'], text2: nestedItems[1]['beta_1Y']['st1'], text3: nestedItems[1]['beta_1Y']['value'] })
-        }
-        else if (nestedItems[1]['beta_1Y']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['beta_1Y']['lt1'], text2: nestedItems[1]['beta_1Y']['st1'], text3: nestedItems[1]['beta_1Y']['value'] })
-        }
-      }
-      if (nestedItems[1]['ema_26']['lt1']) {
-        if (nestedItems[1]['ema_26']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['value'] })
-        }
-        else if (nestedItems[1]['ema_26']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['value'] })
-        }
-        else if (nestedItems[1]['ema_26']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['value'] })
-        }
-      }
-      if (nestedItems[1]['ema_50']['lt1']) {
-        if (nestedItems[1]['ema_50']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['value'] })
-        }
-        else if (nestedItems[1]['ema_50']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['value'] })
-        }
-        else if (nestedItems[1]['ema_50']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['value'] })
-        }
-      }
-      if (nestedItems[1]['ema_100']['lt1']) {
-        if (nestedItems[1]['ema_100']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['value'] })
-        }
-        else if (nestedItems[1]['ema_100']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['value'] })
-        }
-        else if (nestedItems[1]['ema_100']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['value'] })
-        }
-      }
-      if (nestedItems[1]['ema_200']['lt1']) {
-        if (nestedItems[1]['ema_200']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_200']['st1'], text3: nestedItems[1]['ema_200']['value'] })
-        }
-        else if (nestedItems[1]['ema_200']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_200']['st1'], text3: nestedItems[1]['ema_200']['value'] })
-        }
-        else if (nestedItems[1]['ema_200']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_200']['st1'], text3: nestedItems[1]['ema_200']['value'] })
-        }
-      }
-      if (nestedItems[1]['sma_30']['lt1']) {
-        if (nestedItems[1]['sma_30']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['value'] })
-        }
-        else if (nestedItems[1]['sma_30']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['value'] })
-        }
-        else if (nestedItems[1]['sma_30']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['value'] })
-        }
-      }
-      if (nestedItems[1]['sma_50']['lt1']) {
-        if (nestedItems[1]['sma_50']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['value'] })
-        }
-        else if (nestedItems[1]['sma_50']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['value'] })
-        }
-        else if (nestedItems[1]['sma_50']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['value'] })
-        }
-      }
-      if (nestedItems[1]['sma_100']['lt1']) {
-        if (nestedItems[1]['sma_100']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['value'] })
-        }
-        else if (nestedItems[1]['sma_100']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['value'] })
-        }
-        else if (nestedItems[1]['sma_100']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['value'] })
-        }
-      }
-      if (nestedItems[1]['sma_200']['lt1']) {
-        if (nestedItems[1]['sma_200']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_200']['st1'], text3: nestedItems[1]['sma_200']['value'] })
-        }
-        else if (nestedItems[1]['sma_200']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_200']['st1'], text3: nestedItems[1]['sma_200']['value'] })
-        }
-        else if (nestedItems[1]['sma_200']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_200']['st1'], text3: nestedItems[1]['sma_200']['value'] })
-        }
-      }
-      if (nestedItems[1]['macd']['lt1']) {
-        if (nestedItems[1]['macd']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['value'] })
-        }
-        else if (nestedItems[1]['macd']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['value'] })
-        }
-        else if (nestedItems[1]['macd']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['value'] })
-        }
-      }
-      // if (nestedItems[1]['macdsignal']['lt1']) {
-      //   if (nestedItems[1]['macdsignal']['color1'] == 'positive') {
-      //     this.positive.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
-      //   }
-      //   else if (nestedItems[1]['macdsignal']['color1'] == 'negative') {
-      //     this.negative.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
-      //   }
-      //   else if (nestedItems[1]['macdsignal']['color1'] == 'neutral') {
-      //     this.neutral.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
-      //   }
-      // }
-      if (nestedItems[1]['mfi']['lt1']) {
-        if (nestedItems[1]['mfi']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['value'] })
-        }
-        else if (nestedItems[1]['mfi']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['value'] })
-        }
-        else if (nestedItems[1]['mfi']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['value'] })
-        }
-      }
-      if (nestedItems[1]['rsi']['lt1']) {
-        if (nestedItems[1]['rsi']['color1'] == 'positive') {
-          this.positive.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['value'] })
-        }
-        else if (nestedItems[1]['rsi']['color1'] == 'negative') {
-          this.negative.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['value'] })
-        }
-        else if (nestedItems[1]['rsi']['color1'] == 'neutral') {
-          this.neutral.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['value'] })
-        }
-      }
-    }, err => {
-      console.log(err)
-    })
+    } catch (err) {
+    console.error(err);
   }
+  }
+  
+   gettrendlynestocks1(tlid, eqsymbol, tlname) {
+     
+  
+        this.dataApi.gettrendlynestocks1(tlid, eqsymbol, tlname).subscribe(data5 => {
+          let nestedItems = Object.keys(data5).map(key => {
+            return data5[key];
+          });
+          this.brokertarget.push({ text1: nestedItems[1]['broker_avg_target']['lt1'], text2: nestedItems[1]['broker_avg_target']['st1'], text3: nestedItems[1]['broker_avg_target']['color1'] })
+          this.ema_26.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['color1'], text4: nestedItems[1]['ema_26']['value'] })
+          this.ema_50.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['color1'], text4: nestedItems[1]['ema_50']['value'] })
+          this.ema_100.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'], text4: nestedItems[1]['ema_100']['value'] })
+          this.ema_200.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['color1'], text4: nestedItems[1]['ema_200']['value'] })
+          this.sma_30.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['color1'], text4: nestedItems[1]['sma_30']['value'] })
+          this.sma_50.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['color1'], text4: nestedItems[1]['sma_50']['value'] })
+          this.sma_100.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'], text4: nestedItems[1]['sma_100']['value'] })
+          this.sma_200.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['color1'], text4: nestedItems[1]['sma_200']['value'] })
+          this.macd1.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['color1'], text4: nestedItems[1]['macd']['value'] })
+          this.rsi1.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['color1'], text4: nestedItems[1]['rsi']['value'] })
+          this.mfi1.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['color1'], text4: nestedItems[1]['mfi']['value'] })
+          if (nestedItems[1]['broker_recodown_6M']['lt1']) {
+            this.brokerrecodowngrade.push({ text1: nestedItems[1]['broker_recodown_6M']['lt1'], text2: nestedItems[1]['broker_recodown_6M']['st1'], text3: nestedItems[1]['broker_recodown_6M']['color1'] })
+          }
+          if (nestedItems[1]['broker_recoup_6M']['lt1']) {
+            this.brokerrecoupgrade.push({ text1: nestedItems[1]['broker_recoup_6M']['lt1'], text2: nestedItems[1]['broker_recoup_6M']['st1'], text3: nestedItems[1]['broker_recoup_6M']['color1'] })
+          }
+          if (nestedItems[1]['broker_targetup_6M']['lt1']) {
+            this.brokertargetupgrade.push({ text1: nestedItems[1]['broker_targetup_6M']['lt1'], text2: nestedItems[1]['broker_targetup_6M']['st1'], text3: nestedItems[1]['broker_targetup_6M']['color1'] })
+          }
+          if (nestedItems[1]['broker_targetdown_6M']['lt1']) {
+            this.brokertargetdowngrade.push({ text1: nestedItems[1]['broker_targetdown_6M']['lt1'], text2: nestedItems[1]['broker_targetdown_6M']['st1'], text3: nestedItems[1]['broker_targetdown_6M']['color1'] })
+          }
+          if (nestedItems[1]['MCAP_Q']['lt1']) {
+            if (nestedItems[1]['MCAP_Q']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
+            }
+            else if (nestedItems[1]['MCAP_Q']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
+            }
+            else if (nestedItems[1]['MCAP_Q']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['MCAP_Q']['lt1'], text2: nestedItems[1]['MCAP_Q']['title'], text3: nestedItems[1]['MCAP_Q']['value'] })
+            }
+          }
+          if (nestedItems[1]['NP_Q']['lt2']) {
+            if (nestedItems[1]['NP_Q']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['NP_Q']['value'], text2: nestedItems[1]['NP_Q']['lt2'], text3: nestedItems[1]['NP_Q']['st2'] })
+            }
+            else if (nestedItems[1]['NP_Q']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['NP_Q']['value'], text2: nestedItems[1]['NP_Q']['lt2'], text3: nestedItems[1]['NP_Q']['st2'] })
+            }
+            else if (nestedItems[1]['NP_Q']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['NP_Q']['value'], text2: nestedItems[1]['NP_Q']['lt2'], text3: nestedItems[1]['NP_Q']['st2'] })
+            }
+          }
+          if (nestedItems[1]['PBV_A']['st1']) {
+            if (nestedItems[1]['PBV_A']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['PBV_A']['lt1'], text2: nestedItems[1]['PBV_A']['st1'], text3: nestedItems[1]['PBV_A']['value'] })
+            }
+            else if (nestedItems[1]['PBV_A']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['PBV_A']['lt1'], text2: nestedItems[1]['PBV_A']['st1'], text3: nestedItems[1]['PBV_A']['value'] })
+            }
+            else if (nestedItems[1]['PBV_A']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['PBV_A']['lt1'], text2: nestedItems[1]['PBV_A']['st1'], text3: nestedItems[1]['PBV_A']['value'] })
+            }
+          }
+          if (nestedItems[1]['PE_TTM']['lt1']) {
+            if (nestedItems[1]['PE_TTM']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['PE_TTM']['lt1'], text2: nestedItems[1]['PE_TTM']['title'], text3: nestedItems[1]['PE_TTM']['value'] })
+            }
+            else if (nestedItems[1]['PE_TTM']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['PE_TTM']['lt1'], text2: nestedItems[1]['PE_TTM']['title'], text3: nestedItems[1]['PE_TTM']['value'] })
+            }
+            else if (nestedItems[1]['PE_TTM']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['PE_TTM']['lt1'], text2: nestedItems[1]['PE_TTM']['title'], text3: nestedItems[1]['PE_TTM']['value'] })
+            }
+          }
+          if (nestedItems[1]['SR_Q']['lt1']) {
+            if (nestedItems[1]['SR_Q']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['SR_Q']['lt2'], text2: nestedItems[1]['SR_Q']['st2'], text3: nestedItems[1]['SR_Q']['value'] })
+            }
+            else if (nestedItems[1]['SR_Q']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['SR_Q']['lt2'], text2: nestedItems[1]['SR_Q']['st2'], text3: nestedItems[1]['SR_Q']['value'] })
+            }
+            else if (nestedItems[1]['SR_Q']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['SR_Q']['lt2'], text2: nestedItems[1]['SR_Q']['st2'], text3: nestedItems[1]['SR_Q']['value'] })
+            }
+          }
+          if (nestedItems[1]['beta_1Y']['lt1']) {
+            if (nestedItems[1]['beta_1Y']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['beta_1Y']['lt1'], text2: nestedItems[1]['beta_1Y']['st1'], text3: nestedItems[1]['beta_1Y']['value'] })
+            }
+            else if (nestedItems[1]['beta_1Y']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['beta_1Y']['lt1'], text2: nestedItems[1]['beta_1Y']['st1'], text3: nestedItems[1]['beta_1Y']['value'] })
+            }
+            else if (nestedItems[1]['beta_1Y']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['beta_1Y']['lt1'], text2: nestedItems[1]['beta_1Y']['st1'], text3: nestedItems[1]['beta_1Y']['value'] })
+            }
+          }
+          if (nestedItems[1]['ema_26']['lt1']) {
+            if (nestedItems[1]['ema_26']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['value'] })
+            }
+            else if (nestedItems[1]['ema_26']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['value'] })
+            }
+            else if (nestedItems[1]['ema_26']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['ema_26']['lt1'], text2: nestedItems[1]['ema_26']['st1'], text3: nestedItems[1]['ema_26']['value'] })
+            }
+          }
+          if (nestedItems[1]['ema_50']['lt1']) {
+            if (nestedItems[1]['ema_50']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['value'] })
+            }
+            else if (nestedItems[1]['ema_50']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['value'] })
+            }
+            else if (nestedItems[1]['ema_50']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['ema_50']['lt1'], text2: nestedItems[1]['ema_50']['st1'], text3: nestedItems[1]['ema_50']['value'] })
+            }
+          }
+          if (nestedItems[1]['ema_100']['lt1']) {
+            if (nestedItems[1]['ema_100']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['value'] })
+            }
+            else if (nestedItems[1]['ema_100']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['value'] })
+            }
+            else if (nestedItems[1]['ema_100']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['ema_100']['lt1'], text2: nestedItems[1]['ema_100']['st1'], text3: nestedItems[1]['ema_100']['value'] })
+            }
+          }
+          if (nestedItems[1]['ema_200']['lt1']) {
+            if (nestedItems[1]['ema_200']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_200']['st1'], text3: nestedItems[1]['ema_200']['value'] })
+            }
+            else if (nestedItems[1]['ema_200']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_200']['st1'], text3: nestedItems[1]['ema_200']['value'] })
+            }
+            else if (nestedItems[1]['ema_200']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['ema_200']['lt1'], text2: nestedItems[1]['ema_200']['st1'], text3: nestedItems[1]['ema_200']['value'] })
+            }
+          }
+          if (nestedItems[1]['sma_30']['lt1']) {
+            if (nestedItems[1]['sma_30']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['value'] })
+            }
+            else if (nestedItems[1]['sma_30']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['value'] })
+            }
+            else if (nestedItems[1]['sma_30']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['sma_30']['lt1'], text2: nestedItems[1]['sma_30']['st1'], text3: nestedItems[1]['sma_30']['value'] })
+            }
+          }
+          if (nestedItems[1]['sma_50']['lt1']) {
+            if (nestedItems[1]['sma_50']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['value'] })
+            }
+            else if (nestedItems[1]['sma_50']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['value'] })
+            }
+            else if (nestedItems[1]['sma_50']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['sma_50']['lt1'], text2: nestedItems[1]['sma_50']['st1'], text3: nestedItems[1]['sma_50']['value'] })
+            }
+          }
+          if (nestedItems[1]['sma_100']['lt1']) {
+            if (nestedItems[1]['sma_100']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['value'] })
+            }
+            else if (nestedItems[1]['sma_100']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['value'] })
+            }
+            else if (nestedItems[1]['sma_100']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['sma_100']['lt1'], text2: nestedItems[1]['sma_100']['st1'], text3: nestedItems[1]['sma_100']['value'] })
+            }
+          }
+          if (nestedItems[1]['sma_200']['lt1']) {
+            if (nestedItems[1]['sma_200']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_200']['st1'], text3: nestedItems[1]['sma_200']['value'] })
+            }
+            else if (nestedItems[1]['sma_200']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_200']['st1'], text3: nestedItems[1]['sma_200']['value'] })
+            }
+            else if (nestedItems[1]['sma_200']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['sma_200']['lt1'], text2: nestedItems[1]['sma_200']['st1'], text3: nestedItems[1]['sma_200']['value'] })
+            }
+          }
+          if (nestedItems[1]['macd']['lt1']) {
+            if (nestedItems[1]['macd']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['value'] })
+            }
+            else if (nestedItems[1]['macd']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['value'] })
+            }
+            else if (nestedItems[1]['macd']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['macd']['lt1'], text2: nestedItems[1]['macd']['st1'], text3: nestedItems[1]['macd']['value'] })
+            }
+          }
+          // if (nestedItems[1]['macdsignal']['lt1']) {
+          //   if (nestedItems[1]['macdsignal']['color1'] == 'positive') {
+          //     this.positive.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
+          //   }
+          //   else if (nestedItems[1]['macdsignal']['color1'] == 'negative') {
+          //     this.negative.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
+          //   }
+          //   else if (nestedItems[1]['macdsignal']['color1'] == 'neutral') {
+          //     this.neutral.push({ text1: nestedItems[1]['macdsignal']['lt1'], text2: nestedItems[1]['macdsignal']['st1'], text3: nestedItems[1]['macdsignal']['value'] })
+          //   }
+          // }
+          if (nestedItems[1]['mfi']['lt1']) {
+            if (nestedItems[1]['mfi']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['value'] })
+            }
+            else if (nestedItems[1]['mfi']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['value'] })
+            }
+            else if (nestedItems[1]['mfi']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['mfi']['lt1'], text2: nestedItems[1]['mfi']['st1'], text3: nestedItems[1]['mfi']['value'] })
+            }
+          }
+          if (nestedItems[1]['rsi']['lt1']) {
+            if (nestedItems[1]['rsi']['color1'] == 'positive') {
+              this.positive.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['value'] })
+            }
+            else if (nestedItems[1]['rsi']['color1'] == 'negative') {
+              this.negative.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['value'] })
+            }
+            else if (nestedItems[1]['rsi']['color1'] == 'neutral') {
+              this.neutral.push({ text1: nestedItems[1]['rsi']['lt1'], text2: nestedItems[1]['rsi']['st1'], text3: nestedItems[1]['rsi']['value'] })
+            }
+          }
+        }, err => {
+          console.log(err)
+        })
+      
+
+  
+  }
+  
   gettrendlynestocks2(tlid) {
     axios.get('https://trendlyne.com/mapp/v1/stock/chart-data/' + this.tlid + '/SMA/')
       .then((response) => {
@@ -1888,3 +1951,7 @@ export class ShareComponent implements OnInit {
     )
   }
 }
+function err(err: any) {
+  throw new Error('Function not implemented.');
+}
+

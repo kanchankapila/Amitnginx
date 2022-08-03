@@ -22,21 +22,17 @@
         <button pButton type="button" (click)="visibleSidebar3 = true" icon="pi pi-arrow-down" label="Links" class="p-button-raised p-button-danger p-button-outlined "></button>
         <button pButton type="button" (click)="visibleSidebar4 = true" icon="pi pi-arrow-up" label="Websites" class="p-button-raised p-button-help p-button-outlined "></button>
       </div>
-      <div class="ng-autocomplete ng autocomplete" width="10px" >
-        <ng-autocomplete [data]="data" [searchKeyword]="keyword" placeholder="Search Stock" (selected)='selectEvent($event.isin)'
-          (inputFocused)='onFocused($event)' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">
-        </ng-autocomplete>
+      <p-dropdown [options]="items" [(ngModel)]="item" placeholder="Search Stock" [virtualScroll]="true" [itemSize]="31"
+      [filter]="true" (onChange)='selectEvent(item)'>
       
-        <ng-template #itemTemplate let-item>
-          <a [innerHTML]="item.name"></a>
-        </ng-template>
+       </p-dropdown>
       
-        <ng-template #notFoundTemplate let-notFound>
-          <div [innerHTML]="notFound"></div>
-        </ng-template>
-      </div>
     </div>
+   
+   
       
+    
+ 
     <p-sidebar [(visible)]="visibleSidebar1" [baseZIndex]="-1">
       <h1 style="font-weight:normal">Actions</h1>
       <p-button type="button" (click)="visibleSidebar1 = false" label="Cancel" styleClass="p-button-secondary"></p-button>
