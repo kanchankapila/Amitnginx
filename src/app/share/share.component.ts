@@ -728,7 +728,7 @@ export class ShareComponent implements OnInit {
     this.getstock1yr(this.eqsymbol)
     this.getgnewsapi()
     this.getntstockpcrdetails(this.eqsymbol)
-    this.getmcstockrealtime()
+    //this.getmcstockrealtime()
     this.getstocktoday(this.mcsymbol)
     this.getstockmaema(this.eqsymbol)
     this.getstocksentiments(this.mcsymbol);
@@ -736,7 +736,7 @@ export class ShareComponent implements OnInit {
     // this.getetsharetoday(this.eqsymbol)
     setInterval(() => { this.getstocktoday(this.mcsymbol) }, 30000);
     //setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 60000);
-    setInterval(() => { this.getmcstockrealtime() }, 1000);
+    setInterval(() => { this.getmcstockrealtime() }, 500);
     this.getntstockdetails(this.eqsymbol)
   }
   // getetsharetoday(eqsymbol) {
@@ -823,6 +823,7 @@ export class ShareComponent implements OnInit {
       });
   }
   getmcstockrealtime() {
+    this.stockdetails.length = 0;
     this.http.get<any>('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/' + this.mcsymbol).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
@@ -830,6 +831,7 @@ export class ShareComponent implements OnInit {
       this.stockdetails.length = 0;
       this.stockdetails.push({ text1: nestedItems[2]['SC_FULLNM'], text2: nestedItems[2]['pricechange'], text3: nestedItems[2]['pricepercentchange'], text4: nestedItems[2]['pricecurrent'] })
     })
+    console.log(this.stockdetails)
   }
   getstock1yr(eqsymbol) {
     this.stockohlc.length = 0;
@@ -1342,7 +1344,7 @@ export class ShareComponent implements OnInit {
   }
   trackByFuntion42(index42, item42) {
     //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item42.text3;
+    return item42.text2;
   }
   trackByFuntion43(index43, item43) {
     return item43.text2;
