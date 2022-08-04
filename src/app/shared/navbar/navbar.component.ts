@@ -15,7 +15,12 @@ import * as sectors from '../../lists/mcsectorlist';
 import * as fnostocks from '../../lists/fnostocks';
 import * as bqstock from '../../lists/bqlist'
 import * as etstock from '../../lists/etlist'
-import axios from "axios";
+
+import axios from 'axios';
+
+const instance = axios.create();
+
+export default instance;
 
 
 export interface pcrniftytile {

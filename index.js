@@ -1057,47 +1057,47 @@ app.get('/api/ntniftypcr', function (req, res) {
 
   /////////////Nifty trader stock POST request to get pcr////////////////
   
-  app.get('/api/ntstockpcrdetails', (req, res) => {
-    let eqsymbol = req.query.eqsymbol
+  // app.get('/api/ntstockpcrdetails', (req, res) => {
+  //   let eqsymbol = req.query.eqsymbol
     
-    var url11 = 'https://api.niftytrader.in/webapi/Live/kiteInstrumentNfoListNew';
-    request(url11, function (error, response, html) {
-      if (!error) {
+  //   var url11 = 'https://api.niftytrader.in/webapi/Live/kiteInstrumentNfoListNew';
+  //   request(url11, function (error, response, html) {
+  //     if (!error) {
         
-      var options2 = {
-    url: 'https://api.niftytrader.in/webapi/Live/kiteInstrumentNfoListNew',
-    method: 'POST', // Don't forget this line
-    "headers": {
-       "accept": "application/json, text/plain, */*",
-    "accept-language": "en-US,en;q=0.9",
-    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDMzOCIsImp0aSI6IjU5MjUwODYxLWRlNWYtNGFkZS1hZWY0LWRlMzg1YjcwYWQ1ZCIsImV4cCI6MTY1ODUwMjk1MSwiaXNzIjoiTmlmdHl0cmFkZXJoZWxwLmNvbSIsImF1ZCI6Ik5pZnR5dHJhZGVyaGVscC5jb20ifQ.RQyIer2CdUUd2Ge5pLlU8MJJCM-49W0aF3iuDJmZBb0",
-    "content-type": "application/json",
-    "sec-ch-ua": "\".Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\"103\", \"Chromium\";v=\"103\"",
-    "sec-ch-ua-mobile": "?0",
-    "sec-ch-ua-platform": "\"Windows\"",
-    "sec-fetch-dest": "empty",
-    "sec-fetch-mode": "cors",
-    "sec-fetch-site": "same-site",
-    "Referer": "https://www.niftytrader.in/",
-    "Referrer-Policy": "strict-origin-when-cross-origin"
-    },
-    "body": '{\"symbol\":\"'+eqsymbol+'\"}',
-  "method": "POST"
-  }
+  //     var options2 = {
+  //   url: 'https://api.niftytrader.in/webapi/Live/kiteInstrumentNfoListNew',
+  //   method: 'POST', // Don't forget this line
+  //   "headers": {
+  //      "accept": "application/json, text/plain, */*",
+  //   "accept-language": "en-US,en;q=0.9",
+  //   "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDMzOCIsImp0aSI6IjU5MjUwODYxLWRlNWYtNGFkZS1hZWY0LWRlMzg1YjcwYWQ1ZCIsImV4cCI6MTY1ODUwMjk1MSwiaXNzIjoiTmlmdHl0cmFkZXJoZWxwLmNvbSIsImF1ZCI6Ik5pZnR5dHJhZGVyaGVscC5jb20ifQ.RQyIer2CdUUd2Ge5pLlU8MJJCM-49W0aF3iuDJmZBb0",
+  //   "content-type": "application/json",
+  //   "sec-ch-ua": "\".Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\"103\", \"Chromium\";v=\"103\"",
+  //   "sec-ch-ua-mobile": "?0",
+  //   "sec-ch-ua-platform": "\"Windows\"",
+  //   "sec-fetch-dest": "empty",
+  //   "sec-fetch-mode": "cors",
+  //   "sec-fetch-site": "same-site",
+  //   "Referer": "https://www.niftytrader.in/",
+  //   "Referrer-Policy": "strict-origin-when-cross-origin"
+  //   },
+  //   "body": '{\"symbol\":\"'+eqsymbol+'\"}',
+  // "method": "POST"
+  // }
   
-  request(options2, (err, response, body) => {
-    if (err) {
-        //console.log(err);
-    } else {
+  // request(options2, (err, response, body) => {
+  //   if (err) {
+  //       //console.log(err);
+  //   } else {
      
-      ( res.json(JSON.parse(body)));
+  //     ( res.json(JSON.parse(body)));
     
-    }
-  });
-  }
-    })
+  //   }
+  // });
+  // }
+  //   })
     
-  })
+  // })
  
   //////////////Nifty Trader Post Request to get nr7 for Stocks in nr7 database on postgres,dropdown in Actions submits request///////
   
