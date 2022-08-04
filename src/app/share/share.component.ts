@@ -729,7 +729,7 @@ export class ShareComponent implements OnInit {
     this.getstock1yr(this.eqsymbol)
     this.getgnewsapi(this.bqnames,this.dateday5,this.datetoday)
     this.getntstockpcrdetails(this.eqsymbol)
-    this.getmcstockrealtime()
+    this.getmcstockrealtime(this.mcsymbol)
     this.getstocktoday(this.mcsymbol)
     this.getstockmaema(this.eqsymbol)
     this.getstocksentiments(this.mcsymbol);
@@ -737,7 +737,7 @@ export class ShareComponent implements OnInit {
     // this.getetsharetoday(this.eqsymbol)
     setInterval(() => { this.getstocktoday(this.mcsymbol) }, 30000);
     //setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 60000);
-    setInterval(() => { this.getmcstockrealtime() }, 3000);
+    setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
     this.getntstockdetails(this.eqsymbol)
   }
   // getetsharetoday(eqsymbol) {
@@ -838,9 +838,9 @@ export class ShareComponent implements OnInit {
         console.log(nestedItems)
       });
   }
-  async getmcstockrealtime() {
+  async getmcstockrealtime(mcsymbol) {
     try {
-      const response = await fetch("https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/BE03", {
+      const response = await fetch("https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/"+this.mcsymbol, {
         method: 'GET',
         headers: {
          
