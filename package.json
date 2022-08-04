@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng build --configuration=production && ng serve --configuration=production && node index.js",
+    "start": "node index.js",
     "deploy-hosting": "ng build --configuration=production && ng serve --configuration=production && node index.js",
-    "build": "ng build",
+    "heroku-postbuild": "ng build --prod",
+    "build": "node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build",
     "test": "ng test",
     "lint": "eslint src",
     "e2e": "ng e2e",
     "stats": "webpack-bundle-analyzer dist/amitnginx/stats.json"
+  },
+  "engines": {
+    "node": "16.15.1",
+    "npm": "7.21.1"
   },
   "private": true,
   "dependencies": {

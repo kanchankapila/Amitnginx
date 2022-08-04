@@ -1,4 +1,4 @@
-import { Component, OnInit,isDevMode } from '@angular/core';
+import { Component, OnInit,isDevMode,HostListener } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import {
   SwPush,
@@ -18,6 +18,8 @@ import { NotificationService } from './notifications.service';
 export class AppComponent implements OnInit {
   notificationData: string = '{}';
   title = 'demo1';
+  public getScreenWidth: any;
+  public getScreenHeight: any;
 
   showSidebar: boolean = true;
   showNavbar: boolean = true;
@@ -67,6 +69,8 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit() {
+    this.getScreenWidth = window.innerWidth;
+      this.getScreenHeight = window.innerHeight;
     if (isDevMode()) {
       console.log('Development!');
     } else {
@@ -81,6 +85,7 @@ export class AppComponent implements OnInit {
     });
 
 
+
     console.log('AppComponent.ngOnInit');
     if (!this.updateService.isEnabled) {
       console.log('AppComponent.ngOnInit: Service Worker is not enabled');
@@ -90,7 +95,11 @@ export class AppComponent implements OnInit {
     this.#handleUpdates();
     this.#handleNotifications();
   }
-
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.getScreenWidth = window.innerWidth;
+    this.getScreenHeight = window.innerHeight;
+  }
   unsubscribe() {
     this.pushService.unsubscribe().then(() => {
       console.log('Unsubscribed');

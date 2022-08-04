@@ -49,7 +49,9 @@ const axios = require('axios');
 var html2json = require('html2json').html2json;
    
     
-
+console.log("port:",process.env.PORT)
+console.log("host:",process.env.HOST)
+console.log("Database URL:",process.env.DATABASE_URL)
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
@@ -1280,7 +1282,7 @@ app.use(express.static(__dirname+"/"));
 // });
 
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log('Your node is running on port 3000');
 });
 // http.createServer(app,function (req, res) {
