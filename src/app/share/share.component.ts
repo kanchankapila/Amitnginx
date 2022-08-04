@@ -846,7 +846,7 @@ export class ShareComponent implements OnInit {
       this.chartCandleOptions = {
         series: [
           {
-            name: "candle",
+           
             data: this.stockohlc
           }
         ],
@@ -877,7 +877,8 @@ export class ShareComponent implements OnInit {
       this.chartBarOptions = {
         series: [
           {
-            name: "volume",
+            
+          
             data: this.stockohlcvolume
           }
         ],
