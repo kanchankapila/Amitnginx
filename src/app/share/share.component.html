@@ -27,7 +27,7 @@
   </div>
 </div>
 <div class=" grid-margin stretch-card">
-  <div class="content  container "*ngFor="let tile of stockdetails trackBy: trackByFuntion42">
+  <div class="content  container "*ngFor="let tile of stockdetails1 trackBy: trackByFuntion42">
         <div class="text-white type1-bold cardbear1 grid-margin stretch-card" [ngClass]="{ 
                     'bg-gradient-bull': tile.text3 > 0,
                     'bg-gradient-bear2': 0 > tile.text3 ,
@@ -576,11 +576,12 @@ NR7:{{nr7}}
     <div class="col-lg-18 grid-margin  stretch-card">
       <div class="card">
         <h4 class="mb-2">Stock - 1 Year </h4>
-        <apx-chart [series]="chartCandleOptions.series" [chart]="chartCandleOptions.chart"
-          [xaxis]="chartCandleOptions.xaxis" [plotOptions]="chartCandleOptions.plotOptions"></apx-chart>
+        <ng-container *ngIf="chartCandleOptions"> <apx-chart [series]="chartCandleOptions.series" [chart]="chartCandleOptions.chart"
+          [xaxis]="chartCandleOptions.xaxis" [plotOptions]="chartCandleOptions.plotOptions"></apx-chart></ng-container>
+          <ng-container *ngIf="chartBarOptions">
         <apx-chart [series]="chartBarOptions.series" [chart]="chartBarOptions.chart" [xaxis]="chartBarOptions.xaxis"
           [yaxis]="chartBarOptions.yaxis" [dataLabels]="chartBarOptions.dataLabels" [stroke]="chartBarOptions.stroke"
-          [plotOptions]="chartBarOptions.plotOptions"></apx-chart>
+          [plotOptions]="chartBarOptions.plotOptions"></apx-chart></ng-container>
       </div>
     </div>
   </p-tabPanel>

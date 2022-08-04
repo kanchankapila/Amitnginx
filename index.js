@@ -1013,47 +1013,47 @@ app.get('/api/ntniftypcr', function (req, res) {
 
   /////////////Nifty trader POST request////////////////
   
-  app.get('/api/ntstockdetails', (req, res) => {
-    let eqsymbol = req.query.eqsymbol
-    //console.log(eqsymbol)
-    var url11 = 'https://api.niftytrader.in/webapi/Live/stockAnalysis';
-    request(url11, function (error, response, html) {
-      if (!error) {
+  // app.get('/api/ntstockdetails', (req, res) => {
+  //   let eqsymbol = req.query.eqsymbol
+  //   //console.log(eqsymbol)
+  //   var url11 = 'https://api.niftytrader.in/webapi/Live/stockAnalysis';
+  //   request(url11, function (error, response, html) {
+  //     if (!error) {
         
-      var options2 = {
-    url: 'https://api.niftytrader.in/webapi/Live/stockAnalysis',
-    method: 'POST', // Don't forget this line
-    "headers": {
-      "accept": "application/json, text/plain, */*",
-      "accept-language": "en-US,en;q=0.9",
-      "content-type": "application/json",
-      "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
-      "sec-ch-ua-mobile": "?0",
-      "sec-ch-ua-platform": "\"Windows\"",
-      "sec-fetch-dest": "empty",
-      "sec-fetch-mode": "cors",
-      "sec-fetch-site": "same-site"
-    },
-    "referrer": "https://www.niftytrader.in/",
-    "referrerPolicy": "strict-origin-when-cross-origin",
-    "body": '{\"symbol\":\"'+eqsymbol+'\"}',
-    "method": "POST",
-    "mode": "cors",
-    "credentials": "omit"
-  }
+  //     var options2 = {
+  //   url: 'https://api.niftytrader.in/webapi/Live/stockAnalysis',
+  //   method: 'POST', // Don't forget this line
+  //   "headers": {
+  //     "accept": "application/json, text/plain, */*",
+  //     "accept-language": "en-US,en;q=0.9",
+  //     "content-type": "application/json",
+  //     "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
+  //     "sec-ch-ua-mobile": "?0",
+  //     "sec-ch-ua-platform": "\"Windows\"",
+  //     "sec-fetch-dest": "empty",
+  //     "sec-fetch-mode": "cors",
+  //     "sec-fetch-site": "same-site"
+  //   },
+  //   "referrer": "https://www.niftytrader.in/",
+  //   "referrerPolicy": "strict-origin-when-cross-origin",
+  //   "body": '{\"symbol\":\"'+eqsymbol+'\"}',
+  //   "method": "POST",
+  //   "mode": "cors",
+  //   "credentials": "omit"
+  // }
   
-  request(options2, (err, response, body) => {
-    if (err) {
-        //console.log(err);
-    } else {
-      ( res.json(JSON.parse(body)));
+  // request(options2, (err, response, body) => {
+  //   if (err) {
+  //       //console.log(err);
+  //   } else {
+  //     ( res.json(JSON.parse(body)));
     
-    }
-  });
-  }
-    })
+  //   }
+  // });
+  // }
+  //   })
     
-  })
+  // })
 
   /////////////Nifty trader stock POST request to get pcr////////////////
   

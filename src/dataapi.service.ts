@@ -159,10 +159,7 @@ export class DataapiService {
   getmcinsight(mcsymbol){
     return this.http.post('http://localhost:3000/api/mcinsight',mcsymbol)
   }
-  getntstockdetails(eqsymbol) {
-    
-    return this.http.get('http://localhost:3000/api/ntstockdetails?eqsymbol='+eqsymbol)
-  }
+ 
   getntstockpcrdetails(eqsymbol) {
  
     return this.http.get('http://localhost:3000/api/ntstockpcrdetails?eqsymbol='+eqsymbol)

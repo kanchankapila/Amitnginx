@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { BrowserModule } from "@angular/platform-browser";
 import { DataapiService } from '../../dataapi.service'
 import { PrimeNGConfig } from 'primeng/api';
@@ -395,7 +395,8 @@ export interface maxpaintile { text1: any; text2: any; }
 @Component({
   selector: 'app-share',
   templateUrl: './share.component.html',
-  styleUrls: ['./share.component.scss']
+  styleUrls: ['./share.component.scss'],
+  
 })
 @Injectable()
 export class ShareComponent implements OnInit {
@@ -576,7 +577,7 @@ export class ShareComponent implements OnInit {
   neutral: neutraltile[] = [];
   stockema: stockematile[] = [];
   stocksma: stocksmatile[] = [];
-  stockdetails: stockdetailstile[] = [];
+  stockdetails1: stockdetailstile[] = [];
   // public stockdata: Array<number> = [];
   public delivperc: Array<number> = [];
   public delivperctime: Array<number> = [];
@@ -703,7 +704,7 @@ export class ShareComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.eqsymbol = this.stockList.filter(i => i.isin == params.stock)[0].symbol
       this.tlid = this.stockList.filter(i => i.isin == params.stock)[0].tlid
-      console.log(this.tlid)
+      
       this.tlname = this.stockList.filter(i => i.isin == params.stock)[0].tlname
       this.stockname = this.stockList.filter(i => i.isin == params.stock)[0].name
       this.stockisin = this.stockList.filter(i => i.isin == params.stock)[0].isin
@@ -726,9 +727,9 @@ export class ShareComponent implements OnInit {
     this.getshare6m(this.eqsymbol)
     this.getshare1w(this.eqsymbol)
     this.getstock1yr(this.eqsymbol)
-    this.getgnewsapi()
+    this.getgnewsapi(this.bqnames,this.dateday5,this.datetoday)
     this.getntstockpcrdetails(this.eqsymbol)
-    //this.getmcstockrealtime()
+    this.getmcstockrealtime()
     this.getstocktoday(this.mcsymbol)
     this.getstockmaema(this.eqsymbol)
     this.getstocksentiments(this.mcsymbol);
@@ -736,7 +737,7 @@ export class ShareComponent implements OnInit {
     // this.getetsharetoday(this.eqsymbol)
     setInterval(() => { this.getstocktoday(this.mcsymbol) }, 30000);
     //setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 60000);
-    setInterval(() => { this.getmcstockrealtime() }, 500);
+    setInterval(() => { this.getmcstockrealtime() }, 3000);
     this.getntstockdetails(this.eqsymbol)
   }
   // getetsharetoday(eqsymbol) {
@@ -789,30 +790,45 @@ export class ShareComponent implements OnInit {
       // console.log(nestedItems) To be explored
     })
   }
-  getgnewsapi() {
-    axios.get('https://newsapi.org/v2/everything?q=' + this.bqnames + '&from=' + this.dateday5 + '&to=' + this.datetoday + '&sortBy=popularity&apiKey=28bda70739cc4024ba3f30223e8c25a8')
-      .then((response) => {
-        let nestedItems = Object.keys((response.data)).map(key => {
-          return (response.data)[key];
-        });;
-        console.log(nestedItems)
-        this.newscard.length = 0;
-         for (let val in nestedItems[2]) {
-        this.newscard.push({text1:nestedItems[2][val].title,text2:nestedItems[2][val].url,text3:nestedItems[2][val].urlToImage,text4:nestedItems[2][val].description,text5:nestedItems[2][val].content})
-        
-          }
-
+  async getgnewsapi(bqnames,dateday5,datetoday) {
+    try {
+      const response = await fetch('https://newsapi.org/v2/everything?q=' + this.bqnames + '&from=' + this.dateday5 + '&to=' + this.datetoday + '&sortBy=popularity&apiKey=28bda70739cc4024ba3f30223e8c25a8', {
+        method: 'GET',
+        headers: {
+         
+        }
       });
-    console.log(this.bqnames + '&from=' + this.dateday5 + '&to=' + this.datetoday + '&sortBy=popularity&apiKey=28bda70739cc4024ba3f30223e8c25a8')
+    
+      if (response.ok) {
+        const result = await response.json();
+       
+       
+        //console.log(response)
+        // this.newscard.length = 0;
+        //  for (let val in nestedItems[2]) {
+        // this.newscard.push({text1:nestedItems[2][val].title,text2:nestedItems[2][val].url,text3:nestedItems[2][val].urlToImage,text4:nestedItems[2][val].description,text5:nestedItems[2][val].content})
+        console.log(this.bqnames + '&from=' + this.dateday5 + '&to=' + this.datetoday + '&sortBy=popularity&apiKey=28bda70739cc4024ba3f30223e8c25a8')
 
-    console.log(new Date(this.dateday5).setHours(9, 15, 0, 0));
-
-
-    // this.newscard.length = 0;
+        console.log(new Date(this.dateday5).setHours(9, 15, 0, 0));
+      }
+    } catch (err) {
+            console.error(err);
+          }
+ // this.newscard.length = 0;
     //   for (let val in nestedItems[2]) {
     //     this.newscard.push({text1:nestedItems[2][val].title,text2:nestedItems[2][val].url,text3:nestedItems[2][val].urlToImage,text4:nestedItems[2][val].description,text5:nestedItems[2][val].content})
     //       }
-  }
+    
+     
+    
+       
+  }  
+    
+   
+
+
+   
+  
   gettrendlynestocksti(tlid) {
     axios.get('https://trendlyne.com/mapp/v1/stock/adv-technical-analysis/' + this.tlid + '/24/')
       .then((response) => {
@@ -822,16 +838,27 @@ export class ShareComponent implements OnInit {
         console.log(nestedItems)
       });
   }
-  getmcstockrealtime() {
-    this.stockdetails.length = 0;
-    this.http.get<any>('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/' + this.mcsymbol).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
+  async getmcstockrealtime() {
+    try {
+      const response = await fetch("https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/BE03", {
+        method: 'GET',
+        headers: {
+         
+        }
       });
-      this.stockdetails.length = 0;
-      this.stockdetails.push({ text1: nestedItems[2]['SC_FULLNM'], text2: nestedItems[2]['pricechange'], text3: nestedItems[2]['pricepercentchange'], text4: nestedItems[2]['pricecurrent'] })
-    })
-    console.log(this.stockdetails)
+    
+      if (response.ok) {
+        const result = await response.json();
+       
+       
+      this.stockdetails1.length = 0;
+      this.stockdetails1.push({ text1: result.data['SC_FULLNM'], text2: result.data['pricechange'], text3: result.data['pricepercentchange'], text4: result.data['pricecurrent'] })
+    
+     
+    }
+  } catch (err) {
+    console.error(err);
+  }
   }
   getstock1yr(eqsymbol) {
     this.stockohlc.length = 0;
@@ -1339,12 +1366,12 @@ export class ShareComponent implements OnInit {
     return item40.text3;
   }
   trackByFuntion41(index41, item41) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
+   
     return item41.text3;
   }
   trackByFuntion42(index42, item42) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item42.text2;
+    
+    return item42.text1;
   }
   trackByFuntion43(index43, item43) {
     return item43.text2;
@@ -1448,7 +1475,7 @@ export class ShareComponent implements OnInit {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+    //  console.log(nestedItems)
       this.stock1ddata.length = 0;
       this.stock1dLabels.length = 0;
       for (let val in nestedItems[5]) {
@@ -1462,7 +1489,7 @@ export class ShareComponent implements OnInit {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      console.log(nestedItems)
+    //  console.log(nestedItems)
       this.pclose = nestedItems[2].pclose
       ////////////To get Nifty Today Resistances and Indicators/////////////
       this.stockDatasnrr1.length = 0;
@@ -1609,7 +1636,7 @@ export class ShareComponent implements OnInit {
       this.delivperc.length = 0;
       this.delivperctime.length = 0;
       for (let val in result['resultData'].priceTable) {
-        console.log(result['resultData'].priceTable[val].delivery_percentage)
+        
         this.delivperc.unshift(result['resultData'].priceTable[val].delivery_percentage)
         this.delivperctime.unshift(result['resultData'].priceTable[val].created_at)
       }
@@ -1637,32 +1664,27 @@ export class ShareComponent implements OnInit {
   }
   }
   
-  async getntstockpcrdetails(eqsymbol) {
-    // this.dataApi.getntstockpcrdetails(this.eqsymbol).subscribe(data5 => {
-    //   let nestedItems = Object.keys(data5).map(key => {
-    //     return data5[key];
-    //   });
-    //  console.log(nestedItems)
+   async getntstockpcrdetails(eqsymbol) {
+   
     try {
-      const response = await fetch("https://api.niftytrader.in/webapi/Live/stockAnalysis", {
+      const response = await fetch("https://api.niftytrader.in/webapi/Live/kiteInstrumentNfoListNew", {
         "method": "POST",
         "headers": {
           "accept": "application/json, text/plain, */*",
           "accept-language": "en-US,en;q=0.9",
+          "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDMzOCIsImp0aSI6IjU5MjUwODYxLWRlNWYtNGFkZS1hZWY0LWRlMzg1YjcwYWQ1ZCIsImV4cCI6MTY1ODUwMjk1MSwiaXNzIjoiTmlmdHl0cmFkZXJoZWxwLmNvbSIsImF1ZCI6Ik5pZnR5dHJhZGVyaGVscC5jb20ifQ.RQyIer2CdUUd2Ge5pLlU8MJJCM-49W0aF3iuDJmZBb0",
           "content-type": "application/json",
-          "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
+          "sec-ch-ua": "\".Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\"103\", \"Chromium\";v=\"103\"",
           "sec-ch-ua-mobile": "?0",
           "sec-ch-ua-platform": "\"Windows\"",
           "sec-fetch-dest": "empty",
           "sec-fetch-mode": "cors",
-          "sec-fetch-site": "same-site"
-        },
-        "referrer": "https://www.niftytrader.in/",
-        "referrerPolicy": "strict-origin-when-cross-origin",
-        "body": '{\"symbol\":\"' + this.eqsymbol + '\"}',
-        //"method": "POST",
-        "mode": "cors",
-        "credentials": "omit"
+          "sec-fetch-site": "same-site",
+          "Referer": "https://www.niftytrader.in/",
+          "Referrer-Policy": "strict-origin-when-cross-origin"
+          },
+          "body": '{\"symbol\":\"'+eqsymbol+'\"}',
+        //"method": "POST"
       })
         
       
@@ -1670,12 +1692,12 @@ export class ShareComponent implements OnInit {
         const result = await response.json();
         console.log(result)
      
-        this.maxpain.push({ text1: 'max pain', text2: result['resultData']['futureOption'].max_pain })
+         this.maxpain.push({ text1: 'max pain', text2: result['resultData']['futureOption'].max_pain })
         this.stockpcr.push({ text1: 'PCR', text2: result['resultData']['futureOption'].pcr })
       }
     } catch (err) {
-    console.error(err);
-  }
+     console.error(err);
+   }
   }
   
    gettrendlynestocks1(tlid, eqsymbol, tlname) {
@@ -1921,7 +1943,7 @@ export class ShareComponent implements OnInit {
         let nestedItems = Object.keys((response.data)).map(key => {
           return (response.data)[key];
         });;
-        console.log(nestedItems)
+       // console.log(nestedItems)
         this.dscore.push({ text1: nestedItems[1]['stockData'][6], text2: nestedItems[1]['stockData'][9] })
         this.volscore.push({ text1: nestedItems[1]['stockData'][7], text2: nestedItems[1]['stockData'][10] })
         this.mscore.push({ text1: nestedItems[1]['stockData'][8], text2: nestedItems[1]['stockData'][11] })
@@ -1954,7 +1976,5 @@ export class ShareComponent implements OnInit {
     )
   }
 }
-function err(err: any) {
-  throw new Error('Function not implemented.');
-}
+
 

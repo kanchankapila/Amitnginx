@@ -189,7 +189,7 @@ export class NavbarComponent implements OnInit {
     }
     this.sectorList = sectors.default.Data
     this.getmcniftyrealtime()
-    this.getgnewsapi()
+    
     this.getmcbankniftyrealtime()
     this.getmcpharmaniftyrealtime()
     this.fnostock = fnostocks.default.Data
@@ -256,7 +256,7 @@ export class NavbarComponent implements OnInit {
        let nestedItems = Object.keys(data5).map(key => {
          return data5[key];
        });
-      console.log(nestedItems)
+      //console.log(nestedItems)
 
       this.pcrnsenifty.length = 0;
       this.optionwc.length = 0;
@@ -650,21 +650,6 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       console.log(err)
     }
     )
-  }
-  getgnewsapi() {
-    axios.get('https://newsapi.org/v2/everything?q=nifty&from=' + this.dateday5 + '&to=' + this.datetoday + '&sortBy=popularity&apiKey=28bda70739cc4024ba3f30223e8c25a8')
-      .then((response) => {
-        let nestedItems = Object.keys((response.data)).map(key => {
-          return (response.data)[key];
-        });;
-        console.log(nestedItems)
-        this.newscard.length = 0;
-        for (let val in nestedItems[2]) {
-          this.newscard.push({ text1: nestedItems[2][val].title, text2: nestedItems[2][val].url, text3: nestedItems[2][val].urlToImage, text4: nestedItems[2][val].description, text5: nestedItems[2][val].content })
-        
-        }
-
-      });
   }
   nsepostdata2() {
     console.log("eq sector combine start")
