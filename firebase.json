@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "postdeploy":"node index.js",
     "public": "dist/amitnginx",
     "ignore": [
       "firebase.json",
@@ -13,5 +12,8 @@
         "destination": "/index.html"
       }
     ]
+  },
+  "functions": {
+    "source": "functions"
   }
 }
