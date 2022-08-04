@@ -735,7 +735,7 @@ export class ShareComponent implements OnInit {
     this.getstocksentiments(this.mcsymbol);
     //  this.getmcstocktodayohlc(this.mcsymbol)
     // this.getetsharetoday(this.eqsymbol)
-    setInterval(() => { this.getstocktoday(this.mcsymbol) }, 30000);
+    setInterval(() => { this.getstocktoday(this.mcsymbol) }, 3000);
     //setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 60000);
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
     this.getntstockdetails(this.eqsymbol)

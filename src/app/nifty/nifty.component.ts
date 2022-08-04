@@ -271,6 +271,7 @@ export class NiftyComponent implements OnInit {
     this.getniftysentiments()
     this.gettrendlynenifty()
     this.getnifty1yr();
+    this.getniftytoday();
     setInterval(() => { this.getnifty50smaema() }, 30000);
     setInterval(() => { this.getmcnifty50stocks()}, 30000);
     setInterval(() => { this.getniftyvix() }, 30000);

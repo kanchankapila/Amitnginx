@@ -1,6 +1,12 @@
 <script>src = "https://cdnjs.cloudflare.com/ajax/libs/primeng/13.4.1/resources/components/sidebar/sidebar.min.css"</script>
 <br>
 <br>
+<ngx-trend
+  [data]="stock1ddata"
+  [autoDraw]="true"
+  [autoDrawDuration]="3000"
+  autoDrawEasing="ease-in"
+></ngx-trend>
 
 <div class="InsideContent">
   <div *ngFor="let tile of omrscore trackBy: trackByFuntion37" [ngClass]="{
