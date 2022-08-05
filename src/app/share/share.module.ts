@@ -12,12 +12,15 @@ import { MatCardModule } from '@angular/material/card';
 import { CardModule } from 'primeng/card';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { NgChartsModule } from 'ng2-charts';
-import {HttpClientModule, HttpErrorResponse} from '@angular/common/http';
+import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
 import { ButtonModule } from 'primeng/button';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { StockChartAllModule, ChartAnnotationService, RangeNavigatorAllModule, ChartAllModule } from '@syncfusion/ej2-angular-charts';
+import { CategoryService, LineSeriesService, DateTimeService} from '@syncfusion/ej2-angular-charts';
 
 
 
@@ -35,6 +38,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
     //ChartModule,
     MatCardModule,
     CardModule,
+    FormsModule,
+    ReactiveFormsModule, 
     FlexLayoutModule,
     MatButtonModule,
     BrowserModule,
@@ -44,11 +49,14 @@ import { NgxEchartsModule } from 'ngx-echarts';
     TrendModule,
     TabViewModule,
     NgChartsModule,
+    StockChartAllModule,
+    RangeNavigatorAllModule,
+    ChartAllModule,
     NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
     NgApexchartsModule
    
   ],
   schemas: [],
-  providers: [DatePipe]
+  providers: [DatePipe, CategoryService, LineSeriesService, DateTimeService]
 })
 export class ShareModule { }

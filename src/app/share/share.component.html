@@ -1,12 +1,22 @@
 <script>src = "https://cdnjs.cloudflare.com/ajax/libs/primeng/13.4.1/resources/components/sidebar/sidebar.min.css"</script>
 <br>
 <br>
-<ngx-trend
-  [data]="stock1ddata"
-  [autoDraw]="true"
-  [autoDrawDuration]="3000"
-  autoDrawEasing="ease-in"
-></ngx-trend>
+<div (mouseover)="changeText=true" (mouseout)="changeText=false">
+  <span *ngIf="!changeText">Hide</span>
+  <span *ngIf="changeText">Show</span>
+</div>
+<div class="control-section">
+  <div>
+      <ejs-stockchart id='stockChartDefault' [chartArea]='chartArea' [primaryXAxis]='primaryXAxis' style="display:block;"
+          [primaryYAxis]='primaryYAxis' [title]='title' [crosshair]='crosshair'
+          (tooltipRender)='tooltipRender($event)' [tooltip]='tooltip' (load)='load($event)'>
+          <e-stockchart-series-collection>
+              <e-stockchart-series [dataSource]='data1' type='Candle' xName='x' yName='high' high='high' low='low'>
+              </e-stockchart-series>
+          </e-stockchart-series-collection>
+      </ejs-stockchart>
+  </div>
+</div>
 
 <div class="InsideContent">
   <div *ngFor="let tile of omrscore trackBy: trackByFuntion37" [ngClass]="{

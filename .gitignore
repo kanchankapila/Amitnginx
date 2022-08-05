@@ -1,11 +1,13 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-
+/dist*
+/dist/amitnginx/*
 /dist-server
+
 /tmp
 /out-tsc
-/.firebase/hosting*
+/.firebase*
 # dependencies
 /node_modules
 

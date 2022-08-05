@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
-import { BrowserModule } from "@angular/platform-browser";
+import { Component,ViewEncapsulation, OnInit, ViewChild} from '@angular/core'; import { BrowserModule } from "@angular/platform-browser";
 import { DataapiService } from '../../dataapi.service'
+import { chartData } from './indicator-data';
+import { ITooltipRenderEventArgs, IStockChartEventArgs, ChartTheme } from '@syncfusion/ej2-angular-charts';
 import { PrimeNGConfig } from 'primeng/api';
 import { DatePipe } from '@angular/common'
 import { Injectable } from '@angular/core';
@@ -20,366 +21,58 @@ export type ChartOptions1 = { series: ApexAxisChartSeries; chart: ApexChart; xax
 export interface stockcrossover { text1: any; text2: any; text3: any; }
 export interface stockindicatorstile { text1: string; text2: string; text3: string; text4: string; }
 export interface stockDatatiles { x: number; open: any; high: any; low: any; close: any; volume: any; }
-export interface stockindicatorswtile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface stockindicatorsmtile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface mcaptile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface nptile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface newscardtile {
-  
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-}
-export interface pbvtile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface pegttmtile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface pettmtile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface scoretile {
-  text: string;
-  text1: string;
-}
-export interface scorettile {
-  text: string;
-  text1: string;
-}
-export interface techscoretile {
-  text: string;
-  text1: string;
-  text2: string;
-}
-export interface vscoretile {
-  text: string;
-  text1: string;
-  text2: string;
-}
-export interface fscoretile {
-  text: string;
-  text1: string;
-  text2: string;
-}
-export interface qscoretile {
-  text: string;
-  text1: string;
-  text2: string;
-}
-export interface dscoretile {
-  text1: any;
-  text2: any;
-}
-export interface volscoretile {
-  text1: any;
-  text2: any;
-}
-export interface mscoretile {
-  text1: any;
-  text2: any;
-}
-export interface srtile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface beta1tile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface ema26tile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface ema50tile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface ema100tile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface ema200tile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface macd1tile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface macdtile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface macdstile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface mfitile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface rsitile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface rsi1tile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface sma30tile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface sma50tile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface sma100tile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface sma200tile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface yr1rtrntile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface rtrn1yvsnftytile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface positivetile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface negativetile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface neutraltile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface stockematile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-  text6: string;
-  text7: string;
-}
-export interface stocksmatile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-  text6: string;
-  text7: string;
-}
-export interface stocksentimentstiles {
-  text1: string;
-  text2: string;
-}
-export interface stockhcdatatile {
-  x: number;
-  y: number;
-}
-export interface stockcrossovertile {
-  text1: any;
-  text2: any;
-  text3: any;
-  text4: any;
-}
-export interface stockcrossoverwtile {
-  text1: any;
-  text2: any;
-  text3: any;
-  text4: any;
-}
-export interface stockcrossovermtile {
-  text1: any;
-  text2: any;
-  text3: any;
-  text4: any;
-}
-export interface stockohlctile {
-  x: number;
-  y: [any];
-}
-export interface stockohlcvolumetile {
-  x: any;
-  y: number;
-}
-export interface stockohlc1wtile {
-  c: number;
-  o: number;
-  h: number;
-  l: number;
-  x: number;
-}
-export interface etstockohlctodaytile {
-  c: number;
-  o: number;
-  h: number;
-  l: number;
-  x: number;
-}
-export interface brokerrecodowngradetile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface brokerrecoupgradetile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface brokertargettile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface ema_26tile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface ema_50tile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface ema_100tile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface ema_200tile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface sma_30tile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface sma_50tile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface sma_100tile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface sma_200tile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface macd1tile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface macdsignal1tile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface rsi1tile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface newscardtile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-  text5: string;
-}
-export interface mfi1tile {
-  text1: string;
-  text2: string;
-  text3: string;
-  text4: string;
-}
-export interface brokertargetdowngradetile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
-export interface brokertargetupgradetile {
-  text1: string;
-  text2: string;
-  text3: string;
-}
+export interface stockindicatorswtile { text1: string; text2: string; text3: string; text4: string; }
+export interface stockindicatorsmtile { text1: string; text2: string; text3: string; text4: string; }
+export interface mcaptile { text1: string; text2: string; text3: string; }
+export interface nptile { text1: string; text2: string; text3: string; }
+export interface newscardtile { text1: string; text2: string; text3: string; text4: string; text5: string; } export interface pbvtile { text1: string; text2: string; text3: string; }
+export interface pegttmtile { text1: string; text2: string; text3: string; }
+export interface pettmtile { text1: string; text2: string; text3: string; }
+export interface scoretile { text: string; text1: string; } export interface scorettile { text: string; text1: string; }
+export interface techscoretile { text: string; text1: string; text2: string; }
+export interface vscoretile { text: string; text1: string; text2: string; }
+export interface fscoretile { text: string; text1: string; text2: string; }
+export interface qscoretile { text: string; text1: string; text2: string; }
+export interface dscoretile { text1: any; text2: any; } export interface volscoretile { text1: any; text2: any; } export interface mscoretile { text1: any; text2: any; } export interface srtile { text1: string; text2: string; text3: string; }
+export interface beta1tile { text1: string; text2: string; text3: string; }
+export interface ema26tile { text1: string; text2: string; text3: string; }
+export interface ema50tile { text1: string; text2: string; text3: string; }
+export interface ema100tile { text1: string; text2: string; text3: string; }
+export interface ema200tile { text1: string; text2: string; text3: string; }
+export interface macd1tile { text1: string; text2: string; text3: string; }
+export interface macdtile { text1: string; text2: string; text3: string; } export interface macdstile { text1: string; text2: string; text3: string; } export interface mfitile { text1: string; text2: string; text3: string; }
+export interface rsitile { text1: string; text2: string; text3: string; }
+export interface rsi1tile { text1: string; text2: string; text3: string; } export interface sma30tile { text1: string; text2: string; text3: string; } export interface sma50tile { text1: string; text2: string; text3: string; } export interface sma100tile { text1: string; text2: string; text3: string; } export interface sma200tile { text1: string; text2: string; text3: string; } export interface yr1rtrntile { text1: string; text2: string; text3: string; } export interface rtrn1yvsnftytile { text1: string; text2: string; text3: string; }
+export interface positivetile { text1: string; text2: string; text3: string; } export interface negativetile { text1: string; text2: string; text3: string; } export interface neutraltile { text1: string; text2: string; text3: string; } export interface stockematile { text1: string; text2: string; text3: string; text4: string; text5: string; text6: string; text7: string; }
+export interface stocksmatile { text1: string; text2: string; text3: string; text4: string; text5: string; text6: string; text7: string; }
+export interface stocksentimentstiles { text1: string; text2: string; }
+export interface stockhcdatatile { x: number; y: number; }
+export interface stockcrossovertile { text1: any; text2: any; text3: any; text4: any; }
+export interface stockcrossoverwtile { text1: any; text2: any; text3: any; text4: any; }
+export interface stockcrossovermtile { text1: any; text2: any; text3: any; text4: any; }
+export interface stockohlctile { x: number; y: [any]; }
+export interface stockohlc1yrtile { x: any; open: number,high:number,low:number,close:number,volume:number; }
+export interface stockohlcvolumetile { x: any; y: number; }
+export interface stockohlc1wtile { c: number; o: number; h: number; l: number; x: number; }
+export interface etstockohlctodaytile { c: number; o: number; h: number; l: number; x: number; }
+export interface brokerrecodowngradetile { text1: string; text2: string; text3: string; }
+export interface brokerrecoupgradetile { text1: string; text2: string; text3: string; }
+export interface brokertargettile { text1: string; text2: string; text3: string; }
+export interface ema_26tile { text1: string; text2: string; text3: string; text4: string; }
+export interface ema_50tile { text1: string; text2: string; text3: string; text4: string; }
+export interface ema_100tile { text1: string; text2: string; text3: string; text4: string; }
+export interface ema_200tile { text1: string; text2: string; text3: string; text4: string; }
+export interface sma_30tile { text1: string; text2: string; text3: string; text4: string; }
+export interface sma_50tile { text1: string; text2: string; text3: string; text4: string; }
+export interface sma_100tile { text1: string; text2: string; text3: string; text4: string; }
+export interface sma_200tile { text1: string; text2: string; text3: string; text4: string; }
+export interface macd1tile { text1: string; text2: string; text3: string; text4: string; }
+export interface macdsignal1tile { text1: string; text2: string; text3: string; text4: string; }
+export interface rsi1tile { text1: string; text2: string; text3: string; text4: string; }
+export interface newscardtile { text1: string; text2: string; text3: string; text4: string; text5: string; }
+export interface mfi1tile { text1: string; text2: string; text3: string; text4: string; }
+export interface brokertargetdowngradetile { text1: string; text2: string; text3: string; }
+export interface brokertargetupgradetile { text1: string; text2: string; text3: string; }
 export interface divscoretile { text1: string; text2: string; }
 export interface rbsscoretile { text1: string; text2: string; }
 export interface kvscoretile { text1: string; text2: string; }
@@ -396,6 +89,7 @@ export interface maxpaintile { text1: any; text2: any; }
   selector: 'app-share',
   templateUrl: './share.component.html',
   styleUrls: ['./share.component.scss'],
+  encapsulation: ViewEncapsulation.None
   
 })
 @Injectable()
@@ -410,6 +104,7 @@ export class ShareComponent implements OnInit {
   constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private route: ActivatedRoute, private router: Router) { }
   public stockhcdate: Array<any> = [];
   public stockohlc: Array<any> = [];
+  public stockohlc1yr: stockohlc1yrtile[] = [];
   public stockohlcvolume: stockohlcvolumetile[] = [];
   public stockohlc1w: stockohlc1wtile[] = [];
   public etstockohlctoday: etstockohlctodaytile[] = [];
@@ -486,6 +181,42 @@ export class ShareComponent implements OnInit {
   public lineChartDatarsim: Array<number> = [];
   public lineChartDataubandm: Array<number> = [];
   public lineChartDatalbandm: Array<number> = [];
+  
+  
+  
+
+  public primaryXAxis: Object = { majorGridLines: { color: 'transparent' }, crosshairTooltip: { enable: true } };
+
+  public primaryYAxis: Object = {
+      lineStyle: { color: 'transparent' },
+      majorTickLines: { color: 'transparent', width: 0 },
+  };
+  public crosshair: Object = {
+      enable: true
+  };
+  public tooltipRender(args: ITooltipRenderEventArgs): void {
+      if (args.text.split('<br/>')[4]) {
+      let target: number = parseInt(args.text.split('<br/>')[4].split('<b>')[1].split('</b>')[0], 10);
+      let value: string = (target / 100000000).toFixed(1) + 'B';
+      args.text = args.text.replace(args.text.split('<br/>')[4].split('<b>')[1].split('</b>')[0], value);
+      }
+  };
+   // custom code start
+  public load(args: IStockChartEventArgs): void {
+      let selectedTheme: string = location.hash.split('/')[1];
+      selectedTheme = selectedTheme ? selectedTheme : 'Material';
+      args.stockChart.theme = <ChartTheme>(selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).replace(/-dark/i, "Dark");
+  };
+   // custom code end
+  public title: string = 'AAPL Stock Price';
+
+  public tooltip: object = { enable: true };
+  public chartArea: Object = {
+      border: {
+          width: 0
+      }
+  };
+  public enable: boolean = true;
   stockcrossover: stockcrossovertile[] = [];
   stockcrossoverw: stockcrossoverwtile[] = [];
   stockcrossoverm: stockcrossovermtile[] = [];
@@ -578,6 +309,7 @@ export class ShareComponent implements OnInit {
   stockema: stockematile[] = [];
   stocksma: stocksmatile[] = [];
   stockdetails1: stockdetailstile[] = [];
+  public data1: Object[] = [];
   // public stockdata: Array<number> = [];
   public delivperc: Array<number> = [];
   public delivperctime: Array<number> = [];
@@ -860,6 +592,10 @@ export class ShareComponent implements OnInit {
     console.error(err);
   }
   }
+  getstockohlc() {
+    
+    
+  }
   getstock1yr(eqsymbol) {
     this.stockohlc.length = 0;
     this.http.get('https://api.niftytrader.in/webapi/Live/livechartsBySymbol?symbol=' + this.eqsymbol).subscribe(data5 => {
@@ -872,6 +608,15 @@ export class ShareComponent implements OnInit {
         this.stockohlc.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(), y: [nestedItems[3][val].open, nestedItems[3][val].high, nestedItems[3][val].low, nestedItems[3][val].close] })
         this.stockohlcvolume.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(), y: nestedItems[3][val].volume })
       }
+      this.stockohlc1yr.length = 0;
+      
+      for (let val in nestedItems[3]) {
+        this.stockohlc1yr.push({ x: new Date((nestedItems[3][val]['created_at']).slice(0,10)), open: nestedItems[3][val].open, high:nestedItems[3][val].high, low:nestedItems[3][val].low,close: nestedItems[3][val].close,volume: nestedItems[3][val].volume})
+        console.log(nestedItems[3][val]['created_at'])
+      }
+      this.data1=this.stockohlc1yr
+     
+      console.log(this.data1)
       this.chartCandleOptions = {
         series: [
           {
@@ -1604,6 +1349,7 @@ export class ShareComponent implements OnInit {
       const response = await fetch("https://api.niftytrader.in/webapi/Live/stockAnalysis", {
         "method": "POST",
         "headers": {
+          
           "accept": "application/json, text/plain, */*",
         "accept-language": "en-US,en;q=0.9",
         "content-type": "application/json",
