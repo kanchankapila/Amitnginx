@@ -1,7 +1,7 @@
 import { Component,ViewEncapsulation, OnInit, ViewChild} from '@angular/core'; import { BrowserModule } from "@angular/platform-browser";
 import { DataapiService } from '../../dataapi.service'
 import { chartData } from './indicator-data';
-import { ITooltipRenderEventArgs, IStockChartEventArgs, ChartTheme } from '@syncfusion/ej2-angular-charts';
+import { PeriodsModel,ITooltipRenderEventArgs, IStockChartEventArgs, ChartTheme,IAxisLabelRenderEventArgs } from '@syncfusion/ej2-angular-charts';
 import { PrimeNGConfig } from 'primeng/api';
 import { DatePipe } from '@angular/common'
 import { Injectable } from '@angular/core';
@@ -21,8 +21,8 @@ export type ChartOptions1 = { series: ApexAxisChartSeries; chart: ApexChart; xax
 export interface stockcrossover { text1: any; text2: any; text3: any; }
 export interface stockindicatorstile { text1: string; text2: string; text3: string; text4: string; }
 export interface stockDatatiles { x: number; open: any; high: any; low: any; close: any; volume: any; }
-export interface stockindicatorswtile { text1: string; text2: string; text3: string; text4: string; }
-export interface stockindicatorsmtile { text1: string; text2: string; text3: string; text4: string; }
+
+
 export interface mcaptile { text1: string; text2: string; text3: string; }
 export interface nptile { text1: string; text2: string; text3: string; }
 export interface newscardtile { text1: string; text2: string; text3: string; text4: string; text5: string; } export interface pbvtile { text1: string; text2: string; text3: string; }
@@ -52,6 +52,7 @@ export interface stockcrossoverwtile { text1: any; text2: any; text3: any; text4
 export interface stockcrossovermtile { text1: any; text2: any; text3: any; text4: any; }
 export interface stockohlctile { x: number; y: [any]; }
 export interface stockohlc1yrtile { x: any; open: number,high:number,low:number,close:number,volume:number; }
+export interface stockohlc1dtile { x: any; open: number,high:number,low:number,close:number,volume:number; }
 export interface stockohlcvolumetile { x: any; y: number; }
 export interface stockohlc1wtile { c: number; o: number; h: number; l: number; x: number; }
 export interface etstockohlctodaytile { c: number; o: number; h: number; l: number; x: number; }
@@ -97,6 +98,9 @@ export class ShareComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent;
   public chartCandleOptions: Partial<ChartOptions1>;
   public chartBarOptions: Partial<ChartOptions1>;
+  public series1: Object[] = [];
+  public point1: Object;
+  display: boolean = false;
   //stockhighcharts: StockChart;
   visibleSidebar5;
   visibleSidebar6;
@@ -105,6 +109,7 @@ export class ShareComponent implements OnInit {
   public stockhcdate: Array<any> = [];
   public stockohlc: Array<any> = [];
   public stockohlc1yr: stockohlc1yrtile[] = [];
+  public stockohlc1d: stockohlc1dtile[] = [];
   public stockohlcvolume: stockohlcvolumetile[] = [];
   public stockohlc1w: stockohlc1wtile[] = [];
   public etstockohlctoday: etstockohlctodaytile[] = [];
@@ -184,7 +189,7 @@ export class ShareComponent implements OnInit {
   
   
   
-
+  public columnTooltip: boolean = false;
   public primaryXAxis: Object = { majorGridLines: { color: 'transparent' }, crosshairTooltip: { enable: true } };
 
   public primaryYAxis: Object = {
@@ -208,7 +213,7 @@ export class ShareComponent implements OnInit {
       args.stockChart.theme = <ChartTheme>(selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).replace(/-dark/i, "Dark");
   };
    // custom code end
-  public title: string = 'AAPL Stock Price';
+  
 
   public tooltip: object = { enable: true };
   public chartArea: Object = {
@@ -217,6 +222,34 @@ export class ShareComponent implements OnInit {
       }
   };
   public enable: boolean = true;
+  
+  public primaryXAxis1: Object = {
+    valueType: 'DateTime', majorGridLines: { color: 'transparent' },
+    crosshairTooltip: { enable: true }
+};
+
+public primaryYAxis1: Object = {
+    lineStyle: { color: 'transparent' },
+    majorTickLines: { color: 'transparent', width: 0 },
+    crosshairTooltip: { enable: true }
+  };
+  public axisLabelRender(args: IAxisLabelRenderEventArgs): void {
+    let text: number = parseInt(args.text, 10);
+    if (args.axis.name === 'primaryYAxis1') {
+      args.text = text / 100000000 + 'B';
+    }
+  };
+public periods: PeriodsModel[] = [
+    { intervalType: 'Minutes', interval: 1, text: '1m' },
+    { intervalType: 'Minutes', interval: 30, text: '30m' },
+    { intervalType: 'Hours', interval: 1, text: '1H' },
+    { intervalType: 'Hours', interval: 12, text: '12H', selected: true },
+    { intervalType: 'Auto', text: '1D' }
+];
+public seriesType: string[] = [];
+public indicatorType: string[] = [];
+public trendlineType: string[] = [];
+public exportType: string[] = [];
   stockcrossover: stockcrossovertile[] = [];
   stockcrossoverw: stockcrossoverwtile[] = [];
   stockcrossoverm: stockcrossovermtile[] = [];
@@ -279,8 +312,7 @@ export class ShareComponent implements OnInit {
   dateday5: any
   //chart: any;
   stockindicators: stockindicatorstile[] = [];
-  stockindicatorsw: stockindicatorswtile[] = [];
-  stockindicatorsm: stockindicatorsmtile[] = [];
+
   //stockData: stockDatatiles[] = [];
   mcap: mcaptile[] = [];
   np: nptile[] = [];
@@ -310,6 +342,7 @@ export class ShareComponent implements OnInit {
   stocksma: stocksmatile[] = [];
   stockdetails1: stockdetailstile[] = [];
   public data1: Object[] = [];
+  public data2: Object[] = [];
   // public stockdata: Array<number> = [];
   public delivperc: Array<number> = [];
   public delivperctime: Array<number> = [];
@@ -395,6 +428,7 @@ export class ShareComponent implements OnInit {
   tlname: any
   bbmsg: any
   dowmsg: any
+  title: string;
   kstmsg: any
   mamsg: any
   macdmsg: any
@@ -408,7 +442,8 @@ export class ShareComponent implements OnInit {
   all_cookies: any;
   bqnames: any
   companyid: any
-  periods: any
+  // periods: any
+ 
   public lineChartType: ChartType = 'line';
   public lineChartOptions: ChartOptions = {
     scales: {
@@ -439,6 +474,7 @@ export class ShareComponent implements OnInit {
       
       this.tlname = this.stockList.filter(i => i.isin == params.stock)[0].tlname
       this.stockname = this.stockList.filter(i => i.isin == params.stock)[0].name
+      this.title = this.stockname;
       this.stockisin = this.stockList.filter(i => i.isin == params.stock)[0].isin
       this.mcsymbol = this.stockList.filter(i => i.isin == params.stock)[0].mcsymbol
       this.mcsymbolname = this.stockList.filter(i => i.isin == params.stock)[0].mcsymbol
@@ -462,12 +498,12 @@ export class ShareComponent implements OnInit {
     this.getgnewsapi(this.bqnames,this.dateday5,this.datetoday)
     this.getntstockpcrdetails(this.eqsymbol)
     this.getmcstockrealtime(this.mcsymbol)
-    this.getstocktoday(this.mcsymbol)
+    this.getstocktoday(this.mcsymbol,this.eqsymbol)
     this.getstockmaema(this.eqsymbol)
     this.getstocksentiments(this.mcsymbol);
     //  this.getmcstocktodayohlc(this.mcsymbol)
     // this.getetsharetoday(this.eqsymbol)
-    setInterval(() => { this.getstocktoday(this.mcsymbol) }, 3000);
+    setInterval(() => { this.getstocktoday(this.mcsymbol,this.eqsymbol) }, 30000);
     //setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 60000);
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
     this.getntstockdetails(this.eqsymbol)
@@ -489,6 +525,9 @@ export class ShareComponent implements OnInit {
   //    };
   //   })
   //   }
+  showDialog() {
+    this.display = true;
+}
   getkotakview(eqsymbol) {
     this.dataApi.getkotakview(eqsymbol).subscribe(data => {
       let nestedItems = Object.keys(data).map(key => {
@@ -608,11 +647,12 @@ export class ShareComponent implements OnInit {
         this.stockohlc.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(), y: [nestedItems[3][val].open, nestedItems[3][val].high, nestedItems[3][val].low, nestedItems[3][val].close] })
         this.stockohlcvolume.push({ x: new Date(nestedItems[3][val]['created_at']).getTime(), y: nestedItems[3][val].volume })
       }
+
       this.stockohlc1yr.length = 0;
       
       for (let val in nestedItems[3]) {
         this.stockohlc1yr.push({ x: new Date((nestedItems[3][val]['created_at']).slice(0,10)), open: nestedItems[3][val].open, high:nestedItems[3][val].high, low:nestedItems[3][val].low,close: nestedItems[3][val].close,volume: nestedItems[3][val].volume})
-        console.log(nestedItems[3][val]['created_at'])
+       
       }
       this.data1=this.stockohlc1yr
      
@@ -1214,18 +1254,18 @@ export class ShareComponent implements OnInit {
       console.log(err)
     })
   }
-  getstocktoday(mcsymbol) {
+  async getstocktoday(mcsymbol,eqsymbol) {
     ////////////To get Share Today Price///////////////////////
     this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-    //  console.log(nestedItems)
+     console.log(nestedItems)
       this.stock1ddata.length = 0;
       this.stock1dLabels.length = 0;
-      for (let val in nestedItems[5]) {
-        this.stock1ddata.push(nestedItems[5][val]["value"])
-        this.stock1dLabels.push(new Date(nestedItems[5][val]["time"] * 1000).toLocaleTimeString("en-IN"))
+      for (let val in nestedItems[6]) {
+        this.stock1ddata.push(nestedItems[6][val]["value"])
+        this.stock1dLabels.push(new Date(nestedItems[6][val]["time"] * 1000).toLocaleTimeString("en-IN"))
       }
     }, err => {
       console.log(err)
@@ -1329,6 +1369,28 @@ export class ShareComponent implements OnInit {
     }, err => {
       console.log(err)
     })
+     try {
+       const response = await fetch('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company', {
+         "method": "GET",
+         "headers": {
+      
+         }
+       })
+       if (response.ok) {
+      const result = await response.json();
+         console.log(result)
+         this.stockohlc1d.length = 0;
+          for (let val in result.query.results.quote) {
+        this.stockohlc1d.push({ x: new Date((result.query.results.quote[val].Date)), open: result.query.results.quote[val].Open, high:result.query.results.quote[val].High, low:result.query.results.quote[val].Low,close: result.query.results.quote[val].Close,volume: result.query.results.quote[val].Volume})
+        
+      }
+      this.data2=this.stockohlc1d
+      console.log(this.data2)
+                }
+          }
+        catch (err) {
+         console.error(err);
+       }
   }
   getstockmaema(eqsymbol) {
     this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=NSE%3A' + this.eqsymbol).subscribe(data5 => {

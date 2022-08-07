@@ -780,16 +780,16 @@ app.get('/api/nsedatapioii', function (req, res) {
   
 })
 
-//NSE nifty Pharma OI Data
-app.get('/api/nsedatapniftyoi', function (req, res) {
-  let stock = req.query.stock
-  instance.get('https://www.nseindia.com/')
-    .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY'))
-    .then(data => res.json(data.data))
-    .catch(data => console.error(res.response))
+// //NSE nifty Pharma OI Data
+// app.get('/api/nsedatapniftyoi', function (req, res) {
+//   let stock = req.query.stock
+//   instance.get('https://www.nseindia.com/')
+//     .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY'))
+//     .then(data => res.json(data.data))
+//     .catch(data => console.error(res.response))
     
   
-})
+// })
 
 
 app.get('/api/nsedatastockoi', function (req, res) {

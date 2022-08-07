@@ -1,10 +1,6 @@
 <script>src = "https://cdnjs.cloudflare.com/ajax/libs/primeng/13.4.1/resources/components/sidebar/sidebar.min.css"</script>
 <br>
 <br>
-<div (mouseover)="changeText=true" (mouseout)="changeText=false">
-  <span *ngIf="!changeText">Hide</span>
-  <span *ngIf="changeText">Show</span>
-</div>
 <div class="control-section">
   <div>
       <ejs-stockchart id='stockChartDefault' [chartArea]='chartArea' [primaryXAxis]='primaryXAxis' style="display:block;"
@@ -62,6 +58,8 @@ NR7:{{nr7}}
     class="p-button-raised p-button-success p-button-outlined"></button>
   <button pButton type="button" (click)="visibleSidebar5 = true" icon="pi pi-arrow-right" label="Insights"
     style=float:right class="p-button-raised p-button-success p-button-outlined"></button>
+    <button pButton type="button" (click)="showDialog()" icon="p-button-raised p-button-success p-button-outlined" label="Show"></button>
+
     <button pButton type="button" class="mr-2" (click)="visibleSidebar7 = true" icon="pi pi-arrow-right" label="Stock News"
     style=float:right class="p-button-raised p-button-success p-button-outlined"></button>
     
@@ -207,7 +205,7 @@ NR7:{{nr7}}
     </div>
   </div>
 </div>
-<p-sidebar [(visible)]="visibleSidebar5" [fullScreen]="true" [baseZIndex]="10000">
+<p-dialog header="Insights" position="top" [(visible)]="display">
   <h6 style="font-weight:normal">Broker's Insight</h6>
   <p *ngFor="let tile of brokertarget trackBy: trackByFuntion10"
     [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
@@ -263,6 +261,9 @@ NR7:{{nr7}}
   <p *ngFor="let tile of mfi1 trackBy: trackByFuntion26"
     [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
     &rarr;{{tile.text1}}</p>
+</p-dialog>
+<p-sidebar [(visible)]="visibleSidebar5" [fullScreen]="true" [baseZIndex]="10000">
+  
 </p-sidebar>
 <p-sidebar [(visible)]="visibleSidebar6" [fullScreen]="true" [baseZIndex]="10000">
   <h6 style="font-weight:normal">Good/Bad/Neutral</h6>
@@ -334,40 +335,92 @@ NR7:{{nr7}}
     </div>
   </div>
 </div>
-<p-tabView>
-  <p-tabPanel header="Today">
-    <div class="col-lg-12 stretch-card">
-      <div class="card">
-        <div class="card-body">
+<div class="col-lg-12 stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive pt-3">
+        <table class="table table-bordered" *ngFor="let tile of stockema trackBy: trackByFuntion30">
+          <thead>
+            <tr>
+              <th>
+                EMA5
+              </th>
+              <th>
+                EMA10
+              </th>
+              <th>
+                EMA20
+              </th>
+              <th>
+                EMA30
+              </th>
+              <th>
+                EMA50
+              </th>
+              <th>
+                EMA100
+              </th>
+              <th>
+                EMA200
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-success">
+              <td>
+                {{tile.text1| number : '1.2-2'}}
+              </td>
+              <td>
+                {{tile.text2| number : '1.2-2'}}
+              </td>
+              <td>
+                {{tile.text3| number : '1.2-2'}}
+              </td>
+              <td>
+                {{tile.text4| number : '1.2-2'}}
+              </td>
+              <td>
+                {{tile.text5| number : '1.2-2'}}
+              </td>
+              <td>
+                {{tile.text6| number : '1.2-2'}}
+              </td>
+              <td>
+                {{tile.text7| number : '1.2-2'}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-lg-12 stretch-card">
           <div class="table-responsive pt-3">
-            <table class="table table-bordered" *ngFor="let tile of stockema trackBy: trackByFuntion30">
+            <table class="table table-bordered" *ngFor="let tile of stocksma trackBy: trackByFuntion31">
               <thead>
                 <tr>
                   <th>
-                    EMA5
+                    SMA5
                   </th>
                   <th>
-                    EMA10
+                    SMA10
                   </th>
                   <th>
-                    EMA20
+                    SMA20
                   </th>
                   <th>
-                    EMA30
+                    SMA30
                   </th>
                   <th>
-                    EMA50
+                    SMA50
                   </th>
                   <th>
-                    EMA100
+                    SMA100
                   </th>
                   <th>
-                    EMA200
+                    SMA200
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr class="table-success">
+                <tr class="table-danger">
                   <td>
                     {{tile.text1| number : '1.2-2'}}
                   </td>
@@ -392,66 +445,43 @@ NR7:{{nr7}}
                 </tr>
               </tbody>
             </table>
-            <div class="col-lg-12 stretch-card">
-              <div class="table-responsive pt-3">
-                <table class="table table-bordered" *ngFor="let tile of stocksma trackBy: trackByFuntion31">
-                  <thead>
-                    <tr>
-                      <th>
-                        SMA5
-                      </th>
-                      <th>
-                        SMA10
-                      </th>
-                      <th>
-                        SMA20
-                      </th>
-                      <th>
-                        SMA30
-                      </th>
-                      <th>
-                        SMA50
-                      </th>
-                      <th>
-                        SMA100
-                      </th>
-                      <th>
-                        SMA200
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="table-danger">
-                      <td>
-                        {{tile.text1| number : '1.2-2'}}
-                      </td>
-                      <td>
-                        {{tile.text2| number : '1.2-2'}}
-                      </td>
-                      <td>
-                        {{tile.text3| number : '1.2-2'}}
-                      </td>
-                      <td>
-                        {{tile.text4| number : '1.2-2'}}
-                      </td>
-                      <td>
-                        {{tile.text5| number : '1.2-2'}}
-                      </td>
-                      <td>
-                        {{tile.text6| number : '1.2-2'}}
-                      </td>
-                      <td>
-                        {{tile.text7| number : '1.2-2'}}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<p-tabView [scrollable]="true">
+  <p-tabPanel header="Today">
+   
+   
+      <div class="control-section">
+        <div>
+            <ejs-stockchart id='StockChartCandle' [chartArea]='chartArea' [primaryXAxis]='primaryXAxis1' style="display:block;"
+                [primaryYAxis]='primaryYAxis1' [crosshair]='crosshair' [title]='title' [periods]='periods'  [tooltip]='tooltip'
+                (tooltipRender)='tooltipRender($event)' (axisLabelRender)='axisLabelRender($event)' (load)='load($event)'>
+                <e-stockchart-axes>
+                    <e-stockchart-axis rowIndex=1 name='yAxis1' opposedPosition=true labelPosition='Inside' tickPosition='Inside'>
+                    </e-stockchart-axis>
+                </e-stockchart-axes>
+                <e-stockchart-rows>
+                    <e-stockchart-row height=30%></e-stockchart-row>
+                    <e-stockchart-row height=70%></e-stockchart-row>
+                </e-stockchart-rows>
+                <e-stockchart-series-collection>
+                    <e-stockchart-series [dataSource]='data2' type='Candle' xName='x' yName='high' yAxisName='yAxis1' high='high'
+                        low='low'> </e-stockchart-series>
+                    <e-stockchart-series [dataSource]='data2' type='Column' xName='x' yName='volume' high='high' low='low'
+                        name={{stockname}} [enableTooltip]='columnTooltip'> </e-stockchart-series>
+                </e-stockchart-series-collection>
+            </ejs-stockchart>
+        </div>
+      </div>
+      
+    
+    
+    
     <div class="col-lg-18 grid-margin  stretch-card">
       <div class="card">
         <h4 class="mb-2">Stock Today with S/R</h4>
@@ -466,26 +496,11 @@ NR7:{{nr7}}
           [options]="stockChartOptions"></canvas>
       </div>
     </div>
-  </p-tabPanel>
+  
+</p-tabPanel>
+
   <p-tabPanel header="1 Week">
-    <div class="col-lg-18 grid-margin stretch-card">
-      <h4 class="mb-5">Weekly</h4>
-      <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div fxFlex="9" fxFlex.xs="100%" fxFlex.sm="33%"
-          *ngFor="let tile of stockindicatorsw trackBy: trackByFuntion32">
-          <mat-card class="text-black cardbear grid-margin stretch-card" [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
-                          'bg-gradient-bull1':tile.text3 === 'Oversold',
-                          'bg-gradient-bull2':tile.text3 === 'Strong Trend',
-                          'bg-gradient-bull3':tile.text3 === 'High Volatility',
-                          'bg-gradient-bear':tile.text3 === 'Bearish',
-                          'bg-gradient-bear1':tile.text3 === 'Overbought',
-                          'bg-gradient-bear2':tile.text3 === 'Weak Trend',
-                          'bg-gradient-bear3':tile.text3 === 'Low Volatility',
-                          'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
-          </mat-card>
-        </div>
-      </div>
-    </div>
+    
     <div class="col-lg-15 grid-margin  stretch-card">
       <div class="card">
         <h4 class="mb-5">stock - 1 Week</h4>
@@ -542,24 +557,6 @@ NR7:{{nr7}}
     </div>
   </p-tabPanel>
   <p-tabPanel header="1 month">
-    <div class="col-lg-18 grid-margin stretch-card">
-      <h4 class="mb-5">Monthly</h4>
-      <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div fxFlex="9" fxFlex.xs="100%" fxFlex.sm="33%"
-          *ngFor="let tile of stockindicatorsm trackBy: trackByFuntion33">
-          <mat-card class="text-black cardbear grid-margin stretch-card" [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
-                            'bg-gradient-bull1':tile.text3 === 'Oversold',
-                            'bg-gradient-bull2':tile.text3 === 'Strong Trend',
-                            'bg-gradient-bull3':tile.text3 === 'High Volatility',
-                            'bg-gradient-bear':tile.text3 === 'Bearish',
-                            'bg-gradient-bear1':tile.text3 === 'Overbought',
-                            'bg-gradient-bear2':tile.text3 === 'Weak Trend',
-                            'bg-gradient-bear3':tile.text3 === 'Low Volatility',
-                            'bg-gradient-warning':tile.text3 === 'Neutral'}">{{tile.text2}}<br>{{tile.text3}}
-          </mat-card>
-        </div>
-      </div>
-    </div>
     <div class="col-lg-15 grid-margin  stretch-card">
       <div class="card">
         <h4 class="mb-5">stock - 1 Month</h4>
@@ -599,6 +596,7 @@ NR7:{{nr7}}
           [yaxis]="chartBarOptions.yaxis" [dataLabels]="chartBarOptions.dataLabels" [stroke]="chartBarOptions.stroke"
           [plotOptions]="chartBarOptions.plotOptions"></apx-chart></ng-container>
       </div>
+      
     </div>
   </p-tabPanel>
 </p-tabView>
