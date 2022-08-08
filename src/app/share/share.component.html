@@ -1,18 +1,6 @@
 <script>src = "https://cdnjs.cloudflare.com/ajax/libs/primeng/13.4.1/resources/components/sidebar/sidebar.min.css"</script>
 <br>
 <br>
-<div class="control-section">
-  <div>
-      <ejs-stockchart id='stockChartDefault' [chartArea]='chartArea' [primaryXAxis]='primaryXAxis' style="display:block;"
-          [primaryYAxis]='primaryYAxis' [title]='title' [crosshair]='crosshair'
-          (tooltipRender)='tooltipRender($event)' [tooltip]='tooltip' (load)='load($event)'>
-          <e-stockchart-series-collection>
-              <e-stockchart-series [dataSource]='data1' type='Candle' xName='x' yName='high' high='high' low='low'>
-              </e-stockchart-series>
-          </e-stockchart-series-collection>
-      </ejs-stockchart>
-  </div>
-</div>
 
 <div class="InsideContent">
   <div *ngFor="let tile of omrscore trackBy: trackByFuntion37" [ngClass]="{
@@ -262,10 +250,10 @@ NR7:{{nr7}}
     [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
     &rarr;{{tile.text1}}</p>
 </p-dialog>
-<p-sidebar [(visible)]="visibleSidebar5" [fullScreen]="true" [baseZIndex]="10000">
+<p-sidebar [(visible)]="visibleSidebar5" [showCloseIcon]="true" [fullScreen]="true" [baseZIndex]="-1">
   
 </p-sidebar>
-<p-sidebar [(visible)]="visibleSidebar6" [fullScreen]="true" [baseZIndex]="10000">
+<p-sidebar [(visible)]="visibleSidebar6" [showCloseIcon]="true" [fullScreen]="true" [baseZIndex]="-1">
   <h6 style="font-weight:normal">Good/Bad/Neutral</h6>
   <div class="InsideContent">
     <div class="col-lg-4 grid-margin stretch-card">
@@ -296,7 +284,12 @@ NR7:{{nr7}}
     </div>
   </div>
 </p-sidebar>
-<p-sidebar [(visible)]="visibleSidebar7" [fullScreen]="true">
+<p-sidebar [(visible)]="visibleSidebar1" [showCloseIcon]="true" position="bottom" [baseZIndex]="-1">
+  <h1 style="font-weight:normal">Left Sidebar</h1>
+  <p-button type="button" (click)="visibleSidebar1 = false" label="Save" styleClass="p-button-success"></p-button>
+  <p-button type="button" (click)="visibleSidebar1 = false" label="Cancel" styleClass="p-button-secondary"></p-button>
+</p-sidebar>
+<p-sidebar [(visible)]="visibleSidebar7" [style]="{width:'30em'}" [baseZIndex]="-1" [showCloseIcon]="true">
   
   <div class=" grid-margin stretch-card">
     <div class="content  container">
@@ -316,8 +309,7 @@ NR7:{{nr7}}
     </div>
  </div> 
 </div>
-<p-button type="button" (click)="visibleSidebar7 = false" label="Save" styleClass="p-button-success"></p-button>
-<p-button type="button" (click)="visibleSidebar7 = false" label="Cancel" styleClass="p-button-secondary"></p-button>
+
     </p-sidebar>
 <div class="InsideContent">
   <div class="col-lg-6 grid-margin  stretch-card">
@@ -451,6 +443,19 @@ NR7:{{nr7}}
     </div>
   </div>
 </div>
+<p-button type="button" (click)="visibleSidebar1 = false" icon="pi pi-arrow-right"></p-button>
+<div class="control-section">
+  <div>
+      <ejs-stockchart id='stockChartDefault'  [enablePeriodSelector]='enable' [chartArea]='chartArea' [periods]='periods1' [primaryXAxis]='primaryXAxis' style="display:block;"
+          [primaryYAxis]='primaryYAxis' [title]='title' [crosshair]='crosshair'
+          (tooltipRender)='tooltipRender($event)' [tooltip]='tooltip' (load)='load($event)'>
+          <e-stockchart-series-collection>
+              <e-stockchart-series [dataSource]='data1' type='Candle' xName='x' yName='high' high='high' low='low'>
+              </e-stockchart-series>
+          </e-stockchart-series-collection>
+      </ejs-stockchart>
+  </div>
+</div>
 
 <p-tabView [scrollable]="true">
   <p-tabPanel header="Today">
@@ -478,7 +483,7 @@ NR7:{{nr7}}
             </ejs-stockchart>
         </div>
       </div>
-      
+     
     
     
     

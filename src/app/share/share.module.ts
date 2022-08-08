@@ -22,7 +22,7 @@ import { TabViewModule } from "primeng/tabview";
 import { ButtonModule } from 'primeng/button';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { StockChartAllModule, ChartAnnotationService, RangeNavigatorAllModule, ChartAllModule } from '@syncfusion/ej2-angular-charts';
-import { CategoryService, LineSeriesService, DateTimeService} from '@syncfusion/ej2-angular-charts';
+import { CategoryService, LineSeriesService, DateTimeService,PeriodSelectorService,RangeTooltipService} from '@syncfusion/ej2-angular-charts';
 
 
 
@@ -60,6 +60,6 @@ import { CategoryService, LineSeriesService, DateTimeService} from '@syncfusion/
    
   ],
   schemas: [],
-  providers: [DatePipe, CategoryService, LineSeriesService, DateTimeService]
+  providers: [DatePipe, CategoryService, LineSeriesService, DateTimeService,PeriodSelectorService,RangeTooltipService]
 })
 export class ShareModule { }

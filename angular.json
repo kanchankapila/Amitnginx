@@ -15,8 +15,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "customWebpackConfig": {
+              "path": "./extra-webpack.config.js"
+           },
             "outputPath": "dist/amitnginx",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -44,10 +47,10 @@
              
             
             ],
-            "vendorChunk": true,
+            "vendorChunk": false,
             
-            "extractLicenses": false,
-            "buildOptimizer": false,
+            "extractLicenses": true,
+            "buildOptimizer": true,
             "sourceMap": true,
             "optimization": true,
             "namedChunks": true,
@@ -57,15 +60,15 @@
           },
           "configurations": {
             "development":{
-              "optimization": false,
+              "optimization": true,
               "outputHashing": "all",
               "sourceMap": true,
-              "namedChunks": false,
+              "namedChunks": true,
               "aot": true,
-              "statsJson":false,
+              "statsJson":true,
               "extractLicenses": false,
               "vendorChunk": false,
-              "buildOptimizer": false,
+              "buildOptimizer": true,
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
              
@@ -80,7 +83,7 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "namedChunks": false,
+              "namedChunks": true,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,

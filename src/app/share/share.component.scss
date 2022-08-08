@@ -9,6 +9,9 @@
 .text-green{
   color:green;
 }
+:host ::ng-deep button {
+  margin-right: .25em;
+}
 .p-sidebar-close {
   background-color: pink;
   position: relative;

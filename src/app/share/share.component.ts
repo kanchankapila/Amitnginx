@@ -17,6 +17,7 @@ import * as mcindex from '../lists/mcsectorlist'
 import { Chart, ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
 import { from, Observable } from 'rxjs';
 import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexYAxis, ApexXAxis, ApexPlotOptions, ApexDataLabels, ApexStroke } from "ng-apexcharts";
+import { resourceLimits } from 'worker_threads';
 export type ChartOptions1 = { series: ApexAxisChartSeries; chart: ApexChart; xaxis: ApexXAxis; yaxis: ApexYAxis; plotOptions: ApexPlotOptions; dataLabels: ApexDataLabels; stroke: ApexStroke; };
 export interface stockcrossover { text1: any; text2: any; text3: any; }
 export interface stockindicatorstile { text1: string; text2: string; text3: string; text4: string; }
@@ -101,7 +102,9 @@ export class ShareComponent implements OnInit {
   public series1: Object[] = [];
   public point1: Object;
   display: boolean = false;
+  //public enable: boolean = true;
   //stockhighcharts: StockChart;
+  visibleSidebar1;
   visibleSidebar5;
   visibleSidebar6;
   visibleSidebar7;
@@ -240,11 +243,25 @@ public primaryYAxis1: Object = {
     }
   };
 public periods: PeriodsModel[] = [
-    { intervalType: 'Minutes', interval: 1, text: '1m' },
-    { intervalType: 'Minutes', interval: 30, text: '30m' },
-    { intervalType: 'Hours', interval: 1, text: '1H' },
+  { intervalType: 'Minutes', interval: 1, text: '1m' },
+  { intervalType: 'Minutes', interval: 15, text: '15m' },
+  { intervalType: 'Minutes', interval: 30, text: '30m' },
+  { intervalType: 'Minutes', interval: 45, text: '45m' },
+  { intervalType: 'Hours', interval: 1, text: '1H' },
+  { intervalType: 'Hours', interval: 2, text: '2H' },
+  { intervalType: 'Hours', interval: 4, text: '4H' },
     { intervalType: 'Hours', interval: 12, text: '12H', selected: true },
     { intervalType: 'Auto', text: '1D' }
+  ];
+  public periods1: PeriodsModel[] = [
+    
+    { intervalType: 'Weeks', interval: 1, text: '1w' },
+    { intervalType: 'Months', interval: 1, text: '1M' },
+    { intervalType: 'Months', interval: 3, text: '3M', selected: true },
+    { intervalType: 'Months', interval: 6, text: '6M' },
+    { intervalType: 'Months', interval: 9, text: '9M' },
+    { intervalType: 'Years', interval: 1, text: '1Y'},
+    { intervalType: 'Auto', text: '1W' }
 ];
 public seriesType: string[] = [];
 public indicatorType: string[] = [];
@@ -393,6 +410,7 @@ public exportType: string[] = [];
   public stockLabelssnrs2m: Array<any> = [];
   public stockLabelssnrs3m: Array<any> = [];
   public apexohlc = [];
+  displayMaximizable: boolean;
   public apexvolume: Array<any> = [];
   public stockChartType: ChartType = 'line';
   public DelivChartType: ChartType = 'bar';
@@ -527,6 +545,9 @@ public exportType: string[] = [];
   //   }
   showDialog() {
     this.display = true;
+  }
+  showMaximizableDialog() {
+    this.displayMaximizable = true;
 }
   getkotakview(eqsymbol) {
     this.dataApi.getkotakview(eqsymbol).subscribe(data => {
@@ -572,7 +593,7 @@ public exportType: string[] = [];
     
       if (response.ok) {
         const result = await response.json();
-       
+        console.log(result)
        
         //console.log(response)
         // this.newscard.length = 0;
@@ -581,14 +602,15 @@ public exportType: string[] = [];
         console.log(this.bqnames + '&from=' + this.dateday5 + '&to=' + this.datetoday + '&sortBy=popularity&apiKey=28bda70739cc4024ba3f30223e8c25a8')
 
         console.log(new Date(this.dateday5).setHours(9, 15, 0, 0));
+      
+ this.newscard.length = 0;
+      for (let val in result) {
+        this.newscard.push({text1:result[val].title,text2:result[val].url,text3:result[val].urlToImage,text4:result[val].description,text5:result[val].content})
+        }
       }
     } catch (err) {
             console.error(err);
           }
- // this.newscard.length = 0;
-    //   for (let val in nestedItems[2]) {
-    //     this.newscard.push({text1:nestedItems[2][val].title,text2:nestedItems[2][val].url,text3:nestedItems[2][val].urlToImage,text4:nestedItems[2][val].description,text5:nestedItems[2][val].content})
-    //       }
     
      
     
@@ -656,7 +678,7 @@ public exportType: string[] = [];
       }
       this.data1=this.stockohlc1yr
      
-      console.log(this.data1)
+    
       this.chartCandleOptions = {
         series: [
           {
@@ -1256,16 +1278,17 @@ public exportType: string[] = [];
   }
   async getstocktoday(mcsymbol,eqsymbol) {
     ////////////To get Share Today Price///////////////////////
+    
     this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-     console.log(nestedItems)
+    
       this.stock1ddata.length = 0;
       this.stock1dLabels.length = 0;
-      for (let val in nestedItems[6]) {
-        this.stock1ddata.push(nestedItems[6][val]["value"])
-        this.stock1dLabels.push(new Date(nestedItems[6][val]["time"] * 1000).toLocaleTimeString("en-IN"))
+      for (let val in nestedItems[5]) {
+        this.stock1ddata.push(nestedItems[5][val]["value"])
+        this.stock1dLabels.push(new Date(nestedItems[5][val]["time"] * 1000).toLocaleTimeString("en-IN"))
       }
     }, err => {
       console.log(err)
@@ -1378,14 +1401,14 @@ public exportType: string[] = [];
        })
        if (response.ok) {
       const result = await response.json();
-         console.log(result)
+         
          this.stockohlc1d.length = 0;
           for (let val in result.query.results.quote) {
         this.stockohlc1d.push({ x: new Date((result.query.results.quote[val].Date)), open: result.query.results.quote[val].Open, high:result.query.results.quote[val].High, low:result.query.results.quote[val].Low,close: result.query.results.quote[val].Close,volume: result.query.results.quote[val].Volume})
         
       }
       this.data2=this.stockohlc1d
-      console.log(this.data2)
+     
                 }
           }
         catch (err) {
@@ -1432,7 +1455,7 @@ public exportType: string[] = [];
     
       if (response.ok) {
         const result = await response.json();
-        console.log(result)
+        
      
     
     // this.dataApi.getntstockdetails(this.eqsymbol).subscribe(data5 => {
@@ -1498,7 +1521,7 @@ public exportType: string[] = [];
       
       if (response.ok) {
         const result = await response.json();
-        console.log(result)
+        
      
          this.maxpain.push({ text1: 'max pain', text2: result['resultData']['futureOption'].max_pain })
         this.stockpcr.push({ text1: 'PCR', text2: result['resultData']['futureOption'].pcr })
