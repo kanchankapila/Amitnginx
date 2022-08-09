@@ -18,7 +18,7 @@
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "customWebpackConfig": {
-              "path": "./extra-webpack.config.js"
+              "path": "./webpack.config.js"
            },
             "outputPath": "dist/amitnginx",
             "index": "src/index.html",
@@ -29,7 +29,6 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              
               "src/manifest.webmanifest"
               
             ],
