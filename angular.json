@@ -108,7 +108,7 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "amitnginx:build",
+            "browserTarget": "amitnginx:build"
            
           },
           "configurations": {
