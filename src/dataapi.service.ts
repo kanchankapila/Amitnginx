@@ -7,168 +7,168 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class DataapiService {
   stock: any;
   dbname: any;
-
+  baseurl = "https://amitv2.herokuapp.com/api"
   constructor(private http: HttpClient,private window: Window,private route: ActivatedRoute,private router: Router) { }
 
 
  
 
   nsepostdata1(eqsymbol1) {
-    return this.http.post('http://localhost:3000/api/nsepostdata1',eqsymbol1) 
+    return this.http.post(this.baseurl + '/nsepostdata1',eqsymbol1) 
   }
   nsepostdata2(eqsymbol1) {
    
-    return this.http.post('http://localhost:3000/api/nsepostdata2',eqsymbol1) 
+    return this.http.post(this.baseurl + '/nsepostdata2',eqsymbol1) 
   }
   getnteodscreeners(ntoptions) {
-    return this.http.post('http://localhost:3000/api/nteodscreeners',ntoptions)
+    return this.http.post(this.baseurl + '/nteodscreeners',ntoptions)
   console.log(ntoptions)
   }
   getnteodscreeners1() {
-    return this.http.get('http://localhost:3000/api/nteodscreeners1')
+    return this.http.get(this.baseurl + '/nteodscreeners1')
   
   }
   getkite1(timeframe,eqsymbol){
-    return this.http.get('http://localhost:3000/api/kite1?timeframe='+timeframe+'&eqsymbol='+eqsymbol)
+    return this.http.get(this.baseurl + '/kite1?timeframe='+timeframe+'&eqsymbol='+eqsymbol)
   }
   getkitestockreports(){
-    return this.http.get('http://localhost:3000/api/kitestockreports')
+    return this.http.get(this.baseurl + '/kitestockreports')
   }
   getnsetry1(symbol){
-    return this.http.get('http://localhost:3000/api/nsetry1?symbol='+symbol)
+    return this.http.get(this.baseurl + '/nsetry1?symbol='+symbol)
   }
  
  nseresults(){
-    return this.http.get('http://localhost:3000/api/nseresults')
+    return this.http.get(this.baseurl + '/nseresults')
   }
   nseinstrading() {
-    return this.http.get('http://localhost:3000/api/nseinstrading')
+    return this.http.get(this.baseurl + '/nseinstrading')
   }
   nsedatastockohlc1(stock){
-    return this.http.get('http://localhost:3000/api/nsedatastockohlc1?stock='+stock)
+    return this.http.get(this.baseurl + '/nsedatastockohlc1?stock='+stock)
   }
   nsedatasioi(){
-    return this.http.get('http://localhost:3000/api/nsedatasioi')
+    return this.http.get(this.baseurl + '/nsedatasioi')
   }
   nsedatastockoi(stock){
-    return this.http.get('http://localhost:3000/api/nsedatastockoi?stock='+stock)
+    return this.http.get(this.baseurl + '/nsedatastockoi?stock='+stock)
   }
   nsedatapioii(){
-    return this.http.get('http://localhost:3000/api/nsedatapioii')
+    return this.http.get(this.baseurl + '/nsedatapioii')
   }
   nsedataniftyoi(){
-    return this.http.get('http://localhost:3000/api/nsedataniftyoi')
+    return this.http.get(this.baseurl + '/nsedataniftyoi')
   }
   nsedatabniftyoi(){
-    return this.http.get('http://localhost:3000/api/nsedatabniftyoi')
+    return this.http.get(this.baseurl + '/nsedatabniftyoi')
   }
  
   nsedataadvdec(){
-    return this.http.get('http://localhost:3000/api/nsedataadvdec')
+    return this.http.get(this.baseurl + '/nsedataadvdec')
   }
   nsestockhistdata(stock) {
-    return this.http.get('http://localhost:3000/api/nsestockhistdata?stock='+stock)
+    return this.http.get(this.baseurl + '/nsestockhistdata?stock='+stock)
   }
   nsedataindices(){
-    return this.http.get('http://localhost:3000/api/nsedataindices')
+    return this.http.get(this.baseurl + '/nsedataindices')
   }
 
   
   nsedatastockohlc2(stock){
-    return this.http.get('http://localhost:3000/api/nsedatastockohlc2?stock='+stock)
+    return this.http.get(this.baseurl + '/nsedatastockohlc2?stock='+stock)
   }
   nsedata3(){
-    return this.http.get('http://localhost:3000/api/nsedata3')
+    return this.http.get(this.baseurl + '/nsedata3')
   }
  
 
   getmmmarkets(){
-    return this.http.get('http://localhost:3000/api/mmmarkets')
+    return this.http.get(this.baseurl + '/mmmarkets')
   }
   
  
   getnse(){
-    return this.http.get('http://localhost:3000/api/nse')
+    return this.http.get(this.baseurl + '/nse')
   }
   getnse1(){
-    return this.http.get('http://localhost:3000/api/nse1')
+    return this.http.get(this.baseurl + '/nse1')
   }
   getnse2(){
-    return this.http.get('http://localhost:3000/api/nse2')
+    return this.http.get(this.baseurl + '/nse2')
   }
   gettlrsiall() {
     
-    return this.http.get('http://localhost:3000/api/tlrsiall')
+    return this.http.get(this.baseurl + '/tlrsiall')
   }
  
   getmcoverall(){
-    return this.http.get('http://localhost:3000/api/mcoverall')
+    return this.http.get(this.baseurl + '/mcoverall')
   }
   getmoneycontroloveralldaily(mcsymbol){
-    return this.http.post('http://localhost:3000/api/moneycontroloveralldaily',mcsymbol)
+    return this.http.post(this.baseurl + '/moneycontroloveralldaily',mcsymbol)
   }
   getmcmovingaverages(mcsymbol){
-    return this.http.post('http://localhost:3000/api/mcmovingaverages',mcsymbol)
+    return this.http.post(this.baseurl + '/mcmovingaverages',mcsymbol)
   }
   getnr7(mcsymbol){
-    return this.http.post('http://localhost:3000/api/nr7',mcsymbol)
+    return this.http.post(this.baseurl + '/nr7',mcsymbol)
   }
   getetcompanydata(companyid){
-    return this.http.post('http://localhost:3000/api/etcompanydata',companyid)
+    return this.http.post(this.baseurl + '/etcompanydata',companyid)
   }
   getetcompanydataohlc(companyid){
-    return this.http.get('http://localhost:3000/api/etcompanydataohlc?companyid='+companyid)
+    return this.http.get(this.baseurl + '/etcompanydataohlc?companyid='+companyid)
   }
   getetsectordetails(sectorid,etsectorname){
-    return this.http.get('http://localhost:3000/api/etsectordetails?sectorid='+sectorid+'&&etsectorname='+etsectorname)
+    return this.http.get(this.baseurl + '/etsectordetails?sectorid='+sectorid+'&&etsectorname='+etsectorname)
   }
   getetindexdetails(indexid,exchange){
-    return this.http.get('http://localhost:3000/api/etindexdetails?indexid='+indexid+'&&exchange='+exchange)
+    return this.http.get(this.baseurl + '/etindexdetails?indexid='+indexid+'&&exchange='+exchange)
   }
   
   getmccombine(mcsymbol){
-    return this.http.post('http://localhost:3000/api/mccombine',mcsymbol)
+    return this.http.post(this.baseurl + '/mccombine',mcsymbol)
   }
   gettrendlynepostdvm(tlid){
-    return this.http.post('http://localhost:3000/api/trendlynepostdvm',tlid)
+    return this.http.post(this.baseurl + '/trendlynepostdvm',tlid)
   }
   getmcmovingaveragesview(stockisin,dbname) {
     
-    return this.http.get('http://localhost:3000/api/mcmovingaveragesview?stockisin='+stockisin+"&&dbname="+dbname)
+    return this.http.get(this.baseurl + '/mcmovingaveragesview?stockisin='+stockisin+"&&dbname="+dbname)
   }
   getkotakview(eqsymbol) {
     
-    return this.http.get('http://localhost:3000/api/kotakview?eqsymbol='+eqsymbol)
+    return this.http.get(this.baseurl + '/kotakview?eqsymbol='+eqsymbol)
   }
   getkotaksectorview(sectorid) {
     
-    return this.http.get('http://localhost:3000/api/kotaksectorview?sectorid='+sectorid)
+    return this.http.get(this.baseurl + '/kotaksectorview?sectorid='+sectorid)
   }
   getmcsectorcombine(mcsectorsymbol){
-    return this.http.post('http://localhost:3000/api/mcsectorcombine',mcsectorsymbol)
+    return this.http.post(this.baseurl + '/mcsectorcombine',mcsectorsymbol)
   }
   getmoneycontrolti(mcsymbol){
-    return this.http.post('http://localhost:3000/api/moneycontrolti',mcsymbol)
+    return this.http.post(this.baseurl + '/moneycontrolti',mcsymbol)
   }
   getmcvolume(mcsymbol){
-    return this.http.post('http://localhost:3000/api/mcvolume',mcsymbol)
+    return this.http.post(this.baseurl + '/mcvolume',mcsymbol)
   }
   getmcvolume1(mcsymbol1){
-    return this.http.post('http://localhost:3000/api/mcvolume',mcsymbol1)
+    return this.http.post(this.baseurl + '/mcvolume',mcsymbol1)
   }
   getmcinsight(mcsymbol){
-    return this.http.post('http://localhost:3000/api/mcinsight',mcsymbol)
+    return this.http.post(this.baseurl + '/mcinsight',mcsymbol)
   }
  
   getntstockpcrdetails(eqsymbol) {
  
-    return this.http.get('http://localhost:3000/api/ntstockpcrdetails?eqsymbol='+eqsymbol)
+    return this.http.get(this.baseurl + '/ntstockpcrdetails?eqsymbol='+eqsymbol)
   }
 
   
   
   gettrendlynestocks1(tlid,tlname,eqsymbol){
-    return this.http.get('http://localhost:3000/api/trendlynestocks1?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
+    return this.http.get(this.baseurl + '/trendlynestocks1?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
   }
   
 
@@ -176,23 +176,23 @@ export class DataapiService {
   
   
   gettrendlynenifty() {
-    return this.http.get('http://localhost:3000/api/trendlynenifty')
+    return this.http.get(this.baseurl + '/trendlynenifty')
   }
   gettrendlynebanknifty() {
-    return this.http.get('http://localhost:3000/api/trendlynebanknifty')
+    return this.http.get(this.baseurl + '/trendlynebanknifty')
   }
   gettrendlynepharmanifty() {
-    return this.http.get('http://localhost:3000/api/trendlynepharmanifty')
+    return this.http.get(this.baseurl + '/trendlynepharmanifty')
   }
 
   getniftytradersallstocks(){
-    return this.http.get('http://localhost:3000/api/niftytradersallstocks')
+    return this.http.get(this.baseurl + '/niftytradersallstocks')
   }
   getetpost1(){
-    return this.http.get('http://localhost:3000/api/etpost1')
+    return this.http.get(this.baseurl + '/etpost1')
   }
   getetDIIBuying() {
-    return this.http.get('http://localhost:3000/api/etDIIBuying') 
+    return this.http.get(this.baseurl + '/etDIIBuying') 
   }
   
   
