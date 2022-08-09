@@ -5,7 +5,10 @@
     "ng": "ng",
     "start": "node index.js",
     "deploy-hosting": "ng build --configuration=production && ng serve --configuration=production && node index.js",
-    "build": "node --max_old_space_size=8096 ./node_modules/@angular/cli/bin/ng build --configuration=production && ng serve --configuration=production && node index.js",
+    "build-prod": "node --max_old_space_size=8096 ./node_modules/@angular/cli/bin/ng build --configuration=production",
+    "serve-prod": "ng serve --configuration=production",
+    "build": "node --max_old_space_size=8096 ./node_modules/@angular/cli/bin/ng build --configuration=development",
+    "serve": "ng serve --configuration=development --disableHostCheck=true",
     "heroku-postbuild": "ng build --configuration=production",
     "test": "ng test",
     "lint": "eslint src",
@@ -19,7 +22,6 @@
   "resolutions": {
     "uglify-es": "npm:terser"
   },
-  "proxy": "https://licenseapi.herokuapp.com",
   "private": true,
   "sideEffects": false,
   "dependencies": {
@@ -81,7 +83,7 @@
     "rxjs": "^7.5.6",
     "terser": "^5.14.2",
     "tough-cookie": "^4.0.0",
-    "zone.js": "~0.11.7"
+    "zone.js": "^0.11.7"
   },
   "overrides": {
     "autoprefixer": "10.4.7"
