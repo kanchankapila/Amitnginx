@@ -79,18 +79,33 @@ if (cluster.isMaster) {
 const axiosCookieJarSupport = require('axios-cookiejar-support').default;
   const tough = require('tough-cookie');
  
+// const pool = new Pool({
+//   user: "postgres",
+//   host: "localhost",
+//   database: "amit",
+//   password: "amit0605",
+//   port: "5432"
+// });
+// const client = new Client({
+//   user: "amit",
+//   host: "localhost",
+//   database: "amit",
+//   password: "amit0605",
+//   port: "5432"
+  
+// })
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "amit",
-  password: "amit0605",
+  user: "onzcwnkubxycls",
+  host: "ec2-52-207-15-147.compute-1.amazonaws.com",
+  database: "dak59761mft7r4",
+  password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
   port: "5432"
 });
 const client = new Client({
-  user: "amit",
-  host: "localhost",
-  database: "amit",
-  password: "amit0605",
+  user: "onzcwnkubxycls",
+  host: "ec2-52-207-15-147.compute-1.amazonaws.com",
+  database: "dak59761mft7r4",
+  password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
   port: "5432"
   
 })

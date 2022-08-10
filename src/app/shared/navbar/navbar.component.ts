@@ -208,9 +208,11 @@ export class NavbarComponent implements OnInit {
   }
  
   keyword = 'name';
-   selectEvent(stock_isin) {
-       this.router.navigate(['/Share'],{queryParams: {stock:stock_isin}})
-    
+  selectEvent(stock_isin) {
+    // const url = '/Share?stock=' + stock_isin
+    // this.router.navigateByUrl(url)
+       
+   window.open('/Share?stock='+stock_isin)
    }
 
   onChangeSearch(val: string) {

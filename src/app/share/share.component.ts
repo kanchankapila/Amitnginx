@@ -1,6 +1,5 @@
-import { Component,ViewEncapsulation, OnInit, ViewChild} from '@angular/core'; import { BrowserModule } from "@angular/platform-browser";
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataapiService } from '../../dataapi.service'
-import { chartData } from './indicator-data';
 import { PeriodsModel,ITooltipRenderEventArgs, IStockChartEventArgs, ChartTheme,IAxisLabelRenderEventArgs } from '@syncfusion/ej2-angular-charts';
 import { PrimeNGConfig } from 'primeng/api';
 import { DatePipe } from '@angular/common'
@@ -26,7 +25,8 @@ export interface stockDatatiles { x: number; open: any; high: any; low: any; clo
 
 export interface mcaptile { text1: string; text2: string; text3: string; }
 export interface nptile { text1: string; text2: string; text3: string; }
-export interface newscardtile { text1: string; text2: string; text3: string; text4: string; text5: string; } export interface pbvtile { text1: string; text2: string; text3: string; }
+export interface newscardtile { text1: string; text2: string; text3: string; text4: string; text5: string; }
+export interface pbvtile { text1: string; text2: string; text3: string; }
 export interface pegttmtile { text1: string; text2: string; text3: string; }
 export interface pettmtile { text1: string; text2: string; text3: string; }
 export interface scoretile { text: string; text1: string; } export interface scorettile { text: string; text1: string; }
@@ -91,7 +91,7 @@ export interface maxpaintile { text1: any; text2: any; }
   selector: 'app-share',
   templateUrl: './share.component.html',
   styleUrls: ['./share.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  
   
 })
 @Injectable()
@@ -101,13 +101,9 @@ export class ShareComponent implements OnInit {
   public chartBarOptions: Partial<ChartOptions1>;
   public series1: Object[] = [];
   public point1: Object;
-  display: boolean = false;
-  //public enable: boolean = true;
-  //stockhighcharts: StockChart;
+  
   visibleSidebar1;
-  visibleSidebar5;
-  visibleSidebar6;
-  visibleSidebar7;
+
   constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private route: ActivatedRoute, private router: Router) { }
   public stockhcdate: Array<any> = [];
   public stockohlc: Array<any> = [];
@@ -410,7 +406,7 @@ public exportType: string[] = [];
   public stockLabelssnrs2m: Array<any> = [];
   public stockLabelssnrs3m: Array<any> = [];
   public apexohlc = [];
-  displayMaximizable: boolean;
+  
   public apexvolume: Array<any> = [];
   public stockChartType: ChartType = 'line';
   public DelivChartType: ChartType = 'bar';
@@ -526,6 +522,7 @@ public exportType: string[] = [];
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
     this.getntstockdetails(this.eqsymbol)
   }
+  
   // getetsharetoday(eqsymbol) {
   //   this.http.get<any>('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company').subscribe(data5 => {
   //     let nestedItems = Object.keys(data5).map(key => {
@@ -543,12 +540,8 @@ public exportType: string[] = [];
   //    };
   //   })
   //   }
-  showDialog() {
-    this.display = true;
-  }
-  showMaximizableDialog() {
-    this.displayMaximizable = true;
-}
+ 
+  
   getkotakview(eqsymbol) {
     this.dataApi.getkotakview(eqsymbol).subscribe(data => {
       let nestedItems = Object.keys(data).map(key => {
@@ -604,9 +597,10 @@ public exportType: string[] = [];
         console.log(new Date(this.dateday5).setHours(9, 15, 0, 0));
       
  this.newscard.length = 0;
-      for (let val in result) {
-        this.newscard.push({text1:result[val].title,text2:result[val].url,text3:result[val].urlToImage,text4:result[val].description,text5:result[val].content})
+      for (let val in result.articles) {
+        this.newscard.push({text1:result.articles[val].title,text2:result.articles[val].url,text3:result.articles[val].urlToImage,text4:result.articles[val].description,text5:result.articles[val].content})
         }
+        console.log(this.newscard)
       }
     } catch (err) {
             console.error(err);
@@ -1392,9 +1386,12 @@ public exportType: string[] = [];
     }, err => {
       console.log(err)
     })
+   
+    
      try {
        const response = await fetch('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company', {
          "method": "GET",
+         
          "headers": {
       
          }

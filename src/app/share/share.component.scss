@@ -1,4 +1,9 @@
 
+
+@import '../../../styles.scss';
+:host ::ng-deep .p-dropdown {
+  width: 25rem;
+}
 .InsideContent{
     display:flex;
     align-items: flex-start;
@@ -6,17 +11,18 @@
 .InsideContent1 {
     display: block;
   }
+  
 .text-green{
   color:green;
 }
-:host ::ng-deep button {
-  margin-right: .25em;
+
+
+:host ::ng-deep .p-sidebar-content {
+height: 70%;
 }
-.p-sidebar-close {
-  background-color: pink;
-  position: relative;
-  float: right;
-}
+
+
+
 .newscard1{
   width:400px;
   height:250px;

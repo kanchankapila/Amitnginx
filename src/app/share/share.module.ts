@@ -5,7 +5,7 @@ import { TrendModule } from 'ngx-trend';
 import { BrowserModule } from "@angular/platform-browser";
 import { DatePipe } from '@angular/common';
 
-import {DialogModule} from 'primeng/dialog';
+
 import { ShareRoutingModule } from './share-routing.module';
 import { ShareComponent } from './share.component';
 import { SidebarModule } from 'primeng/sidebar';
@@ -54,7 +54,7 @@ import { CategoryService, LineSeriesService, DateTimeService,PeriodSelectorServi
     StockChartAllModule,
     RangeNavigatorAllModule,
     ChartAllModule,
-    DialogModule,
+  
     NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
     NgApexchartsModule
    
