@@ -15,9 +15,11 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            
+            "customWebpackConfig": {
+              "path": "./extra-webpack.config.js"
+            },
             "outputPath": "dist/amitnginx",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -32,7 +34,11 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/animate.css/animate.css"
+              "node_modules/animate.css/animate.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/mdc-light-indigo/theme.css",
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/primeng/resources/primeng.min.css"
             ],"allowedCommonJsDependencies": [
               "chart.js",
               "apexcharts",
@@ -47,7 +53,7 @@
             "vendorChunk": false,
             
             "extractLicenses": true,
-            "buildOptimizer": true,
+            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": true,
             "namedChunks": true,
@@ -65,7 +71,7 @@
               "statsJson":true,
               "extractLicenses": false,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
              
@@ -104,11 +110,10 @@
           "defaultConfiguration": ""
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
             "browserTarget": "amitnginx:build"
-           
-          },
+           },
           "configurations": {
             "production": {
               "browserTarget": "amitnginx:build:production"
@@ -137,8 +142,11 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/animate.css/animate.css"
-              
+              "node_modules/animate.css/animate.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/mdc-light-indigo/theme.css",
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/primeng/resources/primeng.min.css"
               
               
             ],

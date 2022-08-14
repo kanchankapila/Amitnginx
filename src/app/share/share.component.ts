@@ -1,4 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild,ViewEncapsulation, ElementRef } from '@angular/core';
+import httpJsonp from "http-jsonp";
+import { DialogComponent, ButtonPropsModel } from '@syncfusion/ej2-angular-popups';
+import { EmitType } from '@syncfusion/ej2-base';
 import { DataapiService } from '../../dataapi.service'
 import { PeriodsModel,ITooltipRenderEventArgs, IStockChartEventArgs, ChartTheme,IAxisLabelRenderEventArgs } from '@syncfusion/ej2-angular-charts';
 import { PrimeNGConfig } from 'primeng/api';
@@ -6,7 +9,7 @@ import { DatePipe } from '@angular/common'
 import { Injectable } from '@angular/core';
 import axios from "axios";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as  stocks from '../lists/stocklist'
 import * as bqstock from '../lists/bqlist'
@@ -14,7 +17,8 @@ import * as etsector from '../lists/etsectorlist'
 import * as etindex from '../lists/etindexlist'
 import * as mcindex from '../lists/mcsectorlist'
 import { Chart, ChartOptions, ChartConfiguration, ChartType } from 'chart.js';
-import { from, Observable } from 'rxjs';
+import {  Observable } from 'rxjs';
+import { map } from'rxjs/operators'
 import { ChartComponent, ApexAxisChartSeries, ApexChart, ApexYAxis, ApexXAxis, ApexPlotOptions, ApexDataLabels, ApexStroke } from "ng-apexcharts";
 import { resourceLimits } from 'worker_threads';
 export type ChartOptions1 = { series: ApexAxisChartSeries; chart: ApexChart; xaxis: ApexXAxis; yaxis: ApexYAxis; plotOptions: ApexPlotOptions; dataLabels: ApexDataLabels; stroke: ApexStroke; };
@@ -91,18 +95,77 @@ export interface maxpaintile { text1: any; text2: any; }
   selector: 'app-share',
   templateUrl: './share.component.html',
   styleUrls: ['./share.component.scss'],
-  
+  encapsulation: ViewEncapsulation.None,
   
 })
 @Injectable()
 export class ShareComponent implements OnInit {
+  visibleSidebar5;
   @ViewChild("chart") chart: ChartComponent;
+ 
+  // The Dialog shows within the target element.
+  public targetElement;
+
   public chartCandleOptions: Partial<ChartOptions1>;
   public chartBarOptions: Partial<ChartOptions1>;
   public series1: Object[] = [];
   public point1: Object;
   
-  visibleSidebar1;
+  public defaultDialog: DialogComponent;
+  public defaultDialog1: DialogComponent;
+  public defaultDialog2: DialogComponent;
+  public dialogHeader: string = 'Good/Bad/Neutral';
+  public dialogHeader1: string = 'Insights';
+  public dialogHeader2: string = 'Stock News';
+  public position2: object={ X: 160, Y: 240 };
+  public dialogCloseIcon: Boolean = true;
+  public dialogWidth: string = '1100px';
+  public dialogHeight: string = '700px';
+  public animationSettings: Object = { effect: 'Zoom' };
+  public isModal: Boolean = true;
+  public target: string = '.control-section';
+  public target1: string = '.control-section';
+  public target2: string = '.control-section';
+  public showCloseIcon: Boolean = false;
+  public visible: Boolean = false;
+  public visible1: Boolean = false;
+  public visible2: Boolean = false;
+
+  public dlgButtonClick = (): void => {
+    this.defaultDialog.hide();
+    this.visible=false
+  }
+
+  public dialogBtnClick: EmitType<Object> = (args: any) => {
+    this.visible=true
+      const effects = args.target.id;
+      let txt = args.target.parentElement.innerText;
+      txt = (txt === 'Zoom In/Out') ? 'Zoom In or Out' : txt;
+      this.defaultDialog.content = '';
+      this.defaultDialog.animationSettings = { effect: effects, duration: 400 };
+      this.defaultDialog.show();
+  }
+  public dialogBtnClick1: EmitType<Object> = (args: any) => {
+    this.visible1=true
+      const effects = args.target.id;
+      let txt = args.target.parentElement.innerText;
+      txt = (txt === 'Zoom In/Out') ? 'Zoom In or Out' : txt;
+      //this.defaultDialog1.content = '';
+      this.defaultDialog1.animationSettings = { effect: effects, duration: 400 };
+      this.defaultDialog1.show();
+  }
+  public dialogBtnClick2: EmitType<Object> = (args: any) => {
+    this.visible2=true
+      const effects = args.target.id;
+      let txt = args.target.parentElement.innerText;
+      txt = (txt === 'Zoom In/Out') ? 'Zoom In or Out' : txt;
+      //this.defaultDialog2.content = '';
+      this.defaultDialog2.animationSettings = { effect: effects, duration: 400 };
+      this.defaultDialog2.show();
+  }
+
+  
+  
 
   constructor(private datePipe: DatePipe, private http: HttpClient, private primengConfig: PrimeNGConfig, private dataApi: DataapiService, private route: ActivatedRoute, private router: Router) { }
   public stockhcdate: Array<any> = [];
@@ -192,42 +255,42 @@ export class ShareComponent implements OnInit {
   public primaryXAxis: Object = { majorGridLines: { color: 'transparent' }, crosshairTooltip: { enable: true } };
 
   public primaryYAxis: Object = {
-      lineStyle: { color: 'transparent' },
-      majorTickLines: { color: 'transparent', width: 0 },
+    lineStyle: { color: 'transparent' },
+    majorTickLines: { color: 'transparent', width: 0 },
   };
   public crosshair: Object = {
-      enable: true
+    enable: true
   };
   public tooltipRender(args: ITooltipRenderEventArgs): void {
-      if (args.text.split('<br/>')[4]) {
+    if (args.text.split('<br/>')[4]) {
       let target: number = parseInt(args.text.split('<br/>')[4].split('<b>')[1].split('</b>')[0], 10);
       let value: string = (target / 100000000).toFixed(1) + 'B';
       args.text = args.text.replace(args.text.split('<br/>')[4].split('<b>')[1].split('</b>')[0], value);
-      }
+    }
   };
-   // custom code start
+  // custom code start
   public load(args: IStockChartEventArgs): void {
-      let selectedTheme: string = location.hash.split('/')[1];
-      selectedTheme = selectedTheme ? selectedTheme : 'Material';
-      args.stockChart.theme = <ChartTheme>(selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).replace(/-dark/i, "Dark");
+    let selectedTheme: string = location.hash.split('/')[1];
+    selectedTheme = selectedTheme ? selectedTheme : 'Material';
+    args.stockChart.theme = <ChartTheme>(selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).replace(/-dark/i, "Dark");
   };
-   // custom code end
+  // custom code end
   
 
   public tooltip: object = { enable: true };
   public chartArea: Object = {
-      border: {
-          width: 0
-      }
+    border: {
+      width: 0
+    }
   };
   public enable: boolean = true;
   
   public primaryXAxis1: Object = {
     valueType: 'DateTime', majorGridLines: { color: 'transparent' },
     crosshairTooltip: { enable: true }
-};
+  };
 
-public primaryYAxis1: Object = {
+  public primaryYAxis1: Object = {
     lineStyle: { color: 'transparent' },
     majorTickLines: { color: 'transparent', width: 0 },
     crosshairTooltip: { enable: true }
@@ -238,14 +301,14 @@ public primaryYAxis1: Object = {
       args.text = text / 100000000 + 'B';
     }
   };
-public periods: PeriodsModel[] = [
-  { intervalType: 'Minutes', interval: 1, text: '1m' },
-  { intervalType: 'Minutes', interval: 15, text: '15m' },
-  { intervalType: 'Minutes', interval: 30, text: '30m' },
-  { intervalType: 'Minutes', interval: 45, text: '45m' },
-  { intervalType: 'Hours', interval: 1, text: '1H' },
-  { intervalType: 'Hours', interval: 2, text: '2H' },
-  { intervalType: 'Hours', interval: 4, text: '4H' },
+  public periods: PeriodsModel[] = [
+    { intervalType: 'Minutes', interval: 1, text: '1m' },
+    { intervalType: 'Minutes', interval: 15, text: '15m' },
+    { intervalType: 'Minutes', interval: 30, text: '30m' },
+    { intervalType: 'Minutes', interval: 45, text: '45m' },
+    { intervalType: 'Hours', interval: 1, text: '1H' },
+    { intervalType: 'Hours', interval: 2, text: '2H' },
+    { intervalType: 'Hours', interval: 4, text: '4H' },
     { intervalType: 'Hours', interval: 12, text: '12H', selected: true },
     { intervalType: 'Auto', text: '1D' }
   ];
@@ -256,13 +319,13 @@ public periods: PeriodsModel[] = [
     { intervalType: 'Months', interval: 3, text: '3M', selected: true },
     { intervalType: 'Months', interval: 6, text: '6M' },
     { intervalType: 'Months', interval: 9, text: '9M' },
-    { intervalType: 'Years', interval: 1, text: '1Y'},
+    { intervalType: 'Years', interval: 1, text: '1Y' },
     { intervalType: 'Auto', text: '1W' }
-];
-public seriesType: string[] = [];
-public indicatorType: string[] = [];
-public trendlineType: string[] = [];
-public exportType: string[] = [];
+  ];
+  public seriesType: string[] = [];
+  public indicatorType: string[] = [];
+  public trendlineType: string[] = [];
+  public exportType: string[] = [];
   stockcrossover: stockcrossovertile[] = [];
   stockcrossoverw: stockcrossoverwtile[] = [];
   stockcrossoverm: stockcrossovermtile[] = [];
@@ -457,7 +520,7 @@ public exportType: string[] = [];
   bqnames: any
   companyid: any
   // periods: any
- 
+  
   public lineChartType: ChartType = 'line';
   public lineChartOptions: ChartOptions = {
     scales: {
@@ -468,14 +531,17 @@ public exportType: string[] = [];
       }
     }
   };
+
   ngOnInit(): void {
+   
+    this.primengConfig.ripple = true;
     this.today = new Date();
     this.datetoday = this.datePipe.transform(this.today, 'yyyy-MM-dd')
     this.dateyesterday = this.datePipe.transform(this.today.setDate(this.today.getDate() - 1), 'yyyy-MM-dd')
     this.dateday5 = this.datePipe.transform(this.today.setDate(this.today.getDate() - 5), 'yyyy-MM-dd')
     this.date5 = this.today.setDate(this.today.getDate() - 5)
 
-    this.primengConfig.ripple = true;
+    
     this.stockList = stocks.default.Data
     this.stock = stocks.default.Data
     this.bqstocks = bqstock.default.Data
@@ -496,7 +562,7 @@ public exportType: string[] = [];
       this.bqnames = this.stockList.filter(i => i.isin == params.stock)[0].bqname
       this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
     });
-    this.gettrendlynestocks1(this.tlid, this.eqsymbol, this.tlname)
+    
     this.gettrendlynestocks2(this.tlid)
     //this.gettrendlynestocks3(this.tlid)
     this.getshare3m(this.eqsymbol)
@@ -509,40 +575,42 @@ public exportType: string[] = [];
     this.getshare6m(this.eqsymbol)
     this.getshare1w(this.eqsymbol)
     this.getstock1yr(this.eqsymbol)
-    this.getgnewsapi(this.bqnames,this.dateday5,this.datetoday)
+    this.getgnewsapi(this.bqnames, this.dateday5, this.datetoday)
+    this.getLocation(this.eqsymbol)
     this.getntstockpcrdetails(this.eqsymbol)
     this.getmcstockrealtime(this.mcsymbol)
-    this.getstocktoday(this.mcsymbol,this.eqsymbol)
+    this.getstocktoday(this.mcsymbol, this.eqsymbol)
     this.getstockmaema(this.eqsymbol)
     this.getstocksentiments(this.mcsymbol);
+    this.gettrendlynestocks1(this.tlid, this.eqsymbol, this.tlname)
     //  this.getmcstocktodayohlc(this.mcsymbol)
     // this.getetsharetoday(this.eqsymbol)
-    setInterval(() => { this.getstocktoday(this.mcsymbol,this.eqsymbol) }, 30000);
+    setInterval(() => { this.getstocktoday(this.mcsymbol, this.eqsymbol) }, 30000);
     //setInterval(() => { this.getetsharetoday(this.mcsymbol) }, 60000);
     setInterval(() => { this.getmcstockrealtime(this.mcsymbol) }, 3000);
     this.getntstockdetails(this.eqsymbol)
   }
   
-  // getetsharetoday(eqsymbol) {
-  //   this.http.get<any>('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company').subscribe(data5 => {
-  //     let nestedItems = Object.keys(data5).map(key => {
-  //       return data5[key];
-  //     });
-  //     this.etstockohlctoday.length=0;
-  //     for (let val in (nestedItems[0]['results']['quote'])){
-  //       this.etstockohlctoday.push({x:new Date(nestedItems[0]['results']['quote'][val].Date).getTime(),o:nestedItems[0]['results']['quote'][val].Open,h:nestedItems[0]['results']['quote'][val].High,l:nestedItems[0]['results']['quote'][val].Low,c:nestedItems[0]['results']['quote'][val].Close})
-  //     }
-  //   this.etstockChartData  = {
-  //     datasets: [ {
-  //      label: this.stockname,
-  //    data: this.etstockohlctoday
-  //     } ]
-  //    };
-  //   })
-  //   }
+  getLocation(eqsymbol) {
+    httpJsonp({
+      url: 'https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company',
+   
+      callbackProp: "callback",
+      callback: function(data) {
+        console.log("callback", data);
+      },
+      error: function(err) {
+        console.log(err);
+      },
+      complete: function() {
+        console.log("complete");
+      }
+    });
+  }
+
  
   
-  getkotakview(eqsymbol) {
+ getkotakview(eqsymbol) {
     this.dataApi.getkotakview(eqsymbol).subscribe(data => {
       let nestedItems = Object.keys(data).map(key => {
         return data[key];
@@ -577,6 +645,7 @@ public exportType: string[] = [];
   }
   async getgnewsapi(bqnames,dateday5,datetoday) {
     try {
+     
       const response = await fetch('https://newsapi.org/v2/everything?q=' + this.bqnames + '&from=' + this.dateday5 + '&to=' + this.datetoday + '&sortBy=popularity&apiKey=28bda70739cc4024ba3f30223e8c25a8', {
         method: 'GET',
         headers: {
@@ -586,12 +655,7 @@ public exportType: string[] = [];
     
       if (response.ok) {
         const result = await response.json();
-        console.log(result)
        
-        //console.log(response)
-        // this.newscard.length = 0;
-        //  for (let val in nestedItems[2]) {
-        // this.newscard.push({text1:nestedItems[2][val].title,text2:nestedItems[2][val].url,text3:nestedItems[2][val].urlToImage,text4:nestedItems[2][val].description,text5:nestedItems[2][val].content})
         console.log(this.bqnames + '&from=' + this.dateday5 + '&to=' + this.datetoday + '&sortBy=popularity&apiKey=28bda70739cc4024ba3f30223e8c25a8')
 
         console.log(new Date(this.dateday5).setHours(9, 15, 0, 0));
@@ -1016,170 +1080,51 @@ public exportType: string[] = [];
       console.log(err)
     }
   }
-  trackByFuntion(index, item) {
-    return item.text2
-  }
-  trackByFuntion1(index1, item1) {
-    return item1.text1
-  }
-  trackByFuntion2(index2, item2) {
-    return item2.text1
-  }
-  trackByFuntion3(index3, item3) {
-    return item3.text1;
-  }
-  trackByFuntion4(index4, item4) {
-    item4.text2;
-  }
-  trackByFuntion5(index5, item5) {
-    return item5.text1;
-  }
-  trackByFuntion6(index6, item6) {
-    return item6.text1;
-  }
-  trackByFuntion7(index7, item7) {
-    return item7.text1;
-  }
-  trackByFuntion8(index8, item8) {
-    return item8.text3;
-  }
-  trackByFuntion9(index9, item9) {
-    return item9.text3;
-  }
-  trackByFuntion10(index10, item10) {
-    return item10.text1;
-  }
-  trackByFuntion11(index11, item11) {
-    return item11.text3;
-  }
-  trackByFuntion12(index12, item12) {
-    //console.log( 'TrackBy:', item2.text1, 'at index', index2 );
-    return item12.text1
-  }
-  trackByFuntion13(index13, item13) {
-    //console.log( 'TrackBy:', item3.text1, 'at index', index3 );
-    return item13.text1;
-  }
-  trackByFuntion14(index14, item14) {
-    //console.log( 'TrackBy:', item4.text2, 'at index', index4 );
-    item14.text2;
-  }
-  trackByFuntion15(index15, item15) {
-    //console.log( 'TrackBy:', item5.text1, 'at index', index5 );
-    return item15.text1;
-  }
-  trackByFuntion16(index16, item16) {
-    //console.log( 'TrackBy:', item6.text1, 'at index', index6 );
-    return item16.text1;
-  }
-  trackByFuntion17(index17, item17) {
-    //console.log( 'TrackBy:', item7.text1, 'at index', index7 );
-    return item17.text1;
-  }
-  trackByFuntion18(index18, item18) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item18.text3;
-  }
-  trackByFuntion19(index19, item19) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item19.text3;
-  }
-  trackByFuntion20(index20, item20) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item20.text3;
-  }
-  trackByFuntion21(index21, item21) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item21.text3;
-  } trackByFuntion22(index22, item22) {
-    // console.log( 'TrackBy:', item.text2, 'at index', index );
-    return item22.text2
-  }
-  trackByFuntion23(index23, item23) {
-    return item23.text1
-  }
-  trackByFuntion24(index24, item24) {
-    //console.log( 'TrackBy:', item2.text1, 'at index', index2 );
-    return item24.text1
-  }
-  trackByFuntion25(index25, item25) {
-    //console.log( 'TrackBy:', item3.text1, 'at index', index3 );
-    return item25.text1;
-  }
-  trackByFuntion26(index26, item26) {
-    //console.log( 'TrackBy:', item4.text2, 'at index', index4 );
-    item26.text2;
-  }
-  trackByFuntion27(index27, item27) {
-    //console.log( 'TrackBy:', item5.text1, 'at index', index5 );
-    return item27.text1;
-  }
-  trackByFuntion28(index28, item28) {
-    //console.log( 'TrackBy:', item6.text1, 'at index', index6 );
-    return item28.text1;
-  }
-  trackByFuntion29(index29, item29) {
-    //console.log( 'TrackBy:', item7.text1, 'at index', index7 );
-    return item29.text1;
-  }
-  trackByFuntion30(index30, item30) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item30.text3;
-  }
-  trackByFuntion31(index31, item31) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item31.text3;
-  }
-  trackByFuntion32(index32, item32) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item32.text3;
-  }
-  trackByFuntion33(index33, item33) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item33.text3;
-  }
-  trackByFuntion34(index34, item34) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item34.divscore;
-  }
-  trackByFuntion35(index35, item35) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item35.text3;
-  }
-  trackByFuntion36(index36, item36) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item36.text3;
-  }
-  trackByFuntion37(index37, item37) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item37.text3;
-  }
-  trackByFuntion38(index38, item38) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item38.text3;
-  }
-  trackByFuntion39(index39, item39) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item39.text3;
-  }
-  trackByFuntion40(index40, item40) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
-    return item40.text3;
-  }
-  trackByFuntion41(index41, item41) {
-   
-    return item41.text3;
-  }
-  trackByFuntion42(index42, item42) {
-    
-    return item42.text1;
-  }
-  trackByFuntion43(index43, item43) {
-    return item43.text2;
-  }
-  trackByFuntion44(index44, item44) {
-    return item44.text2;
-  }
+  trackByFuntion(index, item) {return item.text2}
+  trackByFuntion1(index1, item1) {return item1.text1}
+  trackByFuntion2(index2, item2) {return item2.text1}
+  trackByFuntion3(index3, item3) {return item3.text1;}
+  trackByFuntion4(index4, item4) {return item4.text2;}
+  trackByFuntion5(index5, item5) {return item5.text1;}
+  trackByFuntion6(index6, item6) {return item6.text1;}
+  trackByFuntion7(index7, item7) {return item7.text1;}
+  trackByFuntion8(index8, item8) {return item8.text3;}
+  trackByFuntion9(index9, item9) {return item9.text3;}
+  trackByFuntion10(index10, item10) {return item10.text1;}
+  trackByFuntion11(index11, item11) {return item11.text3;}
+  trackByFuntion12(index12, item12) {return item12.text1}
+  trackByFuntion13(index13, item13) {return item13.text1;}
+  trackByFuntion14(index14, item14) {item14.text2;}
+  trackByFuntion15(index15, item15) {return item15.text1;}
+  trackByFuntion16(index16, item16) {return item16.text1;}
+  trackByFuntion17(index17, item17) {return item17.text1;}
+  trackByFuntion18(index18, item18) {return item18.text3;}
+  trackByFuntion19(index19, item19) {return item19.text3;}
+  trackByFuntion20(index20, item20) {return item20.text3;}
+  trackByFuntion21(index21, item21) { return item21.text3; }
+  trackByFuntion22(index22, item22) {return item22.text2}
+  trackByFuntion23(index23, item23) {return item23.text1}
+  trackByFuntion24(index24, item24) {return item24.text1}
+  trackByFuntion25(index25, item25) {return item25.text1;}
+  trackByFuntion26(index26, item26) {return item26.text2;}
+  trackByFuntion27(index27, item27) {return item27.text1;}
+  trackByFuntion28(index28, item28) {return item28.text1}
+  trackByFuntion29(index29, item29) {return item29.text1;}
+  trackByFuntion30(index30, item30) {return item30.text3;}
+  trackByFuntion31(index31, item31) {return item31.text3;}
+  trackByFuntion32(index32, item32) {return item32.text3;}
+  trackByFuntion33(index33, item33) {return item33.text3;}
+  trackByFuntion34(index34, item34) {return item34.divscore;}
+  trackByFuntion35(index35, item35) {return item35.text3;}
+  trackByFuntion36(index36, item36) {return item36.text3;}
+  trackByFuntion37(index37, item37) {return item37.text3;}
+  trackByFuntion38(index38, item38) {return item38.text3;}
+  trackByFuntion39(index39, item39) {return item39.text3; }
+  trackByFuntion40(index40, item40) {return item40.text3;}
+  trackByFuntion41(index41, item41) {return item41.text3;}
+  trackByFuntion42(index42, item42) {return item42.text1;}
+  trackByFuntion43(index43, item43) {return item43.text2;}
+  trackByFuntion44(index44, item44) {return item44.text2;}
   getshare1w(eqsymbol) {
     ////////////////Nifty 1 Week/////////////////////////////
     this.http.get('https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode=' + this.eqsymbol + 'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=1w').subscribe(data5 => {
@@ -1388,27 +1333,33 @@ public exportType: string[] = [];
     })
    
     
-     try {
-       const response = await fetch('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company', {
-         "method": "GET",
-         
-         "headers": {
-      
-         }
-       })
-       if (response.ok) {
-      const result = await response.json();
+    try {
+       
+      httpJsonp({
+        url: 'https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company',
+     
+        callbackProp: "callback",
+        callback: function(data) {
+          console.log(data);
+       
          
          this.stockohlc1d.length = 0;
-          for (let val in result.query.results.quote) {
-        this.stockohlc1d.push({ x: new Date((result.query.results.quote[val].Date)), open: result.query.results.quote[val].Open, high:result.query.results.quote[val].High, low:result.query.results.quote[val].Low,close: result.query.results.quote[val].Close,volume: result.query.results.quote[val].Volume})
-        
-      }
-      this.data2=this.stockohlc1d
-     
-                }
+          for (let val in data.query.results.quote) {
+            this.stockohlc1d.push({ x: new Date((data.query.results.quote[val].Date)), open: data.query.results.quote[val].Open, high: data.query.results.quote[val].High, low: data.query.results.quote[val].Low, close: data.query.results.quote[val].Close, volume: data.query.results.quote[val].Volume })
           }
-        catch (err) {
+        
+      
+      this.data2=this.stockohlc1d
+    },
+    error: function(err) {
+      console.log(err);
+    },
+    complete: function() {
+      console.log("complete");
+    }
+  });
+                
+          }catch (err) {
          console.error(err);
        }
   }
@@ -1448,19 +1399,9 @@ public exportType: string[] = [];
         "mode": "cors",
         "credentials": "omit"
       })
-      
-    
       if (response.ok) {
         const result = await response.json();
-        
-     
-    
-    // this.dataApi.getntstockdetails(this.eqsymbol).subscribe(data5 => {
-    //   let nestedItems = Object.keys(data5).map(key => {
-    //     return data5[key];
-    //   });
-    //   console.log(nestedItems)
-      this.nr7 = (result['resultData'].stocktrend['nr7_today'])
+          this.nr7 = (result['resultData'].stocktrend['nr7_today'])
       this.delivperc.length = 0;
       this.delivperctime.length = 0;
       for (let val in result['resultData'].priceTable) {
@@ -1780,6 +1721,7 @@ public exportType: string[] = [];
         console.log(err)
       })
   }
+  
   ////////////////////////////////Market Mojo///////////////////////////////
   getmmstockinfo(stockid) {
     this.http.get('https://frapi.marketsmojo.com/stocks_stocksid/header_info?sid=' + this.stockid + '&exchange=1').subscribe(data5 => {
@@ -1804,5 +1746,6 @@ public exportType: string[] = [];
     )
   }
 }
+
 
 

@@ -1,9 +1,43 @@
 
 
-@import '../../../styles.scss';
+@import '../../styles.scss';
+@import "../../../node_modules/primeicons/primeicons.css";
+@import "../../../node_modules/primeng/resources/themes/mdc-light-indigo/theme.css";
+@import "../../../node_modules/primeng/resources/primeng.min.css";
+:host ::ng-deep button {
+  margin-right: .25em;
+}
 :host ::ng-deep .p-dropdown {
   width: 25rem;
 }
+.p-component-overlay-enter {
+  animation: p-component-overlay-enter-animation 150ms forwards;
+}
+
+.p-component-overlay-leave {
+  animation: p-component-overlay-leave-animation 150ms forwards;
+}
+
+.p-component-overlay {
+  @keyframes p-component-overlay-enter-animation {
+      from {
+          background-color: transparent;
+      }
+      to {
+          background-color: var(--maskbg);
+      }
+  }
+  
+  @keyframes p-component-overlay-leave-animation {
+      from {
+          background-color: var(--maskbg);
+      }
+      to {
+          background-color: transparent;
+      }
+  }
+}
+
 .InsideContent{
     display:flex;
     align-items: flex-start;
@@ -16,10 +50,6 @@
   color:green;
 }
 
-
-:host ::ng-deep .p-sidebar-content {
-height: 70%;
-}
 
 
 

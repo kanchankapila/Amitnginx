@@ -41,16 +41,24 @@
   </div>
 </div>
 NR7:{{nr7}}
-<div class="InsideContent1">
-  <button pButton type="button" (click)="visibleSidebar1 = true" icon="pi pi-arrow-right" label="Actions" class="p-button-raised p-button-success p-button-outlined "></button>
+<div id="customization">
+  <div class="animate">
+      <button ejs-button id="GBN" Class="e-control e-outline e-btn e-primary" #defaultButton
+          (click)="dialogBtnClick($event)">Good/Bad/Neutral</button>
+  </div>
+  <div class="animate">
+    <button ejs-button id="Insights" Class="e-control e-outline e-btn e-primary" #defaultButton
+        (click)="dialogBtnClick1($event)">Insights</button>
+</div>
+<div class="animate">
+  <button ejs-button id="StockNews" Class="e-control e-outline e-btn e-primary" #defaultButton
+      (click)="dialogBtnClick2($event)">Stock News</button>
+</div>
+</div>
+
+
 
   
-  <p-sidebar [(visible)]="visibleSidebar1" [showCloseIcon]="true" autoZIndex="true" baseZIndex="99999">
-    <h1 style="font-weight:normal">Actions</h1>
-    <p-button type="button" (click)="visibleSidebar1 = false" label="Cancel" styleClass="p-button-secondary"></p-button>
-    
-  </p-sidebar>
-
    
     
   
@@ -492,3 +500,132 @@ NR7:{{nr7}}
     </div>
   </p-tabPanel>
 </p-tabView>
+<div class="control-section animation" >
+  <ejs-dialog *ngIf="visible" id="animationDialog" [position]='position2' [header]='dialogHeader' [isModal]='isModal' 
+       [visible]='visible' [animationSettings]='animationSettings' [showCloseIcon]='dialogCloseIcon'
+      [target]='target' [width]='dialogWidth' [height]='dialogHeight'>
+      <ng-template #content>
+        <div class="InsideContent">
+          <div class="col-lg-4 grid-margin stretch-card">
+            <div class="content bg-gradient-success card">
+              <h4 class="mb-5">Positives</h4>
+              <div *ngFor="let tile of positive trackBy: trackByFuntion27">
+                <p class="text-green  grid-margin stretch-card">{{tile.text1}}&nbsp;:{{tile.text3}}Cr.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 grid-margin stretch-card">
+            <div class="content bg-gradient-danger card">
+              <h4 class="mb-5">Negatives</h4>
+              <div *ngFor="let tile of negative trackBy: trackByFuntion28">
+                <p class="text-red grid-margin stretch-card">{{tile.text2}}<br>{{tile.text3}}&nbsp;{{tile.text1}}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 grid-margin stretch-card">
+            <div class="content bg-gradient-warning card">
+              <h4 class="mb-5">Neutrals</h4>
+              <div *ngFor="let tile of neutral trackBy: trackByFuntion29">
+                <p class="text-yellow grid-margin stretch-card">{{tile.text2}}<br>{{tile.text3}}&nbsp;{{tile.text1}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+  </ejs-dialog>
+</div>
+
+<div class="control-section animation" >
+  <ejs-dialog *ngIf="visible1" id="animationDialog" [header]='dialogHeader1'  [position]='position2' [isModal]='isModal' 
+       [visible]='visible1' [animationSettings]='animationSettings' [showCloseIcon]='dialogCloseIcon'
+      [target]='target' [width]='dialogWidth' [height]='dialogHeight'>
+      <ng-template #content>
+        <p *ngFor="let tile of brokertarget trackBy: trackByFuntion10"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    {{tile.text1}}&nbsp;[{{tile.text2}}]</p>
+  <p *ngFor="let tile of brokertargetupgrade trackBy: trackByFuntion11"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    {{tile.text1}}</p>
+  <p *ngFor="let tile of brokertargetdowngrade trackBy: trackByFuntion12"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    {{tile.text1}}</p>
+  <p *ngFor="let tile of brokerrecoupgrade trackBy: trackByFuntion13"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    {{tile.text1}}</p>
+  <p *ngFor="let tile of brokerrecodowngrade trackBy: trackByFuntion14"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    {{tile.text1}}</p>
+  <h6 style="font-weight:normal">Technicals</h6>
+  <h6 style="font-weight:normal">EMA</h6>
+  <p *ngFor="let tile of ema_26 trackBy: trackByFuntion15"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of ema_50 trackBy: trackByFuntion16"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of ema_100 trackBy: trackByFuntion17"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of ema_200 trackBy: trackByFuntion18"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <h6 style="font-weight:normal">SMA</h6>
+  <p *ngFor="let tile of sma_30 trackBy: trackByFuntion19"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of sma_50 trackBy: trackByFuntion20"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of sma_100 trackBy: trackByFuntion21"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <p *ngFor="let tile of sma_200 trackBy: trackByFuntion22"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <h6 style="font-weight:normal">MACD</h6>
+  <p *ngFor="let tile of macd1 trackBy: trackByFuntion23"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <h6 style="font-weight:normal">RSI</h6>
+  <p *ngFor="let tile of rsi1 trackBy: trackByFuntion25"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+  <h6 style="font-weight:normal">MFI</h6>
+  <p *ngFor="let tile of mfi1 trackBy: trackByFuntion26"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    &rarr;{{tile.text1}}</p>
+      </ng-template>
+  </ejs-dialog>
+</div>
+<div class="control-section animation" >
+  <ejs-dialog *ngIf="visible2" id="animationDialog" [header]='dialogHeader2'  [position]='position2' [isModal]='isModal' 
+       [visible]='visible2' [animationSettings]='animationSettings' [showCloseIcon]='dialogCloseIcon'
+      [target]='target' [width]='dialogWidth' [height]='dialogHeight'>
+      <ng-template #content>
+        <div class=" grid-margin stretch-card">
+          <div class="content  container">
+          <div fxLayout="row wrap" fxLayoutGap="10px grid">
+            <div fxFlex="20" fxFlex.xs="100%" fxFlex.sm="100%" *ngFor="let news of newscard" >
+              <p-card >
+                  <p-header>
+                      <img src="{{news.text3}}">
+                  </p-header>
+                  <h4>{{news.text1}}</h4>
+                  <h5>{{news.text2}}</h5>
+                  <h6>{{news.text5}}</h6>
+                  
+                  <a href={{news.text2}} target="_blank" rel="noopener noreferer">{{news.text2}}</a>
+              </p-card>
+            </div>
+          </div>
+       </div> 
+      </div>
+      </ng-template>
+  </ejs-dialog>
+</div>
+
+
+
+

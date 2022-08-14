@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TrendModule } from 'ngx-trend';
 import { BrowserModule } from "@angular/platform-browser";
 import { DatePipe } from '@angular/common';
-
+import { DialogModule } from '@syncfusion/ej2-angular-popups';
 
 import { ShareRoutingModule } from './share-routing.module';
 import { ShareComponent } from './share.component';
@@ -14,7 +14,8 @@ import { MatCardModule } from '@angular/material/card';
 import { CardModule } from 'primeng/card';
 import { NgApexchartsModule } from "ng-apexcharts";
 import { NgChartsModule } from 'ng2-charts';
-import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+    
+import { HttpClientModule, HttpErrorResponse ,HttpClientJsonpModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
@@ -39,6 +40,7 @@ import { CategoryService, LineSeriesService, DateTimeService,PeriodSelectorServi
     NgbModule,
     //ChartModule,
     MatCardModule,
+    DialogModule,
     CardModule,
     FormsModule,
     ReactiveFormsModule, 
@@ -54,7 +56,7 @@ import { CategoryService, LineSeriesService, DateTimeService,PeriodSelectorServi
     StockChartAllModule,
     RangeNavigatorAllModule,
     ChartAllModule,
-  
+    HttpClientJsonpModule,
     NgxEchartsModule.forRoot({ echarts: () => import('echarts') }),
     NgApexchartsModule
    
