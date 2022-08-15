@@ -331,6 +331,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+      console.log("This is KotakHealthscore")
     });
   }
   nsedatabniftyoi() {
