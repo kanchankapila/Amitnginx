@@ -10,7 +10,7 @@ const app = express();
 
 
 const redis = require('redis');
-const client = redis.createClient();
+// const client = redis.createClient();
 const cors = require('cors');
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
@@ -94,21 +94,34 @@ const axiosCookieJarSupport = require('axios-cookiejar-support').default;
 //   port: "5432"
   
 // })
-const pool = new Pool({
-  user: "onzcwnkubxycls",
-  host: "ec2-52-207-15-147.compute-1.amazonaws.com",
-  database: "dak59761mft7r4",
-  password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
-  port: "5432"
-});
-const client = new Client({
-  user: "onzcwnkubxycls",
-  host: "ec2-52-207-15-147.compute-1.amazonaws.com",
-  database: "dak59761mft7r4",
-  password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
-  port: "5432"
+// const pool = new Pool({
+//   user: "onzcwnkubxycls",
+//   host: "ec2-52-207-15-147.compute-1.amazonaws.com",
+//   database: "dak59761mft7r4",
+//   password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
+//   port: "5432"
+// });
+// const client = new Client({
+//   user: "onzcwnkubxycls",
+//   host: "ec2-52-207-15-147.compute-1.amazonaws.com",
+//   database: "dak59761mft7r4",
+//   password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
+//   port: "5432"
   
-})
+// })
+  
+const client = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+const pool = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 const sessionConfig = {
   secret: 'amit0605',
   id_login: 'amit.kapila.2009@gmail.com',
