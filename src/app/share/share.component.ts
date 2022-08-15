@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild,ViewEncapsulation, ElementRef } from '@angular/core';
 import httpJsonp from "http-jsonp";
+import jsonp from 'jsonp-modernized';
 import { DialogComponent, ButtonPropsModel } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';
 import { DataapiService } from '../../dataapi.service'
@@ -117,10 +118,10 @@ export class ShareComponent implements OnInit {
   public dialogHeader: string = 'Good/Bad/Neutral';
   public dialogHeader1: string = 'Insights';
   public dialogHeader2: string = 'Stock News';
-  public position2: object={ X: 160, Y: 240 };
+  public position2: object={ X: 10, Y: 240 };
   public dialogCloseIcon: Boolean = true;
-  public dialogWidth: string = '1100px';
-  public dialogHeight: string = '700px';
+  public dialogWidth: string = '1350px';
+  public dialogHeight: string = '800px';
   public animationSettings: Object = { effect: 'Zoom' };
   public isModal: Boolean = true;
   public target: string = '.control-section';
@@ -1332,31 +1333,32 @@ export class ShareComponent implements OnInit {
       console.log(err)
     })
    
-    
-    try {
-       
-      httpJsonp({
-        url: 'https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company',
-     
-        callbackProp: "callback",
-        callback: function(data) {
-          console.log(data);
-       
-         
-         this.stockohlc1d.length = 0;
-          for (let val in data.query.results.quote) {
-            this.stockohlc1d.push({ x: new Date((data.query.results.quote[val].Date)), open: data.query.results.quote[val].Open, high: data.query.results.quote[val].High, low: data.query.results.quote[val].Low, close: data.query.results.quote[val].Close, volume: data.query.results.quote[val].Volume })
-          }
-        
-      
-      this.data2=this.stockohlc1d
-    },
-    error: function(err) {
-      console.log(err);
-    },
-    complete: function() {
-      console.log("complete");
+    options: {
+      timeout:30000
     }
+    try {
+      
+      jsonp('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company')
+    .then((responseData =>{
+        // Response is parsed json
+        console.log(responseData.query.results.quote);
+    
+      
+         
+      this.stockohlc1d.length = 0;
+      for (let val in responseData.query.results.quote) {
+            
+        this.stockohlc1d.push({ x: new Date((responseData.query.results.quote[val].Date)), open: responseData.query.results.quote[val].Open, high: responseData.query.results.quote[val].High, low: responseData.query.results.quote[val].Low, close: responseData.query.results.quote[val].Close, volume: responseData.query.results.quote[val].Volume })
+      }
+          
+          this.data2 = this.stockohlc1d
+          console.log(this.stockohlc1d)
+          console.log(this.data2)
+    
+  }))
+  .catch(function(error) {
+      // Error contains message and previous if applicable
+      console.log(error);
   });
                 
           }catch (err) {
