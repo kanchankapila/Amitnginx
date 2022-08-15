@@ -8,7 +8,7 @@
 /tmp
 /out-tsc
 /.firebase*
-./src/dataapi.service.ts
+
 # dependencies
 /node_modules
 

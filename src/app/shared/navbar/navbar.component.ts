@@ -326,6 +326,13 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       console.log(err)
     })
   }
+  getkotakhealthscore() {
+    this.dataApi.kotakhealthscore().subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+    });
+  }
   nsedatabniftyoi() {
     this.http.get<any>('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY').subscribe(data5 => {
       (response: Response) => { console.log(response) }
