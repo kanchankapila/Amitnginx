@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { TrendModule } from 'ngx-trend';
-import { BrowserModule } from "@angular/platform-browser";
+
 import { DatePipe } from '@angular/common';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 
@@ -35,7 +35,7 @@ import { CategoryService, LineSeriesService, DateTimeService,PeriodSelectorServi
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
+    
     ShareRoutingModule,
     NgbModule,
     //ChartModule,
@@ -46,7 +46,7 @@ import { CategoryService, LineSeriesService, DateTimeService,PeriodSelectorServi
     ReactiveFormsModule, 
     FlexLayoutModule,
     MatButtonModule,
-    BrowserModule,
+   
     ButtonModule,
     HttpClientModule,
     SidebarModule,

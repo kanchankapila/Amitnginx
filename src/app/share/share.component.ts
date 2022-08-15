@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild,ViewEncapsulation, ElementRef } from '@angular/core';
-import httpJsonp from "http-jsonp";
+import { Component, OnInit, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 import jsonp from 'jsonp-modernized';
 import { DialogComponent, ButtonPropsModel } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';
@@ -577,7 +578,7 @@ export class ShareComponent implements OnInit {
     this.getshare1w(this.eqsymbol)
     this.getstock1yr(this.eqsymbol)
     this.getgnewsapi(this.bqnames, this.dateday5, this.datetoday)
-    this.getLocation(this.eqsymbol)
+   
     this.getntstockpcrdetails(this.eqsymbol)
     this.getmcstockrealtime(this.mcsymbol)
     this.getstocktoday(this.mcsymbol, this.eqsymbol)
@@ -592,23 +593,7 @@ export class ShareComponent implements OnInit {
     this.getntstockdetails(this.eqsymbol)
   }
   
-  getLocation(eqsymbol) {
-    httpJsonp({
-      url: 'https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company',
-   
-      callbackProp: "callback",
-      callback: function(data) {
-        console.log("callback", data);
-      },
-      error: function(err) {
-        console.log(err);
-      },
-      complete: function() {
-        console.log("complete");
-      }
-    });
-  }
-
+  
  
   
  getkotakview(eqsymbol) {
@@ -1217,7 +1202,7 @@ export class ShareComponent implements OnInit {
     })
   }
   async getstocktoday(mcsymbol,eqsymbol) {
-    ////////////To get Share Today Price///////////////////////
+   
     
     this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
@@ -1333,12 +1318,10 @@ export class ShareComponent implements OnInit {
       console.log(err)
     })
    
-    options: {
-      timeout:30000
-    }
+    
     try {
       
-      jsonp('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company')
+       jsonp('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company')
     .then((responseData =>{
         // Response is parsed json
         console.log(responseData.query.results.quote);
@@ -1352,14 +1335,13 @@ export class ShareComponent implements OnInit {
       }
           
           this.data2 = this.stockohlc1d
-          console.log(this.stockohlc1d)
-          console.log(this.data2)
+         
     
   }))
-  .catch(function(error) {
+  .catch((error => {
       // Error contains message and previous if applicable
       console.log(error);
-  });
+  }));
                 
           }catch (err) {
          console.error(err);
@@ -1370,7 +1352,7 @@ export class ShareComponent implements OnInit {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      /////////////////////////////EMA/SMA from Kite //////////////////////
+     
       this.stockema.length = 0;
       this.stocksma.length = 0;
       this.stockema.push({ text1: nestedItems[10], text2: nestedItems[5], text3: nestedItems[7], text4: nestedItems[9], text5: nestedItems[11], text6: nestedItems[6], text7: nestedItems[8] })
