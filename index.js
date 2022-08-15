@@ -40,7 +40,7 @@ const fetch = require("node-fetch");
 //     console.error(err);
 //   }
 
-process.env.trendlynecookie='__utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.775644955.1603113261; .trendlyne=wd57cl51iuhsqelpnzzp4gj61efk6kc1; csrftoken=T2UOO9Ctk4IV1kHeOJtHAxy6gCnvF56GnP5xxtRO3RTzGGNrRSWqNON5PjgveTrg; _gid=GA1.2.1560088878.1658734228; _gat=1'
+process.env.trendlynecookie='_gid=GA1.2.812417360.1660563111; .trendlyne=lbssa9ud0dzwe7pajkkgcoagb2oe4y0c; csrftoken=HexhaQcggvkg1VIsRoeFdNmiJO0ggbdPLW3UKUit2S1hSjJ1v4kMSpjkkJUNugWR; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.775644955.1603113261; _gat=1'
 
 var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
@@ -110,13 +110,13 @@ const axiosCookieJarSupport = require('axios-cookiejar-support').default;
   
 // })
   
-const client = new Pool({
+const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
 });
-const pool = new Client({
+const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
