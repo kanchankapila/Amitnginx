@@ -642,15 +642,13 @@ export class ShareComponent implements OnInit {
       if (response.ok) {
         const result = await response.json();
        
-        console.log(this.bqnames + '&from=' + this.dateday5 + '&to=' + this.datetoday + '&sortBy=popularity&apiKey=28bda70739cc4024ba3f30223e8c25a8')
-
-        console.log(new Date(this.dateday5).setHours(9, 15, 0, 0));
+        
       
  this.newscard.length = 0;
       for (let val in result.articles) {
         this.newscard.push({text1:result.articles[val].title,text2:result.articles[val].url,text3:result.articles[val].urlToImage,text4:result.articles[val].description,text5:result.articles[val].content})
         }
-        console.log(this.newscard)
+       
       }
     } catch (err) {
             console.error(err);
@@ -715,6 +713,7 @@ export class ShareComponent implements OnInit {
       }
 
       this.stockohlc1yr.length = 0;
+      
       
       for (let val in nestedItems[3]) {
         this.stockohlc1yr.push({ x: new Date((nestedItems[3][val]['created_at']).slice(0,10)), open: nestedItems[3][val].open, high:nestedItems[3][val].high, low:nestedItems[3][val].low,close: nestedItems[3][val].close,volume: nestedItems[3][val].volume})
@@ -1324,7 +1323,7 @@ export class ShareComponent implements OnInit {
        jsonp('https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode='+this.eqsymbol+'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company')
     .then((responseData =>{
         // Response is parsed json
-        console.log(responseData.query.results.quote);
+       
     
       
          
