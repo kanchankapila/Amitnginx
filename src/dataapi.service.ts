@@ -33,7 +33,7 @@ export class DataapiService {
     return this.http.get(this.baseurl + '/kite1?timeframe='+timeframe+'&eqsymbol='+eqsymbol)
   }
   kotakhealthscore() {
-    return this.http.get(this.baseurl + '/api/kotakhealthscore')
+    return this.http.get(this.baseurl + '/kotakhealthscore')
     
   }
   getkitestockreports(){
