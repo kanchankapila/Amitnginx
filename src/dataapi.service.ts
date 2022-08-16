@@ -7,8 +7,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class DataapiService {
   stock: any;
   dbname: any;
-  //  baseurl = "https://amitv2.herokuapp.com/api"
-   baseurl="http://localhost:3000/api"
+    baseurl = "https://amitv2.herokuapp.com/api"
+  //  baseurl="http://localhost:3000/api"
   constructor(private http: HttpClient,private window: Window,private route: ActivatedRoute,private router: Router) { }
 
 
