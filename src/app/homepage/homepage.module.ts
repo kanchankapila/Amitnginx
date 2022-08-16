@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+
 import {HttpClientModule, HttpErrorResponse} from '@angular/common/http';
 import { HomepageRoutingModule } from './homepage-routing.module';
 import { HomepageComponent } from './homepage.component';
@@ -20,7 +20,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     FlexLayoutModule,
     NgChartsModule,
     NgApexchartsModule,
-    BrowserModule,
+   
    
 
   ],

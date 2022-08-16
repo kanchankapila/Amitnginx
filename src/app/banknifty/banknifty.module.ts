@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from "@angular/platform-browser";
+
 import { BankniftyRoutingModule } from './banknifty-routing.module';
 import { BankniftyComponent } from './banknifty.component';
 
@@ -27,7 +27,7 @@ import { ChartModule } from 'primeng/chart';
     NgChartsModule,
     TabViewModule,
     ChartModule,
-    BrowserModule
+   
   ]
 })
 export class BankniftyModule { }

@@ -4,7 +4,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NiftyRoutingModule } from './nifty-routing.module';
 import { NiftyComponent } from './nifty.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { BrowserModule } from "@angular/platform-browser";
+
 import { BaseChartDirective } from 'ng2-charts';
 import { MatCardModule } from '@angular/material/card';
 import { NgChartsModule } from 'ng2-charts';
@@ -34,7 +34,7 @@ import {from} from 'rxjs';
     NgChartsModule,
     TabViewModule,
     ChartModule,
-    BrowserModule
+   
 
   ]
 })

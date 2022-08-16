@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from "@angular/platform-browser";
+
 import { ScreenersRoutingModule } from './screeners-routing.module';
 import { ScreenersComponent } from './screeners.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -19,8 +19,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatButtonModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    ScreenersRoutingModule,
-    BrowserModule
+    ScreenersRoutingModule
+    
   ]
 })
 export class ScreenersModule { }

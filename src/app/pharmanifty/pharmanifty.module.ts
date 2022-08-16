@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from "@angular/platform-browser";
+
 import { PharmaniftyRoutingModule } from './pharmanifty-routing.module';
 import { PharmaniftyComponent } from './pharmanifty.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -25,8 +25,7 @@ import { ChartModule } from 'primeng/chart';
     MatButtonModule,
     NgChartsModule,
     TabViewModule,
-    ChartModule,
-    BrowserModule
+    ChartModule
 
   ]
 })
