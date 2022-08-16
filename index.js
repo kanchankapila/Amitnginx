@@ -117,10 +117,10 @@ if (cluster.isMaster) {
   // })
   
   const client = new Client({
-    connectionString: process.env.DATABASE_URL || 'postgresql://amit:@localhost:5432/amit0605', ssl: process.env.DATABASE_URL ? true : false
+    connectionString: process.env.DATABASE_URL || 'postgresql://amit:@localhost/amit0605', sslmode: process.env.NODE_ENV === "production" ? "require" : "disable"
   });
   
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL || 'postgresql://amit:@localhost:5432/amit0605', ssl: process.env.DATABASE_URL ? true : false })
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL || 'postgresql://amit:@localhost/amit0605',  sslmode: process.env.NODE_ENV === "production" ? "require" : "disable" })
 
   const sessionConfig = {
     secret: 'amit0605',
