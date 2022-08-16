@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpRequest } from "@angular/common/http";
+import { HttpClient, HttpHeaders, 
+  HttpRequest
+} from "@angular/common/http";
+import { DOCUMENT } from '@angular/common';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
+
 export class DataapiService {
   stock: any;
   dbname: any;
-    baseurl = "https://amitv2.herokuapp.com/api"
-  //  baseurl="http://localhost:3000/api"
-  constructor(private http: HttpClient,private window: Window,private route: ActivatedRoute,private router: Router) { }
-
+     baseurl = "https://amitv2.herokuapp.com/api"
+    // baseurl="http://localhost:3000/api"
+  constructor(private http: HttpClient, private window: Window, private route: ActivatedRoute, private router: Router, ) {
+    
+    
+    
+   }
+  
 
  
 
@@ -163,6 +171,9 @@ export class DataapiService {
   }
   getmcinsight(mcsymbol){
     return this.http.post(this.baseurl + '/mcinsight',mcsymbol)
+  }
+  getmcinsightview(mcsymbol){
+    return this.http.get(this.baseurl + '/mcinsightview?mcsymbol='+mcsymbol)
   }
  
   getntstockpcrdetails(eqsymbol) {

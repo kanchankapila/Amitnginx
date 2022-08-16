@@ -117,10 +117,10 @@ if (cluster.isMaster) {
   // })
   
   const client = new Client({
-    connectionString: process.env.DATABASE_URL
+    connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit'
   });
   
-  const pool = new Pool({  connectionString: process.env.DATABASE_URL  })
+  const pool = new Pool({  connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit' })
 
   const sessionConfig = {
     secret: 'amit0605',
@@ -215,6 +215,60 @@ if (cluster.isMaster) {
     } catch (e) {
       console.log(e)
     }
+  })
+
+  app.post('/api/mcinsight', async function (req, res) {
+
+    let mcsymbol = req.body
+
+    //console.log(req.body)
+    const promises = mcsymbol.map(symbol => {
+  
+      
+      axios.get('https://api.moneycontrol.com/mcapi/v1/extdata/mc-insights?scId=' + symbol.mcsymbol + '&type=d').then((response) => {
+        console.log(response.data.data)
+        var obj1 = ({
+          Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": response.data.data
+          // "FiveDVol": response.data.data.DVolAvg5, "TenDVol": response.data.data.DVolAvg10, "TwentyDVol": response.data.data.DVolAvg20, "ThirtyDVol": response.data.data.DVolAvg30, "CPrice": response.data.data.pricecurrent, "PChangeper": response.data.data.pricepercentchange, "StockName": response.data.data.SC_FULLNM
+        })
+      
+         console.log("executing mcinsight")
+         pool.query('INSERT INTO mcinsight (info)  VALUES ($1)', [obj1], (err, res) => {
+           console.log(err, res)
+        
+         })
+        // pool.end()
+     
+      
+
+     
+
+      }).catch((error) => {
+        console.log(error)
+      })
+    })
+
+    try {
+      await Promise.all(promises)
+    } catch (e) {
+      console.log(e)
+    }
+  })
+  app.get('/api/mcinsightview', async function (req, res) {
+
+    let mcsymbol = req.query.mcsymbol
+    
+          
+         
+    const result = await pool.query
+            
+      ("select info from mcinsight where info ->> 'Symbol' = $1", [mcsymbol]);
+    // console.log(result.fields) 
+    res.json(result.rows)
+    //pool.end();
+    
+         
+    
   })
   app.get('/api/kotakview', async function (req, res) {
 
