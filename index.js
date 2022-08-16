@@ -7,7 +7,7 @@ const { Pool, Client } = require('pg')
 var compression = require('compression');
 const numCPUs = require('os').cpus().length;
 
-const app = express();
+var app = express();
 
 
 
@@ -117,10 +117,10 @@ if (cluster.isMaster) {
   // })
   
   const client = new Client({
-    connectionString: process.env.DATABASE_URL 
+    connectionString: process.env.DATABASE_URL
   });
   
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL  })
+  const pool = new Pool({  connectionString: process.env.DATABASE_URL  })
 
   const sessionConfig = {
     secret: 'amit0605',
@@ -1315,8 +1315,8 @@ if (cluster.isMaster) {
   
   //   console.log('Example app listening on port 3000! Go to https://localhost:3000/')
   // })
-  // app.listen( 3000, function () {
-  //   console.log('Your node is running on port 3000');
-  // })
-  https.createServer(options, app).listen(process.env.PORT);
+  app.listen( process.env.PORT || 3000, function () {
+    console.log('Your node is running on port 3000');
+  })
+  // https.createServer(options, app).listen(process.env.PORT);
 }
