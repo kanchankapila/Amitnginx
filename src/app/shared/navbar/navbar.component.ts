@@ -548,7 +548,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     }
     )
   }
-  dropmcinsightview() {
+  truncatemcinsightview() {
     this.dataApi.dropmcinsightview().subscribe(data5 => {
       console.log("Drop mcinsight Executed...")
 
