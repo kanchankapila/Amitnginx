@@ -548,6 +548,15 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     }
     )
   }
+  dropmcinsightview() {
+    this.dataApi.dropmcinsightview().subscribe(data5 => {
+      console.log("Drop mcinsight Executed...")
+
+    }, err => {
+      console.log(err)
+    }
+    )
+  }
  
   // getmmstockinforeco() {
   //   console.log("mmstock reco start")

@@ -255,21 +255,20 @@ if (cluster.isMaster) {
     }
   })
   app.get('/api/mcinsightview', async function (req, res) {
-
-    let mcsymbol = req.query.mcsymbol
-    
-          
-         
-    const result = await pool.query
-            
-      ("select info from mcinsight where info ->> 'Symbol' = $1", [mcsymbol]);
-    // console.log(result.fields) 
+  let mcsymbol = req.query.mcsymbol
+  const result = await pool.query
+  ("select info from mcinsight where info ->> 'Symbol' = $1", [mcsymbol]);
     res.json(result.rows)
-    //pool.end();
-    
-         
     
   })
+  app.get('/api/dropmcinsightview', async function (req, res) {
+
+    
+    
+    await pool.query("TRUNCATE mcinsight");    
+    console.log("Truncated mcinsight")
+ })
+ 
   app.get('/api/kotakview', async function (req, res) {
 
     let eqsymbol = req.query.eqsymbol

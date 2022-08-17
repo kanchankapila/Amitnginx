@@ -175,6 +175,9 @@ export class DataapiService {
   getmcinsightview(mcsymbol){
     return this.http.get(this.baseurl + '/mcinsightview?mcsymbol='+mcsymbol)
   }
+  dropmcinsightview() {
+    return this.http.get(this.baseurl + '/dropmcinsightview')
+  }
  
   getntstockpcrdetails(eqsymbol) {
  

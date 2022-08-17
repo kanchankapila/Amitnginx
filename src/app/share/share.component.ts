@@ -384,6 +384,7 @@ export class ShareComponent implements OnInit {
   sectorid: any;
   today: any;
   datetoday: any;
+  dateyearback:any
 
   dateyesterday: any
   date5: any
@@ -521,6 +522,15 @@ export class ShareComponent implements OnInit {
   all_cookies: any;
   bqnames: any
   companyid: any
+  todayepoch: any
+  yesterday: any
+  yesterdayepoch: any
+  date: any
+  yearback: any
+  yearbackepoch: any
+  firstDay: any
+  lastDay: any
+  monthLastDay:any
   // periods: any
   
   public lineChartType: ChartType = 'line';
@@ -537,13 +547,26 @@ export class ShareComponent implements OnInit {
   ngOnInit(): void {
    
     this.primengConfig.ripple = true;
-    this.today = new Date();
-    this.datetoday = this.datePipe.transform(this.today, 'yyyy-MM-dd')
-    this.dateyesterday = this.datePipe.transform(this.today.setDate(this.today.getDate() - 1), 'yyyy-MM-dd')
-    this.dateday5 = this.datePipe.transform(this.today.setDate(this.today.getDate() - 5), 'yyyy-MM-dd')
-    this.date5 = this.today.setDate(this.today.getDate() - 5)
-
     
+    
+    this.date = new Date();
+    console.log("date=" + this.date)
+    this.todayepoch = Math.floor(this.date.getTime() / 1000);
+    console.log("today="+this.todayepoch)
+    this.yesterday = (new Date(this.date.getFullYear(), this.date.getMonth(), new Date().getDate() - 1))
+    this.yearback = (new Date(this.date.getFullYear(), this.date.getMonth(), new Date().getDate() - 365))
+    this.yesterdayepoch = Math.floor(this.yesterday.getTime() / 1000);
+    this.yearbackepoch= Math.floor(this.yearback.getTime()/1000);
+    console.log("yesterday=" + this.yesterdayepoch)
+    console.log("yearback="+this.yearbackepoch)
+    this.firstDay = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
+    console.log("firstday"+this.firstDay)
+    this.lastDay = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0);
+    console.log("lastDay"+this.lastDay)
+    this.monthLastDay = Math.floor(this.lastDay.getTime()/1000);
+    console.log(this.monthLastDay);
+  
+
     this.stockList = stocks.default.Data
     this.stock = stocks.default.Data
     this.bqstocks = bqstock.default.Data
@@ -576,7 +599,8 @@ export class ShareComponent implements OnInit {
     this.getmmdata(this.stockid)
     this.getshare6m(this.eqsymbol)
     this.getshare1w(this.eqsymbol)
-    this.getstock1yr(this.eqsymbol)
+    this.getntstock1yr(this.eqsymbol)
+    this.getmcstockohlc1yr(this.eqsymbol,this.yearbackepoch,this.todayepoch)
     this.getgnewsapi(this.bqnames, this.dateday5, this.datetoday)
    this.getmcinsightview(this.mcsymbol)
     this.getntstockpcrdetails(this.eqsymbol)
@@ -695,11 +719,45 @@ export class ShareComponent implements OnInit {
     console.error(err);
   }
   }
-  getstockohlc() {
+  async getmcstockohlc1yr(eqsymbol,yearbackepoch,todayepoch) {
+    try {
+        console.log('https://priceapi.moneycontrol.com/techCharts/indianMarket/stock/history?symbol='+this.eqsymbol+'&resolution=1D&from='+this.yearbackepoch+'&to='+this.todayepoch)
+      const response = await fetch('https://priceapi.moneycontrol.com/techCharts/indianMarket/stock/history?symbol='+this.eqsymbol+'&resolution=1D&from='+this.yearbackepoch+'&to='+this.todayepoch, {
+        method: 'GET',
+        headers: {
+         
+        }
+      });
     
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result);
+       
+      this.stockohlc1yr.length = 0;
+      
+      
+        for (let val in result.c) {
+          this.stockohlc1yr.push({ x: new Date((result.t[val])*1000), open: result.o[val], high: result.h[val], low: result.l[val], close: result.c[val], volume: result.v[val] })
+        
+        
+        }
+     
+   
+    
+      this.data1=this.stockohlc1yr
+     console.log(this.data1)
+    
+      }
+    
+  } catch (err) {
+    console.error(err);
+  }
+  
     
   }
-  getstock1yr(eqsymbol) {
+  
+
+  getntstock1yr(eqsymbol) {
     this.stockohlc.length = 0;
     this.http.get('https://api.niftytrader.in/webapi/Live/livechartsBySymbol?symbol=' + this.eqsymbol).subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
@@ -715,11 +773,7 @@ export class ShareComponent implements OnInit {
       this.stockohlc1yr.length = 0;
       
       
-      for (let val in nestedItems[3]) {
-        this.stockohlc1yr.push({ x: new Date((nestedItems[3][val]['created_at']).slice(0,10)), open: nestedItems[3][val].open, high:nestedItems[3][val].high, low:nestedItems[3][val].low,close: nestedItems[3][val].close,volume: nestedItems[3][val].volume})
-       
-      }
-      this.data1=this.stockohlc1yr
+     
      
     
       this.chartCandleOptions = {
