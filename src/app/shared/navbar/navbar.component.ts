@@ -530,8 +530,9 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
     )
   }
   getmcinsight() {
+    this.truncatemcinsightview()
     console.log("mc insight")
-    var d = new Date();
+    var d = new Date();;
     //console.log(d.getHours() + ":" + d.getMinutes())
     this.mcsymbol.length = 0;
     for (let val in this.stock) {

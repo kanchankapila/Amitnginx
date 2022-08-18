@@ -226,17 +226,26 @@ if (cluster.isMaster) {
   
       
       axios.get('https://api.moneycontrol.com/mcapi/v1/extdata/mc-insights?scId=' + symbol.mcsymbol + '&type=d').then((response) => {
-        console.log(response.data.data)
-        var obj1 = ({
-          Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": response.data.data
-          // "FiveDVol": response.data.data.DVolAvg5, "TenDVol": response.data.data.DVolAvg10, "TwentyDVol": response.data.data.DVolAvg20, "ThirtyDVol": response.data.data.DVolAvg30, "CPrice": response.data.data.pricecurrent, "PChangeper": response.data.data.pricepercentchange, "StockName": response.data.data.SC_FULLNM
-        })
-      
-         console.log("executing mcinsight")
-         pool.query('INSERT INTO mcinsight (info)  VALUES ($1)', [obj1], (err, res) => {
+        // console.log(response.data.data.insightData)
+        // var obj1 = ({
+        //   Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": response.data.data.insightData
+          
+        // })
+        obj1 = []
+        obj2=[]
+        var obj1=response.data.data.insightData
+        var obj2 = obj1["price"]
+        for (let i in obj2) {
+          var obj3 = ({
+            Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": obj2[i].shortDesc
+        
+          })
+        }
+          console.log("executing mcinsight")
+         pool.query('INSERT INTO mcinsight (info)  VALUES ($1)', [obj3], (err, res) => {
            console.log(err, res)
         
-         })
+          })
         // pool.end()
      
       
