@@ -237,7 +237,7 @@ if (cluster.isMaster) {
         var obj2 = obj1["price"]
         for (let i in obj2) {
           var obj3 = ({
-            Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": obj2[i].shortDesc
+            Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": obj2[i]
         
           })
         }
@@ -247,12 +247,7 @@ if (cluster.isMaster) {
         
           })
         // pool.end()
-     
-      
-
-     
-
-      }).catch((error) => {
+     }).catch((error) => {
         console.log(error)
       })
     })
@@ -271,9 +266,6 @@ if (cluster.isMaster) {
     
   })
   app.get('/api/dropmcinsightview', async function (req, res) {
-
-    
-    
     await pool.query("TRUNCATE mcinsight");    
     console.log("Truncated mcinsight")
  })
@@ -281,35 +273,22 @@ if (cluster.isMaster) {
   app.get('/api/kotakview', async function (req, res) {
 
     let eqsymbol = req.query.eqsymbol
-
-      
-     
     const result = await pool.query
-        
-      ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'CompanyShortName' = $1", [eqsymbol]);
+    ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'CompanyShortName' = $1", [eqsymbol]);
     console.log(result.rows) 
     res.json(result.rows)
     //pool.end();
-
-     
-
-  })
+    })
   app.get('/api/kotaksectorview', async function (req, res) {
 
     let sectorid = req.query.sectorid
     console.log(sectorid)
-          
-         
     const result = await pool.query
-            
-      ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'SectorId' = $1", [sectorid]);
+    ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'SectorId' = $1", [sectorid]);
     // console.log(result.fields) 
     res.json(result.rows)
     //pool.end();
-    
-         
-    
-  })
+    })
       
 
   const { response } = require('express');
@@ -321,14 +300,6 @@ if (cluster.isMaster) {
  
   //This is MC Stock Data Details used in OHLC component using parallel api run
 
-
-  ///////////////////////////////////////////// Market Mojos Data ,used in ohlc///////////////////////////////////////////
-
-
-  /////////////////////////////////////////////////1.MarketMojos MACD,used in OHLC component/////////////////////////////////////////////////////
-
-  ///////////////////////////////////////////////////////////7.MarketMojos Markets,used in OHLC component/////////////////////////////////////////////
-
   app.get('/api/mmmarkets', function (req, res) {
 
     //let mcsymbol = req.query.mcsymbol
@@ -339,34 +310,20 @@ if (cluster.isMaster) {
       if (!error) {
 
         res.json(JSON.parse(response.body))
-
-
-
-
-
       }
     })
 
   })
-  ///////////////////////////////////////////////////////////7.MarketMojos StockInfo,used in OHLC component/////////////////////////////////////////////
-
-
-
-
-
-  app.get('/api/etsharetoday', function (req, res) {
+ 
+    app.get('/api/etsharetoday', function (req, res) {
 
     let eqsymbol = req.query.eqsymbol
   
     var url6 = 'https://ettechcharts.indiatimes.com/ETLiveFeedChartRead/livefeeddata?scripcode=' + eqsymbol + 'EQ&exchangeid=50&datatype=intraday&filtertype=1MIN&tagId=10648&firstreceivedataid=&lastreceivedataid=&directions=all&scripcodetype=company'
     request(url6, function (error, response, html) {
       if (!error) {
-  
-  
         res.json(JSON.parse(response.body))
-  
-  
-      }
+        }
     })
   })
   app.get('/api/etimesnews', function (req, res) {
@@ -376,28 +333,17 @@ if (cluster.isMaster) {
     var url6 = 'https://economictimes.indiatimes.com/feed_marketslisting.cms?feedtype=json&msid=1977021501&curpg=1&callback=breakingnews'
     request(url6, function (error, response, html) {
       if (!error) {
-
-
-        res.json((response.body))
-
-
+      res.json((response.body))
       }
     })
-
-
-  })
+})
 
 
   ////********************************************Kotak Securities*****************/
   app.get('/api/kotakhealthscore', (req, res) => {
   
     console.log("This is Kotak Health Score")
-    // global.document = new JSDOM('https://trendlyne.com/getUserNavBar/').window.document;
-    // console.log(global.document.cookie.cookie)
-
- 
- 
-    var url11 = 'https://www.kotaksecurities.com/TSTerminal/Fundamentals/MasterData/GetHealthScoreScreenerData?sectorId=-1&marketCap=LC&healthScoreValue=A&defaultView=false';
+  var url11 = 'https://www.kotaksecurities.com/TSTerminal/Fundamentals/MasterData/GetHealthScoreScreenerData?sectorId=-1&marketCap=LC&healthScoreValue=A&defaultView=false';
     request(url11, function (error, response, html) {
       if (!error) {
    
@@ -430,10 +376,6 @@ if (cluster.isMaster) {
             //console.log(err);
           } else {
             res.json(JSON.parse(response.body));
-   
-
-
-    
             const obj1 = ((JSON.parse(response.body)));
             console.log(obj1.length)
             console.log("executing kotaksecurities")
@@ -447,11 +389,7 @@ if (cluster.isMaster) {
               })
       
             }
-      
-     
-       
- 
-          }
+            }
         });
       }
     })
@@ -459,21 +397,12 @@ if (cluster.isMaster) {
   })
 
 
-  ///*************************************Trendlyne********************************///
-
-  ////////////////////////////////////////////////**************Trendlyne GET stock******************************/
-
-  ////////////////////////////////To get Brokerage Upgrades and other details///////////////////////////////////
-  //app.use(session(sessionConfig));
+  ///**********************************Trendlyne********************************///////////////////////////////////**************Trendlyne GET stock***********
   app.get('/api/trendlynestocks1', (req, res) => {
     let tlid = req.query.tlid
     let tlname = req.query.tlname
     let eqsymbol = req.query.eqsymbol
     console.log("This is tendlynestocks1")
-  
-
- 
- 
     var url11 = 'https://trendlyne.com/equity/getStockMetricParameterList/' + tlid;
     request(url11, function (error, response, html) {
       if (!error) {
@@ -501,9 +430,7 @@ if (cluster.isMaster) {
           "mode": "cors",
           "credentials": "include"
         };
-
-
-        request(options2, (err, response, body) => {
+          request(options2, (err, response, body) => {
           if (err) {
             //console.log(err);
           } else {

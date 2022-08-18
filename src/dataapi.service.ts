@@ -2,24 +2,35 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, 
   HttpRequest
 } from "@angular/common/http";
-import { DOCUMENT } from '@angular/common';
+import { Location } from '@angular/common';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 
+
 export class DataapiService {
+  public href: string = "";
+  baseurl: any;
   stock: any;
   dbname: any;
-     baseurl = "https://amitv2.herokuapp.com/api"
-    // baseurl="http://localhost:3000/api"
-  constructor(private http: HttpClient, private window: Window, private route: ActivatedRoute, private router: Router, ) {
+    
+  location: Location;
+  constructor(private http: HttpClient, private window: Window, private route: ActivatedRoute, private router: Router, location: Location ) {
     
     
-    
+   
+    if (window.location.hostname = 'localhost') {
+      
+  this.baseurl = "http://localhost:3000/api"
+    } else
+    {
+      this.baseurl = "https://amitv2.herokuapp.com/api"
+    }
+   
    }
-  
-
+   
+   
  
 
   nsepostdata1(eqsymbol1) {
@@ -186,7 +197,8 @@ export class DataapiService {
 
   
   
-  gettrendlynestocks1(tlid,tlname,eqsymbol){
+  gettrendlynestocks1(tlid, tlname, eqsymbol) {
+    console.log(this.location)
     return this.http.get(this.baseurl + '/trendlynestocks1?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
   }
   
