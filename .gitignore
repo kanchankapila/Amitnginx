@@ -8,7 +8,7 @@
 /tmp
 /out-tsc
 /.firebase*
-/src/dataapi.service.ts
+
 # dependencies
 /node_modules
 
@@ -46,4 +46,4 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-src/dataapi.service.ts
+

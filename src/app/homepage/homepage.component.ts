@@ -87,9 +87,20 @@ export class HomepageComponent implements OnInit {
     setInterval(() => { this.getadvdec() }, 30000);
     setInterval(() => { this.getglobal() }, 30000);
     setInterval(() => { this.getsectors() }, 30000);
+    this.getmcinsightview()
    
     
   }
+  getmcinsightview() {
+    
+    this.dataApi.getmcinsightview().subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      console.log(nestedItems)
+    });
+  }
+ 
   getglobal() {
    
     this.http.get<any>('https://api.niftytrader.in/webapi/Index/globalStock').subscribe(data5 => {

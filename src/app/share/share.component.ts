@@ -602,7 +602,7 @@ export class ShareComponent implements OnInit {
     this.getntstock1yr(this.eqsymbol)
     this.getmcstockohlc1yr(this.eqsymbol,this.yearbackepoch,this.todayepoch)
     this.getgnewsapi(this.bqnames, this.dateday5, this.datetoday)
-   this.getmcinsightview(this.mcsymbol)
+   
     this.getntstockpcrdetails(this.eqsymbol)
     this.getmcstockrealtime(this.mcsymbol)
     this.getstocktoday(this.mcsymbol, this.eqsymbol)
@@ -1504,15 +1504,6 @@ export class ShareComponent implements OnInit {
     } catch (err) {
      console.error(err);
    }
-  }
-  getmcinsightview(mcsymbol) {
-    
-    this.dataApi.getmcinsightview(mcsymbol).subscribe(data5 => {
-      let nestedItems = Object.keys(data5).map(key => {
-        return data5[key];
-      });
-      console.log(nestedItems)
-    });
   }
    gettrendlynestocks1(tlid, eqsymbol, tlname) {
      
