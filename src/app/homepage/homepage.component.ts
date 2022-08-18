@@ -1,4 +1,5 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { DataapiService } from '../../dataapi.service'
 import { HttpClient,HttpHeaders} from "@angular/common/http";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -22,6 +23,7 @@ export type ChartOptions1 = {
   plotOptions: ApexPlotOptions;
   legend: ApexLegend;
 };
+export interface dealsdatatile { text1: string; text2: string; text3: string; text4: string, text5: string, text6: any; }
 
 
 export interface globalmarkettiles {
@@ -60,10 +62,12 @@ export class HomepageComponent implements OnInit {
   mcadvvalue: any
   mcdecvalue: any
   user: string;
+  mcsymbol1: any;
   public advData: Array<any> = [];
   public advLabels: Array<number> = [];
   public decData: Array<any> = [];
   public advdecChartData: ChartConfiguration['data']
+  public dealsdata: dealsdatatile[] = [];
   public advdecChartType: ChartType = 'line';
   public leafItemSettings: object
   public data: object[]
@@ -93,12 +97,39 @@ export class HomepageComponent implements OnInit {
   }
   getmcinsightview() {
     
-    this.dataApi.getmcinsightview().subscribe(data5 => {
+    this.dataApi.getmcinsightview().subscribe( async data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
       console.log(nestedItems)
-    });
+      this.dealsdata.length = 0;
+      
+        
+      for (let val in nestedItems) {
+        try {
+          const response = await fetch("https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/" + this.mcsymbol1, {
+            method: 'GET',
+            headers: {
+           
+            }
+            
+          });
+      
+        if(response.ok) {
+          const result = await response.json();
+          console.log(result)
+        
+          this.mcsymbol1 = nestedItems[val].symbol
+          console.log(this.mcsymbol1)
+          this.dealsdata.push({ text1: nestedItems[val]['deals'].slice(nestedItems[val]['deals'].length - 33).slice(0, 3), text2: nestedItems[val].name, text3: nestedItems[val].date, text4: nestedItems[val].time, text5: nestedItems[val].symbol, text6: result.data['pricepercentchange'] })
+          }
+        } catch (err) {
+          console.error(err);
+          }
+       
+      }
+    })
+    
   }
  
   getglobal() {
@@ -218,7 +249,10 @@ export class HomepageComponent implements OnInit {
   
   trackByFuntion1(index1, item1) {
      return item1.text1
-   }
+  }
+  trackByFuntion2(index2, item2) {
+    return item2.text1
+  }
   opstrafiidii() {
     console.log(document.cookie)
     //let headers: HttpHeaders = new HttpHeaders()

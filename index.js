@@ -261,7 +261,7 @@ if (cluster.isMaster) {
   app.get('/api/mcinsightview', async function (req, res) {
   let mcsymbol = req.query.mcsymbol
   const result = await pool.query
-  ("SELECT info ->> 'CurrentVol' as Deals,info ->> 'Symbol' as Symbol,info ->> 'Name' as name  FROM mcinsight where info ->> 'CurrentVol' like '%Stock saw%'");
+  ("SELECT info ->> 'CurrentVol' as Deals,info ->> 'Symbol' as Symbol,info ->> 'Name' as name ,info ->> 'Time' as time,info ->> 'Date' as date FROM mcinsight where info ->> 'CurrentVol' like '%Stock saw%'");
     res.json(result.rows)
     
   })

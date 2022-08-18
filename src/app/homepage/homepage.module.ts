@@ -7,6 +7,7 @@ import { HomepageComponent } from './homepage.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgChartsModule } from 'ng2-charts';
 import { NgApexchartsModule } from "ng-apexcharts";
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     FlexLayoutModule,
     NgChartsModule,
     NgApexchartsModule,
+    MatCardModule
    
    
 
