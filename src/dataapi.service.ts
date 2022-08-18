@@ -12,8 +12,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class DataapiService {
   public href: string = "";
   
-   baseurl = "http://localhost:3000/api"
-  // baseurl = "https://amitv2.herokuapp.com/api"
+  //  baseurl = "http://localhost:3000/api"
+   baseurl = "https://amitv2.herokuapp.com/api"
   stock: any;
   dbname: any;
     
