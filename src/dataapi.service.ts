@@ -11,7 +11,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 export class DataapiService {
   public href: string = "";
-  baseurl: any;
+  baseurl = "https://amitv2.herokuapp.com/api"
   stock: any;
   dbname: any;
     
@@ -19,15 +19,6 @@ export class DataapiService {
   
   constructor(private http: HttpClient, private window: Window, private route: ActivatedRoute, private router: Router, location: Location ) {
     
-}
-  ngOninit(): any{
-    console.log(window.location.hostname)
-  if (window.location.hostname = 'localhost') {
-      
-    this.baseurl = "http://localhost:3000/api"
-  } else {
-    this.baseurl = "https://amitv2.herokuapp.com/api"
-  }
 }
  
 
