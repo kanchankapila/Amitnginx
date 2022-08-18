@@ -16,21 +16,19 @@ export class DataapiService {
   dbname: any;
     
   location: Location;
+  
   constructor(private http: HttpClient, private window: Window, private route: ActivatedRoute, private router: Router, location: Location ) {
     
-    
-   
-    if (window.location.hostname = 'localhost') {
+}
+  ngOninit(): any{
+    console.log(window.location.hostname)
+  if (window.location.hostname = 'localhost') {
       
-  this.baseurl = "http://localhost:3000/api"
-    } else
-    {
-      this.baseurl = "https://amitv2.herokuapp.com/api"
-    }
-   
-   }
-   
-   
+    this.baseurl = "http://localhost:3000/api"
+  } else {
+    this.baseurl = "https://amitv2.herokuapp.com/api"
+  }
+}
  
 
   nsepostdata1(eqsymbol1) {
