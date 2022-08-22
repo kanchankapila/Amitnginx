@@ -22,7 +22,7 @@ import { environment } from '../environments/environment';
   imports: [
     AppRoutingModule,
     SharedModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
    
