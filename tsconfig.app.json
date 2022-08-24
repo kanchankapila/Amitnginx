@@ -1,15 +1,25 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": ["node"]
+  },
+  "angularCompilerOptions": {
+    "preserveWhitespaces": true //Not working in angular 8.1.1
   },
   "files": [
     "src/main.ts",
-    "src/polyfills.ts"
+    "src/polyfills.ts",
+    
+
   ],
   "include": [
-    "src/**/*.d.ts"
+    "app/**/*.ts"
+  ],
+  "exclude": [
+    "src/test.ts",
+    "src/**/*.spec.ts",
+    
+    "src/**/*.ts"
   ]
 }
