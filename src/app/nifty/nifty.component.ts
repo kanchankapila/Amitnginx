@@ -365,7 +365,7 @@ export class NiftyComponent implements OnInit {
     
       if (response.ok) {
          const result = await response.json();
-        console.log(result);
+        // console.log(result);
        
        /////////////////////NIfty PCR from niftytraders////////////////////
        this.niftypcrdata.length = 0;
@@ -420,7 +420,7 @@ export class NiftyComponent implements OnInit {
 
         //////////////////////////////Nifty 50 Stocks ////////////////////////
       this.nifty50stocks.length = 0;
-      console.log(nestedItems)
+      // console.log(nestedItems)
         for (let val in nestedItems[0][0]['companies']) {
           this.nifty50stocks.push({ text1: nestedItems[0][0]['companies'][val].companyShortName, text2: nestedItems[0][0]['companies'][val].change, text3: nestedItems[0][0]['companies'][val].percentChange, text4: nestedItems[0][0]['companies'][val].current,text5:nestedItems[0][0]['companies'][val].symbol })
         }
@@ -459,51 +459,39 @@ export class NiftyComponent implements OnInit {
    
   }
   trackByFuntion(index, item) {
-   // console.log( 'TrackBy:', item.text2, 'at index', index );
-    return item.text2
+  return item.text2
   }
   trackByFuntion1(index1, item1) {
-    //console.log( 'TrackBy:', item1.text1, 'at index', index1);
-    return item1.text1
+  return item1.text1
    }
   trackByFuntion2(index2, item2) {
-    //console.log( 'TrackBy:', item2.text1, 'at index', index2 );
-    return item2.text1
+  return item2.text1
    }
   trackByFuntion3(index3, item3) {
-    //console.log( 'TrackBy:', item3.text1, 'at index', index3 );
-    return item3.text1;
+  return item3.text1;
    }
   trackByFuntion4(index4, item4) {
-    //console.log( 'TrackBy:', item4.text2, 'at index', index4 );
-    item4.text2;
+  return item4.text2;
    }
   trackByFuntion5(index5, item5) {
-    //console.log( 'TrackBy:', item5.text1, 'at index', index5 );
     return item5.text1;
    }
   trackByFuntion6(index6, item6) {
-    //console.log( 'TrackBy:', item6.text1, 'at index', index6 );
-     return item6.text1;
+    return item6.text1;
    }
   trackByFuntion7(index7, item7) {
-    //console.log( 'TrackBy:', item7.text1, 'at index', index7 );
     return item7.text1;
    }
   trackByFuntion8(index8, item8) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
     return item8.text3 ;
   }
   trackByFuntion9(index9, item9) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
     return item9.text3 ;
   }
   trackByFuntion10(index10, item10) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
     return item10.text3 ;
   }
   trackByFuntion11(index11, item11) {
-    //console.log( 'TrackBy:', item8.text3, 'at index', index8 );
     return item11.text3 ;
    }
   
