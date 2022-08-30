@@ -100,14 +100,14 @@
     </p-sidebar>
      <div class="InsideContent">
       <div class="col-md-4 ">
-        <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatenifty()">
+        <div class="card1 bg-gradient-primary card-img-holder text-white" (click)="navigatenifty()">
           <div class="card-body">
             
             <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
-            <h4 class="font-weight-normal mb-1">
+            <h4 class="font-weight-normal  mb-1">
              
              </h4>
-            <h4 [ngClass]="{'bg-gradient-success mb-1 ' : tile.text4 > 0 ,'bg-gradient-danger mb-1 ': 0 > tile.text4 }" *ngFor="let tile of mcniftyrt"><br>&nbsp;NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;({{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%)<br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}</h4>
+            <h4 [ngClass]="{'card2 bg-gradient-success  mb-1 ' : tile.text4 > 0 ,'card2 bg-gradient-danger mb-1 ': 0 > tile.text4 }" *ngFor="let tile of mcniftyrt"><br>&nbsp;NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;({{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%)<br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}</h4>
             
               
                 
@@ -121,7 +121,7 @@
           <div class="card-body">
             <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>                  
             <h4 class="font-weight-normal mb-1"></h4>
-            <h4 [ngClass]="{'bg-gradient-success mb-1 ' : tile.text4 > 0 ,'bg-gradient-danger mb-1 ': 0 > tile.text4 }" *ngFor="let tile of mcbniftyrt"><br>&nbsp;BANK NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;({{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%)<br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}</h4>
+            <h4 [ngClass]="{'card2 bg-gradient-success mb-1 ' : tile.text4 > 0 ,'card2 bg-gradient-danger mb-1 ': 0 > tile.text4 }" *ngFor="let tile of mcbniftyrt"><br>&nbsp;BANK NIFTY <br>&nbsp;{{tile.text2}}<br>&nbsp;({{tile.text3| number : '1.2-2'}}&nbsp;{{tile.text4| number : '1.2-2'}}%)<br>&nbsp;Adv:{{tile.text5}}&nbsp;&nbsp;Dec:{{tile.text6}}</h4>
             <h6 class="card-text"></h6>
           </div>
         </div>

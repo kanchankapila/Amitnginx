@@ -5,6 +5,10 @@
 
   .breadcrumb-item {
     font-size: $breadcrumb-font-size;
+
+    &.active {
+      color: rgba($body-color, 0.8);
+    }
   }
 
   &.breadcrumb-custom {
@@ -23,7 +27,7 @@
       &:before{
         content: "";
       }
-      a{
+      a {
         position: relative;
         color: inherit;
         border: 1px solid $breadcrumb-item-bg;
@@ -56,6 +60,9 @@
       span{
         display: inline-block;
         vertical-align: top;
+      }
+      &.active {
+        color: rgba($body-color, 0.8);
       }
     }
   }

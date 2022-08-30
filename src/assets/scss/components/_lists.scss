@@ -30,7 +30,7 @@ dl {
   li {
     &:before {
       content: '\F12D';
-      color: theme-color(danger);
+      color: $danger;
     }
   }
 }
@@ -39,7 +39,7 @@ dl {
   li {
     &:before {
       content: '\F142';
-      color: theme-color(success);
+      color: $success;
     }
   }
 }
@@ -48,7 +48,7 @@ dl {
   li {
     &:before {
       content: '\F4CE';
-      color: theme-color(warning);
+      color: $warning;
     }
   }
 }
@@ -81,7 +81,7 @@ dl {
       height: 11px;
       top: 2px;
       left: 2px;
-      background: $white;
+      background: $card-bg;
       border-radius: 100%;
     }
     &:nth-child(1) {
@@ -107,6 +107,63 @@ dl {
     &:nth-child(5) {
       &:before {
         background: theme-gradient-color(primary);        
+      }
+    }
+  }
+}
+
+.bullet-line-list {
+  padding-left: 30px;
+  margin-bottom: 0;
+  position: relative;
+  list-style-type: none;
+
+  .rtl & {
+    padding-right: 0px;
+  }
+
+  li {
+    position: relative;
+    line-height: 1;
+    padding-bottom: 10px;
+
+    &:before {
+      content: "";
+      position: absolute;
+      border-radius: 100%;
+      width: 12px;
+      height: 12px;
+      left: -28px;
+      top: 6px;
+      border: 3px solid $primary;
+      margin-right: 15px;
+      z-index: 2;
+      background: $bullet-line-list-shape-bg;
+    }
+
+    &:after {
+      content: "";
+      border: 1px solid $border-color;
+      position: absolute;
+      bottom: 0;
+      left: -23px;
+      height: 100%;
+    }
+
+    &:first-child {
+      &:after {
+        content: "";
+        height: 80%;
+      }
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+
+      &:after {
+        content: "";
+        top: 0;
+        height: 30%;
       }
     }
   }
