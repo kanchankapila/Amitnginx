@@ -15,6 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
  import { MatCardModule } from '@angular/material/card';
+ import { MatIconModule } from '@angular/material/icon';
 
 
 const routes : Routes = [
@@ -36,6 +37,7 @@ const routes : Routes = [
     FormsModule,
     ButtonsModule,
     NgbModule,
+    MatIconModule,
     HttpClientModule,
     ButtonModule,
      MatCardModule,

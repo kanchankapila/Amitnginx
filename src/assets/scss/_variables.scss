@@ -105,7 +105,7 @@ neutral:         linear-gradient(to right, rgb(255, 255, 144),#fefefe )
 ////////// COLOR SYSTEM //////////
 
 ////////// COLOR VARIABLES //////////
-$content-bg: #f2edf3;
+$content-bg: $white;
 $footer-bg: $content-bg;
 $footer-color: color(dark);
 $border-color: #ebedf2;
@@ -169,7 +169,7 @@ $modal-content-bg: $content-bg;
 
 ///////// NAVBAR ////////
 $navbar-bg: #fff;
-$navbar-height: 70px;
+$navbar-height: 130px;
 $navbar-menu-color: #9c9fa6;
 $navbar-font-size: .875rem;
 $navbar-icon-font-size: 1.25rem;
@@ -291,11 +291,11 @@ $dropdown-hover-bg: #f8f9fa;
 
 $boxed-container-width: 1200px;
 $border-property: 1px solid $border-color;
-$card-spacing-y: 2.5rem;
-$card-padding-y: 2.5rem;
-$card-padding-x: 2.5rem;
+$card-spacing-y: 0.5rem;
+$card-padding-y: 0.5rem;
+$card-padding-x: 0.5rem;
 $card-border-radius: .3125rem;
-$grid-gutter-width: 40px;
+$grid-gutter-width: 60px;
 $action-transition-duration: 0.25s;
 $action-transition-timing-function: ease;
 ////////// OTHER VARIABLES //////////
