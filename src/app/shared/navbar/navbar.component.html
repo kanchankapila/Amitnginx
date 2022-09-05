@@ -98,6 +98,35 @@
       <h1 style="font-weight:normal">Full Screen Sidebar</h1>
       
     </p-sidebar>
+    <div class="InsideContent1">
+      <div class="InsideContent">
+    <mat-card [ngClass]="{'animate__flipOutX noptionssupport' : tile.text1 >= 1.2 ,'noptionsresistance animate__flipOutX': 0.80 > tile.text1,'noptionsneutral animate__flipOutX': 1.2 > tile.text1 && tile.text1 > 0.80 }"  *ngFor="let tile of pcrnsenifty">
+      <h6>PCR<br>{{tile.text1| number : '1.2-2'}}</h6>
+      
+    </mat-card>
+    <mat-card class='bnoptionssupport animate__flipOutX'  *ngFor="let tile of n50optionssupport">
+      <h6>N Sup<br>{{tile.text1}}</h6>
+      
+    </mat-card>
+    <mat-card class='n50optionsresistance animate__flipOutX'  *ngFor="let tile of n50optionsresistance">
+      <h6>N Rstnce<br>{{tile.text1}}</h6>
+      
+    </mat-card>
+    <mat-card [ngClass]="{'animate__flipOutX bnoptionssupport' : tile.text1 >= 1.2 ,'bnoptionsresistance animate__flipOutX': 0.80 > tile.text1 ,'bnoptionsneutral animate__flipOutX': 1.2 > tile.text1 && tile.text1 > 0.80 }"  *ngFor="let tile of pcrnsebnifty">
+      <h6>PCRB<br>{{tile.text1| number : '1.2-2'}}</h6>
+     
+    </mat-card>
+  <mat-card class='bnoptionssupport animate__flipOutX'  *ngFor="let tile of bnoptionssupport">
+    <h6>B Sup<br>{{tile.text1}}</h6>
+    
+  </mat-card>
+ 
+  <mat-card class='bnoptionsresistance animate__flipOutX'  *ngFor="let tile of bnoptionsresistance">
+    <h6>B Rstnce<br>{{tile.text1}}</h6>
+    
+  </mat-card>
+    
+    </div>
      <div class="InsideContent">
       <div class="col-md-5 ">
         <div class="card bg-gradient-primary card-img-holder text-white" (click)="navigatenifty()">
@@ -150,50 +179,7 @@
          
     
   
-    <div class="InsideContent">   
-      
-    <div class="InsideContent2">
-      
-      <mat-card [ngClass]="{'animate__flipOutX bnoptionssupport' : tile.text1 >= 1.2 ,'bnoptionsresistance animate__flipOutX': 0.80 > tile.text1 ,'bnoptionsneutral animate__flipOutX': 1.2 > tile.text1 && tile.text1 > 0.80 }"  *ngFor="let tile of pcrnsebnifty">
-        <h6>PCRB :{{tile.text1| number : '1.2-2'}}</h6>
-       
-      </mat-card>
-      <mat-card [ngClass]="{'animate__flipOutX noptionssupport' : tile.text1 >= 1.2 ,'noptionsresistance animate__flipOutX': 0.80 > tile.text1,'noptionsneutral animate__flipOutX': 1.2 > tile.text1 && tile.text1 > 0.80 }"  *ngFor="let tile of pcrnsenifty">
-        <h6>PCR :{{tile.text1| number : '1.2-2'}}</h6>
-        
-      </mat-card>
-    
-      
-      
-      </div>
-    
- 
-<div class="InsideContent1">
-  <div class="InsideContent">
-  <mat-card class='bnoptionssupport animate__flipOutX'  *ngFor="let tile of bnoptionssupport">
-    <h6>Bank Sup:{{tile.text1}}</h6>
-    
-  </mat-card>
- 
-  <mat-card class='bnoptionsresistance animate__flipOutX'  *ngFor="let tile of bnoptionsresistance">
-    <h6>Bank Res:{{tile.text1}}</h6>
-    
-  </mat-card>
-  </div>
-  <div class="InsideContent">
-  <mat-card class='bnoptionssupport animate__flipOutX'  *ngFor="let tile of n50optionssupport">
-    <h6>Nifty Sup :{{tile.text1}}</h6>
-    
-  </mat-card>
-  <mat-card class='n50optionsresistance animate__flipOutX'  *ngFor="let tile of n50optionsresistance">
-    <h6>Nifty Res :{{tile.text1}}</h6>
-    
-  </mat-card>
-  
-</div>
-      
-<owl-clock [type]="'flipbox'"></owl-clock>    
-</div>
+   
     
 </div>  
 </div> 
