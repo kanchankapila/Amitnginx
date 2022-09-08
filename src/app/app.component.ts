@@ -71,6 +71,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.getScreenWidth = window.innerWidth;
       this.getScreenHeight = window.innerHeight;
+     
     if (isDevMode()) {
       console.log('Development!');
     } else {

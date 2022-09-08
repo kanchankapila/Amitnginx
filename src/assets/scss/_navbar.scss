@@ -233,6 +233,16 @@
             }
           }
         }
+        @media (max-width: 575px) {
+          position: static;
+          .navbar-dropdown {
+            left: 20px;
+            right: 20px;
+            top: $navbar-height;
+            width: calc(100% - 80px);
+          }
+        }
+      
         &.nav-settings {
           padding-left: 20px;
           padding-right: 5px;
