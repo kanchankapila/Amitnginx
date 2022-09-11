@@ -9,11 +9,11 @@
 <br>
 <br>
 <div class="InsideContent">
-  <div class="col-lg-7 grid-margin stretch-card">
+  <div class=".col-sm-6 .col-lg-8 grid-margin stretch-card">
     <div class="content card">
       <h4 class="mb-5">Daily Technical Indicators</h4>
       <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div fxFlex="25" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of nifty50indicators trackBy: trackByFuntion">
+        <div fxFlex="25" fxFlex.lg="25%" fxFlex.xs="50%" fxFlex.sm="33%"  *ngFor="let tile of nifty50indicators trackBy: trackByFuntion">
           <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
           [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
                       'bg-gradient-bull1':tile.text3 === 'Oversold',
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="InsideContent1">
-    <div class="col-lg-13 grid-margin stretch-card">
+    <div class="col-xs-4 grid-margin stretch-card">
       <div class="content card">
         
         <h4 class="mb-4">Crossover</h4>
@@ -236,7 +236,7 @@
     
   <p-tabPanel header="5 days">
       <div class="InsideContent">
-        <div class="col-lg-7 grid-margin stretch-card">
+        <div class="col-sm-4 grid-margin stretch-card">
           <div class="content card">
             <h4 class="mb-5">Weekly Technical Indicators</h4>
             <div fxLayout="row wrap" fxLayoutGap="16px grid">
@@ -258,7 +258,7 @@
             </div>
           </div>
          
-          <div class="col-lg-13 grid-margin stretch-card">
+          <div class="col-sm-4 grid-margin stretch-card">
             <div class="content card">
               
               <h4 class="mb-4">Crossover</h4>

@@ -6,7 +6,7 @@ import { DatePipe } from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { NavbarModule, ButtonsModule } from 'angular-bootstrap-md'
+// import { NavbarModule, ButtonsModule } from 'angular-bootstrap-md'
  import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,9 +33,9 @@ const routes : Routes = [
     BrowserAnimationsModule,
     DropdownModule,
     CommonModule,
-    NavbarModule,
+    // NavbarModule,
     FormsModule,
-    ButtonsModule,
+    // ButtonsModule,
     NgbModule,
     MatIconModule,
     HttpClientModule,

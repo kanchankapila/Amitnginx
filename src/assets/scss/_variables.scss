@@ -7,6 +7,7 @@ $pink: #E91E63;
 $red: #f96868;
 $orange: #f2a654;
 $yellow: #f6e84e;
+$dark-yellow:rgb(243, 243, 130);
 $green: #46c35f;
 $teal: #58d8a3;
 $cyan: #57c7d4;
@@ -148,6 +149,7 @@ $body-color: #343a40;
 ////////// FONT VARIABLES //////////
 
 ///////// CARD ////////
+
 $card-bg: #fff;
 $card-description-color: #76838f;
 $card-title-color: $body-color;
@@ -169,7 +171,7 @@ $modal-content-bg: $content-bg;
 
 ///////// NAVBAR ////////
 $navbar-bg: #fff;
-$navbar-height: 130px;
+$navbar-height: 180px;
 $navbar-menu-color: #9c9fa6;
 $navbar-font-size: .875rem;
 $navbar-icon-font-size: 1.25rem;

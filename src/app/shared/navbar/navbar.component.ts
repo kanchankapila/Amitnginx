@@ -34,9 +34,7 @@ export interface newscardtile {
   text4: string;
   text5: string;
 }
-export interface pcrnseniftytile {
-text1: any;
-}
+
 export interface mcniftyrttiles {
 
   text1: string;
@@ -81,18 +79,9 @@ export interface newscardtile {
   text5: string;
 }
 
-export interface n50optionssupporttile {
-  text1: string;
- }
-export interface n50optionsresistancetile {
-  text1: string;
- }
-export interface bnoptionssupporttile {
-  text1: string;
- }
-export interface bnoptionsresistancetile {
-  text1: string;
-}
+
+
+
 export interface pcrnsebniftytile {
   text1: any;
 }
@@ -108,7 +97,7 @@ export class NavbarComponent implements OnInit {
   stock: any
   data: any
   pcrnifty: pcrniftytile[] = [];
-  pcrnsenifty: pcrnseniftytile[] = [];
+  pcrnsenifty:any;
   datetoday:any
   stock_isin: any
   newscard: newscardtile[] = [];
@@ -122,11 +111,11 @@ export class NavbarComponent implements OnInit {
   eqsymbol1 = [];
   tlid = [];
   abc = [];
-  pcrnsebnifty: pcrnsebniftytile[] = [];
-  n50optionssupport: n50optionssupporttile[] = [];
-  n50optionsresistance: n50optionsresistancetile[] = [];
-  bnoptionssupport: bnoptionssupporttile[] = [];
-  bnoptionsresistance: n50optionsresistancetile[] = [];
+  pcrnsebnifty: any;
+  n50optionssupport: any;
+  n50optionsresistance: any;
+  bnoptionssupport: number;
+  bnoptionsresistance:number;
   companyid = [];
   mcsymbol = [];
   mcsymbol1 = [];
@@ -265,15 +254,14 @@ export class NavbarComponent implements OnInit {
        });
       //console.log(nestedItems)
 
-      this.pcrnsenifty.length = 0;
       this.optionwc.length = 0;
-      this.n50optionsresistance.length = 0;
+     
       this.optionwp.length = 0;
-      this.n50optionssupport.length = 0;
+    
 
       //console.log(nestedItems[1]['CE'].totOI)
       //console.log(nestedItems[1]['PE'].totOI)
-this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].totOI)})
+this.pcrnsenifty=(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].totOI)
       for (let val in nestedItems[1]['data']) {
         if (nestedItems[1]['data'][val]['CE']) {
           if ((nestedItems[1]['data'][val]['CE']).length !== 0) {
@@ -291,7 +279,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
             for (let val in nestedItems[1]['data']) {
               if (nestedItems[1]['data'][val]['CE']) {
               if (nestedItems[1]['data'][val]['CE'].openInterest == maxc) {
-                this.n50optionsresistance.push({ text1: nestedItems[1]['data'][val]['CE'].strikePrice })
+                this.n50optionsresistance= nestedItems[1]['data'][val]['CE'].strikePrice 
              }
               }
             
@@ -313,7 +301,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
          if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
      
            if (nestedItems[1]['data'][val]['PE'].openInterest == maxp) {
-             this.n50optionssupport.push({ text1: nestedItems[1]['data'][val]['PE'].strikePrice })
+             this.n50optionssupport= nestedItems[1]['data'][val]['PE'].strikePrice 
             
            }
          }
@@ -340,12 +328,12 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      this.pcrnsebnifty.length = 0;
+      
       this.optionbwc.length = 0;
-      this.bnoptionsresistance.length = 0;
+     
       this.optionbwp.length = 0;
-      this.bnoptionssupport.length = 0;
-      this.pcrnsebnifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].totOI)})
+     
+      this.pcrnsebnifty=(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].totOI)
     
      
       for (let val in nestedItems[1]['data']) {
@@ -365,7 +353,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
             for (let val in nestedItems[1]['data']) {
               if (nestedItems[1]['data'][val]['CE']) {
               if (nestedItems[1]['data'][val]['CE'].openInterest == maxbc) {
-                this.bnoptionsresistance.push({ text1: nestedItems[1]['data'][val]['CE'].strikePrice })
+                this.bnoptionsresistance= nestedItems[1]['data'][val]['CE'].strikePrice 
              }
               }
             
@@ -387,7 +375,7 @@ this.pcrnsenifty.push({text1:(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].to
          if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
      
            if (nestedItems[1]['data'][val]['PE'].openInterest == maxbp) {
-             this.bnoptionssupport.push({ text1: nestedItems[1]['data'][val]['PE'].strikePrice })
+             this.bnoptionssupport= nestedItems[1]['data'][val]['PE'].strikePrice 
             
            }
          }

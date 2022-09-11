@@ -9,6 +9,29 @@
   display: inline-block;
   font-size: 0.4em;
 }
+@media(max-width:320px){
+  :host ::ng-deep .pButton {
+    width: 1rem;
+    font-size: 1px;
+  }
+  :host ::ng-deep .p-dropdown {
+    width: 10rem;
+    
+  }
+  :host ::ng-deep .card {
+    width: 6rem;
+    font-size: xx-small;
+    
+  }
+  :host ::ng-deep .navbar-brand{
+    display:none;
+    
+  }
+  :host ::ng-deep .brand-logo-mini{
+    display:none;
+    
+  }
+}
 
 
   
@@ -342,7 +365,7 @@ pcry1{
           @include display-flex;
           @include align-items(center);
           cursor: pointer;
-          @media (max-width: 767px) {
+          @media (max-width: 320px) {
             margin-left: .8rem;
             margin-right: .8rem;
           }
@@ -519,7 +542,21 @@ pcry1{
     }
   }
 }
-
+.font-red{
+  color: $red;
+  background-color:$white;
+  font-weight: 10px;
+}
+.font-green{
+  color: $green;
+  background-color:$white;
+  font-weight: 10px;
+}
+.font-yellow{
+  color: $dark-yellow;
+  background-color:$black;
+  font-weight: 10px;
+}
 /* Navbar color variations */
 @each $color, $value in $theme-gradient-colors {
   .navbar {
