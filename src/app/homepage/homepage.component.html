@@ -26,7 +26,7 @@
       </div>
       </div>
       </div>
-      <div class="col-lg-15 grid-margin stretch-card ">
+      <div class="col-lg-13 col-xs-6 grid-margin stretch-card ">
         <div class="card">
           <canvas baseChart height="350" [data]="advdecChartData" [options]="advdecChartOptions" [type]="advdecChartType" [options]="advdecChartOptions"></canvas>
         </div>
@@ -42,15 +42,15 @@
         ></apx-chart>
       </div>
 
-      <div class="col-lg-13 grid-margin stretch-card">
+      <div class="col-lg-13 col-xs-6 grid-margin stretch-card">
         <div class="content card">
           
           <h4 class="mb-4">Deals Data</h4>
           <div fxLayout="row wrap" fxLayoutGap="16px grid">
-            <div fxFlex="11" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of dealsdata  trackBy: trackByFuntion2">
-          <mat-card class="text-blue type1-bold cardbear1 bg-gradient-bull grid-margin stretch-card"
-          >{{tile.text3}} {{tile.text4}}<br>{{tile.text2}}<br><br><h3>{{tile.text1}}</h3>
-          <h3>{{tile.text6}}</h3>
+            <div fxFlex="11" fxFlex.xs="33%" fxFlex.sm="33%"  *ngFor="let tile of dealsdata  trackBy: trackByFuntion2">
+          <mat-card class="text-blue type1-bold cardbear bg-gradient-bull grid-margin stretch-card"
+          >{{tile.text3}} {{tile.text4}}<br>{{tile.text2}}<br><br>{{tile.text1}}
+          {{tile.text6}}
           </mat-card>
          
         </div>

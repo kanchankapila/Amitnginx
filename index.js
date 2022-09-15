@@ -11,7 +11,7 @@ var app = express();
 
 
 
-const redis = require('redis');
+// /const redis = require('redis');
 // const client = redis.createClient();
 const cors = require('cors');
 var cookieParser = require('cookie-parser');
@@ -122,19 +122,9 @@ if (cluster.isMaster) {
   
   const pool = new Pool({  connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit' })
 
-  const sessionConfig = {
-    secret: 'amit0605',
-    id_login: 'amit.kapila.2009@gmail.com',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      sameSite: 'Lax', // THIS is the config you are looing for.
-    }
-  };
 
 
-  app.set('trust proxy', 1); // trust first proxy
-  sessionConfig.cookie.secure = true; // serve secure cookies
+
 
 
   app.use(function (req, res, next) {
@@ -807,7 +797,158 @@ if (cluster.isMaster) {
   //     .catch(data => console.error(res.response))
     
   
-  // })
+  // }
+// Include selenium webdriver 
+
+let swd = require("selenium-webdriver"); 
+
+let browser = new swd.Builder(); 
+
+let tab = browser.forBrowser("chrome").build(); 
+
+  
+// Get the credentials from the JSON file 
+
+
+
+  
+// Step 1 - Opening the geeksforgeeks sign in page 
+let tabToOpen = 
+
+    tab.get("https://trendlyne.com/login"); 
+tabToOpen 
+
+    .then(function () { 
+
+  
+
+        // Timeout to wait if connection is slow 
+
+        let findTimeOutP = 
+
+            tab.manage().setTimeouts({ 
+
+                implicit: 10000, // 10 seconds 
+
+            }); 
+
+        return findTimeOutP; 
+
+    }) 
+
+    .then(function () { 
+
+  
+
+        // Step 2 - Finding the username input 
+
+        let promiseUsernameBox = 
+
+            tab.findElement(swd.By.css("#luser")); 
+
+        return promiseUsernameBox; 
+
+    }) 
+
+    .then(function (usernameBox) { 
+
+  
+
+        // Step 3 - Entering the username 
+
+        let promiseFillUsername = 
+
+            usernameBox.sendKeys('amit.kapila.2009@gmail.com'); 
+
+        return promiseFillUsername; 
+
+    }) 
+
+    .then(function () { 
+
+        console.log( 
+
+            "Username entered successfully in" + 
+
+            "'login demonstration' for GEEKSFORGEEKS"
+
+        ); 
+
+  
+
+        // Step 4 - Finding the password input 
+
+        let promisePasswordBox = 
+
+            tab.findElement(swd.By.css("#password")); 
+
+        return promisePasswordBox; 
+
+    }) 
+
+    .then(function (passwordBox) { 
+
+  
+
+        // Step 5 - Entering the password 
+
+        let promiseFillPassword = 
+
+            passwordBox.sendKeys('amit0605'); 
+
+        return promiseFillPassword; 
+
+    }) 
+
+    .then(function () { 
+
+        console.log( 
+
+            "Password entered successfully in" + 
+
+            " 'login demonstration' for GEEKSFORGEEKS"
+
+        ); 
+
+  
+
+        // Step 6 - Finding the Sign In button 
+
+        let promiseSignInBtn = tab.findElement( 
+
+            swd.By.css(".btn.btn-green.signin-button") 
+
+        ); 
+
+        return promiseSignInBtn; 
+
+    }) 
+
+    .then(function (signInBtn) { 
+
+  
+
+        // Step 7 - Clicking the Sign In button 
+
+        let promiseClickSignIn = signInBtn.click(); 
+
+        return promiseClickSignIn; 
+
+    }) 
+
+    .then(function () { 
+
+        console.log("Successfully signed in GEEKSFORGEEKS!"); 
+
+    }) 
+
+    .catch(function (err) { 
+
+        console.log("Error ", err, " occurred!"); 
+
+    });
+
+
 
 
   app.get('/api/nsedatastockoi', function (req, res) {
@@ -956,6 +1097,45 @@ if (cluster.isMaster) {
 
 
   })
+  //To get BANK NIFTY Data from Opstra
+  // const instanceopstra = axios.create({ withCredentials: true ,auth: {
+  //   username: 'amit.kapila.2009@gmail.com',
+  //   password: 'amit0605'
+  // }});
+  // axiosCookieJarSupport(instanceopstra);
+  // instanceopstra.defaults.jar = new tough.CookieJar()
+  // app.get('/api/opstradatalongbuildup', function (req, res) {
+ 
+     
+  //   instanceopstra.get('https://opstra.definedge.com/')
+  //       .then(data => instanceopstra.get('https://opstra.definedge.com/api/openinterest/futuresbuildup'))
+  //       .then(data => console.log(data))
+  //       .catch(data => console.error(res.response))
+  //   })
+  
+
+   
+    app.get('/api/opstradatalongbuildup', function (req, res) {
+  
+   
+      //console.log("nextexpirymonthly="+nextexpirymonthly,"symbol="+eqsymbol)
+      var url11 = 'https://opstra.definedge.com/api/openinterest/futuresbuildup' 
+      request(url11, function (error, response, html) {
+        if (!error) {
+          console.log(response)
+          //res.json(JSON.parse(response.body))
+  
+  
+        }
+      })
+  
+  
+    })
+
+  
+  
+  
+  
   //To get stock data from Opstra
   app.get('/api/opstrastockdata', function (req, res) {
     let nextexpirymonthly = req.query.nextexpirymonthly

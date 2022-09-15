@@ -56,4 +56,9 @@
     display:none;
     
   }
+  :host ::ng-deep .chart{
+    width:300px;
+    height:400px;
+    
+  }
 }
