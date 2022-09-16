@@ -506,6 +506,25 @@ this.pcrnsenifty=(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].totOI)
       console.log(err)
     })
   }
+  gettrendlynecookie() {
+    this.dataApi.gettrendlynecookie().subscribe(data5 => {
+
+
+    }, err => {
+      console.log(err)
+    }
+    );
+  }
+  getopstracookie() {
+    this.dataApi.getopstracookie().subscribe(data5 => {
+
+
+    }, err => {
+      console.log(err)
+    }
+    );
+  }
+ 
       
    
   getmcvolume() {

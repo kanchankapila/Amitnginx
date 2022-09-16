@@ -9,6 +9,7 @@ const numCPUs = require('os').cpus().length;
 let chrome = require('selenium-webdriver/chrome');
 let { Builder } = require('selenium-webdriver')
 let opts = new chrome.Options();
+const swd = require("selenium-webdriver");
 var app = express();
 
 
@@ -48,7 +49,7 @@ const options = {
 //     console.error(err);
 //   }
 
-process.env.trendlynecookie='_gid=GA1.2.812417360.1660563111; .trendlyne=lbssa9ud0dzwe7pajkkgcoagb2oe4y0c; csrftoken=HexhaQcggvkg1VIsRoeFdNmiJO0ggbdPLW3UKUit2S1hSjJ1v4kMSpjkkJUNugWR; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=GA1.2.775644955.1603113261; _gat=1',
+
 process.env.kseccookie='_fbp=fb.1.1653745914138.1241231693; _ga=GA1.2.1340509370.1653745738; _gcl_au=1.1.873030795.1653745910; _nv_ab_cid=["4032","3490","2420","3655"]; _nv_ab_ver_6941_3655=4515; _nv_banner_x=22686; _nv_did=253330646.1653745752.1585996377122177135239zqaz7; _nv_hit=253330646.1656570370.cHZpZXc9MXxzdmlldz1bIjIyNjg2Il0=; _nv_uid=253330646.1653745752.46ba573e-2c31-47df-bc30-44347db76191.1655322664.1656570370.7.0; _nv_utm=253330646.1653745752.7.2.dXRtc3JjPWdvb2dsZXx1dG1jY249KG5vdCBzZXQpfHV0bWNtZD1vcmdhbmljfHV0bWN0cj0obm90IHByb3ZpZGVkKXx1dG1jY3Q9KG5vdCBzZXQpfGdjbGlkPShub3Qgc2V0KQ==; _uetsid=8bc2f710f83d11ecbfed9509e099e362; _uetvid=53ce8fa0de8d11ec8991b5e9297a9184; ORG36141=cab000d5-e326-4945-b583-d453ad82e69a; __stdf=0; __stp={"visit":"returning","uuid":"2d792579-e291-4484-a4e6-d3f4ad444a47","ck":"A0YS2"}; ASP.NET_SessionId=jvmmmyylyzpu1aha22qn0vjm; userTheme=; _gid=GA1.2.1570676169.1660565568; __stgeo="0"; AppConnection=A0YS2-53e4cc48770741b494dc146365c72d3b; __stbpnenable=0; _PLATFORMAUTH=7A2DE2AE1312F943A590973272B8E310B715E3A79C4EA0F36C7DD5C993414E86A75AB50F0F26D7E3EF3E4F8F38C60C8B1EED75CF237D161F62BA3FC2738D62B2E942D6497F2C21B6062BBAFCB68E08F6A3DF3EC4D88E722AFCBE357BC976C3D62901F026330508351B16558B00CAC6901C690DB20657B0939A64A1CEEE4429DC46FEF559522BDEEC2529D1D76843D4425535645AECA0B7712C159F1525E3908DBB69074BEFF4A6155770E15A2A80C04A7B6982E84AA500EBFECA51AA41DC24DF16705DE6C1B2C646080DB760E75C7135F0B7D6A503007A2FABED9377E3CCA6BBDFEED17C5109103736707A404D46880DD76D925C46392701C7002D6C889F485F04B3BA88643F94936DEFF6088255D87026442C8A61A10A3D5CA65044F9910F50661353D6F905CD895FA774CF97EBF6544BF9AFADCF8584014ED50ECF889B19D0CCA97ACCADCFA02107C3C5C1F160FDD65A2E7EA529CA85E516A2EC99143F0120A5202D3811D69D714DC4A62C4DFBB61B2E9D9F5BC23FB7A6F58F678E5BBE49F2DC1CA16465BC8347F46D0B60490E97EB3EE708A5011758AEAE33B42EF91BD09623AD0463B2227CDF74AFA6542D90C1BA589D7C94ACF36F61C0497445979C4F7BA69317690FBF496CA44CBB8E64F5C7A5523BBB98B6DE851F5631F684316E0194D61F22044EA27D6DB21FFEF3B567576114E0D2C475503CC392A770972E850A9A5CF40B77C8C8482A204236C8595C3333E5FF59F1BBE865EF68BCD913FC219143F1586251803983F6013D358108CB73D3BAE98AE31CEBAA92F2C67CF791CC8F185A7A0A463CA34686094B87AD8940B7C6F77451620A53DC6166C856D109B45060236DDAF98F5CD4C07F5D1E748AA2B91892F7F89C12578B6EA8718D69891942E1E3F0F0FD140DCF53F11844D4EE57125F4A61565DECB741A5185FE7F82C889931817FAE40; _gat_UA-10523021-12=1;'
 var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
@@ -802,9 +803,9 @@ if (cluster.isMaster) {
   // }
 // Include selenium webdriver 
 
- let swd = require("selenium-webdriver"); 
-app.get('/api/trendlynecookie', function (req, res) {
-
+ 
+app.get('/api/trendlynecookie', async function (req, res) {
+   
   let driver = new Builder()
   .forBrowser('chrome')
   .setChromeOptions(opts.headless())
@@ -813,7 +814,7 @@ app.get('/api/trendlynecookie', function (req, res) {
   // Step 1 - Opening the geeksforgeeks sign in page 
 let tabToOpen = 
 
-    driver.get("https://trendlyne.com/visitor/loginmodal/"); 
+     driver.get("https://trendlyne.com/visitor/loginmodal/"); 
 tabToOpen 
 
     .then(function () { 
@@ -839,7 +840,7 @@ tabToOpen
 
         let promiseUsernameBox = 
 
-            driver.findElement(swd.By.id("id_login")); 
+         driver.findElement(swd.By.id("id_login")); 
 
         return promiseUsernameBox; 
 
@@ -863,7 +864,7 @@ tabToOpen
 
         console.log( 
 
-            "Username entered successfully in"  
+            "Username entered successfully in Trendlyne"  
 
         ); 
 
@@ -873,7 +874,7 @@ tabToOpen
 
         let promisePasswordBox = 
 
-            driver.findElement(swd.By.id("id_password")); 
+         driver.findElement(swd.By.id("id_password")); 
 
         return promisePasswordBox; 
 
@@ -885,44 +886,46 @@ tabToOpen
         passwordBox.sendKeys('amit0605\n'); 
         return promiseFillPassword;}).then(function () { 
     console.log("Successfully signed in Trendlyne!"); 
-      driver.manage().getCookie('.trendlyne').then(function (cookiestl) {
+     driver.manage().getCookie('.trendlyne').then(function (cookiestl) {
         
         process.env.trendlynecookietl = cookiestl.value;
         
       });
-      driver.manage().getCookie('_gat').then(function (cookiesgat) {
-        console.log(cookiesgat.value)
+       driver.manage().getCookie('_gat').then(function (cookiesgat) {
+        
         process.env.trendlynecookiegat = cookiesgat.value;
         
       });
-      driver.manage().getCookie('_gid').then(function (cookiesgid) {
+        driver.manage().getCookie('_gid').then(function (cookiesgid) {
      console.log(cookiesgid.value)
      process.env.trendlynecookiegid = cookiesgid.value;
         
       });
-          driver.manage().getCookie('csrftoken').then(function (cookiescsrf) {
+     driver.manage().getCookie('csrftoken').then(function (cookiescsrf) {
         // console.log(cookiescsrf.value)
         
         process.env.trendlynecookiecsrf = cookiescsrf.value;
         
       });
-          driver.manage().getCookie('_ga').then(function (cookiesga) {
+        driver.manage().getCookie('_ga').then(function (cookiesga) {
             process.env.trendlynecookiega = cookiesga.value;
         
-       console.log(process.env.trendlynecookiecsrf)
+       console.log(process.env.trendlynecookiegid)
           process.env.trendlynecookie =
             '_gid=' + process.env.trendlynecookiegid + '; .trendlyne=' +process.env.trendlynecookietl + '; csrftoken=' + process.env.trendlynecookiecsrf + '; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=' + process.env.trendlynecookiega + '; _gat=1',
             console.log( process.env.trendlynecookie)
        
          
-      });
+          });
+          
       
-    }).catch(function (err) { console.log("Error ", err, " occurred!"); });
+        }).catch(function (err) { console.log("Error ", err, " occurred!"); });
+        // await driver.quit();
   });
 
-  app.get('/api/opstracookie', function (req, res) {
+  app.get('/api/opstracookie', async function (req, res) {
 
-    let driver = new Builder()
+    let driver1 = new Builder()
     .forBrowser('chrome')
     .setChromeOptions(opts.headless())
     .build();
@@ -930,7 +933,7 @@ tabToOpen
     // Step 1 - Opening the geeksforgeeks sign in page 
   let tabToOpen = 
   
-      driver.get("https://sso.definedge.com/auth/realms/definedge/protocol/openid-connect/auth?response_type=code&client_id=opstra&redirect_uri=https://opstra.definedge.com/ssologin&state=e2cf559f-356c-425a-87e3-032097f643d0&login=true&scope=openid"); 
+      driver1.get("https://sso.definedge.com/auth/realms/definedge/protocol/openid-connect/auth?response_type=code&client_id=opstra&redirect_uri=https://opstra.definedge.com/ssologin&state=e2cf559f-356c-425a-87e3-032097f643d0&login=true&scope=openid"); 
   tabToOpen 
   
       .then(function () { 
@@ -938,7 +941,7 @@ tabToOpen
   
           let findTimeOutP = 
   
-              driver.manage().setTimeouts({ 
+              driver1.manage().setTimeouts({ 
   
                   implicit: 5000, // 10 seconds 
   
@@ -956,7 +959,7 @@ tabToOpen
   
           let promiseUsernameBox = 
   
-              driver.findElement(swd.By.id("username")); 
+              driver1.findElement(swd.By.id("username")); 
   
           return promiseUsernameBox; 
   
@@ -980,7 +983,7 @@ tabToOpen
   
           console.log( 
   
-              "Username entered successfully in"  
+              "Username entered successfully in Opstra"  
   
           ); 
   
@@ -990,7 +993,7 @@ tabToOpen
   
           let promisePasswordBox = 
   
-              driver.findElement(swd.By.id("password")); 
+              driver1.findElement(swd.By.id("password")); 
   
           return promisePasswordBox; 
   
@@ -1002,21 +1005,24 @@ tabToOpen
           passwordBox.sendKeys('amit0605\n'); 
           return promiseFillPassword;}).then(function () { 
       console.log("Successfully signed in Trendlyne!"); 
-        driver.manage().getCookie('_gid').then(function (cookiesopgid) {
+        driver1.manage().getCookie('_gid').then(function (cookiesopgid) {
           process.env.opstracookiegid=cookiesopgid.value
         })
-        driver.manage().getCookie('_gat').then(function (cookiesopgat) {
+        driver1.manage().getCookie('_gat').then(function (cookiesopgat) {
             process.env.opstracookiegat=cookiesopgat.value
         })
-        driver.manage().getCookie('_ga').then(function (cookiesopga) {
+        driver1.manage().getCookie('_ga').then(function (cookiesopga) {
               process.env.opstracookiega=cookiesopga.value
         })
-        driver.manage().getCookie('JSESSIONID').then(function (cookiesopjsid) {
+        driver1.manage().getCookie('JSESSIONID').then(function (cookiesopjsid) {
                 process.env.opstracookiejsid = cookiesopjsid.value
                 process.env.opstracookie = '_ga=' + process.env.opstracookiejsid + '; _gid=' + process.env.opstracookiegid + '; _gat=' + process.env.opstracookiegat + '; JSESSIONID=' + process.env.opstracookiejsid
                 console.log(process.env.opstracookie)
-                })
-      }).catch(function (err) { console.log("Error ", err, " occurred!"); });
+        })
+           
+            // swd.close();
+          }).catch(function (err) { console.log("Error ", err, " occurred!"); });
+          await driver1.quit();
     });
 
    

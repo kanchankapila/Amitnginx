@@ -587,8 +587,7 @@ export class ShareComponent implements OnInit {
       this.bqnames = this.stockList.filter(i => i.isin == params.stock)[0].bqname
       this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
     });
-    this.gettrendlynecookie();
-    this.getopstracookie();
+    
     this.gettrendlynestocks2(this.tlid)
     //this.gettrendlynestocks3(this.tlid)
     this.getshare3m(this.eqsymbol)
@@ -618,12 +617,6 @@ export class ShareComponent implements OnInit {
     this.getntstockdetails(this.eqsymbol)
   }
   
-  gettrendlynecookie() {
-    this.dataApi.gettrendlynecookie();
-  }
-  getopstracookie() {
-    this.dataApi.getopstracookie();
-  }
   
  
   
