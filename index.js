@@ -1561,26 +1561,7 @@ tabToOpen
 
     res.sendFile(path.join(__dirname, '/dist/amitnginx/index.html'));
   });
-  //   https.createServer(app, function (req, res) {
-    
-  //       key: fs.readFileSync('key.pem'),
-  //       cert: fs.readFileSync('cert.pem')
-    
-  //   res.writeHead(200);
-  //   res.end("hello world\n")
-  // }).listen(3000);
-  // console.log("!!!! Your app is listening on"+'3000')
-  // https.createServer({
-
-  //   key: fs.readFileSync('key.pem'),
-  //   cert: fs.readFileSync('cert.pem')
-  
-  // }, app).listen(process.env.PORT || 3000, function () {
-  
-  //   console.log('Example app listening on port 3000! Go to https://localhost:3000/')
-  // })
   app.listen( process.env.PORT || 3000, function () {
     console.log('Your node is running on port 3000');
   })
-  // https.createServer(options, app).listen(process.env.PORT);
-}
+ }
