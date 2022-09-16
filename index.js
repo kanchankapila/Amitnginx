@@ -6,7 +6,9 @@ const cluster = require('cluster');
 const { Pool, Client } = require('pg')
 var compression = require('compression');
 const numCPUs = require('os').cpus().length;
-
+let chrome = require('selenium-webdriver/chrome');
+let { Builder } = require('selenium-webdriver')
+let opts = new chrome.Options();
 var app = express();
 
 
@@ -800,35 +802,28 @@ if (cluster.isMaster) {
   // }
 // Include selenium webdriver 
 
-let swd = require("selenium-webdriver"); 
+ let swd = require("selenium-webdriver"); 
+app.get('/api/123', function (req, res) {
 
-let browser = new swd.Builder(); 
+  let driver = new Builder()
+  .forBrowser('chrome')
+  .setChromeOptions(opts.headless())
+  .build();
 
-let tab = browser.forBrowser("chrome").build(); 
-
-  
-// Get the credentials from the JSON file 
-
-
-
-  
-// Step 1 - Opening the geeksforgeeks sign in page 
+  // Step 1 - Opening the geeksforgeeks sign in page 
 let tabToOpen = 
 
-    tab.get("https://trendlyne.com/login"); 
+    driver.get("https://trendlyne.com/visitor/loginmodal/"); 
 tabToOpen 
 
     .then(function () { 
-
-  
-
-        // Timeout to wait if connection is slow 
+// Timeout to wait if connection is slow 
 
         let findTimeOutP = 
 
-            tab.manage().setTimeouts({ 
+            driver.manage().setTimeouts({ 
 
-                implicit: 10000, // 10 seconds 
+                implicit: 5000, // 10 seconds 
 
             }); 
 
@@ -844,7 +839,7 @@ tabToOpen
 
         let promiseUsernameBox = 
 
-            tab.findElement(swd.By.css("#luser")); 
+            driver.findElement(swd.By.id("id_login")); 
 
         return promiseUsernameBox; 
 
@@ -868,9 +863,7 @@ tabToOpen
 
         console.log( 
 
-            "Username entered successfully in" + 
-
-            "'login demonstration' for GEEKSFORGEEKS"
+            "Username entered successfully in"  
 
         ); 
 
@@ -880,76 +873,153 @@ tabToOpen
 
         let promisePasswordBox = 
 
-            tab.findElement(swd.By.css("#password")); 
+            driver.findElement(swd.By.id("id_password")); 
 
         return promisePasswordBox; 
 
     }) 
 
     .then(function (passwordBox) { 
-
-  
-
         // Step 5 - Entering the password 
-
         let promiseFillPassword = 
+        passwordBox.sendKeys('amit0605\n'); 
+        return promiseFillPassword;}).then(function () { 
+    console.log("Successfully signed in Trendlyne!"); 
+      driver.manage().getCookie('.trendlyne').then(function (cookiestl) {
+        
+        process.env.trendlynecookietl = cookiestl.value;
+        
+      });
+      driver.manage().getCookie('_gat').then(function (cookiesgat) {
+        console.log(cookiesgat.value)
+        process.env.trendlynecookiegat = cookiesgat.value;
+        
+      });
+      driver.manage().getCookie('_gid').then(function (cookiesgid) {
+     console.log(cookiesgid.value)
+     process.env.trendlynecookiegid = cookiesgid.value;
+        
+      });
+          driver.manage().getCookie('csrftoken').then(function (cookiescsrf) {
+        // console.log(cookiescsrf.value)
+        
+        process.env.trendlynecookiecsrf = cookiescsrf.value;
+        
+      });
+          driver.manage().getCookie('_ga').then(function (cookiesga) {
+            process.env.trendlynecookiega = cookiesga.value;
+        
+       console.log(process.env.trendlynecookiecsrf)
+          process.env.trendlynecookie =
+            '_gid=' + process.env.trendlynecookiegid + '; .trendlyne=' +process.env.trendlynecookietl + '; csrftoken=' + process.env.trendlynecookiecsrf + '; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=' + process.env.trendlynecookiega + '; _gat=1',
+            console.log( process.env.trendlynecookie)
+       
+         
+      });
+      
+    }).catch(function (err) { console.log("Error ", err, " occurred!"); });
+  });
 
-            passwordBox.sendKeys('amit0605'); 
+  app.get('/api/456', function (req, res) {
 
-        return promiseFillPassword; 
-
-    }) 
-
-    .then(function () { 
-
-        console.log( 
-
-            "Password entered successfully in" + 
-
-            " 'login demonstration' for GEEKSFORGEEKS"
-
-        ); 
-
+    let driver = new Builder()
+    .forBrowser('chrome')
+    .setChromeOptions(opts.headless())
+    .build();
   
-
-        // Step 6 - Finding the Sign In button 
-
-        let promiseSignInBtn = tab.findElement( 
-
-            swd.By.css(".btn.btn-green.signin-button") 
-
-        ); 
-
-        return promiseSignInBtn; 
-
-    }) 
-
-    .then(function (signInBtn) { 
-
+    // Step 1 - Opening the geeksforgeeks sign in page 
+  let tabToOpen = 
   
-
-        // Step 7 - Clicking the Sign In button 
-
-        let promiseClickSignIn = signInBtn.click(); 
-
-        return promiseClickSignIn; 
-
-    }) 
-
-    .then(function () { 
-
-        console.log("Successfully signed in GEEKSFORGEEKS!"); 
-
-    }) 
-
-    .catch(function (err) { 
-
-        console.log("Error ", err, " occurred!"); 
-
+      driver.get("https://sso.definedge.com/auth/realms/definedge/protocol/openid-connect/auth?response_type=code&client_id=opstra&redirect_uri=https://opstra.definedge.com/ssologin&state=e2cf559f-356c-425a-87e3-032097f643d0&login=true&scope=openid"); 
+  tabToOpen 
+  
+      .then(function () { 
+  // Timeout to wait if connection is slow 
+  
+          let findTimeOutP = 
+  
+              driver.manage().setTimeouts({ 
+  
+                  implicit: 5000, // 10 seconds 
+  
+              }); 
+  
+          return findTimeOutP; 
+  
+      }) 
+  
+      .then(function () { 
+  
+    
+  
+          // Step 2 - Finding the username input 
+  
+          let promiseUsernameBox = 
+  
+              driver.findElement(swd.By.id("username")); 
+  
+          return promiseUsernameBox; 
+  
+      }) 
+  
+      .then(function (usernameBox) { 
+  
+    
+  
+          // Step 3 - Entering the username 
+  
+          let promiseFillUsername = 
+  
+              usernameBox.sendKeys('amit.kapila.2009@gmail.com'); 
+  
+          return promiseFillUsername; 
+  
+      }) 
+  
+      .then(function () { 
+  
+          console.log( 
+  
+              "Username entered successfully in"  
+  
+          ); 
+  
+    
+  
+          // Step 4 - Finding the password input 
+  
+          let promisePasswordBox = 
+  
+              driver.findElement(swd.By.id("password")); 
+  
+          return promisePasswordBox; 
+  
+      }) 
+  
+      .then(function (passwordBox) { 
+          // Step 5 - Entering the password 
+          let promiseFillPassword = 
+          passwordBox.sendKeys('amit0605\n'); 
+          return promiseFillPassword;}).then(function () { 
+      console.log("Successfully signed in Trendlyne!"); 
+        driver.manage().getCookie('_gid').then(function (cookiesopgid) {
+          process.env.opstracookiegid=cookiesopgid.value
+        })
+        driver.manage().getCookie('_gat').then(function (cookiesopgat) {
+            process.env.opstracookiegat=cookiesopgat.value
+        })
+        driver.manage().getCookie('_ga').then(function (cookiesopga) {
+              process.env.opstracookiega=cookiesopga.value
+        })
+        driver.manage().getCookie('JSESSIONID').then(function (cookiesopjsid) {
+                process.env.opstracookiejsid = cookiesopjsid.value
+                process.env.opstracookie = '_ga=' + process.env.opstracookiejsid + '; _gid=' + process.env.opstracookiegid + '; _gat=' + process.env.opstracookiegat + '; JSESSIONID=' + process.env.opstracookiejsid
+                console.log(process.env.opstracookie)
+                })
+      }).catch(function (err) { console.log("Error ", err, " occurred!"); });
     });
 
-
-
+   
 
   app.get('/api/nsedatastockoi', function (req, res) {
     let stock = req.query.stock
@@ -1097,28 +1167,53 @@ tabToOpen
 
 
   })
-  //To get BANK NIFTY Data from Opstra
-  // const instanceopstra = axios.create({ withCredentials: true ,auth: {
-  //   username: 'amit.kapila.2009@gmail.com',
-  //   password: 'amit0605'
-  // }});
-  // axiosCookieJarSupport(instanceopstra);
-  // instanceopstra.defaults.jar = new tough.CookieJar()
-  // app.get('/api/opstradatalongbuildup', function (req, res) {
- 
-     
-  //   instanceopstra.get('https://opstra.definedge.com/')
-  //       .then(data => instanceopstra.get('https://opstra.definedge.com/api/openinterest/futuresbuildup'))
-  //       .then(data => console.log(data))
-  //       .catch(data => console.error(res.response))
-  //   })
   
+  app.get('/api/opstradatalongbuildup', (req, res) => {
+    
+    console.log("This is Opstradata")
+    var url11 = 'https://opstra.definedge.com/api/openinterest/futuresbuildup';
+    request(url11, function (error, response, html) {
+      if (!error) {
+   
+
+        var options2 = {
+          url: 'https://opstra.definedge.com/api/openinterest/futuresbuildup',
+          method: 'GET', // Don't forget this line
+          "headers": {
+            "accept": "application/json, text/plain, */*",
+            "accept-language": "en-US,en;q=0.9",
+            "sec-ch-ua": "\"Google Chrome\";v=\"105\", \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"105\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "same-origin",
+            
+            "Referrer-Policy": "strict-origin-when-cross-origin",
+            "cookie": process.env.opstracookie,
+            
+          },
+          "body": null,
+          "method": "GET"
+        };
+          request(options2, (err, response, body) => {
+          if (err) {
+            //console.log(err);
+          } else {
+            (res.json(JSON.parse(body)));
+          
+          }
+        });
+      }
+    })
+  
+  })
+
 
    
     app.get('/api/opstradatalongbuildup', function (req, res) {
   
    
-      //console.log("nextexpirymonthly="+nextexpirymonthly,"symbol="+eqsymbol)
       var url11 = 'https://opstra.definedge.com/api/openinterest/futuresbuildup' 
       request(url11, function (error, response, html) {
         if (!error) {
