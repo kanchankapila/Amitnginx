@@ -803,7 +803,7 @@ if (cluster.isMaster) {
 // Include selenium webdriver 
 
  let swd = require("selenium-webdriver"); 
-app.get('/api/123', function (req, res) {
+app.get('/api/trendlynecookie', function (req, res) {
 
   let driver = new Builder()
   .forBrowser('chrome')
@@ -920,7 +920,7 @@ tabToOpen
     }).catch(function (err) { console.log("Error ", err, " occurred!"); });
   });
 
-  app.get('/api/456', function (req, res) {
+  app.get('/api/opstracookie', function (req, res) {
 
     let driver = new Builder()
     .forBrowser('chrome')
