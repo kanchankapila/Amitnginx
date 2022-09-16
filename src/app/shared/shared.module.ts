@@ -16,7 +16,7 @@ import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
  import { MatCardModule } from '@angular/material/card';
  import { MatIconModule } from '@angular/material/icon';
- import { CookieService } from 'ngx-cookie-service';
+
 
 
 const routes : Routes = [
@@ -48,7 +48,7 @@ const routes : Routes = [
   ],
   exports:[SidebarComponent,NavbarComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [DatePipe,CookieService]
+  providers: [DatePipe]
   
 })
 export class SharedModule { }

@@ -3,7 +3,7 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import * as stocks from '../../lists/stocklist';
 import * as stocks1 from '../../lists/list1';
 import { DatePipe } from '@angular/common';
-import { CookieService } from 'ngx-cookie-service';
+
 import {MenuItem} from 'primeng/api';
 import {SelectItem} from 'primeng/api';
 import {SelectItemGroup} from 'primeng/api';
@@ -19,11 +19,11 @@ import * as etstock from '../../lists/etlist'
 
 import axios from 'axios';
 
-import  wrapper  from 'axios-cookiejar-support';
-import { CookieJar } from 'tough-cookie';
+// import  wrapper  from 'axios-cookiejar-support';
+// import { CookieJar } from 'tough-cookie';
 
-const jar = new CookieJar();
-const client = wrapper(axios.create({ jar }));
+// const jar = new CookieJar();
+// const client = wrapper(axios.create({ jar }));
 
 
 
@@ -157,7 +157,7 @@ export class NavbarComponent implements OnInit {
   date5: any;
   res;
 
-  constructor(private cookieService: CookieService ,private datePipe: DatePipe,private http: HttpClient,private primengConfig: PrimeNGConfig,config: NgbDropdownConfig, private window: Window, private route: ActivatedRoute, private router: Router,private dataApi: DataapiService) {
+  constructor(private datePipe: DatePipe,private http: HttpClient,private primengConfig: PrimeNGConfig,config: NgbDropdownConfig, private window: Window, private route: ActivatedRoute, private router: Router,private dataApi: DataapiService) {
     config.placement = 'bottom-right'; this.items = [];
     this.stock = stocks.default.Data;
     
@@ -171,11 +171,7 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit() {
-    this.cookieService.set( 'name', 'Test Cookie' ); // To Set Cookie
-    this.cookieValue = this.cookieService.get('JSESSIONID');
-    console.log(this.cookieValue);
    
-   console.log(document.cookie)
     this.test1();
     this.today = new Date();
     this.datetoday = this.datePipe.transform(this.today, 'yyyy-MM-dd')
@@ -258,22 +254,22 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  async test1(){
+   test1(){
 
-await client.get('https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr',{
-  method: 'GET',
+// // await client.get('https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr',{
+//   method: 'GET',
   
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json',
-  },
-  withCredentials: true,
-})
+//   headers: {
+//     'Access-Control-Allow-Origin': '*',
+//     'Content-Type': 'application/json',
+//   },
+//   withCredentials: true,
+// })
    
-  .then((response) => {
-    console.log(response.data);
+//   .then((response) => {
+//     console.log(response.data);
    
-  });
+  // });
     
     }
 
