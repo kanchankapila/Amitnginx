@@ -6,12 +6,13 @@ const cluster = require('cluster');
 const { Pool, Client } = require('pg')
 var compression = require('compression');
 const numCPUs = require('os').cpus().length;
-let chrome = require('selenium-webdriver/chrome');
-let { Builder } = require('selenium-webdriver')
-let opts = new chrome.Options();
+// let chrome = require('selenium-webdriver/chrome');
+// let { Builder } = require('selenium-webdriver')
+// let opts = new chrome.Options();
 const swd = require("selenium-webdriver");
 var app = express();
-
+const webdriver = require('selenium-webdriver');
+const chrome = require('selenium-webdriver/chrome');
 
 
 // /const redis = require('redis');
@@ -806,10 +807,20 @@ if (cluster.isMaster) {
  
 app.get('/api/trendlynecookie', async function (req, res) {
    
-  let driver = new Builder()
+  let options = new chrome.Options();
+//Below arguments are critical for Heroku deployment
+options.addArguments("--headless");
+options.addArguments("--disable-gpu");
+  options.addArguments("--no-sandbox");
+  
+  let driver = new webdriver.Builder()
   .forBrowser('chrome')
-  .setChromeOptions(opts.headless())
+  .setChromeOptions(options)
   .build();
+  // let driver = new Builder()
+  // .forBrowser('chrome')
+  // .setChromeOptions(opts.headless())
+  // .build();
 
   // Step 1 - Opening the geeksforgeeks sign in page 
 let tabToOpen = 
@@ -914,21 +925,27 @@ tabToOpen
           process.env.trendlynecookie =
             '_gid=' + process.env.trendlynecookiegid + '; .trendlyne=' +process.env.trendlynecookietl + '; csrftoken=' + process.env.trendlynecookiecsrf + '; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=' + process.env.trendlynecookiega + '; _gat=1',
             console.log( process.env.trendlynecookie)
-       
+            driver.quit(); 
          
           });
-          
+         
       
         }).catch(function (err) { console.log("Error ", err, " occurred!"); });
-        // await driver.quit();
+         
   });
 
   app.get('/api/opstracookie', async function (req, res) {
 
-    let driver1 = new Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(opts.headless())
-    .build();
+    let options1 = new chrome.Options();
+//Below arguments are critical for Heroku deployment
+options1.addArguments("--headless");
+options1.addArguments("--disable-gpu");
+  options1.addArguments("--no-sandbox");
+  
+  let driver1 = new webdriver.Builder()
+  .forBrowser('chrome')
+  .setChromeOptions(options)
+  .build();
   
     // Step 1 - Opening the geeksforgeeks sign in page 
   let tabToOpen = 
@@ -1022,7 +1039,7 @@ tabToOpen
            
             // swd.close();
           }).catch(function (err) { console.log("Error ", err, " occurred!"); });
-          await driver1.quit();
+           driver1.quit();
     });
 
    
