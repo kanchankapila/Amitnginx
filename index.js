@@ -843,7 +843,7 @@ if (cluster.isMaster) {
     //.catch(data => console.error(res.response.data))
   })
   //* Nifty Stock showing increase in OI
-  app.get('/api/nsedatasioi', function (req, res) {
+  app.get('/api/nsedatasioi',cors(), function (req, res) {
     let stock = req.query.stock
     instance.get('https://www.nseindia.com/')
       .then(data => instance.get('https://www1.nseindia.com/live_market/dynaContent/live_analysis/oi_spurts/topPositiveOIChangeData.json'))
@@ -864,7 +864,7 @@ if (cluster.isMaster) {
   })
 
 //* NSE Data for Bank Nifty Open Interest
-  app.get('/api/nsedatabniftyoi', function (req, res) {
+  app.get('/api/nsedatabniftyoi',cors(), function (req, res) {
     let stock = req.query.stock
     instance.get('https://www.nseindia.com/')
       .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY'))
