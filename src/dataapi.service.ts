@@ -41,6 +41,12 @@ export class DataapiService {
    
     return this.http.post(this.baseurl + '/nsepostdata2',eqsymbol1) 
   }
+  getnsedataniftyoi() {
+    return this.http.get(this.baseurl + '/nsedataniftyoi')
+  }
+  getnsedatabniftyoi() {
+    return this.http.get(this.baseurl + '/nsedatabniftyoi')
+  }
   getnteodscreeners(ntoptions) {
     return this.http.post(this.baseurl + '/nteodscreeners',ntoptions)
   console.log(ntoptions)

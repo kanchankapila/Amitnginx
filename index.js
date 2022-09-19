@@ -6,17 +6,10 @@ const cluster = require('cluster');
 const { Pool, Client } = require('pg')
 var compression = require('compression');
 const numCPUs = require('os').cpus().length;
-// let chrome = require('selenium-webdriver/chrome');
-// let { Builder } = require('selenium-webdriver')
-// let opts = new chrome.Options();
 const swd = require("selenium-webdriver");
 var app = express();
 const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
-
-
-// /const redis = require('redis');
-// const client = redis.createClient();
 const cors = require('cors');
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
@@ -54,7 +47,6 @@ const options = {
 process.env.kseccookie='_fbp=fb.1.1653745914138.1241231693; _ga=GA1.2.1340509370.1653745738; _gcl_au=1.1.873030795.1653745910; _nv_ab_cid=["4032","3490","2420","3655"]; _nv_ab_ver_6941_3655=4515; _nv_banner_x=22686; _nv_did=253330646.1653745752.1585996377122177135239zqaz7; _nv_hit=253330646.1656570370.cHZpZXc9MXxzdmlldz1bIjIyNjg2Il0=; _nv_uid=253330646.1653745752.46ba573e-2c31-47df-bc30-44347db76191.1655322664.1656570370.7.0; _nv_utm=253330646.1653745752.7.2.dXRtc3JjPWdvb2dsZXx1dG1jY249KG5vdCBzZXQpfHV0bWNtZD1vcmdhbmljfHV0bWN0cj0obm90IHByb3ZpZGVkKXx1dG1jY3Q9KG5vdCBzZXQpfGdjbGlkPShub3Qgc2V0KQ==; _uetsid=8bc2f710f83d11ecbfed9509e099e362; _uetvid=53ce8fa0de8d11ec8991b5e9297a9184; ORG36141=cab000d5-e326-4945-b583-d453ad82e69a; __stdf=0; __stp={"visit":"returning","uuid":"2d792579-e291-4484-a4e6-d3f4ad444a47","ck":"A0YS2"}; ASP.NET_SessionId=jvmmmyylyzpu1aha22qn0vjm; userTheme=; _gid=GA1.2.1570676169.1660565568; __stgeo="0"; AppConnection=A0YS2-53e4cc48770741b494dc146365c72d3b; __stbpnenable=0; _PLATFORMAUTH=7A2DE2AE1312F943A590973272B8E310B715E3A79C4EA0F36C7DD5C993414E86A75AB50F0F26D7E3EF3E4F8F38C60C8B1EED75CF237D161F62BA3FC2738D62B2E942D6497F2C21B6062BBAFCB68E08F6A3DF3EC4D88E722AFCBE357BC976C3D62901F026330508351B16558B00CAC6901C690DB20657B0939A64A1CEEE4429DC46FEF559522BDEEC2529D1D76843D4425535645AECA0B7712C159F1525E3908DBB69074BEFF4A6155770E15A2A80C04A7B6982E84AA500EBFECA51AA41DC24DF16705DE6C1B2C646080DB760E75C7135F0B7D6A503007A2FABED9377E3CCA6BBDFEED17C5109103736707A404D46880DD76D925C46392701C7002D6C889F485F04B3BA88643F94936DEFF6088255D87026442C8A61A10A3D5CA65044F9910F50661353D6F905CD895FA774CF97EBF6544BF9AFADCF8584014ED50ECF889B19D0CCA97ACCADCFA02107C3C5C1F160FDD65A2E7EA529CA85E516A2EC99143F0120A5202D3811D69D714DC4A62C4DFBB61B2E9D9F5BC23FB7A6F58F678E5BBE49F2DC1CA16465BC8347F46D0B60490E97EB3EE708A5011758AEAE33B42EF91BD09623AD0463B2227CDF74AFA6542D90C1BA589D7C94ACF36F61C0497445979C4F7BA69317690FBF496CA44CBB8E64F5C7A5523BBB98B6DE851F5631F684316E0194D61F22044EA27D6DB21FFEF3B567576114E0D2C475503CC392A770972E850A9A5CF40B77C8C8482A204236C8595C3333E5FF59F1BBE865EF68BCD913FC219143F1586251803983F6013D358108CB73D3BAE98AE31CEBAA92F2C67CF791CC8F185A7A0A463CA34686094B87AD8940B7C6F77451620A53DC6166C856D109B45060236DDAF98F5CD4C07F5D1E748AA2B91892F7F89C12578B6EA8718D69891942E1E3F0F0FD140DCF53F11844D4EE57125F4A61565DECB741A5185FE7F82C889931817FAE40; _gat_UA-10523021-12=1;'
 var csrfProtection = csrf({ cookie: true });
 var parseForm = bodyParser.urlencoded({ extended: false });
-
 const axios = require('axios');
 var html2json = require('html2json').html2json;
    
@@ -119,12 +111,12 @@ if (cluster.isMaster) {
   //   port: "5432"
   
   // })
-  
+  // *   Postgres Settings for Heroku Postgres DB and local DB
   const client = new Client({
     connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit'
   });
   
-  const pool = new Pool({  connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit' })
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit' })
 
 
 
@@ -141,13 +133,125 @@ if (cluster.isMaster) {
     
   });
 
-  //////////////////////////////////Moneycontrol Post request for MCvolume////////
+  // * To fetch Cookies from Trendlyne and Opstra
+  
+  // * To fetch Trendlyne session Cookies
+  app.get('/api/trendlynecookie', async function (req, res) {
+   
+    let options = new chrome.Options();
+  //Below arguments are critical for Heroku deployment
+  options.addArguments("--headless");
+  options.addArguments("--disable-gpu");
+    options.addArguments("--no-sandbox");
+    
+    let driver = new webdriver.Builder()
+    .forBrowser('chrome')
+    .setChromeOptions(options)
+    .build();
+   
+  let tabToOpen =driver.get("https://trendlyne.com/visitor/loginmodal/"); 
+  tabToOpen.then(function () { 
+        let findTimeOutP =driver.manage().setTimeouts({ implicit: 5000,}); 
+        return findTimeOutP; }) .then(function () { 
+          let promiseUsernameBox =driver.findElement(swd.By.id("id_login")); 
+          return promiseUsernameBox; }) .then(function (usernameBox) { 
+          let promiseFillUsername =usernameBox.sendKeys('amit.kapila.2009@gmail.com'); 
+          return promiseFillUsername; }).then(function () { 
+          console.log("Username entered successfully in Trendlyne"); 
+  
+          let promisePasswordBox =driver.findElement(swd.By.id("id_password")); 
+          return promisePasswordBox;}).then(function (passwordBox) { 
+        
+          let promiseFillPassword =passwordBox.sendKeys('amit0605\n'); 
+          return promiseFillPassword;}).then(function () { 
+      console.log("Successfully signed in Trendlyne!"); 
+       driver.manage().getCookie('.trendlyne').then(function (cookiestl) {
+          process.env.trendlynecookietl = cookiestl.value;});
+         driver.manage().getCookie('_gat').then(function (cookiesgat) {
+          
+          process.env.trendlynecookiegat = cookiesgat.value;});
+          driver.manage().getCookie('_gid').then(function (cookiesgid) {
+            process.env.trendlynecookiegid = cookiesgid.value;
+  });
+       driver.manage().getCookie('csrftoken').then(function (cookiescsrf) {
+          process.env.trendlynecookiecsrf = cookiescsrf.value;
+          
+        });
+          driver.manage().getCookie('_ga').then(function (cookiesga) {
+              process.env.trendlynecookiega = cookiesga.value;
+              process.env.trendlynecookie =
+              '_gid=' + process.env.trendlynecookiegid + '; .trendlyne=' +process.env.trendlynecookietl + '; csrftoken=' + process.env.trendlynecookiecsrf + '; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=' + process.env.trendlynecookiega + '; _gat=1',
+              driver.quit(); 
+           
+            });
+           
+        
+          }).catch(function (err) { console.log("Error ", err, " occurred!"); });
+           
+    });
+  
+    // * To fetch Opstra session Cookies
+  
+  app.get('/api/opstracookie', async function (req, res) {
+  
+      let options1 = new chrome.Options();
+  options1.addArguments("--headless");
+  options1.addArguments("--disable-gpu");
+    options1.addArguments("--no-sandbox");
+    
+    let driver1 = new webdriver.Builder()
+    .forBrowser('chrome')
+    .setChromeOptions(options)
+    .build();
+    
+   
+    let tabToOpen = driver1.get("https://sso.definedge.com/auth/realms/definedge/protocol/openid-connect/auth?response_type=code&client_id=opstra&redirect_uri=https://opstra.definedge.com/ssologin&state=e2cf559f-356c-425a-87e3-032097f643d0&login=true&scope=openid"); 
+    tabToOpen.then(function () { 
+    
+            let findTimeOutP =driver1.manage().setTimeouts({implicit: 5000,}); 
+            return findTimeOutP; }).then(function () { 
+              let promiseUsernameBox = 
+              driver1.findElement(swd.By.id("username")); 
+            return promiseUsernameBox;}).then(function (usernameBox) { 
+    
+            let promiseFillUsername = 
+                usernameBox.sendKeys('amit.kapila.2009@gmail.com'); 
+            return promiseFillUsername; 
+    
+        }).then(function () { 
+          console.log("Username entered successfully in Opstra"); 
+          let promisePasswordBox = 
+        driver1.findElement(swd.By.id("password")); 
+        return promisePasswordBox;}).then(function (passwordBox) { 
+            let promiseFillPassword = 
+            passwordBox.sendKeys('amit0605\n'); 
+            return promiseFillPassword;}).then(function () { 
+        console.log("Successfully signed in Opstra!"); 
+          driver1.manage().getCookie('_gid').then(function (cookiesopgid) {
+            process.env.opstracookiegid=cookiesopgid.value
+          })
+          driver1.manage().getCookie('_gat').then(function (cookiesopgat) {
+              process.env.opstracookiegat=cookiesopgat.value
+          })
+          driver1.manage().getCookie('_ga').then(function (cookiesopga) {
+                process.env.opstracookiega=cookiesopga.value
+          })
+          driver1.manage().getCookie('JSESSIONID').then(function (cookiesopjsid) {
+                  process.env.opstracookiejsid = cookiesopjsid.value
+                  process.env.opstracookie = '_ga=' + process.env.opstracookiejsid + '; _gid=' + process.env.opstracookiegid + '; _gat=' + process.env.opstracookiegat + '; JSESSIONID=' + process.env.opstracookiejsid
+                  
+          })
+             }).catch(function (err) { console.log("Error ", err, " occurred!"); });
+             driver1.quit();
+      });
+  
+
+  // **************Money Control ******************
+  //*Moneycontrol Post request for MCvolume////////
   app.post('/api/mcvolume', async function (req, res) {
 
-    let mcsymbol = req.body
-
-    //console.log(req.body)
-    const promises = mcsymbol.map(symbol => {
+       let mcsymbol = req.body
+       const promises = mcsymbol.map(symbol => {
   
       
       axios.get('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/' + symbol.mcsymbol).then((response) => {
@@ -158,12 +262,7 @@ if (cluster.isMaster) {
           console.log(err, res)
         
         })
-        // pool.end()
-     
-      
-
-     
-
+       
       }).catch((error) => {
         console.log(error)
       })
@@ -180,11 +279,7 @@ if (cluster.isMaster) {
   app.post('/api/mcvolume1', async function (req, res) {
 
     let mcsymbol1 = req.body
-
-    //console.log(req.body)
     const promises = mcsymbol1.map(symbol => {
-  
-      
       axios.get('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/' + symbol.mcsymbol1).then((response) => {
         var obj1 = ({ Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": response.data.data.VOL, "FiveDVol": response.data.data.DVolAvg5, "TenDVol": response.data.data.DVolAvg10, "TwentyDVol": response.data.data.DVolAvg20, "ThirtyDVol": response.data.data.DVolAvg30, "CPrice": response.data.data.pricecurrent, "PChangeper": response.data.data.pricepercentchange, "StockName": response.data.data.SC_FULLNM })
       
@@ -193,13 +288,7 @@ if (cluster.isMaster) {
           console.log(err, res)
         
         })
-        // pool.end()
-     
-      
-
-     
-
-      }).catch((error) => {
+        }).catch((error) => {
         console.log(error)
       })
     })
@@ -214,20 +303,14 @@ if (cluster.isMaster) {
   app.post('/api/mcinsight', async function (req, res) {
 
     let mcsymbol = req.body
-
-    //console.log(req.body)
     const promises = mcsymbol.map(symbol => {
   
       
       axios.get('https://api.moneycontrol.com/mcapi/v1/extdata/mc-insights?scId=' + symbol.mcsymbol + '&type=d').then((response) => {
-        // console.log(response.data.data.insightData)
-        // var obj1 = ({
-        //   Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": response.data.data.insightData
-          
-        // })
+        
         obj1 = []
-        obj2=[]
-        var obj1=response.data.data.insightData
+        obj2 = []
+        var obj1 = response.data.data.insightData
         var obj2 = obj1["price"]
         for (let i in obj2) {
           var obj3 = ({
@@ -235,13 +318,13 @@ if (cluster.isMaster) {
         
           })
         }
-          console.log("executing mcinsight")
-         pool.query('INSERT INTO mcinsight (info)  VALUES ($1)', [obj3], (err, res) => {
-           console.log(err, res)
+        console.log("executing mcinsight")
+        pool.query('INSERT INTO mcinsight (info)  VALUES ($1)', [obj3], (err, res) => {
+          console.log(err, res)
         
-          })
-        // pool.end()
-     }).catch((error) => {
+        })
+        
+      }).catch((error) => {
         console.log(error)
       })
     })
@@ -253,36 +336,36 @@ if (cluster.isMaster) {
     }
   })
   app.get('/api/mcinsightview', async function (req, res) {
-  let mcsymbol = req.query.mcsymbol
-  const result = await pool.query
-  ("SELECT info ->> 'CurrentVol' as Deals,info ->> 'Symbol' as Symbol,info ->> 'Name' as name ,info ->> 'Time' as time,info ->> 'Date' as date FROM mcinsight where info ->> 'CurrentVol' like '%Stock saw%'");
+    let mcsymbol = req.query.mcsymbol
+    const result = await pool.query
+      ("SELECT info ->> 'CurrentVol' as Deals,info ->> 'Symbol' as Symbol,info ->> 'Name' as name ,info ->> 'Time' as time,info ->> 'Date' as date FROM mcinsight where info ->> 'CurrentVol' like '%Stock saw%'");
     res.json(result.rows)
     
   })
   app.get('/api/dropmcinsightview', async function (req, res) {
-    await pool.query("TRUNCATE mcinsight");    
+    await pool.query("TRUNCATE mcinsight");
     console.log("Truncated mcinsight")
- })
- 
+  })
+//  *  KOTAK Post Data
   app.get('/api/kotakview', async function (req, res) {
 
     let eqsymbol = req.query.eqsymbol
     const result = await pool.query
-    ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'CompanyShortName' = $1", [eqsymbol]);
-    console.log(result.rows) 
+      ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'CompanyShortName' = $1", [eqsymbol]);
+    console.log(result.rows)
     res.json(result.rows)
-    //pool.end();
-    })
+    
+  })
   app.get('/api/kotaksectorview', async function (req, res) {
 
     let sectorid = req.query.sectorid
     console.log(sectorid)
     const result = await pool.query
-    ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'SectorId' = $1", [sectorid]);
-    // console.log(result.fields) 
+      ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'SectorId' = $1", [sectorid]);
+   
     res.json(result.rows)
-    //pool.end();
-    })
+ 
+  })
       
 
   const { response } = require('express');
@@ -292,14 +375,11 @@ if (cluster.isMaster) {
 
 
  
-  //This is MC Stock Data Details used in OHLC component using parallel api run
+  //*This is MarketMojo Stock Data Details used in Share component using parallel api run
 
   app.get('/api/mmmarkets', function (req, res) {
-
-    //let mcsymbol = req.query.mcsymbol
-
     var url6 = 'https://frapi.marketsmojo.com/market_marketoverview/getData?';
-    //var url9='https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/'+mcsymbol
+    
     request(url6, function (error, response, html) {
       if (!error) {
 
@@ -308,8 +388,8 @@ if (cluster.isMaster) {
     })
 
   })
- 
-    app.get('/api/etsharetoday', function (req, res) {
+  //*This is ET now Stock Data Details used in Share component using parallel api run
+  app.get('/api/etsharetoday', function (req, res) {
 
     let eqsymbol = req.query.eqsymbol
   
@@ -317,7 +397,7 @@ if (cluster.isMaster) {
     request(url6, function (error, response, html) {
       if (!error) {
         res.json(JSON.parse(response.body))
-        }
+      }
     })
   })
   app.get('/api/etimesnews', function (req, res) {
@@ -327,17 +407,17 @@ if (cluster.isMaster) {
     var url6 = 'https://economictimes.indiatimes.com/feed_marketslisting.cms?feedtype=json&msid=1977021501&curpg=1&callback=breakingnews'
     request(url6, function (error, response, html) {
       if (!error) {
-      res.json((response.body))
+        res.json((response.body))
       }
     })
-})
+  })
 
 
-  ////********************************************Kotak Securities*****************/
+  ////****************Kotak Securities*****************/
   app.get('/api/kotakhealthscore', (req, res) => {
   
     console.log("This is Kotak Health Score")
-  var url11 = 'https://www.kotaksecurities.com/TSTerminal/Fundamentals/MasterData/GetHealthScoreScreenerData?sectorId=-1&marketCap=LC&healthScoreValue=A&defaultView=false';
+    var url11 = 'https://www.kotaksecurities.com/TSTerminal/Fundamentals/MasterData/GetHealthScoreScreenerData?sectorId=-1&marketCap=LC&healthScoreValue=A&defaultView=false';
     request(url11, function (error, response, html) {
       if (!error) {
    
@@ -367,7 +447,7 @@ if (cluster.isMaster) {
 
         request(options2, (err, response, body) => {
           if (err) {
-            //console.log(err);
+            
           } else {
             res.json(JSON.parse(response.body));
             const obj1 = ((JSON.parse(response.body)));
@@ -383,7 +463,7 @@ if (cluster.isMaster) {
               })
       
             }
-            }
+          }
         });
       }
     })
@@ -391,7 +471,8 @@ if (cluster.isMaster) {
   })
 
 
-  ///**********************************Trendlyne********************************///////////////////////////////////**************Trendlyne GET stock***********
+    //*******Trendlyne********//////
+    // ************** Trendlyne GET stock ***********
   app.get('/api/trendlynestocks1', (req, res) => {
     let tlid = req.query.tlid
     let tlname = req.query.tlname
@@ -424,12 +505,12 @@ if (cluster.isMaster) {
           "mode": "cors",
           "credentials": "include"
         };
-          request(options2, (err, response, body) => {
+        request(options2, (err, response, body) => {
           if (err) {
-            //console.log(err);
+            
           } else {
             (res.json(JSON.parse(body)));
-            // console.log(JSON.parse(body))
+            
           }
         });
       }
@@ -438,12 +519,12 @@ if (cluster.isMaster) {
   })
 
 
-  //////////////////////////To get Durability/Momentum/Volatility SCORE/////////////////////////////////////////////
+  //*To get Durability/Momentum/Volatility SCORE///
   
   app.get('/api/trendlynestocks2', (req, res) => {
     let eqsymbol = req.query.eqsymbol
     let tlid = req.query.tlid
-    //console.log(eqsymbol)
+    
     var url11 = 'https://trendlyne.com/mapp/v1/stock/chart-data/' + tlid + '/SMA/';
     request(url11, function (error, response, html) {
       if (!error) {
@@ -454,7 +535,7 @@ if (cluster.isMaster) {
     })
     
   })
-  /////////////////////////////////////Trendlyne Nifty///////////////////////////
+  //*Trendlyne Nifty///////////////////////////
   app.get('/api/trendlynenifty', (req, res) => {
    
     var url11 = 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1887/TJLOGSVLZL4FLXDWFH6TIVYB6A======/';
@@ -486,17 +567,17 @@ if (cluster.isMaster) {
   
         request(options2, (err, response, body) => {
           if (err) {
-            //console.log(err);
+            
           } else {
             (res.json(JSON.parse(body)));
-            //console.log((response))
+            
           }
         });
       }
     })
     
   })
-  /////////////////////////////////////Trendlyne Nifty///////////////////////////
+  //*Trendlyne Pharma Nifty///////////////////////////
   app.get('/api/trendlynepharmanifty', (req, res) => {
    
     var url11 = 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1905/URFM5UKYBSJM3HDF7EH5ZBSEP4======/';
@@ -528,17 +609,17 @@ if (cluster.isMaster) {
    
         request(options2, (err, response, body) => {
           if (err) {
-            //console.log(err);
+            
           } else {
             (res.json(JSON.parse(body)));
-            //console.log((response))
+           
           }
         });
       }
     })
      
   })
-  /////////////////////////////////////Trendlyne Nifty///////////////////////////
+  
   app.get('/api/trendlynebanknifty', (req, res) => {
    
     var url11 = 'https://trendlyne.com/mapp/v1/stock/web/ohlc/1898/NAUN63XDUGR6O4FV2UAQPDQWSA======/';
@@ -570,10 +651,10 @@ if (cluster.isMaster) {
    
         request(options2, (err, response, body) => {
           if (err) {
-            //console.log(err);
+           
           } else {
             (res.json(JSON.parse(body)));
-            //console.log((response))
+           
           }
         });
       }
@@ -582,7 +663,7 @@ if (cluster.isMaster) {
   })
     
   
-  ////////////////////////////////////////////TrendLyne Stocks///////////////////////////////////////////
+  //*TrendLyne Stocks
   app.get('/api/trendlynestocks3', function (req, res) {
     let tlid = req.query.tlid
     var url6 = 'https://trendlyne.com/fundamentals/get-fundamental_results/' + tlid + '/'
@@ -590,10 +671,10 @@ if (cluster.isMaster) {
       if (!error) {
       
         console.log("This is tendlynestocks3")
-        // res.json(((response.body)))
+        
            
       } else {
-        //  console.log(error)
+       
       }
     })
       
@@ -603,19 +684,16 @@ if (cluster.isMaster) {
    
 	  
 
-  ///************************trendlyne post durability/Volatility/Momentum score start */
-  //const axiosCookieJarSupport = require('axios-cookiejar-support').default;
-  //const tough = require('tough-cookie');
+  //****trendlyne post durability/Volatility/Momentum score start */
+  
   const instancetrendlyne = axios.create({ withCredentials: true });
   axiosCookieJarSupport(instancetrendlyne);
   instancetrendlyne.defaults.jar = new tough.CookieJar()
 
 
   app.post('/api/trendlynepostdvm', async function (req, res) {
-    //obj1 = [];
+    
     let tlid = req.body
-
-    //console.log(req.body)
     const promises = tlid.map(symbol => {
   
       
@@ -634,23 +712,7 @@ if (cluster.isMaster) {
     }
   })
 
-
-  //###########################################################################################################################
-  ///////////////////////////////////////////////////Rediff///////////////////////////////////////////////////////////////
-
-  /////////////////////////////////////////////////////NSE INDIA/////////////////////////////////////////////////////////
-  //// Data from NSE India////
-
-  
-  const instance = axios.create({ withCredentials: true });
-  axiosCookieJarSupport(instance);
-  instance.defaults.jar = new tough.CookieJar()
-
-  //////////////////////////////////////////////////////Upcoming Results Data from NSE///////////////////////////////////////
-
-
-
-  //app.use(session(sessionConfig));
+// todo Explore
   app.get('/api/trendlynepost', function (req, res) {
     req = fetch("https://trendlyne.com/equity/api/getLivePriceList/", {
       "headers": {
@@ -672,10 +734,21 @@ if (cluster.isMaster) {
       "method": "POST",
       "mode": "cors"
     });
-    //console.log(res)
+    
   })
 
-  // To get Stock Historical Data from NSE India
+
+  
+
+  // ******************* NSE INDIA ******************
+ 
+
+  
+  const instance = axios.create({ withCredentials: true });
+  axiosCookieJarSupport(instance);
+  instance.defaults.jar = new tough.CookieJar()
+
+//* To get Stock Historical Data from NSE India
   app.get('/api/nsestockhistdata', function (req, res) {
     let stock = req.query.stock
     instance.get('https://www.nseindia.com/')
@@ -687,7 +760,7 @@ if (cluster.isMaster) {
 
 
 
-  //NSE Insider Trading
+  //* NSE Insider Trading
 
   app.get('/api/nseinstrading', function (req, res) {
     let stock = req.query.stock
@@ -713,9 +786,7 @@ if (cluster.isMaster) {
     instance.get('https://www.nseindia.com/')
       .then(data => instance.get('https://www.nseindia.com/api/event-calendar?index=equities&subject=Financial%20Results'), {
         headers: {
-          //cookie: res.headers['bm_sv=9C569B42FD024DAAE1EA21E9C6625106~sAy0A2tWyRGfKiKgjYablYBwApJeI7lHR2L4QM6VUe6RLHSCnWqb+/8xIleZ/RXz5qq466jHokK0jwchB7mcm9dPG3TyfavX2KkiUtjSJYGPB2wCUwDl9rsDviygHC9qzGdl/s3XEqmEPsjYtDJEOJZxlYsd2wMfd2wBqe8hDNk=; Domain=.nseindia.com; Path=/; Max-Age=7191; HttpOnly'],
-        
-          "User-Agent": "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)",
+         "User-Agent": "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)",
           "Referer": "http://www.nseindia.com/",
           "Host": "http://www.nseindia.com/",
           "Accept": '*/*',
@@ -736,7 +807,7 @@ if (cluster.isMaster) {
   
   })
     
-  /// Indices related Data from nseindia// To be used in ////  
+  //* Indices related Data from nseindia
   app.get('/api/nsedata2', function (req, res) {
     
     instance.get('https://www.nseindia.com/')
@@ -744,7 +815,7 @@ if (cluster.isMaster) {
       .then(data => res.json(data.data))
       .catch(data => console.error(res.response))
   })
-  /// F&O related Data from nseindia// To be used in Future and Options ////  
+  //* F&O related Data from nseindia// To be used in Future and Options 
 
 
   app.get('/api/nsedata4', function (req, res) {
@@ -755,7 +826,7 @@ if (cluster.isMaster) {
       .catch(data => console.error(res.response))
   })
 
-  //Nifty Indices Advance Decline Data
+  //* Nifty Indices Advance Decline Data
   app.get('/api/nsedataadvdec', function (req, res) {
     
     instance.get('https://www.nseindia.com/')
@@ -763,7 +834,7 @@ if (cluster.isMaster) {
       .then(data => res.json(data.data))
       .catch(data => console.error(res.response))
   })
-  //Nifty Indices Change in indices prices
+  //* Nifty Indices Change in indices prices
   app.get('/api/nsedataindices', function (req, res) {
     
     instance.get('https://www.nseindia.com/')
@@ -771,7 +842,7 @@ if (cluster.isMaster) {
       .then(data => res.json(data.data))
     //.catch(data => console.error(res.response.data))
   })
-  //Nifty Stock showing increase in OI
+  //* Nifty Stock showing increase in OI
   app.get('/api/nsedatasioi', function (req, res) {
     let stock = req.query.stock
     instance.get('https://www.nseindia.com/')
@@ -781,7 +852,7 @@ if (cluster.isMaster) {
     
   
   })
-  //Nifty Indices and stocks showing price increase  OI increase
+  //* Nifty Indices and stocks showing price increase  OI increase
   app.get('/api/nsedatapioii', function (req, res) {
     let stock = req.query.stock
     instance.get('https://www.nseindia.com/')
@@ -792,255 +863,30 @@ if (cluster.isMaster) {
   
   })
 
-  // //NSE nifty Pharma OI Data
-  // app.get('/api/nsedatapniftyoi', function (req, res) {
-  //   let stock = req.query.stock
-  //   instance.get('https://www.nseindia.com/')
-  //     .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY'))
-  //     .then(data => res.json(data.data))
-  //     .catch(data => console.error(res.response))
+//* NSE Data for Bank Nifty Open Interest
+  app.get('/api/nsedatabniftyoi', function (req, res) {
+    let stock = req.query.stock
+    instance.get('https://www.nseindia.com/')
+      .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY'))
+      .then(data => res.json(data.data))
+      .catch(data => console.error(res.response))
     
   
-  // }
-// Include selenium webdriver 
+  })
+  
+  //* NSE Data for  Nifty Open Interest
+  app.get('/api/nsedataniftyoi', function (req, res) {
+    let stock = req.query.stock
+    instance.get('https://www.nseindia.com/')
+      .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY'))
+      .then(data => res.json(data.data))
+      .catch(data => console.error(res.response))
+    
+  
+  })
+
 
  
-app.get('/api/trendlynecookie', async function (req, res) {
-   
-  let options = new chrome.Options();
-//Below arguments are critical for Heroku deployment
-options.addArguments("--headless");
-options.addArguments("--disable-gpu");
-  options.addArguments("--no-sandbox");
-  
-  let driver = new webdriver.Builder()
-  .forBrowser('chrome')
-  .setChromeOptions(options)
-  .build();
-  // let driver = new Builder()
-  // .forBrowser('chrome')
-  // .setChromeOptions(opts.headless())
-  // .build();
-
-  // Step 1 - Opening the geeksforgeeks sign in page 
-let tabToOpen = 
-
-     driver.get("https://trendlyne.com/visitor/loginmodal/"); 
-tabToOpen 
-
-    .then(function () { 
-// Timeout to wait if connection is slow 
-
-        let findTimeOutP = 
-
-            driver.manage().setTimeouts({ 
-
-                implicit: 5000, // 10 seconds 
-
-            }); 
-
-        return findTimeOutP; 
-
-    }) 
-
-    .then(function () { 
-
-  
-
-        // Step 2 - Finding the username input 
-
-        let promiseUsernameBox = 
-
-         driver.findElement(swd.By.id("id_login")); 
-
-        return promiseUsernameBox; 
-
-    }) 
-
-    .then(function (usernameBox) { 
-
-  
-
-        // Step 3 - Entering the username 
-
-        let promiseFillUsername = 
-
-            usernameBox.sendKeys('amit.kapila.2009@gmail.com'); 
-
-        return promiseFillUsername; 
-
-    }) 
-
-    .then(function () { 
-
-        console.log( 
-
-            "Username entered successfully in Trendlyne"  
-
-        ); 
-
-  
-
-        // Step 4 - Finding the password input 
-
-        let promisePasswordBox = 
-
-         driver.findElement(swd.By.id("id_password")); 
-
-        return promisePasswordBox; 
-
-    }) 
-
-    .then(function (passwordBox) { 
-        // Step 5 - Entering the password 
-        let promiseFillPassword = 
-        passwordBox.sendKeys('amit0605\n'); 
-        return promiseFillPassword;}).then(function () { 
-    console.log("Successfully signed in Trendlyne!"); 
-     driver.manage().getCookie('.trendlyne').then(function (cookiestl) {
-        
-        process.env.trendlynecookietl = cookiestl.value;
-        
-      });
-       driver.manage().getCookie('_gat').then(function (cookiesgat) {
-        
-        process.env.trendlynecookiegat = cookiesgat.value;
-        
-      });
-        driver.manage().getCookie('_gid').then(function (cookiesgid) {
-     console.log(cookiesgid.value)
-     process.env.trendlynecookiegid = cookiesgid.value;
-        
-      });
-     driver.manage().getCookie('csrftoken').then(function (cookiescsrf) {
-        // console.log(cookiescsrf.value)
-        
-        process.env.trendlynecookiecsrf = cookiescsrf.value;
-        
-      });
-        driver.manage().getCookie('_ga').then(function (cookiesga) {
-            process.env.trendlynecookiega = cookiesga.value;
-        
-       console.log(process.env.trendlynecookiegid)
-          process.env.trendlynecookie =
-            '_gid=' + process.env.trendlynecookiegid + '; .trendlyne=' +process.env.trendlynecookietl + '; csrftoken=' + process.env.trendlynecookiecsrf + '; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=' + process.env.trendlynecookiega + '; _gat=1',
-            console.log( process.env.trendlynecookie)
-            driver.quit(); 
-         
-          });
-         
-      
-        }).catch(function (err) { console.log("Error ", err, " occurred!"); });
-         
-  });
-
-  app.get('/api/opstracookie', async function (req, res) {
-
-    let options1 = new chrome.Options();
-//Below arguments are critical for Heroku deployment
-options1.addArguments("--headless");
-options1.addArguments("--disable-gpu");
-  options1.addArguments("--no-sandbox");
-  
-  let driver1 = new webdriver.Builder()
-  .forBrowser('chrome')
-  .setChromeOptions(options)
-  .build();
-  
-    // Step 1 - Opening the geeksforgeeks sign in page 
-  let tabToOpen = 
-  
-      driver1.get("https://sso.definedge.com/auth/realms/definedge/protocol/openid-connect/auth?response_type=code&client_id=opstra&redirect_uri=https://opstra.definedge.com/ssologin&state=e2cf559f-356c-425a-87e3-032097f643d0&login=true&scope=openid"); 
-  tabToOpen 
-  
-      .then(function () { 
-  // Timeout to wait if connection is slow 
-  
-          let findTimeOutP = 
-  
-              driver1.manage().setTimeouts({ 
-  
-                  implicit: 5000, // 10 seconds 
-  
-              }); 
-  
-          return findTimeOutP; 
-  
-      }) 
-  
-      .then(function () { 
-  
-    
-  
-          // Step 2 - Finding the username input 
-  
-          let promiseUsernameBox = 
-  
-              driver1.findElement(swd.By.id("username")); 
-  
-          return promiseUsernameBox; 
-  
-      }) 
-  
-      .then(function (usernameBox) { 
-  
-    
-  
-          // Step 3 - Entering the username 
-  
-          let promiseFillUsername = 
-  
-              usernameBox.sendKeys('amit.kapila.2009@gmail.com'); 
-  
-          return promiseFillUsername; 
-  
-      }) 
-  
-      .then(function () { 
-  
-          console.log( 
-  
-              "Username entered successfully in Opstra"  
-  
-          ); 
-  
-    
-  
-          // Step 4 - Finding the password input 
-  
-          let promisePasswordBox = 
-  
-              driver1.findElement(swd.By.id("password")); 
-  
-          return promisePasswordBox; 
-  
-      }) 
-  
-      .then(function (passwordBox) { 
-          // Step 5 - Entering the password 
-          let promiseFillPassword = 
-          passwordBox.sendKeys('amit0605\n'); 
-          return promiseFillPassword;}).then(function () { 
-      console.log("Successfully signed in Trendlyne!"); 
-        driver1.manage().getCookie('_gid').then(function (cookiesopgid) {
-          process.env.opstracookiegid=cookiesopgid.value
-        })
-        driver1.manage().getCookie('_gat').then(function (cookiesopgat) {
-            process.env.opstracookiegat=cookiesopgat.value
-        })
-        driver1.manage().getCookie('_ga').then(function (cookiesopga) {
-              process.env.opstracookiega=cookiesopga.value
-        })
-        driver1.manage().getCookie('JSESSIONID').then(function (cookiesopjsid) {
-                process.env.opstracookiejsid = cookiesopjsid.value
-                process.env.opstracookie = '_ga=' + process.env.opstracookiejsid + '; _gid=' + process.env.opstracookiegid + '; _gat=' + process.env.opstracookiegat + '; JSESSIONID=' + process.env.opstracookiejsid
-                console.log(process.env.opstracookie)
-        })
-           
-            // swd.close();
-          }).catch(function (err) { console.log("Error ", err, " occurred!"); });
-           driver1.quit();
-    });
 
    
 
@@ -1061,7 +907,7 @@ options1.addArguments("--disable-gpu");
     // request(axios.get(url11), function (error, response, html) {
     //   if (!error) {
 
-    //     // res.json(JSON.parse(response.body))
+    
     //     console.log(response.data)
 
 
@@ -1072,7 +918,7 @@ options1.addArguments("--disable-gpu");
   })
 
 
-  ////////////////////////////////////////////NSE POST DATA/////////////////////////////////////////////////////////////
+//*  NSE Post Data
 
   app.post('/api/nsepostdata1', async function (req, res) {
   
@@ -1095,19 +941,8 @@ options1.addArguments("--disable-gpu");
         })
     }).catch((error) => {
       console.log(error)
-    })
-
- 
-      
-      
-      
-    
-      .catch(data => console.error("There is error"))
-
-  
-  
-  
-    try {
+    }).catch(data => console.error("There is error"))
+  try {
       await Promise.all(promises)
     } catch (e) {
       console.log(e)
@@ -1137,18 +972,8 @@ options1.addArguments("--disable-gpu");
         })
     }).catch((error) => {
       console.log(error)
-    })
+    }).catch(data => console.error("There is error"))
   
-   
-        
-        
-        
-      
-      .catch(data => console.error("There is error"))
-  
-    //})
-  
-    
     try {
       await Promise.all(promises)
     } catch (e) {
@@ -1156,24 +981,18 @@ options1.addArguments("--disable-gpu");
     }
   })
 
-  // To get Nifty PCR Data from Opstra
-  app.get('/api/opstradatanifty', function (req, res) {
+  //********** OPSTRA Data **
+   //* To get Nifty PCR Data from Opstra
+   app.get('/api/opstradatanifty', function (req, res) {
     let nextexpiry = req.query.nextexpiry
   
 
     var url11 = 'https://opstra.definedge.com/api/openinterest/free/NIFTY&' + nextexpiry
     request(url11, function (error, response, html) {
-      if (!error) {
-
-        res.json(JSON.parse(response.body))
-
-
-      }
+      if (!error) {res.json(JSON.parse(response.body))}
     })
-
-
-  })
-  //To get BANK NIFTY Data from Opstra
+})
+  //* To get BANK NIFTY Data from Opstra
   app.get('/api/opstradatabanknifty', function (req, res) {
     let nextexpiry = req.query.nextexpiry
   
@@ -1274,8 +1093,8 @@ options1.addArguments("--disable-gpu");
   })
 
 
-  /////////////////////////////////////////////Kite/Zerodha/Stock Reports///////////////////////////////////////////////////
-  //Getting Technicals from Zerodha
+  //* Kite/Zerodha/Stock Reports **
+  //* Getting Technicals from Zerodha
   app.get('/api/kite1', function (req, res) {
     let timeframe = req.query.timeframe
     let eqsymbol = req.query.eqsymbol
@@ -1296,18 +1115,13 @@ options1.addArguments("--disable-gpu");
   
 
 
-  /////////////////////////////////////*****************************NIFTY TRADERS******************///////////////////////////
+  //*NIFTY TRADERS******************
 
   app.get('/api/niftytradersallstocks', async function (req, res) {
 
     var url11 = 'https://api.niftytrader.in/api/NIndex/stocks_list_api';
     request(url11, function (error, response, html) {//console.log(response)
-      if (!error) {
-      
-        res.json(JSON.parse(response.body))
-
-
-      }
+      if (!error) {res.json(JSON.parse(response.body))}
     })
   })
 
@@ -1327,11 +1141,11 @@ options1.addArguments("--disable-gpu");
     })
   })
 
-  /////////////Nifty trader POST request////////////////
+  //*  NIFTY TRADERS POST request////////////////
   
   // app.get('/api/ntstockdetails', (req, res) => {
   //   let eqsymbol = req.query.eqsymbol
-  //   //console.log(eqsymbol)
+  
   //   var url11 = 'https://api.niftytrader.in/webapi/Live/stockAnalysis';
   //   request(url11, function (error, response, html) {
   //     if (!error) {
@@ -1360,7 +1174,7 @@ options1.addArguments("--disable-gpu");
   
   // request(options2, (err, response, body) => {
   //   if (err) {
-  //       //console.log(err);
+  
   //   } else {
   //     ( res.json(JSON.parse(body)));
     
@@ -1371,7 +1185,7 @@ options1.addArguments("--disable-gpu");
     
   // })
 
-  /////////////Nifty trader stock POST request to get pcr////////////////
+  //*Nifty trader stock POST request to get pcr///
   
   // app.get('/api/ntstockpcrdetails', (req, res) => {
   //   let eqsymbol = req.query.eqsymbol
@@ -1403,7 +1217,7 @@ options1.addArguments("--disable-gpu");
   
   // request(options2, (err, response, body) => {
   //   if (err) {
-  //       //console.log(err);
+  
   //   } else {
      
   //     ( res.json(JSON.parse(body)));
@@ -1415,7 +1229,7 @@ options1.addArguments("--disable-gpu");
     
   // })
  
-  //////////////Nifty Trader Post Request to get nr7 for Stocks in nr7 database on postgres,dropdown in Actions submits request///////
+  //*Nifty Trader Post Request to get nr7 for Stocks in nr7 database on postgres,dropdown in Actions submits request
   
   app.post('/api/nr7', async function (req, res) {
     let eqsymbol = req.body
@@ -1463,17 +1277,11 @@ options1.addArguments("--disable-gpu");
                   obj1.push({ stock: symbol.name, isin: symbol.isin, Date: symbol.Date, nr7: data2['nr7_today'] });
                 }
               }
-              console.log(obj1)
-              console.log("executing nr7")
               pool.query('INSERT INTO nr7 (info)  VALUES ($1)', obj1, (err, res) => {
                 console.log(err, res)
         
               })
-  
-   
-    
-    
-            }
+              }
           });
         }
       })
@@ -1484,7 +1292,7 @@ options1.addArguments("--disable-gpu");
       console.log(e)
     }
   })
-  //////////////////////////////////////Nifty Trader EOD Screeners Post/////////////////////////////////
+  //*Nifty Trader EOD Screeners Post///////////////
   app.post('/api/nteodscreeners', (req, res) => {
     let ntoptions = req.body
     
@@ -1531,7 +1339,7 @@ options1.addArguments("--disable-gpu");
   
   })
 
-  /////////////////////////////////NT EOD Screener Get////////////////////
+  ///* NT EOD Screener Get////////////////////
   app.get('/api/nteodscreeners1', (req, res) => {
  
     var url11 = 'https://api.niftytrader.in/webapi/Screener/getAdvanceEodScreenerFilter';
@@ -1557,7 +1365,7 @@ options1.addArguments("--disable-gpu");
           "referrer": "https://www.niftytrader.in/",
           "referrerPolicy": "strict-origin-when-cross-origin",
           "body": "{'_20_day_sma_below': 'true','cci_200_below': 'true'}",
-          // "body": JSON.stringify(ntoptions),
+          
           "method": "POST",
           "mode": "cors",
           "credentials": "include"

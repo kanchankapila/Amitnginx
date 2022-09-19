@@ -30,8 +30,11 @@ import axios from 'axios';
 
 
 
-export interface pcrniftytile {
-  text1: string;
+export interface pcrnseniftytile {
+  text1: number;
+}
+export interface pcrnsebniftytile {
+  text1: number;
 }
 export interface newscardtile {
   
@@ -90,7 +93,7 @@ export interface newscardtile {
 
 
 export interface pcrnsebniftytile {
-  text1: any;
+  text1: number;
 }
 
 
@@ -103,9 +106,8 @@ export interface pcrnsebniftytile {
 export class NavbarComponent implements OnInit {
   stock: any
   data: any
-  cookieValue:any
-  pcrnifty: pcrniftytile[] = [];
-  pcrnsenifty:any;
+  pcrnsebnifty: pcrnsebniftytile[] = [];
+  pcrnsenifty:pcrnseniftytile[] = [];
   datetoday:any
   stock_isin: any
   newscard: newscardtile[] = [];
@@ -114,12 +116,9 @@ export class NavbarComponent implements OnInit {
   stockid = [];
   mcsectorsymbol = [];
   items: SelectItem[];
-
   item: string;
   eqsymbol1 = [];
   tlid = [];
-  abc = [];
-  pcrnsebnifty: any;
   n50optionssupport: any;
   n50optionsresistance: any;
   bnoptionssupport: any;
@@ -178,8 +177,6 @@ export class NavbarComponent implements OnInit {
     this.dateyesterday = this.datePipe.transform(this.today.setDate(this.today.getDate() - 1), 'yyyy-MM-dd')
     this.dateday5 = this.datePipe.transform(this.today.setDate(this.today.getDate() - 5), 'yyyy-MM-dd')
     this.date5 = this.today.setDate(this.today.getDate() - 5)
-
-    
     this.stock = stocks.default.Data
     this.item=stocks.default.Data['name']
     this.stock1 = stocks1.default.Data
@@ -194,7 +191,6 @@ export class NavbarComponent implements OnInit {
     }
     this.sectorList = sectors.default.Data
     this.getmcniftyrealtime()
-    
     this.getmcbankniftyrealtime()
     this.getmcpharmaniftyrealtime()
     this.fnostock = fnostocks.default.Data
@@ -209,8 +205,7 @@ export class NavbarComponent implements OnInit {
  
   keyword = 'name';
   selectEvent(stock_isin) {
-    // const url = '/Share?stock=' + stock_isin
-    // this.router.navigateByUrl(url)
+    
        
    window.open('/Share?stock='+stock_isin)
    }
@@ -274,14 +269,17 @@ export class NavbarComponent implements OnInit {
     }
 
   nsedataniftyoi() {
-    
-    this.http.get<any>('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY').subscribe(data5 => {
-       (response: Response) => 
-       { }
-       let nestedItems = Object.keys(data5).map(key => {
-         return data5[key];
-       });
-      //console.log(nestedItems)
+    this.dataApi.getnsedataniftyoi().subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+    // this.http.get<any>('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY').subscribe(data5 => {
+    //    (response: Response) => 
+    //    { }
+    //    let nestedItems = Object.keys(data5).map(key => {
+    //      return data5[key];
+    //    });
+      console.log(nestedItems)
 
       this.optionwc.length = 0;
      
@@ -290,7 +288,8 @@ export class NavbarComponent implements OnInit {
 
       //console.log(nestedItems[1]['CE'].totOI)
       //console.log(nestedItems[1]['PE'].totOI)
-this.pcrnsenifty=(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].totOI)
+      this.pcrnsenifty.length=0;
+      this.pcrnsenifty.push({ text1: nestedItems[1]['PE'].totOI / nestedItems[1]['CE'].totOI })
       for (let val in nestedItems[1]['data']) {
         if (nestedItems[1]['data'][val]['CE']) {
           if ((nestedItems[1]['data'][val]['CE']).length !== 0) {
@@ -353,17 +352,21 @@ this.pcrnsenifty=(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].totOI)
   }
 
   nsedatabniftyoi() {
-    this.http.get<any>('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY').subscribe(data5 => {
-      (response: Response) => { console.log(response) }
+    // this.http.get<any>('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY').subscribe(data5 => {
+    //   (response: Response) => { console.log(response) }
+    //   let nestedItems = Object.keys(data5).map(key => {
+    //     return data5[key];
+    //   });
+    this.dataApi.getnsedatabniftyoi().subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-      
+      console.log(nestedItems)
       this.optionbwc.length = 0;
      
       this.optionbwp.length = 0;
-     
-      this.pcrnsebnifty=(nestedItems[1]['PE'].totOI/nestedItems[1]['CE'].totOI)
+      this.pcrnsebnifty.length=0;
+      this.pcrnsebnifty.push({ text1: nestedItems[1]['PE'].totOI / nestedItems[1]['CE'].totOI })
     
      
       for (let val in nestedItems[1]['data']) {
