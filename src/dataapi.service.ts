@@ -12,8 +12,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class DataapiService {
   public href: string = "";
   
-    baseurl = "http://localhost:3000/api"
-    // baseurl = "https://amitv2.herokuapp.com/api"
+    // baseurl = "http://localhost:3000/api"
+    baseurl = "https://amitv2.herokuapp.com/api"
   stock: any;
   dbname: any;
     
@@ -87,12 +87,8 @@ export class DataapiService {
   nsedatapioii(){
     return this.http.get(this.baseurl + '/nsedatapioii')
   }
-  nsedataniftyoi(){
-    return this.http.get(this.baseurl + '/nsedataniftyoi')
-  }
-  nsedatabniftyoi(){
-    return this.http.get(this.baseurl + '/nsedatabniftyoi')
-  }
+  
+ 
  
   nsedataadvdec(){
     return this.http.get(this.baseurl + '/nsedataadvdec')
@@ -206,6 +202,14 @@ export class DataapiService {
   getntstockpcrdetails(eqsymbol) {
  
     return this.http.get(this.baseurl + '/ntstockpcrdetails?eqsymbol='+eqsymbol)
+  }
+  
+  getntniftypcrdetails() {
+ 
+    return this.http.get(this.baseurl + '/ntniftypcr')
+  }
+  getntglobal(){
+    return this.http.get(this.baseurl + '/ntglobal')
   }
 
   

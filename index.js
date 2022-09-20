@@ -17,6 +17,9 @@ app.use(compression());
 const bodyParser = require("body-parser");
 const request = require('request')
 app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
 const path=require('path')
 const session = require('express-session');
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -864,7 +867,7 @@ if (cluster.isMaster) {
   })
 
 //* NSE Data for Bank Nifty Open Interest
-  app.get('/api/nsedatabniftyoi', function (req, res) {
+  app.get('/api/nsedatabniftyoi', cors(),function (req, res) {
     let stock = req.query.stock
     instance.get('https://www.nseindia.com/')
       .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY'))
@@ -875,7 +878,7 @@ if (cluster.isMaster) {
   })
   
   //* NSE Data for  Nifty Open Interest
-  app.get('/api/nsedataniftyoi', function (req, res) {
+  app.get('/api/nsedataniftyoi',cors(), function (req, res) {
     let stock = req.query.stock
     instance.get('https://www.nseindia.com/')
       .then(data => instance.get('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY'))
@@ -1053,21 +1056,7 @@ if (cluster.isMaster) {
 
 
    
-    app.get('/api/opstradatalongbuildup', function (req, res) {
-  
-   
-      var url11 = 'https://opstra.definedge.com/api/openinterest/futuresbuildup' 
-      request(url11, function (error, response, html) {
-        if (!error) {
-          console.log(response)
-          //res.json(JSON.parse(response.body))
-  
-  
-        }
-      })
-  
-  
-    })
+ 
 
   
   
@@ -1128,7 +1117,7 @@ if (cluster.isMaster) {
 
     
   
-  app.get('/api/ntniftypcr', function (req, res) {
+  app.get('/api/ntniftypcr',cors(), function (req, res) {
 
     var url11 = 'https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr';
     request(url11, function (error, response, html) {//console.log(response)
@@ -1140,6 +1129,20 @@ if (cluster.isMaster) {
       }
     })
   })
+
+  app.get('/api/ntglobal',cors(), function (req, res) {
+
+    var url11 = 'https://api.niftytrader.in/webapi/Index/globalStock';
+    request(url11, function (error, response, html) {//console.log(response)
+      if (!error) {
+      
+        res.json(JSON.parse(response.body))
+
+
+      }
+    })
+  })
+  
 
   //*  NIFTY TRADERS POST request////////////////
   

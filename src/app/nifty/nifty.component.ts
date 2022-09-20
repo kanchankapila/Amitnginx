@@ -356,24 +356,23 @@ export class NiftyComponent implements OnInit {
         console.log(err)
       })
   }  
-  async getniftypcr() {
-    try {
-      const response = await fetch("https://api.niftytrader.in/api/FinNiftyOI/niftypcrData?reqType=niftypcr", {
-        "method": "GET",
-        "headers": {}
-      });
+   getniftypcr() {
     
-      if (response.ok) {
-         const result = await response.json();
-        // console.log(result);
+      this.dataApi.getntniftypcrdetails().subscribe(data5 => {
+        let nestedItems= Object.keys(data5).map(key => {
+          return data5[key];
+        });
+
+        console.log(nestedItems)
+  
        
-       /////////////////////NIfty PCR from niftytraders////////////////////
+  //      /////////////////////NIfty PCR from niftytraders////////////////////
        this.niftypcrdata.length = 0;
-       this.niftypcrtime.length = 0;
-       for (let val in result['resultData']['data']) {
-         this.niftypcrdata.push(result['resultData']['data'][val]['pcr'])
-         this.niftypcrtime.push(new Date(result['resultData']['data'][val]['time']).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }))
-       }
+        this.niftypcrtime.length = 0;
+       for (let val in nestedItems[3]['data']) {
+         this.niftypcrdata.push(nestedItems[3]['data'][val]['pcr'])
+        this.niftypcrtime.push(new Date(nestedItems[3]['data'][val]['time']).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }))
+      }
       
        this.lineChartpcrData = [{
         label: 'PCR',
@@ -385,11 +384,12 @@ export class NiftyComponent implements OnInit {
 
       this.lineChartpcrLabels = this.niftypcrtime;
     }
-  } catch (err) {
-    console.error(err);
-  }
    
-  }
+      , err => {
+        console.log(err)
+      })
+    }
+  
   getnifty50smaema() {
     this.http.get('https://mo.streak.tech/api/tech_analysis/?timeFrame=day&stock=INDICES%3ANIFTY%2050').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {

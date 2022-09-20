@@ -273,12 +273,7 @@ export class NavbarComponent implements OnInit {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
-    // this.http.get<any>('https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY').subscribe(data5 => {
-    //    (response: Response) => 
-    //    { }
-    //    let nestedItems = Object.keys(data5).map(key => {
-    //      return data5[key];
-    //    });
+   
       console.log(nestedItems)
 
       this.optionwc.length = 0;
@@ -314,8 +309,6 @@ export class NavbarComponent implements OnInit {
           
         if (nestedItems[1]['data'][val]['PE']) {
           if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
-            // console.log("Put")
-            // console.log(nestedItems[1]['data'][val]['PE'].changeinOpenInterest, nestedItems[1]['data'][val]['PE'].strikePrice)
         
             this.optionwp.push(nestedItems[1]['data'][val]['PE'].openInterest);
           }
@@ -352,11 +345,7 @@ export class NavbarComponent implements OnInit {
   }
 
   nsedatabniftyoi() {
-    // this.http.get<any>('https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY').subscribe(data5 => {
-    //   (response: Response) => { console.log(response) }
-    //   let nestedItems = Object.keys(data5).map(key => {
-    //     return data5[key];
-    //   });
+ 
     this.dataApi.getnsedatabniftyoi().subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
@@ -382,7 +371,6 @@ export class NavbarComponent implements OnInit {
           var maxbc = this.optionbwc.reduce((a, b) => Math.max(a, b));  // 5
         }
       }
-      //console.log("maximum"+maxbc)
             for (let val in nestedItems[1]['data']) {
               if (nestedItems[1]['data'][val]['CE']) {
               if (nestedItems[1]['data'][val]['CE'].openInterest == maxbc) {
@@ -393,9 +381,6 @@ export class NavbarComponent implements OnInit {
           
         if (nestedItems[1]['data'][val]['PE']) {
           if ((nestedItems[1]['data'][val]['PE']).length !== 0) {
-            // console.log("Put")
-            // console.log(nestedItems[1]['data'][val]['PE'].changeinOpenInterest, nestedItems[1]['data'][val]['PE'].strikePrice)
-        
             this.optionbwp.push(nestedItems[1]['data'][val]['PE'].openInterest);
           }
         }

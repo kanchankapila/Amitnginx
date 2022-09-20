@@ -133,12 +133,14 @@ export class HomepageComponent implements OnInit {
   }
  
   getglobal() {
-   
-    this.http.get<any>('https://api.niftytrader.in/webapi/Index/globalStock').subscribe(data5 => {
-    
+    this.dataApi.getntglobal().subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+   
+    // this.http.get<any>('https://api.niftytrader.in/webapi/Index/globalStock').subscribe(data5 => {
+    
+     console.log(nestedItems)
       this.globalmarket.length = 0;
       for (let val in nestedItems[2]) {
         for (let val1 in nestedItems[2][val]['data']) {
