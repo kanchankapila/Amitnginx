@@ -4,7 +4,8 @@ import { PrimeNGConfig } from 'primeng/api';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
-
+import { ILoadedEventArgs, ChartTheme, ChartAnnotationSettingsModel, TechnicalIndicator } from '@syncfusion/ej2-angular-charts';
+import { Browser } from '@syncfusion/ej2-base';
 import { of } from 'rxjs'; 
 import { map } from 'rxjs/operators';
 import {Observable} from 'rxjs'
@@ -106,6 +107,8 @@ export interface niftysmatile{
   
  
 }
+export interface pcrtile{x: any;y: string;}
+export interface niftytile{x: any;y: string;color:any;}
 
 
 @Component({
@@ -114,6 +117,10 @@ export interface niftysmatile{
   styleUrls: ['./nifty.component.scss']
 })
 export class NiftyComponent implements OnInit {
+ 
+  a: any;
+  b: any;
+  c:any;
  
   constructor(private http: HttpClient, private dataApi: DataapiService, private window: Window, private primengConfig: PrimeNGConfig, private vps: ViewportScroller) {
     
@@ -135,7 +142,7 @@ export class NiftyComponent implements OnInit {
   public lineChartData: Array<any> = [];
   public lineChartLabels: Array<number> = [];
   
- 
+  public pointColorMapping:string;
   public nifty505ddata: Array<number> = [];
   public nifty505dLabels: Array<any> = [];
   public lineChart5dData: Array<any> = [];
@@ -162,7 +169,7 @@ export class NiftyComponent implements OnInit {
   public lineChartvixData: Array<any> = [];
   public lineChartvixLabels: Array<number> = [];
   public lineChartvixOptions: any;
-  
+  axis1:Object[];
   basicData: any;
   basicOptions: any;
   basicData1: any;
@@ -175,7 +182,8 @@ export class NiftyComponent implements OnInit {
   tlname = 'NIFTY50';
   eqsymbol='nifty-50'
   nifty50sentiments: nifty50sentimentstiles[] = [];
-  
+  pcr:pcrtile[]=[];
+  nifty:niftytile[]=[];
   nifty50stocks: nifty50stockstiles[] = [];
   nifty50crossover: nifty50crossovertile[] = [];
   nifty50crossoverw: nifty50crossoverwtile[] = [];
@@ -223,6 +231,9 @@ export class NiftyComponent implements OnInit {
   public lineChartLabelsn50snrs1m: Array<any> = [];
   public lineChartLabelsn50snrs2m: Array<any> = [];
   public lineChartLabelsn50snrs3m: Array<any> = [];
+  public data2: Object[] = []; 
+  public data3: Object[] = []; 
+  public marker1:any;
   basicData3: any;
   basicOptions3: any;
   stockList: any
@@ -234,17 +245,16 @@ export class NiftyComponent implements OnInit {
   
   public lineChartType: ChartType = 'line';
   public lineChartOptions:ChartOptions = {
+    responsive: true,
+    // maintainAspectRatio:false,
     scales: {
       
-    },
-   
-    
-    elements: {
+    },elements: {
       point: {
         radius: 0
       }
     }
-   
+    
   };
  
  
@@ -259,6 +269,7 @@ export class NiftyComponent implements OnInit {
      
     this.primengConfig.ripple = true;
     this.stockList = stocks.default.Data
+    this.getniftypcr();
     this.getmcnifty50stocks();
     this.getnifty50smaema();
     this.getnifty5d();
@@ -267,7 +278,7 @@ export class NiftyComponent implements OnInit {
     this.getnifty6m();
     this.getniftytoday()
     this.getniftyvix()
-    this.getniftypcr()
+    
     this.getniftysentiments()
     this.gettrendlynenifty()
     this.getnifty1yr();
@@ -281,7 +292,73 @@ export class NiftyComponent implements OnInit {
 
   
   }
-  
+  public annotations: ChartAnnotationSettingsModel[] = [
+    {
+       
+        coordinateUnits: 'Point',
+        verticalAlignment: 'Top',
+       
+    }, {
+       
+        coordinateUnits: 'Point',
+        yAxisName: 'yAxis'}
+       
+];
+// public data2: Object[] =  [
+//   { x: new Date(2017, 11, 20).getTime(), y: 1500 }, { x: new Date(2017, 11, 21).getTime(), y: 1300 },
+//   { x: new Date(2017, 11, 22).getTime(), y: 1200 }, { x: new Date(2017, 11, 26).getTime(), y: 1450 },
+//   { x: new Date(2017, 11, 27).getTime(), y: 1320 }, { x: new Date(2018, 0, 2).getTime(), y: 1470 },
+//   { x: new Date(2018, 0, 3).getTime(), y: 1490 }, { x: new Date(2018, 0, 4).getTime(), y: 1390 },
+//   { x: new Date(2018, 0, 5).getTime(), y: 1200 }, { x: new Date(2018, 0, 8).getTime(), y: 1320 }
+// ];
+
+//     public data1: Object[] = [
+//         { x: 'Sun', y: 30 }, { x: 'Mon', y: 28 },
+//         { x: 'Tue', y: 29 }, { x: 'Wed', y: 30 }, { x: 'Thu', y: 33 }, { x: 'Fri', y: 32 },
+//         { x: 'Sat', y: 34 }
+//     ];
+
+    //Initializing Primary X Axis
+    public primaryXAxis: Object = {
+        valueType: 'Category',
+        interval: 1,
+        labelIntersectAction: 'Rotate90',
+        majorGridLines: { width: 0 }
+    };
+    //Initializing Primary Y Axis
+    public primaryYAxis: Object = {
+        // minimum: 0, maximum: 2, interval: 0.1,
+        lineStyle: { width: 0 },
+        labelFormat: '{value}'
+    };
+    public chartArea: Object = {
+        border: {
+            width: 0
+        }
+    };
+
+    // public width: string = Browser.isDevice ? '100%' : '90%';
+    // custom code start
+    public load(args: ILoadedEventArgs): void {
+        let selectedTheme: string = location.hash.split('/')[1];
+        selectedTheme = selectedTheme ? selectedTheme : 'Material';
+        args.chart.theme = <ChartTheme>(selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).replace(/-dark/i, "Dark");
+    };
+    // custom code end
+    public legend: Object = {
+        visible: false
+    }
+    public marker: Object 
+    public axis: Object[] 
+    public majorGridLines: Object = {
+        width: 0
+    };
+    public tooltip: Object = {
+        enable: true
+    };
+    public title: string = 'Nifty vs PCR';
+   
+ 
   gettrendlynenifty() {
     this.dataApi.gettrendlynenifty().subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
@@ -365,14 +442,70 @@ export class NiftyComponent implements OnInit {
 
         console.log(nestedItems)
   
-       
+        // console.log(this.data2)
   //      /////////////////////NIfty PCR from niftytraders////////////////////
        this.niftypcrdata.length = 0;
         this.niftypcrtime.length = 0;
+        this.pcr.length = 0;
+        this.nifty.length = 0;
        for (let val in nestedItems[3]['data']) {
+         this.pcr.push({x:new Date(nestedItems[3]['data'][val]['time']).getTime(),y:nestedItems[3]['data'][val]['pcr']})
+         if (nestedItems[3]['data'][val]['index_close'] > 17600) {
+         this.nifty.push({x:new Date(nestedItems[3]['data'][val]['time']).getTime(),y:nestedItems[3]['data'][val]['index_close'],color:'red'})
+          this.pointColorMapping = 'color'; 
+         this.axis1=[{
+          majorGridLines: { width: 0 },
+          majorTickLines: { width: 5 },
+          rowIndex: 0, opposedPosition: true,
+          minimum: this.a , maximum:this.b , interval: 30,
+          lineStyle: { width: 10 ,color: 'red' },
+         
+          name: 'yAxis',
+          labelFormat: '{value}'
+      }];
+     this.marker1={
+      visible: true,
+      width: 2,
+      height: 2,
+      border: { width: 2, color: 'red' }
+  }; 
+      this.marker=this.marker1;
+      this.axis=this.axis1
+        } else if (nestedItems[3]['data'][val]['index_close'] < 17600){
+          this.nifty.push({x:new Date(nestedItems[3]['data'][val]['time']).getTime(),y:nestedItems[3]['data'][val]['index_close'],color:'green'})
+           this.pointColorMapping = 'color';
+          this.axis1=[{
+            majorGridLines: { width: 0 },
+            majorTickLines: { width: 5 },
+            rowIndex: 0, opposedPosition: true,
+            minimum: this.a , maximum:this.b , interval: 30,
+            lineStyle: { width: 10 ,color: 'green' },
+           
+            name: 'yAxis',
+            labelFormat: '{value}'
+        }];
+        this.marker1={
+          visible: true,
+          width: 10,
+          height: 10,
+          border: { width: 5, color: 'green' }
+      }; 
+          this.marker1=this.marker;
+       
+    
+        this.axis=this.axis1
+         }
          this.niftypcrdata.push(nestedItems[3]['data'][val]['pcr'])
         this.niftypcrtime.push(new Date(nestedItems[3]['data'][val]['time']).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }))
-      }
+        this.a=(nestedItems[3]['data'][val]['index_close']-100)
+        
+        this.b=(nestedItems[3]['data'][val]['index_close']+1000)
+        
+       }
+    
+      this.data2=this.pcr;
+      this.data3=this.nifty;
+      console.log(this.data3)
       
        this.lineChartpcrData = [{
         label: 'PCR',

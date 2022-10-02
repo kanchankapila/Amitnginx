@@ -6,7 +6,9 @@ import { BaseChartDirective } from 'ng2-charts';
 import * as  stocks from '../lists/stocklist'
 import { ViewportScroller } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { ILoadedEventArgs, ChartTheme } from '@syncfusion/ej2-angular-charts';
+import { Browser } from '@syncfusion/ej2-base';
+import { rainFallData } from './financial-data';
 //import { StockChart } from 'angular-highcharts';
 import { ChartType, ChartOptions } from 'chart.js';
 
@@ -114,7 +116,9 @@ export class PharmaniftyComponent implements OnInit {
   }
   //stockhighcharts: StockChart;
   public stockhcdate: Array<any> = [];
+  public stockhcdate1: Array<any> = [];
   public pharmaniftydata: Array<number> = [];
+  public pharmaniftydata1: Array<number> = [];
   public pharmaniftyLabels: Array<any> = [];
   public niftyvixdata: Array<number> = [];
   public niftyvixtime: Array<any> = [];
@@ -144,7 +148,7 @@ export class PharmaniftyComponent implements OnInit {
   public lineChartvixData: Array<any> = [];
   public lineChartvixLabels: Array<number> = [];
   public lineChartvixOptions: any;
-  
+  prev_close:number;
   stockisin: any;
   stockList: any
   basicData: any;
@@ -153,6 +157,9 @@ export class PharmaniftyComponent implements OnInit {
   basicOptions1: any;
   chart: any;
   date: any;
+  hours:any;
+  minutes:any;
+  time:any;
   pharmaniftysentiments: pharmaniftysentimentstiles[] = [];
   
   pharmaniftystocks: pharmaniftystockstiles[] = [];
@@ -229,6 +236,9 @@ export class PharmaniftyComponent implements OnInit {
   ngOnInit(): void {
     this.primengConfig.ripple = true;
     this.stockList = stocks.default.Data
+    
+    this.getpharmaniftytoday()
+    this.getpharmaniftytoday1()
     this.gettrendlynepharmanifty()
     this.getmcpharmaniftystocks();
     this.getpharmaniftysmaema();
@@ -236,12 +246,13 @@ export class PharmaniftyComponent implements OnInit {
     this.getpharmanifty1m();
     this.getpharmanifty3m();
     this.getpharmanifty6m();
-    this.getpharmaniftytoday()
+    
     this.getpharmaniftyvix()
  
     this.getpharmaniftysentiments()
    
     this.getpharmanifty1yr();
+    setInterval(() => { this.getpharmaniftytoday1()}, 30000);
     setInterval(() => { this.getpharmaniftysmaema() }, 30000);
     setInterval(() => { this.getmcpharmaniftystocks()}, 30000);
     setInterval(() => { this.getpharmaniftyvix() }, 30000);
@@ -251,6 +262,51 @@ export class PharmaniftyComponent implements OnInit {
 
   
   }
+  public dataValues: Object[] = [];
+    // public colors: string[] = ['red', 'green'];
+    //Initializing Primary X Axis
+    // public primaryXAxis: Object = {
+    //     valueType: 'DateTime',
+    //     //  labelFormat: 'hms',
+    //      intervalType: 'Minutes',
+    //     edgeLabelPlacement: 'Shift',
+    //     majorGridLines: { width: 0 }
+    // };
+    //Initializing Primary Y Axis
+    public primaryXAxis: Object;
+    public primaryYAxis: Object;
+    // public primaryYAxis: Object = {
+    //     rangePadding: 'None',
+    //     minimum: 12000,
+    //     maximum: 15000,
+    //     title: 'Pharma Nifty',
+    //     lineStyle: { width: 1 },
+    //     majorTickLines: { width: 1 },
+    //     minorTickLines: { width: 1 }
+    // };
+    public chartArea: Object = {
+        border: {
+            width: 0
+        }
+    };
+    
+    public width: string = Browser.isDevice ? '100%' : '60%';
+    public legend: Object = { visible: true };
+   
+    public tooltip: Object = {
+        enable: true, shared: true
+    };
+    public load(args: ILoadedEventArgs):void {
+      
+      
+        // custom code start
+        let selectedTheme: string = location.hash.split('/')[1];
+        selectedTheme = selectedTheme ? selectedTheme : 'Material';
+        args.chart.theme = <ChartTheme>(selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).replace(/-dark/i, "Dark");
+        
+  }
+    public title: string = ('Pharma');
+   
   gettrendlynepharmanifty() {
     this.dataApi.gettrendlynepharmanifty().subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
@@ -710,25 +766,126 @@ export class PharmaniftyComponent implements OnInit {
       console.log(err)
     })
   }
- 
-  getpharmaniftytoday() {
-        ////////////To get Nifty Today Price///////////////////////
-    
+  getpharmaniftytoday1(){ 
+   
+
     this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=1d&type=area').subscribe(data5 => {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
     
-      this.pharmaniftydata.length = 0;
-      this.pharmaniftyLabels.length = 0;
+      this.dataValues.length=0;  
+       this.stockhcdate1.length=0; 
+       this.prev_close=(nestedItems[1]['prev_close'])
+       console.log(this.prev_close)
       for (let val in nestedItems[1].values) {
-        this.pharmaniftydata.push(nestedItems[1].values[val]["_value"])
-        this.pharmaniftyLabels.push((nestedItems[1].values[val]["_time"]))
-        this.stockhcdate.push({x:(nestedItems[1].values[val]["_time"]),y:(nestedItems[1].values[val]["_value"])})     
+       
+        this.stockhcdate1.push({x:(nestedItems[1].values[val]["_time"]),y:(nestedItems[1].values[val]["_value"])})     
       }
-    }, err => {
-      console.log(err)
-    })
+      
+      
+    
+
+ 
+this.primaryYAxis = {
+  rangePadding: 'None',
+  // minimum: 12000,
+  // maximum: 13000,
+  title: 'Pharma Nifty',
+  lineStyle: { width: 1 },
+  majorTickLines: { width: 0 },
+  minorTickLines: { width: 0 }
+};
+this.primaryXAxis={
+valueType: 'DateTime',
+  // labelFormat: 'hms',
+  intervalType: 'Minutes',
+edgeLabelPlacement: 'Shift',
+majorGridLines: { width: 0 }
+};
+      
+this.stockhcdate1.map((value: number, index: number) => {
+  
+
+  if (((value['x']).slice(0,1)) == 0){ 
+
+  this.hours=((value['x']).slice(1,2))
+}
+  else { this.hours=((value['x']).slice(0,2))
+  }
+ this.minutes=Number((value['x']).split(':').splice(1))
+  let date=new Date()
+  this.time=((date.setHours(this.hours,this.minutes)))
+  
+  
+
+   if ( (Number(value['y'])) < this.prev_close){
+    this.dataValues.push({
+       
+          XValue:new Date(this.time), YValue: Number(value['y']),
+        color: ['red']
+    });
+   }
+  else if (Number(value['y']) > this.prev_close ) {
+    
+     
+    this.dataValues.push({
+       
+        XValue:new Date(this.time), YValue: Number(value['y']),
+        color: ['green']
+    });}
+    
+  
+  });  
+
+})
+}
+  
+  
+
+ 
+  getpharmaniftytoday() {
+        ////////////To get Nifty Today Price///////////////////////
+    
+    // 
+    // this.dataValues.length=0; 
+    // rainFallData.map((value: number, index: number) => {
+    //   console.log(index)
+    //   console.log(new Date(2017, -index, 1),(value))
+    //   if ( Number(value) > 12650 ){
+    //     this.dataValues.push({
+    //         XValue: (new Date(2017, -index, 1)), YValue: (value),
+    //         color: ['green']
+    //     });}
+    //   else if ( Number(value) < 12650 ) {
+    //     this.dataValues.push({
+    //       XValue: new Date(2017, -index, 1), YValue: (value),
+    //         color: ['red']
+    //     });}
+        
+    // });
+    // console.log( this.dataValues)
+   
+    this.http.get('https://appfeeds.moneycontrol.com/jsonapi/market/graph&format=json&ind_id=41&range=1d&type=area').subscribe(data5 => {
+        let nestedItems = Object.keys(data5).map(key => {
+          return data5[key];
+        });
+      
+        this.pharmaniftydata.length = 0;
+        this.pharmaniftyLabels.length = 0;
+         this.stockhcdate.length=0; 
+         this.dataValues.length=0;
+        for (let val in nestedItems[1].values) {
+          this.pharmaniftydata.push(nestedItems[1].values[val]["_value"])
+          
+          this.pharmaniftyLabels.push((nestedItems[1].values[val]["_time"]))
+          this.stockhcdate.push({x:(nestedItems[1].values[val]["_time"]),y:(nestedItems[1].values[val]["_value"])})     
+        }
+        
+        
+      }, err => {
+        console.log(err)
+      })
       this.http.get('https://priceapi.moneycontrol.com/pricefeed/techindicator/D/in%3Bcpr?field=RSI').subscribe(data5 => {
         let nestedItems = Object.keys(data5).map(key => {
           return data5[key];
@@ -823,7 +980,7 @@ export class PharmaniftyComponent implements OnInit {
     }, err => {
       console.log(err)
     })
-  }
+    }
   changestockpage(symbol) {
      
 

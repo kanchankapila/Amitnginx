@@ -12,7 +12,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 import { TabViewModule } from "primeng/tabview";
 import { ChartModule } from 'primeng/chart';
-
+import { ChartAllModule, AccumulationChartAllModule, RangeNavigatorAllModule,MultiColoredLineSeriesService} from '@syncfusion/ej2-angular-charts';
 import { of } from 'rxjs'; 
 import { map } from 'rxjs/operators';
 import {Observable} from 'rxjs'
@@ -25,6 +25,9 @@ import {from} from 'rxjs';
   ],
   imports: [
     CommonModule,
+    ChartAllModule, 
+    AccumulationChartAllModule, 
+    RangeNavigatorAllModule,
     NiftyRoutingModule,
     FlexLayoutModule,
     NgbModule,
@@ -36,6 +39,7 @@ import {from} from 'rxjs';
     ChartModule,
    
 
-  ]
+  ],
+  providers:[MultiColoredLineSeriesService]
 })
 export class NiftyModule { }

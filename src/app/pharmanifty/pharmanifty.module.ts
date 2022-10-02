@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ChartAllModule, AccumulationChartAllModule, DateTimeService,DateTimeCategoryService,RangeNavigatorAllModule,MultiColoredLineSeriesService } from '@syncfusion/ej2-angular-charts';
 import { PharmaniftyRoutingModule } from './pharmanifty-routing.module';
 import { PharmaniftyComponent } from './pharmanifty.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -25,8 +25,10 @@ import { ChartModule } from 'primeng/chart';
     MatButtonModule,
     NgChartsModule,
     TabViewModule,
-    ChartModule
+    ChartModule,
+    ChartAllModule, AccumulationChartAllModule, RangeNavigatorAllModule
 
-  ]
+  ],
+  providers:[MultiColoredLineSeriesService,DateTimeCategoryService,DateTimeService]
 })
 export class PharmaniftyModule { }

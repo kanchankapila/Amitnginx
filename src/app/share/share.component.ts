@@ -5,7 +5,7 @@ import jsonp from 'jsonp-modernized';
 import { DialogComponent, ButtonPropsModel } from '@syncfusion/ej2-angular-popups';
 import { EmitType } from '@syncfusion/ej2-base';
 import { DataapiService } from '../../dataapi.service'
-import { PeriodsModel,ITooltipRenderEventArgs, IStockChartEventArgs, ChartTheme,IAxisLabelRenderEventArgs } from '@syncfusion/ej2-angular-charts';
+import { PeriodsModel,ITooltipRenderEventArgs, IStockChartEventArgs, ChartTheme,IAxisLabelRenderEventArgs,ILoadedEventArgs } from '@syncfusion/ej2-angular-charts';
 import { PrimeNGConfig } from 'primeng/api';
 import { DatePipe } from '@angular/common'
 import { Injectable } from '@angular/core';
@@ -137,7 +137,7 @@ export class ShareComponent implements OnInit {
     this.defaultDialog.hide();
     this.visible=false
   }
-
+  
   public dialogBtnClick: EmitType<Object> = (args: any) => {
     this.visible=true
       const effects = args.target.id;
@@ -335,7 +335,8 @@ export class ShareComponent implements OnInit {
   fscore: fscoretile[] = [];
   qscore: qscoretile[] = [];
   dscore: dscoretile[] = [];
-  pclose: any;
+  previousclose: Array<number> = [];
+  pclose:any;
   volscore: volscoretile[] = [];
   mscore: mscoretile[] = [];
   techscore: techscoretile[] = [];
@@ -1254,7 +1255,7 @@ export class ShareComponent implements OnInit {
       console.log(err)
     })
   }
-  async getstocktoday(mcsymbol,eqsymbol) {
+   getstocktoday(mcsymbol,eqsymbol) {
    
     
     this.http.get('https://www.moneycontrol.com/mc/widget/stockdetails/getChartInfo?classic=true&scId=' + this.mcsymbol + '&resolution=1D').subscribe(data5 => {
@@ -1265,8 +1266,10 @@ export class ShareComponent implements OnInit {
       this.stock1ddata.length = 0;
       this.stock1dLabels.length = 0;
       for (let val in nestedItems[5]) {
+        if(nestedItems[5][val]["value"] )
         this.stock1ddata.push(nestedItems[5][val]["value"])
         this.stock1dLabels.push(new Date(nestedItems[5][val]["time"] * 1000).toLocaleTimeString("en-IN"))
+
       }
     }, err => {
       console.log(err)
@@ -1276,7 +1279,7 @@ export class ShareComponent implements OnInit {
         return data5[key];
       });
     //  console.log(nestedItems)
-      this.pclose = nestedItems[2].pclose
+     this.pclose=nestedItems[2].pclose; 
       ////////////To get Nifty Today Resistances and Indicators/////////////
       this.stockDatasnrr1.length = 0;
       this.stockDatasnrr2.length = 0;
@@ -1287,6 +1290,7 @@ export class ShareComponent implements OnInit {
       let val = 0;
       while (val != 400) {
         val = val + 1
+        this.previousclose.push(nestedItems[2].pclose),
         this.stockDatasnrr1.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r1),
           this.stockDatasnrr2.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r2),
           this.stockDatasnrr3.push(nestedItems[2]['pivotLevels'][0].pivotLevel.r3),
@@ -1317,6 +1321,13 @@ export class ShareComponent implements OnInit {
         data: this.stock1ddata,
         borderWidth: 1,
         borderColor: this.stock1ddata.map((v) => (v > this.pclose ? "red" : "green")),
+        fill: false
+      },
+      {
+        label: 'Previous close',
+        data: this.previousclose,
+        borderWidth: 3,
+        borderColor: '#040FFA',
         fill: false
       }];
       this.stockLabels = this.stock1dLabels;
@@ -1364,6 +1375,13 @@ export class ShareComponent implements OnInit {
         data: this.stockDatasnrs3,
         borderWidth: 1,
         borderColor: '#375f00',
+        fill: false
+      },
+      {
+        label: 'Previous close',
+        data: this.previousclose,
+        borderWidth: 3,
+        borderColor: '#040FFA',
         fill: false
       }];
       this.lineChartLabels = this.stockLabels;
