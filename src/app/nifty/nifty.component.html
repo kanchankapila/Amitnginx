@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="InsideContent">
-    <div class="col-xs-6 grid-margin stretch-card">
+    <div class="col-xs-4 grid-margin stretch-card">
       <div class="content card">
         
         <h4 class="mb-4">Crossover</h4>
@@ -55,7 +55,7 @@
         </div>
       </div>
     
-    <div class="col-xs-7 grid-margin stretch-card">
+    <div class="col-lg-13 grid-margin stretch-card">
       <div class="content card">
         
         <h4 class="mb-4">Sentiment</h4>
@@ -77,12 +77,10 @@
   </div>
 
 
-
     <div class=" stretch-card">
       
-
          
-          
+          <div class="table-responsive pt-3">
             <table class="table table-bordered" *ngFor="let tile of niftyema trackBy: trackByFuntion3" >
               <thead>
                 <tr>
@@ -137,7 +135,6 @@
                 
               </tbody>
             </table>
-
             <div class="table-responsive pt-3">
               <table class="table table-bordered" *ngFor="let tile of niftysma trackBy: trackByFuntion3" >
                 <thead>
@@ -196,73 +193,12 @@
             
                   
           </div>
-
-            
-      
-             
-                <table class="table table-bordered" *ngFor="let tile of niftysma trackBy: trackByFuntion4" >
-                  <thead>
-                    <tr>
-                     
-                     <th>
-                        SMA5
-                      </th>
-                      <th>
-                        SMA10
-                      </th>
-                      <th>
-                        SMA20
-                      </th>
-                      <th>
-                        SMA30
-                      </th>
-                      <th>
-                        SMA50
-                      </th>
-                      <th>
-                        SMA100
-                      </th>
-                      <th>
-                        SMA200
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="table-danger">
-                      <td>
-                       {{tile.text1| number : '1.2-2'}} 
-                      </td>
-                      <td>
-                        {{tile.text2| number : '1.2-2'}} 
-                       </td>
-                       <td>
-                        {{tile.text3| number : '1.2-2'}} 
-                       </td>
-                       <td>
-                        {{tile.text4| number : '1.2-2'}} 
-                       </td>
-                       <td>
-                        {{tile.text5| number : '1.2-2'}} 
-                       </td>
-                       <td>
-                        {{tile.text6| number : '1.2-2'}} 
-                       </td>
-                       <td>
-                        {{tile.text7| number : '1.2-2'}} 
-                       </td>
-                    </tr>
-                    
-                  </tbody>
-                </table>
-             
-
+        </div>
      
   </div>
 
   
-
     <div class="col-lg-15 col-xs-5  grid-margin stretch-card ">
-
       <div class="card">
         <div class="card-body" >
           <h6 class="mb-5">NIFTY - Today</h6>
@@ -282,7 +218,7 @@
           PCR
           <div style="display:flex" >
           <div class="table-responsive">
-          <canvas baseChart style="height:400px" class="table" [type]="lineChartType" [datasets]="lineChartpcrData" [labels]="lineChartpcrLabels" [options]="lineChartOptions"></canvas>
+          <canvas baseChart style="min-height:250px" class="table" [type]="lineChartType" [datasets]="lineChartpcrData" [labels]="lineChartpcrLabels" [options]="lineChartOptions"></canvas>
         </div>
       </div>
       </div>
@@ -290,13 +226,13 @@
     </div>
        
     
-    <div class="col-lg-15 col-xs-5 grid-margin stretch-card ">
+    <div class="col-lg-15 col-xs-15 grid-margin stretch-card ">
       <div class="card">
         <div class="card-body" >
           VIX
           <div style="display:flex" >
           <div class="table-responsive">
-          <canvas baseChart style="height:400px" class="table"  [type]="lineChartType" [datasets]="lineChartvixData" [labels]="lineChartvixLabels" [options]="lineChartOptions"></canvas>
+          <canvas baseChart style="min-height:250px" class="table"  [type]="lineChartType" [datasets]="lineChartvixData" [labels]="lineChartvixLabels" [options]="lineChartOptions"></canvas>
        </div>
       </div>
       </div>
@@ -357,13 +293,13 @@
         </div>
       
       
-    <div class="col-lg-15 col-xs-5 grid-margin  stretch-card">
+    <div class="col-lg-15 col-xs-15 grid-margin  stretch-card">
       <div class="card">
         <div class="card-body">
           <h4 class="mb-5">NIFTY50 - 1 Week</h4>
           <div style="display:flex" >
             <div class="table-responsive">
-          <canvas baseChart style="height:400px" class="table" [type]="lineChartType" [datasets]="lineChart5dData" [labels]="lineChart5dLabels" [options]="lineChartOptions"></canvas>
+          <canvas baseChart style="min-height:250px" class="table" [type]="lineChartType" [datasets]="lineChart5dData" [labels]="lineChart5dLabels" [options]="lineChartOptions"></canvas>
         </div>
       </div>
       </div>

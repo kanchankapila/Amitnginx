@@ -245,9 +245,9 @@ export class NiftyComponent implements OnInit {
   
   public lineChartType: ChartType = 'line';
   public lineChartOptions:ChartOptions = {
-    responsive: false,
+    responsive: true,
     // aspectRatio: 1,
-    //  maintainAspectRatio:true,
+     maintainAspectRatio:false,
     scales: {
       
     },elements: {
