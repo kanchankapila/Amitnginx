@@ -245,8 +245,9 @@ export class NiftyComponent implements OnInit {
   
   public lineChartType: ChartType = 'line';
   public lineChartOptions:ChartOptions = {
-    responsive: true,
-    // maintainAspectRatio:false,
+    responsive: false,
+    // aspectRatio: 1,
+    //  maintainAspectRatio:true,
     scales: {
       
     },elements: {
@@ -728,9 +729,10 @@ export class NiftyComponent implements OnInit {
   this.nifty505dLabels.length = 0;
   for (let val in nestedItems[1].values) {
     this.nifty505ddata.push(nestedItems[1].values[val]["_value"])
-    this.nifty505dLabels.push(nestedItems[1].values[val]["_time"])
+    this.nifty505dLabels.push(nestedItems[1].values[val]["_time"].slice(0,6))
   
   }
+  console.log(this.nifty505dLabels.slice(0,2))
  
 
   this.lineChart5dData = [{

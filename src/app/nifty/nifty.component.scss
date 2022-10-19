@@ -20,6 +20,12 @@ cardpcr{
   height:150px;
   
 }
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 80vh;
+  width: 80vw;
+}
 @media(max-width:320px){
   :host ::ng-deep .pButton {
     width: 1rem;

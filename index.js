@@ -99,27 +99,27 @@ if (cluster.isMaster) {
   //   port: "5432"
   
   // })
-  // const pool = new Pool({
-  //   user: "onzcwnkubxycls",
-  //   host: "ec2-52-207-15-147.compute-1.amazonaws.com",
-  //   database: "dak59761mft7r4",
-  //   password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
-  //   port: "5432"
-  // });
-  // const client = new Client({
-  //   user: "onzcwnkubxycls",
-  //   host: "ec2-52-207-15-147.compute-1.amazonaws.com",
-  //   database: "dak59761mft7r4",
-  //   password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
-  //   port: "5432"
-  
-  // })
-  // *   Postgres Settings for Heroku Postgres DB and local DB
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit'
+   const pool = new Pool({
+    user: "onzcwnkubxycls",
+    host: "ec2-52-207-15-147.compute-1.amazonaws.com",
+    database: "dak59761mft7r4",
+    password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
+    port: "5432"
   });
+  const client = new Client({
+    user: "onzcwnkubxycls",
+    host: "ec2-52-207-15-147.compute-1.amazonaws.com",
+    database: "dak59761mft7r4",
+    password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
+    port: "5432"
   
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit' })
+  })
+  // *   Postgres Settings for Heroku Postgres DB and local DB
+  // const client = new Client({
+  //   connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit'
+  // });
+  
+  // const pool = new Pool({ connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit' })
 
 
 

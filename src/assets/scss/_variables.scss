@@ -142,7 +142,7 @@ $type1-bold: 'ubuntu-bold',
 sans-serif;
 
 $default-font-size: .875rem; // 14px as base font size
-
+$small-font-size: .45rem;
 $text-muted: #9c9fa6;
 $body-color: #343a40;
 
@@ -160,6 +160,7 @@ $card-bg-varient: #fff;
 $table-accent-bg: transparent;
 $table-hover-bg: $content-bg;
 $table-cell-padding: .9375rem;
+$table-cell-padding1: .4375rem;
 $table-border-color: $border-color;
 $table-inverse-bg: #2a2b32;
 $table-inverse-color: color(white);
