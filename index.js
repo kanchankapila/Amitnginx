@@ -27,10 +27,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.raw());
 const fetch = require("node-fetch");
 const csrf = require('csurf');
-const options = {
-  key: fs.readFileSync('key.pem'),
-  cert: fs.readFileSync('cert.pem')
-};
+// const options = {
+//   key: fs.readFileSync('key.pem'),
+//   cert: fs.readFileSync('cert.pem')
+// };
 // const { Compress } = require('gzipper');
 
 //   const gzip = new Compress('./src', './dist', {
