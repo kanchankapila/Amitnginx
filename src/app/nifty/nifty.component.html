@@ -77,8 +77,10 @@
   </div>
 
 
+
     <div class=" stretch-card">
       
+
          
           
             <table class="table table-bordered" *ngFor="let tile of niftyema trackBy: trackByFuntion3" >
@@ -135,6 +137,7 @@
                 
               </tbody>
             </table>
+
             <div class="table-responsive pt-3">
               <table class="table table-bordered" *ngFor="let tile of niftysma trackBy: trackByFuntion3" >
                 <thead>
@@ -193,12 +196,73 @@
             
                   
           </div>
-        </div>
+
+            
+      
+             
+                <table class="table table-bordered" *ngFor="let tile of niftysma trackBy: trackByFuntion4" >
+                  <thead>
+                    <tr>
+                     
+                     <th>
+                        SMA5
+                      </th>
+                      <th>
+                        SMA10
+                      </th>
+                      <th>
+                        SMA20
+                      </th>
+                      <th>
+                        SMA30
+                      </th>
+                      <th>
+                        SMA50
+                      </th>
+                      <th>
+                        SMA100
+                      </th>
+                      <th>
+                        SMA200
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="table-danger">
+                      <td>
+                       {{tile.text1| number : '1.2-2'}} 
+                      </td>
+                      <td>
+                        {{tile.text2| number : '1.2-2'}} 
+                       </td>
+                       <td>
+                        {{tile.text3| number : '1.2-2'}} 
+                       </td>
+                       <td>
+                        {{tile.text4| number : '1.2-2'}} 
+                       </td>
+                       <td>
+                        {{tile.text5| number : '1.2-2'}} 
+                       </td>
+                       <td>
+                        {{tile.text6| number : '1.2-2'}} 
+                       </td>
+                       <td>
+                        {{tile.text7| number : '1.2-2'}} 
+                       </td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+             
+
      
   </div>
 
   
+
     <div class="col-lg-15 col-xs-5  grid-margin stretch-card ">
+
       <div class="card">
         <div class="card-body" >
           <h6 class="mb-5">NIFTY - Today</h6>
