@@ -10,7 +10,7 @@
 <br>
 
 <div class="InsideContent1">
-  <div class=" col-lg-9 col-xs-6 grid-margin stretch-card">
+  <div class=" col-lg-13 col-xs-6 grid-margin stretch-card">
     <div class="content card">
       <h4 class="mb-5">Daily Technical Indicators</h4>
       <div fxLayout="row wrap" fxLayoutGap="10px grid">
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="InsideContent">
-    <div class="col-xs-4 grid-margin stretch-card">
+    <div class="col-lg-6 col-xs-4 grid-margin stretch-card">
       <div class="content card">
         
         <h4 class="mb-4">Crossover</h4>
@@ -55,7 +55,7 @@
         </div>
       </div>
     
-    <div class="col-lg-13 grid-margin stretch-card">
+    <div class="col-lg-6 col-xs-4 grid-margin stretch-card">
       <div class="content card">
         
         <h4 class="mb-4">Sentiment</h4>
@@ -225,31 +225,35 @@
       </div>
     </div>
        
-    
-    <div class="col-lg-15 col-xs-15 grid-margin stretch-card ">
+    <div class="col-lg-15 col-xs-5  grid-margin stretch-card ">
       <div class="card">
         <div class="card-body" >
           VIX
-          <div style="display:flex" >
           <div class="table-responsive">
-          <canvas baseChart style="min-height:250px" class="table"  [type]="lineChartType" [datasets]="lineChartvixData" [labels]="lineChartvixLabels" [options]="lineChartOptions"></canvas>
-       </div>
+          <div style="display:flex" >
+           
+          <canvas baseChart style="min-height:250px" class="table" [type]="lineChartType" [datasets]="lineChartvixData" [labels]="lineChartvixLabels" [options]="lineChartOptions" ></canvas>
+        </div> 
+        </div>
+        </div>
       </div>
-      </div>
-      </div>
-    </div>
+    </div> 
+  
+
+    
+
 
  
 
 <p-tabView>
     
   <p-tabPanel header="5 days">
-      <div class="InsideContent">
-        <div class="col-sm-4 grid-margin stretch-card">
+      
+        <div class="col-lg-13 col-sm-6 grid-margin stretch-card">
           <div class="content card">
             <h4 class="mb-5">Weekly Technical Indicators</h4>
             <div fxLayout="row wrap" fxLayoutGap="16px grid">
-              <div fxFlex="25" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of nifty50indicatorsw trackBy: trackByFuntion5">
+              <div fxFlex="15" fxFlex.lg="12%" fxFlex.xs="30%" fxFlex.sm="33%"  *ngFor="let tile of nifty50indicatorsw trackBy: trackByFuntion5">
                 <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
                 [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
                             'bg-gradient-bull1':tile.text3 === 'Oversold',
@@ -267,7 +271,7 @@
             </div>
           </div>
          
-          <div class="col-sm-4 grid-margin stretch-card">
+          <div class="col-lg-6 col-xs-4  grid-margin stretch-card">
             <div class="content card">
               
               <h4 class="mb-4">Crossover</h4>
@@ -290,30 +294,32 @@
               </div>
             </div>
           
-        </div>
+       
       
       
-    <div class="col-lg-15 col-xs-15 grid-margin  stretch-card">
+   
+    <div class="col-lg-15 col-xs-5  grid-margin stretch-card ">
       <div class="card">
-        <div class="card-body">
-          <h4 class="mb-5">NIFTY50 - 1 Week</h4>
+        <div class="card-body" >
+          <h6 class="mb-5">NIFTY50 - 1 Week</h6>
+          <div class="table-responsive">
           <div style="display:flex" >
-            <div class="table-responsive">
-          <canvas baseChart style="min-height:250px" class="table" [type]="lineChartType" [datasets]="lineChart5dData" [labels]="lineChart5dLabels" [options]="lineChartOptions"></canvas>
+           
+          <canvas baseChart style="min-height:250px" class="table" [type]="lineChartType" [datasets]="lineChart5dData" [labels]="lineChart5dLabels" [options]="lineChartOptions" ></canvas>
+        </div> 
+        </div>
         </div>
       </div>
-      </div>
-      </div>
-    </div>
+    </div>  
   
   </p-tabPanel>
   <p-tabPanel header="1 month">
-    <div class="InsideContent">
-      <div class="col-lg-7 grid-margin stretch-card">
+   
+      <div class="col-lg-6 col-xs-4  grid-margin stretch-card">
         <div class="content card">
-          <h4 class="mb-5">Weekly Technical Indicators</h4>
+          <h4 class="mb-5">Monthly Technical Indicators</h4>
           <div fxLayout="row wrap" fxLayoutGap="16px grid">
-            <div fxFlex="25" fxFlex.xs="100%" fxFlex.sm="33%"  *ngFor="let tile of nifty50indicatorsm trackBy: trackByFuntion8">
+            <div fxFlex="15" fxFlex.lg="12%" fxFlex.xs="30%" fxFlex.sm="33%"  *ngFor="let tile of nifty50indicatorsm trackBy: trackByFuntion8">
               <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card"
               [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
                           'bg-gradient-bull1':tile.text3 === 'Oversold',
@@ -331,7 +337,7 @@
           </div>
         </div>
         
-        <div class="col-lg-13 grid-margin stretch-card">
+        <div class="col-lg-6 col-xs-4 grid-margin stretch-card">
           <div class="content card">
             
             <h4 class="mb-4">Crossover</h4>
@@ -355,18 +361,18 @@
           </div>
         
         
-      </div>
+   
     
     
     
   
       
-    <div class="col-lg-15 grid-margin  stretch-card">
+    <div class="col-lg-15 col-xs-5  grid-margin  stretch-card">
       <div class="card">
         <div class="card-body">
           <h4 class="mb-5">NIFTY50 - 1 Month</h4>
           <div class="table-responsive">
-          <canvas baseChart style="height:400px" class="table" [datasets]="lineChart1mData" [labels]="lineChart1mLabels" [type]="lineChartType" [options]="lineChartOptions"></canvas>
+          <canvas baseChart style="min-height:250px" class="table" [datasets]="lineChart1mData" [labels]="lineChart1mLabels" [type]="lineChartType" [options]="lineChartOptions"></canvas>
         </div>
       </div>
       </div>
@@ -375,32 +381,32 @@
   </p-tabPanel>
   
   <p-tabPanel header="3months">
-    <div class="col-lg-15 grid-margin  stretch-card">
+    <div class="col-lg-15 col-xs-5  grid-margin  stretch-card">
       <div class="card">
         <div class="card-body" >
           <h4 class="mb-5">NIFTY - 3 months</h4>
-          <canvas baseChart height="100"  [datasets]="lineChart3mData" [labels]="lineChart3mLabels" [type]="lineChartType" [options]="lineChartOptions"></canvas>
+          <canvas baseChart style="min-height:250px"  [datasets]="lineChart3mData" [labels]="lineChart3mLabels" [type]="lineChartType" [options]="lineChartOptions"></canvas>
         </div>
       </div>
     </div>
   
   </p-tabPanel>
   <p-tabPanel header="6 months">
-    <div class="col-lg-15 grid-margin  stretch-card">
+    <div class="col-lg-15 col-xs-5  grid-margin  stretch-card">
       <div class="card">
         <div class="card-body">
           <h4 class="mb-5">NIFTY50 - 6 Months</h4>
-          <canvas baseChart height="100"  [datasets]="lineChart6mData" [labels]="lineChart6mLabels" [type]="lineChartType" [options]="lineChartOptions"></canvas>
+          <canvas baseChart style="min-height:250px"  [datasets]="lineChart6mData" [labels]="lineChart6mLabels" [type]="lineChartType" [options]="lineChartOptions"></canvas>
         </div>
       </div>
     </div>
   </p-tabPanel>
   <p-tabPanel header="1 Year">
-    <div class="col-lg-15 grid-margin  stretch-card">
+    <div class="col-lg-15 col-xs-5  grid-margin  stretch-card">
       <div class="card">
         <div class="card-body">
           <h4 class="mb-5">NIFTY - 1 Year </h4>
-          <canvas baseChart height="100"  [datasets]="lineChart1yrData" [labels]="lineChart1yrLabels" [type]="lineChartType" [options]="lineChartOptions"></canvas>
+          <canvas baseChart style="min-height:250px"  [datasets]="lineChart1yrData" [labels]="lineChart1yrLabels" [type]="lineChartType" [options]="lineChartOptions"></canvas>
         </div>
       </div>
     </div>
@@ -431,7 +437,7 @@
     <div class="content card">
       <h4 class="card-title">NIFTY50 Stocks</h4>
       <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div fxFlex="15%" fxFlex.xs="30%" fxFlex.sm="33%" class="text-white"  *ngFor="let tile of nifty50stocks trackBy: trackByFuntion11">
+        <div fxFlex="15%" fxFlex.xs="33%" fxFlex.sm="33%" class="text-white"  *ngFor="let tile of nifty50stocks trackBy: trackByFuntion11">
           <mat-card [ngClass]="{'bg-gradient-bull text-white cardbear mat-elevation-z4' : tile.text3 > 0 , 'cardbear bg-gradient-bear text-white mat-elevation-z4': 0 > tile.text3}"  >
           
               {{tile.text1}}
