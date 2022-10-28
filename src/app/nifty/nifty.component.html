@@ -437,10 +437,10 @@
     <div class="content card">
       <h4 class="card-title">NIFTY50 Stocks</h4>
       <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div fxFlex="15%" fxFlex.xs="33%" fxFlex.sm="33%" class="text-white"  *ngFor="let tile of nifty50stocks trackBy: trackByFuntion11">
-          <mat-card [ngClass]="{'bg-gradient-bull text-white cardbear mat-elevation-z4' : tile.text3 > 0 , 'cardbear bg-gradient-bear text-white mat-elevation-z4': 0 > tile.text3}"  >
+        <div fxFlex="15%" fxFlex.xs="33%" fxFlex.sm="50%" class="text-white"  *ngFor="let tile of nifty50stocks trackBy: trackByFuntion11">
+          <mat-card [ngClass]="{'bg-gradient-bull text-black cardbear mat-elevation-z4' : tile.text3 > 0 , 'cardbear bg-gradient-bear text-black mat-elevation-z4': 0 > tile.text3}"  >
           
-              {{tile.text1}}
+              <h6>{{tile.text1}}</h6>
               {{tile.text4}}<br>{{tile.text2}}&nbsp;({{tile.text3}}%)
             <mat-card-actions>
               <button mat-button (click)="changestockpage(tile.text5)" >Graph</button>

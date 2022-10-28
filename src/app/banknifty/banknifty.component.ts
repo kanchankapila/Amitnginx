@@ -215,6 +215,9 @@ export class BankniftyComponent implements OnInit {
   ];
   public lineChartType: ChartType = 'line';
   public lineChartOptions:ChartOptions = {
+    responsive: true,
+    // aspectRatio: 1,
+     maintainAspectRatio:false,
     scales: {
       
     },

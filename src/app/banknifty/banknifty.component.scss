@@ -1,26 +1,80 @@
 .InsideContent{
-    display:flex;
-    align-items: flex-start;
-  }
+  display:flex;
+  align-items: flex-start;
+}
 
-.cardbear{
-  width:125px;
-  height:90px;
-  margin-right:5px;
-  margin-left:5px;
+cardbear{
+  display:flex;
+  width:auto;
+  
 }
 
 cardvix{
-  width:800px;
-  height:150px;
-  
+width:800px;
+height:150px;
+
 }
 
 cardpcr{
-  width:800px;
-  height:150px;
+width:800px;
+height:150px;
+
+}
+.matbutton1{
+  width: 5px;
+  font-size: xx-small;
+}
+.chart-container {
+position: relative;
+margin: auto;
+height: 80vh;
+width: 80vw;
+}
+@media(max-width:320px){
+:host ::ng-deep .pButton {
+  width: 1rem;
+  font-size: 1px;
+}
+:host ::ng-deep .p-dropdown {
+  width: 10rem;
   
 }
-.InsideContent1{
-    display:block;
-  }
+:host ::ng-deep .cardbear {
+  width: auto;
+  height:auto;
+  font-size: xx-small;
+  
+}
+:host ::ng-deep .matbutton1 {
+  width: 5px;
+  height:auto;
+  font-size: xx-small;
+  
+}
+:host ::ng-deep .card {
+  width: auto;
+  height:auto;
+  color:black;
+  font-size: xx-small;
+  
+}
+:host ::ng-deep .cardbear1 {
+  width: auto;
+  height:auto;
+  font-size: xx-small;
+  
+}
+:host ::ng-deep .navbar-brand{
+  display:none;
+  
+}
+:host ::ng-deep .brand-logo-mini{
+  display:none;
+  
+}
+:host ::ng-deep .chart{
+  width:300px;
+  height:400px;
+  
+}
+}

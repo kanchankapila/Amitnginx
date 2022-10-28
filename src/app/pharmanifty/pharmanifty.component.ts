@@ -218,6 +218,9 @@ export class PharmaniftyComponent implements OnInit {
   ];
   public lineChartType: ChartType = 'line';
   public lineChartOptions:ChartOptions = {
+    responsive: true,
+    // aspectRatio: 1,
+     maintainAspectRatio:false,
     scales: {
       
     },
