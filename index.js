@@ -7,6 +7,7 @@ const { Pool, Client } = require('pg')
 var compression = require('compression');
 const numCPUs = require('os').cpus().length;
 const swd = require("selenium-webdriver");
+require('chromedriver');
 var app = express();
 const webdriver = require('selenium-webdriver');
 const chrome = require('selenium-webdriver/chrome');
@@ -147,6 +148,11 @@ if (cluster.isMaster) {
       options.addArguments("--headless");
       options.addArguments("--disable-gpu");
      options.addArguments("--no-sandbox");
+     options.setChromeBinaryPath(process.env.CHROME_BINARY_PATH);
+     let serviceBuilder = new chrome.ServiceBuilder(process.env.CHROME_DRIVER_PATH);
+    
+    //  binary_location = "C:\\path\\to\\chrome.exe"
+    //  options.setBinary(".\\src\\assets\\chromedriver.exe");
     options.addArguments("--disable-dev-shm-usage")
       let driver = new webdriver.Builder()
         .forBrowser('chrome')
