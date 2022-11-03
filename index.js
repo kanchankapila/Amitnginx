@@ -146,8 +146,8 @@ if (cluster.isMaster) {
       //Below arguments are critical for Heroku deployment
       options.addArguments("--headless");
       options.addArguments("--disable-gpu");
-      options.addArguments("--no-sandbox")
-    options.addArguments('--disable-dev-shm-usage');
+     options.addArguments("--no-sandbox");
+    options.addArguments("--disable-dev-shm-usage")
       let driver = new webdriver.Builder()
         .forBrowser('chrome')
         .setChromeOptions(options)
@@ -195,7 +195,7 @@ if (cluster.isMaster) {
             '_gid=' + process.env.trendlynecookiegid + '; .trendlyne=' + process.env.trendlynecookietl + '; csrftoken=' + process.env.trendlynecookiecsrf + '; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=' + process.env.trendlynecookiega + '; _gat=1'
               
           // console.log(process.env.trendlynecookie)
-          return (process.env.trendlynecookie)
+          return (process.env.trendlynecookie),
           driver.quit(); 
         });
                
@@ -204,11 +204,12 @@ if (cluster.isMaster) {
       }).catch(function (err) { console.log("Error ", err, " occurred!"); });
       //    
     };
-  let i = 0;
-   while ( i < 2 ) {
-     i = i + 1;
-     let c = def();
-   }
+  // let i = 0;
+  //  while ( i < 2 ) {
+  //    i = i + 1;
+  // let c =
+    def();
+  //  }
    
   
     // * To fetch Opstra session Cookies
