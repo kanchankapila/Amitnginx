@@ -146,8 +146,8 @@ if (cluster.isMaster) {
       //Below arguments are critical for Heroku deployment
       options.addArguments("--headless");
       options.addArguments("--disable-gpu");
-      options.addArguments("--no-sandbox");
-     options.addArguments('--disable-dev-shm-usage');
+      options.addArguments("--no-sandbox")
+    options.addArguments('--disable-dev-shm-usage');
       let driver = new webdriver.Builder()
         .forBrowser('chrome')
         .setChromeOptions(options)
