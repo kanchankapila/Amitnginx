@@ -157,6 +157,7 @@ if (cluster.isMaster) {
       let driver = new webdriver.Builder()
         .forBrowser('chrome')
         .setChromeOptions(options)
+        .setChromeService(serviceBuilder)
         .build();
    
       let tabToOpen = driver.get("https://trendlyne.com/visitor/loginmodal/");
