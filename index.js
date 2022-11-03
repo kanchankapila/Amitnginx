@@ -140,7 +140,7 @@ if (cluster.isMaster) {
   // * To fetch Cookies from Trendlyne and Opstra
   
     // * To fetch Trendlyne session Cookies
-    // app.get('/api/trendlynecookie', async 
+     app.get('/api/trendlynecookie', 
    async function def (req, res) {
    
       let options = new chrome.Options();
@@ -210,12 +210,12 @@ if (cluster.isMaster) {
         
       }).catch(function (err) { console.log("Error ", err, " occurred!"); });
       //    
-    };
+    });
   // let i = 0;
   //  while ( i < 2 ) {
   //    i = i + 1;
   // let c =
-    def();
+    // def();
   //  }
    
   
