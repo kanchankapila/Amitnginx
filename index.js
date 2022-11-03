@@ -99,27 +99,27 @@ if (cluster.isMaster) {
   //   port: "5432"
   
   // })
-   const pool = new Pool({
-    user: "onzcwnkubxycls",
-    host: "ec2-52-207-15-147.compute-1.amazonaws.com",
-    database: "dak59761mft7r4",
-    password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
-    port: "5432"
-  });
-  const client = new Client({
-    user: "onzcwnkubxycls",
-    host: "ec2-52-207-15-147.compute-1.amazonaws.com",
-    database: "dak59761mft7r4",
-    password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
-    port: "5432"
-  
-  })
-  // *   Postgres Settings for Heroku Postgres DB and local DB
-  // const client = new Client({
-  //   connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit'
+  //  const pool = new Pool({
+  //   user: "onzcwnkubxycls",
+  //   host: "ec2-52-207-15-147.compute-1.amazonaws.com",
+  //   database: "dak59761mft7r4",
+  //   password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
+  //   port: "5432"
   // });
+  // const client = new Client({
+  //   user: "onzcwnkubxycls",
+  //   host: "ec2-52-207-15-147.compute-1.amazonaws.com",
+  //   database: "dak59761mft7r4",
+  //   password: "3716fb10802c87b0d573b48dfaba0e093d50cb06a8be63fb84447a554d77a5e4",
+  //   port: "5432"
   
-  // const pool = new Pool({ connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit' })
+  // })
+  // *   Postgres Settings for Heroku Postgres DB and local DB
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit'
+  });
+  
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit' })
 
 
 
@@ -138,60 +138,78 @@ if (cluster.isMaster) {
 
   // * To fetch Cookies from Trendlyne and Opstra
   
-  // * To fetch Trendlyne session Cookies
-  app.get('/api/trendlynecookie', async function (req, res) {
+    // * To fetch Trendlyne session Cookies
+    // app.get('/api/trendlynecookie', async 
+   async function def (req, res) {
    
-    let options = new chrome.Options();
-  //Below arguments are critical for Heroku deployment
-  options.addArguments("--headless");
-  options.addArguments("--disable-gpu");
-    options.addArguments("--no-sandbox");
+      let options = new chrome.Options();
+      //Below arguments are critical for Heroku deployment
+      options.addArguments("--headless");
+      options.addArguments("--disable-gpu");
+      options.addArguments("--no-sandbox");
     
-    let driver = new webdriver.Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(options)
-    .build();
+      let driver = new webdriver.Builder()
+        .forBrowser('chrome')
+        .setChromeOptions(options)
+        .build();
    
-  let tabToOpen =driver.get("https://trendlyne.com/visitor/loginmodal/"); 
-  tabToOpen.then(function () { 
-        let findTimeOutP =driver.manage().setTimeouts({ implicit: 5000,}); 
-        return findTimeOutP; }) .then(function () { 
-          let promiseUsernameBox =driver.findElement(swd.By.id("id_login")); 
-          return promiseUsernameBox; }) .then(function (usernameBox) { 
-          let promiseFillUsername =usernameBox.sendKeys('amit.kapila.2009@gmail.com'); 
-          return promiseFillUsername; }).then(function () { 
-          console.log("Username entered successfully in Trendlyne"); 
+      let tabToOpen = driver.get("https://trendlyne.com/visitor/loginmodal/");
+      tabToOpen.then(function () {
+        let findTimeOutP = driver.manage().setTimeouts({ implicit: 5000, });
+        return findTimeOutP;
+      }).then(function () {
+        let promiseUsernameBox = driver.findElement(swd.By.id("id_login"));
+        return promiseUsernameBox;
+      }).then(function (usernameBox) {
+        let promiseFillUsername = usernameBox.sendKeys('amit.kapila.2009@gmail.com');
+        return promiseFillUsername;
+      }).then(function () {
+        console.log("Username entered successfully in Trendlyne");
   
-          let promisePasswordBox =driver.findElement(swd.By.id("id_password")); 
-          return promisePasswordBox;}).then(function (passwordBox) { 
+        let promisePasswordBox = driver.findElement(swd.By.id("id_password"));
+        return promisePasswordBox;
+      }).then(function (passwordBox) {
         
-          let promiseFillPassword =passwordBox.sendKeys('amit0605\n'); 
-          return promiseFillPassword;}).then(function () { 
-      console.log("Successfully signed in Trendlyne!"); 
-       driver.manage().getCookie('.trendlyne').then(function (cookiestl) {
-          process.env.trendlynecookietl = cookiestl.value;});
-         driver.manage().getCookie('_gat').then(function (cookiesgat) {
+        let promiseFillPassword = passwordBox.sendKeys('amit0605\n');
+        return promiseFillPassword;
+      }).then(function () {
+        console.log("Successfully signed in Trendlyne!");
+        driver.manage().getCookie('.trendlyne').then(function (cookiestl) {
+          process.env.trendlynecookietl = cookiestl.value;
+        });
+        driver.manage().getCookie('_gat').then(function (cookiesgat) {
           
-          process.env.trendlynecookiegat = cookiesgat.value;});
-          driver.manage().getCookie('_gid').then(function (cookiesgid) {
-            process.env.trendlynecookiegid = cookiesgid.value;
-  });
-       driver.manage().getCookie('csrftoken').then(function (cookiescsrf) {
+          process.env.trendlynecookiegat = cookiesgat.value;
+        });
+        driver.manage().getCookie('_gid').then(function (cookiesgid) {
+          process.env.trendlynecookiegid = cookiesgid.value;
+        });
+        driver.manage().getCookie('csrftoken').then(function (cookiescsrf) {
           process.env.trendlynecookiecsrf = cookiescsrf.value;
           
         });
-          driver.manage().getCookie('_ga').then(function (cookiesga) {
-              process.env.trendlynecookiega = cookiesga.value;
-              process.env.trendlynecookie =
-              '_gid=' + process.env.trendlynecookiegid + '; .trendlyne=' +process.env.trendlynecookietl + '; csrftoken=' + process.env.trendlynecookiecsrf + '; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=' + process.env.trendlynecookiega + '; _gat=1',
-              driver.quit(); 
-           
-            });
-           
+        driver.manage().getCookie('_ga').then(function (cookiesga) {
+          process.env.trendlynecookiega = cookiesga.value;
+              
+          process.env.trendlynecookie =
+            '_gid=' + process.env.trendlynecookiegid + '; .trendlyne=' + process.env.trendlynecookietl + '; csrftoken=' + process.env.trendlynecookiecsrf + '; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=' + process.env.trendlynecookiega + '; _gat=1'
+              
+          // console.log(process.env.trendlynecookie)
+          return (process.env.trendlynecookie)
+          driver.quit(); 
+        });
+               
         
-          }).catch(function (err) { console.log("Error ", err, " occurred!"); });
-           
-    });
+        
+      }).catch(function (err) { console.log("Error ", err, " occurred!"); });
+      //    
+    };
+  let i = 0;
+   while ( i < 2 ) {
+     i = i + 1;
+     let c = def();
+   }
+   
   
     // * To fetch Opstra session Cookies
   
@@ -485,7 +503,8 @@ if (cluster.isMaster) {
     request(url11, function (error, response, html) {
       if (!error) {
    
-
+        console.log(process.env.trendlynecookie)
+        
         var options2 = {
           url: 'https://trendlyne.com/equity/getStockMetricParameterList/' + tlid,
           method: 'GET', // Don't forget this line
