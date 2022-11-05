@@ -59,28 +59,29 @@ console.log("port:",process.env.PORT)
 console.log("host:",process.env.HOST)
 console.log("Database URL:",process.env.DATABASE_URL)
 
-if (cluster.isMaster) {
-  console.log(`Master ${process.pid} is running`);
+// if (cluster.isMaster) {
+//   console.log(`Master ${process.pid} is running`);
 
-  // Fork workers.
-  for (let i = 0; i < numCPUs; i++) {
-    cluster.fork();
-  }
+//   // Fork workers.
+//   for (let i = 0; i < numCPUs; i++) {
+//     cluster.fork();
+//   }
 
-  //Check if work id is died
-  cluster.on('exit', (worker, code, signal) => {
-    console.log(`worker ${worker.process.pid} died`);
-  });
+//   //Check if work id is died
+//   cluster.on('exit', (worker, code, signal) => {
+//     console.log(`worker ${worker.process.pid} died`);
+//   });
 
-} else {
-  // This is Workers can share any TCP connection
-  // It will be initialized using express
-  console.log(`Worker ${process.pid} started`);
+// } else {
+//   // This is Workers can share any TCP connection
+//   // It will be initialized using express
+//   console.log(`Worker ${process.pid} started`);
 
-  app.get('/api/cluster', (req, res) => {
-    let worker = cluster.worker.id;
-    res.send(`Running on worker with id ==> ${worker}`);
-  });
+//   app.get('/api/cluster', (req, res) => {
+//     let worker = cluster.worker.id;
+//     res.send(`Running on worker with id ==> ${worker}`);
+//   });
+
 
   const axiosCookieJarSupport = require('axios-cookiejar-support').default;
   const tough = require('tough-cookie');
@@ -1426,4 +1427,4 @@ if (cluster.isMaster) {
   app.listen( process.env.PORT || 3000, function () {
     console.log('Your node is running on port 3000');
   })
- }
+//  }
