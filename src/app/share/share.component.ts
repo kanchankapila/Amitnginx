@@ -603,7 +603,7 @@ export class ShareComponent implements OnInit {
     this.getntstock1yr(this.eqsymbol)
     this.getmcstockohlc1yr(this.eqsymbol,this.yearbackepoch,this.todayepoch)
     this.getgnewsapi(this.bqnames, this.dateday5, this.datetoday)
-   
+    this.getntstockdetails(this.eqsymbol)
     this.getntstockpcrdetails(this.eqsymbol)
     this.getmcstockrealtime(this.mcsymbol)
     this.getstocktoday(this.mcsymbol, this.eqsymbol)
@@ -1433,36 +1433,41 @@ export class ShareComponent implements OnInit {
     })
   }
   async getntstockdetails(eqsymbol) {
-    try {
-      const response = await fetch("https://api.niftytrader.in/webapi/Live/stockAnalysis", {
-        "method": "POST",
-        "headers": {
+    this.dataApi.getntstockdetails(eqsymbol).subscribe(data5 => {
+      let nestedItems = Object.keys(data5).map(key => {
+        return data5[key];
+      });
+      
+      //   try {
+      //     const response = await fetch("https://api.niftytrader.in/webapi/Live/stockAnalysis", { 
+      //       "method": "POST",
+      //       "headers": {
           
-          "accept": "application/json, text/plain, */*",
-        "accept-language": "en-US,en;q=0.9",
-        "content-type": "application/json",
-        "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": "\"Windows\"",
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-site"},
-        "referrer": "https://www.niftytrader.in/",
-        "referrerPolicy": "strict-origin-when-cross-origin",
-        "body": '{\"symbol\":\"'+this.eqsymbol+'\"}',
-        //"method": "POST",
-        "mode": "cors",
-        "credentials": "omit"
-      })
-      if (response.ok) {
-        const result = await response.json();
-          this.nr7 = (result['resultData'].stocktrend['nr7_today'])
+      //         "accept": "application/json, text/plain, */*",
+      //       "accept-language": "en-US,en;q=0.9",
+      //       "content-type": "application/json",
+      //       "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
+      //       "sec-ch-ua-mobile": "?0",
+      //       "sec-ch-ua-platform": "\"Windows\"",
+      //       "sec-fetch-dest": "empty",
+      //       "sec-fetch-mode": "cors",
+      //       "sec-fetch-site": "same-site"},
+      //       "referrer": "https://www.niftytrader.in/",
+      //       "referrerPolicy": "strict-origin-when-cross-origin",
+      //       "body": '{\"symbol\":\"'+this.eqsymbol+'\"}',
+      //       //"method": "POST",
+      //       "mode": "cors",
+      //       "credentials": "omit"
+      //     })
+      //     if (response.ok) {
+      //       const result = await response.json();
+      this.nr7 = (nestedItems[3].stocktrend['nr7_today'])
       this.delivperc.length = 0;
       this.delivperctime.length = 0;
-      for (let val in result['resultData'].priceTable) {
+      for (let val in nestedItems[3].priceTable) {
         
-        this.delivperc.unshift(result['resultData'].priceTable[val].delivery_percentage)
-        this.delivperctime.unshift(result['resultData'].priceTable[val].created_at)
+        this.delivperc.unshift(nestedItems[3].priceTable[val].delivery_percentage)
+        this.delivperctime.unshift(nestedItems[3].priceTable[val].created_at)
       }
       this.DelivData = [{
         label: 'Delivery Percentage',
@@ -1471,9 +1476,9 @@ export class ShareComponent implements OnInit {
         fill: false
       }];
       this.DelivLabels = this.delivperctime;
-      for (let val in result['resultData'].priceTable) {
-        this.volume.unshift(result['resultData'].priceTable[val].volume)
-        this.volumetime.unshift(result['resultData'].priceTable[val].created_at)
+      for (let val in nestedItems[3].priceTable) {
+        this.volume.unshift(nestedItems[3].priceTable[val].volume)
+        this.volumetime.unshift(nestedItems[3].priceTable[val].created_at)
       }
       this.VolumeData = [{
         label: 'Volume',
@@ -1481,47 +1486,55 @@ export class ShareComponent implements OnInit {
         borderWidth: 1,
         fill: false
       }];
-        this.VolumeLabels = this.volumetime;
-      }
-  } catch (err) {
-    console.error(err);
+      this.VolumeLabels = this.volumetime;
+    
+  // } catch (err) {
+  //   console.error(err);
+  // }
+    
   }
+  )
   }
   
    async getntstockpcrdetails(eqsymbol) {
-   
-    try {
-      const response = await fetch("https://api.niftytrader.in/webapi/Live/kiteInstrumentNfoListNew", {
-        "method": "POST",
-        "headers": {
-          "accept": "application/json, text/plain, */*",
-          "accept-language": "en-US,en;q=0.9",
-          "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDMzOCIsImp0aSI6IjU5MjUwODYxLWRlNWYtNGFkZS1hZWY0LWRlMzg1YjcwYWQ1ZCIsImV4cCI6MTY1ODUwMjk1MSwiaXNzIjoiTmlmdHl0cmFkZXJoZWxwLmNvbSIsImF1ZCI6Ik5pZnR5dHJhZGVyaGVscC5jb20ifQ.RQyIer2CdUUd2Ge5pLlU8MJJCM-49W0aF3iuDJmZBb0",
-          "content-type": "application/json",
-          "sec-ch-ua": "\".Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\"103\", \"Chromium\";v=\"103\"",
-          "sec-ch-ua-mobile": "?0",
-          "sec-ch-ua-platform": "\"Windows\"",
-          "sec-fetch-dest": "empty",
-          "sec-fetch-mode": "cors",
-          "sec-fetch-site": "same-site",
-          "Referer": "https://www.niftytrader.in/",
-          "Referrer-Policy": "strict-origin-when-cross-origin"
-          },
-          "body": '{\"symbol\":\"'+eqsymbol+'\"}',
-        //"method": "POST"
-      })
+     this.dataApi.getntstockpcrdetails(eqsymbol).subscribe(data5 => {
+       let nestedItems = Object.keys(data5).map(key => {
+         return data5[key];
+       });
+       console.log(nestedItems)
+       // try {
+       //   const response = await fetch("https://api.niftytrader.in/webapi/Live/kiteInstrumentNfoListNew", {
+       //     "method": "POST",
+       //     "headers": {
+       //       "accept": "application/json, text/plain, */*",
+       //       "accept-language": "en-US,en;q=0.9",
+       //       "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDMzOCIsImp0aSI6IjU5MjUwODYxLWRlNWYtNGFkZS1hZWY0LWRlMzg1YjcwYWQ1ZCIsImV4cCI6MTY1ODUwMjk1MSwiaXNzIjoiTmlmdHl0cmFkZXJoZWxwLmNvbSIsImF1ZCI6Ik5pZnR5dHJhZGVyaGVscC5jb20ifQ.RQyIer2CdUUd2Ge5pLlU8MJJCM-49W0aF3iuDJmZBb0",
+       //       "content-type": "application/json",
+       //       "sec-ch-ua": "\".Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\"103\", \"Chromium\";v=\"103\"",
+       //       "sec-ch-ua-mobile": "?0",
+       //       "sec-ch-ua-platform": "\"Windows\"",
+       //       "sec-fetch-dest": "empty",
+       //       "sec-fetch-mode": "cors",
+       //       "sec-fetch-site": "same-site",
+       //       "Referer": "https://www.niftytrader.in/",
+       //       "Referrer-Policy": "strict-origin-when-cross-origin"
+       //       },
+       //       "body": '{\"symbol\":\"'+eqsymbol+'\"}',
+       //     //"method": "POST"
+       //   })
         
       
-      if (response.ok) {
-        const result = await response.json();
+       //   if (response.ok) {
+       //     const result = await response.json();
         
      
-         this.maxpain.push({ text1: 'max pain', text2: result['resultData']['futureOption'].max_pain })
-        this.stockpcr.push({ text1: 'PCR', text2: result['resultData']['futureOption'].pcr })
-      }
-    } catch (err) {
-     console.error(err);
-   }
+          this.maxpain.push({ text1: 'max pain', text2: nestedItems[3]['futureOption'].max_pain })
+         this.stockpcr.push({ text1: 'PCR', text2: nestedItems[3]['futureOption'].pcr })
+      //  }
+       //   } catch (err) {
+       //    console.error(err);
+       //  }
+     })
   }
    gettrendlynestocks1(tlid, eqsymbol, tlname) {
      

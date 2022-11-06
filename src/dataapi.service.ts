@@ -13,8 +13,8 @@ export class DataapiService {
   public href: string = "";
   
 
-    //  baseurl = "http://localhost:3000/api"
-     baseurl = "https://amitv2.herokuapp.com/api"
+      // baseurl = "http://localhost:3000/api"
+      baseurl = "https://amitv2.herokuapp.com/api"
 
 
   stock: any;
@@ -206,11 +206,17 @@ export class DataapiService {
  
     return this.http.get(this.baseurl + '/ntstockpcrdetails?eqsymbol='+eqsymbol)
   }
+  getntstockdetails(eqsymbol) {
+ 
+    return this.http.get(this.baseurl + '/ntstockdetails?eqsymbol='+eqsymbol)
+  }
+  ntstockdetails
   
   getntniftypcrdetails() {
  
     return this.http.get(this.baseurl + '/ntniftypcr')
   }
+  
   getntglobal(){
     return this.http.get(this.baseurl + '/ntglobal')
   }

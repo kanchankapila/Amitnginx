@@ -196,7 +196,7 @@ console.log("Database URL:",process.env.DATABASE_URL)
           process.env.trendlynecookiecsrf = cookiescsrf.value;
           
         });
-        driver.manage().getCookie('_ga').then(function (cookiesga) {
+        driver.manage().getCookie('_ga').then(async function (cookiesga) {
           process.env.trendlynecookiega = cookiesga.value;
               
           process.env.trendlynecookie =
@@ -204,7 +204,7 @@ console.log("Database URL:",process.env.DATABASE_URL)
               
           // console.log(process.env.trendlynecookie)
           return (process.env.trendlynecookie),
-          driver.quit(); 
+          await driver.quit(); 
         });
                
         
@@ -223,20 +223,27 @@ console.log("Database URL:",process.env.DATABASE_URL)
   
     // * To fetch Opstra session Cookies
   
-  app.get('/api/opstracookie', async function (req, res) {
+// app.get('/api/opstracookie', async 
+async function ghi(req, res) {
   
       let options1 = new chrome.Options();
   options1.addArguments("--headless");
   options1.addArguments("--disable-gpu");
     options1.addArguments("--no-sandbox");
+    options1.setChromeBinaryPath(process.env.CHROME_BINARY_PATH);
+     let serviceBuilder1 = new chrome.ServiceBuilder(process.env.CHROME_DRIVER_PATH);
     
+    //  binary_location = "C:\\path\\to\\chrome.exe"
+    //  options.setBinary(".\\src\\assets\\chromedriver.exe");
+    options1.addArguments("--disable-dev-shm-usage")
     let driver1 = new webdriver.Builder()
     .forBrowser('chrome')
-    .setChromeOptions(options)
+      .setChromeOptions(options1)
+      .setChromeService(serviceBuilder1)
     .build();
     
    
-    let tabToOpen = driver1.get("https://sso.definedge.com/auth/realms/definedge/protocol/openid-connect/auth?response_type=code&client_id=opstra&redirect_uri=https://opstra.definedge.com/ssologin&state=e2cf559f-356c-425a-87e3-032097f643d0&login=true&scope=openid"); 
+    let tabToOpen = driver1.get("https://opstra.definedge.com/ssologin"); 
     tabToOpen.then(function () { 
     
             let findTimeOutP =driver1.manage().setTimeouts({implicit: 5000,}); 
@@ -267,14 +274,18 @@ console.log("Database URL:",process.env.DATABASE_URL)
           driver1.manage().getCookie('_ga').then(function (cookiesopga) {
                 process.env.opstracookiega=cookiesopga.value
           })
-          driver1.manage().getCookie('JSESSIONID').then(function (cookiesopjsid) {
+          driver1.manage().getCookie('JSESSIONID').then(async function (cookiesopjsid) {
                   process.env.opstracookiejsid = cookiesopjsid.value
-                  process.env.opstracookie = '_ga=' + process.env.opstracookiejsid + '; _gid=' + process.env.opstracookiegid + '; _gat=' + process.env.opstracookiegat + '; JSESSIONID=' + process.env.opstracookiejsid
-                  
+            process.env.opstracookie = '_ga=' + process.env.opstracookiejsid + '; _gid=' + process.env.opstracookiegid + '; _gat=' + process.env.opstracookiegat + '; JSESSIONID=' + process.env.opstracookiejsid
+                
+                  return (process.env.opstracookie),
+                 await driver1.quit(); 
           })
              }).catch(function (err) { console.log("Error ", err, " occurred!"); });
-             driver1.quit();
-      });
+            //  await driver1.quit();
+};
+      // );
+ghi();
   
 
   // **************Money Control ******************
@@ -1175,91 +1186,91 @@ console.log("Database URL:",process.env.DATABASE_URL)
 
   //*  NIFTY TRADERS POST request////////////////
   
-  // app.get('/api/ntstockdetails', (req, res) => {
-  //   let eqsymbol = req.query.eqsymbol
+  app.get('/api/ntstockdetails',cors(), function (req, res)  {
+    let eqsymbol = req.query.eqsymbol
   
-  //   var url11 = 'https://api.niftytrader.in/webapi/Live/stockAnalysis';
-  //   request(url11, function (error, response, html) {
-  //     if (!error) {
+    var url11 = 'https://api.niftytrader.in/webapi/Live/stockAnalysis';
+    request(url11, function (error, response, html) {
+      if (!error) {
         
-  //     var options2 = {
-  //   url: 'https://api.niftytrader.in/webapi/Live/stockAnalysis',
-  //   method: 'POST', // Don't forget this line
-  //   "headers": {
-  //     "accept": "application/json, text/plain, */*",
-  //     "accept-language": "en-US,en;q=0.9",
-  //     "content-type": "application/json",
-  //     "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
-  //     "sec-ch-ua-mobile": "?0",
-  //     "sec-ch-ua-platform": "\"Windows\"",
-  //     "sec-fetch-dest": "empty",
-  //     "sec-fetch-mode": "cors",
-  //     "sec-fetch-site": "same-site"
-  //   },
-  //   "referrer": "https://www.niftytrader.in/",
-  //   "referrerPolicy": "strict-origin-when-cross-origin",
-  //   "body": '{\"symbol\":\"'+eqsymbol+'\"}',
-  //   "method": "POST",
-  //   "mode": "cors",
-  //   "credentials": "omit"
-  // }
+      var options2 = {
+    url: 'https://api.niftytrader.in/webapi/Live/stockAnalysis',
+    method: 'POST', // Don't forget this line
+    "headers": {
+      "accept": "application/json, text/plain, */*",
+      "accept-language": "en-US,en;q=0.9",
+      "content-type": "application/json",
+      "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-site"
+    },
+    "referrer": "https://www.niftytrader.in/",
+    "referrerPolicy": "strict-origin-when-cross-origin",
+    "body": '{\"symbol\":\"'+eqsymbol+'\"}',
+    "method": "POST",
+    "mode": "cors",
+    "credentials": "omit"
+  }
   
-  // request(options2, (err, response, body) => {
-  //   if (err) {
+  request(options2, (err, response, body) => {
+    if (err) {
   
-  //   } else {
-  //     ( res.json(JSON.parse(body)));
+    } else {
+      ( res.json(JSON.parse(body)));
     
-  //   }
-  // });
-  // }
-  //   })
+    }
+  });
+  }
+    })
     
-  // })
+  })
 
   //*Nifty trader stock POST request to get pcr///
   
-  // app.get('/api/ntstockpcrdetails', (req, res) => {
-  //   let eqsymbol = req.query.eqsymbol
+  app.get('/api/ntstockpcrdetails', (req, res) => {
+    let eqsymbol = req.query.eqsymbol
     
-  //   var url11 = 'https://api.niftytrader.in/webapi/Live/kiteInstrumentNfoListNew';
-  //   request(url11, function (error, response, html) {
-  //     if (!error) {
+    var url11 = 'https://api.niftytrader.in/webapi/Live/kiteInstrumentNfoListNew';
+    request(url11, function (error, response, html) {
+      if (!error) {
         
-  //     var options2 = {
-  //   url: 'https://api.niftytrader.in/webapi/Live/kiteInstrumentNfoListNew',
-  //   method: 'POST', // Don't forget this line
-  //   "headers": {
-  //      "accept": "application/json, text/plain, */*",
-  //   "accept-language": "en-US,en;q=0.9",
-  //   "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDMzOCIsImp0aSI6IjU5MjUwODYxLWRlNWYtNGFkZS1hZWY0LWRlMzg1YjcwYWQ1ZCIsImV4cCI6MTY1ODUwMjk1MSwiaXNzIjoiTmlmdHl0cmFkZXJoZWxwLmNvbSIsImF1ZCI6Ik5pZnR5dHJhZGVyaGVscC5jb20ifQ.RQyIer2CdUUd2Ge5pLlU8MJJCM-49W0aF3iuDJmZBb0",
-  //   "content-type": "application/json",
-  //   "sec-ch-ua": "\".Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\"103\", \"Chromium\";v=\"103\"",
-  //   "sec-ch-ua-mobile": "?0",
-  //   "sec-ch-ua-platform": "\"Windows\"",
-  //   "sec-fetch-dest": "empty",
-  //   "sec-fetch-mode": "cors",
-  //   "sec-fetch-site": "same-site",
-  //   "Referer": "https://www.niftytrader.in/",
-  //   "Referrer-Policy": "strict-origin-when-cross-origin"
-  //   },
-  //   "body": '{\"symbol\":\"'+eqsymbol+'\"}',
-  // "method": "POST"
-  // }
+      var options2 = {
+    url: 'https://api.niftytrader.in/webapi/Live/kiteInstrumentNfoListNew',
+    method: 'POST', // Don't forget this line
+    "headers": {
+       "accept": "application/json, text/plain, */*",
+    "accept-language": "en-US,en;q=0.9",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1NDMzOCIsImp0aSI6IjU5MjUwODYxLWRlNWYtNGFkZS1hZWY0LWRlMzg1YjcwYWQ1ZCIsImV4cCI6MTY1ODUwMjk1MSwiaXNzIjoiTmlmdHl0cmFkZXJoZWxwLmNvbSIsImF1ZCI6Ik5pZnR5dHJhZGVyaGVscC5jb20ifQ.RQyIer2CdUUd2Ge5pLlU8MJJCM-49W0aF3iuDJmZBb0",
+    "content-type": "application/json",
+    "sec-ch-ua": "\".Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\"103\", \"Chromium\";v=\"103\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "Referer": "https://www.niftytrader.in/",
+    "Referrer-Policy": "strict-origin-when-cross-origin"
+    },
+    "body": '{\"symbol\":\"'+eqsymbol+'\"}',
+  "method": "POST"
+  }
   
-  // request(options2, (err, response, body) => {
-  //   if (err) {
+  request(options2, (err, response, body) => {
+    if (err) {
   
-  //   } else {
+    } else {
      
-  //     ( res.json(JSON.parse(body)));
+      ( res.json(JSON.parse(body)));
     
-  //   }
-  // });
-  // }
-  //   })
+    }
+  });
+  }
+    })
     
-  // })
+  })
  
   //*Nifty Trader Post Request to get nr7 for Stocks in nr7 database on postgres,dropdown in Actions submits request
   
