@@ -6,9 +6,32 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
+
+<div class="col-lg-13 col-xs-3 grid-margin stretch-card">
+  <div class="content  container "*ngFor="let tile of stockdetails1 trackBy: trackByFuntion42">
+        <div class=" type1-bold grid-margin stretch-card" [ngClass]="{ 
+                    'text-green': tile.text3 > 0,
+                    'text-red': 0 > tile.text3 ,
+                    'text-yellow': tile.text3 == 0 }">
+         
+         <div class="InsideContent1">           <h1>
+           {{tile.text1}}
+       
+          
+          </h1>
+          
+
+          <h5>&nbsp;{{tile.text4}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text3}}%</h5>
+        </div>
+      
+    </div>
+  </div>
+</div>
+<div class="InsideContent1">
+  <div *ngFor="let tile of brokertarget trackBy: trackByFuntion10"
+    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
+    <h4>{{tile.text1}}&nbsp;[{{tile.text2}}]</h4>
+  </div>
 
 <div class="InsideContent">
   <div *ngFor="let tile of omrscore trackBy: trackByFuntion37" [ngClass]="{
@@ -29,27 +52,13 @@
   <div *ngFor="let tile of maxpain trackBy: trackByFuntion44" class='card12 bg-gradient-bear text-black'>
     {{tile.text1}}<br>&nbsp;&nbsp;{{tile.text2}}
   </div>
-  <div *ngFor="let tile of brokertarget trackBy: trackByFuntion10"
-    [ngClass]="{'text-green' : tile.text3 == 'positive' ,'text-red' : tile.text3 == 'negative' , 'text-yellow': tile.text3 == 'neutral'}">
-    <h4>{{tile.text1}}&nbsp;[{{tile.text2}}]</h4>
-  </div>
 </div>
-<div class=" grid-margin stretch-card">
-  <div class="content  container "*ngFor="let tile of stockdetails1 trackBy: trackByFuntion42">
-        <div class="text-white type1-bold cardbear1 grid-margin stretch-card" [ngClass]="{ 
-                    'bg-gradient-bull': tile.text3 > 0,
-                    'bg-gradient-bear2': 0 > tile.text3 ,
-                    'bg-gradient-neutral': tile.text3 == 0 }">
-          <h1>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text1}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text4}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text2}}&nbsp;&nbsp;&nbsp;&nbsp;{{tile.text3}}%
-          </h1>
-    
-      
-    </div>
-  </div>
 </div>
+
+
 NR7:{{nr7}}
-<div id="customization">
+
+<div class="InsideContent" id="customization">
   <div class="animate">
       <button ejs-button id="GBN" Class="e-control e-outline e-btn e-primary" #defaultButton
           (click)="dialogBtnClick($event)">Good/Bad/Neutral</button>
@@ -58,96 +67,98 @@ NR7:{{nr7}}
     <button ejs-button id="Insights" Class="e-control e-outline e-btn e-primary" #defaultButton
         (click)="dialogBtnClick1($event)">Insights</button>
 </div>
+
+</div>
 <div class="animate">
   <button ejs-button id="StockNews" Class="e-control e-outline e-btn e-primary" #defaultButton
       (click)="dialogBtnClick2($event)">Stock News</button>
 </div>
-</div>
 
 
-
-  
    
     
   
 <div [innerHtml]="hmsg"></div>
-<div class="InsideContent">
-  <div class="col-lg-5 card content container">
-    <h4 class="mb-5">Scores</h4>
-    <div class="grid-margin stretch-card" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex="25">
-      <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div *ngFor="let tile of fscore  trackBy: trackByFuntion1" [ngClass]="{
-        'card2 bg-gradient-bull text-black':tile.text === 'green'||'Green',
-        'card3 bg-gradient-bear text-black':tile.text === 'red',
-        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}">
-          <br>Financial<br>&nbsp;&nbsp;{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
-        </div>
+
+  <div class=" col-lg-13 col-xs-6 grid-margin stretch-card">
+    <div class="content card">
+      <h4 class="mb-5">Scores</h4>
+      <div fxLayout="row wrap" fxLayoutGap="10px grid">
+      <div fxFlex="15" fxFlex.lg="12%" fxFlex.xs="30%" fxFlex.sm="33%"  *ngFor="let tile of fscore">
+      <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card" [ngClass]="{
+        ' bg-gradient-bull text-black':tile.text === 'green'||'Green',
+        ' bg-gradient-bear text-black':tile.text === 'red',
+        ' bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}">
+          <br>Financial<br>&nbsp;&nbsp;{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}} </mat-card>
+        
         <div *ngFor="let tile of qscore  trackBy: trackByFuntion2" [ngClass]="{
-        'card2 bg-gradient-bull text-black':tile.text === 'green'||'Green',
-        'card3 bg-gradient-bear text-black':tile.text === 'red',
-        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}">
+        'cardbear bg-gradient-bull text-black':tile.text === 'green'||'Green',
+        'cardbear bg-gradient-bear text-black':tile.text === 'red',
+        'cardbear bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}">
           <br>Quality<br>&nbsp;&nbsp;{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
         </div>
+     
         <div *ngFor="let tile of techscore trackBy: trackByFuntion3" [ngClass]="{
-        'card2 bg-gradient-bull text-black':tile.text === 'green'||'Green',
-        'card3 bg-gradient-bear text-black':tile.text === 'red',
-        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}">
+        'cardbear bg-gradient-bull text-black':tile.text === 'green'||'Green',
+        'cardbear bg-gradient-bear text-black':tile.text === 'red',
+        'cardbear bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}">
           <br>Technicals<br>{{tile.text2}}<br>{{tile.text1}}
         </div>
         <div *ngFor="let tile of vscore trackBy: trackByFuntion4" [ngClass]="{
-        'card2 bg-gradient-bull text-black':tile.text === 'green'||'Green',
-        'card3 bg-gradient-bear text-black':tile.text === 'red',
-        'card4 bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}">
+        'cardbear bg-gradient-bull text-black':tile.text === 'green'||'Green',
+        'cardbear bg-gradient-bear text-black':tile.text === 'red',
+        'cardbear bg-gradient-warning text-black':tile.text === 'yellow'||'Yellow'}">
           <br>Valuation<br>{{tile.text2}}<br>&nbsp;{{tile.text1}}
         </div>
         <div *ngFor="let tile of volscore trackBy: trackByFuntion6" [ngClass]="{
-      'card2 bg-gradient-bull text-black':tile.text2 === 'positive',
-      'card3 bg-gradient-bear text-black':tile.text2 === 'negative',
-      'card4 bg-gradient-warning text-black':tile.text2 === 'neutral'}"><br>Volatility<br>&nbsp;&nbsp;{{tile.text1}}
+      'cardbear bg-gradient-bull text-black':tile.text2 === 'positive',
+      'cardbear bg-gradient-bear text-black':tile.text2 === 'negative',
+      'cardbear bg-gradient-warning text-black':tile.text2 === 'neutral'}"><br>Volatility<br>&nbsp;&nbsp;{{tile.text1}}
         </div>
         <div *ngFor="let tile of dscore trackBy: trackByFuntion7" [ngClass]="{
-    'card2 bg-gradient-bull text-black':tile.text2 === 'positive',
-    'card3 bg-gradient-bear text-black':tile.text2 === 'negative',
-    'card4 bg-gradient-warning text-black':tile.text2 === 'neutral'}"><br>Durability<br>&nbsp;&nbsp;{{tile.text1}}
+    'cardbear bg-gradient-bull text-black':tile.text2 === 'positive',
+    'cardbear bg-gradient-bear text-black':tile.text2 === 'negative',
+    'cardbear bg-gradient-warning text-black':tile.text2 === 'neutral'}"><br>Durability<br>&nbsp;&nbsp;{{tile.text1}}
         </div>
         <div *ngFor="let tile of mscore trackBy: trackByFuntion5" [ngClass]="{
-  'card2 bg-gradient-bull text-black':tile.text2 === 'positive',
-  'card3 bg-gradient-bear text-black':tile.text2 === 'negative',
-  'card4 bg-gradient-warning text-black':tile.text2 === 'neutral'}"><br>Momentum<br>&nbsp;&nbsp;{{tile.text1}}
+  'cardbear bg-gradient-bull text-black':tile.text2 === 'positive',
+  'cardbear bg-gradient-bear text-black':tile.text2 === 'negative',
+  'cardbear bg-gradient-warning text-black':tile.text2 === 'neutral'}"><br>Momentum<br>&nbsp;&nbsp;{{tile.text1}}
         </div>
         <div *ngFor="let tile of divscore trackBy: trackByFuntion34" [ngClass]="{
-  'card2 bg-gradient-bear text-black':5 > tile.text1,
-  'card3 bg-gradient-bull text-black':tile.text1 > 5,
-  'card4 bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
+  'cardbear bg-gradient-bear text-black':5 > tile.text1,
+  'cardbear bg-gradient-bull text-black':tile.text1 > 5,
+  'cardbear bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
         </div>
         <div *ngFor="let tile of growthscore trackBy: trackByFuntion35" [ngClass]="{
-  'card2 bg-gradient-bear text-black':5 > tile.text1,
-  'card3 bg-gradient-bull text-black':tile.text1 > 5,
-  'card4 bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
+  'cardbear bg-gradient-bear text-black':5 > tile.text1,
+  'cardbear bg-gradient-bull text-black':tile.text1 > 5,
+  'cardbear bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
         </div>
         <div *ngFor="let tile of healthscore trackBy: trackByFuntion36" [ngClass]="{
-  'card2 bg-gradient-bear text-black':5 > tile.text1,
-  'card3 bg-gradient-bull text-black':tile.text1 > 5,
-  'card4 bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
+  'cardbear bg-gradient-bear text-black':5 > tile.text1,
+  'cardbear bg-gradient-bull text-black':tile.text1 > 5,
+  'cardbear bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
         </div>
         <div *ngFor="let tile of kvscore trackBy: trackByFuntion38" [ngClass]="{
-  'card2 bg-gradient-bear text-black':5 > tile.text1,
-  'card3 bg-gradient-bull text-black':tile.text1 > 5,
-  'card4 bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
+  'cardbear bg-gradient-bear text-black':5 > tile.text1,
+  'cardbear bg-gradient-bull text-black':tile.text1 > 5,
+  'cardbear bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
         </div>
         <div *ngFor="let tile of kqscore trackBy: trackByFuntion39" [ngClass]="{
-  'card2 bg-gradient-bear text-black':5 > tile.text1,
-  'card3 bg-gradient-bull text-black':tile.text1 > 5,
-  'card4 bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
+  'cardbear bg-gradient-bear text-black':5 > tile.text1,
+  'cardbear bg-gradient-bull text-black':tile.text1 > 5,
+  'cardbear bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
         </div>
         <div *ngFor="let tile of ppscore trackBy: trackByFuntion40" [ngClass]="{
-  'card2 bg-gradient-bear text-black':5 > tile.text1,
-  'card3 bg-gradient-bull text-black':tile.text1 > 5,
-  'card4 bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
+  'cardbear bg-gradient-bear text-black':5 > tile.text1,
+  'cardbear bg-gradient-bull text-black':tile.text1 > 5,
+  'cardbear bg-gradient-warning text-black':tile.text1 == 5}"><br>{{tile.text2}}<br>&nbsp;&nbsp;{{tile.text1}}
         </div>
       </div>
     </div>
   </div>
+</div>
   <div class="col-lg-4 grid-margin stretch-card">
     <div class="content card container">
       <h4 class="mb-5">Daily Technical Indicators</h4>
@@ -172,7 +183,7 @@ NR7:{{nr7}}
       </div>
     </div>
   </div>
-  <div class="InsideContent1">
+ 
     <div class="col-lg-13 grid-margin stretch-card">
       <div class="content card container">
         <h4 class="mb-4">Crossover</h4>
@@ -209,8 +220,8 @@ NR7:{{nr7}}
         </div>
       </div>
     </div>
-  </div>
-</div>
+ 
+
 
 
 
