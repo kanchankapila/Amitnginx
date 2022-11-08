@@ -159,11 +159,11 @@ NR7:{{nr7}}
     </div>
   </div>
 </div>
-  <div class="col-lg-4 grid-margin stretch-card">
+  <div class="col-lg-13 col-xs-6 grid-margin stretch-card">
     <div class="content card container">
       <h4 class="mb-5">Daily Technical Indicators</h4>
       <div fxLayout="row wrap" fxLayoutGap="10px grid">
-        <div fxFlex="33" fxFlex.xs="100%" fxFlex.sm="100%"
+        <div fxFlex="15" fxFlex.lg="12%" fxFlex.xs="30%" fxFlex.sm="33%" 
           *ngFor="let tile of stockindicators trackBy: trackByFuntion7">
           <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card" [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
                       'bg-gradient-bull1':tile.text3 === 'Oversold',
@@ -184,11 +184,11 @@ NR7:{{nr7}}
     </div>
   </div>
  
-    <div class="col-lg-13 grid-margin stretch-card">
+    <div class="col-lg-6 col-xs-4 grid-margin stretch-card">
       <div class="content card container">
         <h4 class="mb-4">Crossover</h4>
         <div fxLayout="row wrap" fxLayoutGap="16px grid">
-          <div fxFlex="30" fxFlex.xs="100%" fxFlex.sm="33%"
+          <div fxFlex="30" fxFlex.xs="100%" fxFlex.sm="33%" fxFlex.sm="33%" 
             *ngFor="let tile of stockcrossover trackBy: trackByFuntion8">
             <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card" [ngClass]="{'bg-gradient-bull':tile.text3 === 'Bullish',
                           'bg-gradient-bull1':tile.text3 === 'Oversold',
@@ -204,11 +204,11 @@ NR7:{{nr7}}
         </div>
       </div>
     </div>
-    <div class="col-lg-13 grid-margin stretch-card">
+    <div class="col-lg-6 col-xs-4 grid-margin stretch-card">
       <div class="content card container">
         <h4 class="mb-4">Sentiment</h4>
         <div fxLayout="row wrap" fxLayoutGap="16px grid">
-          <div fxFlex="30" fxFlex.xs="100%" fxFlex.sm="33%"
+          <div fxFlex="30" fxFlex.xs="100%" fxFlex.sm="33%" fxFlex.sm="33%" 
             *ngFor="let tile of stocksentiments trackBy: trackByFuntion9">
             <mat-card class="text-blue type1-bold cardbear grid-margin stretch-card" [ngClass]="{'bg-gradient-bull':tile.text1 === 'Bullish',
                           'bg-gradient-bull1':tile.text1 === 'Very Bullish',
@@ -225,25 +225,32 @@ NR7:{{nr7}}
 
 
 
-<div class="InsideContent">
-  <div class="col-lg-6 grid-margin  stretch-card">
+
+  <div class="col-lg-13 col-xs-5 grid-margin  stretch-card">
     <div class="card">
       <h4 class="mb-5">Delivery Percentage</h4>
-      <canvas baseChart height="250" [datasets]="DelivData" [labels]="DelivLabels" [type]="DelivChartType"
-        [options]="stockChartOptions"></canvas>
-    </div>
-  </div>
-  <div class="col-lg-6 grid-margin  stretch-card">
-    <div class="card">
-      <h4 class="mb-5">Volume</h4>
-      <canvas baseChart height="250" [datasets]="VolumeData" [labels]="VolumeLabels" [type]="stockChartType"
+      <div class="table-responsive">
+        <div style="display:flex" >
+      <canvas baseChart style="min-height:250px" class="table" [datasets]="DelivData" [labels]="DelivLabels" [type]="DelivChartType"
         [options]="stockChartOptions"></canvas>
     </div>
   </div>
 </div>
-<div class="col-lg-12 stretch-card">
-  <div class="card">
-    <div class="card-body">
+</div>
+  <div class="col-lg-13 col-xs-5 grid-margin  stretch-card">
+    <div class="card">
+      <h4 class="mb-5">Volume</h4>
+      <div class="table-responsive">
+        <div style="display:flex" >
+      <canvas baseChart style="min-height:250px" class="table" [datasets]="VolumeData" [labels]="VolumeLabels" [type]="stockChartType"
+        [options]="stockChartOptions"></canvas>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="stretch-card">
+
       <div class="table-responsive pt-3">
         <table class="table table-bordered" *ngFor="let tile of stockema trackBy: trackByFuntion30">
           <thead>
@@ -297,7 +304,7 @@ NR7:{{nr7}}
             </tr>
           </tbody>
         </table>
-        <div class="col-lg-12 stretch-card">
+       
           <div class="table-responsive pt-3">
             <table class="table table-bordered" *ngFor="let tile of stocksma trackBy: trackByFuntion31">
               <thead>
@@ -352,14 +359,15 @@ NR7:{{nr7}}
               </tbody>
             </table>
           </div>
-        </div>
+       
       </div>
-    </div>
-  </div>
+   
 </div>
 
 <div class="control-section">
   <div>
+    <div class="table-responsive">
+     
       <ejs-stockchart id='stockChartDefault'  [enablePeriodSelector]='enable' [chartArea]='chartArea' [periods]='periods1' [primaryXAxis]='primaryXAxis' style="display:block;"
           [primaryYAxis]='primaryYAxis' [title]='title' [crosshair]='crosshair'
           (tooltipRender)='tooltipRender($event)' [tooltip]='tooltip' (load)='load($event)'>
@@ -368,6 +376,8 @@ NR7:{{nr7}}
               </e-stockchart-series>
           </e-stockchart-series-collection>
       </ejs-stockchart>
+   
+  </div>
   </div>
 </div>
 
@@ -377,6 +387,8 @@ NR7:{{nr7}}
    
       <div class="control-section">
         <div>
+          <div class="table-responsive">
+           
             <ejs-stockchart id='StockChartCandle' [chartArea]='chartArea' [primaryXAxis]='primaryXAxis1' style="display:block;"
                 [primaryYAxis]='primaryYAxis1' [crosshair]='crosshair' [title]='title' [periods]='periods'  [tooltip]='tooltip'
                 (tooltipRender)='tooltipRender($event)' (axisLabelRender)='axisLabelRender($event)' (load)='load($event)'>
@@ -395,119 +407,211 @@ NR7:{{nr7}}
                         name={{stockname}} [enableTooltip]='columnTooltip'> </e-stockchart-series>
                 </e-stockchart-series-collection>
             </ejs-stockchart>
-        </div>
+   
+      </div>
+    </div>
       </div>
      
     
     
     
-    <div class="col-lg-18 grid-margin  stretch-card">
+    <div class="col-lg-15 col-xs-5 grid-margin  stretch-card">
       <div class="card">
+        <div class="card-body" >
         <h4 class="mb-2">Stock Today with S/R</h4>
-        <canvas baseChart height="100" [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels"
+        <div class="table-responsive">
+          <div style="display:flex" >
+        <canvas baseChart style="height:400px" [type]="lineChartType" [datasets]="lineChartData" [labels]="lineChartLabels"
           [options]="lineChartOptions"></canvas>
       </div>
     </div>
-    <div class="col-lg-18 grid-margin  stretch-card">
+  </div>
+</div>
+    </div>
+    <div class="col-lg-15 col-xs-5 grid-margin  stretch-card">
       <div class="card">
+        <div class="card-body" >
         <h4 class="mb-2">Stock Today </h4>
-        <canvas baseChart [datasets]="stockData" [labels]="stockLabels" [type]="stockChartType"
+        <div class="table-responsive">
+          <div style="display:flex" >
+        <canvas baseChart style="height:400px" [datasets]="stockData" [labels]="stockLabels" [type]="stockChartType"
           [options]="stockChartOptions"></canvas>
       </div>
+    </div>
+  </div>
+</div>
     </div>
   
 </p-tabPanel>
 
   <p-tabPanel header="1 Week">
     
-    <div class="col-lg-15 grid-margin  stretch-card">
+    <div class="col-lg-15 col-xs-5 grid-margin  stretch-card">
       <div class="card">
+        <div class="card-body" >
         <h4 class="mb-5">stock - 1 Week</h4>
-        <canvas baseChart [datasets]="stock1wData" [labels]="stock1wLabels" [type]="stockChartType"
+        <div class="table-responsive">
+          <div style="display:flex" >
+        <canvas baseChart style="min-height:250px" class="table" [datasets]="stock1wData" [labels]="stock1wLabels" [type]="stockChartType"
           [options]="stockChartOptions"></canvas>
       </div>
     </div>
+  </div>
+</div>
+    </div>
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
+        <div class="card-body" >
+          
         <h1 class="mb-5" [innerHtml]="mamsg"></h1>
-        <canvas baseChart height="75" [data]="maChartData" [options]="stockChartOptions" [type]="stockChartType"
+        <div class="table-responsive">
+          <div style="display:flex" >
+        <canvas baseChart style="min-height:250px" class="table"  [data]="maChartData" [options]="stockChartOptions" [type]="stockChartType"
           [options]="stockChartOptions"></canvas>
       </div>
     </div>
+  </div>
+</div>
+    </div>
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
+        <div class="card-body" >
+         
         <h1 class="mb-5" [innerHtml]="bbmsg">&nbsp;</h1>
-        <canvas baseChart height="75" [data]="bbChartData" [options]="stockChartOptions" [type]="stockChartType"
+        <div class="table-responsive">
+          <div style="display:flex" >
+        <canvas baseChart style="min-height:250px" class="table"  [data]="bbChartData" [options]="stockChartOptions" [type]="stockChartType"
           [options]="stockChartOptions"></canvas>
       </div>
     </div>
+  </div>
+</div>
+    </div>
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
+        <div class="card-body" >
+          
         <h1 class="mb-5" [innerHtml]="macdmsg"></h1>
-        <canvas baseChart height="75" [data]="macdChartData" [options]="stockChartOptions" [type]="stockChartType"
+        <div class="table-responsive">
+          <div style="display:flex" >
+        <canvas baseChart style="min-height:250px" class="table"  [data]="macdChartData" [options]="stockChartOptions" [type]="stockChartType"
           [options]="stockChartOptions"></canvas>
       </div>
     </div>
+  </div>
+</div>
+    </div>
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
+        <div class="card-body" >
+          
         <h1 class="mb-5" [innerHtml]="rsimsg"></h1>
-        <canvas baseChart height="75" [data]="rsiChartData" [options]="stockChartOptions" [type]="stockChartType"
+        <div class="table-responsive">
+          <div style="display:flex" >
+        <canvas baseChart style="min-height:250px" class="table"  [data]="rsiChartData" [options]="stockChartOptions" [type]="stockChartType"
           [options]="stockChartOptions"></canvas>
       </div>
     </div>
+  </div>
+</div>
+    </div>
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
+        <div class="card-body" >
+         
         <h1 class="mb-5" [innerHtml]="kstmsg"></h1>
-        <canvas baseChart height="75" [data]="kstChartData" [options]="stockChartOptions" [type]="stockChartType"
+        <div class="table-responsive">
+          <div style="display:flex" >
+        <canvas baseChart style="min-height:250px" class="table"  [data]="kstChartData" [options]="stockChartOptions" [type]="stockChartType"
           [options]="stockChartOptions"></canvas>
       </div>
     </div>
+  </div>
+</div>
+    </div>
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
+        <div class="card-body" >
+         
         <h1 class="mb-5" [innerHtml]="obvmsg"></h1>
-        <canvas baseChart height="75" [data]="obvChartData" [options]="stockChartOptions" [type]="stockChartType"
+        <div class="table-responsive">
+          <div style="display:flex" >
+        <canvas baseChart style="min-height:250px" class="table"  [data]="obvChartData" [options]="stockChartOptions" [type]="stockChartType"
           [options]="stockChartOptions"></canvas>
       </div>
     </div>
+  </div>
+</div>
+  </div>
     <div class="col-lg-15 grid-margin stretch-card ">
       <div class="card">
+        <div class="card-body" >
+          
         <h1 class="mb-5" [innerHtml]="dowmsg"></h1>
+        <div class="table-responsive">
+          <div style="display:flex" >
       </div>
+    </div>
+  </div>
+</div>
     </div>
   </p-tabPanel>
   <p-tabPanel header="1 month">
     <div class="col-lg-15 grid-margin  stretch-card">
       <div class="card">
+        <div class="card-body" >
+         
         <h4 class="mb-5">stock - 1 Month</h4>
-        <canvas baseChart [datasets]="stock1mData" [labels]="stock1mLabels" [type]="stockChartType"
+        <div class="table-responsive">
+          <div style="display:flex" >
+        <canvas baseChart style="min-height:250px" class="table" [datasets]="stock1mData" [labels]="stock1mLabels" [type]="stockChartType"
           [options]="stockChartOptions"></canvas>
       </div>
+    </div>
+  </div>
+</div>
     </div>
   </p-tabPanel>
   <p-tabPanel header="3months">
     <div class="col-lg-15 grid-margin  stretch-card">
       <div class="card">
         <div class="card-body" *ngIf="stock3mData">
-          <h4 class="mb-5">NIFTY - 3 months</h4>
-          <canvas baseChart [datasets]="stock3mData" [labels]="stock3mLabels" [type]="stockChartType"
+         
+        
+          <h4 class="mb-5">Stock - 3 months</h4>
+          <div class="table-responsive">
+            <div style="display:flex" >
+          <canvas baseChart style="min-height:250px" class="table" [datasets]="stock3mData" [labels]="stock3mLabels" [type]="stockChartType"
             [options]="stockChartOptions"></canvas>
-        </div>
+      
       </div>
+      </div>
+    </div>
+  </div>
     </div>
   </p-tabPanel>
   <p-tabPanel header="6 months">
     <div class="col-lg-15 grid-margin  stretch-card">
       <div class="card">
+        <div class="card-body" >
         <h4 class="mb-5">stock - 6 Months</h4>
-        <canvas baseChart [datasets]="stock6mData" [labels]="stock6mLabels" [type]="stockChartType"
+        <div class="table-responsive">
+          <div style="display:flex" >
+        <canvas baseChart style="min-height:250px" class="table" [datasets]="stock6mData" [labels]="stock6mLabels" [type]="stockChartType"
           [options]="stockChartOptions"></canvas>
       </div>
     </div>
+    </div>
+  </div>
+</div>
   </p-tabPanel>
   <p-tabPanel header="1 Year">
     <div class="col-lg-18 grid-margin  stretch-card">
       <div class="card">
+        <div class="card-body" >
         <h4 class="mb-2">Stock - 1 Year </h4>
+        <div class="table-responsive">
+          <div style="display:flex" >
         <ng-container *ngIf="chartCandleOptions"> <apx-chart [series]="chartCandleOptions.series" [chart]="chartCandleOptions.chart"
           [xaxis]="chartCandleOptions.xaxis" [plotOptions]="chartCandleOptions.plotOptions"></apx-chart></ng-container>
           <ng-container *ngIf="chartBarOptions">
@@ -515,6 +619,9 @@ NR7:{{nr7}}
           [yaxis]="chartBarOptions.yaxis" [dataLabels]="chartBarOptions.dataLabels" [stroke]="chartBarOptions.stroke"
           [plotOptions]="chartBarOptions.plotOptions"></apx-chart></ng-container>
       </div>
+    </div>
+  </div>
+</div>
       
     </div>
   </p-tabPanel>

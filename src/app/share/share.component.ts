@@ -103,6 +103,7 @@ export interface maxpaintile { text1: any; text2: any; }
 @Injectable()
 export class ShareComponent implements OnInit {
   visibleSidebar5;
+  res;
   @ViewChild("chart") chart: ChartComponent;
  
   // The Dialog shows within the target element.
@@ -488,6 +489,10 @@ export class ShareComponent implements OnInit {
   public stockChartData1w: ChartConfiguration['data']
   public etstockChartData: ChartConfiguration['data']
   public stockChartOptions: ChartOptions = {
+    responsive: true,
+    // aspectRatio: 1,
+     maintainAspectRatio:false,
+    
     scales: {
     },
     elements: {
@@ -588,7 +593,7 @@ export class ShareComponent implements OnInit {
       this.bqnames = this.stockList.filter(i => i.isin == params.stock)[0].bqname
       this.companyid = this.stockList.filter(i => i.isin == params.stock)[0].companyid
     });
-    
+    this.abc()
     this.gettrendlynestocks2(this.tlid)
     //this.gettrendlynestocks3(this.tlid)
     this.getshare3m(this.eqsymbol)
@@ -1207,6 +1212,32 @@ export class ShareComponent implements OnInit {
     }];
     this.stock1mLabels = this.stock1mLabels;
   }
+  abc(){
+    // axios.get('https://api.niftytrader.in/api/NIndex/stocks_list_api')
+    // .then((response) => {
+    //   let nestedItems = Object.keys((response.data)).map(key => {
+    //     return (response.data)[key];
+    //   });;
+    //   console.log(nestedItems)
+     
+    // }, err => {
+    //   console.log(err)
+    // })
+    
+    try{
+      this.http.jsonp('https://api.niftytrader.in/api/NIndex/stocks_list_api', 'callback')
+    // .subscribe(res => this.res = res);
+      // jsonp('https://api.niftytrader.in/api/NIndex/stocks_list_api')
+       .subscribe((responseData =>{ 
+  
+      console.log(responseData)}
+     
+       ))
+    }catch (err) {
+      console.error(err);
+    }
+  }
+  
   getshare6m(eqsymbol) {
     ////////////////Nifty 3 months/////////////////////////////
     this.http.get('https://etelection.indiatimes.com/ET_Charts/delaycharts?scripcode=' + this.eqsymbol + 'EQ&exchangeid=50&datatype=eod&filtertype=eod&lastreceivedataid=&directions=back&scripcodetype=company&uptodataid=&period=6m').subscribe(data5 => {
@@ -1437,6 +1468,9 @@ export class ShareComponent implements OnInit {
       let nestedItems = Object.keys(data5).map(key => {
         return data5[key];
       });
+     
+      
+        
       
       //   try {
       //     const response = await fetch("https://api.niftytrader.in/webapi/Live/stockAnalysis", { 

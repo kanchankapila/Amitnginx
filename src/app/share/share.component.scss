@@ -33,7 +33,13 @@
       }
   }
 }
-
+:host ::ng-deep .card {
+  width: auto;
+  height:auto;
+  color:black;
+  font-size: xx-small;
+  
+}
 .InsideContent{
     display:flex;
     align-items: flex-start;
@@ -76,6 +82,7 @@ card12{
 .cardbear{
   display:flex;
   width:auto;
+  font-size: x-small;
   
 }
 // .cardbear{
