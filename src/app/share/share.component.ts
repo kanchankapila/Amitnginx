@@ -1212,8 +1212,29 @@ export class ShareComponent implements OnInit {
     }];
     this.stock1mLabels = this.stock1mLabels;
   }
-  abc(){
-    // axios.get('https://api.niftytrader.in/api/NIndex/stocks_list_api')
+    abc() {
+    const API_ENDPOINT = 'https://www.trading80.com/technical_card/getCardInfo?sid=981456&se=bse&cardlist=sectPrice_techScore,sectPrice_indiScale,sectIndigraph_graph,sectMacd_macd_w,sectRsi_rsi_w,sectBb_bb_w,sectMa_ma_w,sectKst_kst_w,sectDow_dow_w,sectObv_obv_w'
+
+//  exports.handler = async (event, context) => {
+  try {
+    const data =  fetch(API_ENDPOINT, {
+      method: 'GET',
+    }).then(response => response.json())
+    console.log((data))
+    return {
+      statusCode: 200,
+      body: JSON.stringify(data)
+    }
+  } catch (e) {
+    return {
+      statusCode: 422,
+      body: JSON.stringify({
+        e: e.message
+      })
+    }
+  }
+
+    // axios.get('https://www.trading80.com/technical_card/getCardInfo?sid=981456&se=bse&cardlist=sectPrice_techScore,sectPrice_indiScale,sectIndigraph_graph,sectMacd_macd_w,sectRsi_rsi_w,sectBb_bb_w,sectMa_ma_w,sectKst_kst_w,sectDow_dow_w,sectObv_obv_w')
     // .then((response) => {
     //   let nestedItems = Object.keys((response.data)).map(key => {
     //     return (response.data)[key];
@@ -1224,18 +1245,18 @@ export class ShareComponent implements OnInit {
     //   console.log(err)
     // })
     
-    try{
-      this.http.jsonp('https://api.niftytrader.in/api/NIndex/stocks_list_api', 'callback')
-    // .subscribe(res => this.res = res);
-      // jsonp('https://api.niftytrader.in/api/NIndex/stocks_list_api')
-       .subscribe((responseData =>{ 
+    // try{
+    // //   this.http.jsonp('https://api.niftytrader.in/api/NIndex/stocks_list_api', 'callback')
+    // // // .subscribe(res => this.res = res);
+    //    jsonp('https://api.niftytrader.in/api/NIndex/stocks_list_api')
+    //    .subscribe((responseData =>this.res = res{ 
   
-      console.log(responseData)}
+    //   console.log(res)}
      
-       ))
-    }catch (err) {
-      console.error(err);
-    }
+    //    ))
+    // }catch (err) {
+    //   console.error(err);
+    // }
   }
   
   getshare6m(eqsymbol) {
