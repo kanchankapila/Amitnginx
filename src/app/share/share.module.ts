@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TrendModule } from 'ngx-trend';
 
 import { DatePipe } from '@angular/common';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
@@ -50,7 +49,7 @@ import { CategoryService, LineSeriesService, DateTimeService,PeriodSelectorServi
     ButtonModule,
     HttpClientModule,
     SidebarModule,
-    TrendModule,
+   
     TabViewModule,
     NgChartsModule,
     StockChartAllModule,
