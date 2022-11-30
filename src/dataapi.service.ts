@@ -225,7 +225,7 @@ export class DataapiService {
   
   gettrendlynestocks1(tlid, tlname, eqsymbol) {
     console.log(this.location)
-    return this.http.get(this.baseurl + '/trendlynestocks1?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
+    return this.http.get('https://amitkapila.netlify.app/.netlify/functions/chrometrendlyne?tlid='+tlid+'&&tlname='+tlname+'&&eqsymbol='+eqsymbol)
   }
   
 
