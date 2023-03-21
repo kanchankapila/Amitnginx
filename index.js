@@ -181,7 +181,7 @@ console.log("Database URL:",process.env.DATABASE_URL)
         return promisePasswordBox;
       }).then(function (passwordBox) {
         
-        let promiseFillPassword = passwordBox.sendKeys('amit0605\n');
+        let promiseFillPassword = passwordBox.sendKeys('Angular789\n');
         return promiseFillPassword;
       }).then(function () {
         console.log("Successfully signed in Trendlyne!");
@@ -220,7 +220,7 @@ console.log("Database URL:",process.env.DATABASE_URL)
   //  while ( i < 2 ) {
   //    i = i + 1;
   // let c =
-       def();
+      //  def();
   //  }
    
   
@@ -265,7 +265,7 @@ async function ghi(req, res) {
         driver1.findElement(swd.By.id("password")); 
         return promisePasswordBox;}).then(function (passwordBox) { 
             let promiseFillPassword = 
-            passwordBox.sendKeys('amit0605\n'); 
+            passwordBox.sendKeys('Angular789\n'); 
             return promiseFillPassword;}).then(function () { 
         console.log("Successfully signed in Opstra!"); 
           driver1.manage().getCookie('_gid').then(function (cookiesopgid) {
@@ -288,7 +288,7 @@ async function ghi(req, res) {
             //  await driver1.quit();
 };
       // );
-  ghi();
+  // ghi();
   
 
   // **************Money Control ******************

@@ -166,7 +166,8 @@ export class DataapiService {
     return this.http.post(this.baseurl + '/mccombine',mcsymbol)
   }
   gettrendlynepostdvm(tlid){
-    return this.http.post(this.baseurl + '/trendlynepostdvm',tlid)
+    console.log(tlid)
+    return this.http.post(this.baseurl + '/trendlynepostdvmold',tlid)
   }
   getmcmovingaveragesview(stockisin,dbname) {
     

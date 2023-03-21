@@ -164,7 +164,7 @@
     }
   },
   "cli": {
-    "analytics": true
+    "analytics": false
   }
   
 }
