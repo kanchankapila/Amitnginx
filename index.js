@@ -772,8 +772,9 @@ async function ghi(req, res) {
       //   data1.body['stockData'][8] = '#N/A'
       // }
       
-      // console.log(data1.body['stockData'][6])
-      if(data1.body['stockData'][6] && data1.body['stockData'][7] && data1.body['stockData'][8] && data1.body['stockData'][9] && data1.body['stockData'][10] && data1.body['stockData'][11] ){
+      //  console.log(data1.body['stockData'][6])
+      // if(data1.body['stockData'][6] && data1.body['stockData'][7] && data1.body['stockData'][8] && data1.body['stockData'][9] && data1.body['stockData'][10] && data1.body['stockData'][11] ){
+     try{
       obj.push({
         Date: symbol.Date,
         Time: symbol.time,
@@ -784,7 +785,10 @@ async function ghi(req, res) {
         VolatilityColor: data1.body['stockData'][10],
         MomentumScore: data1.body['stockData'][8],
         MomentumColor: data1.body['stockData'][11]
-      })}
+      })
+    }catch (error){
+      console.log('error')
+    }
     await axiosApiInstance.post('/updateOne', {
       collection: 'DVM',
       database: 'DVM',
