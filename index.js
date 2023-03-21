@@ -735,78 +735,79 @@ async function ghi(req, res) {
   const instancetrendlyne = axios.create({ withCredentials: true });
   axiosCookieJarSupport(instancetrendlyne);
   instancetrendlyne.defaults.jar = new tough.CookieJar()
-
-
   app.post('/api/trendlynepostdvm', async function (req, res) {
     const start = Date.now();
-    const obj=[];
-    let tlid = req.body
+    const tlid = req.body;
     const axiosApiInstance = axios.create({
-      baseURL: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Request-Headers': '*',
-        'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy ',
-        Accept: 'application/ejson'
-      }
-    });
-    const promises = tlid.map(async symbol => {
-   
-      
-     const response= await fetch(
-        `https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`,
-        {
-          headers: { Accept: 'application/json' }
+        baseURL: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Headers': '*',
+            'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy ',
+            Accept: 'application/ejson'
         }
-      );
-      
-      const data1 = await response.json();
-      if(data1.body['stockData'][6] == null){
-        data1.body['stockData'][6] = '#N/A'
-      }
-      if(data1.body['stockData'][7] == null){
-        data1.body['stockData'][7] = '#N/A'
-      }
-      if(data1.body['stockData'][8] == null){
-        data1.body['stockData'][8] = '#N/A'
-      }
-      console.log(data1.body['stockData'][6])
-      obj.push({
-        Date: symbol.Date,
-        Time: symbol.time,
-        Name: symbol.name,
-        DurabilityScore: data1.body['stockData'][6],
-        DurabilityColor: data1.body['stockData'][9],
-        VolatilityScore: data1.body['stockData'][7],
-        VolatilityColor: data1.body['stockData'][10],
-        MomentumScore: data1.body['stockData'][8],
-        MomentumColor: data1.body['stockData'][11]
-      })
-    await axiosApiInstance.post('/updateOne', {
-      collection: 'DVM',
-      database: 'DVM',
-      dataSource: 'Cluster0',
-      filter: {},
-      update: {
-        $set: {
-          output: obj,
-          time: start
-        }
-      },
-      upsert: true
     });
-    const timeTaken = Date.now() - start;
-    console.log(`Total time taken: ${timeTaken} milliseconds`);
 
-    console.log(obj1)
+    const updateData = async () => {
+        await axiosApiInstance.post('/updateOne', {
+            collection: 'DVM',
+            database: 'DVM',
+            dataSource: 'Cluster0',
+            filter: {},
+            update: {
+                $set: {
+                    output: obj,
+                    time: start
+                }
+            },
+            upsert: true
+        });
+        const timeTaken = Date.now() - start;
+        console.log(`Total time taken: ${timeTaken} milliseconds`);
+    };
+
+    const setDefaultValue = (item, index) => {
+        if (item.body['stockData'][index] == null) {
+            item.body['stockData'][index] = '#N/A';
+        }
+    };
+
     try {
-      await Promise.all(promises)
-    } catch (e) {
-      console.log(e)
+        const promises = tlid.map(async symbol => {
+            const response = await fetch(`https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`, {
+                headers: { Accept: 'application/json' }
+            });
+            const { body } = await response.json();
+
+            setDefaultValue(body, 6);
+            setDefaultValue(body, 7);
+            setDefaultValue(body, 8);
+
+            return {
+                Date: symbol.Date,
+                Time: symbol.time,
+                Name: symbol.name,
+                DurabilityScore: body['stockData'][6],
+                DurabilityColor: body['stockData'][9],
+                VolatilityScore: body['stockData'][7],
+                VolatilityColor: body['stockData'][10],
+                MomentumScore: body['stockData'][8],
+                MomentumColor: body['stockData'][11]
+            };
+        });
+
+        const obj = await Promise.all(promises);
+        await updateData();
+
+        console.log(obj);
+    } catch (error) {
+        console.log(error);
     }
-  })
+
+    res.sendStatus(200);
 });
 
+ 
 // todo Explore
   app.get('/api/trendlynepost', function (req, res) {
     req = fetch("https://trendlyne.com/equity/api/getLivePriceList/", {
