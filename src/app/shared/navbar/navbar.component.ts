@@ -626,6 +626,7 @@ export class NavbarComponent implements OnInit {
     console.log('Date is' + this.datetoday)
     var d = new Date();
     console.log(d.getHours()+":"+d.getMinutes())
+    this.tlid.length=0;
     for (let val in this.stock) {
       this.tlid.push({ tlid: this.stock[val].tlid, isin: this.stock[val].isin, name: this.stock[val].name,Date:this.datetoday,time:d.getHours()+":"+d.getMinutes() })
       

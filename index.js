@@ -120,11 +120,11 @@ console.log("Database URL:",process.env.DATABASE_URL)
   
   // })
   // *   Postgres Settings for Heroku Postgres DB and local DB
-  const client = new Client({
-    connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit'
-  });
+  // const client = new Client({
+  //   connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit'
+  // });
   
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit' })
+  // const pool = new Pool({ connectionString: process.env.DATABASE_URL || 'postgresql://amit:amit0605@localhost:5432/amit' })
 
 
 
@@ -293,128 +293,128 @@ async function ghi(req, res) {
 
   // **************Money Control ******************
   //*Moneycontrol Post request for MCvolume////////
-  app.post('/api/mcvolume', async function (req, res) {
+//   app.post('/api/mcvolume', async function (req, res) {
 
-       let mcsymbol = req.body
-       const promises = mcsymbol.map(symbol => {
+//        let mcsymbol = req.body
+//        const promises = mcsymbol.map(symbol => {
   
       
-      axios.get('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/' + symbol.mcsymbol).then((response) => {
-        var obj1 = ({ Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": response.data.data.VOL, "FiveDVol": response.data.data.DVolAvg5, "TenDVol": response.data.data.DVolAvg10, "TwentyDVol": response.data.data.DVolAvg20, "ThirtyDVol": response.data.data.DVolAvg30, "CPrice": response.data.data.pricecurrent, "PChangeper": response.data.data.pricepercentchange, "StockName": response.data.data.SC_FULLNM })
+//       axios.get('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/' + symbol.mcsymbol).then((response) => {
+//         var obj1 = ({ Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": response.data.data.VOL, "FiveDVol": response.data.data.DVolAvg5, "TenDVol": response.data.data.DVolAvg10, "TwentyDVol": response.data.data.DVolAvg20, "ThirtyDVol": response.data.data.DVolAvg30, "CPrice": response.data.data.pricecurrent, "PChangeper": response.data.data.pricepercentchange, "StockName": response.data.data.SC_FULLNM })
       
-        console.log("executing mcvolume")
-        pool.query('INSERT INTO mcvolume (info)  VALUES ($1)', [obj1], (err, res) => {
-          console.log(err, res)
+//         console.log("executing mcvolume")
+//         pool.query('INSERT INTO mcvolume (info)  VALUES ($1)', [obj1], (err, res) => {
+//           console.log(err, res)
         
-        })
+//         })
        
-      }).catch((error) => {
-        console.log(error)
-      })
-    })
+//       }).catch((error) => {
+//         console.log(error)
+//       })
+//     })
 
-    try {
-      await Promise.all(promises)
-    } catch (e) {
-      console.log(e)
-    }
-  })
+//     try {
+//       await Promise.all(promises)
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   })
 
   
-  app.post('/api/mcvolume1', async function (req, res) {
+//   app.post('/api/mcvolume1', async function (req, res) {
 
-    let mcsymbol1 = req.body
-    const promises = mcsymbol1.map(symbol => {
-      axios.get('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/' + symbol.mcsymbol1).then((response) => {
-        var obj1 = ({ Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": response.data.data.VOL, "FiveDVol": response.data.data.DVolAvg5, "TenDVol": response.data.data.DVolAvg10, "TwentyDVol": response.data.data.DVolAvg20, "ThirtyDVol": response.data.data.DVolAvg30, "CPrice": response.data.data.pricecurrent, "PChangeper": response.data.data.pricepercentchange, "StockName": response.data.data.SC_FULLNM })
+//     let mcsymbol1 = req.body
+//     const promises = mcsymbol1.map(symbol => {
+//       axios.get('https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/' + symbol.mcsymbol1).then((response) => {
+//         var obj1 = ({ Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": response.data.data.VOL, "FiveDVol": response.data.data.DVolAvg5, "TenDVol": response.data.data.DVolAvg10, "TwentyDVol": response.data.data.DVolAvg20, "ThirtyDVol": response.data.data.DVolAvg30, "CPrice": response.data.data.pricecurrent, "PChangeper": response.data.data.pricepercentchange, "StockName": response.data.data.SC_FULLNM })
       
-        console.log("executing mcvolume1")
-        pool.query('INSERT INTO mcvolume (info)  VALUES ($1)', [obj1], (err, res) => {
-          console.log(err, res)
+//         console.log("executing mcvolume1")
+//         pool.query('INSERT INTO mcvolume (info)  VALUES ($1)', [obj1], (err, res) => {
+//           console.log(err, res)
         
-        })
-        }).catch((error) => {
-        console.log(error)
-      })
-    })
+//         })
+//         }).catch((error) => {
+//         console.log(error)
+//       })
+//     })
 
-    try {
-      await Promise.all(promises)
-    } catch (e) {
-      console.log(e)
-    }
-  })
+//     try {
+//       await Promise.all(promises)
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   })
 
-  app.post('/api/mcinsight', async function (req, res) {
+//   app.post('/api/mcinsight', async function (req, res) {
 
-    let mcsymbol = req.body
-    const promises = mcsymbol.map(symbol => {
+//     let mcsymbol = req.body
+//     const promises = mcsymbol.map(symbol => {
   
       
-      axios.get('https://api.moneycontrol.com/mcapi/v1/extdata/mc-insights?scId=' + symbol.mcsymbol + '&type=d').then((response) => {
+//       axios.get('https://api.moneycontrol.com/mcapi/v1/extdata/mc-insights?scId=' + symbol.mcsymbol + '&type=d').then((response) => {
         
-        obj1 = []
-        obj2 = []
-        var obj1 = response.data.data.insightData
-        var obj2 = obj1["price"]
-        for (let i in obj2) {
-          var obj3 = ({
-            Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": obj2[i]
+//         obj1 = []
+//         obj2 = []
+//         var obj1 = response.data.data.insightData
+//         var obj2 = obj1["price"]
+//         for (let i in obj2) {
+//           var obj3 = ({
+//             Date: symbol.Date, Time: symbol.time, Name: symbol.name, Symbol: symbol.mcsymbol, "CurrentVol": obj2[i]
         
-          })
-        }
-        console.log("executing mcinsight")
-        pool.query('INSERT INTO mcinsight (info)  VALUES ($1)', [obj3], (err, res) => {
-          console.log(err, res)
+//           })
+//         }
+//         console.log("executing mcinsight")
+//         pool.query('INSERT INTO mcinsight (info)  VALUES ($1)', [obj3], (err, res) => {
+//           console.log(err, res)
         
-        })
+//         })
         
-      }).catch((error) => {
-        console.log(error)
-      })
-    })
+//       }).catch((error) => {
+//         console.log(error)
+//       })
+//     })
 
-    try {
-      await Promise.all(promises)
-    } catch (e) {
-      console.log(e)
-    }
-  })
-  app.get('/api/mcinsightview', async function (req, res) {
-    let mcsymbol = req.query.mcsymbol
-    const result = await pool.query
-      ("SELECT info ->> 'CurrentVol' as Deals,info ->> 'Symbol' as Symbol,info ->> 'Name' as name ,info ->> 'Time' as time,info ->> 'Date' as date FROM mcinsight where info ->> 'CurrentVol' like '%Stock saw%'");
-    res.json(result.rows)
+//     try {
+//       await Promise.all(promises)
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   })
+//   app.get('/api/mcinsightview', async function (req, res) {
+//     let mcsymbol = req.query.mcsymbol
+//     const result = await pool.query
+//       ("SELECT info ->> 'CurrentVol' as Deals,info ->> 'Symbol' as Symbol,info ->> 'Name' as name ,info ->> 'Time' as time,info ->> 'Date' as date FROM mcinsight where info ->> 'CurrentVol' like '%Stock saw%'");
+//     res.json(result.rows)
     
-  })
-  app.get('/api/dropmcinsightview', async function (req, res) {
-    await pool.query("TRUNCATE mcinsight");
-    console.log("Truncated mcinsight")
-  })
-//  *  KOTAK Post Data
-  app.get('/api/kotakview', async function (req, res) {
+//   })
+//   app.get('/api/dropmcinsightview', async function (req, res) {
+//     await pool.query("TRUNCATE mcinsight");
+//     console.log("Truncated mcinsight")
+//   })
+// //  *  KOTAK Post Data
+//   app.get('/api/kotakview', async function (req, res) {
 
-    let eqsymbol = req.query.eqsymbol
-    const result = await pool.query
-      ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'CompanyShortName' = $1", [eqsymbol]);
-    console.log(result.rows)
-    res.json(result.rows)
+//     let eqsymbol = req.query.eqsymbol
+//     const result = await pool.query
+//       ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'CompanyShortName' = $1", [eqsymbol]);
+//     console.log(result.rows)
+//     res.json(result.rows)
     
-  })
-  app.get('/api/kotaksectorview', async function (req, res) {
+//   })
+//   app.get('/api/kotaksectorview', async function (req, res) {
 
-    let sectorid = req.query.sectorid
-    console.log(sectorid)
-    const result = await pool.query
-      ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'SectorId' = $1", [sectorid]);
+//     let sectorid = req.query.sectorid
+//     console.log(sectorid)
+//     const result = await pool.query
+//       ("select info ->>'IndCode' as IndCoded , info ->>'SectorId' as SectorId , info ->>'CompanyId' as CompanyId, info ->>'MarketCap' as MarketCap, info ->>'SectorName' as SectorName,info ->>'Finance' as Finance, info ->>'ValueScore' as ValueScore,info ->>'CompanyName' as CompanyName, info ->>'GrowthScore' as GrowthScore,info ->>'HealthScore' as HealthScore, info ->>'ReleaseDate' as ReleaseDate,info ->> 'QualityScore' as QualityScore,info ->> 'RankBySector' as RankBySector, info ->>'DividendScore' as DividendScore, info ->>'CompanyShortName' as CompanyShortName, info ->>'OverallMarketRank' as OverallMarketRank, info ->>'PastPerformanceScore' as PastPerformanceScore from kotaksec where info->>'SectorId' = $1", [sectorid]);
    
-    res.json(result.rows)
+//     res.json(result.rows)
  
-  })
+//   })
       
 
-  const { response } = require('express');
-  const { json } = require('body-parser');
+//   const { response } = require('express');
+//   const { json } = require('body-parser');
 
 
 
@@ -459,61 +459,61 @@ async function ghi(req, res) {
 
 
   ////****************Kotak Securities*****************/
-  app.get('/api/kotakhealthscore', (req, res) => {
+  // app.get('/api/kotakhealthscore', (req, res) => {
   
-    console.log("This is Kotak Health Score")
-    var url11 = 'https://www.kotaksecurities.com/TSTerminal/Fundamentals/MasterData/GetHealthScoreScreenerData?sectorId=-1&marketCap=LC&healthScoreValue=A&defaultView=false';
-    request(url11, function (error, response, html) {
-      if (!error) {
+  //   console.log("This is Kotak Health Score")
+  //   var url11 = 'https://www.kotaksecurities.com/TSTerminal/Fundamentals/MasterData/GetHealthScoreScreenerData?sectorId=-1&marketCap=LC&healthScoreValue=A&defaultView=false';
+  //   request(url11, function (error, response, html) {
+  //     if (!error) {
    
 
-        var options2 = {
-          url: 'https://mtrade.kotaksecurities.com/TSTerminal/Fundamentals/MasterData/GetHealthScoreScreenerData?sectorId=-1&marketCap=ALL&healthScoreValue=A&defaultView=true',
-          method: 'GET', // Don't forget this line
-          "headers": {
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-            "accept-language": "en-US,en;q=0.9",
-            "cache-control": "max-age=0",
-            "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"102\", \"Google Chrome\";v=\"102\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Windows\"",
-            "sec-fetch-dest": "document",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-site": "none",
-            "sec-fetch-user": "?1",
-            "upgrade-insecure-requests": "1",
-            "cookie": process.env.kseccookie
-          },
-          "referrerPolicy": "strict-origin-when-cross-origin",
-          "body": null,
-          "method": "GET"
-        };
+  //       var options2 = {
+  //         url: 'https://mtrade.kotaksecurities.com/TSTerminal/Fundamentals/MasterData/GetHealthScoreScreenerData?sectorId=-1&marketCap=ALL&healthScoreValue=A&defaultView=true',
+  //         method: 'GET', // Don't forget this line
+  //         "headers": {
+  //           "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+  //           "accept-language": "en-US,en;q=0.9",
+  //           "cache-control": "max-age=0",
+  //           "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"102\", \"Google Chrome\";v=\"102\"",
+  //           "sec-ch-ua-mobile": "?0",
+  //           "sec-ch-ua-platform": "\"Windows\"",
+  //           "sec-fetch-dest": "document",
+  //           "sec-fetch-mode": "navigate",
+  //           "sec-fetch-site": "none",
+  //           "sec-fetch-user": "?1",
+  //           "upgrade-insecure-requests": "1",
+  //           "cookie": process.env.kseccookie
+  //         },
+  //         "referrerPolicy": "strict-origin-when-cross-origin",
+  //         "body": null,
+  //         "method": "GET"
+  //       };
 
 
-        request(options2, (err, response, body) => {
-          if (err) {
+  //       request(options2, (err, response, body) => {
+  //         if (err) {
             
-          } else {
-            res.json(JSON.parse(response.body));
-            const obj1 = ((JSON.parse(response.body)));
-            console.log(obj1.length)
-            console.log("executing kotaksecurities")
+  //         } else {
+  //           res.json(JSON.parse(response.body));
+  //           const obj1 = ((JSON.parse(response.body)));
+  //           console.log(obj1.length)
+  //           console.log("executing kotaksecurities")
 
-            for (let i = 0; i < obj1.length; i += 1) {
-              const obj2 = obj1[i];
-              console.log(obj2)
-              pool.query('INSERT INTO kotaksec (info) VALUES ($1)', [obj2], (err, res) => {
-                console.log(err, res)
+  //           for (let i = 0; i < obj1.length; i += 1) {
+  //             const obj2 = obj1[i];
+  //             console.log(obj2)
+  //             pool.query('INSERT INTO kotaksec (info) VALUES ($1)', [obj2], (err, res) => {
+  //               console.log(err, res)
         
-              })
+  //             })
       
-            }
-          }
-        });
-      }
-    })
+  //           }
+  //         }
+  //       });
+  //     }
+  //   })
   
-  })
+  // })
 
 
     //*******Trendlyne********//////
@@ -738,25 +738,74 @@ async function ghi(req, res) {
 
 
   app.post('/api/trendlynepostdvm', async function (req, res) {
-    
+    const start = Date.now();
+    const obj=[];
     let tlid = req.body
-    const promises = tlid.map(symbol => {
-  
+    const axiosApiInstance = axios.create({
+      baseURL: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Request-Headers': '*',
+        'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy ',
+        Accept: 'application/ejson'
+      }
+    });
+    const promises = tlid.map(async symbol => {
+   
       
-      axios.get('https://trendlyne.com/mapp/v1/stock/web/ohlc/' + symbol.tlid).then((response) => {
-        obj1 = ({ Date: symbol.Date, Time: symbol.time, Name: symbol.name, DurabilityScore: response.data.body.stockData[6], VolatilityScore: response.data.body.stockData[7], MomentumScore: response.data.body.stockData[8] })
+     const response= await fetch(
+        `https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`,
+        {
+          headers: { Accept: 'application/json' }
+        }
+      );
       
-      }).catch((error) => {
-        console.log(error)
+      const data1 = await response.json();
+      if(data1.body['stockData'][6] == null){
+        data1.body['stockData'][6] = '#N/A'
+      }
+      if(data1.body['stockData'][7] == null){
+        data1.body['stockData'][7] = '#N/A'
+      }
+      if(data1.body['stockData'][8] == null){
+        data1.body['stockData'][8] = '#N/A'
+      }
+      console.log(data1.body['stockData'][6])
+      obj.push({
+        Date: symbol.Date,
+        Time: symbol.time,
+        Name: symbol.name,
+        DurabilityScore: data1.body['stockData'][6],
+        DurabilityColor: data1.body['stockData'][9],
+        VolatilityScore: data1.body['stockData'][7],
+        VolatilityColor: data1.body['stockData'][10],
+        MomentumScore: data1.body['stockData'][8],
+        MomentumColor: data1.body['stockData'][11]
       })
-    })
+    await axiosApiInstance.post('/updateOne', {
+      collection: 'DVM',
+      database: 'DVM',
+      dataSource: 'Cluster0',
+      filter: {},
+      update: {
+        $set: {
+          output: obj,
+          time: start
+        }
+      },
+      upsert: true
+    });
+    const timeTaken = Date.now() - start;
+    console.log(`Total time taken: ${timeTaken} milliseconds`);
 
+    console.log(obj1)
     try {
       await Promise.all(promises)
     } catch (e) {
       console.log(e)
     }
   })
+});
 
 // todo Explore
   app.get('/api/trendlynepost', function (req, res) {
@@ -1277,67 +1326,67 @@ async function ghi(req, res) {
  
   //*Nifty Trader Post Request to get nr7 for Stocks in nr7 database on postgres,dropdown in Actions submits request
   
-  app.post('/api/nr7', async function (req, res) {
-    let eqsymbol = req.body
-    const promises = eqsymbol.map(symbol => {
-      console.log(eqsymbol)
-      var url11 = 'https://api.niftytrader.in/webapi/Live/stockAnalysis';
-      request(url11, function (error, response, html) {
-        if (error) {
-          console.log(error)
+  // app.post('/api/nr7', async function (req, res) {
+  //   let eqsymbol = req.body
+  //   const promises = eqsymbol.map(symbol => {
+  //     console.log(eqsymbol)
+  //     var url11 = 'https://api.niftytrader.in/webapi/Live/stockAnalysis';
+  //     request(url11, function (error, response, html) {
+  //       if (error) {
+  //         console.log(error)
         
-        }
-        else if (!error) {
-          var options2 = {
-            url: 'https://api.niftytrader.in/webapi/Live/stockAnalysis',
-            method: 'POST', // Don't forget this line
-            "headers": {
-              "accept": "application/json, text/plain, */*",
-              "accept-language": "en-US,en;q=0.9",
-              "content-type": "application/json",
-              "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
-              "sec-ch-ua-mobile": "?0",
-              "sec-ch-ua-platform": "\"Windows\"",
-              "sec-fetch-dest": "empty",
-              "sec-fetch-mode": "cors",
-              "sec-fetch-site": "same-site"
-            },
-            "referrer": "https://www.niftytrader.in/",
-            "referrerPolicy": "strict-origin-when-cross-origin",
-            "body": '{\"symbol\":\"' + symbol.eqsymbol + '\"}',
-            "method": "POST",
-            "mode": "cors",
-            "credentials": "omit"
-          }
+  //       }
+  //       else if (!error) {
+  //         var options2 = {
+  //           url: 'https://api.niftytrader.in/webapi/Live/stockAnalysis',
+  //           method: 'POST', // Don't forget this line
+  //           "headers": {
+  //             "accept": "application/json, text/plain, */*",
+  //             "accept-language": "en-US,en;q=0.9",
+  //             "content-type": "application/json",
+  //             "sec-ch-ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"101\", \"Google Chrome\";v=\"101\"",
+  //             "sec-ch-ua-mobile": "?0",
+  //             "sec-ch-ua-platform": "\"Windows\"",
+  //             "sec-fetch-dest": "empty",
+  //             "sec-fetch-mode": "cors",
+  //             "sec-fetch-site": "same-site"
+  //           },
+  //           "referrer": "https://www.niftytrader.in/",
+  //           "referrerPolicy": "strict-origin-when-cross-origin",
+  //           "body": '{\"symbol\":\"' + symbol.eqsymbol + '\"}',
+  //           "method": "POST",
+  //           "mode": "cors",
+  //           "credentials": "omit"
+  //         }
    
-          request(options2, (err, response, body, res) => {
-            if (err) {
+  //         request(options2, (err, response, body, res) => {
+  //           if (err) {
       
-            } else {
-              data = JSON.parse(response.body)
-              data2 = data["resultData"]["stocktrend"]
-              obj1 = [];
-              for (let i in data2) {
-                if (i == 'nr7_today') {
-                  console.log(data2['nr7_today'])
-                  obj1.push({ stock: symbol.name, isin: symbol.isin, Date: symbol.Date, nr7: data2['nr7_today'] });
-                }
-              }
-              pool.query('INSERT INTO nr7 (info)  VALUES ($1)', obj1, (err, res) => {
-                console.log(err, res)
+  //           } else {
+  //             data = JSON.parse(response.body)
+  //             data2 = data["resultData"]["stocktrend"]
+  //             obj1 = [];
+  //             for (let i in data2) {
+  //               if (i == 'nr7_today') {
+  //                 console.log(data2['nr7_today'])
+  //                 obj1.push({ stock: symbol.name, isin: symbol.isin, Date: symbol.Date, nr7: data2['nr7_today'] });
+  //               }
+  //             }
+  //             pool.query('INSERT INTO nr7 (info)  VALUES ($1)', obj1, (err, res) => {
+  //               console.log(err, res)
         
-              })
-              }
-          });
-        }
-      })
-    })
-    try {
-      await Promise.all(promises)
-    } catch (e) {
-      console.log(e)
-    }
-  })
+  //             })
+  //             }
+  //         });
+  //       }
+  //     })
+  //   })
+  //   try {
+  //     await Promise.all(promises)
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // })
   //*Nifty Trader EOD Screeners Post///////////////
   app.post('/api/nteodscreeners', (req, res) => {
     let ntoptions = req.body

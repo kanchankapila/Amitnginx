@@ -167,7 +167,7 @@ export class DataapiService {
   }
   gettrendlynepostdvm(tlid){
     console.log(tlid)
-    return this.http.post(this.baseurl + '/trendlynepostdvmold',tlid)
+    return this.http.post(this.baseurl + '/trendlynepostdvm',tlid)
   }
   getmcmovingaveragesview(stockisin,dbname) {
     
