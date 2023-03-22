@@ -750,32 +750,21 @@ async function ghi(req, res) {
         Accept: 'application/ejson'
       }
     });
+   
     const promises = tlid.map(async symbol => {
    
-      
+ 
      const response= await fetch(
         `https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`,
         {
           headers: { Accept: 'application/json' }
         }
       );
-      
+  
       const data1 = await response.json();
     
-      // if(typeof(data1.body['stockData'][6]) !== 'number'){
-      //   data1.body['stockData'][6] = '#N/A'
-      // }
-      // if(typeof(data1.body['stockData'][7]) !== 'number'){
-      //   data1.body['stockData'][7] = '#N/A'
-      // }
-      // if(typeof(data1.body['stockData'][8]) !== 'number'){
-      //   data1.body['stockData'][8] = '#N/A'
-      // }
-      
-      //  console.log(data1.body['stockData'][6])
-      // if(data1.body['stockData'][6] && data1.body['stockData'][7] && data1.body['stockData'][8] && data1.body['stockData'][9] && data1.body['stockData'][10] && data1.body['stockData'][11] ){
-     try{
-      obj.push({
+      try{
+              obj.push({
         Date: symbol.Date,
         Time: symbol.time,
         Name: symbol.name,
@@ -786,10 +775,9 @@ async function ghi(req, res) {
         MomentumScore: data1.body['stockData'][8],
         MomentumColor: data1.body['stockData'][11]
       })
-    }catch (error){
-      console.log('error')
-    }
-    await axiosApiInstance.post('/updateOne', {
+      
+   
+    await axiosApiInstance.post('/updateMany', {
       collection: 'DVM',
       database: 'DVM',
       dataSource: 'Cluster0',
@@ -802,9 +790,12 @@ async function ghi(req, res) {
       },
       upsert: true
     });
+  }catch (error){
+    console.log('error')
+  }
     const timeTaken = Date.now() - start;
     console.log(`Total time taken: ${timeTaken} milliseconds`);
-  
+ 
     console.log(obj)
     try {
       await Promise.all(promises)
@@ -812,6 +803,7 @@ async function ghi(req, res) {
       console.log(e)
     }
   })
+
 });
 
 // todo Explore
