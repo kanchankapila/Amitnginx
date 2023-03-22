@@ -7,7 +7,7 @@ if (environment.production) {enableProdMode();}
 import 'zone.js'; //Added for lazy module error in firefox,safari in server.
 import 'hammerjs';
 import { registerLicense } from '@syncfusion/ej2-base';
-registerLicense('ORg4AjUWIQA/Gnt2VVhjQlFaclhJXGFWfVJpTGpQdk5xdV9DaVZUTWY/P1ZhSXxRd0VhWn9ZcXNQQ2heVUI=');
+registerLicense('ORg4AjUWIQA/Gnt2VVhkQlFadVdJXGFWfVJpTGpQdk5xdV9DaVZUTWY/P1ZhSXxRd0dhW39acnRRR2NeU0Q=');
 platformBrowserDynamic().bootstrapModule(AppModule)
   // .then(() => {
   // if ('serviceWorker' in navigator) {
