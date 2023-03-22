@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng build --configuration=production && ng serve --configuration=production && node index.js",
+    "start": "node index.js",
     "deploy-hosting": "ng build --configuration=production && ng serve --configuration=production && node index.js",
     "build-prod": "node --max_old_space_size=8096 ./node_modules/@angular/cli/bin/ng build --configuration=production",
     "serve-prod": "ng serve --configuration=production",
