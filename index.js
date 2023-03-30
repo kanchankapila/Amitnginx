@@ -6,6 +6,7 @@ var app = express();
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
+const fetch = require('node-fetch');
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
@@ -67,13 +68,15 @@ fs.readFile('./src/app/lists/tlid.txt', 'utf8', (err, data) => {
   const symbols = data.trim().split('\n');
 
   // map over the symbols and create an array of promises
-  const promises = symbols.map(async symbol => {
+  const promises = symbols.map(async(value,key)  => {console.log(`${key}`)
     // your existing code here, but replace tlid with symbol
+    // console.log(symbol.Object.value(tlid))
  
- 
- 
+//  symbols.map((value,key) => {
+  
+//  })
      const response= await fetch(
-        `https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`,
+        `https://trendlyne.com/mapp/v1/stock/chart-data/${key}/SMA/?format=json`,
         {
           headers: { Accept: 'application/json' }
         }
