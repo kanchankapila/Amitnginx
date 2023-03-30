@@ -1,9 +1,10 @@
 {
   "name": "amitnginx",
   "version": "1.0.0",
+  "main":"index.js",
   "scripts": {
     "ng": "ng",
-    "start": "node index.js",
+    "start": "npm i && ng build --configuration=production && node index.js",
     "deploy-hosting": "ng build --configuration=production && ng serve --configuration=production && node index.js",
     "build-prod": "node --max_old_space_size=8096 ./node_modules/@angular/cli/bin/ng build --configuration=production",
     "serve-prod": "ng serve --configuration=production",
