@@ -4,11 +4,11 @@
   "main":"index.js",
   "scripts": {
     "ng": "ng",
-    "start": "npm i && ng build --configuration=production && node index.js",
+    "start": "node index.js",
     "deploy-hosting": "ng build --configuration=production && ng serve --configuration=production && node index.js",
     "build-prod": "node --max_old_space_size=8096 ./node_modules/@angular/cli/bin/ng build --configuration=production",
     "serve-prod": "ng serve --configuration=production",
-    "build": "node index.js",
+    "build": "ng build --configuration=production",
     "serve": "ng serve --configuration=development --disableHostCheck=true",
     "heroku-postbuild": "ng build --configuration=production",
     "test": "ng test",
