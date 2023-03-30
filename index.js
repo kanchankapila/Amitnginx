@@ -43,52 +43,49 @@ app.use(bodyParser.raw());
   })
  
 
-
+  const axiosApiInstance = axios.create({
+    baseURL: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Request-Headers': '*',
+      'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy ',
+      Accept: 'application/ejson'
+    }
+  });
 
  
     const start = Date.now();
     const obj=[];
     
    
-    const axiosApiInstance = axios.create({
-      baseURL: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Request-Headers': '*',
-        'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy ',
-        Accept: 'application/ejson'
-      }
-    });
+ 
    
 // read the contents of the file
 fs.readFile('./src/app/lists/tlid.txt', 'utf8', (err, data) => {
   if (err) throw err;
 
-  // split the data into an array of symbols
+
   const symbols = data.trim().split('\n');
 
-  // map over the symbols and create an array of promises
-  const promises = symbols.map(async(value,key)  => {console.log(`${key}`)
-    // your existing code here, but replace tlid with symbol
-    // console.log(symbol.Object.value(tlid))
  
-//  symbols.map((value,key) => {
-  
-//  })
+  const promises = symbols.map(async(value,key)  => {console.log(key=`${key}`,value=`${value}`)
+   
      const response= await fetch(
-        `https://trendlyne.com/mapp/v1/stock/chart-data/${key}/SMA/?format=json`,
+        `https://trendlyne.com/mapp/v1/stock/chart-data/${value}/SMA/?format=json`,
         {
           headers: { Accept: 'application/json' }
         }
       );
-  
+      if (!response.ok) {
+        return { statusCode: response.status, body: response.statusText }
+      }
       const data1 = await response.json();
-    
+    console.log(data1)
       try{
               obj.push({
-        Date: symbol.Date,
-        Time: symbol.time,
-        Name: symbol.name,
+        // Date: symbol.Date,
+        // Time: symbol.time,
+        // Name: symbol.name,
         DurabilityScore: data1.body['stockData'][6],
         DurabilityColor: data1.body['stockData'][9],
         VolatilityScore: data1.body['stockData'][7],
@@ -98,22 +95,23 @@ fs.readFile('./src/app/lists/tlid.txt', 'utf8', (err, data) => {
       })
       
     
-    await axiosApiInstance.post('/updateMany', {
-      collection: 'DVM',
-      database: 'DVM',
-      dataSource: 'Cluster0',
-      filter: {},
-      update: {
-        $set: {
-          output: obj,
-          time: start
-        }
-      },
-      upsert: true
-    });
+   
   }catch (error){
     console.log('error')
   }
+  // await axiosApiInstance.post('/updateMany', {
+  //   collection: 'DVM',
+  //   database: 'DVM',
+  //   dataSource: 'Cluster0',
+  //   filter: {},
+  //   update: {
+  //     $set: {
+  //       output: obj,
+  //       time: start
+  //     }
+  //   },
+  //   upsert: true
+  // });
     const timeTaken = Date.now() - start;
     console.log(`Total time taken: ${timeTaken} milliseconds`);
  
