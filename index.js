@@ -1,6 +1,7 @@
 
 const express = require('express');
-
+const fs = require('fs');
+const filePath = './src/app/lists/tlid.txt';
 var app = express();
 const axios = require('axios');
 const cors = require('cors');
@@ -42,10 +43,12 @@ app.use(bodyParser.raw());
  
 
 
-  app.post('/api/trendlynepostdvm', async function (req, res) {
+
+ 
     const start = Date.now();
     const obj=[];
-    let tlid = req.body
+    
+   
     const axiosApiInstance = axios.create({
       baseURL: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action',
       headers: {
@@ -56,8 +59,18 @@ app.use(bodyParser.raw());
       }
     });
    
-    const promises = tlid.map(async symbol => {
-   
+// read the contents of the file
+fs.readFile('./src/app/lists/tlid.txt', 'utf8', (err, data) => {
+  if (err) throw err;
+
+  // split the data into an array of symbols
+  const symbols = data.trim().split('\n');
+
+  // map over the symbols and create an array of promises
+  const promises = symbols.map(async symbol => {
+    // your existing code here, but replace tlid with symbol
+ 
+ 
  
      const response= await fetch(
         `https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`,
@@ -81,7 +94,7 @@ app.use(bodyParser.raw());
         MomentumColor: data1.body['stockData'][11]
       })
       
-   
+    
     await axiosApiInstance.post('/updateMany', {
       collection: 'DVM',
       database: 'DVM',
@@ -107,9 +120,10 @@ app.use(bodyParser.raw());
     } catch (e) {
       console.log(e)
     }
+  });
   })
 
-});
+
 
 
   
