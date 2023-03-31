@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "resolutions": {
     "uglify-es": "npm:terser"
@@ -28,7 +28,7 @@
     "express-session": "^1.17.3",
     "mongodb": "^5.1.0",
     "node-fetch": "^2.6.7",
-    "nodemon": "^2.0.21",
+    "nodemon": "^2.0.22",
     "npm": "^8.18.0",
     "path": "^0.12.7",
     "request": "^2.88.2"
