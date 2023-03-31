@@ -9,6 +9,8 @@ const path = require('path');
 const fetch = require('node-fetch');
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
+const { MongoClient } = require('mongodb');
+const client1 = new MongoClient( "mongodb+srv://amit:amit0605@cluster0.mxilo.mongodb.net/?retryWrites=true&w=majority", { useUnifiedTopology: true });
 
 const bodyParser = require("body-parser");
 const request = require('request')
@@ -58,20 +60,44 @@ app.use(bodyParser.raw());
     const obj=[];
     
    
+   
+  //  const fs = require('fs');
+   
+   // Read the file
+   fs.readFile('./src/app/lists/tlid1.json', (err, data) => {
+     if (err) throw err;
+   
+     // Parse the data into an array
+     const symbols = JSON.parse(data);
+   
+  //    // Iterate over the array
+  //    array.forEach((obj) => {
+  //      // Get the key and value
+  //     //  const key = Object.keys(obj)[1];
+  //      const value = obj['tlid'];
+   
+  //      // Hit the URL with the key/value
+  //      fetch(`https://example.com/${value}`)
+  //        .then((response) => response.json())
+  //        .then((data) => console.log(data))
+  //        .catch((err) => console.error(err));
+  //    });
+  //  });
  
    
 // read the contents of the file
-fs.readFile('./src/app/lists/tlid.txt', 'utf8', (err, data) => {
-  if (err) throw err;
+// fs.readFile('./src/app/lists/tlid1.json', 'utf8', (err, data) => {
+//   if (err) throw err;
 
 
-  const symbols = data.trim().split('\n');
+//   const symbols = JSON.parse(data);
 
  
-  const promises = symbols.map(async(value,key)  => {console.log(key=`${key}`,value=`${value}`)
+  const promises = symbols.map(async symbol  => {
+    console.log(`${symbol.tlid}`)
    
      const response= await fetch(
-        `https://trendlyne.com/mapp/v1/stock/chart-data/${value}/SMA/?format=json`,
+        `https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`,
         {
           headers: { Accept: 'application/json' }
         }
@@ -80,12 +106,12 @@ fs.readFile('./src/app/lists/tlid.txt', 'utf8', (err, data) => {
         return { statusCode: response.status, body: response.statusText }
       }
       const data1 = await response.json();
-    console.log(data1)
+     console.log(`${symbol.name}`)
       try{
               obj.push({
         // Date: symbol.Date,
         // Time: symbol.time,
-        // Name: symbol.name,
+        Name: `${symbol.name}`,
         DurabilityScore: data1.body['stockData'][6],
         DurabilityColor: data1.body['stockData'][9],
         VolatilityScore: data1.body['stockData'][7],
@@ -99,29 +125,33 @@ fs.readFile('./src/app/lists/tlid.txt', 'utf8', (err, data) => {
   }catch (error){
     console.log('error')
   }
-  // await axiosApiInstance.post('/updateMany', {
-  //   collection: 'DVM',
-  //   database: 'DVM',
-  //   dataSource: 'Cluster0',
-  //   filter: {},
-  //   update: {
-  //     $set: {
-  //       output: obj,
-  //       time: start
-  //     }
-  //   },
-  //   upsert: true
-  // });
-    const timeTaken = Date.now() - start;
-    console.log(`Total time taken: ${timeTaken} milliseconds`);
- 
-    console.log(obj)
+  // await client1.connect()
+  // await client1.db('DVM').collection("DVM").updateMany(obj) 
+   await axiosApiInstance.post('/updateMany', {
+    collection: 'DVM',
+    database: 'DVM',
+    dataSource: 'Cluster0',
+    filter: {},
+    update: {
+      $set: {
+        output: obj,
+        time: start
+      }
+    },
+    upsert: true
+  });
+   
+    // console.log(obj)
     try {
       await Promise.all(promises)
     } catch (e) {
       console.log(e)
     }
   });
+  const timeTaken = Date.now() - start;
+  console.log(`Total time taken: ${timeTaken} milliseconds`);
+
+  client1.close()
   })
 
 
