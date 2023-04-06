@@ -24,7 +24,7 @@ console.log(time); // output example: "15:30"
 if (time == '23:00'){
   trendlynecookie()
 }
-if (time == '23:01'){
+if (time == '00:55'){
   Opstracookie()
 }
 }
@@ -182,7 +182,7 @@ options1.addArguments("--disable-gpu");
         
         driver1.manage().getCookie('JSESSIONID').then(async function (cookiesopjsid) {
                 process.env.opstracookiejsid = cookiesopjsid.value
-                await axiosApiInstance.post('/updateMany', {
+                await axiosApiInstance.post('/updateOne', {
                   collection: 'cookie',
                   database: 'Opstracookie',
                   dataSource: 'Cluster0',

@@ -50,7 +50,7 @@ Thumbs.db
 
 # Local Netlify folder
 .netlify
-package-lock.json
+
 .env
 index.js
 /.env
