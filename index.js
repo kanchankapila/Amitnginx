@@ -3,6 +3,8 @@ const express = require('express');
 const fs = require('fs');
 const filePath = './src/app/lists/tlid.txt';
 var app = express();
+const swd = require("selenium-webdriver");
+const webdriver = require('selenium-webdriver');
 const chrome=require('selenium-webdriver/chrome')
 const axios = require('axios');
 const cors = require('cors');
@@ -12,7 +14,22 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 const { MongoClient } = require('mongodb');
 const client1 = new MongoClient( "mongodb+srv://amit:amit0605@cluster0.mxilo.mongodb.net/?retryWrites=true&w=majority", { useUnifiedTopology: true });
+function time(){
+const now = new Date();
+const hours = now.getHours().toString().padStart(2, "0"); // add leading zero if necessary
+const minutes = now.getMinutes().toString().padStart(2, "0"); // add leading zero if necessary
+const time = `${hours}:${minutes}`;
+console.log(typeof(time))
+console.log(time); // output example: "15:30"
+if (time == '23:00'){
+  trendlynecookie()
+}
+if (time == '23:01'){
+  Opstracookie()
+}
+}
 
+setInterval(time, 60000);
 const bodyParser = require("body-parser");
 const request = require('request')
 app.use(cors());
@@ -31,7 +48,16 @@ app.use(bodyParser.raw());
     
     
   });
-  async function def (req, res) {
+  const axiosApiInstance = axios.create({
+    baseURL: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Request-Headers': '*',
+      'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy ',
+      Accept: 'application/ejson'
+    }
+  });
+  async function trendlynecookie (req, res) {
    
     let options = new chrome.Options();
     //Below arguments are critical for Heroku deployment
@@ -73,28 +99,31 @@ app.use(bodyParser.raw());
       console.log("Successfully signed in Trendlyne!");
       driver.manage().getCookie('.trendlyne').then(function (cookiestl) {
         process.env.trendlynecookietl = cookiestl.value;
+        console.log(process.env.trendlynecookietl)
       });
-      driver.manage().getCookie('_gat').then(function (cookiesgat) {
-        
-        process.env.trendlynecookiegat = cookiesgat.value;
-      });
-      driver.manage().getCookie('_gid').then(function (cookiesgid) {
-        process.env.trendlynecookiegid = cookiesgid.value;
-      });
-      driver.manage().getCookie('csrftoken').then(function (cookiescsrf) {
+      
+      driver.manage().getCookie('csrftoken').then(async function (cookiescsrf) {
         process.env.trendlynecookiecsrf = cookiescsrf.value;
-        
-      });
-      driver.manage().getCookie('_ga').then(async function (cookiesga) {
-        process.env.trendlynecookiega = cookiesga.value;
-            
-        process.env.trendlynecookie =
-          '_gid=' + process.env.trendlynecookiegid + '; .trendlyne=' + process.env.trendlynecookietl + '; csrftoken=' + process.env.trendlynecookiecsrf + '; __utma=185246956.775644955.1603113261.1614010114.1614018734.3; _ga=' + process.env.trendlynecookiega + '; _gat=1'
-            
-        // console.log(process.env.trendlynecookie)
-        return (process.env.trendlynecookie),
+        console.log(process.env.trendlynecookiecsrf)
         await driver.quit(); 
+        await axiosApiInstance.post('/updateMany', {
+          collection: 'cookie',
+          database: 'Trendlynecookie',
+          dataSource: 'Cluster0',
+          filter: {},
+          update: {
+            $set: {
+              csrf: process.env.trendlynecookiecsrf,
+              trnd: process.env.trendlynecookietl
+            }
+          },
+          upsert: true
+        });
+        console.log("Inserted Successfully in Trendlyne DB!!!") 
       });
+      
+       
+    
              
       
       
@@ -102,14 +131,14 @@ app.use(bodyParser.raw());
     //    
 };
 
-      def();
+     
 
  
 
   // * To fetch Opstra session Cookies
 
 // app.get('/api/opstracookie', async 
-async function ghi(req, res) {
+async function Opstracookie(req, res) {
 
     let options1 = new chrome.Options();
 options1.addArguments("--headless");
@@ -150,27 +179,30 @@ options1.addArguments("--disable-gpu");
           passwordBox.sendKeys('Angular789\n'); 
           return promiseFillPassword;}).then(function () { 
       console.log("Successfully signed in Opstra!"); 
-        driver1.manage().getCookie('_gid').then(function (cookiesopgid) {
-          process.env.opstracookiegid=cookiesopgid.value
-        })
-        driver1.manage().getCookie('_gat').then(function (cookiesopgat) {
-            process.env.opstracookiegat=cookiesopgat.value
-        })
-        driver1.manage().getCookie('_ga').then(function (cookiesopga) {
-              process.env.opstracookiega=cookiesopga.value
-        })
+        
         driver1.manage().getCookie('JSESSIONID').then(async function (cookiesopjsid) {
                 process.env.opstracookiejsid = cookiesopjsid.value
-          process.env.opstracookie = '_ga=' + process.env.opstracookiejsid + '; _gid=' + process.env.opstracookiegid + '; _gat=' + process.env.opstracookiegat + '; JSESSIONID=' + process.env.opstracookiejsid
-              
-                return (process.env.opstracookie),
+                await axiosApiInstance.post('/updateMany', {
+                  collection: 'cookie',
+                  database: 'Opstracookie',
+                  dataSource: 'Cluster0',
+                  filter: {},
+                  update: {
+                    $set: {
+                      JSESSIONID: process.env.opstracookiejsid
+                    
+                    }
+                  },
+                  upsert: true
+                });
+         
                await driver1.quit(); 
         })
            }).catch(function (err) { console.log("Error ", err, " occurred!"); });
           //  await driver1.quit();
 };
-    // );
- ghi();
+    
+  
 
  
   //*This is ET now Stock Data Details used in Share component using parallel api run
@@ -187,15 +219,7 @@ options1.addArguments("--disable-gpu");
   })
  
 
-  const axiosApiInstance = axios.create({
-    baseURL: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action',
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Request-Headers': '*',
-      'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy ',
-      Accept: 'application/ejson'
-    }
-  });
+  
 
   app.get('/api/et', function (req, res) {
     const start = Date.now();
@@ -203,36 +227,14 @@ options1.addArguments("--disable-gpu");
     
    
    
-  //  const fs = require('fs');
-   
-   // Read the file
+
    fs.readFile('./src/app/lists/tlid1.json', (err, data) => {
      if (err) throw err;
    
      // Parse the data into an array
      const symbols = JSON.parse(data);
    
-  //    // Iterate over the array
-  //    array.forEach((obj) => {
-  //      // Get the key and value
-  //     //  const key = Object.keys(obj)[1];
-  //      const value = obj['tlid'];
-   
-  //      // Hit the URL with the key/value
-  //      fetch(`https://example.com/${value}`)
-  //        .then((response) => response.json())
-  //        .then((data) => console.log(data))
-  //        .catch((err) => console.error(err));
-  //    });
-  //  });
- 
-   
-// read the contents of the file
-// fs.readFile('./src/app/lists/tlid1.json', 'utf8', (err, data) => {
-//   if (err) throw err;
-
-
-//   const symbols = JSON.parse(data);
+  
 
  
   const promises = symbols.map(async symbol  => {
@@ -251,8 +253,7 @@ options1.addArguments("--disable-gpu");
      console.log(`${symbol.name}`)
       try{
               obj.push({
-        // Date: symbol.Date,
-        // Time: symbol.time,
+       
         Name: `${symbol.name}`,
         DurabilityScore: data1.body['stockData'][6],
         DurabilityColor: data1.body['stockData'][9],
@@ -267,8 +268,7 @@ options1.addArguments("--disable-gpu");
   }catch (error){
     console.log('error')
   }
-  // await client1.connect()
-  // await client1.db('DVM').collection("DVM").updateMany(obj) 
+ 
    await axiosApiInstance.post('/updateMany', {
     collection: 'DVM',
     database: 'DVM',
