@@ -57,6 +57,7 @@ app.use(bodyParser.raw());
       Accept: 'application/ejson'
     }
   });
+  app.get('/api/trendlynecookie', function (req, res) {
   async function trendlynecookie (req, res) {
    
     let options = new chrome.Options();
@@ -130,6 +131,7 @@ app.use(bodyParser.raw());
     }).catch(function (err) { console.log("Error ", err, " occurred!"); });
     //    
 };
+});
 
      
 
@@ -138,6 +140,7 @@ app.use(bodyParser.raw());
   // * To fetch Opstra session Cookies
 
 // app.get('/api/opstracookie', async 
+app.get('/api/Opstracookie', function (req, res) {
 async function Opstracookie(req, res) {
 
     let options1 = new chrome.Options();
@@ -202,7 +205,7 @@ options1.addArguments("--disable-gpu");
           //  await driver1.quit();
 };
     
-  
+});
 
  
   //*This is ET now Stock Data Details used in Share component using parallel api run
