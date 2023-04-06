@@ -24,7 +24,7 @@ console.log(time); // output example: "15:30"
 if (time == '23:00'){
   trendlynecookie()
 }
-if (time == '00:55'){
+if (time == '01:05'){
   Opstracookie()
 }
 }
