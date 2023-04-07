@@ -1,8 +1,11 @@
-
+require('chromedriver');
 const express = require('express');
 const fs = require('fs');
 const filePath = './src/app/lists/tlid.txt';
 var app = express();
+const swd = require("selenium-webdriver");
+const webdriver = require('selenium-webdriver');
+const chrome=require('selenium-webdriver/chrome')
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
@@ -11,7 +14,22 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 const { MongoClient } = require('mongodb');
 const client1 = new MongoClient( "mongodb+srv://amit:amit0605@cluster0.mxilo.mongodb.net/?retryWrites=true&w=majority", { useUnifiedTopology: true });
+function time(){
+const now = new Date();
+const hours = now.getHours().toString().padStart(2, "0"); // add leading zero if necessary
+const minutes = now.getMinutes().toString().padStart(2, "0"); // add leading zero if necessary
+const time = `${hours}:${minutes}`;
+console.log(typeof(time))
+console.log(time); // output example: "15:30"
+if (time == '23:00'){
+  trendlynecookie()
+}
+if (time == '01:05'){
+  Opstracookie()
+}
+}
 
+setInterval(time, 60000);
 const bodyParser = require("body-parser");
 const request = require('request')
 app.use(cors());
@@ -30,7 +48,166 @@ app.use(bodyParser.raw());
     
     
   });
+  const axiosApiInstance = axios.create({
+    baseURL: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Request-Headers': '*',
+      'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy ',
+      Accept: 'application/ejson'
+    }
+  });
+  app.get('/api/trendlynecookie', function (req, res) {
+  async function trendlynecookie (req, res) {
+   
+    let options = new chrome.Options();
+    //Below arguments are critical for Heroku deployment
+    options.addArguments("--headless");
+    options.addArguments("--disable-gpu");
+   options.addArguments("--no-sandbox");
+   options.setChromeBinaryPath(process.env.CHROME_BINARY_PATH);
+   let serviceBuilder = new chrome.ServiceBuilder(process.env.CHROME_DRIVER_PATH);
+  
+  //  binary_location = "C:\\path\\to\\chrome.exe"
+  //  options.setBinary(".\\src\\assets\\chromedriver.exe");
+  options.addArguments("--disable-dev-shm-usage")
+    let driver = new webdriver.Builder()
+      .forBrowser('chrome')
+      .setChromeOptions(options)
+      .setChromeService(serviceBuilder)
+      .build();
+ 
+    let tabToOpen = driver.get("https://trendlyne.com/visitor/loginmodal/");
+    tabToOpen.then(function () {
+      let findTimeOutP = driver.manage().setTimeouts({ implicit: 5000, });
+      return findTimeOutP;
+    }).then(function () {
+      let promiseUsernameBox = driver.findElement(swd.By.id("id_login"));
+      return promiseUsernameBox;
+    }).then(function (usernameBox) {
+      let promiseFillUsername = usernameBox.sendKeys('amit.kapila.2009@gmail.com');
+      return promiseFillUsername;
+    }).then(function () {
+      console.log("Username entered successfully in Trendlyne");
 
+      let promisePasswordBox = driver.findElement(swd.By.id("id_password"));
+      return promisePasswordBox;
+    }).then(function (passwordBox) {
+      
+      let promiseFillPassword = passwordBox.sendKeys('Angular789\n');
+      return promiseFillPassword;
+    }).then(function () {
+      console.log("Successfully signed in Trendlyne!");
+      driver.manage().getCookie('.trendlyne').then(function (cookiestl) {
+        process.env.trendlynecookietl = cookiestl.value;
+        console.log(process.env.trendlynecookietl)
+      });
+      
+      driver.manage().getCookie('csrftoken').then(async function (cookiescsrf) {
+        process.env.trendlynecookiecsrf = cookiescsrf.value;
+        console.log(process.env.trendlynecookiecsrf)
+        await driver.quit(); 
+        await axiosApiInstance.post('/updateMany', {
+          collection: 'cookie',
+          database: 'Trendlynecookie',
+          dataSource: 'Cluster0',
+          filter: {},
+          update: {
+            $set: {
+              csrf: process.env.trendlynecookiecsrf,
+              trnd: process.env.trendlynecookietl
+            }
+          },
+          upsert: true
+        });
+        console.log("Inserted Successfully in Trendlyne DB!!!") 
+      });
+      
+       
+    
+             
+      
+      
+    }).catch(function (err) { console.log("Error ", err, " occurred!"); });
+    //    
+};
+});
+
+     
+
+ 
+
+  // * To fetch Opstra session Cookies
+
+// app.get('/api/opstracookie', async 
+app.get('/api/Opstracookie', function (req, res) {
+async function Opstracookie(req, res) {
+
+    let options1 = new chrome.Options();
+options1.addArguments("--headless");
+options1.addArguments("--disable-gpu");
+  options1.addArguments("--no-sandbox");
+  options1.setChromeBinaryPath(process.env.CHROME_BINARY_PATH);
+   let serviceBuilder1 = new chrome.ServiceBuilder(process.env.CHROME_DRIVER_PATH);
+  
+  //  binary_location = "C:\\path\\to\\chrome.exe"
+  //  options.setBinary(".\\src\\assets\\chromedriver.exe");
+  options1.addArguments("--disable-dev-shm-usage")
+  let driver1 = new webdriver.Builder()
+  .forBrowser('chrome')
+    .setChromeOptions(options1)
+    .setChromeService(serviceBuilder1)
+  .build();
+  
+ 
+  let tabToOpen = driver1.get("https://opstra.definedge.com/ssologin"); 
+  tabToOpen.then(function () { 
+  
+          let findTimeOutP =driver1.manage().setTimeouts({implicit: 5000,}); 
+          return findTimeOutP; }).then(function () { 
+            let promiseUsernameBox = 
+            driver1.findElement(swd.By.id("username")); 
+          return promiseUsernameBox;}).then(function (usernameBox) { 
+  
+          let promiseFillUsername = 
+              usernameBox.sendKeys('amit.kapila.2009@gmail.com'); 
+          return promiseFillUsername; 
+  
+      }).then(function () { 
+        console.log("Username entered successfully in Opstra"); 
+        let promisePasswordBox = 
+      driver1.findElement(swd.By.id("password")); 
+      return promisePasswordBox;}).then(function (passwordBox) { 
+          let promiseFillPassword = 
+          passwordBox.sendKeys('Angular789\n'); 
+          return promiseFillPassword;}).then(function () { 
+      console.log("Successfully signed in Opstra!"); 
+        
+        driver1.manage().getCookie('JSESSIONID').then(async function (cookiesopjsid) {
+                process.env.opstracookiejsid = cookiesopjsid.value
+                await axiosApiInstance.post('/updateOne', {
+                  collection: 'cookie',
+                  database: 'Opstracookie',
+                  dataSource: 'Cluster0',
+                  filter: {},
+                  update: {
+                    $set: {
+                      JSESSIONID: process.env.opstracookiejsid
+                    
+                    }
+                  },
+                  upsert: true
+                });
+         
+               await driver1.quit(); 
+        })
+           }).catch(function (err) { console.log("Error ", err, " occurred!"); });
+          //  await driver1.quit();
+};
+    
+});
+
+ 
   //*This is ET now Stock Data Details used in Share component using parallel api run
   app.get('/api/etsharetoday', function (req, res) {
 
@@ -45,29 +222,24 @@ app.use(bodyParser.raw());
   })
  
 
-  const axiosApiInstance = axios.create({
-    baseURL: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action',
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Request-Headers': '*',
-      'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy ',
-      Accept: 'application/ejson'
-    }
-  });
+  
 
-  app.get('/api/postdvm', function (req, res) {
-  app.get('/api/postdvm', function (req, res) {
+  app.get('/api/et', function (req, res) {
     const start = Date.now();
     const obj=[];
     
    
-    fs.readFile('./src/app/lists/tlid1.json', (err, data) => {
+   
+
+   fs.readFile('./src/app/lists/tlid1.json', (err, data) => {
      if (err) throw err;
    
      // Parse the data into an array
      const symbols = JSON.parse(data);
    
   
+
+ 
   const promises = symbols.map(async symbol  => {
     console.log(`${symbol.tlid}`)
    
@@ -84,7 +256,7 @@ app.use(bodyParser.raw());
      console.log(`${symbol.name}`)
       try{
               obj.push({
-        
+       
         Name: `${symbol.name}`,
         DurabilityScore: data1.body['stockData'][6],
         DurabilityColor: data1.body['stockData'][9],
@@ -99,8 +271,7 @@ app.use(bodyParser.raw());
   }catch (error){
     console.log('error')
   }
-  // await client1.connect()
-  // await client1.db('DVM').collection("DVM").updateMany(obj) 
+ 
    await axiosApiInstance.post('/updateMany', {
     collection: 'DVM',
     database: 'DVM',
