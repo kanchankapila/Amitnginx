@@ -56,6 +56,7 @@ app.use(bodyParser.raw());
   });
 
   app.get('/api/postdvm', function (req, res) {
+  app.get('/api/postdvm', function (req, res) {
     const start = Date.now();
     const obj=[];
     
