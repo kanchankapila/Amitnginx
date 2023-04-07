@@ -301,67 +301,6 @@ options1.addArguments("--disable-gpu");
 })
 
 
-// app.get('/api/mcsymbol', function (req, res) {
-  const start = Date.now();
-  const obj=[];
-  
- 
-
- fs.readFile('./src/app/lists/mcsymbol.txt','utf8', (err, data) => {
-   if (err) throw err;
- const values= data.split('\n').filter(value => value.trim() !== '');
- 
- 
- const promises = values.map(async value  => {
-  // console.log(`${value}`)
- 
-   const response= await fetch(
-      `https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/${value}`,
-      {
-        headers: { Accept: 'application/json' }
-      }
-    );
-    if (!response.ok) {
-      return { statusCode: response.status, body: response.statusText }
-    }
-    const data1 = await response.json();
-    // console.log(data1.data)
-    console.log(`${value}`);
-  // console.log(`${value}`,data1.data['SC_FULLNM'])
-    
-
-try{
- await axiosApiInstance.post('/insertOne', {
-  collection: 'mcsymbol',
-  database: 'mcsymbol',
-  dataSource: 'Cluster0',
-  document: {
-    Name:data1.data,
-    // ['SC_FULLNM'],
-    // Comapny:data1.data['company'],
-    // symbol:data1.data['symbol'],
-    // isinid: data1.data['isinid'],
-    // DISPID: data1.data['DISPID']
-  }
-  
-})
-}catch (e) {
-  console.log(e,`${value}`)
-};
- 
- 
-  try {
-    await Promise.all(promises)
-  } catch (e) {
-    console.log(e)
-  }
-});
-const timeTaken = Date.now() - start;
-console.log(`Total time taken: ${timeTaken} milliseconds`);
-
-// client1.close()
-})
-// })
 
   
 
