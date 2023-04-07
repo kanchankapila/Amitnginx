@@ -58,8 +58,8 @@ app.use(bodyParser.raw());
     }
   });
   app.get('/api/trendlynecookie', function (req, res) {
-  async function trendlynecookie (req, res) {
-   
+  // async function trendlynecookie (req, res) {
+   console.log("Hello!!!")
     let options = new chrome.Options();
     //Below arguments are critical for Heroku deployment
     options.addArguments("--headless");
@@ -130,7 +130,7 @@ app.use(bodyParser.raw());
       
     }).catch(function (err) { console.log("Error ", err, " occurred!"); });
     //    
-};
+// };
 });
 
      
@@ -141,7 +141,8 @@ app.use(bodyParser.raw());
 
 // app.get('/api/opstracookie', async 
 app.get('/api/Opstracookie', function (req, res) {
-async function Opstracookie(req, res) {
+  console.log("hi")
+// async function Opstracookie(req, res) {
 
     let options1 = new chrome.Options();
 options1.addArguments("--headless");
@@ -203,7 +204,7 @@ options1.addArguments("--disable-gpu");
         })
            }).catch(function (err) { console.log("Error ", err, " occurred!"); });
           //  await driver1.quit();
-};
+// };
     
 });
 
