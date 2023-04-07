@@ -55,44 +55,18 @@ app.use(bodyParser.raw());
     }
   });
 
- 
+  app.get('/api/postdvm', function (req, res) {
     const start = Date.now();
     const obj=[];
     
    
-   
-  //  const fs = require('fs');
-   
-   // Read the file
-   fs.readFile('./src/app/lists/tlid1.json', (err, data) => {
+    fs.readFile('./src/app/lists/tlid1.json', (err, data) => {
      if (err) throw err;
    
      // Parse the data into an array
      const symbols = JSON.parse(data);
    
-  //    // Iterate over the array
-  //    array.forEach((obj) => {
-  //      // Get the key and value
-  //     //  const key = Object.keys(obj)[1];
-  //      const value = obj['tlid'];
-   
-  //      // Hit the URL with the key/value
-  //      fetch(`https://example.com/${value}`)
-  //        .then((response) => response.json())
-  //        .then((data) => console.log(data))
-  //        .catch((err) => console.error(err));
-  //    });
-  //  });
- 
-   
-// read the contents of the file
-// fs.readFile('./src/app/lists/tlid1.json', 'utf8', (err, data) => {
-//   if (err) throw err;
-
-
-//   const symbols = JSON.parse(data);
-
- 
+  
   const promises = symbols.map(async symbol  => {
     console.log(`${symbol.tlid}`)
    
@@ -109,8 +83,7 @@ app.use(bodyParser.raw());
      console.log(`${symbol.name}`)
       try{
               obj.push({
-        // Date: symbol.Date,
-        // Time: symbol.time,
+        
         Name: `${symbol.name}`,
         DurabilityScore: data1.body['stockData'][6],
         DurabilityColor: data1.body['stockData'][9],
@@ -153,9 +126,70 @@ app.use(bodyParser.raw());
 
   client1.close()
   })
+})
 
 
+// app.get('/api/mcsymbol', function (req, res) {
+  const start = Date.now();
+  const obj=[];
+  
+ 
 
+ fs.readFile('./src/app/lists/mcsymbol.txt','utf8', (err, data) => {
+   if (err) throw err;
+ const values= data.split('\n').filter(value => value.trim() !== '');
+ 
+ 
+ const promises = values.map(async value  => {
+  // console.log(`${value}`)
+ 
+   const response= await fetch(
+      `https://priceapi.moneycontrol.com/pricefeed/nse/equitycash/${value}`,
+      {
+        headers: { Accept: 'application/json' }
+      }
+    );
+    if (!response.ok) {
+      return { statusCode: response.status, body: response.statusText }
+    }
+    const data1 = await response.json();
+    // console.log(data1.data)
+    console.log(`${value}`);
+  // console.log(`${value}`,data1.data['SC_FULLNM'])
+    
+
+try{
+ await axiosApiInstance.post('/insertOne', {
+  collection: 'mcsymbol',
+  database: 'mcsymbol',
+  dataSource: 'Cluster0',
+  document: {
+    Name:data1.data,
+    // ['SC_FULLNM'],
+    // Comapny:data1.data['company'],
+    // symbol:data1.data['symbol'],
+    // isinid: data1.data['isinid'],
+    // DISPID: data1.data['DISPID']
+  }
+  
+})
+}catch (e) {
+  console.log(e,`${value}`)
+};
+ 
+ 
+  try {
+    await Promise.all(promises)
+  } catch (e) {
+    console.log(e)
+  }
+});
+const timeTaken = Date.now() - start;
+console.log(`Total time taken: ${timeTaken} milliseconds`);
+
+// client1.close()
+})
+// })
 
   
 
