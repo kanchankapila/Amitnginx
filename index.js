@@ -65,10 +65,9 @@ const axios = require('axios');
     let browser = null
     console.log('spawning chrome headless')
     try {
-      let abc=`C:/\Program Files/\Google/\Chrome/\Application/\chrome.exe`
+      // let abc=`C:/\Program Files/\Google/\Chrome/\Application/\chrome.exe`
       const start = Date.now();
-      const executablePath = abc;
-      //  process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+      const executablePath =  process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
  
       // setup
       browser = await puppeteer.launch({
