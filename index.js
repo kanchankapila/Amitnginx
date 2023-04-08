@@ -59,7 +59,7 @@ app.use(bodyParser.raw());
     }
   });
   app.get('/api/trendlynecookie', async function (req, res) {
-    const chromium = require('@sparticuz/chromium')
+    const chromium = require('chromium')
 const puppeteer = require('puppeteer-core')
 const axios = require('axios');
     let browser = null
