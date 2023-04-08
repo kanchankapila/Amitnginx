@@ -11,6 +11,7 @@
   "private": true,
   "sideEffects": false,
   "dependencies": {
+    "@sparticuz/chromium": "^106.0.2",
     "async": "^3.2.4",
     "axios": "^0.27.2",
     "axios-cookiejar-support": "^1.0.1",
@@ -31,6 +32,7 @@
     "nodemon": "^2.0.22",
     "npm": "^8.18.0",
     "path": "^0.12.7",
+    "puppeteer-core": "^18.0.5",
     "request": "^2.88.2",
     "selenium-webdriver": "^4.8.2"
   },
