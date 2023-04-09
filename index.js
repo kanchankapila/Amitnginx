@@ -63,6 +63,7 @@ app.use(bodyParser.raw());
             
    
    console.log("Hello!!!")
+   try{
     let options = new chrome.Options();
     //Below arguments are critical for Heroku deployment
     options.addArguments("--headless");
@@ -125,14 +126,16 @@ app.use(bodyParser.raw());
         console.log("Inserted Successfully in Trendlyne DB!!!") 
       });
       
-       
+    
     
              
       
       
     }).catch(function (err) { console.log("Error ", err, " occurred!"); });
     //    
-
+  }catch (e){
+    console.log(e)
+  } 
 
 });
 
