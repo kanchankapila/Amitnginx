@@ -69,8 +69,8 @@ app.use(bodyParser.raw());
     options.addArguments("--headless");
     options.addArguments("--disable-gpu");
    options.addArguments("--no-sandbox");
-   options.setChromeBinaryPath(process.env.CHROME_BINARY_PATH);
-   let serviceBuilder = new chrome.ServiceBuilder(process.env.CHROME_DRIVER_PATH);
+   options.setChromeBinaryPath('./node_modules/chromedriver/lib/chromedriver/chromedriver.exe');
+   let serviceBuilder = new chrome.ServiceBuilder('./node_modules/chromedriver/lib/chromedriver/chromedriver.exe');
   
  
   options.addArguments("--disable-dev-shm-usage")
