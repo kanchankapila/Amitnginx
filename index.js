@@ -1,6 +1,6 @@
-// require('chromedriver').path
+require('chromedriver')
 const chromium = require('@sparticuz/chromium')
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer-core')
 const express = require('express');
 const fs = require('fs');
 const filePath = './src/app/lists/tlid.txt';
@@ -145,7 +145,7 @@ app.use(bodyParser.raw());
     browser = await puppeteer.launch({
            args: chromium.args,
          
-      executablePath: executablePath,
+      executablePath: './node_modules/chromedriver/lib/chromedriver/chromedriver.exe',
        headless:chromium.headless,
         ignoreHTTPSErrors: true,
           // ignoreDefaultArgs: ["--disable-extensions","--single-process"]
