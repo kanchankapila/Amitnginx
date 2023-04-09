@@ -1,13 +1,13 @@
-require('chromedriver')
-const chromium = require('@sparticuz/chromium')
-const puppeteer = require('puppeteer-core')
+const chromedriver=require('chromedriver')
+// const chromium = require('@sparticuz/chromium')
+// const puppeteer = require('puppeteer-core')
 const express = require('express');
 const fs = require('fs');
 const filePath = './src/app/lists/tlid.txt';
 var app = express();
-// const swd = require("selenium-webdriver");
-// const webdriver = require('selenium-webdriver');
-// const chrome=require('selenium-webdriver/chrome')
+const swd = require("selenium-webdriver");
+const webdriver = require('selenium-webdriver');
+const chrome=require('selenium-webdriver/chrome')
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
@@ -145,7 +145,7 @@ app.use(bodyParser.raw());
     browser = await puppeteer.launch({
            args: chromium.args,
          
-      executablePath: './node_modules/chromedriver/lib/chromedriver/chromedriver.exe',
+       executablePath: executablePath,
        headless:chromium.headless,
         ignoreHTTPSErrors: true,
           // ignoreDefaultArgs: ["--disable-extensions","--single-process"]
@@ -231,7 +231,84 @@ app.use(bodyParser.raw());
 });
 
      
+app.get('/api/trendlynecookie1', async function (req, res) {
 
+            
+   
+  console.log("Hello!!!")
+ 
+   let options = new chrome.Options();
+   //Below arguments are critical for Heroku deployment
+   options.addArguments("--headless");
+   options.addArguments("--disable-gpu");
+  options.addArguments("--no-sandbox");
+  options.addArguments("--disable-dev-shm-usage")
+  options.addArguments("--remote-debugging-port=9222")
+  options.setChromeBinaryPath(chromedriver.path);
+  let serviceBuilder = new chrome.ServiceBuilder(chromedriver.path);
+ 
+
+
+   let driver = new webdriver.Builder()
+     .forBrowser('chrome')
+     .setChromeOptions(options)
+     .setChromeService(serviceBuilder)
+     .build();
+
+   let tabToOpen = driver.get("https://trendlyne.com/visitor/loginmodal/");
+   tabToOpen.then(function () {
+     let findTimeOutP = driver.manage().setTimeouts({ implicit: 5000, });
+     return findTimeOutP;
+   }).then(function () {
+     let promiseUsernameBox = driver.findElement(swd.By.id("id_login"));
+     return promiseUsernameBox;
+   }).then(function (usernameBox) {
+     let promiseFillUsername = usernameBox.sendKeys('amit.kapila.2009@gmail.com');
+     return promiseFillUsername;
+   }).then(function () {
+     console.log("Username entered successfully in Trendlyne");
+
+     let promisePasswordBox = driver.findElement(swd.By.id("id_password"));
+     return promisePasswordBox;
+   }).then(function (passwordBox) {
+     
+     let promiseFillPassword = passwordBox.sendKeys('Angular789\n');
+     return promiseFillPassword;
+   }).then(function () {
+     console.log("Successfully signed in Trendlyne!");
+     driver.manage().getCookie('.trendlyne').then(function (cookiestl) {
+       process.env.trendlynecookietl = cookiestl.value;
+       console.log(process.env.trendlynecookietl)
+     });
+     
+     driver.manage().getCookie('csrftoken').then(async function (cookiescsrf) {
+       process.env.trendlynecookiecsrf = cookiescsrf.value;
+       console.log(process.env.trendlynecookiecsrf)
+       await driver.quit(); 
+       await axiosApiInstance.post('/updateMany', {
+         collection: 'cookie',
+         database: 'Trendlynecookie',
+         dataSource: 'Cluster0',
+         filter: {},
+         update: {
+           $set: {
+             csrf: process.env.trendlynecookiecsrf,
+             trnd: process.env.trendlynecookietl
+           }
+         },
+         upsert: true
+       });
+       console.log("Inserted Successfully in Trendlyne DB!!!") 
+     });
+     
+   
+   
+            
+     
+     
+   }).catch(function (err) { console.log("Error ", err, " occurred!"); });
+   //    
+});
  
 
   // * To fetch Opstra session Cookies

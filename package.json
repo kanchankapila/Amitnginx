@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node node_modules/puppeteer-core/install.js && node index.js",
     "dev": "nodemon index.js"
   },
   "resolutions": {
@@ -13,18 +13,17 @@
   "sideEffects": false,
   "dependencies": {
     "@angular-builders/custom-webpack": "^15.0.0",
-    "@sparticuz/chromium": "^106.0.2",
     "async": "^3.2.4",
     "axios": "^0.27.2",
     "body-parser": "^1.20.0",
-    "chromedriver": "^103.0.0",
+    "chromedriver": "^112.0.0",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "mongodb": "^5.1.0",
     "node-fetch": "^2.6.7",
     "nodemon": "^2.0.22",
     "path": "^0.12.7",
-    "puppeteer-core": "^18.0.5",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "selenium-webdriver": "^4.8.2"
   }
 }
