@@ -244,7 +244,7 @@ app.get('/api/trendlynecookie1', async function (req, res) {
   options.addArguments("--no-sandbox");
   options.addArguments("--disable-dev-shm-usage")
   options.addArguments("--remote-debugging-port=9222")
-  options.setChromeBinaryPath(chromedriver.path);
+ 
   let serviceBuilder = new chrome.ServiceBuilder(chromedriver.path);
  
 
