@@ -1,4 +1,4 @@
-const chromedriver=require('chromedriver')
+require('chromedriver')
 // const chromium = require('@sparticuz/chromium')
 // const puppeteer = require('puppeteer-core')
 const express = require('express');
@@ -245,7 +245,7 @@ app.get('/api/trendlynecookie1', async function (req, res) {
   options.addArguments("--disable-dev-shm-usage")
   options.addArguments("--remote-debugging-port=9222")
  
-  let serviceBuilder = new chrome.ServiceBuilder(chromedriver.path);
+  let serviceBuilder = new chrome.ServiceBuilder(require('chromedriver').path);
  
 
 
