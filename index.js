@@ -1,11 +1,13 @@
-require('chromedriver').path
+// require('chromedriver').path
+const chromium = require('@sparticuz/chromium')
+const puppeteer = require('puppeteer')
 const express = require('express');
 const fs = require('fs');
 const filePath = './src/app/lists/tlid.txt';
 var app = express();
-const swd = require("selenium-webdriver");
-const webdriver = require('selenium-webdriver');
-const chrome=require('selenium-webdriver/chrome')
+// const swd = require("selenium-webdriver");
+// const webdriver = require('selenium-webdriver');
+// const chrome=require('selenium-webdriver/chrome')
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
@@ -63,79 +65,168 @@ app.use(bodyParser.raw());
             
    
    console.log("Hello!!!")
-   try{
-    let options = new chrome.Options();
-    //Below arguments are critical for Heroku deployment
-    options.addArguments("--headless");
-    options.addArguments("--disable-gpu");
-   options.addArguments("--no-sandbox");
-   options.setChromeBinaryPath('./src/assets/chromedriver.exe');
-   let serviceBuilder = new chrome.ServiceBuilder('./src/assets/chromedriver.exe');
+  
+  //   let options = new chrome.Options();
+  //   //Below arguments are critical for Heroku deployment
+  //   options.addArguments("--headless");
+  //   options.addArguments("--disable-gpu");
+  //  options.addArguments("--no-sandbox");
+  //  options.setChromeBinaryPath('./src/assets/chromedriver.exe');
+  //  let serviceBuilder = new chrome.ServiceBuilder('./src/assets/chromedriver.exe');
   
  
-  options.addArguments("--disable-dev-shm-usage")
-    let driver = new webdriver.Builder()
-      .forBrowser('chrome')
-      .setChromeOptions(options)
-      .setChromeService(serviceBuilder)
-      .build();
+  // options.addArguments("--disable-dev-shm-usage")
+  //   let driver = new webdriver.Builder()
+  //     .forBrowser('chrome')
+  //     .setChromeOptions(options)
+  //     .setChromeService(serviceBuilder)
+  //     .build();
  
-    let tabToOpen = driver.get("https://trendlyne.com/visitor/loginmodal/");
-    tabToOpen.then(function () {
-      let findTimeOutP = driver.manage().setTimeouts({ implicit: 5000, });
-      return findTimeOutP;
-    }).then(function () {
-      let promiseUsernameBox = driver.findElement(swd.By.id("id_login"));
-      return promiseUsernameBox;
-    }).then(function (usernameBox) {
-      let promiseFillUsername = usernameBox.sendKeys('amit.kapila.2009@gmail.com');
-      return promiseFillUsername;
-    }).then(function () {
-      console.log("Username entered successfully in Trendlyne");
+  //   let tabToOpen = driver.get("https://trendlyne.com/visitor/loginmodal/");
+  //   tabToOpen.then(function () {
+  //     let findTimeOutP = driver.manage().setTimeouts({ implicit: 5000, });
+  //     return findTimeOutP;
+  //   }).then(function () {
+  //     let promiseUsernameBox = driver.findElement(swd.By.id("id_login"));
+  //     return promiseUsernameBox;
+  //   }).then(function (usernameBox) {
+  //     let promiseFillUsername = usernameBox.sendKeys('amit.kapila.2009@gmail.com');
+  //     return promiseFillUsername;
+  //   }).then(function () {
+  //     console.log("Username entered successfully in Trendlyne");
 
-      let promisePasswordBox = driver.findElement(swd.By.id("id_password"));
-      return promisePasswordBox;
-    }).then(function (passwordBox) {
+  //     let promisePasswordBox = driver.findElement(swd.By.id("id_password"));
+  //     return promisePasswordBox;
+  //   }).then(function (passwordBox) {
       
-      let promiseFillPassword = passwordBox.sendKeys('Angular789\n');
-      return promiseFillPassword;
-    }).then(function () {
-      console.log("Successfully signed in Trendlyne!");
-      driver.manage().getCookie('.trendlyne').then(function (cookiestl) {
-        process.env.trendlynecookietl = cookiestl.value;
-        console.log(process.env.trendlynecookietl)
-      });
+  //     let promiseFillPassword = passwordBox.sendKeys('Angular789\n');
+  //     return promiseFillPassword;
+  //   }).then(function () {
+  //     console.log("Successfully signed in Trendlyne!");
+  //     driver.manage().getCookie('.trendlyne').then(function (cookiestl) {
+  //       process.env.trendlynecookietl = cookiestl.value;
+  //       console.log(process.env.trendlynecookietl)
+  //     });
       
-      driver.manage().getCookie('csrftoken').then(async function (cookiescsrf) {
-        process.env.trendlynecookiecsrf = cookiescsrf.value;
-        console.log(process.env.trendlynecookiecsrf)
-        await driver.quit(); 
-        await axiosApiInstance.post('/updateMany', {
-          collection: 'cookie',
-          database: 'Trendlynecookie',
-          dataSource: 'Cluster0',
-          filter: {},
-          update: {
-            $set: {
-              csrf: process.env.trendlynecookiecsrf,
-              trnd: process.env.trendlynecookietl
-            }
-          },
-          upsert: true
-        });
-        console.log("Inserted Successfully in Trendlyne DB!!!") 
-      });
+  //     driver.manage().getCookie('csrftoken').then(async function (cookiescsrf) {
+  //       process.env.trendlynecookiecsrf = cookiescsrf.value;
+  //       console.log(process.env.trendlynecookiecsrf)
+  //       await driver.quit(); 
+  //       await axiosApiInstance.post('/updateMany', {
+  //         collection: 'cookie',
+  //         database: 'Trendlynecookie',
+  //         dataSource: 'Cluster0',
+  //         filter: {},
+  //         update: {
+  //           $set: {
+  //             csrf: process.env.trendlynecookiecsrf,
+  //             trnd: process.env.trendlynecookietl
+  //           }
+  //         },
+  //         upsert: true
+  //       });
+  //       console.log("Inserted Successfully in Trendlyne DB!!!") 
+  //     });
       
     
     
              
       
       
-    }).catch(function (err) { console.log("Error ", err, " occurred!"); });
-    //    
-  }catch (e){
-    console.log(e)
-  } 
+  //   }).catch(function (err) { console.log("Error ", err, " occurred!"); });
+  //   //    
+  let browser = null
+  console.log('spawning chrome headless')
+  try {
+    const start = Date.now();
+    const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+
+    // setup
+    browser = await puppeteer.launch({
+           args: chromium.args,
+         
+      executablePath: executablePath,
+       headless:chromium.headless,
+        ignoreHTTPSErrors: true,
+          // ignoreDefaultArgs: ["--disable-extensions","--single-process"]
+    })
+
+    // Use page cache when loading page.
+    page = await browser.newPage();
+    await page.setCacheEnabled(true)
+    
+    const targetUrl = 'https://trendlyne.com/visitor/loginmodal/'
+
+    await page.goto(targetUrl, {
+      waitUntil: ["domcontentloaded"]
+    })
+
+   
+       await page.type('#id_login', 'amit.kapila.2009@gmail.com');
+       
+       await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
+     
+        
+  cookie = await page.cookies()
+  // console.log(cookie)
+  for (let val in cookie){
+   
+      if (cookie[val].name == '.trendlyne'){
+        process.env.trnd=cookie[val].value
+      
+     }}
+     for (let val in cookie){
+     if (cookie[val].name == 'csrftoken'){
+       process.env.csrf=cookie[val].value
+    
+    }
+  }
+ 
+    const data = {
+      "collection": "cookie",
+      "database": "Trendlynecookie",
+      "dataSource": "Cluster0",
+      "filter":{},
+      "update":{$set: {
+        "csrf":  process.env.csrf,
+        "trnd":  process.env.trnd,
+        "time": start
+      }},
+      "upsert":true
+      };
+      const config = {
+        method: 'post',
+        url: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action/updateOne',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Request-Headers': '*',
+          'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy',
+          'Accept': 'application/ejson'
+        },
+        data,
+    };
+    const result = await axios(config);
+          
+    // return response data
+  
+    const timeTaken = Date.now() - start;
+    console.log(`Total time taken: ${timeTaken} milliseconds`);
+
+   
+  } catch (error) {
+    console.log(error);
+  
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ msg: error.message }),
+    };
+  } finally {
+    if (browser) {
+        await browser.close();
+      // await client.close();
+    }
+  }
+ 
 
 });
 
