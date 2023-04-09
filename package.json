@@ -23,14 +23,10 @@
     "nodemon": "^2.0.22",
     "npm": "^8.18.0",
     "path": "^0.12.7",
-    "puppeteer-core": "^19.8.5",
     "request": "^2.88.2",
     "selenium-webdriver": "^4.8.2"
   },
   "overrides": {
     "autoprefixer": "10.4.7"
-  },
-  "devDependencies": {
-    "typescript": "^5.0.4"
   }
 }
