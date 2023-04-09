@@ -5,9 +5,7 @@ const express = require('express');
 const fs = require('fs');
 const filePath = './src/app/lists/tlid.txt';
 var app = express();
-const swd = require("selenium-webdriver");
-const webdriver = require('selenium-webdriver');
-const chrome=require('selenium-webdriver/chrome')
+
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
