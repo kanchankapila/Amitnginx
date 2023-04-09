@@ -1,4 +1,4 @@
- require('chromedriver');
+require('chromedriver').path
 const express = require('express');
 const fs = require('fs');
 const filePath = './src/app/lists/tlid.txt';
