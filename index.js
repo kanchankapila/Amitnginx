@@ -1,4 +1,4 @@
-// require('chromedriver');
+ require('chromedriver');
 const express = require('express');
 const fs = require('fs');
 const filePath = './src/app/lists/tlid.txt';
@@ -59,13 +59,9 @@ app.use(bodyParser.raw());
     }
   });
   app.get('/api/trendlynecookie', async function (req, res) {
-    const chromium = require('@sparticuz/chromium')
-const puppeteer = require('puppeteer-core')
-const axios = require('axios');
+
             
-      // return response data
-  
-  async function trendlynecookie (req, res) {
+   
    console.log("Hello!!!")
     let options = new chrome.Options();
     //Below arguments are critical for Heroku deployment
@@ -75,8 +71,7 @@ const axios = require('axios');
    options.setChromeBinaryPath(process.env.CHROME_BINARY_PATH);
    let serviceBuilder = new chrome.ServiceBuilder(process.env.CHROME_DRIVER_PATH);
   
-  //  binary_location = "C:\\path\\to\\chrome.exe"
-  //  options.setBinary(".\\src\\assets\\chromedriver.exe");
+ 
   options.addArguments("--disable-dev-shm-usage")
     let driver = new webdriver.Builder()
       .forBrowser('chrome')
@@ -137,19 +132,8 @@ const axios = require('axios');
       
     }).catch(function (err) { console.log("Error ", err, " occurred!"); });
     //    
-};
-// callback(null, {
-//   statusCode: 200,
-//   body: "Inserted"
-// });
-// const timeTaken = Date.now() - start;
-// console.log(`Total time taken: ${timeTaken} milliseconds`);
 
 
-// } catch (error) {
-// console.log(error);
-// // callback(err);
-// }
 });
 
      
