@@ -10,8 +10,8 @@ const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
 const fetch = require('node-fetch');
-var cookieParser = require('cookie-parser');
-app.use(cookieParser());
+
+
 const { MongoClient } = require('mongodb');
 const client1 = new MongoClient( "mongodb+srv://amit:amit0605@cluster0.mxilo.mongodb.net/?retryWrites=true&w=majority", { useUnifiedTopology: true });
 function time(){
