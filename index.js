@@ -59,7 +59,7 @@ app.use(bodyParser.raw());
     }
   });
   app.get('/api/trendlynecookie', async function (req, res) {
-    const chromium = require('chromium')
+    const chromium = require('@sparticuz/chromium')
 const puppeteer = require('puppeteer-core')
 const axios = require('axios');
     let browser = null
@@ -67,6 +67,7 @@ const axios = require('axios');
     try {
       // let abc=`C:/\Program Files/\Google/\Chrome/\Application/\chrome.exe`
       const start = Date.now();
+      console.log(chromium.executablePath )
       const executablePath =  process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
  
       // setup
