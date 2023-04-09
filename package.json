@@ -32,6 +32,7 @@
     "nodemon": "^2.0.22",
     "npm": "^8.18.0",
     "path": "^0.12.7",
+    "puppeteer": "^19.8.5",
     "puppeteer-core": "^18.0.5",
     "request": "^2.88.2",
     "selenium-webdriver": "^4.8.2"

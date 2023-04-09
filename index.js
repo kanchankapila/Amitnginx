@@ -60,7 +60,7 @@ app.use(bodyParser.raw());
   });
   app.get('/api/trendlynecookie', async function (req, res) {
     const chromium = require('@sparticuz/chromium')
-const puppeteer = require('puppeteer-core')
+const puppeteer = require('puppeteer')
 const axios = require('axios');
     let browser = null
     console.log('spawning chrome headless')
