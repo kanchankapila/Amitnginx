@@ -75,9 +75,9 @@ app.use(bodyParser.raw());
              args: chromium.args,
            
          executablePath:executablePath ,
-         headless:chromium.headless,
+         headless:true,
           ignoreHTTPSErrors: true,
-          timeout:0
+          // timeout:0
             // ignoreDefaultArgs: ["--disable-extensions","--single-process"]
       })
       // Use page cache when loading page.
@@ -415,7 +415,7 @@ options1.addArguments("--disable-gpu");
   app.use(express.static(path.join(__dirname, '/dist/amitnginx')))
   app.get("/*", function (req, res) {
 
-    res.sendFile(path.join(__dirname, '/dist/amitnginx/index.html'));
+    res.sendFile(path.join(__dirname, '.cache', 'puppeteer'));
   });
   app.listen( process.env.PORT || 3000, function () {
     console.log('Your node is running on port 3000');
