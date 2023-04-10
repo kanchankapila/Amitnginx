@@ -1,6 +1,6 @@
 require('chromedriver')
  const chromium = require('selenium-webdriver/chrome')
-  const puppeteer = require('puppeteer-extra')
+  const puppeteer = require('puppeteer-core')
  const swd = require("selenium-webdriver");
 const webdriver = require('selenium-webdriver');
 const chrome=require('selenium-webdriver/chrome')
@@ -77,6 +77,7 @@ app.use(bodyParser.raw());
          executablePath: require('chromedriver').path,
          headless:chromium.headless,
           ignoreHTTPSErrors: true,
+      
             // ignoreDefaultArgs: ["--disable-extensions","--single-process"]
       })
       // Use page cache when loading page.
