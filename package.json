@@ -6,6 +6,9 @@
     "start": "nodemon index.js",
     "dev": "nodemon index.js"
   },
+  "engines": {
+    "node": ">=16.18.1"
+  },
   "resolutions": {
     "uglify-es": "npm:terser"
   },
