@@ -53,11 +53,11 @@ app.use(bodyParser.raw());
     
   });
   const axiosApiInstance = axios.create({
-    baseURL: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action',
+    baseURL: 'https://ap-south-1.aws.data.mongodb-api.com/app/data-oqytz/endpoint/data/v1/action',
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Request-Headers': '*',
-      'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy ',
+      'api-key': 'HgzdJTZiRk4gFe7tl1m31DxVxNCZXecOuCJvSz6xlG0p5lMC21c7u8CeLcDma97C',
       Accept: 'application/ejson'
     }
   });
@@ -123,11 +123,11 @@ app.use(bodyParser.raw());
         };
         const config = {
           method: 'post',
-          url: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action/updateOne',
+          url: 'https://ap-south-1.aws.data.mongodb-api.com/app/data-oqytz/endpoint/data/v1/action/updateOne',
           headers: {
             'Content-Type': 'application/json',
             'Access-Control-Request-Headers': '*',
-            'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy',
+            'api-key': 'HgzdJTZiRk4gFe7tl1m31DxVxNCZXecOuCJvSz6xlG0p5lMC21c7u8CeLcDma97C',
             'Accept': 'application/ejson'
           },
           data,
@@ -167,7 +167,7 @@ app.get('/api/trendlynecookie1', async function (req, res) {
   console.log("Hello!!!")
   const start = Date.now();
    let options = new chrome.Options();
-   //Below arguments are critical for Heroku deployment
+   
    options.addArguments("--headless");
    options.addArguments("--disable-gpu");
   options.addArguments("--no-sandbox");
@@ -214,7 +214,7 @@ app.get('/api/trendlynecookie1', async function (req, res) {
        process.env.trendlynecookiecsrf = cookiescsrf.value;
        console.log(process.env.trendlynecookiecsrf)
        await driver.quit(); 
-       await axiosApiInstance.post('/updateMany', {
+       await axiosApiInstance.post('/updateOne', {
          collection: 'cookie',
          database: 'Trendlynecookie',
          dataSource: 'Cluster0',
@@ -331,85 +331,90 @@ options1.addArguments("--disable-gpu");
 
   
 
-  app.get('/api/et', function (req, res) {
+  app.get('/api/trendlyneDVM', function (req, res) {
     const start = Date.now();
-    const obj=[];
-    
-   
-   
-
-   fs.readFile('./tlid.json', (err, data) => {
-     if (err) throw err;
-   
-     // Parse the data into an array
-     const symbols = JSON.parse(data);
-   
+    const obj = [];
   
-
- 
-  const promises = symbols.map(async symbol  => {
-    console.log(`${symbol.tlid}`)
-   
-     const response= await fetch(
-        `https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`,
-        {
-          headers: { Accept: 'application/json' }
-        }
-      );
-      if (!response.ok) {
-        return { statusCode: response.status, body: response.statusText }
+    fs.readFile('./tlid.json', async (err, data) => {
+      if (err) {
+        console.log('Error while reading file:', err);
+        res.status(500).send('Error while reading file');
+        return;
       }
-      const data1 = await response.json();
-     console.log(`${symbol.name}`)
-      try{
+  
+      try {
+        // Parse the data into an array
+        const symbols = JSON.parse(data);
+  
+        // Process 100 symbols at a time
+        for (let i = 0; i < symbols.length; i += 100) {
+          const symbolBatch = symbols.slice(i, i + 100);
+  
+          const promises = symbolBatch.map(async symbol => {
+            try {
+              const response = await fetch(
+                `https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`,
+                {
+                  headers: { Accept: 'application/json' },
+                }
+              );
+  
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+  
+              const data1 = await response.json();
+              console.log(`${symbol.name}`);
+  
               obj.push({
-       
-        Name: `${symbol.name}`,
-        DurabilityScore: data1.body['stockData'][6],
-        DurabilityColor: data1.body['stockData'][9],
-        VolatilityScore: data1.body['stockData'][7],
-        VolatilityColor: data1.body['stockData'][10],
-        MomentumScore: data1.body['stockData'][8],
-        MomentumColor: data1.body['stockData'][11]
-      })
-      
-    
-   
-  }catch (error){
-    console.log('error')
-  }
- 
-   await axiosApiInstance.post('/updateMany', {
-    collection: 'DVM',
-    database: 'DVM',
-    dataSource: 'Cluster0',
-    filter: {},
-    update: {
-      $set: {
-        output: obj,
-        time: start
-      }
-    },
-    upsert: true
-  });
-   
-    // console.log(obj)
-    try {
-      await Promise.all(promises)
-    } catch (e) {
-      console.log(e)
-    }
-  });
-  const timeTaken = Date.now() - start;
-  console.log(`Total time taken: ${timeTaken} milliseconds`);
-
-  client1.close()
-  })
-})
-
-
-
+                Name: `${symbol.name}`,
+                DurabilityScore: data1.body['stockData'][6],
+                DurabilityColor: data1.body['stockData'][9],
+                VolatilityScore: data1.body['stockData'][7],
+                VolatilityColor: data1.body['stockData'][10],
+                MomentumScore: data1.body['stockData'][8],
+                MomentumColor: data1.body['stockData'][11],
+              });
+            } catch (error) {
+              console.log('Error while fetching data:', error);
+            }
+          });
   
+          await Promise.all(promises);
+        }
+  
+        const timeTaken = Date.now() - start;
+        console.log(`Total time taken: ${timeTaken} milliseconds`);
+  
+        axiosApiInstance
+          .post('/updateOne', {
+            collection: 'DVM',
+            database: 'DVM',
+            dataSource: 'Cluster0',
+            filter: {},
+            update: {
+              $set: {
+                output: obj,
+                time: start,
+              },
+            },
+            upsert: true,
+          })
+          .then(() => {
+            console.log('Data updated successfully');
+            res.status(200).send('Data updated successfully');
+          })
+          .catch((error) => {
+            console.log('Error while updating data:', error);
+            res.status(500).send('Error while updating data');
+          });
+      } catch (error) {
+        console.log('Error while parsing data:', error);
+        res.status(500).send('Error while parsing data');
+      }
+    });
+  });
+    
 
   
   app.listen( process.env.PORT || 3000, function () {
