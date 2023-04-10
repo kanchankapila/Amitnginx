@@ -338,7 +338,7 @@ options1.addArguments("--disable-gpu");
    
    
 
-   fs.readFile('./src/app/lists/tlid1.json', (err, data) => {
+   fs.readFile('./tlid.json', (err, data) => {
      if (err) throw err;
    
      // Parse the data into an array
@@ -411,12 +411,7 @@ options1.addArguments("--disable-gpu");
 
   
 
-  app.use(express.static(__dirname + "/"));
-  app.use(express.static(path.join(__dirname, '/dist/amitnginx')))
-  app.get("/*", function (req, res) {
-
-    res.sendFile(path.join(__dirname, '.cache', 'puppeteer'));
-  });
+  
   app.listen( process.env.PORT || 3000, function () {
     console.log('Your node is running on port 3000');
   })
