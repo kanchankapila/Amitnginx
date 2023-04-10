@@ -1,5 +1,5 @@
 require('chromedriver')
- const chromium = require('selenium-webdriver/chrome')
+ const chromium = require('@sparticuz/chromium')
   const puppeteer = require('puppeteer-core')
  const swd = require("selenium-webdriver");
 const webdriver = require('selenium-webdriver');
