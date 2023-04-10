@@ -61,111 +61,111 @@ app.use(bodyParser.raw());
       Accept: 'application/ejson'
     }
   });
-  app.get('/api/trendlynecookie', async function (req, res) {
+  // app.get('/api/trendlynecookie', async function (req, res) {
 
             
    
-    let browser = null
-    console.log('spawning chrome headless')
-    try {
-      const start = Date.now();
-      const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
-      // setup
-      browser = await puppeteer.launch({
-             args: chromium.args,
+  //   let browser = null
+  //   console.log('spawning chrome headless')
+  //   try {
+  //     const start = Date.now();
+  //     const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+  //     // setup
+  //     browser = await puppeteer.launch({
+  //            args: chromium.args,
            
-         executablePath: require('chromedriver').path,
-         headless:chromium.headless,
-          ignoreHTTPSErrors: true,
+  //        executablePath: require('chromedriver').path,
+  //        headless:chromium.headless,
+  //         ignoreHTTPSErrors: true,
       
-            // ignoreDefaultArgs: ["--disable-extensions","--single-process"]
-      })
-      // Use page cache when loading page.
-      page = await browser.newPage();
-      await page.setCacheEnabled(true)
+  //           // ignoreDefaultArgs: ["--disable-extensions","--single-process"]
+  //     })
+  //     // Use page cache when loading page.
+  //     page = await browser.newPage();
+  //     await page.setCacheEnabled(true)
       
-      const targetUrl = 'https://trendlyne.com/visitor/loginmodal/'
-      await page.goto(targetUrl, {
-        waitUntil: ["domcontentloaded"]
-      })
+  //     const targetUrl = 'https://trendlyne.com/visitor/loginmodal/'
+  //     await page.goto(targetUrl, {
+  //       waitUntil: ["domcontentloaded"]
+  //     })
      
-         await page.type('#id_login', 'amit.kapila.2009@gmail.com');
+  //        await page.type('#id_login', 'amit.kapila.2009@gmail.com');
          
-         await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
+  //        await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
        
           
-    cookie = await page.cookies()
-    // console.log(cookie)
-    for (let val in cookie){
+  //   cookie = await page.cookies()
+  //   // console.log(cookie)
+  //   for (let val in cookie){
      
-        if (cookie[val].name == '.trendlyne'){
-          process.env.trnd=cookie[val].value
+  //       if (cookie[val].name == '.trendlyne'){
+  //         process.env.trnd=cookie[val].value
         
-       }}
-       for (let val in cookie){
-       if (cookie[val].name == 'csrftoken'){
-         process.env.csrf=cookie[val].value
+  //      }}
+  //      for (let val in cookie){
+  //      if (cookie[val].name == 'csrftoken'){
+  //        process.env.csrf=cookie[val].value
       
-      }
-    }
+  //     }
+  //   }
    
-      const data = {
-        "collection": "cookie",
-        "database": "Trendlynecookie",
-        "dataSource": "Cluster0",
-        "filter":{},
-        "update":{$set: {
-          "csrf":  process.env.csrf,
-          "trnd":  process.env.trnd,
-          "time": start
-        }},
-        "upsert":true
-        };
-        const config = {
-          method: 'post',
-          url: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action/updateOne',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Request-Headers': '*',
-            'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy',
-            'Accept': 'application/ejson'
-          },
-          data,
-      };
-      const result = await axios(config);
+  //     const data = {
+  //       "collection": "cookie",
+  //       "database": "Trendlynecookie",
+  //       "dataSource": "Cluster0",
+  //       "filter":{},
+  //       "update":{$set: {
+  //         "csrf":  process.env.csrf,
+  //         "trnd":  process.env.trnd,
+  //         "time": start
+  //       }},
+  //       "upsert":true
+  //       };
+  //       const config = {
+  //         method: 'post',
+  //         url: 'https://data.mongodb-api.com/app/data-cibaq/endpoint/data/v1/action/updateOne',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           'Access-Control-Request-Headers': '*',
+  //           'api-key': 'hhsIfhonChu0fJ000k04e1k7nb5bX1CvkIWLw17FRjrzLg7kWihbY7Sy4UUKwoUy',
+  //           'Accept': 'application/ejson'
+  //         },
+  //         data,
+  //     };
+  //     const result = await axios(config);
             
-      // return response data
+  //     // return response data
     
-      const timeTaken = Date.now() - start;
-      console.log(`Total time taken: ${timeTaken} milliseconds`);
+  //     const timeTaken = Date.now() - start;
+  //     console.log(`Total time taken: ${timeTaken} milliseconds`);
      
-    } catch (error) {
-      console.log(error);
+  //   } catch (error) {
+  //     console.log(error);
     
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ msg: error.message }),
-      };
-    } finally {
-      if (browser) {
-          await browser.close();
-        // await client.close();
-      }
-    }
+  //     return {
+  //       statusCode: 500,
+  //       body: JSON.stringify({ msg: error.message }),
+  //     };
+  //   } finally {
+  //     if (browser) {
+  //         await browser.close();
+  //       // await client.close();
+  //     }
+  //   }
    
-  });
+  // });
   
 
   
 
 
      
-app.get('/api/trendlynecookie1', async function (req, res) {
+app.get('/api/trendlynecookie', async function (req, res) {
 
             
    
   console.log("Hello!!!")
- 
+  const start = Date.now();
    let options = new chrome.Options();
    //Below arguments are critical for Heroku deployment
    options.addArguments("--headless");
@@ -222,11 +222,14 @@ app.get('/api/trendlynecookie1', async function (req, res) {
          update: {
            $set: {
              csrf: process.env.trendlynecookiecsrf,
-             trnd: process.env.trendlynecookietl
+             trnd: process.env.trendlynecookietl,
+             time: start
            }
          },
          upsert: true
        });
+       const timeTaken = Date.now() - start;
+            console.log(`Total time taken: ${timeTaken} milliseconds`);
        console.log("Inserted Successfully in Trendlyne DB!!!") 
      });
      
