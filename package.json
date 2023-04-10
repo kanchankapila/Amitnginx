@@ -23,6 +23,8 @@
     "node-fetch": "^2.6.7",
     "nodemon": "^2.0.22",
     "path": "^0.12.7",
+    "puppeteer-core": "^18.0.5",
+    "puppeteer-extra": "^3.3.6",
     "request": "^2.88.2",
     "selenium-webdriver": "^4.8.2"
   }
