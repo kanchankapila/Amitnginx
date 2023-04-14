@@ -1,14 +1,14 @@
 require('chromedriver')
- const chromium = require('@sparticuz/chromium')
-  const puppeteer = require('puppeteer')
- const swd = require("selenium-webdriver");
+const chromium = require('@sparticuz/chromium')
+const puppeteer = require('puppeteer')
+const swd = require("selenium-webdriver");
 const webdriver = require('selenium-webdriver');
 const chrome=require('selenium-webdriver/chrome')
 const express = require('express');
 const fs = require('fs');
 const filePath = './src/app/lists/tlid.txt';
 var app = express();
-
+require('dotenv').config({path: __dirname + '/.env'})
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
@@ -16,18 +16,18 @@ const fetch = require('node-fetch');
 
 
 const { MongoClient } = require('mongodb');
-const client1 = new MongoClient( "mongodb+srv://kanchankapila2020:amit0605@cluster0.mbhkhse.mongodb.net/test", { useUnifiedTopology: true });
+const client1 = new MongoClient( process.env.MONGODB_ATLAS_CLUSTER_URI, { useUnifiedTopology: true });
 function time(){
  
 const now = new Date();
 const hours = now.getHours().toString().padStart(2, "0"); // add leading zero if necessary
 const minutes = now.getMinutes().toString().padStart(2, "0"); // add leading zero if necessary
 const time = `${hours}:${minutes}`;
-console.log(typeof(time))
+console.log((time))
 
 console.log(time); // output example: "15:30"
-if (time == '23:00'){
-  trendlynecookie()
+if (time == '16:00'){
+  Trendlynecookie()
 }
 if (time == '01:05'){
   Opstracookie()
@@ -62,10 +62,10 @@ app.use(bodyParser.raw());
       Accept: 'application/ejson'
     }
   });
-  app.get('/api/trendlynecookie', async function (req, res) {
+  // app.get('/api/trendlynecookie', async function (req, res) {
 
             
-   
+   async function Trendlynecookie(req, res){
     let browser = null
     console.log('spawning chrome headless')
     try {
@@ -152,8 +152,8 @@ app.use(bodyParser.raw());
         // await client.close();
       }
     }
-   
-  });
+  }
+  // });
   
 
   
