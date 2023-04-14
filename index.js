@@ -16,8 +16,9 @@ const fetch = require('node-fetch');
 
 
 const { MongoClient } = require('mongodb');
-const client1 = new MongoClient( "mongodb+srv://amit:amit0605@cluster0.mxilo.mongodb.net/?retryWrites=true&w=majority", { useUnifiedTopology: true });
+const client1 = new MongoClient( "mongodb+srv://kanchankapila2020:amit0605@cluster0.mbhkhse.mongodb.net/test", { useUnifiedTopology: true });
 function time(){
+ 
 const now = new Date();
 const hours = now.getHours().toString().padStart(2, "0"); // add leading zero if necessary
 const minutes = now.getMinutes().toString().padStart(2, "0"); // add leading zero if necessary
@@ -53,11 +54,11 @@ app.use(bodyParser.raw());
     
   });
   const axiosApiInstance = axios.create({
-    baseURL: 'https://ap-south-1.aws.data.mongodb-api.com/app/data-oqytz/endpoint/data/v1/action',
+    baseURL: process.env.mongoapiurl,
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Request-Headers': '*',
-      'api-key': 'HgzdJTZiRk4gFe7tl1m31DxVxNCZXecOuCJvSz6xlG0p5lMC21c7u8CeLcDma97C',
+      'api-key': process.env.mongoapikey,
       Accept: 'application/ejson'
     }
   });
@@ -200,7 +201,7 @@ app.get('/api/trendlynecookie1', async function (req, res) {
      return promisePasswordBox;
    }).then(function (passwordBox) {
      
-     let promiseFillPassword = passwordBox.sendKeys('Angular789\n');
+     let promiseFillPassword = passwordBox.sendKeys(process.env.TRENDLYNE_PASSWORD);
      return promiseFillPassword;
    }).then(function () {
      console.log("Successfully signed in Trendlyne!");
@@ -285,7 +286,7 @@ options1.addArguments("--disable-gpu");
       driver1.findElement(swd.By.id("password")); 
       return promisePasswordBox;}).then(function (passwordBox) { 
           let promiseFillPassword = 
-          passwordBox.sendKeys('Angular789\n'); 
+          passwordBox.sendKeys(process.env.OPSTRA_PASSWORD); 
           return promiseFillPassword;}).then(function () { 
       console.log("Successfully signed in Opstra!"); 
         
