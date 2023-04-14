@@ -24,7 +24,7 @@ const hours = now.getHours().toString().padStart(2, "0"); // add leading zero if
 const minutes = now.getMinutes().toString().padStart(2, "0"); // add leading zero if necessary
 const time = `${hours}:${minutes}`;
 console.log((time))
-
+Trendlynecookie()
 console.log(time); // output example: "15:30"
 if (time == '16:15'){
   Trendlynecookie()
