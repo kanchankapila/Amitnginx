@@ -95,7 +95,7 @@ app.use(bodyParser.raw());
        
           
     cookie = await page.cookies()
-    
+     console.log(cookie)
     for (let val in cookie){
      
         if (cookie[val].name == '.trendlyne'){
@@ -108,33 +108,34 @@ app.use(bodyParser.raw());
       
       }
     }
-    console.log(process.env.csrf)
-    console.log(process.env.trnd)
-      
-        axiosApiInstance
-          .post('/updateOne', {
-            collection: 'cookie',
-            database: 'Trendlynecookie',
-            dataSource: 'Cluster0',
-            filter: {},
-            update: {
-              $set: {
-                "csrf":  process.env.csrf,
-                "trnd":  process.env.trnd,
-                "time": start
-              },
-            },
-            upsert: true,
-          })
-          .then(() => {
-            console.log('Trendlyne cookie Data updated successfully');
-            res.status(200).send('Trendlyne cookie Data updated successfully');
-          })
-          .catch((error) => {
-            console.log('Error while updating data:', error);
-            res.status(500).send('Error while updating data');
-          });
-  
+   
+      const data = {
+        "collection": "cookie",
+        "database": "Trendlynecookie",
+        "dataSource": "Cluster0",
+        "filter":{},
+        "update":{$set: {
+          "csrf":  process.env.csrf,
+          "trnd":  process.env.trnd,
+          "time": start
+        }},
+        "upsert":true
+        };
+        const config = {
+          method: 'post',
+          url: 'https://ap-south-1.aws.data.mongodb-api.com/app/data-oqytz/endpoint/data/v1/action/updateOne',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Headers': '*',
+            'api-key': 'HgzdJTZiRk4gFe7tl1m31DxVxNCZXecOuCJvSz6xlG0p5lMC21c7u8CeLcDma97C',
+            'Accept': 'application/ejson'
+          },
+          data,
+      };
+      const result = await axios(config);
+            
+      // return response data
+    
       const timeTaken = Date.now() - start;
       console.log(`Total time taken: ${timeTaken} milliseconds`);
      
