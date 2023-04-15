@@ -37,7 +37,7 @@ if (time == '01:05'){
 }
 }
 
-setInterval(time, 60000);
+setInterval(time, 300000);
 const bodyParser = require("body-parser");
 const request = require('request')
 app.use(cors());
@@ -89,7 +89,6 @@ app.use(bodyParser.raw());
     await page.type('#id_login', 'amit.kapila.2009@gmail.com');
     await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
     const cookies = await page.cookies();
-    console.log(cookies)
     let csrf, trnd;
     for (const cookie of cookies) {
       if (cookie.name === '.trendlyne') {
