@@ -25,7 +25,7 @@ const time = `${hours}:${minutes}`;
 
 
 console.log(time); // output example: "15:30"
-if (time == '09:30'){
+if (time == '09:45'){
   Trendlynecookie()
 }
 if (time == '01:05'){
@@ -33,7 +33,7 @@ if (time == '01:05'){
 }
 }
 
-setInterval(time, 120000);
+setInterval(time, 60000);
 const bodyParser = require("body-parser");
 const request = require('request')
 app.use(cors());
