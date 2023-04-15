@@ -37,7 +37,7 @@ if (time == '01:05'){
 }
 }
 
-setInterval(time, 300000);
+setInterval(time, 60000);
 const bodyParser = require("body-parser");
 const request = require('request')
 app.use(cors());
@@ -68,67 +68,95 @@ app.use(bodyParser.raw());
  
 
             
-  async function Trendlynecookie(req, res) {
-  let browser = null;
-  console.log('spawning chrome headless');
-  try {
-    const start = Date.now();
-    const executablePath = process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath());
-
-    // Setup
-    browser = await puppeteer.launch({
-      args: chromium.args,
-      executablePath,
-      headless: true,
-      ignoreHTTPSErrors: true,
-    });
-    const page = await browser.newPage();
-    await page.setCacheEnabled(true);
-    const targetUrl = 'https://trendlyne.com/visitor/loginmodal/';
-    await page.goto(targetUrl, { waitUntil: 'domcontentloaded' });
-    await page.type('#id_login', 'amit.kapila.2009@gmail.com');
-    await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
-    const cookies = await page.cookies();
-    let csrf, trnd;
-    for (const cookie of cookies) {
-      if (cookie.name === '.trendlyne') {
-        trnd = cookie.value;
-      }
-      if (cookie.name === 'csrftoken') {
-        csrf = cookie.value;
-      }
-    }
-    if (!csrf || !trnd) {
-      throw new Error('Missing csrf or trnd cookie');
-    }
-    console.log(csrf);
-    console.log(trnd);
-    await axiosApiInstance.post('/updateOne', {
-      collection: 'cookie',
-      database: 'Trendlynecookie',
-      dataSource: 'Cluster0',
-      filter: {},
-      update: {
-        $set: {
-          csrf,
-          trnd,
-          time: start,
-        },
-      },
-      upsert: true,
-    });
-    console.log('Trendlyne cookie data updated successfully');
+   async function Trendlynecookie(req, res){
+    let browser = null
+    console.log('spawning chrome headless')
+    try {
+      const start = Date.now();
+      const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+      // setup
+      browser = await puppeteer.launch({
+             args: chromium.args,
+           
+         executablePath:executablePath ,
+         headless:true,
+          ignoreHTTPSErrors: true,
+          // timeout:0
+            // ignoreDefaultArgs: ["--disable-extensions","--single-process"]
+      })
+      // Use page cache when loading page.
+      page = await browser.newPage();
+      await page.setCacheEnabled(true)
+      
+      const targetUrl = 'https://trendlyne.com/visitor/loginmodal/'
+      await page.goto(targetUrl, {
+        waitUntil: ["domcontentloaded"]
+      })
+     
+         await page.type('#id_login', 'amit.kapila.2009@gmail.com');
+         
+         await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
+       
+          
+    cookie = await page.cookies()
     
-  } catch (error) {
-    console.error(error);
-   
-  } finally {
-    if (browser) {
-      await browser.close();
+    for (let val in cookie){
+     
+        if (cookie[val].name == '.trendlyne'){
+          process.env.trnd=cookie[val].value
+        
+       }}
+       for (let val in cookie){
+       if (cookie[val].name == 'csrftoken'){
+         process.env.csrf=cookie[val].value
+      
+      }
+    }
+    console.log(process.env.csrf)
+    console.log(process.env.trnd)
+      
+        axiosApiInstance
+          .post('/updateOne', {
+            collection: 'cookie',
+            database: 'Trendlynecookie',
+            dataSource: 'Cluster0',
+            filter: {},
+            update: {
+              $set: {
+                "csrf":  process.env.csrf,
+                "trnd":  process.env.trnd,
+                "time": start
+              },
+            },
+            upsert: true,
+          })
+          .then(() => {
+            console.log('Trendlyne cookie Data updated successfully');
+            res.status(200).send('Trendlyne cookie Data updated successfully');
+          })
+          .catch((error) => {
+            console.log('Error while updating data:', error);
+            res.status(500).send('Error while updating data');
+          });
+  
+      const timeTaken = Date.now() - start;
+      console.log(`Total time taken: ${timeTaken} milliseconds`);
+     
+    } catch (error) {
+      console.log(error);
+    
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ msg: error.message }),
+      };
+    } finally {
+      if (browser) {
+          await browser.close();
+        // await client.close();
+      }
     }
   }
-}
-
+  
   
 
   
