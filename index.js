@@ -22,18 +22,18 @@ const now = new Date();
 const hours = now.getHours().toString().padStart(2, "0"); // add leading zero if necessary
 const minutes = now.getMinutes().toString().padStart(2, "0"); // add leading zero if necessary
 const time = `${hours}:${minutes}`;
-console.log(typeof(time))
+
 
 console.log(time); // output example: "15:30"
-if (time == '23:00'){
-  trendlynecookie()
+if (time == '09:30'){
+  Trendlynecookie()
 }
 if (time == '01:05'){
   Opstracookie()
 }
 }
 
-setInterval(time, 60000);
+setInterval(time, 120000);
 const bodyParser = require("body-parser");
 const request = require('request')
 app.use(cors());
@@ -70,17 +70,16 @@ app.use(bodyParser.raw());
     try {
       const start = Date.now();
       const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
-      // setup
+    
       browser = await puppeteer.launch({
              args: chromium.args,
            
          executablePath:executablePath ,
          headless:true,
           ignoreHTTPSErrors: true,
-          // timeout:0
-            // ignoreDefaultArgs: ["--disable-extensions","--single-process"]
+      
       })
-      // Use page cache when loading page.
+     
       page = await browser.newPage();
       await page.setCacheEnabled(true)
       
@@ -95,7 +94,7 @@ app.use(bodyParser.raw());
        
           
     cookie = await page.cookies()
-     console.log(cookie)
+     
     for (let val in cookie){
      
         if (cookie[val].name == '.trendlyne'){
@@ -109,35 +108,130 @@ app.use(bodyParser.raw());
       }
     }
    
-      const data = {
-        "collection": "cookie",
-        "database": "Trendlynecookie",
-        "dataSource": "Cluster0",
-        "filter":{},
-        "update":{$set: {
-          "csrf":  process.env.csrf,
-          "trnd":  process.env.trnd,
-          "time": start
-        }},
-        "upsert":true
-        };
-        const config = {
-          method: 'post',
-          url: 'https://ap-south-1.aws.data.mongodb-api.com/app/data-oqytz/endpoint/data/v1/action/updateOne',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Request-Headers': '*',
-            'api-key': 'HgzdJTZiRk4gFe7tl1m31DxVxNCZXecOuCJvSz6xlG0p5lMC21c7u8CeLcDma97C',
-            'Accept': 'application/ejson'
-          },
-          data,
-      };
-      const result = await axios(config);
-            
-      // return response data
-    
+     
+  
+      
+        axiosApiInstance
+          .post('/updateOne', {
+            collection: 'cookie',
+            database: 'Trendlynecookie',
+            dataSource: 'Cluster0',
+            filter: {},
+            update: {
+              $set: {
+                "csrf":  process.env.csrf,
+                "trnd":  process.env.trnd,
+                "time": start
+              },
+            },
+            upsert: true,
+          })
+          .then(() => {
+            console.log('Trendlyne cookie Data updated successfully');
+            res.status(200).send('Trendlyne cookie Data updated successfully');
+          })
+          .catch((error) => {
+            console.log('Error while updating data:', error);
+            res.status(500).send('Error while updating data');
+          });
+  
       const timeTaken = Date.now() - start;
       console.log(`Total time taken: ${timeTaken} milliseconds`);
+
+    } catch (error) {
+      console.log(error);
+    
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ msg: error.message }),
+      };
+    } finally {
+      if (browser) {
+          await browser.close();
+        
+      }
+    }
+   
+  });
+  
+ 
+
+    async function Trendlynecookie(req, res) {
+   
+    let browser = null
+    console.log('spawning chrome headless')
+    try {
+      const start = Date.now();
+      const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+    
+      browser = await puppeteer.launch({
+             args: chromium.args,
+           
+         executablePath:executablePath ,
+         headless:true,
+          ignoreHTTPSErrors: true,
+      
+      })
+     
+      page = await browser.newPage();
+      await page.setCacheEnabled(true)
+      
+      const targetUrl = 'https://trendlyne.com/visitor/loginmodal/'
+      await page.goto(targetUrl, {
+        waitUntil: ["domcontentloaded"]
+      })
+     
+         await page.type('#id_login', 'amit.kapila.2009@gmail.com');
+         
+         await page.type('#id_password', 'Angular789\n');
+       
+          
+    cookie = await page.cookies()
+ 
+    for (let val in cookie){
+     
+        if (cookie[val].name == '.trendlyne'){
+          process.env.trnd=cookie[val].value
+        
+       }}
+       for (let val in cookie){
+       if (cookie[val].name == 'csrftoken'){
+         process.env.csrf=cookie[val].value
+      
+      }
+    }
+   
+     
+  
+      
+        axiosApiInstance
+          .post('/updateOne', {
+            collection: 'cookie',
+            database: 'Trendlynecookie',
+            dataSource: 'Cluster0',
+            filter: {},
+            update: {
+              $set: {
+                "csrf":  process.env.csrf,
+                "trnd":  process.env.trnd,
+                "time": start
+              },
+            },
+            upsert: true,
+          })
+          .then(() => {
+            console.log('Trendlyne cookie Data updated successfully');
+            res.status(200).send('Trendlyne cookie Data updated successfully');
+          })
+          .catch((error) => {
+            console.log('Error while updating data:', error);
+            res.status(500).send('Error while updating data');
+          });
+  
+      const timeTaken = Date.now() - start;
+      console.log(`Total time taken: ${timeTaken} milliseconds`);
+
+     
      
     } catch (error) {
       console.log(error);
@@ -149,103 +243,19 @@ app.use(bodyParser.raw());
     } finally {
       if (browser) {
           await browser.close();
-        // await client.close();
+      
       }
     }
    
-  });
+  };
+ 
   
 
+
+     
+ 
+
   
-
-
-     
-app.get('/api/trendlynecookie1', async function (req, res) {
-
-            
-   
-  console.log("Hello!!!")
-  const start = Date.now();
-   let options = new chrome.Options();
-   
-   options.addArguments("--headless");
-   options.addArguments("--disable-gpu");
-  options.addArguments("--no-sandbox");
-  options.addArguments("--disable-dev-shm-usage")
-  
- 
-  let serviceBuilder = new chrome.ServiceBuilder(require('chromedriver').path);
- 
-
-
-   let driver = new webdriver.Builder()
-     .forBrowser('chrome')
-     .setChromeOptions(options)
-     .setChromeService(serviceBuilder)
-     .build();
-
-   let tabToOpen = driver.get("https://trendlyne.com/visitor/loginmodal/");
-   tabToOpen.then(function () {
-     let findTimeOutP = driver.manage().setTimeouts({ implicit: 5000, });
-     return findTimeOutP;
-   }).then(function () {
-     let promiseUsernameBox = driver.findElement(swd.By.id("id_login"));
-     return promiseUsernameBox;
-   }).then(function (usernameBox) {
-     let promiseFillUsername = usernameBox.sendKeys('amit.kapila.2009@gmail.com');
-     return promiseFillUsername;
-   }).then(function () {
-     console.log("Username entered successfully in Trendlyne");
-
-     let promisePasswordBox = driver.findElement(swd.By.id("id_password"));
-     return promisePasswordBox;
-   }).then(function (passwordBox) {
-     
-     let promiseFillPassword = passwordBox.sendKeys('Angular789\n');
-     return promiseFillPassword;
-   }).then(function () {
-     console.log("Successfully signed in Trendlyne!");
-     driver.manage().getCookie('.trendlyne').then(function (cookiestl) {
-       process.env.trendlynecookietl = cookiestl.value;
-       console.log(process.env.trendlynecookietl)
-     });
-     
-     driver.manage().getCookie('csrftoken').then(async function (cookiescsrf) {
-       process.env.trendlynecookiecsrf = cookiescsrf.value;
-       console.log(process.env.trendlynecookiecsrf)
-       await driver.quit(); 
-       await axiosApiInstance.post('/updateOne', {
-         collection: 'cookie',
-         database: 'Trendlynecookie',
-         dataSource: 'Cluster0',
-         filter: {},
-         update: {
-           $set: {
-             csrf: process.env.trendlynecookiecsrf,
-             trnd: process.env.trendlynecookietl,
-             time: start
-           }
-         },
-         upsert: true
-       });
-       const timeTaken = Date.now() - start;
-            console.log(`Total time taken: ${timeTaken} milliseconds`);
-       console.log("Inserted Successfully in Trendlyne DB!!!") 
-     });
-     
-   
-   
-            
-     
-     
-   }).catch(function (err) { console.log("Error ", err, " occurred!"); });
-   //    
-});
- 
-
-  // * To fetch Opstra session Cookies
-
-// app.get('/api/opstracookie', async 
 app.get('/api/Opstracookie', function (req, res) {
   console.log("hi")
 // async function Opstracookie(req, res) {
