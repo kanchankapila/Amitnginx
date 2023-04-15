@@ -73,12 +73,12 @@ app.use(bodyParser.raw());
   console.log('spawning chrome headless');
   try {
     const start = Date.now();
-    const executablePath = process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath);
+    const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath;
 
     // Setup
     browser = await puppeteer.launch({
       args: chromium.args,
-      executablePath,
+      executablePath:executablePath,
       headless: true,
       ignoreHTTPSErrors: true,
     });
