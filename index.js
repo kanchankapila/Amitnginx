@@ -37,7 +37,7 @@ if (time == '01:05'){
 }
 }
 
-setInterval(time, 60000);
+setInterval(time, 120000);
 const bodyParser = require("body-parser");
 const request = require('request')
 app.use(cors());
