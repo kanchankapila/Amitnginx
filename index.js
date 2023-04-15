@@ -28,7 +28,7 @@ console.log(time); // output example: "15:30"
 if (time == '09:45'){
   Trendlynecookie()
 }
-if (time == '01:05'){
+if (time == '13:40'){
   Opstracookie()
 }
 }
@@ -88,9 +88,9 @@ app.use(bodyParser.raw());
         waitUntil: ["domcontentloaded"]
       })
      
-         await page.type('#id_login', 'amit.kapila.2009@gmail.com');
+         await page.type('#id_login', process.env.TRENDLYNE_EMAIL);
          
-         await page.type('#id_password', 'Angular789\n');
+         await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
        
           
     cookie = await page.cookies()
@@ -128,11 +128,11 @@ app.use(bodyParser.raw());
           })
           .then(() => {
             console.log('Trendlyne cookie Data updated successfully');
-            res.status(200).send('Trendlyne cookie Data updated successfully');
+            
           })
           .catch((error) => {
             console.log('Error while updating data:', error);
-            res.status(500).send('Error while updating data');
+           
           });
   
       const timeTaken = Date.now() - start;
@@ -181,9 +181,9 @@ app.use(bodyParser.raw());
         waitUntil: ["domcontentloaded"]
       })
      
-         await page.type('#id_login', 'amit.kapila.2009@gmail.com');
+         await page.type('#id_login', process.env.TRENDLYNE_EMAIL);
          
-         await page.type('#id_password', 'Angular789\n');
+         await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
        
           
     cookie = await page.cookies()
@@ -221,11 +221,11 @@ app.use(bodyParser.raw());
           })
           .then(() => {
             console.log('Trendlyne cookie Data updated successfully');
-            res.status(200).send('Trendlyne cookie Data updated successfully');
+           
           })
           .catch((error) => {
             console.log('Error while updating data:', error);
-            res.status(500).send('Error while updating data');
+           
           });
   
       const timeTaken = Date.now() - start;
@@ -250,80 +250,99 @@ app.use(bodyParser.raw());
   };
  
   
+  async function Opstracookie(req, res) {
+   
+    let browser = null
+    console.log('spawning chrome headless')
+    try {
+      const start = Date.now();
+      const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+    
+      browser = await puppeteer.launch({
+             args: chromium.args,
+           
+         executablePath:executablePath ,
+         headless:true,
+          ignoreHTTPSErrors: true,
+      
+      })
+     
+      page = await browser.newPage();
+      await page.setCacheEnabled(true)
+      
+      const targetUrl = "https://opstra.definedge.com/ssologin"
+      await page.goto(targetUrl, {
+        waitUntil: ["domcontentloaded"]
+      })
+     
+         await page.type('#username', 'amit.kapila.2009@gmail.com');
+         
+         await page.type('#password', 'Angular789\n');
+       
+          
+    cookie = await page.cookies()
+ 
+    for (let val in cookie){
+     
+        if (cookie[val].name == 'JSESSIONID'){
+          process.env.jsessionid=cookie[val].value
+        
+       }}
+      
+   console.log(process.env.jsessionid)
+     
+  
+      
+        axiosApiInstance
+          .post('/updateOne', {
+            collection: 'cookie',
+            database: 'Opstracookie',
+            dataSource: 'Cluster0',
+            filter: {},
+            update: {
+              $set: {
+                
+                "jsessionid":  process.env.jsessionid,
+                "time": start
+              },
+            },
+            upsert: true,
+          })
+          .then(() => {
+            console.log('Opstra cookie Data updated successfully');
+           
+          })
+          .catch((error) => {
+            console.log('Error while updating data:', error);
+           
+          });
+  
+      const timeTaken = Date.now() - start;
+      console.log(`Total time taken: ${timeTaken} milliseconds`);
 
+     
+     
+    } catch (error) {
+      console.log(error);
+    
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ msg: error.message }),
+      };
+    } finally {
+      if (browser) {
+          await browser.close();
+      
+      }
+    }
+   
+  };
+ 
 
      
  
 
   
-app.get('/api/Opstracookie', function (req, res) {
-  console.log("hi")
-// async function Opstracookie(req, res) {
-
-    let options1 = new chrome.Options();
-options1.addArguments("--headless");
-options1.addArguments("--disable-gpu");
-  options1.addArguments("--no-sandbox");
-  options1.setChromeBinaryPath(process.env.CHROME_BINARY_PATH);
-   let serviceBuilder1 = new chrome.ServiceBuilder(process.env.CHROME_DRIVER_PATH);
-  
-  //  binary_location = "C:\\path\\to\\chrome.exe"
-  //  options.setBinary(".\\src\\assets\\chromedriver.exe");
-  options1.addArguments("--disable-dev-shm-usage")
-  let driver1 = new webdriver.Builder()
-  .forBrowser('chrome')
-    .setChromeOptions(options1)
-    .setChromeService(serviceBuilder1)
-  .build();
-  
- 
-  let tabToOpen = driver1.get("https://opstra.definedge.com/ssologin"); 
-  tabToOpen.then(function () { 
-  
-          let findTimeOutP =driver1.manage().setTimeouts({implicit: 5000,}); 
-          return findTimeOutP; }).then(function () { 
-            let promiseUsernameBox = 
-            driver1.findElement(swd.By.id("username")); 
-          return promiseUsernameBox;}).then(function (usernameBox) { 
-  
-          let promiseFillUsername = 
-              usernameBox.sendKeys('amit.kapila.2009@gmail.com'); 
-          return promiseFillUsername; 
-  
-      }).then(function () { 
-        console.log("Username entered successfully in Opstra"); 
-        let promisePasswordBox = 
-      driver1.findElement(swd.By.id("password")); 
-      return promisePasswordBox;}).then(function (passwordBox) { 
-          let promiseFillPassword = 
-          passwordBox.sendKeys('Angular789\n'); 
-          return promiseFillPassword;}).then(function () { 
-      console.log("Successfully signed in Opstra!"); 
-        
-        driver1.manage().getCookie('JSESSIONID').then(async function (cookiesopjsid) {
-                process.env.opstracookiejsid = cookiesopjsid.value
-                await axiosApiInstance.post('/updateOne', {
-                  collection: 'cookie',
-                  database: 'Opstracookie',
-                  dataSource: 'Cluster0',
-                  filter: {},
-                  update: {
-                    $set: {
-                      JSESSIONID: process.env.opstracookiejsid
-                    
-                    }
-                  },
-                  upsert: true
-                });
-         
-               await driver1.quit(); 
-        })
-           }).catch(function (err) { console.log("Error ", err, " occurred!"); });
-          //  await driver1.quit();
-// };
-    
-});
-
  
   //*This is ET now Stock Data Details used in Share component using parallel api run
   app.get('/api/etsharetoday', function (req, res) {
@@ -348,7 +367,7 @@ options1.addArguments("--disable-gpu");
     fs.readFile('./tlid.json', async (err, data) => {
       if (err) {
         console.log('Error while reading file:', err);
-        res.status(500).send('Error while reading file');
+      
         return;
       }
   
