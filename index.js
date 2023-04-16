@@ -28,12 +28,14 @@ console.log(time); // output example: "15:30"
 if (time == '09:45'){
   Trendlynecookie()
 }
-if (time == '13:40'){
-  Opstracookie()
+
 }
+function Opstra30min(){
+  Opstracookie()
 }
 
 setInterval(time, 60000);
+setInterval(Opstracookie, 1800000);
 const bodyParser = require("body-parser");
 const request = require('request')
 app.use(cors());
