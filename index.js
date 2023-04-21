@@ -30,12 +30,10 @@ if (time == '09:45'){
 }
 
 }
-function Opstra30min(){
-  Opstracookie()
-}
+
 
 setInterval(time, 60000);
-setInterval(Opstracookie, 60000);
+
 const bodyParser = require("body-parser");
 const request = require('request')
 app.use(cors());
@@ -341,7 +339,95 @@ app.use(bodyParser.raw());
   };
  
 
+        app.get('/api/Opstracookie', async function (req, res) {
+   
+    let browser = null
+    console.log('spawning chrome headless')
+    try {
+      const start = Date.now();
+      const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+    
+      browser = await puppeteer.launch({
+             args: chromium.args,
+           
+         executablePath:executablePath ,
+         headless:true,
+          ignoreHTTPSErrors: true,
+      
+      })
      
+      page = await browser.newPage();
+      await page.setCacheEnabled(true)
+      
+      const targetUrl = "https://opstra.definedge.com/ssologin"
+      await page.goto(targetUrl, {
+        waitUntil: ["domcontentloaded"]
+      })
+     
+         await page.type('#username', 'amit.kapila.2009@gmail.com');
+         
+         await page.type('#password', 'Angular789\n');
+       
+          
+    cookie = await page.cookies()
+ 
+    for (let val in cookie){
+     
+        if (cookie[val].name == 'JSESSIONID'){
+          process.env.jsessionid=cookie[val].value
+        
+       }}
+      
+   console.log(process.env.jsessionid)
+     
+  
+      
+        axiosApiInstance
+          .post('/updateOne', {
+            collection: 'cookie',
+            database: 'Opstracookie',
+            dataSource: 'Cluster0',
+            filter: {},
+            update: {
+              $set: {
+                
+                "jsessionid":  process.env.jsessionid,
+                "time": start
+              },
+            },
+            upsert: true,
+          })
+          .then(() => {
+            console.log('Opstra cookie Data updated successfully');
+           
+          })
+          .catch((error) => {
+            console.log('Error while updating data:', error);
+           
+          });
+  
+      const timeTaken = Date.now() - start;
+      console.log(`Total time taken: ${timeTaken} milliseconds`);
+
+     
+     
+    } catch (error) {
+      console.log(error);
+    
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ msg: error.message }),
+      };
+    } finally {
+      if (browser) {
+          await browser.close();
+      
+      }
+    }
+   
+  });
+ 
+ 
  
 
   
