@@ -35,7 +35,7 @@ function Opstra30min(){
 }
 
 setInterval(time, 60000);
-setInterval(Opstracookie, 1800000);
+setInterval(Opstracookie, 60000);
 const bodyParser = require("body-parser");
 const request = require('request')
 app.use(cors());
