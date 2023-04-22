@@ -33,6 +33,7 @@ if (time == '09:45'){
 
 
 setInterval(time, 60000);
+setInterval(Opstracookie, 1800000);
 
 const bodyParser = require("body-parser");
 const request = require('request')
