@@ -16,7 +16,6 @@ const fetch = require('node-fetch');
 
 
 const { MongoClient } = require('mongodb');
-
 function time(){
 const now = new Date();
 const hours = now.getHours().toString().padStart(2, "0"); // add leading zero if necessary
@@ -28,13 +27,18 @@ console.log(time); // output example: "15:30"
 if (time == '09:45'){
   Trendlynecookie()
 }
+if (time == '10:55'){
+  
+  while(time != '11:05'){
+setInterval(ttvolbreakout, 60000);
+  }
+}
 
 }
 
 
 setInterval(time, 60000);
 setInterval(Opstracookie, 1800000);
-
 const bodyParser = require("body-parser");
 const request = require('request')
 app.use(cors());
@@ -340,7 +344,9 @@ app.use(bodyParser.raw());
   };
  
 
-        app.get('/api/Opstracookie', async function (req, res) {
+     
+
+  app.get('/api/Opstracookie', async function (req, res) {
    
     let browser = null
     console.log('spawning chrome headless')
@@ -377,60 +383,56 @@ app.use(bodyParser.raw());
         if (cookie[val].name == 'JSESSIONID'){
           process.env.jsessionid=cookie[val].value
         
-       }}
-      
+       }} 
+ 
    
      
   
       
-        axiosApiInstance
-          .post('/updateOne', {
-            collection: 'cookie',
-            database: 'Opstracookie',
-            dataSource: 'Cluster0',
-            filter: {},
-            update: {
-              $set: {
-                
-                "jsessionid":  process.env.jsessionid,
-                "time": start
-              },
-            },
-            upsert: true,
-          })
-          .then(() => {
-            console.log('Opstra cookie Data updated successfully');
-           
-          })
-          .catch((error) => {
-            console.log('Error while updating data:', error);
-           
-          });
+      axiosApiInstance
+      .post('/updateOne', {
+        collection: 'cookie',
+        database: 'Opstracookie',
+        dataSource: 'Cluster0',
+        filter: {},
+        update: {
+          $set: {
+            
+            "jsessionid":  process.env.jsessionid,
+            "time": start
+          },
+        },
+        upsert: true,
+      })
+      .then(() => {
+        console.log('Opstra cookie Data updated successfully');
+       
+      })
+      .catch((error) => {
+        console.log('Error while updating data:', error);
+       
+      });
+
+  const timeTaken = Date.now() - start;
+  console.log(`Total time taken: ${timeTaken} milliseconds`);
+
+ 
+ 
+} catch (error) {
+  console.log(error);
+
+  return {
+    statusCode: 500,
+    body: JSON.stringify({ msg: error.message }),
+  };
+} finally {
+  if (browser) {
+      await browser.close();
   
-      const timeTaken = Date.now() - start;
-      console.log(`Total time taken: ${timeTaken} milliseconds`);
+  }
+}
 
-     
-     
-    } catch (error) {
-      console.log(error);
-    
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ msg: error.message }),
-      };
-    } finally {
-      if (browser) {
-          await browser.close();
-      
-      }
-    }
-   
-  });
- 
- 
- 
-
+});
   
  
   //*This is ET now Stock Data Details used in Share component using parallel api run
@@ -614,7 +616,168 @@ app.use(bodyParser.raw());
     });
   });
 
+  // app.get('/api/ttvolbreakout', function (req, res) {
+    async function ttvolbreakout(req, res) {
+    const start = Date.now();
+    const obj = [];
   
+    fs.readFile('./tlid.json', async (err, data) => {
+      if (err) {
+        console.log('Error while reading file:', err);
+      
+        return;
+      }
+  
+      try {
+        // Parse the data into an array
+        const symbols = JSON.parse(data);
+  
+        // Process 100 symbols at a time
+        for (let i = 0; i < symbols.length; i += 100) {
+          const symbolBatch = symbols.slice(i, i + 100);
+  
+          const promises = symbolBatch.map(async symbol => {
+            try {
+              const response = await fetch(
+                `https://quotes-api.tickertape.in/quotes?sids=${symbol.ttsymbol}`,
+                {
+                  headers: { Accept: 'application/json' },
+                }
+              );
+  
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+  
+              const data1 = await response.json();
+              console.log(`${symbol.name}`);
+              console.log(data1['data'][0]['sid'])
+  
+              obj.push({
+                Name: `${symbol.name}`,
+                sid:data1['data'][0]['sid'],
+                volBreakout:data1['data'][0]['volBreakout']
+              });
+            } catch (error) {
+              console.log('Error while fetching data:', error);
+            }
+          });
+  
+          await Promise.all(promises);
+        }
+  
+        const timeTaken = Date.now() - start;
+        console.log(`Total time taken: ${timeTaken} milliseconds`);
+  
+        axiosApiInstance
+          .post('/updateOne', {
+            collection: 'Volume',
+            database: 'Tickertape',
+            dataSource: 'Cluster0',
+            filter: {},
+            update: {
+              $set: {
+                 obj,
+                time: start,
+              },
+            },
+            upsert: true,
+          })
+          .then(() => {
+            console.log('Data updated successfully');
+            res.status(200).send('Data updated successfully');
+          })
+          .catch((error) => {
+            console.log('Error while updating data:', error);
+            res.status(500).send('Error while updating data');
+          });
+      } catch (error) {
+        console.log('Error while parsing data:', error);
+        res.status(500).send('Error while parsing data');
+      }
+    });
+  };
+
+  async function ttvolbreakout(req, res) {
+    const start = Date.now();
+    const obj = [];
+  
+    fs.readFile('./tlid.json', async (err, data) => {
+      if (err) {
+        console.log('Error while reading file:', err);
+      
+        return;
+      }
+  
+      try {
+        // Parse the data into an array
+        const symbols = JSON.parse(data);
+  
+        // Process 100 symbols at a time
+        for (let i = 0; i < symbols.length; i += 100) {
+          const symbolBatch = symbols.slice(i, i + 100);
+  
+          const promises = symbolBatch.map(async symbol => {
+            try {
+              const response = await fetch(
+                `https://quotes-api.tickertape.in/quotes?sids=${symbol.ttsymbol}`,
+                {
+                  headers: { Accept: 'application/json' },
+                }
+              );
+  
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+  
+              const data1 = await response.json();
+              console.log(`${symbol.name}`);
+              console.log(data1['data'][0]['sid'])
+  
+              obj.push({
+                Name: `${symbol.name}`,
+                sid:data1['data'][0]['sid'],
+                volBreakout:data1['data'][0]['volBreakout']
+              });
+            } catch (error) {
+              console.log('Error while fetching data:', error);
+            }
+          });
+  
+          await Promise.all(promises);
+        }
+  
+        const timeTaken = Date.now() - start;
+        console.log(`Total time taken: ${timeTaken} milliseconds`);
+  
+        axiosApiInstance
+          .post('/updateOne', {
+            collection: 'Volume',
+            database: 'Tickertape',
+            dataSource: 'Cluster0',
+            filter: {},
+            update: {
+              $set: {
+                 obj,
+                time: start,
+              },
+            },
+            upsert: true,
+          })
+          .then(() => {
+            console.log('Data updated successfully');
+            res.status(200).send('Data updated successfully');
+          })
+          .catch((error) => {
+            console.log('Error while updating data:', error);
+            res.status(500).send('Error while updating data');
+          });
+      } catch (error) {
+        console.log('Error while parsing data:', error);
+        res.status(500).send('Error while parsing data');
+      }
+    });
+  };
   app.listen( process.env.PORT || 3000, function () {
     console.log('Your node is running on port 3000');
   })
