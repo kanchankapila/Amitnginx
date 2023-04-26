@@ -8,8 +8,8 @@ const express = require('express');
 const fs = require('fs');
 const filePath = './src/app/lists/tlid.txt';
 var app = express();
-const dotenv=require('dotenv')
-dotenv.config('/.env')
+// const dotenv=require('dotenv')
+// dotenv.config('/.env')
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
