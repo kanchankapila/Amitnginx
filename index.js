@@ -25,6 +25,9 @@ const time = `${hours}:${minutes}`;
 function ttvolbreak(){
   ttvolbreakout()
 }
+function trendlyneDVM(){
+  trendlyneDVM()
+}
 console.log(time); // output example: "15:30"
 if (time == '09:45'){
   Trendlynecookie()
@@ -46,6 +49,18 @@ if (time == '11:45'){
    if (time == '04:16'){
 
    this.timerID1 = setInterval(ttvolbreak, 900000);
+   
+   
+  }
+   if (time == '04:20'){
+
+   this.timerID2 = setInterval(trendlyneDVM, 900000);
+   
+   
+  }
+   if (time == '04:25'){
+
+   this.timerID2 = setInterval(trendlyneDVM, 900000);
    
    
   }
@@ -555,6 +570,90 @@ app.use(bodyParser.raw());
     });
   });
     
+async function trendlyneDVM(req, res) {
+ 
+    const start = Date.now();
+    const obj = [];
+  
+    fs.readFile('./tlid.json', async (err, data) => {
+      if (err) {
+        console.log('Error while reading file:', err);
+      
+        return;
+      }
+  
+      try {
+        // Parse the data into an array
+        const symbols = JSON.parse(data);
+  
+        // Process 100 symbols at a time
+        for (let i = 0; i < symbols.length; i += 100) {
+          const symbolBatch = symbols.slice(i, i + 100);
+  
+          const promises = symbolBatch.map(async symbol => {
+            try {
+              const response = await fetch(
+                `https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`,
+                {
+                  headers: { Accept: 'application/json' },
+                }
+              );
+  
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+  
+              const data1 = await response.json();
+              console.log(`${symbol.name}`);
+  
+              obj.push({
+                Name: `${symbol.name}`,
+                DurabilityScore: data1.body['stockData'][6],
+                DurabilityColor: data1.body['stockData'][9],
+                VolatilityScore: data1.body['stockData'][7],
+                VolatilityColor: data1.body['stockData'][10],
+                MomentumScore: data1.body['stockData'][8],
+                MomentumColor: data1.body['stockData'][11],
+              });
+            } catch (error) {
+              console.log('Error while fetching data:', error);
+            }
+          });
+  
+          await Promise.all(promises);
+        }
+  
+        const timeTaken = Date.now() - start;
+        console.log(`Total time taken: ${timeTaken} milliseconds`);
+  
+        axiosApiInstance
+          .post('/updateOne', {
+            collection: 'DVM',
+            database: 'DVM',
+            dataSource: 'Cluster0',
+            filter: {},
+            update: {
+              $set: {
+                output: obj,
+                time: start,
+              },
+            },
+            upsert: true,
+          })
+          .then(() => {
+            console.log('Data updated successfully');
+            
+          })
+          .catch((error) => {
+            console.log('Error while updating data:', error);
+           
+          });
+      } catch (error) {
+        console.log('Error while parsing data:', error);
+      
+      }
+    });
+  };
   app.get('/api/ttvolbreakout', function (req, res) {
     const start = Date.now();
     const obj = [];
