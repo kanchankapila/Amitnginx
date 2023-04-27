@@ -499,6 +499,7 @@ app.use(bodyParser.raw());
   
       try {
         // Parse the data into an array
+        const start = Date.now();
         const symbols = JSON.parse(data);
   
         // Process 100 symbols at a time
@@ -529,6 +530,7 @@ app.use(bodyParser.raw());
                 VolatilityColor: data1.body['stockData'][10],
                 MomentumScore: data1.body['stockData'][8],
                 MomentumColor: data1.body['stockData'][11],
+
               });
             } catch (error) {
               console.log('Error while fetching data:', error);
