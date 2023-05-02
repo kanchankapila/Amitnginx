@@ -8,8 +8,8 @@ const express = require('express');
 const fs = require('fs');
 const filePath = './src/app/lists/tlid.txt';
 var app = express();
-// const dotenv=require('dotenv')
-// dotenv.config('/.env')
+const dotenv=require('dotenv')
+dotenv.config('/.env')
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
@@ -101,6 +101,96 @@ app.use(bodyParser.raw());
       Accept: 'application/ejson'
     }
   });
+ 
+  
+  app.get('/api/mcinsights', function (req, res) {
+    const start = Date.now();
+    const obj = [];
+  
+    fs.readFile('./tlid.json', async (err, data) => {
+      if (err) {
+        console.log('Error while reading file:', err);
+      
+        return;
+      }
+  
+      try {
+        // Parse the data into an array
+        const symbols = JSON.parse(data);
+  
+        // Process 100 symbols at a time
+        for (let i = 0; i < symbols.length; i += 100) {
+          const symbolBatch = symbols.slice(i, i + 100);
+  
+          const promises = symbolBatch.map(async symbol => {
+            try {
+              const response = await fetch(
+                `https://api.moneycontrol.com//mcapi//v1//extdata//mc-insights?scId=${symbol.mcsymbol}&type=d`,
+                {
+                  headers: { Accept: 'application/json' },
+                }
+              );
+  
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+  
+              const data1 = await response.json();
+              
+              console.log(`${symbol.name}`);
+  
+              obj.push({
+                Name: `${symbol.name}`,
+                FnO: data1.data['insightData']['price'][4],
+                DealData: data1.data['insightData']['price'][5],
+               
+              });
+            } catch (error) {
+              console.log('Error while fetching data:', error);
+            }
+          });
+  
+          await Promise.all(promises);
+        }
+  
+        const timeTaken = Date.now() - start;
+        console.log(`Total time taken: ${timeTaken} milliseconds`);
+  
+        axiosApiInstance
+          .post('/updateOne', {
+            collection: 'mcinsights',
+            database: 'MC',
+            dataSource: 'Cluster0',
+            filter: {},
+            update: {
+              $set: {
+                output: obj,
+                time: start,
+              },
+            },
+            upsert: true,
+          })
+          .then(() => {
+            console.log('Data updated successfully');
+            
+          })
+          .catch((error) => {
+            console.log('Error while updating data:', error);
+           
+          });
+      } catch (error) {
+        console.log('Error while parsing data:', error);
+      
+      }
+    });
+  });
+    
+  app.get('/api/ttvolnmcinsight', async function (req, res) {
+
+    ttvolbreakout();
+    mcinsight();
+  });
+
   app.get('/api/trendlynecookie', async function (req, res) {
 
             
@@ -194,7 +284,87 @@ app.use(bodyParser.raw());
    
   });
   
- 
+  async function mcinsight (req, res) {
+    const start = Date.now();
+    const obj = [];
+  
+    fs.readFile('./tlid.json', async (err, data) => {
+      if (err) {
+        console.log('Error while reading file:', err);
+      
+        return;
+      }
+  
+      try {
+        // Parse the data into an array
+        const symbols = JSON.parse(data);
+  
+        // Process 100 symbols at a time
+        for (let i = 0; i < symbols.length; i += 100) {
+          const symbolBatch = symbols.slice(i, i + 100);
+  
+          const promises = symbolBatch.map(async symbol => {
+            try {
+              const response = await fetch(
+                `https://api.moneycontrol.com//mcapi//v1//extdata//mc-insights?scId=${symbol.mcsymbol}&type=d`,
+                {
+                  headers: { Accept: 'application/json' },
+                }
+              );
+  
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+  
+              const data1 = await response.json();
+              
+              console.log(`${symbol.name}`);
+  
+              obj.push({
+                Name: `${symbol.name}`,
+                FnO: data1.data['insightData']['price'][4],
+                DealData: data1.data['insightData']['price'][5],
+               
+              });
+            } catch (error) {
+              console.log('Error while fetching data:', error);
+            }
+          });
+  
+          await Promise.all(promises);
+        }
+  
+        const timeTaken = Date.now() - start;
+        console.log(`Total time taken: ${timeTaken} milliseconds`);
+  
+        axiosApiInstance
+          .post('/updateOne', {
+            collection: 'mcinsights',
+            database: 'MC',
+            dataSource: 'Cluster0',
+            filter: {},
+            update: {
+              $set: {
+                output: obj,
+                time: start,
+              },
+            },
+            upsert: true,
+          })
+          .then(() => {
+            console.log('Data updated successfully');
+            
+          })
+          .catch((error) => {
+            console.log('Error while updating data:', error);
+           
+          });
+      } catch (error) {
+        console.log('Error while parsing data:', error);
+      
+      }
+    });
+  };
 
     async function Trendlynecookie(req, res) {
    
