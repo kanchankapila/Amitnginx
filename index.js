@@ -80,6 +80,19 @@ app.use(bodyParser.raw());
  res.sendStatus(200);
    
   });
+  app.get('/api/ttvolnmcinsight', async function (req, res) {
+
+    console.log('Hitting ttvolnmcinsight')
+    
+      var url6 = 'https://render-express-e54x.onrender.com/api/ttvolnmcinsight'
+    request(url6, function (error, response, html) {
+      if (!error) {
+       console.log('ttvolnmcinsight Hit !!!')
+      }
+    })
+ res.sendStatus(200);
+   
+  });
  
 
    
