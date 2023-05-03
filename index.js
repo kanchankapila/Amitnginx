@@ -8,8 +8,8 @@ const express = require('express');
 const fs = require('fs');
 const filePath = './src/app/lists/tlid.txt';
 var app = express();
-// const dotenv=require('dotenv')
-// dotenv.config('/.env')
+const dotenv=require('dotenv')
+dotenv.config('/.env')
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
@@ -391,9 +391,9 @@ app.use(bodyParser.raw());
         waitUntil: ["domcontentloaded"]
       })
      
-         await page.type('#id_login', process.env.TRENDLYNE_EMAIL);
+         await page.keyboard.type('#id_login', process.env.TRENDLYNE_EMAIL);
          
-         await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
+         await page.keyboard.type('#id_password', process.env.TRENDLYNE_PASSWORD);
        
           
     cookie = await page.cookies()
@@ -576,9 +576,9 @@ app.use(bodyParser.raw());
         waitUntil: ["domcontentloaded"]
       })
      
-         await page.type('#username', process.env.TRENDLYNE_EMAIL);
+         await page.keyboard.type('#username', process.env.TRENDLYNE_EMAIL);
          
-         await page.type('#password', process.env.OPSTRA_PASSWORD);
+         await page.keyboard.type('#password', process.env.OPSTRA_PASSWORD);
        
           
     cookie = await page.cookies()
