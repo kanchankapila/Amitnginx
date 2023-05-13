@@ -110,7 +110,6 @@ app.use(bodyParser.raw());
     fs.readFile('./tlid.json', async (err, data) => {
       if (err) {
         console.log('Error while reading file:', err);
-      
         return;
       }
   
@@ -136,15 +135,17 @@ app.use(bodyParser.raw());
               }
   
               const data1 = await response.json();
-              
+  
               console.log(`${symbol.name}`);
   
-              obj.push({
-                Name: `${symbol.name}`,
-                FnO: data1.data['insightData']['price'][4],
-                DealData: data1.data['insightData']['price'][5],
-               
-              });
+              // Check if data1.data['insightData']['price'][5] exists before pushing to obj array
+              if (data1.data['insightData']['price'][5]) {
+                obj.push({
+                  Name: `${symbol.name}`,
+                  FnO: data1.data['insightData']['price'][4],
+                  DealData: data1.data['insightData']['price'][5],
+                });
+              }
             } catch (error) {
               console.log('Error while fetching data:', error);
             }
@@ -172,23 +173,21 @@ app.use(bodyParser.raw());
           })
           .then(() => {
             console.log('Data updated successfully');
-            
           })
           .catch((error) => {
             console.log('Error while updating data:', error);
-           
           });
       } catch (error) {
         console.log('Error while parsing data:', error);
-      
       }
     });
   });
-    
+     
   app.get('/api/ttvolnmcinsight', async function (req, res) {
 
     ttvolbreakout();
     mcinsight();
+    trendlyneDVM();
   });
 
   app.get('/api/trendlynecookie', async function (req, res) {
