@@ -183,6 +183,84 @@ app.use(bodyParser.raw());
     });
   });
      
+  const { Pool } = require('pg');
+const pool = new Pool({
+  user: 'ycpnmuie',
+  host: 'satao.db.elephantsql.com',
+  database: 'ycpnmuie',
+  password: 'd4ZAKlbzqUmt1sAirHehOHcrRJDHS3oR',
+  port: 5432,
+});
+
+app.get('/api/mcinsightspg', async function (req, res) {
+  const start = Date.now();
+  const obj = [];
+
+ 
+  fs.readFile('./tlid.json', async (err, data) => {
+    if (err) {
+      console.log('Error while reading file:', err);
+      return;
+    }
+
+    try {
+      // Parse the data into an array
+      const symbols = JSON.parse(data);
+
+      // Process 100 symbols at a time
+      for (let i = 0; i < symbols.length; i += 100) {
+        const symbolBatch = symbols.slice(i, i + 100);
+
+        const promises = symbolBatch.map(async symbol => {
+          try {
+            const response = await fetch(
+              `https://api.moneycontrol.com//mcapi//v1//extdata//mc-insights?scId=${symbol.mcsymbol}&type=d`,
+              {
+                headers: { Accept: 'application/json' },
+              }
+            );
+
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data1 = await response.json();
+
+            console.log(`${symbol.name}`);
+
+            // Check if data1.data['insightData']['price'][5] exists before pushing to obj array
+            if (data1.data['insightData']['price'][5]) {
+              obj.push({
+                Name: `${symbol.name}`,
+                FnO: data1.data['insightData']['price'][4],
+                DealData: data1.data['insightData']['price'][5],
+              });
+            }
+          } catch (error) {
+            console.log('Error while fetching data:', error);
+          }
+        });
+
+        await Promise.all(promises);
+      }
+
+      const timeTaken = Date.now() - start;
+      console.log(`Total time taken: ${timeTaken} milliseconds`);
+
+      const insertQuery = `
+        INSERT INTO mcinsights (output, time)
+        VALUES ($1, $2)
+        ON CONFLICT DO NOTHING
+      `;
+
+      await pool.query(insertQuery, [obj, new Date(start)]);
+
+      console.log('Data updated successfully');
+    } catch (error) {
+      console.log('Error while processing data:', error);
+    }
+  });
+});
   app.get('/api/ttvolnmcinsight', async function (req, res) {
 
     ttvolbreakout();
