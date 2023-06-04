@@ -31,7 +31,7 @@ app.use(bodyParser.raw());
 
     console.log('Hitting Trendlyne cookie')
     
-      var url6 = 'https://render-express-e54x.onrender.com/api/trendlynecookie'
+      var url6 = 'https://render-express-e54x.onrender.com/api/trendlynecookiepg'
     request(url6, function (error, response, html) {
       if (!error) {
        console.log('Trendlyne cookie Hit !!!')
@@ -44,7 +44,7 @@ app.use(bodyParser.raw());
 
     console.log('Hitting Tickertape Volume Breakout')
     
-      var url6 = 'https://render-express-e54x.onrender.com/api/ttvolbreakout'
+      var url6 = 'https://render-express-e54x.onrender.com/api/ttvolbreakoutpg'
     request(url6, function (error, response, html) {
       if (!error) {
           console.log('Tickertape Volume Breakout Hit !!!')
@@ -71,7 +71,7 @@ app.use(bodyParser.raw());
 
     console.log('Hitting Trendlyne DVM')
     
-      var url6 = 'https://render-express-e54x.onrender.com/api/trendlyneDVM'
+      var url6 = 'https://render-express-e54x.onrender.com/api/trendlyneDVMpg'
     request(url6, function (error, response, html) {
       if (!error) {
        console.log('Trendlyne DVM Hit !!!')

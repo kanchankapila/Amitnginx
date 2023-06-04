@@ -1,0 +1,6324 @@
+[
+  [
+    {
+      "id": "NR03",
+      "name": "Nupur Rec"
+    }
+  ],
+  [
+    {
+      "id": "MCE01",
+      "name": "Mitcon Cons"
+    },
+    {
+      "id": "TCS",
+      "name": "TCS"
+    },
+    {
+      "id": "BCF03",
+      "name": "Sindhu Trade"
+    },
+    {
+      "id": "SDF04",
+      "name": "SVP Global"
+    },
+    {
+      "id": "SCL12",
+      "name": "SecMark Consult"
+    },
+    {
+      "id": "DCS01",
+      "name": "Dhruv Consultan"
+    },
+    {
+      "id": "WPF",
+      "name": "Generic Eng"
+    },
+    {
+      "id": "SPM06",
+      "name": "Supra Pacific M"
+    },
+    {
+      "id": "FIC01",
+      "name": "FICS Consultanc"
+    },
+    {
+      "id": "KFC",
+      "name": "Prismx Global"
+    },
+    {
+      "id": "MPU",
+      "name": "Aikyam Intellec"
+    },
+    {
+      "id": "LC05",
+      "name": "TRILIANCE"
+    },
+    {
+      "id": "RCC",
+      "name": "Rane Computers"
+    },
+    {
+      "id": "SIC05",
+      "name": "Shivom Investme"
+    }
+  ],
+  [
+    {
+      "id": "NA04",
+      "name": "Narmada Agrobas"
+    },
+    {
+      "id": "GNV",
+      "name": "GNFC"
+    },
+    {
+      "id": "SWG",
+      "name": "Narmada Gelatin"
+    },
+    {
+      "id": "GNS",
+      "name": "Amraworld"
+    },
+    {
+      "id": "GNF",
+      "name": "Guj Narmada Fly"
+    },
+    {
+      "id": "GNK",
+      "name": "Guj Narmada Kni"
+    },
+    {
+      "id": "GSA02",
+      "name": "Girdhari Sugar"
+    },
+    {
+      "id": "NAI01",
+      "name": "Ratnamani Agro"
+    },
+    {
+      "id": "NC08",
+      "name": "Narmada Cem"
+    },
+    {
+      "id": "NCC02",
+      "name": "Narmada Cement"
+    },
+    {
+      "id": "NCP",
+      "name": "Narmada Chematu"
+    },
+    {
+      "id": "NMD",
+      "name": "Narmada Macplas"
+    },
+    {
+      "id": "SNA01",
+      "name": "Shree Narmada"
+    },
+    {
+      "id": "SSN01",
+      "name": "Sardar Sarovar"
+    },
+    {
+      "id": "VNE",
+      "name": "Videocon Narmad"
+    }
+  ],
+  [
+    {
+      "id": "MM05",
+      "name": "Modison"
+    }
+  ],
+  [
+    {
+      "id": "OBC01",
+      "name": "Orissa Bengal C"
+    },
+    {
+      "id": "OMD",
+      "name": "Orissa Minerals"
+    },
+    {
+      "id": "CCL03",
+      "name": "Chartered Logis"
+    },
+    {
+      "id": "GIC11",
+      "name": "Globe Internati"
+    },
+    {
+      "id": "BTF03",
+      "name": "Bengal Tea"
+    },
+    {
+      "id": "BAC01",
+      "name": "Bengal & Assam"
+    },
+    {
+      "id": "ISO",
+      "name": "Inter State Oil"
+    },
+    {
+      "id": "BOL01",
+      "name": "Bilati (Orissa)"
+    },
+    {
+      "id": "CA",
+      "name": "Carrier Aircon"
+    },
+    {
+      "id": "BSI05",
+      "name": "Bengal Steel"
+    },
+    {
+      "id": "CRC",
+      "name": "Central Roadlin"
+    },
+    {
+      "id": "OE02",
+      "name": "Orissa Extrusio"
+    },
+    {
+      "id": "OI05",
+      "name": "Orissa Ind"
+    },
+    {
+      "id": "OLL",
+      "name": "Orissa Lamps"
+    },
+    {
+      "id": "OLL01",
+      "name": "Orissa Luminair"
+    },
+    {
+      "id": "OOL",
+      "name": "Orissaa Organic"
+    },
+    {
+      "id": "OSI",
+      "name": "Orissa Sponge"
+    },
+    {
+      "id": "PSC",
+      "name": "Ponni Sugars(O)"
+    },
+    {
+      "id": "TBC",
+      "name": "Tolani Bulk"
+    },
+    {
+      "id": "WOS",
+      "name": "Western Orissa"
+    }
+  ],
+  [
+    {
+      "id": "NSL04",
+      "name": "NINtec SYSTEMS"
+    },
+    {
+      "id": "MSS01",
+      "name": "MOTHERSON"
+    },
+    {
+      "id": "PS15",
+      "name": "Persistent"
+    },
+    {
+      "id": "WAB",
+      "name": "ZFCVINDIA"
+    },
+    {
+      "id": "APP03",
+      "name": "Hitachi Energy"
+    },
+    {
+      "id": "SCS04",
+      "name": "Symphony"
+    },
+    {
+      "id": "CIS01",
+      "name": "C. E. Info Syst"
+    },
+    {
+      "id": "CIS02",
+      "name": "CMS Info System"
+    },
+    {
+      "id": "SSS",
+      "name": "JTEKT India"
+    },
+    {
+      "id": "TPS",
+      "name": "TD Power System"
+    },
+    {
+      "id": "LGS",
+      "name": "Brightcom Group"
+    },
+    {
+      "id": "RSI01",
+      "name": "R Systems Intl"
+    },
+    {
+      "id": "SNP",
+      "name": "HBL Power"
+    },
+    {
+      "id": "JIS02",
+      "name": "Jain Irrigation"
+    },
+    {
+      "id": "DTS",
+      "name": "Divgi Torqtrans"
+    },
+    {
+      "id": "SPS05",
+      "name": "Servotech Power"
+    },
+    {
+      "id": "AMS",
+      "name": "Apollo Micro Sy"
+    },
+    {
+      "id": "NPS",
+      "name": "Swelect Energy"
+    },
+    {
+      "id": "DSS01",
+      "name": "Dynacons Sys"
+    },
+    {
+      "id": "BES",
+      "name": "BGR Energy"
+    },
+    {
+      "id": "CSS",
+      "name": "Cybertech"
+    },
+    {
+      "id": "WSL",
+      "name": "Websol Energy"
+    },
+    {
+      "id": "UFS",
+      "name": "UCAL Fuel"
+    },
+    {
+      "id": "TTS01",
+      "name": "Total Transport"
+    },
+    {
+      "id": "DSI02",
+      "name": "DRC Systems"
+    }
+  ],
+  [
+    {
+      "id": "NE10",
+      "name": "Nitiraj Enginee"
+    },
+    {
+      "id": "GRS01",
+      "name": "Garden Reach Sh"
+    },
+    {
+      "id": "EI14",
+      "name": "Engineers India"
+    },
+    {
+      "id": "CEB",
+      "name": "Jupiter Wagons"
+    },
+    {
+      "id": "HEI",
+      "name": "Harsha Engineer"
+    },
+    {
+      "id": "VE07",
+      "name": "Vascon Engineer"
+    },
+    {
+      "id": "SE26",
+      "name": "Softtech Engine"
+    },
+    {
+      "id": "AE20",
+      "name": "Ahlada Engineer"
+    },
+    {
+      "id": "SES",
+      "name": "Sulabh Engineer"
+    },
+    {
+      "id": "RE",
+      "name": "Rajoo Engineers"
+    },
+    {
+      "id": "PES",
+      "name": "Prajay Engineer"
+    },
+    {
+      "id": "JEC",
+      "name": "Josts Engineers"
+    },
+    {
+      "id": "APE01",
+      "name": "Ameya Precision"
+    },
+    {
+      "id": "SE25",
+      "name": "Shreeshay Engin"
+    },
+    {
+      "id": "FCE",
+      "name": "Filtra Consult"
+    },
+    {
+      "id": "CE05",
+      "name": "Conart Engineer"
+    },
+    {
+      "id": "HE02",
+      "name": "Hawa Engineers"
+    },
+    {
+      "id": "IE05",
+      "name": "Incon Engineers"
+    },
+    {
+      "id": "AIN",
+      "name": "Kohinoor Techno"
+    },
+    {
+      "id": "EI20",
+      "name": "EIL FPO"
+    },
+    {
+      "id": "FE",
+      "name": "Filtron Enginee"
+    },
+    {
+      "id": "HARIS54268",
+      "name": "HTE"
+    },
+    {
+      "id": "IE01",
+      "name": "Incorporated"
+    },
+    {
+      "id": "JEI",
+      "name": "Jord Engineers"
+    },
+    {
+      "id": "ME09",
+      "name": "Mukund Engg"
+    }
+  ],
+  [
+    {
+      "id": "NS16",
+      "name": "NMDC Steel"
+    },
+    {
+      "id": "JVS",
+      "name": "JSW Steel"
+    },
+    {
+      "id": "TIS",
+      "name": "Tata Steel"
+    },
+    {
+      "id": "JSP",
+      "name": "Jindal Steel"
+    },
+    {
+      "id": "SAI",
+      "name": "SAIL"
+    },
+    {
+      "id": "NMD01",
+      "name": "NMDC"
+    },
+    {
+      "id": "NIA",
+      "name": "New India Assur"
+    },
+    {
+      "id": "MAS",
+      "name": "Mahindra CIE"
+    },
+    {
+      "id": "RAS",
+      "name": "Sarda Energy"
+    },
+    {
+      "id": "SIS05",
+      "name": "Sunflag Iron"
+    },
+    {
+      "id": "TSI",
+      "name": "Tata Steel Long"
+    },
+    {
+      "id": "LSI01",
+      "name": "Lloyds Steels"
+    },
+    {
+      "id": "SSW01",
+      "name": "Steel Str Wheel"
+    },
+    {
+      "id": "ISS",
+      "name": "ISMT"
+    },
+    {
+      "id": "RMG",
+      "name": "Welspun Special"
+    },
+    {
+      "id": "M02",
+      "name": "Mukand"
+    },
+    {
+      "id": "SEI02",
+      "name": "Steel Exchange"
+    },
+    {
+      "id": "RST",
+      "name": "Rama Steel Tube"
+    },
+    {
+      "id": "VSS01",
+      "name": "Vardhman Steels"
+    },
+    {
+      "id": "KS01",
+      "name": "Kalyani Steels"
+    },
+    {
+      "id": "GLS",
+      "name": "Good Luck"
+    },
+    {
+      "id": "S06",
+      "name": "Steelcast"
+    },
+    {
+      "id": "LS01",
+      "name": "Gujarat Natural"
+    },
+    {
+      "id": "SAS",
+      "name": "Shiv Aum Steels"
+    },
+    {
+      "id": "MSP",
+      "name": "MSP Steel"
+    }
+  ],
+  [
+    {
+      "id": "NGO",
+      "name": "Nakoda Group"
+    },
+    {
+      "id": "NGIL541418",
+      "name": "Ajbcjsbc lvnsdj"
+    },
+    {
+      "id": "NGO01",
+      "name": "NGIL-RE"
+    },
+    {
+      "id": "HPF01",
+      "name": "Pearl Global In"
+    },
+    {
+      "id": "NTI",
+      "name": "Nakoda"
+    },
+    {
+      "id": "RI",
+      "name": "Reliance"
+    },
+    {
+      "id": "SBI",
+      "name": "SBI"
+    },
+    {
+      "id": "LIC09",
+      "name": "LIC India"
+    },
+    {
+      "id": "TI01",
+      "name": "Titan Company"
+    },
+    {
+      "id": "SPI",
+      "name": "Sun Pharma"
+    },
+    {
+      "id": "PGC",
+      "name": "Power Grid Corp"
+    },
+    {
+      "id": "PI11",
+      "name": "Pidilite Ind"
+    },
+    {
+      "id": "GI01",
+      "name": "Grasim"
+    },
+    {
+      "id": "BI",
+      "name": "Britannia"
+    },
+    {
+      "id": "BOB",
+      "name": "Bank of Baroda"
+    },
+    {
+      "id": "H",
+      "name": "Hindalco"
+    },
+    {
+      "id": "GAI",
+      "name": "GAIL"
+    },
+    {
+      "id": "MI25",
+      "name": "Marico"
+    },
+    {
+      "id": "IDB",
+      "name": "IDBI Bank"
+    },
+    {
+      "id": "MIC",
+      "name": "Bosch"
+    },
+    {
+      "id": "TIIND54076",
+      "name": "Tube Investment"
+    },
+    {
+      "id": "SI10",
+      "name": "UPL"
+    },
+    {
+      "id": "PII",
+      "name": "PI Industries"
+    },
+    {
+      "id": "UBI01",
+      "name": "Union Bank"
+    },
+    {
+      "id": "PI35",
+      "name": "Page Industries"
+    }
+  ],
+  [
+    {
+      "id": "MOL02",
+      "name": "Moksh Ornaments"
+    },
+    {
+      "id": "VO06",
+      "name": "Veeram Sec"
+    }
+  ],
+  [
+    {
+      "id": "PO03",
+      "name": "Pondy Oxides"
+    },
+    {
+      "id": "HOE",
+      "name": "Herdillia Oxide"
+    }
+  ],
+  [
+    {
+      "id": "PD08",
+      "name": "Pansari Develop"
+    },
+    {
+      "id": "MD04",
+      "name": "Macrotech Dev"
+    },
+    {
+      "id": "IID01",
+      "name": "IRB Infra"
+    },
+    {
+      "id": "GC16",
+      "name": "Mahindra Life"
+    },
+    {
+      "id": "SD6",
+      "name": "Sobha"
+    },
+    {
+      "id": "KD07",
+      "name": "Kolte-Patil"
+    },
+    {
+      "id": "RDI",
+      "name": "Radhe Developer"
+    },
+    {
+      "id": "PD05",
+      "name": "Parsvnath"
+    },
+    {
+      "id": "MID",
+      "name": "MEP Infra"
+    },
+    {
+      "id": "AF08",
+      "name": "Vipul"
+    },
+    {
+      "id": "RD04",
+      "name": "Ratnabhumi Deve"
+    },
+    {
+      "id": "HBE",
+      "name": "HB Estate Dev"
+    },
+    {
+      "id": "GCD02",
+      "name": "Giriraj Civil D"
+    },
+    {
+      "id": "ME05",
+      "name": "Poddar Housing"
+    },
+    {
+      "id": "TD01",
+      "name": "Thakkars Dev"
+    },
+    {
+      "id": "ITD01",
+      "name": "Indian Toners"
+    },
+    {
+      "id": "AD05",
+      "name": "Future Market"
+    },
+    {
+      "id": "RPP03",
+      "name": "Citadel Realty"
+    },
+    {
+      "id": "KMF02",
+      "name": "KMF Builders"
+    },
+    {
+      "id": "ASM03",
+      "name": "Amrapali Devlpr"
+    },
+    {
+      "id": "CHD",
+      "name": "CHD Developers"
+    },
+    {
+      "id": "DSK",
+      "name": "DS Kulkarni"
+    },
+    {
+      "id": "ESD",
+      "name": "Ensa Steel"
+    },
+    {
+      "id": "GDB",
+      "name": "Gyan Developers"
+    },
+    {
+      "id": "GDR",
+      "name": "Genesis Develop"
+    }
+  ],
+  [
+    {
+      "id": "JBC",
+      "name": "JB Chemicals"
+    },
+    {
+      "id": "PDC02",
+      "name": "Par Drugs"
+    },
+    {
+      "id": "HDC01",
+      "name": "Sri Krishna"
+    },
+    {
+      "id": "SCD",
+      "name": "Shasun Pharma"
+    },
+    {
+      "id": "FCT",
+      "name": "Fert and Chem"
+    },
+    {
+      "id": "CFC",
+      "name": "Chambal Fert"
+    },
+    {
+      "id": "RCF01",
+      "name": "Rashtriya Chem"
+    },
+    {
+      "id": "HCI01",
+      "name": "Himadri Special"
+    },
+    {
+      "id": "GAC01",
+      "name": "Guj Alkali"
+    },
+    {
+      "id": "TAC01",
+      "name": "IOL Chemicals"
+    },
+    {
+      "id": "PDS01",
+      "name": "Paras Defence"
+    },
+    {
+      "id": "OCP",
+      "name": "Orchid Pharma"
+    },
+    {
+      "id": "BCI01",
+      "name": "Bhagiradh Chem"
+    },
+    {
+      "id": "KDC01",
+      "name": "Kiri Industries"
+    },
+    {
+      "id": "MCF01",
+      "name": "Mangalore Chem"
+    },
+    {
+      "id": "PCP01",
+      "name": "Punjab Chemical"
+    },
+    {
+      "id": "IMP02",
+      "name": "Ind Motor Parts"
+    },
+    {
+      "id": "PAC01",
+      "name": "Primo Chemicals"
+    },
+    {
+      "id": "OCC",
+      "name": "Oriental Carbon"
+    },
+    {
+      "id": "BCP01",
+      "name": "Bliss GVS"
+    },
+    {
+      "id": "KCF",
+      "name": "Khaitan Chemica"
+    },
+    {
+      "id": "SSC02",
+      "name": "Sukhjit Starch"
+    },
+    {
+      "id": "NFC",
+      "name": "Nagarjuna Fert"
+    },
+    {
+      "id": "SPC03",
+      "name": "Shree Pushkar"
+    },
+    {
+      "id": "OCF",
+      "name": "Oswal ChemandFe"
+    }
+  ],
+  [
+    {
+      "id": "OL02",
+      "name": "Ortin Labs"
+    },
+    {
+      "id": "DL03",
+      "name": "Divis Labs"
+    },
+    {
+      "id": "DRL",
+      "name": "Dr Reddys Labs"
+    },
+    {
+      "id": "AL16",
+      "name": "Alkem Lab"
+    },
+    {
+      "id": "IL",
+      "name": "Ipca Labs"
+    },
+    {
+      "id": "JL",
+      "name": "Jyothy Labs"
+    },
+    {
+      "id": "CPL",
+      "name": "Caplin Labs"
+    },
+    {
+      "id": "NL",
+      "name": "Neuland Lab"
+    },
+    {
+      "id": "UL02",
+      "name": "Unichem Labs"
+    },
+    {
+      "id": "ML06",
+      "name": "Morepen Lab"
+    },
+    {
+      "id": "ST18",
+      "name": "Zenotech Labs"
+    },
+    {
+      "id": "ZIMLA54140",
+      "name": "ZIM Lab"
+    },
+    {
+      "id": "ISL",
+      "name": "Ind-Swift Labs"
+    },
+    {
+      "id": "PP26",
+      "name": "Gennex Labs"
+    },
+    {
+      "id": "VSA",
+      "name": "Vaidya Sane Ayu"
+    },
+    {
+      "id": "BL04",
+      "name": "Brooks Labs"
+    },
+    {
+      "id": "AL11",
+      "name": "Alpa Labs"
+    },
+    {
+      "id": "AL18",
+      "name": "Arvee Laborator"
+    },
+    {
+      "id": "JHS01",
+      "name": "JHS Svendgaard"
+    },
+    {
+      "id": "NLH",
+      "name": "Nidan Lab"
+    },
+    {
+      "id": "VL09",
+      "name": "Vineet Lab"
+    },
+    {
+      "id": "CL03",
+      "name": "Coral Labs"
+    },
+    {
+      "id": "NRL",
+      "name": "Novateor Labs"
+    },
+    {
+      "id": "ML",
+      "name": "Makers Labs"
+    },
+    {
+      "id": "GTL",
+      "name": "Guj Terce Labs"
+    }
+  ],
+  [
+    {
+      "id": "OCP",
+      "name": "Orchid Pharma"
+    },
+    {
+      "id": "SPI",
+      "name": "Sun Pharma"
+    },
+    {
+      "id": "TP06",
+      "name": "Torrent Pharma"
+    },
+    {
+      "id": "MP21",
+      "name": "Mankind Pharma"
+    },
+    {
+      "id": "KP",
+      "name": "Abbott India"
+    },
+    {
+      "id": "AP",
+      "name": "Aurobindo Pharm"
+    },
+    {
+      "id": "GI",
+      "name": "GlaxoSmithKline"
+    },
+    {
+      "id": "GP08",
+      "name": "Glenmark"
+    },
+    {
+      "id": "GP14",
+      "name": "Gland"
+    },
+    {
+      "id": "AP22",
+      "name": "Ajanta Pharma"
+    },
+    {
+      "id": "JBC",
+      "name": "JB Chemicals"
+    },
+    {
+      "id": "HMR",
+      "name": "Sanofi India"
+    },
+    {
+      "id": "SP42",
+      "name": "Suven Pharma"
+    },
+    {
+      "id": "NP01",
+      "name": "Natco Pharma"
+    },
+    {
+      "id": "AP29",
+      "name": "Alembic Pharma"
+    },
+    {
+      "id": "PP37",
+      "name": "Piramal Pharma"
+    },
+    {
+      "id": "AID",
+      "name": "AstraZeneca"
+    },
+    {
+      "id": "SPA",
+      "name": "Sun Pharma Adv"
+    },
+    {
+      "id": "TCP02",
+      "name": "Tatva Chintan"
+    },
+    {
+      "id": "TP01",
+      "name": "Marksans Pharma"
+    },
+    {
+      "id": "SA10",
+      "name": "Strides Pharma"
+    },
+    {
+      "id": "AP32",
+      "name": "AARTIPHARM"
+    },
+    {
+      "id": "TAC01",
+      "name": "IOL Chemicals"
+    },
+    {
+      "id": "VTF",
+      "name": "Sequent Scienti"
+    },
+    {
+      "id": "TTK",
+      "name": "TTK Healthcare"
+    }
+  ],
+  [
+    {
+      "id": "OMM",
+      "name": "OM Infra"
+    },
+    {
+      "id": "BI26",
+      "name": "INDUS TOWERS"
+    },
+    {
+      "id": "GI27",
+      "name": "GMR Airports"
+    },
+    {
+      "id": "IID01",
+      "name": "IRB Infra"
+    },
+    {
+      "id": "IDF",
+      "name": "IDFC"
+    },
+    {
+      "id": "PII04",
+      "name": "PowerGrid InvIT"
+    },
+    {
+      "id": "I13",
+      "name": "G R Infra"
+    },
+    {
+      "id": "PI29",
+      "name": "PNC Infratech"
+    },
+    {
+      "id": "HIE",
+      "name": "HG Infra Engg"
+    },
+    {
+      "id": "GT06",
+      "name": "Olectra Greente"
+    },
+    {
+      "id": "IIP",
+      "name": "Rattanindia Ent"
+    },
+    {
+      "id": "BSE",
+      "name": "Reliance Infra"
+    },
+    {
+      "id": "SEI04",
+      "name": "Schneider Infra"
+    },
+    {
+      "id": "HS03",
+      "name": "Luharuka Media"
+    },
+    {
+      "id": "MI37",
+      "name": "Man Infra"
+    },
+    {
+      "id": "RI29",
+      "name": "Ramky Infra"
+    },
+    {
+      "id": "JTL01",
+      "name": "JTL Ind."
+    },
+    {
+      "id": "GOE",
+      "name": "Genus Power"
+    },
+    {
+      "id": "KI19",
+      "name": "J Kumar Infra"
+    },
+    {
+      "id": "KC11",
+      "name": "KCL Infra"
+    },
+    {
+      "id": "KPIGL54232",
+      "name": "KPIGREEN"
+    },
+    {
+      "id": "AI66",
+      "name": "Arvind Smart"
+    },
+    {
+      "id": "AF02",
+      "name": "Optiemus Infra"
+    },
+    {
+      "id": "RII",
+      "name": "Rel Ind Infra"
+    },
+    {
+      "id": "SPS01",
+      "name": "Ajmera Realty"
+    }
+  ],
+  [
+    {
+      "id": "PP05",
+      "name": "Paras Petro"
+    },
+    {
+      "id": "PDS01",
+      "name": "Paras Defence"
+    },
+    {
+      "id": "PI03",
+      "name": "Parasrampur Ind"
+    },
+    {
+      "id": "PS01",
+      "name": "Parasrampur Syn"
+    },
+    {
+      "id": "PMT",
+      "name": "Paras Magnetic"
+    }
+  ],
+  [
+    {
+      "id": "PA03",
+      "name": "Pasupati Acrylo"
+    },
+    {
+      "id": "PHW",
+      "name": "Pasupati Haryan"
+    },
+    {
+      "id": "PF01",
+      "name": "Pasupati Fincap"
+    },
+    {
+      "id": "PF09",
+      "name": "Pasupati Fabric"
+    },
+    {
+      "id": "PSW",
+      "name": "Pasupati Spin"
+    },
+    {
+      "id": "PTL04",
+      "name": "Pasupati Techno"
+    }
+  ],
+  [
+    {
+      "id": "OHR",
+      "name": "Osia Hyper Reta"
+    },
+    {
+      "id": "PFR",
+      "name": "Aditya Birla F"
+    },
+    {
+      "id": "VR03",
+      "name": "V-Mart Retail"
+    },
+    {
+      "id": "BCR",
+      "name": "Bhatia Communic"
+    },
+    {
+      "id": "CRI01",
+      "name": "Cantabil Retail"
+    },
+    {
+      "id": "7RL",
+      "name": "7NR Retail"
+    },
+    {
+      "id": "SPENC54233",
+      "name": "Spencer Retail"
+    },
+    {
+      "id": "SR09",
+      "name": "Sun Retail"
+    },
+    {
+      "id": "VR02",
+      "name": "V2 Retail"
+    },
+    {
+      "id": "WOR",
+      "name": "White Organic"
+    },
+    {
+      "id": "FR",
+      "name": "Future Retail"
+    },
+    {
+      "id": "PRAXI54090",
+      "name": "Praxis Home Ret"
+    },
+    {
+      "id": "PFI",
+      "name": "Future Ent"
+    },
+    {
+      "id": "TMR",
+      "name": "Heads UP Vent"
+    },
+    {
+      "id": "SR06",
+      "name": "Silgo Retail"
+    },
+    {
+      "id": "PRI",
+      "name": "Future Ent DVR"
+    },
+    {
+      "id": "BCF04",
+      "name": "Bella Casa"
+    },
+    {
+      "id": "OT07",
+      "name": "Osiajee"
+    },
+    {
+      "id": "RR07",
+      "name": "RCL Retail"
+    },
+    {
+      "id": "VRO",
+      "name": "Vasa Retail and"
+    },
+    {
+      "id": "HT02",
+      "name": "Hypersoft Techn"
+    },
+    {
+      "id": "AER01",
+      "name": "ASRL-RE"
+    },
+    {
+      "id": "7RR",
+      "name": "7NR Retail RE"
+    },
+    {
+      "id": "ABF",
+      "name": "AB Fashion-RE"
+    },
+    {
+      "id": "ABF01",
+      "name": "AB F&R-PP"
+    }
+  ],
+  [
+    {
+      "id": "SSC07",
+      "name": "Shreeoswal Seed"
+    },
+    {
+      "id": "CSA",
+      "name": "Continental See"
+    },
+    {
+      "id": "FCT",
+      "name": "Fert and Chem"
+    },
+    {
+      "id": "JBC",
+      "name": "JB Chemicals"
+    },
+    {
+      "id": "CFC",
+      "name": "Chambal Fert"
+    },
+    {
+      "id": "RCF01",
+      "name": "Rashtriya Chem"
+    },
+    {
+      "id": "HCI01",
+      "name": "Himadri Special"
+    },
+    {
+      "id": "GAC01",
+      "name": "Guj Alkali"
+    },
+    {
+      "id": "TAC01",
+      "name": "IOL Chemicals"
+    },
+    {
+      "id": "OCP",
+      "name": "Orchid Pharma"
+    },
+    {
+      "id": "BCI01",
+      "name": "Bhagiradh Chem"
+    },
+    {
+      "id": "KDC01",
+      "name": "Kiri Industries"
+    },
+    {
+      "id": "MCF01",
+      "name": "Mangalore Chem"
+    },
+    {
+      "id": "PCP01",
+      "name": "Punjab Chemical"
+    },
+    {
+      "id": "PAC01",
+      "name": "Primo Chemicals"
+    },
+    {
+      "id": "OCC",
+      "name": "Oriental Carbon"
+    },
+    {
+      "id": "BCP01",
+      "name": "Bliss GVS"
+    },
+    {
+      "id": "KCF",
+      "name": "Khaitan Chemica"
+    },
+    {
+      "id": "SSC02",
+      "name": "Sukhjit Starch"
+    },
+    {
+      "id": "NFC",
+      "name": "Nagarjuna Fert"
+    },
+    {
+      "id": "SPC03",
+      "name": "Shree Pushkar"
+    },
+    {
+      "id": "OCF",
+      "name": "Oswal ChemandFe"
+    },
+    {
+      "id": "KCI01",
+      "name": "Kanoria Chem"
+    },
+    {
+      "id": "IBC",
+      "name": "Indo Borax"
+    },
+    {
+      "id": "KSC",
+      "name": "Kothari Sugars"
+    }
+  ],
+  [
+    {
+      "id": "SSI",
+      "name": "PVP Ventures"
+    },
+    {
+      "id": "BTV",
+      "name": "Bharti Airtel"
+    },
+    {
+      "id": "FEV",
+      "name": "FSN E-Co Nykaa"
+    },
+    {
+      "id": "AH04",
+      "name": "Vaarad Ventures"
+    },
+    {
+      "id": "JHP01",
+      "name": "Jaiprakash Pow"
+    },
+    {
+      "id": "NBF01",
+      "name": "NAVA"
+    },
+    {
+      "id": "MVI",
+      "name": "Max Ventures an"
+    },
+    {
+      "id": "IS08",
+      "name": "Dhani Services"
+    },
+    {
+      "id": "CESCV54233",
+      "name": "RPSG VENTURES"
+    },
+    {
+      "id": "MFS04",
+      "name": "Sasta Sundar"
+    },
+    {
+      "id": "DTI",
+      "name": "Dhunseri Ventur"
+    },
+    {
+      "id": "KV04",
+      "name": "KAMOPAINTS"
+    },
+    {
+      "id": "TAR",
+      "name": "Balaxi Pharma"
+    },
+    {
+      "id": "SR",
+      "name": "Crest Ventures"
+    },
+    {
+      "id": "NF04",
+      "name": "Nouveau Global"
+    },
+    {
+      "id": "HMV",
+      "name": "Hindustan Media"
+    },
+    {
+      "id": "HFC01",
+      "name": "NDL Ventures"
+    },
+    {
+      "id": "RCV02",
+      "name": "Reliance Comm"
+    },
+    {
+      "id": "GCI05",
+      "name": "GeeCee Ventures"
+    },
+    {
+      "id": "OV01",
+      "name": "Oriental RI"
+    },
+    {
+      "id": "PCV01",
+      "name": "Pace E Commerce"
+    },
+    {
+      "id": "FVI",
+      "name": "Future Consumer"
+    },
+    {
+      "id": "SDF04",
+      "name": "SVP Global"
+    },
+    {
+      "id": "MV02",
+      "name": "Magnum Ventures"
+    },
+    {
+      "id": "AF25",
+      "name": "JMD Ventures"
+    }
+  ],
+  [
+    {
+      "id": "RJI",
+      "name": "Radhika Jewel"
+    },
+    {
+      "id": "RP12",
+      "name": "Radhika Poly"
+    },
+    {
+      "id": "RS07",
+      "name": "Radhika Synth"
+    },
+    {
+      "id": "RSM",
+      "name": "Radhika Spinnin"
+    }
+  ],
+  [
+    {
+      "id": "SME02",
+      "name": "Pritika Auto"
+    },
+    {
+      "id": "JAI",
+      "name": "Jamna Auto"
+    },
+    {
+      "id": "GC10",
+      "name": "Munjal Auto Ind"
+    },
+    {
+      "id": "AI59",
+      "name": "Autoline Ind"
+    },
+    {
+      "id": "AT04",
+      "name": "Akar Auto Indus"
+    },
+    {
+      "id": "AI30",
+      "name": "TVS Autolec"
+    },
+    {
+      "id": "AI32",
+      "name": "Autopal"
+    },
+    {
+      "id": "AI36",
+      "name": "Shirpur Gold"
+    },
+    {
+      "id": "ANG",
+      "name": "ANG Industries"
+    },
+    {
+      "id": "PI05",
+      "name": "Nandan Auto"
+    },
+    {
+      "id": "RI",
+      "name": "Reliance"
+    },
+    {
+      "id": "BAF",
+      "name": "Bajaj Finance"
+    },
+    {
+      "id": "TI01",
+      "name": "Titan Company"
+    },
+    {
+      "id": "SPI",
+      "name": "Sun Pharma"
+    },
+    {
+      "id": "PI11",
+      "name": "Pidilite Ind"
+    },
+    {
+      "id": "BA06",
+      "name": "Bajaj Auto"
+    },
+    {
+      "id": "GI01",
+      "name": "Grasim"
+    },
+    {
+      "id": "BI",
+      "name": "Britannia"
+    },
+    {
+      "id": "H",
+      "name": "Hindalco"
+    },
+    {
+      "id": "BA",
+      "name": "Bajaj Holdings"
+    },
+    {
+      "id": "MI25",
+      "name": "Marico"
+    },
+    {
+      "id": "MIC",
+      "name": "Bosch"
+    },
+    {
+      "id": "SI10",
+      "name": "UPL"
+    },
+    {
+      "id": "PII",
+      "name": "PI Industries"
+    },
+    {
+      "id": "PI35",
+      "name": "Page Industries"
+    }
+  ],
+  [
+    {
+      "id": "PI40",
+      "name": "Priti Internati"
+    },
+    {
+      "id": "MSS01",
+      "name": "MOTHERSON"
+    },
+    {
+      "id": "SI62",
+      "name": "Syngene Intl"
+    },
+    {
+      "id": "CF06",
+      "name": "Coromandel Int"
+    },
+    {
+      "id": "PRC",
+      "name": "Navin Fluorine"
+    },
+    {
+      "id": "DI23",
+      "name": "Devyani Int"
+    },
+    {
+      "id": "PMC",
+      "name": "PMC Fincorp"
+    },
+    {
+      "id": "KEC03",
+      "name": "KEC Intl"
+    },
+    {
+      "id": "EI03",
+      "name": "Elpro Int"
+    },
+    {
+      "id": "BFI01",
+      "name": "Bikaji Foods"
+    },
+    {
+      "id": "FIC",
+      "name": "Zensar Tech"
+    },
+    {
+      "id": "II21",
+      "name": "Ircon Internati"
+    },
+    {
+      "id": "BLS",
+      "name": "BLS Internation"
+    },
+    {
+      "id": "UI11",
+      "name": "Ushdev Intl"
+    },
+    {
+      "id": "HEI",
+      "name": "Harsha Engineer"
+    },
+    {
+      "id": "IC05",
+      "name": "Intl Conveyor"
+    },
+    {
+      "id": "CFS01",
+      "name": "Choice Internat"
+    },
+    {
+      "id": "RSI01",
+      "name": "R Systems Intl"
+    },
+    {
+      "id": "APP",
+      "name": "Andhra Paper"
+    },
+    {
+      "id": "GI10",
+      "name": "Goldiam Inter"
+    },
+    {
+      "id": "MIT",
+      "name": "Negotium Int"
+    },
+    {
+      "id": "GIC10",
+      "name": "Genesys Int"
+    },
+    {
+      "id": "MT03",
+      "name": "Mirza Intl"
+    },
+    {
+      "id": "KEC",
+      "name": "Summit Sec"
+    },
+    {
+      "id": "GLI",
+      "name": "Gold Line"
+    }
+  ],
+  [
+    {
+      "id": "RCI02",
+      "name": "Reliance Chemo"
+    },
+    {
+      "id": "RI",
+      "name": "Reliance"
+    },
+    {
+      "id": "RIL08",
+      "name": "Reliance Indust"
+    },
+    {
+      "id": "RIP02",
+      "name": "RIL Partly Paid"
+    },
+    {
+      "id": "RIP03",
+      "name": "ASCASVV"
+    },
+    {
+      "id": "TI01",
+      "name": "Titan Company"
+    },
+    {
+      "id": "SPI",
+      "name": "Sun Pharma"
+    },
+    {
+      "id": "PI11",
+      "name": "Pidilite Ind"
+    },
+    {
+      "id": "GI01",
+      "name": "Grasim"
+    },
+    {
+      "id": "BI",
+      "name": "Britannia"
+    },
+    {
+      "id": "H",
+      "name": "Hindalco"
+    },
+    {
+      "id": "MI25",
+      "name": "Marico"
+    },
+    {
+      "id": "MIC",
+      "name": "Bosch"
+    },
+    {
+      "id": "SI10",
+      "name": "UPL"
+    },
+    {
+      "id": "PII",
+      "name": "PI Industries"
+    },
+    {
+      "id": "PI35",
+      "name": "Page Industries"
+    },
+    {
+      "id": "BI03",
+      "name": "Balkrishna Ind"
+    },
+    {
+      "id": "SI48",
+      "name": "Supreme Ind"
+    },
+    {
+      "id": "RSI",
+      "name": "Patanjali Foods"
+    },
+    {
+      "id": "SE20",
+      "name": "Solar Ind"
+    },
+    {
+      "id": "MI44",
+      "name": "UNO Minda"
+    },
+    {
+      "id": "OAR",
+      "name": "TOYAM SPORTS"
+    },
+    {
+      "id": "KEI",
+      "name": "KEI Industries"
+    },
+    {
+      "id": "AI",
+      "name": "Aarti Ind"
+    },
+    {
+      "id": "EI",
+      "name": "Exide Ind"
+    }
+  ],
+  [
+    {
+      "id": "RC04",
+      "name": "Regency Ceramic"
+    },
+    {
+      "id": "KC06",
+      "name": "Kajaria Ceramic"
+    },
+    {
+      "id": "SPL02",
+      "name": "Somany Ceramics"
+    },
+    {
+      "id": "OCI",
+      "name": "Orient Bell"
+    },
+    {
+      "id": "MC13",
+      "name": "Murudeshwar Cer"
+    },
+    {
+      "id": "RC06",
+      "name": "Restile Ceramic"
+    },
+    {
+      "id": "RI41",
+      "name": "REGENCY FINCORP"
+    },
+    {
+      "id": "RT03",
+      "name": "Regency Trust"
+    },
+    {
+      "id": "CC02",
+      "name": "Charms Ind"
+    },
+    {
+      "id": "ACL01",
+      "name": "Akhil Ceramics"
+    },
+    {
+      "id": "ACL03",
+      "name": "Associated Cera"
+    },
+    {
+      "id": "BC04",
+      "name": "Bell Ceramics"
+    },
+    {
+      "id": "BGC01",
+      "name": "Bodh Gaya Ceram"
+    },
+    {
+      "id": "EC7",
+      "name": "Euro Ceramics"
+    },
+    {
+      "id": "DC10",
+      "name": "Decolight Ceram"
+    },
+    {
+      "id": "GMB01",
+      "name": "GMB Ceramics"
+    },
+    {
+      "id": "GCL",
+      "name": "Godavari Cerami"
+    },
+    {
+      "id": "HC05",
+      "name": "Hind Ceramics"
+    },
+    {
+      "id": "ICL",
+      "name": "Intl Ceramics"
+    },
+    {
+      "id": "JFC",
+      "name": "Jay Flash Ceram"
+    },
+    {
+      "id": "MCL01",
+      "name": "Metlex Ceramics"
+    },
+    {
+      "id": "LCA",
+      "name": "Lakshmi Cement"
+    },
+    {
+      "id": "PC09",
+      "name": "Prakash Ceramic"
+    },
+    {
+      "id": "OCL02",
+      "name": "Osho Ceramics L"
+    },
+    {
+      "id": "RCI01",
+      "name": "Raasi Ceramics"
+    }
+  ],
+  [
+    {
+      "id": "RRW",
+      "name": "Ram Ratna Wires"
+    },
+    {
+      "id": "MC",
+      "name": "Ramco Cements"
+    },
+    {
+      "id": "RMT",
+      "name": "Ratnamani Metal"
+    },
+    {
+      "id": "KRB",
+      "name": "KRBL"
+    },
+    {
+      "id": "RF16",
+      "name": "RamkrishnaForge"
+    },
+    {
+      "id": "RI29",
+      "name": "Ramky Infra"
+    },
+    {
+      "id": "RST",
+      "name": "Rama Steel Tube"
+    },
+    {
+      "id": "PWI",
+      "name": "Precision Wires"
+    },
+    {
+      "id": "RI26",
+      "name": "Ramcoind"
+    },
+    {
+      "id": "IRS",
+      "name": "Indo Rama Synth"
+    },
+    {
+      "id": "RS17",
+      "name": "Ramco System"
+    },
+    {
+      "id": "W06",
+      "name": "D P Wires"
+    },
+    {
+      "id": "SLR",
+      "name": "Shankar Lal Ram"
+    },
+    {
+      "id": "RNP01",
+      "name": "Shree Rama News"
+    },
+    {
+      "id": "GW01",
+      "name": "Geekay Wires"
+    },
+    {
+      "id": "KW",
+      "name": "Kritika Wires"
+    },
+    {
+      "id": "SRP07",
+      "name": "Shree Ram Proti"
+    },
+    {
+      "id": "RLF01",
+      "name": "Ramchandra Leas"
+    },
+    {
+      "id": "RD04",
+      "name": "Ratnabhumi Deve"
+    },
+    {
+      "id": "SRI01",
+      "name": "Shri Rama Multi"
+    },
+    {
+      "id": "SWI02",
+      "name": "Shalimar Wires"
+    },
+    {
+      "id": "RP07",
+      "name": "Rama Phosphates"
+    },
+    {
+      "id": "RPP",
+      "name": "Nath Industries"
+    },
+    {
+      "id": "WFS01",
+      "name": "Wires and Fabri"
+    },
+    {
+      "id": "RPM",
+      "name": "Rama Paper Mill"
+    }
+  ],
+  [
+    {
+      "id": "RE11",
+      "name": "RUDRABHISHEK"
+    },
+    {
+      "id": "AE01",
+      "name": "Adani Enterpris"
+    },
+    {
+      "id": "AHE",
+      "name": "Apollo Hospital"
+    },
+    {
+      "id": "ZT",
+      "name": "Zee Entertain"
+    },
+    {
+      "id": "NP07",
+      "name": "Piramal Enter"
+    },
+    {
+      "id": "IE07",
+      "name": "Cyient"
+    },
+    {
+      "id": "BE08",
+      "name": "Brigade Ent"
+    },
+    {
+      "id": "AEI01",
+      "name": "Amber Enterpris"
+    },
+    {
+      "id": "RE09",
+      "name": "Religare Enterp"
+    },
+    {
+      "id": "IIP",
+      "name": "Rattanindia Ent"
+    },
+    {
+      "id": "HGE",
+      "name": "Healthcare Glob"
+    },
+    {
+      "id": "MSK",
+      "name": "Welspun Enter"
+    },
+    {
+      "id": "E09",
+      "name": "SJS Enterprises"
+    },
+    {
+      "id": "UP02",
+      "name": "Uniphos Ent"
+    },
+    {
+      "id": "NCT",
+      "name": "Spacenet Ent"
+    },
+    {
+      "id": "CDE",
+      "name": "Coffee Day"
+    },
+    {
+      "id": "NIE",
+      "name": "Nahar Ent"
+    },
+    {
+      "id": "PT03",
+      "name": "PTL Enterprises"
+    },
+    {
+      "id": "OE03",
+      "name": "Omansh Ente"
+    },
+    {
+      "id": "OC04",
+      "name": "Oricon Ent"
+    },
+    {
+      "id": "ABG",
+      "name": "Starlog Enter"
+    },
+    {
+      "id": "AE15",
+      "name": "Inceptum Ent"
+    },
+    {
+      "id": "SE23",
+      "name": "Sharika Enter"
+    },
+    {
+      "id": "IE12",
+      "name": "Indiabulls Ent"
+    },
+    {
+      "id": "BCL08",
+      "name": "BCL Enterprises"
+    }
+  ],
+  [
+    {
+      "id": "RM09",
+      "name": "Rajnandini Meta"
+    },
+    {
+      "id": "RMT",
+      "name": "Ratnamani Metal"
+    },
+    {
+      "id": "SME05",
+      "name": "Shyam Metalics"
+    },
+    {
+      "id": "TM",
+      "name": "Tata Metaliks"
+    },
+    {
+      "id": "RMG",
+      "name": "Welspun Special"
+    },
+    {
+      "id": "IMF01",
+      "name": "Indian Metals"
+    },
+    {
+      "id": "LME",
+      "name": "Lloyds Metals"
+    },
+    {
+      "id": "GM02",
+      "name": "Gallantt Ispat"
+    },
+    {
+      "id": "SML04",
+      "name": "Supershakti Met"
+    },
+    {
+      "id": "OMM",
+      "name": "OM Infra"
+    },
+    {
+      "id": "HMF",
+      "name": "Hilton Metal"
+    },
+    {
+      "id": "SM16",
+      "name": "Sarthak Metals"
+    },
+    {
+      "id": "MM05",
+      "name": "Modison"
+    },
+    {
+      "id": "BM01",
+      "name": "Bhagyanagar Ind"
+    },
+    {
+      "id": "CM07",
+      "name": "Chaman Metallic"
+    },
+    {
+      "id": "KIC",
+      "name": "KIC Metaliks"
+    },
+    {
+      "id": "AIM",
+      "name": "Alliance Integ"
+    },
+    {
+      "id": "MCM02",
+      "name": "Manaksia Coated"
+    },
+    {
+      "id": "AM11",
+      "name": "Alkali Metals"
+    },
+    {
+      "id": "HM05",
+      "name": "Hisar Metal"
+    },
+    {
+      "id": "AMa",
+      "name": "Ankit Metal"
+    },
+    {
+      "id": "PM10",
+      "name": "Precision Metal"
+    },
+    {
+      "id": "PM09",
+      "name": "Poojawestern Me"
+    },
+    {
+      "id": "UM01",
+      "name": "Unison Metals"
+    },
+    {
+      "id": "BMA",
+      "name": "Bothra Metals"
+    }
+  ],
+  [
+    {
+      "id": "RR01",
+      "name": "Raj Rayon Ind"
+    },
+    {
+      "id": "GI01",
+      "name": "Grasim"
+    },
+    {
+      "id": "ARI",
+      "name": "Anant Raj"
+    },
+    {
+      "id": "RS03",
+      "name": "Mahamaya Steel"
+    },
+    {
+      "id": "RMI01",
+      "name": "Remi Edelstahl"
+    },
+    {
+      "id": "RI01",
+      "name": "Rajdarshan Ind"
+    },
+    {
+      "id": "RAM",
+      "name": "Paos Industries"
+    },
+    {
+      "id": "RPI02",
+      "name": "Raj Packaging"
+    },
+    {
+      "id": "RI34",
+      "name": "Rajvir Ind"
+    },
+    {
+      "id": "IRI",
+      "name": "AB Nuvo"
+    },
+    {
+      "id": "RLI",
+      "name": "Rajdhani Leasin"
+    },
+    {
+      "id": "REI",
+      "name": "Remi Elektrotec"
+    },
+    {
+      "id": "RRL01",
+      "name": "Raj Rayon Ltd"
+    },
+    {
+      "id": "RI25",
+      "name": "Rajlaxmi Ind"
+    },
+    {
+      "id": "RIL03",
+      "name": "Rajadhiraj Ind"
+    },
+    {
+      "id": "RAI",
+      "name": "Raj Ambuja Ind"
+    },
+    {
+      "id": "RI",
+      "name": "Reliance"
+    },
+    {
+      "id": "TI01",
+      "name": "Titan Company"
+    },
+    {
+      "id": "SPI",
+      "name": "Sun Pharma"
+    },
+    {
+      "id": "PI11",
+      "name": "Pidilite Ind"
+    },
+    {
+      "id": "BI",
+      "name": "Britannia"
+    },
+    {
+      "id": "H",
+      "name": "Hindalco"
+    },
+    {
+      "id": "MI25",
+      "name": "Marico"
+    },
+    {
+      "id": "MIC",
+      "name": "Bosch"
+    },
+    {
+      "id": "SI10",
+      "name": "UPL"
+    }
+  ],
+  [
+    {
+      "id": "SP45",
+      "name": "Sah Polymers"
+    },
+    {
+      "id": "SCL11",
+      "name": "Best Agrolife"
+    },
+    {
+      "id": "BEP",
+      "name": "Bhansali Eng"
+    },
+    {
+      "id": "SI84",
+      "name": "Sahyadri Ind"
+    },
+    {
+      "id": "SP19",
+      "name": "Sturdy Ind"
+    },
+    {
+      "id": "SP36",
+      "name": "GP Petroleums"
+    },
+    {
+      "id": "SRF03",
+      "name": "Kama Holdings"
+    },
+    {
+      "id": "LHF",
+      "name": "Sahara Housing"
+    },
+    {
+      "id": "DEEP541778",
+      "name": "Deep Polymers L"
+    },
+    {
+      "id": "PP08",
+      "name": "Pearl Polymers"
+    },
+    {
+      "id": "AP12",
+      "name": "Resonance"
+    },
+    {
+      "id": "TP16",
+      "name": "Technopack"
+    },
+    {
+      "id": "JP01",
+      "name": "Shri Jagdamba"
+    },
+    {
+      "id": "CP12",
+      "name": "COMMAND"
+    },
+    {
+      "id": "PAP02",
+      "name": "Padmanabh Alloy"
+    },
+    {
+      "id": "DP08",
+      "name": "Dutron Polymers"
+    },
+    {
+      "id": "LP08",
+      "name": "Lehar Footwears"
+    },
+    {
+      "id": "PP03",
+      "name": "Pankaj Polymers"
+    },
+    {
+      "id": "PPI01",
+      "name": "Polylink Polyme"
+    },
+    {
+      "id": "RRM",
+      "name": "Mohota Ind"
+    },
+    {
+      "id": "SFS",
+      "name": "Tradewell Hold."
+    },
+    {
+      "id": "AVI04",
+      "name": "AVI Polymers"
+    },
+    {
+      "id": "AFP01",
+      "name": "Acme Fluoro Pol"
+    },
+    {
+      "id": "AP24",
+      "name": "Axel Polymers"
+    },
+    {
+      "id": "APL02",
+      "name": "Aditya Polymers"
+    }
+  ],
+  [
+    {
+      "id": "RP26",
+      "name": "Rajshree Polypa"
+    },
+    {
+      "id": "RSC",
+      "name": "Rajshree Sugars"
+    },
+    {
+      "id": "PP32",
+      "name": "CDG PETCHEM"
+    },
+    {
+      "id": "DP9",
+      "name": "Deccan Poly"
+    }
+  ],
+  [
+    {
+      "id": "RH03",
+      "name": "Ravinder Height"
+    },
+    {
+      "id": "PHH",
+      "name": "Viceroy Hotels"
+    }
+  ],
+  [
+    {
+      "id": "RL06",
+      "name": "Ritco Logistics"
+    },
+    {
+      "id": "AC02",
+      "name": "Aegis Logistics"
+    },
+    {
+      "id": "AGL02",
+      "name": "Allcargo"
+    },
+    {
+      "id": "VL08",
+      "name": "VRL Logistics"
+    },
+    {
+      "id": "ML12",
+      "name": "Mahindra Logist"
+    },
+    {
+      "id": "CCL03",
+      "name": "Chartered Logis"
+    },
+    {
+      "id": "SL16",
+      "name": "Snowman Logist"
+    },
+    {
+      "id": "ALL02",
+      "name": "AVG Logistics"
+    },
+    {
+      "id": "ML08",
+      "name": "Maheshwari Logi"
+    },
+    {
+      "id": "SVL01",
+      "name": "Shree Vasu"
+    },
+    {
+      "id": "DML03",
+      "name": "DJ Mediaprint"
+    },
+    {
+      "id": "TLI01",
+      "name": "Tiger Logistics"
+    },
+    {
+      "id": "TLI02",
+      "name": "Timescan Logist"
+    },
+    {
+      "id": "PR",
+      "name": "Patel Integrate"
+    },
+    {
+      "id": "JFL04",
+      "name": "Jet Freight Log"
+    },
+    {
+      "id": "CL09",
+      "name": "Cargosol Log"
+    },
+    {
+      "id": "DLI02",
+      "name": "Destiny Logisti"
+    },
+    {
+      "id": "SS06",
+      "name": "Shahi Shipping"
+    },
+    {
+      "id": "TLI03",
+      "name": "Transvoy"
+    },
+    {
+      "id": "ALI07",
+      "name": "Amiable Logisti"
+    },
+    {
+      "id": "AL14",
+      "name": "Aqua Logistics"
+    },
+    {
+      "id": "ES",
+      "name": "Essar Ports"
+    },
+    {
+      "id": "DLI03",
+      "name": "DESTIN-RE"
+    },
+    {
+      "id": "JFL05",
+      "name": "JETFRE-RE"
+    },
+    {
+      "id": "PIF03",
+      "name": "Apollo Tricoat"
+    }
+  ],
+  [
+    {
+      "id": "SI90",
+      "name": "Satia Ind"
+    },
+    {
+      "id": "RL05",
+      "name": "Sat Ind"
+    },
+    {
+      "id": "SAI03",
+      "name": "Satguru Agro"
+    },
+    {
+      "id": "RI",
+      "name": "Reliance"
+    },
+    {
+      "id": "TI01",
+      "name": "Titan Company"
+    },
+    {
+      "id": "SPI",
+      "name": "Sun Pharma"
+    },
+    {
+      "id": "PI11",
+      "name": "Pidilite Ind"
+    },
+    {
+      "id": "GI01",
+      "name": "Grasim"
+    },
+    {
+      "id": "BI",
+      "name": "Britannia"
+    },
+    {
+      "id": "H",
+      "name": "Hindalco"
+    },
+    {
+      "id": "MI25",
+      "name": "Marico"
+    },
+    {
+      "id": "MIC",
+      "name": "Bosch"
+    },
+    {
+      "id": "SI10",
+      "name": "UPL"
+    },
+    {
+      "id": "PII",
+      "name": "PI Industries"
+    },
+    {
+      "id": "PI35",
+      "name": "Page Industries"
+    },
+    {
+      "id": "BI03",
+      "name": "Balkrishna Ind"
+    },
+    {
+      "id": "SI48",
+      "name": "Supreme Ind"
+    },
+    {
+      "id": "RSI",
+      "name": "Patanjali Foods"
+    },
+    {
+      "id": "SE20",
+      "name": "Solar Ind"
+    },
+    {
+      "id": "MI44",
+      "name": "UNO Minda"
+    },
+    {
+      "id": "OAR",
+      "name": "TOYAM SPORTS"
+    },
+    {
+      "id": "KEI",
+      "name": "KEI Industries"
+    },
+    {
+      "id": "AI",
+      "name": "Aarti Ind"
+    },
+    {
+      "id": "EI",
+      "name": "Exide Ind"
+    },
+    {
+      "id": "AI01",
+      "name": "Trident"
+    }
+  ],
+  [
+    {
+      "id": "SBG",
+      "name": "Suratwwala BG"
+    },
+    {
+      "id": "MBP02",
+      "name": "Mindspace REIT"
+    },
+    {
+      "id": "FBF",
+      "name": "Five-Star Busin"
+    },
+    {
+      "id": "LGS",
+      "name": "Brightcom Group"
+    },
+    {
+      "id": "GG02",
+      "name": "Goodricke Group"
+    },
+    {
+      "id": "TW",
+      "name": "Timex Group Ind"
+    },
+    {
+      "id": "NDG",
+      "name": "Naga Dhunseri"
+    },
+    {
+      "id": "IBS01",
+      "name": "IRIS Business S"
+    },
+    {
+      "id": "NGO",
+      "name": "Nakoda Group"
+    },
+    {
+      "id": "PBS01",
+      "name": "Platinumone"
+    },
+    {
+      "id": "GBF",
+      "name": "Goenka Business"
+    },
+    {
+      "id": "FBS",
+      "name": "Focus Business"
+    },
+    {
+      "id": "AI08",
+      "name": "Aftek"
+    },
+    {
+      "id": "A03",
+      "name": "Frontline Sol"
+    },
+    {
+      "id": "ABC03",
+      "name": "Assoc Business"
+    },
+    {
+      "id": "BFL01",
+      "name": "Business Forms"
+    },
+    {
+      "id": "CB01",
+      "name": "East Buildtech"
+    },
+    {
+      "id": "HII",
+      "name": "Hemkunta Ind"
+    },
+    {
+      "id": "HC04",
+      "name": "SI Group"
+    },
+    {
+      "id": "JBM02",
+      "name": "Jayanti Biz"
+    },
+    {
+      "id": "IHC01",
+      "name": "Integra India"
+    },
+    {
+      "id": "MC12",
+      "name": "Saptak Chem"
+    },
+    {
+      "id": "NGIL541418",
+      "name": "Ajbcjsbc lvnsdj"
+    },
+    {
+      "id": "NGO01",
+      "name": "NGIL-RE"
+    },
+    {
+      "id": "SB11",
+      "name": "Shivamshree Bus"
+    }
+  ],
+  [
+    {
+      "id": "SF31",
+      "name": "Sarveshwar Food"
+    },
+    {
+      "id": "RSI",
+      "name": "Patanjali Foods"
+    },
+    {
+      "id": "BFI01",
+      "name": "Bikaji Foods"
+    },
+    {
+      "id": "CNA",
+      "name": "Zydus Wellness"
+    },
+    {
+      "id": "SFI05",
+      "name": "Sapphire Foods"
+    },
+    {
+      "id": "HFL",
+      "name": "Hindustan Foods"
+    },
+    {
+      "id": "LTO",
+      "name": "LT Foods"
+    },
+    {
+      "id": "ITC02",
+      "name": "Agro Tech Foods"
+    },
+    {
+      "id": "HFI",
+      "name": "Heritage Foods"
+    },
+    {
+      "id": "ADF01",
+      "name": "ADF Foods"
+    },
+    {
+      "id": "PMF01",
+      "name": "Parag Milk Food"
+    },
+    {
+      "id": "FI10",
+      "name": "Foods and Inns"
+    },
+    {
+      "id": "AFF",
+      "name": "Apex Frozen"
+    },
+    {
+      "id": "VMF",
+      "name": "Kellton Tech"
+    },
+    {
+      "id": "EC07",
+      "name": "Krishival Foods"
+    },
+    {
+      "id": "MF20",
+      "name": "Mishtann Foods"
+    },
+    {
+      "id": "EIF",
+      "name": "Euro India Fres"
+    },
+    {
+      "id": "MF23",
+      "name": "Megastar Foods"
+    },
+    {
+      "id": "VP9",
+      "name": "WARDWIZFBL"
+    },
+    {
+      "id": "SO01",
+      "name": "Kohinoor Foods"
+    },
+    {
+      "id": "JKD",
+      "name": "Umang Dairies"
+    },
+    {
+      "id": "FF03",
+      "name": "Flex Foods"
+    },
+    {
+      "id": "HR02",
+      "name": "Univa Foods"
+    },
+    {
+      "id": "MF02",
+      "name": "Mahaan Foods"
+    },
+    {
+      "id": "GCH",
+      "name": "Gold Coin Healt"
+    }
+  ],
+  [
+    {
+      "id": "RP22",
+      "name": "RKEC Projects"
+    },
+    {
+      "id": "PEP02",
+      "name": "Prestige Estate"
+    },
+    {
+      "id": "PMP",
+      "name": "Power Mech"
+    },
+    {
+      "id": "PP33",
+      "name": "PSP Projects"
+    },
+    {
+      "id": "MSK",
+      "name": "Welspun Enter"
+    },
+    {
+      "id": "KC11",
+      "name": "KCL Infra"
+    },
+    {
+      "id": "PP27",
+      "name": "Puravankara"
+    },
+    {
+      "id": "AE21",
+      "name": "Artemis Elect"
+    },
+    {
+      "id": "ABB01",
+      "name": "GE Power India"
+    },
+    {
+      "id": "MIP",
+      "name": "Madhav Infra Pr"
+    },
+    {
+      "id": "SPM05",
+      "name": "SPML Infra"
+    },
+    {
+      "id": "RIP01",
+      "name": "RPP Infra Proj"
+    },
+    {
+      "id": "SIP",
+      "name": "Sadbhav Infra"
+    },
+    {
+      "id": "SIP06",
+      "name": "Magellanic"
+    },
+    {
+      "id": "GP10",
+      "name": "Gayatri Project"
+    },
+    {
+      "id": "GIP01",
+      "name": "AJR Infra & Tol"
+    },
+    {
+      "id": "ASF02",
+      "name": "Artefact"
+    },
+    {
+      "id": "WPF",
+      "name": "Generic Eng"
+    },
+    {
+      "id": "VP01",
+      "name": "TeleCanor Glob"
+    },
+    {
+      "id": "AIP",
+      "name": "ARSS Infra"
+    },
+    {
+      "id": "HIP",
+      "name": "HEC Infra Proje"
+    },
+    {
+      "id": "MP16",
+      "name": "Madhucon Proj"
+    },
+    {
+      "id": "NBP",
+      "name": "Perfect-Octave"
+    },
+    {
+      "id": "CCA",
+      "name": "Shelter Infra"
+    },
+    {
+      "id": "TP14",
+      "name": "Thirani Project"
+    }
+  ],
+  [
+    {
+      "id": "SC53",
+      "name": "SecUR Credentia"
+    },
+    {
+      "id": "ISL03",
+      "name": "ICICI Securitie"
+    },
+    {
+      "id": "DSL01",
+      "name": "Capri Global"
+    },
+    {
+      "id": "SIS07",
+      "name": "SIS"
+    },
+    {
+      "id": "SIS08",
+      "name": "SHAREINDIA"
+    },
+    {
+      "id": "IS08",
+      "name": "Dhani Services"
+    },
+    {
+      "id": "IIFLS54277",
+      "name": "ISL"
+    },
+    {
+      "id": "CS08",
+      "name": "Ugro Capital"
+    },
+    {
+      "id": "GS17",
+      "name": "GCM Securities"
+    },
+    {
+      "id": "GS12",
+      "name": "Geojit Fin"
+    },
+    {
+      "id": "SS54",
+      "name": "Shree Secu"
+    },
+    {
+      "id": "SGS01",
+      "name": "SMC Global Secu"
+    },
+    {
+      "id": "KEC",
+      "name": "Summit Sec"
+    },
+    {
+      "id": "CSL01",
+      "name": "CSL Fin"
+    },
+    {
+      "id": "PS",
+      "name": "Prime Sec"
+    },
+    {
+      "id": "VO06",
+      "name": "Veeram Sec"
+    },
+    {
+      "id": "ITS",
+      "name": "Indo Thai Secu"
+    },
+    {
+      "id": "AS19",
+      "name": "Almondz Global"
+    },
+    {
+      "id": "SS02",
+      "name": "Prime Property"
+    },
+    {
+      "id": "KS10",
+      "name": "The Byke Hosp"
+    },
+    {
+      "id": "SS13",
+      "name": "Shardul Sec"
+    },
+    {
+      "id": "IGS",
+      "name": "Inventure Grow"
+    },
+    {
+      "id": "VS12",
+      "name": "Vertex Sec"
+    },
+    {
+      "id": "LKP01",
+      "name": "LKP Securities"
+    },
+    {
+      "id": "RCL02",
+      "name": "Securekloud Tec"
+    }
+  ],
+  [
+    {
+      "id": "SCP02",
+      "name": "Sheetal Cool Pr"
+    },
+    {
+      "id": "GCP",
+      "name": "Godrej Consumer"
+    },
+    {
+      "id": "TT",
+      "name": "TATA Cons. Prod"
+    },
+    {
+      "id": "A06",
+      "name": "Atul"
+    },
+    {
+      "id": "HAP",
+      "name": "Hatsun Agro"
+    },
+    {
+      "id": "APP03",
+      "name": "Hitachi Energy"
+    },
+    {
+      "id": "ISP",
+      "name": "Gillette India"
+    },
+    {
+      "id": "JKC",
+      "name": "JK Lakshmi Cem"
+    },
+    {
+      "id": "CC10",
+      "name": "CCL Products"
+    },
+    {
+      "id": "IWP540954",
+      "name": "The Indian Wood"
+    },
+    {
+      "id": "AMP01",
+      "name": "Astra Microwave"
+    },
+    {
+      "id": "TP15",
+      "name": "Tarsons Product"
+    },
+    {
+      "id": "TSI",
+      "name": "Tata Steel Long"
+    },
+    {
+      "id": "MBA",
+      "name": "Madhya Bharat A"
+    },
+    {
+      "id": "SHP",
+      "name": "Honda India PP"
+    },
+    {
+      "id": "PP",
+      "name": "Huhtamaki India"
+    },
+    {
+      "id": "BPI",
+      "name": "Banco Products"
+    },
+    {
+      "id": "SBP02",
+      "name": "Shankara Buildi"
+    },
+    {
+      "id": "MI16",
+      "name": "JSW Ispat Speci"
+    },
+    {
+      "id": "AVT",
+      "name": "AVT Natural"
+    },
+    {
+      "id": "EE02",
+      "name": "Everest Ind"
+    },
+    {
+      "id": "CAP",
+      "name": "ORIENTAL AROMAT"
+    },
+    {
+      "id": "CCI08",
+      "name": "Cool Caps"
+    },
+    {
+      "id": "GRR",
+      "name": "GRP"
+    },
+    {
+      "id": "SEP",
+      "name": "SKM Egg Product"
+    }
+  ],
+  [
+    {
+      "id": "SPS05",
+      "name": "Servotech Power"
+    },
+    {
+      "id": "APP03",
+      "name": "Hitachi Energy"
+    },
+    {
+      "id": "TPS",
+      "name": "TD Power System"
+    },
+    {
+      "id": "SNP",
+      "name": "HBL Power"
+    },
+    {
+      "id": "NPS",
+      "name": "Swelect Energy"
+    },
+    {
+      "id": "SPS04",
+      "name": "Starlit Power"
+    },
+    {
+      "id": "UPS",
+      "name": "UCAL Power Sys"
+    },
+    {
+      "id": "PGC",
+      "name": "Power Grid Corp"
+    },
+    {
+      "id": "AP26",
+      "name": "Adani Power"
+    },
+    {
+      "id": "TPC",
+      "name": "Tata Power"
+    },
+    {
+      "id": "MSS01",
+      "name": "MOTHERSON"
+    },
+    {
+      "id": "JSP",
+      "name": "Jindal Steel"
+    },
+    {
+      "id": "CG",
+      "name": "CG Power"
+    },
+    {
+      "id": "PFC02",
+      "name": "Power Finance"
+    },
+    {
+      "id": "PS15",
+      "name": "Persistent"
+    },
+    {
+      "id": "TP13",
+      "name": "Torrent Power"
+    },
+    {
+      "id": "WAB",
+      "name": "ZFCVINDIA"
+    },
+    {
+      "id": "PII04",
+      "name": "PowerGrid InvIT"
+    },
+    {
+      "id": "KPT",
+      "name": "Kalpataru Power"
+    },
+    {
+      "id": "SCS04",
+      "name": "Symphony"
+    },
+    {
+      "id": "CIS01",
+      "name": "C. E. Info Syst"
+    },
+    {
+      "id": "IIP",
+      "name": "Rattanindia Ent"
+    },
+    {
+      "id": "GPI7",
+      "name": "Godawari Power"
+    },
+    {
+      "id": "CIS02",
+      "name": "CMS Info System"
+    },
+    {
+      "id": "PMP",
+      "name": "Power Mech"
+    }
+  ],
+  [
+    {
+      "id": "SMC05",
+      "name": "SEL Mgf Company"
+    },
+    {
+      "id": "BDM",
+      "name": "BOMDYEING"
+    },
+    {
+      "id": "HWM",
+      "name": "Hardcastle"
+    },
+    {
+      "id": "AMC",
+      "name": "Skyline Millars"
+    },
+    {
+      "id": "RTM",
+      "name": "Raj Tube"
+    },
+    {
+      "id": "AEM",
+      "name": "Aakar Engg & Mf"
+    },
+    {
+      "id": "HPF",
+      "name": "Hindustan Photo"
+    },
+    {
+      "id": "IJM",
+      "name": "Italian Jewel"
+    },
+    {
+      "id": "MDM",
+      "name": "Mrinal Dye"
+    },
+    {
+      "id": "KWC",
+      "name": "Kumar Wire"
+    },
+    {
+      "id": "SMC",
+      "name": "Shree Mfg Co"
+    },
+    {
+      "id": "ULM",
+      "name": "Universal Lug"
+    },
+    {
+      "id": "ITC",
+      "name": "ITC"
+    },
+    {
+      "id": "TI01",
+      "name": "Titan Company"
+    },
+    {
+      "id": "TEL",
+      "name": "Tata Motors"
+    },
+    {
+      "id": "HSL01",
+      "name": "HDFC Life"
+    },
+    {
+      "id": "SLI03",
+      "name": "SBI Life Insura"
+    },
+    {
+      "id": "GI01",
+      "name": "Grasim"
+    },
+    {
+      "id": "CIF01",
+      "name": "Chola Invest."
+    },
+    {
+      "id": "TPC",
+      "name": "Tata Power"
+    },
+    {
+      "id": "IPL01",
+      "name": "ICICI Prudentia"
+    },
+    {
+      "id": "MC08",
+      "name": "United Spirits"
+    },
+    {
+      "id": "TVS",
+      "name": "TVS Motor"
+    },
+    {
+      "id": "MIC",
+      "name": "Bosch"
+    },
+    {
+      "id": "IHC",
+      "name": "Indian Hotels"
+    }
+  ],
+  [
+    {
+      "id": "SAG",
+      "name": "Sejal Glass"
+    },
+    {
+      "id": "AIS",
+      "name": "Asahi India"
+    },
+    {
+      "id": "BGW",
+      "name": "Borosil Renew"
+    },
+    {
+      "id": "HGG",
+      "name": "Haldyn Glass"
+    },
+    {
+      "id": "HSG01",
+      "name": "Viaan Ind"
+    },
+    {
+      "id": "HNG01",
+      "name": "Hind Nat Glass"
+    },
+    {
+      "id": "AFG",
+      "name": "Agarwal Float"
+    },
+    {
+      "id": "TSG",
+      "name": "Triveni Glass"
+    },
+    {
+      "id": "AGI",
+      "name": "Alembic Glass"
+    },
+    {
+      "id": "AGI02",
+      "name": "Atul Glass"
+    },
+    {
+      "id": "BGC",
+      "name": "Bhagwati Glass"
+    },
+    {
+      "id": "CG01",
+      "name": "Cana Glass"
+    },
+    {
+      "id": "CGG",
+      "name": "Philips Glass"
+    },
+    {
+      "id": "CGL",
+      "name": "Comet Glass Ltd"
+    },
+    {
+      "id": "EG01",
+      "name": "Excel Glasses"
+    },
+    {
+      "id": "DLG",
+      "name": "Dyna Lamps"
+    },
+    {
+      "id": "IAG",
+      "name": "IAG Company"
+    },
+    {
+      "id": "HG01",
+      "name": "Hotline Glass"
+    },
+    {
+      "id": "HSG",
+      "name": "Haryana Sheet"
+    },
+    {
+      "id": "GGL",
+      "name": "Piramal Glass"
+    },
+    {
+      "id": "JMR",
+      "name": "Jai Mata Glass"
+    },
+    {
+      "id": "MGI",
+      "name": "Greencrest Fin"
+    },
+    {
+      "id": "MGT",
+      "name": "Manna Glass-Tec"
+    },
+    {
+      "id": "NGI02",
+      "name": "Nuline Glasswar"
+    },
+    {
+      "id": "SVG",
+      "name": "Shree Vallabh"
+    }
+  ],
+  [
+    {
+      "id": "RCL02",
+      "name": "Securekloud Tec"
+    },
+    {
+      "id": "IT",
+      "name": "Infosys"
+    },
+    {
+      "id": "HCL02",
+      "name": "HCL Tech"
+    },
+    {
+      "id": "NII02",
+      "name": "COFORGE LTD."
+    },
+    {
+      "id": "KPITT54265",
+      "name": "KPIT Tech"
+    },
+    {
+      "id": "ET04",
+      "name": "Endurance Techn"
+    },
+    {
+      "id": "DT07",
+      "name": "Dixon Technolog"
+    },
+    {
+      "id": "HMT01",
+      "name": "Happiest Minds"
+    },
+    {
+      "id": "KPI01",
+      "name": "Birlasoft"
+    },
+    {
+      "id": "FIC",
+      "name": "Zensar Tech"
+    },
+    {
+      "id": "SO03",
+      "name": "Sterlite Techno"
+    },
+    {
+      "id": "MT14",
+      "name": "MTAR Tech"
+    },
+    {
+      "id": "KT06",
+      "name": "KFin Tech"
+    },
+    {
+      "id": "RTT",
+      "name": "Rategain Travel"
+    },
+    {
+      "id": "NST01",
+      "name": "Newgen Software"
+    },
+    {
+      "id": "NT03",
+      "name": "Nazara"
+    },
+    {
+      "id": "AET02",
+      "name": "Advanced Enzyme"
+    },
+    {
+      "id": "DTL",
+      "name": "Datamatics Glob"
+    },
+    {
+      "id": "AT23",
+      "name": "Avalon Technolo"
+    },
+    {
+      "id": "ZT01",
+      "name": "Zen Tech"
+    },
+    {
+      "id": "TT14",
+      "name": "Thyrocare Techn"
+    },
+    {
+      "id": "CI39",
+      "name": "Cigniti Tech"
+    },
+    {
+      "id": "DT05",
+      "name": "Dynamatic Tech"
+    },
+    {
+      "id": "LAT",
+      "name": "Lumax Auto Tech"
+    },
+    {
+      "id": "SC04",
+      "name": "Savita Oil Tech"
+    }
+  ],
+  [
+    {
+      "id": "STT01",
+      "name": "Silver Touch Te"
+    },
+    {
+      "id": "SAT02",
+      "name": "Nextgen"
+    },
+    {
+      "id": "SI",
+      "name": "Silverline"
+    },
+    {
+      "id": "IT",
+      "name": "Infosys"
+    },
+    {
+      "id": "HCL02",
+      "name": "HCL Tech"
+    },
+    {
+      "id": "NII02",
+      "name": "COFORGE LTD."
+    },
+    {
+      "id": "KPITT54265",
+      "name": "KPIT Tech"
+    },
+    {
+      "id": "ET04",
+      "name": "Endurance Techn"
+    },
+    {
+      "id": "DT07",
+      "name": "Dixon Technolog"
+    },
+    {
+      "id": "HMT01",
+      "name": "Happiest Minds"
+    },
+    {
+      "id": "KPI01",
+      "name": "Birlasoft"
+    },
+    {
+      "id": "FIC",
+      "name": "Zensar Tech"
+    },
+    {
+      "id": "SO03",
+      "name": "Sterlite Techno"
+    },
+    {
+      "id": "MT14",
+      "name": "MTAR Tech"
+    },
+    {
+      "id": "KT06",
+      "name": "KFin Tech"
+    },
+    {
+      "id": "RTT",
+      "name": "Rategain Travel"
+    },
+    {
+      "id": "NST01",
+      "name": "Newgen Software"
+    },
+    {
+      "id": "NT03",
+      "name": "Nazara"
+    },
+    {
+      "id": "AET02",
+      "name": "Advanced Enzyme"
+    },
+    {
+      "id": "DTL",
+      "name": "Datamatics Glob"
+    },
+    {
+      "id": "AT23",
+      "name": "Avalon Technolo"
+    },
+    {
+      "id": "ZT01",
+      "name": "Zen Tech"
+    },
+    {
+      "id": "TT14",
+      "name": "Thyrocare Techn"
+    },
+    {
+      "id": "CI39",
+      "name": "Cigniti Tech"
+    },
+    {
+      "id": "DT05",
+      "name": "Dynamatic Tech"
+    }
+  ],
+  [
+    {
+      "id": "SEP01",
+      "name": "Shaily Engg"
+    },
+    {
+      "id": "TEL",
+      "name": "Tata Motors"
+    },
+    {
+      "id": "AIE01",
+      "name": "AIA Engineering"
+    },
+    {
+      "id": "EEC",
+      "name": "Elecon Eng"
+    },
+    {
+      "id": "HIE",
+      "name": "HG Infra Engg"
+    },
+    {
+      "id": "TE10",
+      "name": "Triveni Engg"
+    },
+    {
+      "id": "SE15",
+      "name": "Suprajit Eng"
+    },
+    {
+      "id": "VE08",
+      "name": "Varroc Engineer"
+    },
+    {
+      "id": "NSE",
+      "name": "NESCO"
+    },
+    {
+      "id": "TEE",
+      "name": "Techno Electric"
+    },
+    {
+      "id": "SE30",
+      "name": "Sansera Eng"
+    },
+    {
+      "id": "SIS06",
+      "name": "ISGEC Heavy Eng"
+    },
+    {
+      "id": "MTP02",
+      "name": "Mold-Tek Pack"
+    },
+    {
+      "id": "BEP",
+      "name": "Bhansali Eng"
+    },
+    {
+      "id": "PEC",
+      "name": "Patel Eng"
+    },
+    {
+      "id": "PSO",
+      "name": "Seamec"
+    },
+    {
+      "id": "TRE",
+      "name": "Texmaco Rail"
+    },
+    {
+      "id": "TE13",
+      "name": "Thejo Engg"
+    },
+    {
+      "id": "LME",
+      "name": "Lloyds Metals"
+    },
+    {
+      "id": "ANUP54246",
+      "name": "TAEL"
+    },
+    {
+      "id": "ITT01",
+      "name": "Axiscades Tech"
+    },
+    {
+      "id": "STE02",
+      "name": "Salasar Techno"
+    },
+    {
+      "id": "JE04",
+      "name": "Jash Engineerin"
+    },
+    {
+      "id": "PL",
+      "name": "Pitti Engineeri"
+    },
+    {
+      "id": "LPP",
+      "name": "Linc"
+    }
+  ],
+  [
+    {
+      "id": "SGI01",
+      "name": "Synergy Green I"
+    },
+    {
+      "id": "GREEN54285",
+      "name": "Greenpanel Ind"
+    },
+    {
+      "id": "GI28",
+      "name": "Greenlam Ind"
+    },
+    {
+      "id": "HSI",
+      "name": "AGI Greenpac"
+    },
+    {
+      "id": "GI19",
+      "name": "Greenply Ind"
+    },
+    {
+      "id": "MGI",
+      "name": "Greencrest Fin"
+    },
+    {
+      "id": "STF01",
+      "name": "Bio Green Ind"
+    },
+    {
+      "id": "RI",
+      "name": "Reliance"
+    },
+    {
+      "id": "TI01",
+      "name": "Titan Company"
+    },
+    {
+      "id": "SPI",
+      "name": "Sun Pharma"
+    },
+    {
+      "id": "ADANI54145",
+      "name": "Adani Green Ene"
+    },
+    {
+      "id": "PI11",
+      "name": "Pidilite Ind"
+    },
+    {
+      "id": "GI01",
+      "name": "Grasim"
+    },
+    {
+      "id": "BI",
+      "name": "Britannia"
+    },
+    {
+      "id": "H",
+      "name": "Hindalco"
+    },
+    {
+      "id": "MI25",
+      "name": "Marico"
+    },
+    {
+      "id": "MIC",
+      "name": "Bosch"
+    },
+    {
+      "id": "SI10",
+      "name": "UPL"
+    },
+    {
+      "id": "PII",
+      "name": "PI Industries"
+    },
+    {
+      "id": "PI35",
+      "name": "Page Industries"
+    },
+    {
+      "id": "BI03",
+      "name": "Balkrishna Ind"
+    },
+    {
+      "id": "SI48",
+      "name": "Supreme Ind"
+    },
+    {
+      "id": "RSI",
+      "name": "Patanjali Foods"
+    },
+    {
+      "id": "SE20",
+      "name": "Solar Ind"
+    },
+    {
+      "id": "MI44",
+      "name": "UNO Minda"
+    }
+  ],
+  [
+    {
+      "id": "SO05",
+      "name": "Shanti Overseas"
+    },
+    {
+      "id": "II10",
+      "name": "Infar (India)"
+    },
+    {
+      "id": "MIL07",
+      "name": "Magnetix"
+    },
+    {
+      "id": "WIL",
+      "name": "Woolways"
+    },
+    {
+      "id": "EI09",
+      "name": "Europlast India"
+    },
+    {
+      "id": "DI10",
+      "name": "Digiflex India"
+    },
+    {
+      "id": "GSP01",
+      "name": "GSPL India"
+    },
+    {
+      "id": "GI15",
+      "name": "Gresoil India"
+    },
+    {
+      "id": "TI05",
+      "name": "Terryfab India"
+    },
+    {
+      "id": "CI20",
+      "name": "Clariant India"
+    },
+    {
+      "id": "IIL01",
+      "name": "Intecon (India)"
+    },
+    {
+      "id": "SIT01",
+      "name": "Swede (India)"
+    },
+    {
+      "id": "PI10",
+      "name": "Photoquip India"
+    },
+    {
+      "id": "CI18",
+      "name": "Cosco India"
+    },
+    {
+      "id": "LI",
+      "name": "Lactose India"
+    },
+    {
+      "id": "AI03",
+      "name": "Acrow India"
+    },
+    {
+      "id": "AEC01",
+      "name": "AEC India"
+    },
+    {
+      "id": "BI02",
+      "name": "Banka India"
+    },
+    {
+      "id": "GSL",
+      "name": "GSL India"
+    },
+    {
+      "id": "KI07",
+      "name": "Kengold India"
+    },
+    {
+      "id": "NI12",
+      "name": "Nubal India"
+    },
+    {
+      "id": "TMT",
+      "name": "TMT India"
+    },
+    {
+      "id": "TI04",
+      "name": "Tektronix India"
+    },
+    {
+      "id": "AI29",
+      "name": "AksharChem"
+    },
+    {
+      "id": "AI31",
+      "name": "Autolite India"
+    }
+  ],
+  [
+    {
+      "id": "SI72",
+      "name": "Sikko Industrie"
+    },
+    {
+      "id": "RI",
+      "name": "Reliance"
+    },
+    {
+      "id": "TI01",
+      "name": "Titan Company"
+    },
+    {
+      "id": "SPI",
+      "name": "Sun Pharma"
+    },
+    {
+      "id": "PI11",
+      "name": "Pidilite Ind"
+    },
+    {
+      "id": "GI01",
+      "name": "Grasim"
+    },
+    {
+      "id": "BI",
+      "name": "Britannia"
+    },
+    {
+      "id": "H",
+      "name": "Hindalco"
+    },
+    {
+      "id": "MI25",
+      "name": "Marico"
+    },
+    {
+      "id": "MIC",
+      "name": "Bosch"
+    },
+    {
+      "id": "SI10",
+      "name": "UPL"
+    },
+    {
+      "id": "PII",
+      "name": "PI Industries"
+    },
+    {
+      "id": "PI35",
+      "name": "Page Industries"
+    },
+    {
+      "id": "BI03",
+      "name": "Balkrishna Ind"
+    },
+    {
+      "id": "SI48",
+      "name": "Supreme Ind"
+    },
+    {
+      "id": "RSI",
+      "name": "Patanjali Foods"
+    },
+    {
+      "id": "SE20",
+      "name": "Solar Ind"
+    },
+    {
+      "id": "MI44",
+      "name": "UNO Minda"
+    },
+    {
+      "id": "OAR",
+      "name": "TOYAM SPORTS"
+    },
+    {
+      "id": "KEI",
+      "name": "KEI Industries"
+    },
+    {
+      "id": "AI",
+      "name": "Aarti Ind"
+    },
+    {
+      "id": "EI",
+      "name": "Exide Ind"
+    },
+    {
+      "id": "AI01",
+      "name": "Trident"
+    },
+    {
+      "id": "GS",
+      "name": "Godrej Ind"
+    },
+    {
+      "id": "FOI",
+      "name": "Fine Organics"
+    }
+  ],
+  [
+    {
+      "id": "SR06",
+      "name": "Silgo Retail"
+    },
+    {
+      "id": "PFR",
+      "name": "Aditya Birla F"
+    },
+    {
+      "id": "VR03",
+      "name": "V-Mart Retail"
+    },
+    {
+      "id": "BCR",
+      "name": "Bhatia Communic"
+    },
+    {
+      "id": "CRI01",
+      "name": "Cantabil Retail"
+    },
+    {
+      "id": "7RL",
+      "name": "7NR Retail"
+    },
+    {
+      "id": "SPENC54233",
+      "name": "Spencer Retail"
+    },
+    {
+      "id": "SR09",
+      "name": "Sun Retail"
+    },
+    {
+      "id": "OHR",
+      "name": "Osia Hyper Reta"
+    },
+    {
+      "id": "VR02",
+      "name": "V2 Retail"
+    },
+    {
+      "id": "WOR",
+      "name": "White Organic"
+    },
+    {
+      "id": "FR",
+      "name": "Future Retail"
+    },
+    {
+      "id": "PRAXI54090",
+      "name": "Praxis Home Ret"
+    },
+    {
+      "id": "PFI",
+      "name": "Future Ent"
+    },
+    {
+      "id": "TMR",
+      "name": "Heads UP Vent"
+    },
+    {
+      "id": "PRI",
+      "name": "Future Ent DVR"
+    },
+    {
+      "id": "BCF04",
+      "name": "Bella Casa"
+    },
+    {
+      "id": "RR07",
+      "name": "RCL Retail"
+    },
+    {
+      "id": "VRO",
+      "name": "Vasa Retail and"
+    },
+    {
+      "id": "AER01",
+      "name": "ASRL-RE"
+    },
+    {
+      "id": "7RR",
+      "name": "7NR Retail RE"
+    },
+    {
+      "id": "ABF",
+      "name": "AB Fashion-RE"
+    },
+    {
+      "id": "ABF01",
+      "name": "AB F&R-PP"
+    },
+    {
+      "id": "ABF02",
+      "name": "ABFRLPP1"
+    },
+    {
+      "id": "BR03",
+      "name": "Brandhouse"
+    }
+  ],
+  [
+    {
+      "id": "S06",
+      "name": "Steelcast"
+    }
+  ],
+  [
+    {
+      "id": "TF15",
+      "name": "TIPSFILMS"
+    },
+    {
+      "id": "JP09",
+      "name": "Jindal PolyFilm"
+    },
+    {
+      "id": "TI25",
+      "name": "Tips Industries"
+    },
+    {
+      "id": "CF08",
+      "name": "Cosmo First"
+    },
+    {
+      "id": "NE01",
+      "name": "Nahar Poly Film"
+    },
+    {
+      "id": "JPF",
+      "name": "Consol Finvest"
+    },
+    {
+      "id": "GVF",
+      "name": "GV Films"
+    },
+    {
+      "id": "GP",
+      "name": "GRWRHITECH"
+    },
+    {
+      "id": "BAG",
+      "name": "BAG Films"
+    },
+    {
+      "id": "GFI03",
+      "name": "Ganesh Films In"
+    },
+    {
+      "id": "FS10",
+      "name": "V R Films"
+    },
+    {
+      "id": "AF27",
+      "name": "Reliance Media"
+    },
+    {
+      "id": "FAW",
+      "name": "Global Films"
+    },
+    {
+      "id": "DEL",
+      "name": "Pooja Entertain"
+    },
+    {
+      "id": "F03",
+      "name": "P B Films"
+    },
+    {
+      "id": "GIT",
+      "name": "Divine Multi"
+    },
+    {
+      "id": "GA03",
+      "name": "Asian Films"
+    },
+    {
+      "id": "HPF",
+      "name": "Hindustan Photo"
+    },
+    {
+      "id": "NCI01",
+      "name": "BGIL Films"
+    },
+    {
+      "id": "SOF",
+      "name": "Supreme Orient"
+    }
+  ],
+  [
+    {
+      "id": "NMA",
+      "name": "Starteck Financ"
+    },
+    {
+      "id": "HDF",
+      "name": "HDFC"
+    },
+    {
+      "id": "BAF",
+      "name": "Bajaj Finance"
+    },
+    {
+      "id": "KMF",
+      "name": "Kotak Mahindra"
+    },
+    {
+      "id": "CIF01",
+      "name": "Chola Invest."
+    },
+    {
+      "id": "ASF03",
+      "name": "AU Small Financ"
+    },
+    {
+      "id": "STF",
+      "name": "Shriram Finance"
+    },
+    {
+      "id": "IRF",
+      "name": "IRFC"
+    },
+    {
+      "id": "PFC02",
+      "name": "Power Finance"
+    },
+    {
+      "id": "MF19",
+      "name": "Muthoot Finance"
+    },
+    {
+      "id": "SF20",
+      "name": "Sundaram Fin"
+    },
+    {
+      "id": "ML07",
+      "name": "Poonawalla Fin"
+    },
+    {
+      "id": "LFH",
+      "name": "L&T Finance"
+    },
+    {
+      "id": "LIC",
+      "name": "LIC Housing Fin"
+    },
+    {
+      "id": "II15",
+      "name": "IIFL Finance"
+    },
+    {
+      "id": "FBF",
+      "name": "Five-Star Busin"
+    },
+    {
+      "id": "IDF",
+      "name": "IDFC"
+    },
+    {
+      "id": "AVH",
+      "name": "APTUS VALUE"
+    },
+    {
+      "id": "PHF",
+      "name": "PNB Housing Fin"
+    },
+    {
+      "id": "MGF01",
+      "name": "Manappuram Fin"
+    },
+    {
+      "id": "ESF",
+      "name": "Equitas Bank"
+    },
+    {
+      "id": "USF",
+      "name": "Ujjivan Small"
+    },
+    {
+      "id": "HFF",
+      "name": "Home First"
+    },
+    {
+      "id": "IHF01",
+      "name": "Indiabulls Hsg"
+    },
+    {
+      "id": "FMF",
+      "name": "Fusion Micro"
+    }
+  ],
+  [
+    {
+      "id": "TT11",
+      "name": "Tarapur Trans"
+    },
+    {
+      "id": "VT9",
+      "name": "Voltamp Trans"
+    },
+    {
+      "id": "TRI",
+      "name": "Transformers"
+    },
+    {
+      "id": "ITT02",
+      "name": "Indo Tech Trans"
+    },
+    {
+      "id": "SDT02",
+      "name": "Star Delta Tran"
+    },
+    {
+      "id": "ATL03",
+      "name": "Accurate Transf"
+    },
+    {
+      "id": "MT05",
+      "name": "Mukati Transfor"
+    },
+    {
+      "id": "RT01",
+      "name": "Rams Transforme"
+    },
+    {
+      "id": "TEK",
+      "name": "Trans & Electr"
+    }
+  ],
+  [
+    {
+      "id": "SE28",
+      "name": "Supreme Enginee"
+    },
+    {
+      "id": "TEL",
+      "name": "Tata Motors"
+    },
+    {
+      "id": "SI48",
+      "name": "Supreme Ind"
+    },
+    {
+      "id": "AIE01",
+      "name": "AIA Engineering"
+    },
+    {
+      "id": "SP",
+      "name": "Supreme Petro"
+    },
+    {
+      "id": "EEC",
+      "name": "Elecon Eng"
+    },
+    {
+      "id": "HIE",
+      "name": "HG Infra Engg"
+    },
+    {
+      "id": "TE10",
+      "name": "Triveni Engg"
+    },
+    {
+      "id": "SE15",
+      "name": "Suprajit Eng"
+    },
+    {
+      "id": "VE08",
+      "name": "Varroc Engineer"
+    },
+    {
+      "id": "NSE",
+      "name": "NESCO"
+    },
+    {
+      "id": "TEE",
+      "name": "Techno Electric"
+    },
+    {
+      "id": "SE30",
+      "name": "Sansera Eng"
+    },
+    {
+      "id": "SIS06",
+      "name": "ISGEC Heavy Eng"
+    },
+    {
+      "id": "BEP",
+      "name": "Bhansali Eng"
+    },
+    {
+      "id": "PEC",
+      "name": "Patel Eng"
+    },
+    {
+      "id": "PSO",
+      "name": "Seamec"
+    },
+    {
+      "id": "TRE",
+      "name": "Texmaco Rail"
+    },
+    {
+      "id": "TE13",
+      "name": "Thejo Engg"
+    },
+    {
+      "id": "LME",
+      "name": "Lloyds Metals"
+    },
+    {
+      "id": "ANUP54246",
+      "name": "TAEL"
+    },
+    {
+      "id": "ITT01",
+      "name": "Axiscades Tech"
+    },
+    {
+      "id": "STE02",
+      "name": "Salasar Techno"
+    },
+    {
+      "id": "JE04",
+      "name": "Jash Engineerin"
+    },
+    {
+      "id": "SEP01",
+      "name": "Shaily Engg"
+    }
+  ],
+  [
+    {
+      "id": "SM16",
+      "name": "Sarthak Metals"
+    },
+    {
+      "id": "RMT",
+      "name": "Ratnamani Metal"
+    },
+    {
+      "id": "RMG",
+      "name": "Welspun Special"
+    },
+    {
+      "id": "IMF01",
+      "name": "Indian Metals"
+    },
+    {
+      "id": "LME",
+      "name": "Lloyds Metals"
+    },
+    {
+      "id": "OMM",
+      "name": "OM Infra"
+    },
+    {
+      "id": "MM05",
+      "name": "Modison"
+    },
+    {
+      "id": "BM01",
+      "name": "Bhagyanagar Ind"
+    },
+    {
+      "id": "MCM02",
+      "name": "Manaksia Coated"
+    },
+    {
+      "id": "AM11",
+      "name": "Alkali Metals"
+    },
+    {
+      "id": "UM01",
+      "name": "Unison Metals"
+    },
+    {
+      "id": "BMA",
+      "name": "Bothra Metals"
+    },
+    {
+      "id": "SM12",
+      "name": "Sacheta Metals"
+    },
+    {
+      "id": "PM04",
+      "name": "Pradeep Metals"
+    },
+    {
+      "id": "PM08",
+      "name": "Palco Metals"
+    },
+    {
+      "id": "BM04",
+      "name": "Pradhin"
+    },
+    {
+      "id": "AF26",
+      "name": "Sarthak Global"
+    },
+    {
+      "id": "ALP01",
+      "name": "Sarthak Ind"
+    },
+    {
+      "id": "AM04",
+      "name": "Alcobex Metals"
+    },
+    {
+      "id": "CSM",
+      "name": "Century Sheet"
+    },
+    {
+      "id": "DF",
+      "name": "E-Metals India"
+    },
+    {
+      "id": "CM",
+      "name": "Terrascope"
+    },
+    {
+      "id": "CNX08",
+      "name": "Nifty Metal"
+    },
+    {
+      "id": "HM01",
+      "name": "Hariyana Vent."
+    },
+    {
+      "id": "KM",
+      "name": "Kinjal Metals"
+    }
+  ],
+  [
+    {
+      "id": "SE27",
+      "name": "Tembo Global"
+    },
+    {
+      "id": "TGI",
+      "name": "TEMBO-RE"
+    },
+    {
+      "id": "HPF01",
+      "name": "Pearl Global In"
+    },
+    {
+      "id": "ZA",
+      "name": "Zuari Ind."
+    },
+    {
+      "id": "SF09",
+      "name": "Shiva Global"
+    },
+    {
+      "id": "VC10",
+      "name": "Vivid Global"
+    },
+    {
+      "id": "GIL06",
+      "name": "Global Ind"
+    },
+    {
+      "id": "GAI01",
+      "name": "Global Arya Ind"
+    },
+    {
+      "id": "MI38",
+      "name": "GB Global"
+    },
+    {
+      "id": "RI",
+      "name": "Reliance"
+    },
+    {
+      "id": "TI01",
+      "name": "Titan Company"
+    },
+    {
+      "id": "SPI",
+      "name": "Sun Pharma"
+    },
+    {
+      "id": "PI11",
+      "name": "Pidilite Ind"
+    },
+    {
+      "id": "GI01",
+      "name": "Grasim"
+    },
+    {
+      "id": "BI",
+      "name": "Britannia"
+    },
+    {
+      "id": "H",
+      "name": "Hindalco"
+    },
+    {
+      "id": "TT",
+      "name": "TATA Cons. Prod"
+    },
+    {
+      "id": "MI25",
+      "name": "Marico"
+    },
+    {
+      "id": "MIC",
+      "name": "Bosch"
+    },
+    {
+      "id": "SI10",
+      "name": "UPL"
+    },
+    {
+      "id": "PII",
+      "name": "PI Industries"
+    },
+    {
+      "id": "SGT",
+      "name": "Shree Global"
+    },
+    {
+      "id": "PI35",
+      "name": "Page Industries"
+    },
+    {
+      "id": "BI03",
+      "name": "Balkrishna Ind"
+    },
+    {
+      "id": "SI48",
+      "name": "Supreme Ind"
+    }
+  ],
+  [
+    {
+      "id": "SSF08",
+      "name": "Suryoday Small"
+    },
+    {
+      "id": "ASF03",
+      "name": "AU Small Financ"
+    },
+    {
+      "id": "ESF",
+      "name": "Equitas Bank"
+    },
+    {
+      "id": "USF",
+      "name": "Ujjivan Small"
+    },
+    {
+      "id": "KMF",
+      "name": "Kotak Mahindra"
+    },
+    {
+      "id": "HDF01",
+      "name": "HDFC Bank"
+    },
+    {
+      "id": "ICI02",
+      "name": "ICICI Bank"
+    },
+    {
+      "id": "SBI",
+      "name": "SBI"
+    },
+    {
+      "id": "HDF",
+      "name": "HDFC"
+    },
+    {
+      "id": "BAF",
+      "name": "Bajaj Finance"
+    },
+    {
+      "id": "UTI10",
+      "name": "Axis Bank"
+    },
+    {
+      "id": "IIB",
+      "name": "IndusInd Bank"
+    },
+    {
+      "id": "BOB",
+      "name": "Bank of Baroda"
+    },
+    {
+      "id": "CIF01",
+      "name": "Chola Invest."
+    },
+    {
+      "id": "IDB",
+      "name": "IDBI Bank"
+    },
+    {
+      "id": "PNB05",
+      "name": "PNB"
+    },
+    {
+      "id": "CB06",
+      "name": "Canara Bank"
+    },
+    {
+      "id": "STF",
+      "name": "Shriram Finance"
+    },
+    {
+      "id": "UBI01",
+      "name": "Union Bank"
+    },
+    {
+      "id": "IOB",
+      "name": "IOB"
+    },
+    {
+      "id": "YB",
+      "name": "Yes Bank"
+    },
+    {
+      "id": "IDF01",
+      "name": "IDFC First Bank"
+    },
+    {
+      "id": "IRF",
+      "name": "IRFC"
+    },
+    {
+      "id": "PFC02",
+      "name": "Power Finance"
+    },
+    {
+      "id": "MF19",
+      "name": "Muthoot Finance"
+    }
+  ],
+  [
+    {
+      "id": "SE26",
+      "name": "Softtech Engine"
+    },
+    {
+      "id": "GRS01",
+      "name": "Garden Reach Sh"
+    },
+    {
+      "id": "EI14",
+      "name": "Engineers India"
+    },
+    {
+      "id": "CEB",
+      "name": "Jupiter Wagons"
+    },
+    {
+      "id": "HEI",
+      "name": "Harsha Engineer"
+    },
+    {
+      "id": "VE07",
+      "name": "Vascon Engineer"
+    },
+    {
+      "id": "AE20",
+      "name": "Ahlada Engineer"
+    },
+    {
+      "id": "SES",
+      "name": "Sulabh Engineer"
+    },
+    {
+      "id": "RE",
+      "name": "Rajoo Engineers"
+    },
+    {
+      "id": "PES",
+      "name": "Prajay Engineer"
+    },
+    {
+      "id": "NE10",
+      "name": "Nitiraj Enginee"
+    },
+    {
+      "id": "JEC",
+      "name": "Josts Engineers"
+    },
+    {
+      "id": "APE01",
+      "name": "Ameya Precision"
+    },
+    {
+      "id": "SE25",
+      "name": "Shreeshay Engin"
+    },
+    {
+      "id": "FCE",
+      "name": "Filtra Consult"
+    },
+    {
+      "id": "CE05",
+      "name": "Conart Engineer"
+    },
+    {
+      "id": "HE02",
+      "name": "Hawa Engineers"
+    },
+    {
+      "id": "IE05",
+      "name": "Incon Engineers"
+    },
+    {
+      "id": "AIN",
+      "name": "Kohinoor Techno"
+    },
+    {
+      "id": "EI20",
+      "name": "EIL FPO"
+    },
+    {
+      "id": "FE",
+      "name": "Filtron Enginee"
+    },
+    {
+      "id": "HARIS54268",
+      "name": "HTE"
+    },
+    {
+      "id": "IE01",
+      "name": "Incorporated"
+    },
+    {
+      "id": "JEI",
+      "name": "Jord Engineers"
+    },
+    {
+      "id": "ME09",
+      "name": "Mukund Engg"
+    }
+  ],
+  [
+    {
+      "id": "IE03",
+      "name": "Indsil Hydro"
+    },
+    {
+      "id": "TCH",
+      "name": "Tecil Chemicals"
+    },
+    {
+      "id": "CG",
+      "name": "CG Power"
+    },
+    {
+      "id": "FCT",
+      "name": "Fert and Chem"
+    },
+    {
+      "id": "APP03",
+      "name": "Hitachi Energy"
+    },
+    {
+      "id": "JBC",
+      "name": "JB Chemicals"
+    },
+    {
+      "id": "CFC",
+      "name": "Chambal Fert"
+    },
+    {
+      "id": "RCF01",
+      "name": "Rashtriya Chem"
+    },
+    {
+      "id": "HCI01",
+      "name": "Himadri Special"
+    },
+    {
+      "id": "IIP",
+      "name": "Rattanindia Ent"
+    },
+    {
+      "id": "GAC01",
+      "name": "Guj Alkali"
+    },
+    {
+      "id": "JHP01",
+      "name": "Jaiprakash Pow"
+    },
+    {
+      "id": "TAC01",
+      "name": "IOL Chemicals"
+    },
+    {
+      "id": "HSS",
+      "name": "Kingfa Science"
+    },
+    {
+      "id": "OCP",
+      "name": "Orchid Pharma"
+    },
+    {
+      "id": "BCI01",
+      "name": "Bhagiradh Chem"
+    },
+    {
+      "id": "KDC01",
+      "name": "Kiri Industries"
+    },
+    {
+      "id": "MCF01",
+      "name": "Mangalore Chem"
+    },
+    {
+      "id": "GPU",
+      "name": "GMRP&UI"
+    },
+    {
+      "id": "PCP01",
+      "name": "Punjab Chemical"
+    },
+    {
+      "id": "PAC01",
+      "name": "Primo Chemicals"
+    },
+    {
+      "id": "OCC",
+      "name": "Oriental Carbon"
+    },
+    {
+      "id": "BCP01",
+      "name": "Bliss GVS"
+    },
+    {
+      "id": "KCF",
+      "name": "Khaitan Chemica"
+    },
+    {
+      "id": "SSC02",
+      "name": "Sukhjit Starch"
+    }
+  ],
+  [
+    {
+      "id": "VC14",
+      "name": "Vaxtex"
+    }
+  ],
+  [
+    {
+      "id": "WFP",
+      "name": "Wealth First Po"
+    },
+    {
+      "id": "IDF01",
+      "name": "IDFC First Bank"
+    },
+    {
+      "id": "IIFLW54277",
+      "name": "360 ONE WAM"
+    },
+    {
+      "id": "FS07",
+      "name": "Firstsource Sol"
+    },
+    {
+      "id": "HFF",
+      "name": "Home First"
+    },
+    {
+      "id": "ARW",
+      "name": "Anand Rathi"
+    },
+    {
+      "id": "CF08",
+      "name": "Cosmo First"
+    },
+    {
+      "id": "TFC03",
+      "name": "TCPL Packaging"
+    },
+    {
+      "id": "ILF",
+      "name": "ILandFS"
+    },
+    {
+      "id": "HBP",
+      "name": "HB Portfolio"
+    },
+    {
+      "id": "WPF",
+      "name": "Generic Eng"
+    },
+    {
+      "id": "FCF",
+      "name": "First Custodian"
+    },
+    {
+      "id": "BP12",
+      "name": "Brilliant Port"
+    },
+    {
+      "id": "MPM",
+      "name": "Mideast Portfol"
+    },
+    {
+      "id": "LI02",
+      "name": "SW Investments"
+    },
+    {
+      "id": "IQM",
+      "name": "FIRST FINTEC"
+    },
+    {
+      "id": "FCH",
+      "name": "Capital First"
+    },
+    {
+      "id": "FFS",
+      "name": "First Financial"
+    },
+    {
+      "id": "FLC",
+      "name": "First Leasing"
+    },
+    {
+      "id": "DPM",
+      "name": "Dynamic Portfol"
+    },
+    {
+      "id": "FWI",
+      "name": "First Winner"
+    }
+  ],
+  [
+    {
+      "id": "UTS",
+      "name": "Uniinfo Telecom"
+    },
+    {
+      "id": "TIT",
+      "name": "Tulip Telecom"
+    },
+    {
+      "id": "SVE",
+      "name": "Nivyah Infra"
+    },
+    {
+      "id": "TCS",
+      "name": "TCS"
+    },
+    {
+      "id": "SCP03",
+      "name": "SBI Card"
+    },
+    {
+      "id": "LTS",
+      "name": "L&T Technology"
+    },
+    {
+      "id": "MMF04",
+      "name": "M&M Financial"
+    },
+    {
+      "id": "S11",
+      "name": "Oracle Fin Serv"
+    },
+    {
+      "id": "CRI",
+      "name": "CRISIL"
+    },
+    {
+      "id": "MI",
+      "name": "Max Financial"
+    },
+    {
+      "id": "DSL01",
+      "name": "Capri Global"
+    },
+    {
+      "id": "CDS",
+      "name": "CDSL"
+    },
+    {
+      "id": "CAM",
+      "name": "CAMS"
+    },
+    {
+      "id": "MOF01",
+      "name": "Motilal Oswal"
+    },
+    {
+      "id": "MHS01",
+      "name": "Medplus Health"
+    },
+    {
+      "id": "BLS",
+      "name": "BLS Internation"
+    },
+    {
+      "id": "ES07",
+      "name": "eClerx Services"
+    },
+    {
+      "id": "EC06",
+      "name": "Edelweiss"
+    },
+    {
+      "id": "IF",
+      "name": "Visagar Fin"
+    },
+    {
+      "id": "SIS07",
+      "name": "SIS"
+    },
+    {
+      "id": "MFS09",
+      "name": "MAS Financial S"
+    },
+    {
+      "id": "UFS01",
+      "name": "Ujjivan Financi"
+    },
+    {
+      "id": "TS15",
+      "name": "TeamLease Ser."
+    },
+    {
+      "id": "CFS01",
+      "name": "Choice Internat"
+    },
+    {
+      "id": "PCA",
+      "name": "Prudent Advisor"
+    }
+  ],
+  [
+    {
+      "id": "UE",
+      "name": "Uma Exports"
+    },
+    {
+      "id": "AE01",
+      "name": "Adani Enterpris"
+    },
+    {
+      "id": "RE07",
+      "name": "Rajesh Exports"
+    },
+    {
+      "id": "GAE",
+      "name": "Guj Amb Exports"
+    },
+    {
+      "id": "GE05",
+      "name": "Gokaldas Export"
+    },
+    {
+      "id": "NS",
+      "name": "Nucleus Softwar"
+    },
+    {
+      "id": "CLS",
+      "name": "Chaman Lal Seti"
+    },
+    {
+      "id": "NE01",
+      "name": "Nahar Poly Film"
+    },
+    {
+      "id": "TIE",
+      "name": "Tatia Global"
+    },
+    {
+      "id": "SE29",
+      "name": "SBC Exports"
+    },
+    {
+      "id": "OE",
+      "name": "Orbit Exports"
+    },
+    {
+      "id": "SE18",
+      "name": "SEL"
+    },
+    {
+      "id": "STE01",
+      "name": "STEL Holdings"
+    },
+    {
+      "id": "JKD",
+      "name": "Umang Dairies"
+    },
+    {
+      "id": "LME01",
+      "name": "Le Merite"
+    },
+    {
+      "id": "BHE02",
+      "name": "Bhandari Hosier"
+    },
+    {
+      "id": "ATE01",
+      "name": "EFC"
+    },
+    {
+      "id": "ME05",
+      "name": "Poddar Housing"
+    },
+    {
+      "id": "UC05",
+      "name": "Uma Converter"
+    },
+    {
+      "id": "ATE",
+      "name": "Asian Tea Expo"
+    },
+    {
+      "id": "ADE",
+      "name": "Aarvee Denim"
+    },
+    {
+      "id": "ZE",
+      "name": "Zenithexpo"
+    },
+    {
+      "id": "NE",
+      "name": "Nagreeka Export"
+    },
+    {
+      "id": "FTE",
+      "name": "Faze Three"
+    },
+    {
+      "id": "AET",
+      "name": "Axtel Ind"
+    }
+  ],
+  [
+    {
+      "id": "WF03",
+      "name": "Wonder Elect."
+    },
+    {
+      "id": "BHE",
+      "name": "BHEL"
+    },
+    {
+      "id": "BE",
+      "name": "Bajaj Electric"
+    },
+    {
+      "id": "WH03",
+      "name": "Wonderla"
+    },
+    {
+      "id": "AE21",
+      "name": "Artemis Elect"
+    },
+    {
+      "id": "INE",
+      "name": "India Nippon"
+    },
+    {
+      "id": "ME21",
+      "name": "Marine Electric"
+    },
+    {
+      "id": "CE9",
+      "name": "Classic Elec"
+    },
+    {
+      "id": "GEF",
+      "name": "Goa Electricals"
+    },
+    {
+      "id": "KE02",
+      "name": "Khaitan Elec"
+    },
+    {
+      "id": "KEL",
+      "name": "Kanohar Electri"
+    },
+    {
+      "id": "SPR",
+      "name": "REIL Electrical"
+    },
+    {
+      "id": "TEK",
+      "name": "Trans & Electr"
+    },
+    {
+      "id": "SVE",
+      "name": "Nivyah Infra"
+    }
+  ],
+  [
+    {
+      "id": "UPG",
+      "name": "United Polyfab"
+    },
+    {
+      "id": "GAC",
+      "name": "Ambuja Cements"
+    },
+    {
+      "id": "MC08",
+      "name": "United Spirits"
+    },
+    {
+      "id": "SI10",
+      "name": "UPL"
+    },
+    {
+      "id": "UBB",
+      "name": "United Brewerie"
+    },
+    {
+      "id": "GUJAR54281",
+      "name": "Gujarat Fluoro"
+    },
+    {
+      "id": "GGC",
+      "name": "Gujarat Gas"
+    },
+    {
+      "id": "GSP02",
+      "name": "Guj State Petro"
+    },
+    {
+      "id": "GNV",
+      "name": "GNFC"
+    },
+    {
+      "id": "GSF",
+      "name": "GSFC"
+    },
+    {
+      "id": "WGS",
+      "name": "Welspun Corp"
+    },
+    {
+      "id": "GPP03",
+      "name": "Gujarat Pipavav"
+    },
+    {
+      "id": "GAE",
+      "name": "Guj Amb Exports"
+    },
+    {
+      "id": "GMD",
+      "name": "Guj Mineral"
+    },
+    {
+      "id": "GAC01",
+      "name": "Guj Alkali"
+    },
+    {
+      "id": "GHC",
+      "name": "Guj Heavy Chem"
+    },
+    {
+      "id": "RMG",
+      "name": "Welspun Special"
+    },
+    {
+      "id": "GIP",
+      "name": "Guj Ind Power"
+    },
+    {
+      "id": "UP02",
+      "name": "Uniphos Ent"
+    },
+    {
+      "id": "LS01",
+      "name": "Gujarat Natural"
+    },
+    {
+      "id": "GF07",
+      "name": "GFL"
+    },
+    {
+      "id": "GRR",
+      "name": "GRP"
+    },
+    {
+      "id": "UDT",
+      "name": "United Drilling"
+    },
+    {
+      "id": "GC10",
+      "name": "Munjal Auto Ind"
+    },
+    {
+      "id": "HGG",
+      "name": "Haldyn Glass"
+    }
+  ],
+  [
+    {
+      "id": "JKU",
+      "name": "Udaipur Cement"
+    },
+    {
+      "id": "UTC",
+      "name": "UltraTechCement"
+    },
+    {
+      "id": "SC12",
+      "name": "Shree Cements"
+    },
+    {
+      "id": "GAC",
+      "name": "Ambuja Cements"
+    },
+    {
+      "id": "OCL",
+      "name": "Dalmia Bharat"
+    },
+    {
+      "id": "ACC",
+      "name": "ACC"
+    },
+    {
+      "id": "JKC03",
+      "name": "J. K. Cement"
+    },
+    {
+      "id": "MC",
+      "name": "Ramco Cements"
+    },
+    {
+      "id": "LMW",
+      "name": "Lakshmi Machine"
+    },
+    {
+      "id": "JKC",
+      "name": "JK Lakshmi Cem"
+    },
+    {
+      "id": "BGW",
+      "name": "Borosil Renew"
+    },
+    {
+      "id": "IC",
+      "name": "India Cements"
+    },
+    {
+      "id": "PC",
+      "name": "Prism Johnson"
+    },
+    {
+      "id": "SFC02",
+      "name": "Star Cement"
+    },
+    {
+      "id": "PC13",
+      "name": "Rain Industries"
+    },
+    {
+      "id": "MC14",
+      "name": "Heidelberg Cem"
+    },
+    {
+      "id": "HS03",
+      "name": "Luharuka Media"
+    },
+    {
+      "id": "DCB",
+      "name": "Dalmia Sugar"
+    },
+    {
+      "id": "SC27",
+      "name": "Sagar Cement"
+    },
+    {
+      "id": "THC",
+      "name": "ITD Cementation"
+    },
+    {
+      "id": "OC12",
+      "name": "Orient Cement"
+    },
+    {
+      "id": "M02",
+      "name": "Mukand"
+    },
+    {
+      "id": "USW",
+      "name": "Ugar Sugar Work"
+    },
+    {
+      "id": "SDC",
+      "name": "Shree Digvijay"
+    },
+    {
+      "id": "AC16",
+      "name": "Andhra Cement"
+    }
+  ],
+  [
+    {
+      "id": "VL09",
+      "name": "Vineet Lab"
+    },
+    {
+      "id": "DL03",
+      "name": "Divis Labs"
+    },
+    {
+      "id": "DRL",
+      "name": "Dr Reddys Labs"
+    },
+    {
+      "id": "AL16",
+      "name": "Alkem Lab"
+    },
+    {
+      "id": "IL",
+      "name": "Ipca Labs"
+    },
+    {
+      "id": "JL",
+      "name": "Jyothy Labs"
+    },
+    {
+      "id": "CPL",
+      "name": "Caplin Labs"
+    },
+    {
+      "id": "NL",
+      "name": "Neuland Lab"
+    },
+    {
+      "id": "UL02",
+      "name": "Unichem Labs"
+    },
+    {
+      "id": "ML06",
+      "name": "Morepen Lab"
+    },
+    {
+      "id": "ST18",
+      "name": "Zenotech Labs"
+    },
+    {
+      "id": "ZIMLA54140",
+      "name": "ZIM Lab"
+    },
+    {
+      "id": "ISL",
+      "name": "Ind-Swift Labs"
+    },
+    {
+      "id": "PP26",
+      "name": "Gennex Labs"
+    },
+    {
+      "id": "VSA",
+      "name": "Vaidya Sane Ayu"
+    },
+    {
+      "id": "BL04",
+      "name": "Brooks Labs"
+    },
+    {
+      "id": "AL11",
+      "name": "Alpa Labs"
+    },
+    {
+      "id": "AL18",
+      "name": "Arvee Laborator"
+    },
+    {
+      "id": "JHS01",
+      "name": "JHS Svendgaard"
+    },
+    {
+      "id": "NLH",
+      "name": "Nidan Lab"
+    },
+    {
+      "id": "CL03",
+      "name": "Coral Labs"
+    },
+    {
+      "id": "OL02",
+      "name": "Ortin Labs"
+    },
+    {
+      "id": "NRL",
+      "name": "Novateor Labs"
+    },
+    {
+      "id": "ML",
+      "name": "Makers Labs"
+    },
+    {
+      "id": "GTL",
+      "name": "Guj Terce Labs"
+    }
+  ],
+  [
+    {
+      "id": "VI14",
+      "name": "Visesh Infotech"
+    }
+  ],
+  [
+    {
+      "id": "VO04",
+      "name": "Vinny Overseas"
+    },
+    {
+      "id": "IOB",
+      "name": "IOB"
+    },
+    {
+      "id": "LTO",
+      "name": "LT Foods"
+    },
+    {
+      "id": "GOE",
+      "name": "Genus Power"
+    },
+    {
+      "id": "GRM01",
+      "name": "GRM Overseas"
+    },
+    {
+      "id": "MO",
+      "name": "Maral Overseas"
+    },
+    {
+      "id": "SO01",
+      "name": "Kohinoor Foods"
+    },
+    {
+      "id": "BO02",
+      "name": "Bang Overseas"
+    },
+    {
+      "id": "OO",
+      "name": "Omkar Overseas"
+    },
+    {
+      "id": "MOE",
+      "name": "Moxsh Overseas"
+    },
+    {
+      "id": "PF07",
+      "name": "Biogen Pharmach"
+    },
+    {
+      "id": "SO05",
+      "name": "Shanti Overseas"
+    },
+    {
+      "id": "LO01",
+      "name": "Lahoti Over"
+    },
+    {
+      "id": "JO02",
+      "name": "Jonjua Overseas"
+    },
+    {
+      "id": "BO01",
+      "name": "Beeyu Overseas"
+    },
+    {
+      "id": "VRO",
+      "name": "Vasa Retail and"
+    },
+    {
+      "id": "EO",
+      "name": "Eastern Oversea"
+    },
+    {
+      "id": "DO02",
+      "name": "Dharnendra Over"
+    },
+    {
+      "id": "GOD",
+      "name": "Trans Asia Corp"
+    },
+    {
+      "id": "ITO",
+      "name": "Haryana Tex"
+    },
+    {
+      "id": "JO01",
+      "name": "Jyoti Overseas"
+    },
+    {
+      "id": "KO01",
+      "name": "Kunal Overseas"
+    },
+    {
+      "id": "KO02",
+      "name": "Khaitan Over"
+    },
+    {
+      "id": "KO03",
+      "name": "Kamal Over"
+    },
+    {
+      "id": "KOE01",
+      "name": "Kiran Overseas"
+    }
+  ],
+  [
+    {
+      "id": "IWS",
+      "name": "Yaari Digital"
+    },
+    {
+      "id": "I09",
+      "name": "Integrated Dig"
+    },
+    {
+      "id": "ADS01",
+      "name": "Allied Digital"
+    },
+    {
+      "id": "AIS03",
+      "name": "ANI Integrated"
+    },
+    {
+      "id": "ICS01",
+      "name": "Integrated Cap"
+    },
+    {
+      "id": "IPS02",
+      "name": "Integrated Pers"
+    },
+    {
+      "id": "IFS",
+      "name": "Integ Fin Serv"
+    },
+    {
+      "id": "TCS",
+      "name": "TCS"
+    },
+    {
+      "id": "SCP03",
+      "name": "SBI Card"
+    },
+    {
+      "id": "LTS",
+      "name": "L&T Technology"
+    },
+    {
+      "id": "MMF04",
+      "name": "M&M Financial"
+    },
+    {
+      "id": "S11",
+      "name": "Oracle Fin Serv"
+    },
+    {
+      "id": "CRI",
+      "name": "CRISIL"
+    },
+    {
+      "id": "MI",
+      "name": "Max Financial"
+    },
+    {
+      "id": "DSL01",
+      "name": "Capri Global"
+    },
+    {
+      "id": "CDS",
+      "name": "CDSL"
+    },
+    {
+      "id": "CAM",
+      "name": "CAMS"
+    },
+    {
+      "id": "MOF01",
+      "name": "Motilal Oswal"
+    },
+    {
+      "id": "MHS01",
+      "name": "Medplus Health"
+    },
+    {
+      "id": "BLS",
+      "name": "BLS Internation"
+    },
+    {
+      "id": "ES07",
+      "name": "eClerx Services"
+    },
+    {
+      "id": "EC06",
+      "name": "Edelweiss"
+    },
+    {
+      "id": "IF",
+      "name": "Visagar Fin"
+    },
+    {
+      "id": "SIS07",
+      "name": "SIS"
+    },
+    {
+      "id": "MFS09",
+      "name": "MAS Financial S"
+    }
+  ],
+  [
+    {
+      "id": "ZE01",
+      "name": "Zodiac Energy"
+    },
+    {
+      "id": "ADANI54145",
+      "name": "Adani Green Ene"
+    },
+    {
+      "id": "JE02",
+      "name": "JSW Energy"
+    },
+    {
+      "id": "APP03",
+      "name": "Hitachi Energy"
+    },
+    {
+      "id": "IEE",
+      "name": "IEX"
+    },
+    {
+      "id": "SE17",
+      "name": "Suzlon Energy"
+    },
+    {
+      "id": "SME05",
+      "name": "Shyam Metalics"
+    },
+    {
+      "id": "SM09",
+      "name": "Swan Energy"
+    },
+    {
+      "id": "SWS",
+      "name": "Sterling Wilson"
+    },
+    {
+      "id": "BSE",
+      "name": "Reliance Infra"
+    },
+    {
+      "id": "RAS",
+      "name": "Sarda Energy"
+    },
+    {
+      "id": "KPIGL54232",
+      "name": "KPIGREEN"
+    },
+    {
+      "id": "IWE",
+      "name": "Inox Wind Energ"
+    },
+    {
+      "id": "LME",
+      "name": "Lloyds Metals"
+    },
+    {
+      "id": "IGE02",
+      "name": "INOXGREEN"
+    },
+    {
+      "id": "ASE03",
+      "name": "Avadh Sugar"
+    },
+    {
+      "id": "LS01",
+      "name": "Gujarat Natural"
+    },
+    {
+      "id": "NPS",
+      "name": "Swelect Energy"
+    },
+    {
+      "id": "MSE01",
+      "name": "Magadh Sugar"
+    },
+    {
+      "id": "AOS",
+      "name": "Asian Energy"
+    },
+    {
+      "id": "BES",
+      "name": "BGR Energy"
+    },
+    {
+      "id": "DI24",
+      "name": "Deep Energy Res"
+    },
+    {
+      "id": "SE24",
+      "name": "Solex Energy"
+    },
+    {
+      "id": "WSL",
+      "name": "Websol Energy"
+    },
+    {
+      "id": "EES",
+      "name": "EKI Energy"
+    }
+  ],
+  [
+    {
+      "id": "SBS01",
+      "name": "WE WIN"
+    },
+    {
+      "id": "IIFLW54277",
+      "name": "360 ONE WAM"
+    },
+    {
+      "id": "DIC",
+      "name": "Westlife Food"
+    },
+    {
+      "id": "CNA",
+      "name": "Zydus Wellness"
+    },
+    {
+      "id": "WI03",
+      "name": "Welspun India"
+    },
+    {
+      "id": "RW",
+      "name": "Rajnish Wellnes"
+    },
+    {
+      "id": "WGS",
+      "name": "Welspun Corp"
+    },
+    {
+      "id": "AW",
+      "name": "Delta Corp"
+    },
+    {
+      "id": "JSW",
+      "name": "JSW Holdings"
+    },
+    {
+      "id": "WCP",
+      "name": "West Coast Pap"
+    },
+    {
+      "id": "IW",
+      "name": "Inox Wind"
+    },
+    {
+      "id": "ARW",
+      "name": "Anand Rathi"
+    },
+    {
+      "id": "GWI",
+      "name": "Grauer and Weil"
+    },
+    {
+      "id": "MSK",
+      "name": "Welspun Enter"
+    },
+    {
+      "id": "WH01",
+      "name": "Venkys"
+    },
+    {
+      "id": "RMG",
+      "name": "Welspun Special"
+    },
+    {
+      "id": "WI05",
+      "name": "Wendt"
+    },
+    {
+      "id": "AO",
+      "name": "Ador Welding"
+    },
+    {
+      "id": "IWE",
+      "name": "Inox Wind Energ"
+    },
+    {
+      "id": "PSW01",
+      "name": "Marathon Realty"
+    },
+    {
+      "id": "RSW",
+      "name": "RSWM"
+    },
+    {
+      "id": "WB01",
+      "name": "Windlas Biotech"
+    },
+    {
+      "id": "WS01",
+      "name": "AYM Syntex"
+    },
+    {
+      "id": "SWP",
+      "name": "South West Pinn"
+    },
+    {
+      "id": "WF02",
+      "name": "DELPHI WORLD"
+    }
+  ],
+  [
+    {
+      "id": "YI",
+      "name": "Yuken India"
+    },
+    {
+      "id": "ITC",
+      "name": "ITC"
+    },
+    {
+      "id": "SBI",
+      "name": "SBI"
+    },
+    {
+      "id": "LIC09",
+      "name": "LIC India"
+    },
+    {
+      "id": "API",
+      "name": "Asian Paints"
+    },
+    {
+      "id": "MU01",
+      "name": "Maruti Suzuki"
+    },
+    {
+      "id": "NI",
+      "name": "Nestle"
+    },
+    {
+      "id": "PGC",
+      "name": "Power Grid Corp"
+    },
+    {
+      "id": "CI29",
+      "name": "Coal India"
+    },
+    {
+      "id": "IOC",
+      "name": "IOC"
+    },
+    {
+      "id": "DI",
+      "name": "Dabur India"
+    },
+    {
+      "id": "ABB",
+      "name": "ABB India"
+    },
+    {
+      "id": "HI01",
+      "name": "Havells India"
+    },
+    {
+      "id": "GAI",
+      "name": "GAIL"
+    },
+    {
+      "id": "BPI02",
+      "name": "Berger Paints"
+    },
+    {
+      "id": "IDB",
+      "name": "IDBI Bank"
+    },
+    {
+      "id": "IHC",
+      "name": "Indian Hotels"
+    },
+    {
+      "id": "TIIND54076",
+      "name": "Tube Investment"
+    },
+    {
+      "id": "PI41",
+      "name": "Polycab"
+    },
+    {
+      "id": "IEI01",
+      "name": "Info Edge"
+    },
+    {
+      "id": "IRC",
+      "name": "IRCTC"
+    },
+    {
+      "id": "UBI01",
+      "name": "Union Bank"
+    },
+    {
+      "id": "IOB",
+      "name": "IOB"
+    },
+    {
+      "id": "CI02",
+      "name": "Cummins"
+    },
+    {
+      "id": "KP",
+      "name": "Abbott India"
+    }
+  ],
+  [
+    {
+      "id": "BF01",
+      "name": "WinPro Ind."
+    },
+    {
+      "id": "RI",
+      "name": "Reliance"
+    },
+    {
+      "id": "TI01",
+      "name": "Titan Company"
+    },
+    {
+      "id": "SPI",
+      "name": "Sun Pharma"
+    },
+    {
+      "id": "PI11",
+      "name": "Pidilite Ind"
+    },
+    {
+      "id": "GI01",
+      "name": "Grasim"
+    },
+    {
+      "id": "BI",
+      "name": "Britannia"
+    },
+    {
+      "id": "H",
+      "name": "Hindalco"
+    },
+    {
+      "id": "MI25",
+      "name": "Marico"
+    },
+    {
+      "id": "MIC",
+      "name": "Bosch"
+    },
+    {
+      "id": "SI10",
+      "name": "UPL"
+    },
+    {
+      "id": "PII",
+      "name": "PI Industries"
+    },
+    {
+      "id": "PI35",
+      "name": "Page Industries"
+    },
+    {
+      "id": "BI03",
+      "name": "Balkrishna Ind"
+    },
+    {
+      "id": "SI48",
+      "name": "Supreme Ind"
+    },
+    {
+      "id": "RSI",
+      "name": "Patanjali Foods"
+    },
+    {
+      "id": "SE20",
+      "name": "Solar Ind"
+    },
+    {
+      "id": "MI44",
+      "name": "UNO Minda"
+    },
+    {
+      "id": "OAR",
+      "name": "TOYAM SPORTS"
+    },
+    {
+      "id": "KEI",
+      "name": "KEI Industries"
+    },
+    {
+      "id": "AI",
+      "name": "Aarti Ind"
+    },
+    {
+      "id": "EI",
+      "name": "Exide Ind"
+    },
+    {
+      "id": "AI01",
+      "name": "Trident"
+    },
+    {
+      "id": "GS",
+      "name": "Godrej Ind"
+    },
+    {
+      "id": "FOI",
+      "name": "Fine Organics"
+    }
+  ]
+]
