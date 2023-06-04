@@ -185,17 +185,17 @@ app.use(bodyParser.raw());
      
   const { Pool } = require('pg');
 const pool = new Pool({
-  user: 'ycpnmuie',
-  host: 'satao.db.elephantsql.com',
-  database: 'ycpnmuie',
-  password: 'd4ZAKlbzqUmt1sAirHehOHcrRJDHS3oR',
+  user: process.env.POSTGRESS_DATABASE_USER,
+  host: process.env.POSTGRESS_DATABASE_HOST,
+  database: process.env.POSTGRESS_DATABASE_DATABASE,
+  password: process.env.POSTGRESS_DATABASE_PASSWORD,
   port: 5432,
 });
 const pool1 = new Pool({
-  user: 'icdzrvqn',
-  host: 'trumpet.db.elephantsql.com',
-  database: 'icdzrvqn',
-  password: 'mH76I1IChyq6SKmhj4g6uDQjhadSzB-p',
+  user: process.env.POSTGRESS_DATABASE_USER1,
+  host: process.env.POSTGRESS_DATABASE_HOST1,
+  database: process.env.POSTGRESS_DATABASE_DATABASE1,
+  password: process.env.POSTGRESS_DATABASE_PASSWORD1,
   port: 5432,
 });
 
@@ -213,6 +213,91 @@ fs.readFile('./tlid.json', (err, data) => {
 
 const batchSize = 100; // Number of symbols to process in each batch
 
+async function mcinsightspg(req, res) {
+  const start = Date.now();
+  const obj = [];
+
+  try {
+      const createTableQuery = `
+      CREATE TABLE IF NOT EXISTS mcinsights (
+        id SERIAL PRIMARY KEY,
+        obj JSONB,
+        time TIMESTAMP
+      )
+    `;
+    await pool.query(createTableQuery);
+    
+    // Delete all existing entries in the table
+    const deleteQuery = `DELETE FROM ${tableName}`;
+    await pool.query(deleteQuery);
+
+    // Create an index on the "FnO" field
+    const createIndexQuery = `
+      CREATE INDEX IF NOT EXISTS fno_idx ON ${tableName} (((obj->>'FnO')))
+    `;
+    await pool.query(createIndexQuery);
+    const data = fs.readFileSync('./tlid.json');
+    const symbols = JSON.parse(data);
+
+    const processBatch = async (symbolBatch) => {
+      const promises = symbolBatch.map(async (symbol) => {
+        try {
+          const response = await fetch(
+            `https://api.moneycontrol.com//mcapi//v1//extdata//mc-insights?scId=${symbol.mcsymbol}&type=d`,
+            {
+              headers: { Accept: 'application/json' },
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data1 = await response.json();
+
+          console.log(`${symbol.name}`);
+
+          // Check if data1.data['insightData']['price'][5] exists before pushing to obj array
+          if (data1.data['insightData']['price'][5]) {
+            const entry = {
+              Name: `${symbol.name}`,
+              FnO: data1.data['insightData']['price'][4],
+              DealData: data1.data['insightData']['price'][5],
+            };
+
+            obj.push(entry);
+          }
+        } catch (error) {
+          console.log('Error while fetching data:', error);
+        }
+      });
+
+      await Promise.all(promises);
+    };
+
+    for (let i = 0; i < symbols.length; i += batchSize) {
+      const symbolBatch = symbols.slice(i, i + batchSize);
+      await processBatch(symbolBatch);
+    }
+
+    const timeTaken = Date.now() - start;
+    console.log(`Total time taken: ${timeTaken} milliseconds`);
+
+    const insertQuery = `
+      INSERT INTO mcinsights (obj, time)
+      VALUES ($1, $2)
+      ON CONFLICT DO NOTHING
+    `;
+
+    const objString = JSON.stringify(obj);
+
+    await pool.query(insertQuery, [objString, new Date(start)]);
+
+    console.log('Data updated successfully');
+  } catch (error) {
+    console.log('Error while processing data:', error);
+  }
+}
 app.get('/api/mcinsightspg', async function (req, res) {
   const start = Date.now();
   const obj = [];
@@ -375,7 +460,7 @@ app.get('/api/mcinsightspg', async function (req, res) {
 
     ttvolbreakoutpg();
     mcinsightspg();
-    trendlyneDVMpg();
+    // trendlyneDVMpg();
   });
 
   app.get('/api/trendlynecookie', async function (req, res) {
@@ -471,6 +556,7 @@ app.get('/api/mcinsightspg', async function (req, res) {
    
   });
   
+
 app.get('/api/trendlynecookiepg', async function (req, res) {
  
     
@@ -531,7 +617,7 @@ app.get('/api/trendlynecookiepg', async function (req, res) {
 
     try {
       await pool.query(createTableQuery);
-      console.log('Table created successfully or already exists');
+      console.log('Table created successfully or already exists on DB1');
 
       const deleteQuery = `
       DELETE FROM cookie`;
@@ -555,7 +641,47 @@ app.get('/api/trendlynecookiepg', async function (req, res) {
       `;
       try {
         await pool.query(createIndexQuery);
-        console.log('Index created successfully or already exists');
+        console.log('Index created successfully or already exists on DB1');
+      } catch (error) {
+        console.log('Error creating index:', error);
+      }
+
+    } catch (error) {
+      console.log('Error creating table:', error);
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ msg: error.message }),
+      };
+    }
+
+    // Insert into pooli Database
+    try {
+      await pool1.query(createTableQuery);
+      console.log('Table created successfully or already exists on DB2');
+
+      const deleteQuery = `
+      DELETE FROM cookie`;
+      const updateQuery = `
+      
+      INSERT INTO cookie (csrf, trnd, time)
+      VALUES ($1, $2, to_timestamp($3 / 1000.0))
+      RETURNING *
+    `;
+      const values = [process.env.csrf, process.env.trnd, start];
+
+      try {
+        await pool1.query(deleteQuery);
+        await pool1.query(updateQuery, values);
+        console.log('Trendlyne cookie Data updated successfully on DB2');
+      } catch (error) {
+        console.log('Error while updating data:', error);
+      }
+       const createIndexQuery = `
+        CREATE INDEX IF NOT EXISTS csrf_idx ON cookie (csrf)
+      `;
+      try {
+        await pool1.query(createIndexQuery);
+        console.log('Index created successfully or already exists on DB2');
       } catch (error) {
         console.log('Error creating index:', error);
       }
@@ -569,7 +695,6 @@ app.get('/api/trendlynecookiepg', async function (req, res) {
         body: JSON.stringify({ msg: error.message }),
       };
     }
-
   } catch (error) {
     console.log(error);
     return {
@@ -582,6 +707,156 @@ app.get('/api/trendlynecookiepg', async function (req, res) {
     }
   }
 });
+async function trendlynecookiepg (req, res) {
+ 
+    
+   
+  let browser = null
+  console.log('spawning chrome headless')
+  try {
+    const start = Date.now();
+    const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+  
+    browser = await puppeteer.launch({
+           args: chromium.args,
+         
+       executablePath:executablePath ,
+       headless:true,
+        ignoreHTTPSErrors: true,
+    
+    })
+   
+    page = await browser.newPage();
+    await page.setCacheEnabled(true)
+    
+    const targetUrl = 'https://trendlyne.com/visitor/loginmodal/'
+    await page.goto(targetUrl, {
+      waitUntil: ["domcontentloaded"]
+    })
+   
+       await page.type('#id_login', process.env.TRENDLYNE_EMAIL);
+       
+       await page.type('#id_password', process.env.TRENDLYNE_PASSWORD);
+     
+        
+  cookie = await page.cookies()
+   
+  for (let val in cookie){
+   
+      if (cookie[val].name == '.trendlyne'){
+        process.env.trnd=cookie[val].value
+      
+     }}
+     console.log( process.env.trnd)
+     for (let val in cookie){
+     if (cookie[val].name == 'csrftoken'){
+       process.env.csrf=cookie[val].value
+    
+    }
+  }
+  console.log( process.env.csrf)
+
+  const createTableQuery = `
+    CREATE TABLE IF NOT EXISTS cookie (
+      id SERIAL PRIMARY KEY,
+      csrf VARCHAR(255),
+      trnd VARCHAR(255),
+      time TIMESTAMP
+    )
+  `;
+
+  try {
+    await pool.query(createTableQuery);
+    console.log('Table created successfully or already exists on DB1');
+
+    const deleteQuery = `
+    DELETE FROM cookie`;
+    const updateQuery = `
+    
+    INSERT INTO cookie (csrf, trnd, time)
+    VALUES ($1, $2, to_timestamp($3 / 1000.0))
+    RETURNING *
+  `;
+    const values = [process.env.csrf, process.env.trnd, start];
+
+    try {
+      await pool.query(deleteQuery);
+      await pool.query(updateQuery, values);
+      console.log('Trendlyne cookie Data updated successfully');
+    } catch (error) {
+      console.log('Error while updating data:', error);
+    }
+     const createIndexQuery = `
+      CREATE INDEX IF NOT EXISTS csrf_idx ON cookie (csrf)
+    `;
+    try {
+      await pool.query(createIndexQuery);
+      console.log('Index created successfully or already exists on DB1');
+    } catch (error) {
+      console.log('Error creating index:', error);
+    }
+
+  } catch (error) {
+    console.log('Error creating table:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ msg: error.message }),
+    };
+  }
+
+  // Insert into pooli Database
+  try {
+    await pool1.query(createTableQuery);
+    console.log('Table created successfully or already exists on DB2');
+
+    const deleteQuery = `
+    DELETE FROM cookie`;
+    const updateQuery = `
+    
+    INSERT INTO cookie (csrf, trnd, time)
+    VALUES ($1, $2, to_timestamp($3 / 1000.0))
+    RETURNING *
+  `;
+    const values = [process.env.csrf, process.env.trnd, start];
+
+    try {
+      await pool1.query(deleteQuery);
+      await pool1.query(updateQuery, values);
+      console.log('Trendlyne cookie Data updated successfully on DB2');
+    } catch (error) {
+      console.log('Error while updating data:', error);
+    }
+     const createIndexQuery = `
+      CREATE INDEX IF NOT EXISTS csrf_idx ON cookie (csrf)
+    `;
+    try {
+      await pool1.query(createIndexQuery);
+      console.log('Index created successfully or already exists on DB2');
+    } catch (error) {
+      console.log('Error creating index:', error);
+    }
+
+    const timeTaken = Date.now() - start;
+    console.log(`Total time taken: ${timeTaken} milliseconds`);
+  } catch (error) {
+    console.log('Error creating table:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ msg: error.message }),
+    };
+  }
+} catch (error) {
+  console.log(error);
+  return {
+    statusCode: 500,
+    body: JSON.stringify({ msg: error.message }),
+  };
+} finally {
+  if (browser) {
+    await browser.close();
+  }
+}
+}
   
   async function mcinsight (req, res) {
     const start = Date.now();
@@ -1217,7 +1492,92 @@ async function trendlyneDVM(req, res) {
     });
   };
  
-
+  async function ttvolbreakoutpg(req, res) {
+    const start = Date.now();
+    const obj = [];
+  
+    try {
+        
+      
+         const createTableQuery = `
+        CREATE TABLE IF NOT EXISTS Volume (
+          id SERIAL PRIMARY KEY,
+          obj JSONB,
+          time TIMESTAMP
+        )
+      `;
+      await pool.query(createTableQuery);
+    const deleteQuery = `DELETE FROM Volume`;
+      await pool.query(deleteQuery);
+  
+      // Create an index on the "volBreakout" field
+      const createIndexQuery = `
+        CREATE INDEX IF NOT EXISTS volBreakout_idx ON Volume (((obj->>'volBreakout')::numeric))
+      `;
+      await pool.query(createIndexQuery);
+      const data = fs.readFileSync('./tlid.json');
+      const symbols = JSON.parse(data);
+  
+      for (let i = 0; i < symbols.length; i += 100) {
+        const symbolBatch = symbols.slice(i, i + 100);
+  
+        const promises = symbolBatch.map(async (symbol) => {
+          try {
+            const response = await fetch(
+              `https://quotes-api.tickertape.in/quotes?sids=${symbol.ttsymbol}`,
+              {
+                headers: { Accept: 'application/json' },
+              }
+            );
+  
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+  
+            const data1 = await response.json();
+            console.log(`${symbol.name}`);
+            console.log(data1['data'][0]['sid']);
+  
+            obj.push({
+              Name: `${symbol.name}`,
+              sid: data1['data'][0]['sid'],
+              volBreakout: data1['data'][0]['volBreakout'],
+            });
+          } catch (error) {
+            console.log('Error while fetching data:', error);
+          }
+        });
+  
+        await Promise.all(promises);
+      }
+  
+      const timeTaken = Date.now() - start;
+      console.log(`Total time taken: ${timeTaken} milliseconds`);
+  
+      const connectionString = process.env.POSTGRESS_DATABASE_URL;
+      const dbName = 'Tickertape';
+      const tableName = 'Volume';
+  
+      const client = new Client({ connectionString });
+      await client.connect();
+  
+      const insertQuery = `
+        INSERT INTO ${tableName} (obj, time)
+        VALUES ($1, $2)
+      `;
+  
+      const objString = JSON.stringify(obj);
+  
+      await client.query(insertQuery, [objString, new Date(start)]);
+      await client.end();
+  
+      console.log('Data updated successfully');
+      res.send('Data updated successfully');
+    } catch (error) {
+      console.log('Error while processing data:', error);
+      res.status(500).send('Internal server error');
+    }
+  }
 app.get('/api/ttvolbreakoutpg', async function (req, res) {
   const start = Date.now();
   const obj = [];
