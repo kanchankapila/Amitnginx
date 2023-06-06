@@ -106,7 +106,7 @@ app.use(bodyParser.raw());
   app.get('/api/mcinsights', function (req, res) {
     const start = Date.now();
     const obj = [];
-  
+    
     fs.readFile('./tlid.json', async (err, data) => {
       if (err) {
         console.log('Error while reading file:', err);
@@ -216,7 +216,7 @@ const batchSize = 100; // Number of symbols to process in each batch
 async function mcinsightspg(req, res) {
   const start = Date.now();
   const obj = [];
-
+  const tableName = 'mcinsights';
   try {
       const createTableQuery = `
       CREATE TABLE IF NOT EXISTS mcinsights (
@@ -1495,6 +1495,7 @@ async function trendlyneDVM(req, res) {
   async function ttvolbreakoutpg(req, res) {
     const start = Date.now();
     const obj = [];
+    const tableName = 'Volume';
   
     try {
         
