@@ -28,5 +28,5 @@ jobs:
         cache: 'npm'
     - run: npm ci
   
-    - run: nodemon index.js
+    - run: node index.js
    
