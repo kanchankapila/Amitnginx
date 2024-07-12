@@ -56,7 +56,7 @@ Thumbs.db
 /.env
 /.env
 .env
-package-lock.json
+
 /output.json
 /outputsymbolname.json
 /symbol.json
