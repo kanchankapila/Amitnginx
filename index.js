@@ -1,5 +1,5 @@
 require('chromedriver')
-
+ const chromium = require('@sparticuz/chromium')
   const puppeteer = require('puppeteer')
  const swd = require("selenium-webdriver");
 const webdriver = require('selenium-webdriver');
@@ -15,7 +15,6 @@ const cors = require('cors');
 const path = require('path');
 const fetch = require('node-fetch');
 const { Client } = require('pg');
-const chromium = require('chrome-aws-lambda');
 
 const { MongoClient } = require('mongodb');
 function time(){
@@ -472,10 +471,10 @@ app.get('/api/mcinsightspg', async function (req, res) {
     console.log('spawning chrome headless')
     try {
       const start = Date.now();
-      const executablePath =  await chromium.executablePath 
+      const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
     
       browser = await puppeteer.launch({
-        args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
+             args: chromium.args,
            
          executablePath:executablePath ,
          headless:true,
@@ -566,13 +565,13 @@ app.get('/api/trendlynecookiepg', async function (req, res) {
     console.log('spawning chrome headless')
     try {
       const start = Date.now();
-      const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+      const executablePath = await chromium.executablePath 
     
       browser = await puppeteer.launch({
              args: [chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
            
          executablePath:executablePath ,
-         headless:true,
+         headless: chromium.headless,
           ignoreHTTPSErrors: true,
       
       })
