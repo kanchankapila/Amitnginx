@@ -1,5 +1,5 @@
 require('chromedriver')
- const chromium = require('@sparticuz/chromium')
+
   const puppeteer = require('puppeteer')
  const swd = require("selenium-webdriver");
 const webdriver = require('selenium-webdriver');
@@ -15,6 +15,7 @@ const cors = require('cors');
 const path = require('path');
 const fetch = require('node-fetch');
 const { Client } = require('pg');
+const chromium = require('chrome-aws-lambda');
 
 const { MongoClient } = require('mongodb');
 function time(){
@@ -471,10 +472,10 @@ app.get('/api/mcinsightspg', async function (req, res) {
     console.log('spawning chrome headless')
     try {
       const start = Date.now();
-      const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+      const executablePath =  await chromium.executablePath 
     
       browser = await puppeteer.launch({
-             args: chromium.args,
+        args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
            
          executablePath:executablePath ,
          headless:true,
@@ -568,7 +569,7 @@ app.get('/api/trendlynecookiepg', async function (req, res) {
       const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
     
       browser = await puppeteer.launch({
-             args: chromium.args,
+             args: [chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
            
          executablePath:executablePath ,
          headless:true,
@@ -703,7 +704,7 @@ app.get('/api/trendlynecookiepg', async function (req, res) {
     };
   } finally {
     if (browser) {
-      await browser.close();
+       await browser.close();
     }
   }
 });
@@ -715,6 +716,7 @@ async function trendlynecookiepg (req, res) {
   console.log('spawning chrome headless')
   try {
     const start = Date.now();
+    console.log(start)
     const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
   
     browser = await puppeteer.launch({
@@ -756,48 +758,48 @@ async function trendlynecookiepg (req, res) {
   }
   console.log( process.env.csrf)
 
-  const createTableQuery = `
-    CREATE TABLE IF NOT EXISTS cookie (
-      id SERIAL PRIMARY KEY,
-      csrf VARCHAR(255),
-      trnd VARCHAR(255),
-      time TIMESTAMP
-    )
-  `;
+  // const createTableQuery = `
+  //   CREATE TABLE IF NOT EXISTS cookie (
+  //     id SERIAL PRIMARY KEY,
+  //     csrf VARCHAR(255),
+  //     trnd VARCHAR(255),
+  //     time TIMESTAMP
+  //   )
+  // `;
 
   try {
     await pool.query(createTableQuery);
     console.log('Table created successfully or already exists on DB1');
 
-    const deleteQuery = `
-    DELETE FROM cookie`;
-    const updateQuery = `
+  //   const deleteQuery = `
+  //   DELETE FROM cookie`;
+  //   const updateQuery = `
     
-    INSERT INTO cookie (csrf, trnd, time)
-    VALUES ($1, $2, to_timestamp($3 / 1000.0))
-    RETURNING *
-  `;
+  //   INSERT INTO cookie (csrf, trnd, time)
+  //   VALUES ($1, $2, to_timestamp($3 / 1000.0))
+  //   RETURNING *
+  // `;
     const values = [process.env.csrf, process.env.trnd, start];
 
     try {
-      await pool.query(deleteQuery);
-      await pool.query(updateQuery, values);
+      // await pool.query(deleteQuery);
+      // await pool.query(updateQuery, values);
       console.log('Trendlyne cookie Data updated successfully');
     } catch (error) {
       console.log('Error while updating data:', error);
     }
-     const createIndexQuery = `
-      CREATE INDEX IF NOT EXISTS csrf_idx ON cookie (csrf)
-    `;
+    //  const createIndexQuery = `
+    //   CREATE INDEX IF NOT EXISTS csrf_idx ON cookie (csrf)
+    // `;
     try {
-      await pool.query(createIndexQuery);
+      // await pool.query(createIndexQuery);
       console.log('Index created successfully or already exists on DB1');
     } catch (error) {
       console.log('Error creating index:', error);
     }
 
   } catch (error) {
-    console.log('Error creating table:', error);
+    // console.log('Error creating table:', error);
     return {
       statusCode: 500,
       body: JSON.stringify({ msg: error.message }),
@@ -806,32 +808,32 @@ async function trendlynecookiepg (req, res) {
 
   // Insert into pooli Database
   try {
-    await pool1.query(createTableQuery);
-    console.log('Table created successfully or already exists on DB2');
+    // await pool1.query(createTableQuery);
+    // console.log('Table created successfully or already exists on DB2');
 
-    const deleteQuery = `
-    DELETE FROM cookie`;
-    const updateQuery = `
+  //   const deleteQuery = `
+  //   DELETE FROM cookie`;
+  //   const updateQuery = `
     
-    INSERT INTO cookie (csrf, trnd, time)
-    VALUES ($1, $2, to_timestamp($3 / 1000.0))
-    RETURNING *
-  `;
-    const values = [process.env.csrf, process.env.trnd, start];
+  //   INSERT INTO cookie (csrf, trnd, time)
+  //   VALUES ($1, $2, to_timestamp($3 / 1000.0))
+  //   RETURNING *
+  // `;
+    // const values = [process.env.csrf, process.env.trnd, start];
 
     try {
-      await pool1.query(deleteQuery);
-      await pool1.query(updateQuery, values);
-      console.log('Trendlyne cookie Data updated successfully on DB2');
+      // await pool1.query(deleteQuery);
+      // await pool1.query(updateQuery, values);
+      // console.log('Trendlyne cookie Data updated successfully on DB2');
     } catch (error) {
       console.log('Error while updating data:', error);
     }
-     const createIndexQuery = `
-      CREATE INDEX IF NOT EXISTS csrf_idx ON cookie (csrf)
-    `;
+    //  const createIndexQuery = `
+    //   CREATE INDEX IF NOT EXISTS csrf_idx ON cookie (csrf)
+    // `;
     try {
-      await pool1.query(createIndexQuery);
-      console.log('Index created successfully or already exists on DB2');
+      // await pool1.query(createIndexQuery);
+      // console.log('Index created successfully or already exists on DB2');
     } catch (error) {
       console.log('Error creating index:', error);
     }
@@ -1026,7 +1028,7 @@ async function trendlynecookiepg (req, res) {
       };
     } finally {
       if (browser) {
-          await browser.close();
+          // await browser.close();
       
       }
     }
