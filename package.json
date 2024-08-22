@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build": "ng build --configuration=production",
     "start": "nodemon index.js",
     "dev": "nodemon index.js"
   },
@@ -16,12 +17,12 @@
   "sideEffects": false,
   "dependencies": {
     "@angular-builders/custom-webpack": "^15.0.0",
-    "@sparticuz/chromium": "^123.0.1",
+    "@sparticuz/chromium": "^106.0.2",
     "async": "^3.2.4",
     "axios": "^1.7.2",
     "body-parser": "^1.20.0",
     "chrome-aws-lambda": "^10.1.0",
-    "chromedriver": "^126.0.4",
+    "chromedriver": "^112.0.0",
     "chromium": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -31,7 +32,7 @@
     "nodemon": "^3.1.4",
     "path": "^0.12.7",
     "pg": "^8.10.0",
-    "puppeteer": "^22.13.0",
+    "puppeteer": "^18.0.5",
     "puppeteer-core": "^22.13.0",
     "request": "^2.88.2",
     "selenium-webdriver": "^4.8.2"
