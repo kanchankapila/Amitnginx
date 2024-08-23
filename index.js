@@ -496,7 +496,7 @@ app.get('/api/mcinsightspg', async function (req, res) {
        
           
     cookie = await page.cookies()
-     
+     console.log(cookie)
     for (let val in cookie){
      
         if (cookie[val].name == '.trendlyne'){
@@ -510,7 +510,8 @@ app.get('/api/mcinsightspg', async function (req, res) {
       }
     }
    
-     
+     console.log(process.env.csrf)
+     console.log(process.env.trnd)
   
       
         axiosApiInstance
