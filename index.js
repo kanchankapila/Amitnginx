@@ -72,7 +72,7 @@ if (time == '11:45'){
 
 
 setInterval(time, 60000);
-setInterval(Opstracookie, 1800000);
+// setInterval(Opstracookie, 1800000);
 
 const bodyParser = require("body-parser");
 const request = require('request')
@@ -1036,8 +1036,139 @@ async function trendlynecookiepg (req, res) {
   };
  
   
-  async function Opstracookie(req, res) {
+//   async function Opstracookie(req, res) {
    
+//     let browser = null
+//     console.log('spawning chrome headless')
+//     try {
+//       const start = Date.now();
+//       const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+    
+//       browser = await puppeteer.launch({
+//              args: chromium.args,
+           
+//          executablePath:executablePath ,
+//          headless:false,
+//           ignoreHTTPSErrors: true,
+      
+//       })
+     
+//       page = await browser.newPage();
+//       await page.setCacheEnabled(true)
+      
+//       const targetUrl = "https://opstra.definedge.com/ssologin"
+//       await page.goto(targetUrl, {
+//         waitUntil: ["domcontentloaded"]
+//       })
+     
+//          await page.type('#username', process.env.TRENDLYNE_EMAIL);
+         
+//          await page.type('#password', process.env.OPSTRA_PASSWORD);
+       
+          
+//     cookie = await page.cookies()
+//  console.log(cookie)
+//  console.log(process.env.jsessionid)
+//     for (let val in cookie){
+     
+//         if (cookie[val].name == 'AUTH_SESSION_ID'){
+//           process.env.jsessionid=cookie[val].value
+        
+//        }}
+      
+  
+     
+  
+      
+//         axiosApiInstance
+//           .post('/updateOne', {
+//             collection: 'cookie',
+//             database: 'Opstracookie',
+//             dataSource: 'Cluster0',
+//             filter: {},
+//             update: {
+//               $set: {
+                
+//                 "jsessionid":  process.env.jsessionid,
+//                 "time": start
+//               },
+//             },
+//             upsert: true,
+//           })
+//           .then(() => {
+//             console.log('Opstra cookie Data updated successfully');
+           
+//           })
+//           .catch((error) => {
+//             console.log('Error while updating data:', error);
+           
+//           });
+  
+//       const timeTaken = Date.now() - start;
+//       console.log(`Total time taken: ${timeTaken} milliseconds`);
+
+     
+     
+//     } catch (error) {
+//       console.log(error);
+    
+//       return {
+//         statusCode: 500,
+//         body: JSON.stringify({ msg: error.message }),
+//       };
+//     } finally {
+//       if (browser) {
+//           await browser.close();
+      
+//       }
+//     }
+   
+//   };
+ 
+
+     
+
+  app.get('/api/Opstracookie', async function (req, res) {
+   
+    // let browser = null
+    // console.log('spawning chrome headless')
+    // try {
+    //   const start = Date.now();
+    //   const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
+    
+    //   browser = await puppeteer.launch({
+    //          args: chromium.args,
+           
+    //      executablePath:executablePath ,
+    //       headless:false,
+    //       ignoreHTTPSErrors: true,
+      
+    //   })
+     
+    //   page = await browser.newPage();
+    //   await page.setCacheEnabled(true)
+      
+    //   const targetUrl = "https://opstra.definedge.com/ssologin"
+    //   await page.goto(targetUrl, {
+    //     waitUntil: ["domcontentloaded"]
+    //   })
+    //  console.log(process.env.TRENDLYNE_EMAIL)
+    //      await page.keyboard.type('#Email', process.env.TRENDLYNE_EMAIL);
+    //      console.log(process.env.OPSTRA_PASSWORD)
+    //      await page.keyboard.type('password', process.env.OPSTRA_PASSWORD);
+       
+          
+    // cookie = await page.cookies()
+ 
+    // for (let val in cookie){
+     
+    //     if (cookie[val].name == 'AUTH_SESSION_ID'){
+    //       process.env.jsessionid=cookie[val].value
+        
+    //    }} 
+ 
+    //    console.log(cookie)
+    //    console.log(process.env.jsessionid)
     let browser = null
     console.log('spawning chrome headless')
     try {
@@ -1048,7 +1179,7 @@ async function trendlynecookiepg (req, res) {
              args: chromium.args,
            
          executablePath:executablePath ,
-         headless:true,
+         headless:false,
           ignoreHTTPSErrors: true,
       
       })
@@ -1056,7 +1187,7 @@ async function trendlynecookiepg (req, res) {
       page = await browser.newPage();
       await page.setCacheEnabled(true)
       
-      const targetUrl = "https://opstra.definedge.com/ssologin"
+      const targetUrl = 'https://opstra.definedge.com/ssologin'
       await page.goto(targetUrl, {
         waitUntil: ["domcontentloaded"]
       })
@@ -1067,107 +1198,24 @@ async function trendlynecookiepg (req, res) {
        
           
     cookie = await page.cookies()
- 
+   console.log(cookie)
     for (let val in cookie){
      
-        if (cookie[val].name == 'JSESSIONID'){
-          process.env.jsessionid=cookie[val].value
+        if (cookie[val].name == 'DSESSIONID'){
+          process.env.dsession=cookie[val].value
         
        }}
-      
-  
-     
-  
-      
-        axiosApiInstance
-          .post('/updateOne', {
-            collection: 'cookie',
-            database: 'Opstracookie',
-            dataSource: 'Cluster0',
-            filter: {},
-            update: {
-              $set: {
-                
-                "jsessionid":  process.env.jsessionid,
-                "time": start
-              },
-            },
-            upsert: true,
-          })
-          .then(() => {
-            console.log('Opstra cookie Data updated successfully');
-           
-          })
-          .catch((error) => {
-            console.log('Error while updating data:', error);
-           
-          });
-  
-      const timeTaken = Date.now() - start;
-      console.log(`Total time taken: ${timeTaken} milliseconds`);
-
-     
-     
-    } catch (error) {
-      console.log(error);
-    
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ msg: error.message }),
-      };
-    } finally {
-      if (browser) {
-          await browser.close();
+       for (let val in cookie){
+       if (cookie[val].name == 'JSESSIONID'){
+         process.env.jsession=cookie[val].value
       
       }
     }
    
-  };
- 
-
-     
-
-  app.get('/api/Opstracookie', async function (req, res) {
-   
-    let browser = null
-    console.log('spawning chrome headless')
-    try {
-      const start = Date.now();
-      const executablePath = process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath 
-    
-      browser = await puppeteer.launch({
-             args: chromium.args,
-           
-         executablePath:executablePath ,
-         headless:true,
-          ignoreHTTPSErrors: true,
+     console.log(process.env.jsession)
+     console.log(process.env.dsession)
+  
       
-      })
-     
-      page = await browser.newPage();
-      await page.setCacheEnabled(true)
-      
-      const targetUrl = "https://opstra.definedge.com/ssologin"
-      await page.goto(targetUrl, {
-        waitUntil: ["domcontentloaded"]
-      })
-     
-         await page.keyboard.type('#username', process.env.TRENDLYNE_EMAIL);
-         
-         await page.keyboard.type('#password', process.env.OPSTRA_PASSWORD);
-       
-          
-    cookie = await page.cookies()
- 
-    for (let val in cookie){
-     
-        if (cookie[val].name == 'JSESSIONID'){
-          process.env.jsessionid=cookie[val].value
-        
-       }} 
- 
-   
-     
   
       
       axiosApiInstance
@@ -1180,6 +1228,7 @@ async function trendlynecookiepg (req, res) {
           $set: {
             
             "jsessionid":  process.env.jsessionid,
+            "dsessionid":  process.env.dsessionid,
             "time": start
           },
         },
@@ -1208,7 +1257,7 @@ async function trendlynecookiepg (req, res) {
   };
 } finally {
   if (browser) {
-      await browser.close();
+      //  await browser.close();
   
   }
 }
@@ -1230,96 +1279,96 @@ async function trendlynecookiepg (req, res) {
   })
  
 
-  app.get('/api/trendlyneDVMpg', async function (req, res) {
-    const start = Date.now();
-    const obj = [];
+  // app.get('/api/trendlyneDVMpg', async function (req, res) {
+  //   const start = Date.now();
+  //   const obj = [];
   
-    try {
+  //   try {
         
       
-         const createTableQuery = `
-        CREATE TABLE IF NOT EXISTS DVM (
-          id SERIAL PRIMARY KEY,
-          obj JSONB,
-          time TIMESTAMP
-        )
-      `;
-      await pool1.query(createTableQuery);
-    const deleteQuery = `DELETE FROM DVM`;
-      await pool1.query(deleteQuery);
+  //        const createTableQuery = `
+  //       CREATE TABLE IF NOT EXISTS DVM (
+  //         id SERIAL PRIMARY KEY,
+  //         obj JSONB,
+  //         time TIMESTAMP
+  //       )
+  //     `;
+  //     await pool1.query(createTableQuery);
+  //   const deleteQuery = `DELETE FROM DVM`;
+  //     await pool1.query(deleteQuery);
   
-      // Create an index on the "volBreakout" field
-      const createIndexQuery = `
-        CREATE INDEX IF NOT EXISTS DurabilityScore_idx ON DVM (((obj->>'DurabilityScore')::numeric))
-      `;
-      await pool1.query(createIndexQuery);
-      const data = fs.readFileSync('./tlid.json');
-      const symbols = JSON.parse(data);
+  //     // Create an index on the "volBreakout" field
+  //     const createIndexQuery = `
+  //       CREATE INDEX IF NOT EXISTS DurabilityScore_idx ON DVM (((obj->>'DurabilityScore')::numeric))
+  //     `;
+  //     await pool1.query(createIndexQuery);
+  //     const data = fs.readFileSync('./tlid.json');
+  //     const symbols = JSON.parse(data);
   
-      for (let i = 0; i < symbols.length; i += 100) {
-        const symbolBatch = symbols.slice(i, i + 100);
+  //     for (let i = 0; i < symbols.length; i += 100) {
+  //       const symbolBatch = symbols.slice(i, i + 100);
   
-        const promises = symbolBatch.map(async (symbol) => {
-          try {
-            const response = await fetch(
-              `https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`,
-              {
-                headers: { Accept: 'application/json' },
-              }
-            );
+  //       const promises = symbolBatch.map(async (symbol) => {
+  //         try {
+  //           const response = await fetch(
+  //             `https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`,
+  //             {
+  //               headers: { Accept: 'application/json' },
+  //             }
+  //           );
   
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
+  //           if (!response.ok) {
+  //             throw new Error(`HTTP error! status: ${response.status}`);
+  //           }
   
-            const data1 = await response.json();
-            console.log(`${symbol.name}`);
+  //           const data1 = await response.json();
+  //           console.log(`${symbol.name}`);
   
-            obj.push({
-              Name: `${symbol.name}`,
-              DurabilityScore: data1.body['stockData'][6],
-              DurabilityColor: data1.body['stockData'][9],
-              VolatilityScore: data1.body['stockData'][7],
-              VolatilityColor: data1.body['stockData'][10],
-              MomentumScore: data1.body['stockData'][8],
-              MomentumColor: data1.body['stockData'][11],
+  //           obj.push({
+  //             Name: `${symbol.name}`,
+  //             DurabilityScore: data1.body['stockData'][6],
+  //             DurabilityColor: data1.body['stockData'][9],
+  //             VolatilityScore: data1.body['stockData'][7],
+  //             VolatilityColor: data1.body['stockData'][10],
+  //             MomentumScore: data1.body['stockData'][8],
+  //             MomentumColor: data1.body['stockData'][11],
 
-            });
-          } catch (error) {
-            console.log('Error while fetching data:', error);
-          }
-        });
+  //           });
+  //         } catch (error) {
+  //           console.log('Error while fetching data:', error);
+  //         }
+  //       });
   
-        await Promise.all(promises);
-      }
+  //       await Promise.all(promises);
+  //     }
   
-      const timeTaken = Date.now() - start;
-      console.log(`Total time taken: ${timeTaken} milliseconds`);
+  //     const timeTaken = Date.now() - start;
+  //     console.log(`Total time taken: ${timeTaken} milliseconds`);
   
-      const connectionString = process.env.POSTGRESS_DATABASE_URL1;
-      const dbName = 'Tickertape';
-      const tableName = 'DVM';
+  //     const connectionString = process.env.POSTGRESS_DATABASE_URL1;
+  //     const dbName = 'Tickertape';
+  //     const tableName = 'DVM';
   
-      const client = new Client({ connectionString });
-      await client.connect();
+  //     const client = new Client({ connectionString });
+  //     await client.connect();
   
-      const insertQuery = `
-        INSERT INTO ${tableName} (obj, time)
-        VALUES ($1, $2)
-      `;
+  //     const insertQuery = `
+  //       INSERT INTO ${tableName} (obj, time)
+  //       VALUES ($1, $2)
+  //     `;
   
-      const objString = JSON.stringify(obj);
+  //     const objString = JSON.stringify(obj);
   
-      await client.query(insertQuery, [objString, new Date(start)]);
-      await client.end();
+  //     await client.query(insertQuery, [objString, new Date(start)]);
+  //     await client.end();
   
-      console.log('Data updated successfully');
-      res.send('Data updated successfully');
-    } catch (error) {
-      console.log('Error while processing data:', error);
-      res.status(500).send('Internal server error');
-    }
-  });
+  //     console.log('Data updated successfully');
+  //     res.send('Data updated successfully');
+  //   } catch (error) {
+  //     console.log('Error while processing data:', error);
+  //     res.status(500).send('Internal server error');
+  //   }
+  // });
   
   
 
@@ -1409,264 +1458,264 @@ async function trendlynecookiepg (req, res) {
     });
   });
     
-async function trendlyneDVM(req, res) {
+// async function trendlyneDVM(req, res) {
  
-    const start = Date.now();
-    const obj = [];
+//     const start = Date.now();
+//     const obj = [];
   
-    fs.readFile('./tlid.json', async (err, data) => {
-      if (err) {
-        console.log('Error while reading file:', err);
+//     fs.readFile('./tlid.json', async (err, data) => {
+//       if (err) {
+//         console.log('Error while reading file:', err);
       
-        return;
-      }
+//         return;
+//       }
   
-      try {
-        // Parse the data into an array
-        const symbols = JSON.parse(data);
+//       try {
+//         // Parse the data into an array
+//         const symbols = JSON.parse(data);
   
-        // Process 100 symbols at a time
-        for (let i = 0; i < symbols.length; i += 100) {
-          const symbolBatch = symbols.slice(i, i + 100);
+//         // Process 100 symbols at a time
+//         for (let i = 0; i < symbols.length; i += 100) {
+//           const symbolBatch = symbols.slice(i, i + 100);
   
-          const promises = symbolBatch.map(async symbol => {
-            try {
-              const response = await fetch(
-                `https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`,
-                {
-                  headers: { Accept: 'application/json' },
-                }
-              );
+//           const promises = symbolBatch.map(async symbol => {
+//             try {
+//               const response = await fetch(
+//                 `https://trendlyne.com/mapp/v1/stock/chart-data/${symbol.tlid}/SMA/?format=json`,
+//                 {
+//                   headers: { Accept: 'application/json' },
+//                 }
+//               );
   
-              if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-              }
+//               if (!response.ok) {
+//                 throw new Error(`HTTP error! status: ${response.status}`);
+//               }
   
-              const data1 = await response.json();
-              console.log(`${symbol.name}`);
+//               const data1 = await response.json();
+//               console.log(`${symbol.name}`);
   
-              obj.push({
-                Name: `${symbol.name}`,
-                DurabilityScore: data1.body['stockData'][6],
-                DurabilityColor: data1.body['stockData'][9],
-                VolatilityScore: data1.body['stockData'][7],
-                VolatilityColor: data1.body['stockData'][10],
-                MomentumScore: data1.body['stockData'][8],
-                MomentumColor: data1.body['stockData'][11],
-              });
-            } catch (error) {
-              console.log('Error while fetching data:', error);
-            }
-          });
+//               obj.push({
+//                 Name: `${symbol.name}`,
+//                 DurabilityScore: data1.body['stockData'][6],
+//                 DurabilityColor: data1.body['stockData'][9],
+//                 VolatilityScore: data1.body['stockData'][7],
+//                 VolatilityColor: data1.body['stockData'][10],
+//                 MomentumScore: data1.body['stockData'][8],
+//                 MomentumColor: data1.body['stockData'][11],
+//               });
+//             } catch (error) {
+//               console.log('Error while fetching data:', error);
+//             }
+//           });
   
-          await Promise.all(promises);
-        }
+//           await Promise.all(promises);
+//         }
   
-        const timeTaken = Date.now() - start;
-        console.log(`Total time taken: ${timeTaken} milliseconds`);
+//         const timeTaken = Date.now() - start;
+//         console.log(`Total time taken: ${timeTaken} milliseconds`);
   
-        axiosApiInstance
-          .post('/updateOne', {
-            collection: 'DVM',
-            database: 'DVM',
-            dataSource: 'Cluster0',
-            filter: {},
-            update: {
-              $set: {
-                output: obj,
-                time: start,
-              },
-            },
-            upsert: true,
-          })
-          .then(() => {
-            console.log('Data updated successfully');
+//         axiosApiInstance
+//           .post('/updateOne', {
+//             collection: 'DVM',
+//             database: 'DVM',
+//             dataSource: 'Cluster0',
+//             filter: {},
+//             update: {
+//               $set: {
+//                 output: obj,
+//                 time: start,
+//               },
+//             },
+//             upsert: true,
+//           })
+//           .then(() => {
+//             console.log('Data updated successfully');
             
-          })
-          .catch((error) => {
-            console.log('Error while updating data:', error);
+//           })
+//           .catch((error) => {
+//             console.log('Error while updating data:', error);
            
-          });
-      } catch (error) {
-        console.log('Error while parsing data:', error);
+//           });
+//       } catch (error) {
+//         console.log('Error while parsing data:', error);
       
-      }
-    });
-  };
+//       }
+//     });
+//   };
  
-  async function ttvolbreakoutpg(req, res) {
-    const start = Date.now();
-    const obj = [];
-    const tableName = 'Volume';
+  // async function ttvolbreakoutpg(req, res) {
+  //   const start = Date.now();
+  //   const obj = [];
+  //   const tableName = 'Volume';
   
-    try {
+  //   try {
         
       
-         const createTableQuery = `
-        CREATE TABLE IF NOT EXISTS Volume (
-          id SERIAL PRIMARY KEY,
-          obj JSONB,
-          time TIMESTAMP
-        )
-      `;
-      await pool.query(createTableQuery);
-    const deleteQuery = `DELETE FROM Volume`;
-      await pool.query(deleteQuery);
+  //        const createTableQuery = `
+  //       CREATE TABLE IF NOT EXISTS Volume (
+  //         id SERIAL PRIMARY KEY,
+  //         obj JSONB,
+  //         time TIMESTAMP
+  //       )
+  //     `;
+  //     await pool.query(createTableQuery);
+  //   const deleteQuery = `DELETE FROM Volume`;
+  //     await pool.query(deleteQuery);
   
-      // Create an index on the "volBreakout" field
-      const createIndexQuery = `
-        CREATE INDEX IF NOT EXISTS volBreakout_idx ON Volume (((obj->>'volBreakout')::numeric))
-      `;
-      await pool.query(createIndexQuery);
-      const data = fs.readFileSync('./tlid.json');
-      const symbols = JSON.parse(data);
+  //     // Create an index on the "volBreakout" field
+  //     const createIndexQuery = `
+  //       CREATE INDEX IF NOT EXISTS volBreakout_idx ON Volume (((obj->>'volBreakout')::numeric))
+  //     `;
+  //     await pool.query(createIndexQuery);
+  //     const data = fs.readFileSync('./tlid.json');
+  //     const symbols = JSON.parse(data);
   
-      for (let i = 0; i < symbols.length; i += 100) {
-        const symbolBatch = symbols.slice(i, i + 100);
+  //     for (let i = 0; i < symbols.length; i += 100) {
+  //       const symbolBatch = symbols.slice(i, i + 100);
   
-        const promises = symbolBatch.map(async (symbol) => {
-          try {
-            const response = await fetch(
-              `https://quotes-api.tickertape.in/quotes?sids=${symbol.ttsymbol}`,
-              {
-                headers: { Accept: 'application/json' },
-              }
-            );
+  //       const promises = symbolBatch.map(async (symbol) => {
+  //         try {
+  //           const response = await fetch(
+  //             `https://quotes-api.tickertape.in/quotes?sids=${symbol.ttsymbol}`,
+  //             {
+  //               headers: { Accept: 'application/json' },
+  //             }
+  //           );
   
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
+  //           if (!response.ok) {
+  //             throw new Error(`HTTP error! status: ${response.status}`);
+  //           }
   
-            const data1 = await response.json();
-            console.log(`${symbol.name}`);
-            console.log(data1['data'][0]['sid']);
+  //           const data1 = await response.json();
+  //           console.log(`${symbol.name}`);
+  //           console.log(data1['data'][0]['sid']);
   
-            obj.push({
-              Name: `${symbol.name}`,
-              sid: data1['data'][0]['sid'],
-              volBreakout: data1['data'][0]['volBreakout'],
-            });
-          } catch (error) {
-            console.log('Error while fetching data:', error);
-          }
-        });
+  //           obj.push({
+  //             Name: `${symbol.name}`,
+  //             sid: data1['data'][0]['sid'],
+  //             volBreakout: data1['data'][0]['volBreakout'],
+  //           });
+  //         } catch (error) {
+  //           console.log('Error while fetching data:', error);
+  //         }
+  //       });
   
-        await Promise.all(promises);
-      }
+  //       await Promise.all(promises);
+  //     }
   
-      const timeTaken = Date.now() - start;
-      console.log(`Total time taken: ${timeTaken} milliseconds`);
+  //     const timeTaken = Date.now() - start;
+  //     console.log(`Total time taken: ${timeTaken} milliseconds`);
   
-      const connectionString = process.env.POSTGRESS_DATABASE_URL;
-      const dbName = 'Tickertape';
-      const tableName = 'Volume';
+  //     const connectionString = process.env.POSTGRESS_DATABASE_URL;
+  //     const dbName = 'Tickertape';
+  //     const tableName = 'Volume';
   
-      const client = new Client({ connectionString });
-      await client.connect();
+  //     const client = new Client({ connectionString });
+  //     await client.connect();
   
-      const insertQuery = `
-        INSERT INTO ${tableName} (obj, time)
-        VALUES ($1, $2)
-      `;
+  //     const insertQuery = `
+  //       INSERT INTO ${tableName} (obj, time)
+  //       VALUES ($1, $2)
+  //     `;
   
-      const objString = JSON.stringify(obj);
+  //     const objString = JSON.stringify(obj);
   
-      await client.query(insertQuery, [objString, new Date(start)]);
-      await client.end();
+  //     await client.query(insertQuery, [objString, new Date(start)]);
+  //     await client.end();
   
-      console.log('Data updated successfully');
-      res.send('Data updated successfully');
-    } catch (error) {
-      console.log('Error while processing data:', error);
-      res.status(500).send('Internal server error');
-    }
-  }
-app.get('/api/ttvolbreakoutpg', async function (req, res) {
-  const start = Date.now();
-  const obj = [];
+  //     console.log('Data updated successfully');
+  //     res.send('Data updated successfully');
+  //   } catch (error) {
+  //     console.log('Error while processing data:', error);
+  //     res.status(500).send('Internal server error');
+  //   }
+  // }
+// app.get('/api/ttvolbreakoutpg', async function (req, res) {
+//   const start = Date.now();
+//   const obj = [];
 
-  try {
+//   try {
       
     
-       const createTableQuery = `
-      CREATE TABLE IF NOT EXISTS Volume (
-        id SERIAL PRIMARY KEY,
-        obj JSONB,
-        time TIMESTAMP
-      )
-    `;
-    await pool.query(createTableQuery);
-  const deleteQuery = `DELETE FROM Volume`;
-    await pool.query(deleteQuery);
+//        const createTableQuery = `
+//       CREATE TABLE IF NOT EXISTS Volume (
+//         id SERIAL PRIMARY KEY,
+//         obj JSONB,
+//         time TIMESTAMP
+//       )
+//     `;
+//     await pool.query(createTableQuery);
+//   const deleteQuery = `DELETE FROM Volume`;
+//     await pool.query(deleteQuery);
 
-    // Create an index on the "volBreakout" field
-    const createIndexQuery = `
-      CREATE INDEX IF NOT EXISTS volBreakout_idx ON Volume (((obj->>'volBreakout')::numeric))
-    `;
-    await pool.query(createIndexQuery);
-    const data = fs.readFileSync('./tlid.json');
-    const symbols = JSON.parse(data);
+//     // Create an index on the "volBreakout" field
+//     const createIndexQuery = `
+//       CREATE INDEX IF NOT EXISTS volBreakout_idx ON Volume (((obj->>'volBreakout')::numeric))
+//     `;
+//     await pool.query(createIndexQuery);
+//     const data = fs.readFileSync('./tlid.json');
+//     const symbols = JSON.parse(data);
 
-    for (let i = 0; i < symbols.length; i += 100) {
-      const symbolBatch = symbols.slice(i, i + 100);
+//     for (let i = 0; i < symbols.length; i += 100) {
+//       const symbolBatch = symbols.slice(i, i + 100);
 
-      const promises = symbolBatch.map(async (symbol) => {
-        try {
-          const response = await fetch(
-            `https://quotes-api.tickertape.in/quotes?sids=${symbol.ttsymbol}`,
-            {
-              headers: { Accept: 'application/json' },
-            }
-          );
+//       const promises = symbolBatch.map(async (symbol) => {
+//         try {
+//           const response = await fetch(
+//             `https://quotes-api.tickertape.in/quotes?sids=${symbol.ttsymbol}`,
+//             {
+//               headers: { Accept: 'application/json' },
+//             }
+//           );
 
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
+//           if (!response.ok) {
+//             throw new Error(`HTTP error! status: ${response.status}`);
+//           }
 
-          const data1 = await response.json();
-          console.log(`${symbol.name}`);
-          console.log(data1['data'][0]['sid']);
+//           const data1 = await response.json();
+//           console.log(`${symbol.name}`);
+//           console.log(data1['data'][0]['sid']);
 
-          obj.push({
-            Name: `${symbol.name}`,
-            sid: data1['data'][0]['sid'],
-            volBreakout: data1['data'][0]['volBreakout'],
-          });
-        } catch (error) {
-          console.log('Error while fetching data:', error);
-        }
-      });
+//           obj.push({
+//             Name: `${symbol.name}`,
+//             sid: data1['data'][0]['sid'],
+//             volBreakout: data1['data'][0]['volBreakout'],
+//           });
+//         } catch (error) {
+//           console.log('Error while fetching data:', error);
+//         }
+//       });
 
-      await Promise.all(promises);
-    }
+//       await Promise.all(promises);
+//     }
 
-    const timeTaken = Date.now() - start;
-    console.log(`Total time taken: ${timeTaken} milliseconds`);
+//     const timeTaken = Date.now() - start;
+//     console.log(`Total time taken: ${timeTaken} milliseconds`);
 
-    const connectionString = process.env.POSTGRESS_DATABASE_URL;
-    const dbName = 'Tickertape';
-    const tableName = 'Volume';
+//     const connectionString = process.env.POSTGRESS_DATABASE_URL;
+//     const dbName = 'Tickertape';
+//     const tableName = 'Volume';
 
-    const client = new Client({ connectionString });
-    await client.connect();
+//     const client = new Client({ connectionString });
+//     await client.connect();
 
-    const insertQuery = `
-      INSERT INTO ${tableName} (obj, time)
-      VALUES ($1, $2)
-    `;
+//     const insertQuery = `
+//       INSERT INTO ${tableName} (obj, time)
+//       VALUES ($1, $2)
+//     `;
 
-    const objString = JSON.stringify(obj);
+//     const objString = JSON.stringify(obj);
 
-    await client.query(insertQuery, [objString, new Date(start)]);
-    await client.end();
+//     await client.query(insertQuery, [objString, new Date(start)]);
+//     await client.end();
 
-    console.log('Data updated successfully');
-    res.send('Data updated successfully');
-  } catch (error) {
-    console.log('Error while processing data:', error);
-    res.status(500).send('Internal server error');
-  }
-});
+//     console.log('Data updated successfully');
+//     res.send('Data updated successfully');
+//   } catch (error) {
+//     console.log('Error while processing data:', error);
+//     res.status(500).send('Internal server error');
+//   }
+// });
 
   app.get('/api/ttvolbreakout', function (req, res) {
     const start = Date.now();
@@ -1751,86 +1800,86 @@ app.get('/api/ttvolbreakoutpg', async function (req, res) {
 
   
 
-  async function ttvolbreakout(req, res) {
-    const start = Date.now();
-    const obj = [];
+  // async function ttvolbreakout(req, res) {
+  //   const start = Date.now();
+  //   const obj = [];
   
-    fs.readFile('./tlid.json', async (err, data) => {
-      if (err) {
-        console.log('Error while reading file:', err);
+  //   fs.readFile('./tlid.json', async (err, data) => {
+  //     if (err) {
+  //       console.log('Error while reading file:', err);
       
-        return;
-      }
+  //       return;
+  //     }
   
-      try {
-        // Parse the data into an array
-        const symbols = JSON.parse(data);
+  //     try {
+  //       // Parse the data into an array
+  //       const symbols = JSON.parse(data);
   
-        // Process 100 symbols at a time
-        for (let i = 0; i < symbols.length; i += 100) {
-          const symbolBatch = symbols.slice(i, i + 100);
+  //       // Process 100 symbols at a time
+  //       for (let i = 0; i < symbols.length; i += 100) {
+  //         const symbolBatch = symbols.slice(i, i + 100);
   
-          const promises = symbolBatch.map(async symbol => {
-            try {
-              const response = await fetch(
-                `https://quotes-api.tickertape.in/quotes?sids=${symbol.ttsymbol}`,
-                {
-                  headers: { Accept: 'application/json' },
-                }
-              );
+  //         const promises = symbolBatch.map(async symbol => {
+  //           try {
+  //             const response = await fetch(
+  //               `https://quotes-api.tickertape.in/quotes?sids=${symbol.ttsymbol}`,
+  //               {
+  //                 headers: { Accept: 'application/json' },
+  //               }
+  //             );
   
-              if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-              }
+  //             if (!response.ok) {
+  //               throw new Error(`HTTP error! status: ${response.status}`);
+  //             }
   
-              const data1 = await response.json();
-              console.log(`${symbol.name}`);
-              console.log(data1['data'][0]['sid'])
+  //             const data1 = await response.json();
+  //             console.log(`${symbol.name}`);
+  //             console.log(data1['data'][0]['sid'])
   
-              obj.push({
-                Name: `${symbol.name}`,
-                sid:data1['data'][0]['sid'],
-                volBreakout:data1['data'][0]['volBreakout']
-              });
-            } catch (error) {
-              console.log('Error while fetching data:', error);
-            }
-          });
+  //             obj.push({
+  //               Name: `${symbol.name}`,
+  //               sid:data1['data'][0]['sid'],
+  //               volBreakout:data1['data'][0]['volBreakout']
+  //             });
+  //           } catch (error) {
+  //             console.log('Error while fetching data:', error);
+  //           }
+  //         });
   
-          await Promise.all(promises);
-        }
+  //         await Promise.all(promises);
+  //       }
   
-        const timeTaken = Date.now() - start;
-        console.log(`Total time taken: ${timeTaken} milliseconds`);
+  //       const timeTaken = Date.now() - start;
+  //       console.log(`Total time taken: ${timeTaken} milliseconds`);
   
-        axiosApiInstance
-          .post('/updateOne', {
-            collection: 'Volume',
-            database: 'Tickertape',
-            dataSource: 'Cluster0',
-            filter: {},
-            update: {
-              $set: {
-                 obj,
-                time: start,
-              },
-            },
-            upsert: true,
-          })
-          .then(() => {
-            console.log('Data updated successfully');
+  //       axiosApiInstance
+  //         .post('/updateOne', {
+  //           collection: 'Volume',
+  //           database: 'Tickertape',
+  //           dataSource: 'Cluster0',
+  //           filter: {},
+  //           update: {
+  //             $set: {
+  //                obj,
+  //               time: start,
+  //             },
+  //           },
+  //           upsert: true,
+  //         })
+  //         .then(() => {
+  //           console.log('Data updated successfully');
           
-          })
-          .catch((error) => {
-            console.log('Error while updating data:', error);
+  //         })
+  //         .catch((error) => {
+  //           console.log('Error while updating data:', error);
            
-          });
-      } catch (error) {
-        console.log('Error while parsing data:', error);
+  //         });
+  //     } catch (error) {
+  //       console.log('Error while parsing data:', error);
         
-      }
-    });
-  };
+  //     }
+  //   });
+  // };
   app.listen( process.env.PORT || 3000, function () {
     console.log('Your node is running on port 3000');
   })

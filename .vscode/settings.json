@@ -55,5 +55,6 @@
             "bold": true,
             "italic": false
         }
-    ]
+    ],
+    "workbench.colorTheme": "Kimbie Dark"
 }
